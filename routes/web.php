@@ -34,6 +34,10 @@ use Cartalyst\Sentinel\Native\Facades\Sentinel;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::test('test', function(){
+    echo "abc";
+});
+
 Route::pattern('slug', '[a-z0-9- _]+');
 
 Route::group(
