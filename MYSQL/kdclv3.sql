@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 05, 2023 lúc 04:35 AM
+-- Thời gian đã tạo: Th5 06, 2023 lúc 11:07 AM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 7.4.29
 
@@ -164,7 +164,9 @@ INSERT INTO `activity_log` (`id`, `log_name`, `description`, `subject_id`, `subj
 (108, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-04-25 12:03:45', '2023-04-25 12:03:45'),
 (109, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-03 03:11:55', '2023-05-03 03:11:55'),
 (110, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-04 03:35:39', '2023-05-04 03:35:39'),
-(111, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-05 02:04:35', '2023-05-05 02:04:35');
+(111, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-05 02:04:35', '2023-05-05 02:04:35'),
+(112, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-05 14:17:12', '2023-05-05 14:17:12'),
+(113, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-06 07:14:25', '2023-05-06 07:14:25');
 
 -- --------------------------------------------------------
 
@@ -1026,18 +1028,28 @@ CREATE TABLE `excel_import_giaotrinh` (
 CREATE TABLE `excel_import_gvch` (
   `id` int(10) NOT NULL,
   `noi_dung` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `tong_so` int(10) NOT NULL,
-  `giao_su` int(10) NOT NULL COMMENT 'Chức danh	\r\n',
-  `pho_giao_su` int(10) NOT NULL COMMENT 'Chức danh	\r\n',
-  `tien_si` int(10) NOT NULL COMMENT 'Trình độ đào tạo				\r\n',
-  `thac_si` int(10) NOT NULL COMMENT 'Trình độ đào tạo				\r\n',
-  `dai_hoc` int(10) NOT NULL COMMENT 'Trình độ đào tạo				\r\n',
-  `cao_dang` int(10) NOT NULL COMMENT 'Trình độ đào tạo				\r\n',
-  `trinh_do_khac` int(10) NOT NULL COMMENT 'Trình độ đào tạo				\r\n',
-  `hang_3` int(10) NOT NULL COMMENT 'Hạng chức danh nghề nghiệp		\r\n',
-  `hang_2` int(10) NOT NULL COMMENT 'Hạng chức danh nghề nghiệp		\r\n',
-  `hang_1` int(10) NOT NULL COMMENT 'Hạng chức danh nghề nghiệp		\r\n'
+  `tong_so` int(10) NOT NULL DEFAULT 0,
+  `giao_su` int(10) DEFAULT 0 COMMENT 'Chức danh	\r\n',
+  `pho_giao_su` int(10) NOT NULL DEFAULT 0 COMMENT 'Chức danh	\r\n',
+  `tien_si` int(10) NOT NULL DEFAULT 0 COMMENT 'Trình độ đào tạo				\r\n',
+  `thac_si` int(10) NOT NULL DEFAULT 0 COMMENT 'Trình độ đào tạo				\r\n',
+  `dai_hoc` int(10) NOT NULL DEFAULT 0 COMMENT 'Trình độ đào tạo				\r\n',
+  `cao_dang` int(10) NOT NULL DEFAULT 0 COMMENT 'Trình độ đào tạo				\r\n',
+  `trinh_do_khac` int(10) NOT NULL DEFAULT 0 COMMENT 'Trình độ đào tạo				\r\n',
+  `hang_3` int(10) NOT NULL DEFAULT 0 COMMENT 'Hạng chức danh nghề nghiệp		\r\n',
+  `hang_2` int(10) NOT NULL DEFAULT 0 COMMENT 'Hạng chức danh nghề nghiệp		\r\n',
+  `hang_1` int(10) NOT NULL DEFAULT 0 COMMENT 'Hạng chức danh nghề nghiệp		\r\n',
+  `loai` int(11) NOT NULL DEFAULT 0 COMMENT '1. Giảng viên cơ hữu theo ngành\r\n2. Giảng viên cơ hữu môn chung',
+  `khoinganh` int(11) NOT NULL DEFAULT 0 COMMENT '1. Khối ngành I\r\n2. Khối ngành II\r\n3. Khối ngành III\r\n4. Khối ngành IV\r\n5. Khối ngành V'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_gvch`
+--
+
+INSERT INTO `excel_import_gvch` (`id`, `noi_dung`, `tong_so`, `giao_su`, `pho_giao_su`, `tien_si`, `thac_si`, `dai_hoc`, `cao_dang`, `trinh_do_khac`, `hang_3`, `hang_2`, `hang_1`, `loai`, `khoinganh`) VALUES
+(3, 'Ngành Kế toán', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1),
+(4, 'Kế toán2', 4, 435, 435, 345, 34, 34, 345, 23, 12, 43, 56, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -2723,7 +2735,9 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (90, 1, 'mAdnEYYvo3c4ODsqeKFG8y0tsfT3JlJM', '2023-04-25 12:03:45', '2023-04-25 12:03:45'),
 (91, 1, 'ft4cPpSzoI8BQv5JgQd2gM4CAFfhgX3q', '2023-05-03 03:11:55', '2023-05-03 03:11:55'),
 (92, 1, 'wfYCqLugx7DEk3hkOQqCOwxL3zaQt3iG', '2023-05-04 03:35:39', '2023-05-04 03:35:39'),
-(93, 1, 'OS0M9t3pQEZg0My0ZsDI53RGvxOGEjr8', '2023-05-05 02:04:35', '2023-05-05 02:04:35');
+(93, 1, 'OS0M9t3pQEZg0My0ZsDI53RGvxOGEjr8', '2023-05-05 02:04:35', '2023-05-05 02:04:35'),
+(94, 1, 'MsSxZbxj83ehPyPzOGJECTziyFZRJZqv', '2023-05-05 14:17:12', '2023-05-05 14:17:12'),
+(95, 1, '7uQw3mmjs7AYxbABwmScWekiP13Z1ZGD', '2023-05-06 07:14:25', '2023-05-06 07:14:25');
 
 -- --------------------------------------------------------
 
@@ -4687,7 +4701,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ma_nhansu`, `name`, `email`, `password`, `permissions`, `last_login`, `first_name`, `last_name`, `nguoi_tao`, `created_at`, `updated_at`, `deleted_at`, `gender`, `dob`, `pic`, `country`, `user_state`, `city`, `address`, `phone`, `description`, `postal`, `provider`, `provider_id`, `donvi_id`, `csdt_id`, `code`, `ns`, `tdnvtcn`, `ntn`, `noitn`, `gvsp`, `qlnn`, `th`, `nn`, `hhdp`, `ndp`, `cdnnktd`, `mscnktd`, `ntd`, `qdbn`, `cdkn`) VALUES
-(1, '1002', 'John Doe', 'admin@admin.com', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-05-05 02:04:35', NULL, NULL, 1, '2022-06-30 05:43:03', '2023-05-05 02:04:35', NULL, '1', '2023-03-28', 'uploads/users/DEF/1661420665-imageAvatar.png', NULL, NULL, NULL, NULL, '0123456678', NULL, NULL, NULL, NULL, 2, 1, 'DEF', '2023-03-28', 'Chuyên ngành đào tạo', 2002, 'Khoa CNTT - ĐH công', '2022', 'Nhà nước', '2022', '2022', 'không', 2022, 'Chuyên viên', '123ABC', 2020, 'QD', 'Giảng viên'),
+(1, '1002', 'John Doe', 'admin@admin.com', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-05-06 07:14:25', NULL, NULL, 1, '2022-06-30 05:43:03', '2023-05-06 07:14:25', NULL, '1', '2023-03-28', 'uploads/users/DEF/1661420665-imageAvatar.png', NULL, NULL, NULL, NULL, '0123456678', NULL, NULL, NULL, NULL, 2, 1, 'DEF', '2023-03-28', 'Chuyên ngành đào tạo', 2002, 'Khoa CNTT - ĐH công', '2022', 'Nhà nước', '2022', '2022', 'không', 2022, 'Chuyên viên', '123ABC', 2020, 'QD', 'Giảng viên'),
 (1427, '10050', 'Hoàng Anh', 'anh.hoang', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-04-16 08:51:02', NULL, NULL, 1, '2022-10-06 04:04:13', '2023-04-16 08:51:02', NULL, NULL, NULL, '', NULL, NULL, NULL, 'Trung tâm Đảm bảo Chất lượng', '0904215756', '1037', NULL, NULL, NULL, 36, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1428, '10498', 'Hoàng Minh Tuấn', 'tuan.hoang', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-04-12 14:34:27', NULL, NULL, 1, '2022-10-06 04:04:13', '2023-04-12 14:34:27', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '0915491868', '1037', NULL, NULL, NULL, 36, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1619, '10676', 'Trịnh Thị Phương', 'phuong.trinh', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-04-16 08:36:21', NULL, NULL, 1, '2022-10-06 04:04:13', '2023-04-16 08:36:21', NULL, NULL, NULL, '', NULL, NULL, NULL, '', '0386351060', '1037', NULL, NULL, NULL, 36, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -7025,7 +7039,7 @@ ALTER TABLE `activations`
 -- AUTO_INCREMENT cho bảng `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT cho bảng `baocao_chung`
@@ -7217,7 +7231,7 @@ ALTER TABLE `excel_import_giaotrinh`
 -- AUTO_INCREMENT cho bảng `excel_import_gvch`
 --
 ALTER TABLE `excel_import_gvch`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_gvchkn`
@@ -7535,7 +7549,7 @@ ALTER TABLE `nhom_mc_sl`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT cho bảng `reminders`
