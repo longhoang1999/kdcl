@@ -88,6 +88,9 @@
     .content-body{
         background:white;
     }
+    th{
+        font-weight:bold !important;
+    }
 </style>
 
 @stop
@@ -169,7 +172,64 @@
                 </th>
              </tr>
             </thead>
-            <tbody>  
+            <tbody>
+                @php
+                    $loai = [
+                        Lang::get('project/ImportdataExcel/title.gvchcn'),
+                        Lang::get('project/ImportdataExcel/title.gvchmc'),
+                    ];
+                    $khoinganh = [
+                        Lang::get('project/ImportdataExcel/title.khoing1'),
+                        Lang::get('project/ImportdataExcel/title.khoing2'),
+                        Lang::get('project/ImportdataExcel/title.khoing3'),
+                        Lang::get('project/ImportdataExcel/title.khoing4'),
+                        Lang::get('project/ImportdataExcel/title.khoing5'),
+                    ];
+                    $character = 'abcdef';
+                @endphp
+                @foreach($loai as $key => $lo)
+                    <tr>
+                        <th>{{ $key + 1 }}</th>
+                        <td colspan = "13">
+                            <b>{{ $lo }}</b>
+                        </td>
+                    </tr>
+                    @foreach($khoinganh as $key2 => $kn)
+                        <tr>
+                            <th>{{ substr($character , $key2, 1) }}</th>
+                            <td colspan = "13">
+                                <b>{{ $kn }}</b>
+                            </td>
+                        </tr>
+                        @foreach($gvch as $value)
+                            @if($value->loai == $key + 1 && $value->khoinganh == $key2 + 1)
+                                <tr>
+                                    <td></td>
+                                    <td>{{ $value->noi_dung }}</td>
+                                    <td>{{ $value->tong_so }}</td>
+                                    <td>{{ $value->giao_su }}</td>
+                                    <td>{{ $value->pho_giao_su }}</td>
+                                    <td>{{ $value->tien_si }}</td>
+                                    <td>{{ $value->thac_si }}</td>
+                                    <td>{{ $value->dai_hoc }}</td>
+                                    <td>{{ $value->cao_dang }}</td>
+                                    <td>{{ $value->trinh_do_khac }}</td>
+                                    <td>{{ $value->hang_3 }}</td>
+                                    <td>{{ $value->hang_2 }}</td>
+                                    <td>{{ $value->hang_1 }}</td>
+                                    <td>
+                                        <a href="#" class="open-update" data-id="{{ $value->id }}">
+                                        <i class="bi bi-gear-fill" style="font-size: 25px;color: #009ef7;"></i>
+                                        </a>
+                                        <a href="#" class="open-delete" data-id="{{ $value->id }}">
+                                            <i class="bi bi-trash" style="font-size: 25px;color: red;"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    @endforeach
+                @endforeach
             </tbody>                
         </table>
     </div>
@@ -182,7 +242,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalUnitLabel">
-                    @lang('project/ImportdataExcel/title.ckdtdsv')
+                    @lang('project/ImportdataExcel/title.ckdngvch')
                 </h5>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -220,14 +280,14 @@
                                 @lang('project/ImportdataExcel/title.tennganh')
                             </label>
                             <input type="text" name="tennganh" id="fortenng" class="form-control"
-                            placeholder="@lang('project/ImportdataExcel/title.tennganh')">
+                            placeholder="@lang('project/ImportdataExcel/title.tennganh')" required>
                         </div>  
                         <div class="form-group col-md-6">
                             <label for="fortongso">
                                 @lang('project/ImportdataExcel/title.tongso')
                             </label>
                             <input type="number" name="tongso" id="fortongso" class="form-control"
-                            placeholder="@lang('project/ImportdataExcel/title.tongso')">
+                            placeholder="@lang('project/ImportdataExcel/title.tongso')" required>
                         </div> 
                         <!-- Chức danh -->
                         <div class="form-group col-md-12">
@@ -240,14 +300,14 @@
                                 @lang('project/ImportdataExcel/title.giaosu')
                             </label>
                             <input type="number" name="giaosu" id="forgiaosu" class="form-control"
-                            placeholder="@lang('project/ImportdataExcel/title.giaosu')">
+                            placeholder="@lang('project/ImportdataExcel/title.giaosu')" required>
                         </div> 
                         <div class="form-group col-md-6">
                             <label for="forpgiaosu">
                                 @lang('project/ImportdataExcel/title.phogiaosu')
                             </label>
                             <input type="number" name="phogiaosu" id="forpgiaosu" class="form-control"
-                            placeholder="@lang('project/ImportdataExcel/title.phogiaosu')">
+                            placeholder="@lang('project/ImportdataExcel/title.phogiaosu')" required>
                         </div> 
                         <!-- Trình độ đào tạo -->
                         <div class="form-group col-md-12">
@@ -260,35 +320,35 @@
                                 @lang('project/ImportdataExcel/title.tiensi')
                             </label>
                             <input type="number" name="tiensi" id="fortiensi" class="form-control"
-                            placeholder="@lang('project/ImportdataExcel/title.tiensi')">
+                            placeholder="@lang('project/ImportdataExcel/title.tiensi')" required>
                         </div> 
                         <div class="form-group col-md-2">
                             <label for="forthacsi">
                                 @lang('project/ImportdataExcel/title.thacsi')
                             </label>
                             <input type="number" name="thacsi" id="forthacsi" class="form-control"
-                            placeholder="@lang('project/ImportdataExcel/title.thacsi')">
+                            placeholder="@lang('project/ImportdataExcel/title.thacsi')" required>
                         </div> 
                         <div class="form-group col-md-2">
                             <label for="fordaihoc">
                                 @lang('project/ImportdataExcel/title.daihoc')
                             </label>
                             <input type="number" name="daihoc" id="fordaihoc" class="form-control"
-                            placeholder="@lang('project/ImportdataExcel/title.daihoc')">
+                            placeholder="@lang('project/ImportdataExcel/title.daihoc')" required>
                         </div> 
                         <div class="form-group col-md-2">
                             <label for="forcaodang">
                                 @lang('project/ImportdataExcel/title.caodang')
                             </label>
                             <input type="number" name="caodang" id="forcaodang" class="form-control"
-                            placeholder="@lang('project/ImportdataExcel/title.caodang')">
+                            placeholder="@lang('project/ImportdataExcel/title.caodang')" required>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="fortdk">
                                 @lang('project/ImportdataExcel/title.trinhdokhac')
                             </label>
                             <input type="number" name="trinhdokhac" id="fortdk" class="form-control"
-                            placeholder="@lang('project/ImportdataExcel/title.trinhdokhac')">
+                            placeholder="@lang('project/ImportdataExcel/title.trinhdokhac')" required>
                         </div>
                     </div>
                     <div class="row">
@@ -303,27 +363,27 @@
                                 @lang('project/ImportdataExcel/title.hangIII')
                             </label>
                             <input type="number" name="hangIII" id="forhang3" class="form-control"
-                            placeholder="@lang('project/ImportdataExcel/title.hangIII')">
+                            placeholder="@lang('project/ImportdataExcel/title.hangIII')" required>
                         </div> 
                         <div class="form-group col-md-2">
                             <label for="forhang2">
                                 @lang('project/ImportdataExcel/title.hangII')
                             </label>
                             <input type="number" name="hangII" id="forhang2" class="form-control"
-                            placeholder="@lang('project/ImportdataExcel/title.hangII')">
+                            placeholder="@lang('project/ImportdataExcel/title.hangII')" required>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="forhang1">
                                 @lang('project/ImportdataExcel/title.hangI')
                             </label>
                             <input type="number" name="hangI" id="forhang1" class="form-control"
-                            placeholder="@lang('project/ImportdataExcel/title.hangI')">
+                            placeholder="@lang('project/ImportdataExcel/title.hangI')" required>
                         </div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="import_unit_data">
+                    <button type="submit" class="btn btn-primary" >
                         @lang('project/Standard/title.themmoi')
                     </button>
 
@@ -382,70 +442,150 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form action="{{ route('admin.importdata.ckdngv.updateUnit') }}" method="post" id="update-unit">
-                    @csrf
-                    <input type="hidden" id="id_unit" name="id_unit">
-                    <div class="container-fuild">
-                        <div class="row">
-                            <div class="form-group col-md-3">
-                                <label for="forten">
-                                    <span>@lang('project/ImportdataExcel/title.hoten')</span>
-                                </label>
-                                <input type="text" class="form-control " id="forten" placeholder="@lang('project/ImportdataExcel/title.hoten')" name="hoten">
-                            </div>
-                            <div class="form-group col-md-3" >
-                                <label for="fornamsinh">
-                                    <span>@lang('project/ImportdataExcel/title.namsinh')</span>
-                                </label>
-                                <input type="text" class="form-control " id="fornamsinh" placeholder="@lang('project/ImportdataExcel/title.namsinh')" name="namsinh">
-                            </div>
-                            <div class="form-group col-md-3" >
-                                <label for="forgioitinh">
-                                    <span>@lang('project/ImportdataExcel/title.gioitinh')</span>
-                                </label>
-                                <select name="gioitinh" id="forgioitinh" class="form-control">
-                                    <option value="1">@lang('project/ImportdataExcel/title.male')</option>
-                                    <option value="2">@lang('project/ImportdataExcel/title.female')</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3" >
-                                <label for="forchucdanh">
-                                    <span>@lang('project/ImportdataExcel/title.chucdanh')</span>
-                                </label>
-                                <input type="text" class="form-control " id="forchucdanh" placeholder="@lang('project/ImportdataExcel/title.chucdanh')" name="chucdanh">
-                            </div>
-                            <div class="form-group col-md-3" >
-                                <label for="fortddt">
-                                    <span>@lang('project/ImportdataExcel/title.tddt')</span>
-                                </label>
-                                <input type="text" class="form-control " id="fortddt" placeholder="@lang('project/ImportdataExcel/title.tddt')" name="tddt">
-                            </div>
-                            <div class="form-group col-md-3" >
-                                <label for="forcngd">
-                                    <span>@lang('project/ImportdataExcel/title.cngd')</span>
-                                </label>
-                                <input type="text" class="form-control " id="forcngd" placeholder="@lang('project/ImportdataExcel/title.cngd')" name="cngd">
-                            </div>
-                            <div class="form-group col-md-3" >
-                                <label for="forkhoinganh">
-                                    <span>@lang('project/ImportdataExcel/title.khoinganh')</span>
-                                </label>
-                                <input type="text" class="form-control " id="forkhoinganh" placeholder="@lang('project/ImportdataExcel/title.khoinganh')" name="khoinganh">
-                            </div>
+
+            <form action="{{ route('admin.importdata.ckdngvch.updateUnit') }}" method="post">
+                @csrf
+                <input type="hidden" name="id" id="id_update">
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="forlgv_up">
+                                @lang('project/ImportdataExcel/title.loaigv')
+                            </label>
+                            <select name="loaigv" id="forlgv_up" class="form-control">
+                                <option value="1">@lang('project/ImportdataExcel/title.gvchcn')</option>
+                                <option value="2">@lang('project/ImportdataExcel/title.gvchmc')</option>
+                            </select>
+                        </div>  
+                        <div class="form-group col-md-6">
+                            <label for="forkn_up">
+                                @lang('project/ImportdataExcel/title.khoinganh')
+                            </label>
+                            <select name="khoinganh" id="forkn_up" class="form-control">
+                                <option value="1">@lang('project/ImportdataExcel/title.khoing1')</option>
+                                <option value="2">@lang('project/ImportdataExcel/title.khoing2')</option>
+                                <option value="3">@lang('project/ImportdataExcel/title.khoing3')</option>
+                                <option value="4">@lang('project/ImportdataExcel/title.khoing4')</option>
+                                <option value="5">@lang('project/ImportdataExcel/title.khoing5')</option>
+                            </select>
+                        </div>  
+                        <div class="form-group col-md-6">
+                            <label for="fortenng_up">
+                                @lang('project/ImportdataExcel/title.tennganh')
+                            </label>
+                            <input type="text" name="tennganh" id="fortenng_up" class="form-control"
+                            placeholder="@lang('project/ImportdataExcel/title.tennganh')" required>
+                        </div>  
+                        <div class="form-group col-md-6">
+                            <label for="fortongso_up">
+                                @lang('project/ImportdataExcel/title.tongso')
+                            </label>
+                            <input type="number" name="tongso" id="fortongso_up" class="form-control"
+                            placeholder="@lang('project/ImportdataExcel/title.tongso')" required>
+                        </div> 
+                        <!-- Chức danh -->
+                        <div class="form-group col-md-12">
+                            <i>
+                                <h2>@lang('project/ImportdataExcel/title.chucdanh'):</h2>
+                            </i>
                         </div>
-                        
-                    </div> 
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btn-update-unit">
-                    @lang('project/Standard/title.thaydoi')
-                </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    @lang('project/Standard/title.huy')
-                </button>
-            </div>
+                        <div class="form-group col-md-6">
+                            <label for="forgiaosu_up">
+                                @lang('project/ImportdataExcel/title.giaosu')
+                            </label>
+                            <input type="number" name="giaosu" id="forgiaosu_up" class="form-control"
+                            placeholder="@lang('project/ImportdataExcel/title.giaosu')" required>
+                        </div> 
+                        <div class="form-group col-md-6">
+                            <label for="forpgiaosu_up">
+                                @lang('project/ImportdataExcel/title.phogiaosu')
+                            </label>
+                            <input type="number" name="phogiaosu" id="forpgiaosu_up" class="form-control"
+                            placeholder="@lang('project/ImportdataExcel/title.phogiaosu')" required>
+                        </div> 
+                        <!-- Trình độ đào tạo -->
+                        <div class="form-group col-md-12">
+                            <i>
+                                <h2>@lang('project/ImportdataExcel/title.tddt'):</h2>
+                            </i>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="fortiensi_up">
+                                @lang('project/ImportdataExcel/title.tiensi')
+                            </label>
+                            <input type="number" name="tiensi" id="fortiensi_up" class="form-control"
+                            placeholder="@lang('project/ImportdataExcel/title.tiensi')" required>
+                        </div> 
+                        <div class="form-group col-md-2">
+                            <label for="forthacsi_up">
+                                @lang('project/ImportdataExcel/title.thacsi')
+                            </label>
+                            <input type="number" name="thacsi" id="forthacsi_up" class="form-control"
+                            placeholder="@lang('project/ImportdataExcel/title.thacsi')" required>
+                        </div> 
+                        <div class="form-group col-md-2">
+                            <label for="fordaihoc_up">
+                                @lang('project/ImportdataExcel/title.daihoc')
+                            </label>
+                            <input type="number" name="daihoc" id="fordaihoc_up" class="form-control"
+                            placeholder="@lang('project/ImportdataExcel/title.daihoc')" required>
+                        </div> 
+                        <div class="form-group col-md-2">
+                            <label for="forcaodang_up">
+                                @lang('project/ImportdataExcel/title.caodang')
+                            </label>
+                            <input type="number" name="caodang" id="forcaodang_up" class="form-control"
+                            placeholder="@lang('project/ImportdataExcel/title.caodang')" required>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="fortdk_up">
+                                @lang('project/ImportdataExcel/title.trinhdokhac')
+                            </label>
+                            <input type="number" name="trinhdokhac" id="fortdk_up" class="form-control"
+                            placeholder="@lang('project/ImportdataExcel/title.trinhdokhac')" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Hạng chức danh nghề -->
+                        <div class="form-group col-md-12">
+                            <i>
+                                <h2>@lang('project/ImportdataExcel/title.hcdn'):</h2>
+                            </i>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="forhang3_up">
+                                @lang('project/ImportdataExcel/title.hangIII')
+                            </label>
+                            <input type="number" name="hangIII" id="forhang3_up" class="form-control"
+                            placeholder="@lang('project/ImportdataExcel/title.hangIII')" required>
+                        </div> 
+                        <div class="form-group col-md-2">
+                            <label for="forhang2_up">
+                                @lang('project/ImportdataExcel/title.hangII')
+                            </label>
+                            <input type="number" name="hangII" id="forhang2_up" class="form-control"
+                            placeholder="@lang('project/ImportdataExcel/title.hangII')" required>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="forhang1_up">
+                                @lang('project/ImportdataExcel/title.hangI')
+                            </label>
+                            <input type="number" name="hangI" id="forhang1_up" class="form-control"
+                            placeholder="@lang('project/ImportdataExcel/title.hangI')" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" >
+                        @lang('project/Standard/title.thaydoi')
+                    </button>
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        @lang('project/Standard/title.huy')
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -469,7 +609,46 @@
 
 
 <script>
-    
+    $(".open-delete").click(function(){
+        let idItem = $(this).attr('data-id');
+        $("#modalDelete").modal("show")
+        let route = "{!! route('admin.importdata.ckdngvch.deleteUnit') !!}" + "?id_delete=" + idItem
+        $("#btn-delete-unit").attr("href", route);
+    })
+
+    $(".open-update").click(function() {
+        let idItem = $(this).attr('data-id');
+        
+
+        let loadData = "{{ route('admin.importdata.ckdngvch.getInfoUnit') }}" + "?id=" + idItem;
+        fetch(loadData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                $("#id_update").val(idItem)
+                $("#forlgv_up").val(data.loai);
+                $("#forkn_up").val(data.khoinganh);
+                $("#fortenng_up").val(data.noi_dung);
+                $("#fortongso_up").val(data.tong_so);
+                $("#forgiaosu_up").val(data.giao_su);
+                $("#forpgiaosu_up").val(data.pho_giao_su);
+                $("#fortiensi_up").val(data.tien_si);
+                $("#forthacsi_up").val(data.thac_si);
+                $("#fordaihoc_up").val(data.dai_hoc);
+                $("#forcaodang_up").val(data.cao_dang);
+                $("#fortdk_up").val(data.trinh_do_khac);
+                $("#forhang3_up").val(data.hang_3);
+                $("#forhang2_up").val(data.hang_2);
+                $("#forhang1_up").val(data.hang_1);
+                $("#modalUpdate").modal("show");
+            })
+
+    })
 
     var listColor = {
         check_empty :   '#ec5757',
@@ -846,29 +1025,7 @@
     })
 
 
-    $('#modalUpdate').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) 
-        var id = button.data('id') 
-        $("#id_unit").val(id);
-        let loadData = "{{ route('admin.importdata.ckdngv.dataUnit') }}" + "?id=" + id;
-        fetch(loadData, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                $("#forten").val(data.hoten);
-                $("#fornamsinh").val(data.namsinh);
-                $("#forgioitinh").val(data.gioitinh);
-                $("#forchucdanh").val(data.chucdanh);
-                $("#fortddt").val(data.tddt);
-                $("#forcngd").val(data.cngd);
-                $("#forkhoinganh").val(data.khoinganh);
-            })
-    })
+  
 
     $("#btn-update-unit").click(function() {
         $("#update-unit").submit();

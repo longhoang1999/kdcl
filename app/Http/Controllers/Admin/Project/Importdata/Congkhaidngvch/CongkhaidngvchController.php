@@ -34,15 +34,36 @@ class CongkhaidngvchController extends DefinedController{
 		$donvi = DB::table("donvi")->select("id", "ten_donvi", "deleted_at","loai_dv_id")
                 ->where("deleted_at", null)
                 ->get();
+        $gvch = DB::table('excel_import_gvch')->get();
 		
         return view('admin.project.Importdata.ckdngvch')->with([
            	'loai_dv'           => $loai_dv,
            	'donvi'             => $donvi,
+            'gvch'              => $gvch
         ]);
 	}
 
     public function createUnit(Request $req){
-        
+        // excel_import_gvch
+        $data = [
+            'noi_dung'  => $req->tennganh,
+            'tong_so'   => $req->tongso,
+            'giao_su'   => $req->giaosu,
+            'pho_giao_su'   => $req->phogiaosu,
+            'tien_si'       => $req->tiensi,
+            'thac_si'        => $req->thacsi,
+            'dai_hoc'        => $req->daihoc,
+            'cao_dang'       => $req->caodang,
+            'trinh_do_khac'   => $req->trinhdokhac,
+            'hang_3'       => $req->hangIII,
+            'hang_2'        => $req->hangII,
+            'hang_1'         => $req->hangI,
+            'loai'          => $req->loaigv,
+            'khoinganh'     => $req->khoinganh
+        ];
+        DB::table('excel_import_gvch')->insert($data);
+        return back()->with('success', 
+                    Lang::get('project/Standard/message.success.create'));
     }
 
 	//Import excel unit
@@ -109,23 +130,34 @@ class CongkhaidngvchController extends DefinedController{
 
 
     public function deleteUnit(Request $req){
-        DB::table('excel_import_gvtkn')->where("id", $req->id_delete)->delete();
+        DB::table('excel_import_gvch')->where("id", $req->id_delete)->delete();
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.delete'));
     }
-
+    public function getInfoUnit(Request $req){
+        $data = DB::table('excel_import_gvch')->where("id", $req->id)->first();
+        return json_encode($data);
+    }
     public function updateUnit(Request $req){
     	$data = [
-            'hoten'  => $req->hoten,
-            'namsinh' => $req->namsinh,
-            'gioitinh' => $req->gioitinh,
-            'chucdanh' => $req->chucdanh,
-            'tddt' => $req->tddt,
-            'cngd' => $req->cngd,
-            'khoinganh' => $req->khoinganh,
+            'noi_dung'  => $req->tennganh,
+            'tong_so'   => $req->tongso,
+            'giao_su'   => $req->giaosu,
+            'pho_giao_su'   => $req->phogiaosu,
+            'tien_si'       => $req->tiensi,
+            'thac_si'        => $req->thacsi,
+            'dai_hoc'        => $req->daihoc,
+            'cao_dang'       => $req->caodang,
+            'trinh_do_khac'   => $req->trinhdokhac,
+            'hang_3'       => $req->hangIII,
+            'hang_2'        => $req->hangII,
+            'hang_1'         => $req->hangI,
+            'loai'          => $req->loaigv,
+            'khoinganh'     => $req->khoinganh
         ];
-        DB::table("excel_import_gvtkn")->where("id", $req->id_unit)
-        		->update($data);
+        DB::table('excel_import_gvch')
+                    ->where("id", $req->id)
+                    ->update($data);
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.update'));
     }

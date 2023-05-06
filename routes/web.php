@@ -1396,14 +1396,10 @@ Route::group(
                             function(){
                                 Route::get('index','CongkhaidngvchController@index')->name('index');
                                 Route::post('create-unit','CongkhaidngvchController@createUnit')->name('createUnit');
-                                // Route::post('import-unit', 'CongkhaidngvController@importUnit')->name('importUnit');
-                                // Route::post('import-data-unit', 'CongkhaidngvController@importDataUnit')->name('importDataUnit');
-                                // Route::get('data-unit', 'CongkhaidngvController@dataUnit')->name('dataUnit');
-                                // Route::get('delete-unit', 'CongkhaidngvController@deleteUnit')->name('deleteUnit');
-                                // Route::post('update-unit', 'CongkhaidngvController@updateUnit')->name('updateUnit');
+                                Route::get('delete-unit', 'CongkhaidngvchController@deleteUnit')->name('deleteUnit');
+                                Route::get('get-info-unit', 'CongkhaidngvchController@getInfoUnit')->name('getInfoUnit');
                                 
-                                // //Export công khai thông tin danh sách chi tiết đội ngũ giảng viên theo khối ngành
-                                // Route::get('export-cknckh', 'CongkhaidngvController@exportCkdtdsv')->name('exportCkdtdsv');
+                                Route::post('update-unit', 'CongkhaidngvchController@updateUnit')->name('updateUnit');
 
                             }
                         );
