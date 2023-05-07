@@ -49,52 +49,52 @@
 
 
     </style>
-	<div class="container mt-5 block_css">
-			<div class="row form-group css-t d-flex align-items-center">
-				<label for="" class="col-4 control-label">@lang('project/Externalreview/title.tenbaocao')</label>
-				<div class="col-8" id="parentDiv" style="width: 250px;">
-					<select name="" id="select2" class="form-control name_bc scrollbar" style="width: 100%">
-						@foreach($baocao as $value)
-							<option value="" id="{{$value->id}}">{{$value->ten_bc}}</option>
-						@endforeach
-					</select>
+		<div class="container mt-5 block_css">
+				<div class="row form-group css-t d-flex align-items-center">
+					<label for="" class="col-4 control-label">@lang('project/Externalreview/title.tenbaocao')</label>
+					<div class="col-8" id="parentDiv" style="width: 250px;">
+						<select name="id_baocao" id="select2" class="form-control name_bc scrollbar" style="width: 100%">
+							@foreach($baocao as $value)
+								<option value="{{$value->id}}" >{{$value->ten_bc}}</option>
+							@endforeach
+						</select>
+					</div>
 				</div>
-			</div>
 
-			<div class="row css-t d-flex align-items-center">
-				<label for="" class="col-4 control-label ">@lang('project/Externalreview/title.ttct')</label>
-				<div class="col-8">
-					<select name="" id="select2_tt" class="form-control select2">
-						@foreach($data as $nhansu)
-							<option value="{{$nhansu->id}}">{{$nhansu->name}}-({{$nhansu->ten_donvi}})</option>
-						@endforeach
-					</select>	
+				<div class="row css-t d-flex align-items-center">
+					<label for="" class="col-4 control-label ">@lang('project/Externalreview/title.ttct')</label>
+					<div class="col-8">
+						<select name="nhansu_id" id="select2_tt" class="form-control select2 nhansu_id">
+							@foreach($data as $nhansu)
+								<option value="{{$nhansu->id}}">{{$nhansu->name}}-({{$nhansu->ten_donvi}})</option>
+							@endforeach
+						</select>	
+					</div>
 				</div>
-			</div>
 
-			<div class="row css-t d-flex align-items-center">
-				<label for="" class="col-4 control-label">@lang('project/Externalreview/title.nhansuthuchien')</label>
-				<div class="col-8">
-					<button class="btn btn-xs pd-css" data-toggle="modal" type="button" data-target="#nhanSuThucHienModal">
-                            <i class="bi bi-person-lines-fill" style="font-size: 35px;color: #5014d0;"></i>
-                    </button>
+				<div class="row css-t d-flex align-items-center">
+					<label for="" class="col-4 control-label">@lang('project/Externalreview/title.nhansuthuchien')</label>
+					<div class="col-8">
+						<button class="btn btn-xs pd-css" data-toggle="modal" type="button" data-target="#nhanSuThucHienModal">
+								<i class="bi bi-person-lines-fill" style="font-size: 35px;color: #5014d0;"></i>
+						</button>
+					</div>
 				</div>
-			</div>
 
-			<div class="row css-t d-flex align-items-center">
-				<label for="" class="col-4 control-label">@lang('project/Externalreview/title.khth')</label>
-				<div class="col-4">
-					<input name="gioihan_start" class="start-date form-control flatpickr flatpickr-input ngaybd_bc" id="gioihan_start" type="text" value=""/>
+				<div class="row css-t d-flex align-items-center">
+					<label for="" class="col-4 control-label">@lang('project/Externalreview/title.khth')</label>
+					<div class="col-4">
+						<input name="gioihan_start" class="start-date form-control flatpickr flatpickr-input ngaybd_bc" id="gioihan_start" type="text" value=""/>
+					</div>
+					<div class="col-4">
+						<input name="gioihan_start" class="start-end form-control flatpickr flatpickr-input ngaybd_bc" id="gioihan_start" type="text" value=""/>
+					</div>
 				</div>
-				<div class="col-4">
-					<input name="gioihan_start" class="start-end form-control flatpickr flatpickr-input ngaybd_bc" id="gioihan_start" type="text" value=""/>
-				</div>
-			</div>
-			@if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
-				<button type="button" class="btn btn-success save">@lang('project/Externalreview/title.luu')</button>
-			@endif
+				@if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+					<button type="submit" class="btn btn-success save">@lang('project/Externalreview/title.luu')</button>
+				@endif
 
-	</div>
+		</div>
 		
 	<!-- modal nhân sự thực hiện -->
                 <div class="modal inmodal fade" id="nhanSuThucHienModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -152,7 +152,23 @@
                         </div>
                     </div>
                 </div>
+
+	<!-- <table class="table table-striped table-bordered" id="table" width="100%">
+		<thead>
+			<tr>
+				<th>Tên kế hoạch</th>
+				<th>Tổ trưởng chuyên trách</th>
+				<th>Nhân sự thực hiên</th>
+				<th>Thời gian</th>
+			</tr>
+		</thead>
+		<tbody> 
+
+		</tbody>                
+	</table>  -->
 </section>
+
+
 @stop
 
 
@@ -163,6 +179,7 @@
 @section('footer_scripts')
 
 <script>
+
 
 	$(".start-date").flatpickr({
         dateFormat: 'd-m-Y',
@@ -248,5 +265,40 @@
 	  });
 	});
 
+
+
+	$(".save").click(function() {
+		let arr = []
+		let a = $(".appen").find(".convertir").find(".border");
+		for(let i = 0;i < a.length; i++){
+			arr.push(a[i].getAttribute("id"))
+		}
+		let data = {
+			'id_bc': $(".name_bc").val(),
+			'ns_phutrach': $(".nhansu_id").val(),
+			'ds_chuanbi' : arr,
+			'start_date'	: $(".start-date").val(),
+			'end_date'	: $(".start-end").val()
+		}
+		
+		let routeApi = "{{ route('admin.danhgiangoai.lapkehoachdanhgian.phanquyen') }}";
+		fetch(routeApi, {
+			headers: {
+				'Content-Type': 'application/json',
+				'Accept': 'application/json',
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			method: "POST",
+			body: JSON.stringify(data),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if(data.mes == "done"){
+
+				}				
+			})
+			
+	})
+	
 </script>
 @stop

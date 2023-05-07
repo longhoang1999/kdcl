@@ -207,6 +207,9 @@ class ReportController extends DefinedController
         if(!$req->nhansuchuanbi || !$req->nhansuthuchien || !$req->nhansukiemtra){
             return 0;
         };
+        $check_nhansu = false;
+        $tieuchi_idkh = array();
+        $menhde_idkh = array();
         $nhansuchuanbi = explode(',',$req->nhansuchuanbi);
         $nhansuthuchien = explode(',',$req->nhansuthuchien);
         $nhansukiemtra = explode(',',$req->nhansukiemtra);
@@ -250,9 +253,11 @@ class ReportController extends DefinedController
         if($check){
             $save = $kh_tieuchuan->update($data);
             $id_khtieuchuan = $check->id;
+            $check_nhansu = true;
+            
 
         }else{
-
+            
             $data['id_kh_baocao'] = $req->id_khbc;
             $data['tieuchuan_id'] = $req->id_tieuchuan;
             
@@ -273,9 +278,14 @@ class ReportController extends DefinedController
                      'id_csdt'         => Sentinel::getUser()->csdt_id,
                      'nguoi_tao'       => Sentinel::getUser()->id,
                      'truongnhom'    => $req->truong_nhom,
+                     'ngay_batdau_chuanbi'    => $this->toDBDate($req->ngay_chuanbi),
+                     'ngay_hoanthanh_chuanbi'    => $this->toDBDate($req->ngay_hoanthanh),
+                     'ngay_batdau'    => $this->toDBDate($req->ngay_batdau_vbc),
+                     'ngay_hoanthanh'    => $this->toDBDate($req->ngay_hoanthanh_vbc),
 
                ]);
-                $save_bctc = DB::table("baocao_tieuchi")
+               $pust_khtc = array_push($tieuchi_idkh,$kehoach_tchi);
+               $save_bctc = DB::table("baocao_tieuchi")
                                     ->insert([
                                             'id_kehoach_bc' => $req->id_khbc,
                                             'id_tieuchi' => $value2,
@@ -291,8 +301,12 @@ class ReportController extends DefinedController
                              'id_menhde'        => $value3,
                              'id_csdt'         => Sentinel::getUser()->csdt_id,
                              'nguoi_tao'       => Sentinel::getUser()->id,
+                             'ngay_batdau'        => $this->toDBDate($req->ngay_batdau_vbc),
+                             'ngay_hoanthanh'        => $this->toDBDate($req->ngay_hoanthanh_vbc),
+
                           ]);
 
+                        $pust_idkhmd = array_push($menhde_idkh,$kehoach_mde);
                         DB::table('baocao_menhde')->insert([
                             'id_kehoach_bc' =>    $req->id_khbc,
                             'id_kh_menhde' =>     $kehoach_mde,
@@ -312,9 +326,11 @@ class ReportController extends DefinedController
                              'mocchuan_id'    => $value3,
                              'id_csdt'         => Sentinel::getUser()->csdt_id,
                              'nguoi_tao'       => Sentinel::getUser()->id,
+                             'ngay_batdau'        => $this->toDBDate($req->ngay_batdau_vbc),
+                             'ngay_hoanthanh'        => $this->toDBDate($req->ngay_hoanthanh_vbc),
                           ]);
 
-
+                        $pust_idkhmd = array_push($menhde_idkh,$kehoach_mde);
                        $save_mc = DB::table('baocao_menhde')->insert([
                                     'id_kehoach_bc' =>    $req->id_khbc,
                                     'id_kh_menhde' =>     $kehoach_mde,
@@ -350,6 +366,20 @@ class ReportController extends DefinedController
                     'id_kehoach'    => $id_khtieuchuan,
                     'id_nhansuchuanbi'  => $value,
                 ]);
+
+
+                if(!$check_nhansu){
+                    foreach($tieuchi_idkh as $valkhtc){
+                         $res2 = DB::table('kehoach_tieuchi_nhansu')->insert([
+                            'id_kehoach'    => $valkhtc,
+                            'id_nhansuchuanbi'  => $value,
+                        ]);
+                    }
+                }
+                
+               
+
+
             }
 
             foreach ($nhansuthuchien as $key2 => $value2) {
@@ -357,6 +387,25 @@ class ReportController extends DefinedController
                     'id_kehoach'    => $id_khtieuchuan,
                     'id_nhansuthuchien'  => $value2,
                 ]);
+
+                if(!$check_nhansu){
+                    foreach($tieuchi_idkh as $valkhtc){
+                        $res2 = DB::table('kehoach_tieuchi_nhansu')->insert([
+                            'id_kehoach'    => $valkhtc,
+                            'id_nhansuthuchien'  => $value2,
+                        ]);
+
+                        foreach($menhde_idkh as $val_idmd){
+                            $res3 = DB::table('kehoach_menhde_nhansu')->insert([
+                                'id_kehoach'    => $val_idmd,
+                                'id_nhansuthuchien'  => $value2,
+                            ]);
+                        }
+                    }
+                }
+                
+               
+                
             }
 
             foreach ($nhansukiemtra as $key3 => $value3) {
@@ -364,6 +413,24 @@ class ReportController extends DefinedController
                     'id_kehoach'    => $id_khtieuchuan,
                     'id_nhansukiemtra'  => $value3,
                 ]);
+
+                if(!$check_nhansu){
+                    foreach($tieuchi_idkh as $valkhtc){
+                        $res3 = DB::table('kehoach_tieuchi_nhansu')->insert([
+                            'id_kehoach'    => $valkhtc,
+                            'id_nhansukiemtra'  => $value3,
+                        ]);
+
+                        foreach($menhde_idkh as $val_idmd){
+                            $res4 = DB::table('kehoach_menhde_nhansu')->insert([
+                                'id_kehoach'    => $val_idmd,
+                                'id_nhansukiemtra'  => $value3,
+                            ]);
+                        }
+                    }
+                }
+                
+                
             }
         }
 

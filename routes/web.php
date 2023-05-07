@@ -748,6 +748,8 @@ Route::group(
                             function(){
                                 // Đánh giá ngoài
                                 Route::get('/','PlanningassessmentController@index')->name('index');
+                                Route::post("phanquyen", 'PlanningassessmentController@phanquyen')->name('phanquyen');
+                                Route::get('get-data','PlanningassessmentController@getdata')->name('getdata');
                             }
                         );
                     }

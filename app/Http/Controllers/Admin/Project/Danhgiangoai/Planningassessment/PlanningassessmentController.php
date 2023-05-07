@@ -32,9 +32,35 @@ class PlanningassessmentController extends DefinedController{
 					->select('id','ten_bc')
 					->get();
 		return view('admin.project.Planningassessment.index')
-					->with([
-							'data'  => $data,
-							'baocao'  => $baocao,
-					]);
+			->with([
+					'data'  => $data,
+					'baocao'  => $baocao,
+			]);
+	}
+	public function phanquyen(Request $req){
+		if($req->ds_chuanbi != null && $req->ds_chuanbi != ""){
+			foreach($req->ds_chuanbi as $ds_chuanbi){
+				$exit = DB::table("role_user_dgn")->where("user_id", $ds_chuanbi)
+							->where("baocao_tdg_id", $req->id_bc);
+				if($exit->count() == 0){
+					$data = [
+						'user_id'	=> $ds_chuanbi,
+						"start_time"	=> date("Y-m-d", strtotime($req->start_date)),
+						"end_time"		=> date("Y-m-d", strtotime($req->end_date)),
+						"baocao_tdg_id"	=> $req->id_bc,
+						"to_truong"		=> $req->ns_phutrach
+					];
+					DB::table("role_user_dgn")->insert($data);
+				}
+				
+			}
+		}
+		return json_encode([
+			'mes' => 'done'
+		]);
+	}
+
+	public function getdata(){
+		
 	}
 }

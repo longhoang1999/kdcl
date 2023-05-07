@@ -1607,10 +1607,41 @@ tbody tr td:last-child {
                         // console.log(data);
                         load_tieuchuan(data.kh_tieuchuan, tieuchuan_id);
                         listkhtchi[tieuchi_id] = data.id;
+                       
+                        let tchi_batdau_chuanbi = $('.tchi_batdau_chuanbi_' + tieuchuan_id).val();
+                        let tchi_hoanthanh_chuanbi = $('.tchi_hoanthanh_chuanbi_' + tieuchuan_id).val();
+                        let tchi_batdau_bc = $('.tchi_batdau_bc_' + tieuchuan_id).val();
+                        let tchi_hoanthanh_bc = $('.tchi_hoanthanh_bc_' + tieuchuan_id).val();
+                       $("#ngay_chuanbi_tchi" + tieuchi_id).flatpickr({
+                            dateFormat: 'd-m-Y',
+                            minDate: tchi_batdau_chuanbi,
+                            maxDate: tchi_hoanthanh_chuanbi,
+                        });
+
+                        $("#ngay_hoanthanh_tchi" + tieuchi_id).flatpickr({
+                            dateFormat: 'd-m-Y',
+                            minDate: tchi_batdau_chuanbi,
+                            maxDate: tchi_hoanthanh_chuanbi,
+                        });
+
+                        $("#ngay_batdau_vbc_tchi" + tieuchi_id).flatpickr({
+                            dateFormat: 'd-m-Y',
+                            minDate: tchi_batdau_bc,
+                            maxDate: tchi_hoanthanh_bc,
+                        });
+
+                        $("#ngay_hoanthanh_vbc_tchi" + tieuchi_id).flatpickr({
+                            dateFormat: 'd-m-Y',
+                            minDate: tchi_batdau_bc,
+                            maxDate: tchi_hoanthanh_bc,
+                        });
                         $('#ngay_chuanbi_tchi' + tieuchi_id).val(data.ngay_batdau_chuanbi);
                         $('#ngay_hoanthanh_tchi' + tieuchi_id).val(data.ngay_hoanthanh_chuanbi);
                         $('#ngay_batdau_vbc_tchi' + tieuchi_id).val(data.ngay_batdau);
                         $('#ngay_hoanthanh_vbc_tchi' + tieuchi_id).val(data.ngay_hoanthanh);
+                        
+                        
+
                         truong_nhom_tieuchi.empty();
                         let id_nsth_tieuchi = [];
                         let id_nsth_kiemtra = [];
@@ -1851,40 +1882,6 @@ tbody tr td:last-child {
         
                 },
             });
-            
-            setTimeout(function(){
-                let tchi_batdau_chuanbi = $('.tchi_batdau_chuanbi_' + tieuchuan_id).val();
-                let tchi_hoanthanh_chuanbi = $('.tchi_hoanthanh_chuanbi_' + tieuchuan_id).val();
-                let tchi_batdau_bc = $('.tchi_batdau_bc_' + tieuchuan_id).val();
-                let tchi_hoanthanh_bc = $('.tchi_hoanthanh_bc_' + tieuchuan_id).val();
-
-                $("#ngay_chuanbi_tchi" + tieuchi_id).flatpickr({
-                    dateFormat: 'd-m-Y',
-                    minDate: tchi_batdau_chuanbi,
-                    maxDate: tchi_hoanthanh_chuanbi,
-                });
-
-                $("#ngay_hoanthanh_tchi" + tieuchi_id).flatpickr({
-                    dateFormat: 'd-m-Y',
-                    minDate: tchi_batdau_chuanbi,
-                    maxDate: tchi_hoanthanh_chuanbi,
-                });
-
-                $("#ngay_batdau_vbc_tchi" + tieuchi_id).flatpickr({
-                    dateFormat: 'd-m-Y',
-                    minDate: tchi_batdau_bc,
-                    maxDate: tchi_hoanthanh_bc,
-                });
-
-                $("#ngay_hoanthanh_vbc_tchi" + tieuchi_id).flatpickr({
-                    dateFormat: 'd-m-Y',
-                    minDate: tchi_batdau_bc,
-                    maxDate: tchi_hoanthanh_bc,
-                });
-
-            }, 2000); 
-
-            
 
             $('#div_lkh_part_tieuchi'+tieuchi_id).show();
             $('#btn_part_tieuchi'+tieuchi_id).html('<i class="fa fa-minus"></i>');
@@ -2171,7 +2168,6 @@ tbody tr td:last-child {
 
     function update_tieuchuan(tc_id){
         let id_tieuchuan = tc_id;
-        console.log(id_tieuchuan)
         let id_khbc = {{ $keHoachBaoCao->id }};
         let ngay_chuanbi = $('#ngay_chuanbi_'+tc_id).val();
         let ngay_hoanthanh = $('#ngay_hoanthanh_'+tc_id).val();

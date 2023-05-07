@@ -308,7 +308,19 @@ class ExternalReviewController extends DefinedController{
 		public function data(Request $req){
 			$keHoachBaoCaoList = DB::table('kehoach_baocao')
 									->select('kehoach_baocao.id as id_khbc','kehoach_baocao.*','users.*')
-									->leftjoin('users','users.id','=','kehoach_baocao.ns_phutrach');
+									->leftjoin('users','users.id','=','kehoach_baocao.ns_phutrach')
+									->get();
+			if(!Sentinel::getUser()->inRole("operator") && !Sentinel::getUser()->inRole("admin")){
+				foreach($keHoachBaoCaoList as $key => $value){
+					$find = DB::table("role_user_dgn")
+							->where("user_id", Sentinel::getUser()->id)
+							->where("baocao_tdg_id", $value->id_khbc);
+					if($find->count() == 0){
+						$keHoachBaoCaoList->forget($key);
+					}
+				}
+			}
+
 			return DataTables::of($keHoachBaoCaoList)
 						->addColumn(
 							'ten_donvi',
