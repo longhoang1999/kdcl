@@ -117,6 +117,7 @@ class ReportController extends DefinedController
 
         $listTc = DB::table("tieuchuan")                        
             ->where('bo_tieuchuan_id',$khbc->bo_tieuchuan_id)
+            ->where('deleted_at',null)
             ->orderBy('stt')
             ->get();
         
