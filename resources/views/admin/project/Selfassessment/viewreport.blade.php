@@ -28,6 +28,7 @@
     padding: 0 30px;
     height: 4rem;
     
+
 }
 h4{
     font-size: 16px;
@@ -49,6 +50,12 @@ div {
     padding-left: 15px !important;
     padding-right: 15px !important;
     width: 100% !important;
+}
+table,tr,td{
+    border: solid 1px lightblue;
+}
+td{
+    text-align: center;
 }
 </style>
 @stop

@@ -1463,7 +1463,7 @@ tbody tr td:last-child {
             $('#btn_part_two_'+tieuchuan_id).html('<i class="fa fa-plus"></i>');
         }else{
             // load du lieu khi mo
-            console.log(tieuchuan_id)
+            // console.log(tieuchuan_id)
             $.ajax({
                 url: "{{route('admin.tudanhgia.report.datadetail')}}",
                 type: "POST",
@@ -1960,7 +1960,7 @@ tbody tr td:last-child {
                         var id_nsth_menhde = [];
                         var id_nsth_kiemtra = [];
 
-                        console.log(data);
+                        // console.log(data);
                         data.kh_menhde_id.forEach(function(e){
                             e.id_nhansuthuchien.forEach(function(e_child){
                                 id_nsth_menhde.push(e_child.id);
@@ -2171,6 +2171,7 @@ tbody tr td:last-child {
 
     function update_tieuchuan(tc_id){
         let id_tieuchuan = tc_id;
+        console.log(id_tieuchuan)
         let id_khbc = {{ $keHoachBaoCao->id }};
         let ngay_chuanbi = $('#ngay_chuanbi_'+tc_id).val();
         let ngay_hoanthanh = $('#ngay_hoanthanh_'+tc_id).val();
@@ -2200,6 +2201,7 @@ tbody tr td:last-child {
                 },
 
                 success: function(data) {
+                    console.log(data)
                     if(data == 1){
                         $('#div_lkh_part_two'+tc_id).hide();
                         $('#btn_part_two_'+tc_id).html('<i class="fa fa-plus"></i>');
@@ -2358,7 +2360,7 @@ tbody tr td:last-child {
                         if(menhde[i][1] == 1){
                             $('.daVietBaoCao_menhde_' + menhde[i][0]).html('<i class="fas fa-star text-danger" data-toggle="tooltip"\n' +
                                 'title="Đã được lên kết hoạch"></i>');
-                            console.log( menhde[i][0])
+                            // console.log( menhde[i][0])
 
                         }else{
                             $('.daVietBaoCao_menhde_' + menhde[i][0]).html('<i class="fas fa-star text-muted" data-toggle="tooltip"' +

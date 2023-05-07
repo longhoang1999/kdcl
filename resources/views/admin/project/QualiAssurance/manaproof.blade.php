@@ -47,24 +47,24 @@
 
                 <div class="row mt-3 div_search" id="div_tk_1">                    
                     <div class="col-md-2">
-                        <select class="form-control  select2" id="nam_search">
-                            <option value="">@lang('project/QualiAssurance/title.nam')</option>
+                        <select class="form-control " id="nam_search">
+                            <option value=""></option>
                             @for($i = intVal(date('Y'));$i >= 1990 ;$i--)
                             <option value="{{$i}}">{{$i}}</option>
                             @endfor
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-control  select2" id="linhvuc_search" >
-                            <option value="" hidden>@lang('project/QualiAssurance/title.lclv')</option>
+                        <select class="form-control " id="linhvuc_search" >
+                            <option value=""></option>
                             @foreach ($linhvuc as $item)
                                 <option value="{{ $item->id }}">{{ $item->mo_ta }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <select class="form-control  select2" id="hoatdong_search">
-                            <option value="" hidden>@lang('project/QualiAssurance/title.lchd')</option>                            
+                        <select class="form-control " id="hoatdong_search">
+                            <option value=""></option>
                         </select>
                     </div>  
                     <div class="col-md-2">
@@ -394,7 +394,20 @@
             loadhoatdong($('#linhvuc_search').val());
         });
 
-        $(".select2").select2();
+        $("#linhvuc_search").select2({
+            placeholder: "@lang('project/QualiAssurance/title.lclv')",
+            allowClear: false
+        })
+        
+        $("#hoatdong_search").select2({
+            placeholder: "@lang('project/QualiAssurance/title.lchd')",
+            allowClear: false
+        })
+        
+        $("#nam_search").select2({
+            placeholder: "@lang('project/QualiAssurance/title.nam')",
+            allowClear: false
+        })
 
         $('.div_search').hide();
         fill_list_search();

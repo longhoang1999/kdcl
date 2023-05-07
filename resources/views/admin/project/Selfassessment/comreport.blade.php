@@ -17,6 +17,7 @@
     .fa, .far, .fas {
         font-family: "Font Awesome 5 Free" !important;
     }
+    
 </style>
 @stop
 
@@ -117,7 +118,7 @@
                     var  ccb = '' + "@lang('project/Selfassessment/title.chuacongbo')";
                     var css_color_tt = 'css_color_organe';
                     data.tieuchuan_tieuchi.forEach((value)=>{
-                        console.log(value)
+                     
                         if(value.baoCaoTieuChuan != undefined){
                             check = true;    
                             if(value.baoCaoTieuChuan.trang_thai_bctc){

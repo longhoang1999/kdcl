@@ -78,21 +78,22 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-7">
+                    <div class="col-md-5">
                         <input type="text" class="form-control " placeholder="@lang('project/QualiAssurance/title.thd')" id="name_hd" name="name_hd">
                     </div>
                     <div class="col-md-1">
                         <button class="btn pl-4 pr-4 " data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.luu')"><i class="bi bi-save" style="font-size: 35px;color: #009ef7;"></i></button>
                     </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.tmcyc')">
+                            <i class="bi bi-plus-square" style="font-size: 35px;color: #50cd89;"></i>
+                        </button>
+                    </div>  
                     
                 </div>
             </div>
         </form>
-        <div class="col-md-1 bao">
-            <button class="btn" data-toggle="modal" data-target="#modalCreate" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.tmcyc')">
-                <i class="bi bi-plus-square" style="font-size: 35px;color: #50cd89;"></i>
-            </button>
-        </div>
+        
         @endif
         <div class="block-flex mt-5 mb-5">
             <h3>@lang('project/QualiAssurance/title.dsmcyc')</h3>

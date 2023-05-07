@@ -32,6 +32,12 @@
     div  {
         font-size: 16px ;
     }
+    table,tr,td{
+        border: solid 1px lightblue;
+    }
+    td{
+        text-align: center;
+    }
 </style>
 @stop
 

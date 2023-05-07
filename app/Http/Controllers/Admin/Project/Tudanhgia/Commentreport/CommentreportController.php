@@ -214,10 +214,14 @@ class CommentreportController extends DefinedController
                }                      
                
                $value->bc_menhde = $menhde_baocao;
-               $value->menhde_baocao_start = $menhde_baocao_start;
+               if(isset($value->menhde_baocao_start)){
+                    $value->menhde_baocao_start = $menhde_baocao_start;
+                    array_push($start,$value->menhde_baocao_start->danhgia);
+               }
+               
                $value->baocao_tieuchi = $baocao;
                $value->bacao_menhde = $menhde_baocao;
-               array_push($start,$value->menhde_baocao_start->danhgia);
+               
               
           }
           $sum_start = Collection::make($start)->avg();

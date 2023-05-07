@@ -120,9 +120,10 @@ class CategoryController extends DefinedController
 
     public function deleteManafield(Request $req) {
         DB::table("nhom_mc_sl")->where("id", $req->id_manafield)
-                ->update([
-                    'deleted_at' => Carbon::now()->toDateTimeString()
-                ]);
+                ->delete();
+                // ->update([
+                //     'deleted_at' => Carbon::now()->toDateTimeString()
+                // ]);
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.delete'));
     }

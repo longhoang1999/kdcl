@@ -97,25 +97,33 @@ class PlanningController extends DefinedController
 
     }
     public function createPlan(Request $req){
-        $data = [
-            'dv_thuchien'   => $req->dvpt,
-            'dv_kiemtra'    => $req->nskt,
-            'ngay_batdau'   => date("Y-m-d", strtotime($req->startDate)),
-            'ngay_hoanthanh'    => date("Y-m-d", strtotime($req->endDate)),
-            'nguoi_tao'             => Sentinel::getUser()->id,
-            'csdt_id'               => Sentinel::getUser()->csdt_id,
-            'kehoach_baocao_id'     => '',
-            'nhom_mc_sl_id'         => $req->linhvuc,
-            'trang_thai'            => 'todo',
-            'year'                  => date("Y", strtotime($req->startDate)),
-            'notes'              => $req->notes == null ? "" : $req->notes,
-            'created_at'            => Carbon::now()->toDateTimeString(),
-            'updated_at'            => Carbon::now()->toDateTimeString(),
-        ];
-        DB::table("kehoach_cc_solieu")->insert($data);
-
-        return back()->with('success', 
-                    Lang::get('project/Standard/message.success.create'));
+        $check = DB::table("kehoach_cc_solieu")->where("nhom_mc_sl_id", $req->linhvuc)
+                ->where("year", date("Y", strtotime($req->startDate)));
+        if($check->count() == 0){
+            $data = [
+                'dv_thuchien'   => $req->dvpt,
+                'dv_kiemtra'    => $req->nskt,
+                'ngay_batdau'   => date("Y-m-d", strtotime($req->startDate)),
+                'ngay_hoanthanh'    => date("Y-m-d", strtotime($req->endDate)),
+                'nguoi_tao'             => Sentinel::getUser()->id,
+                'csdt_id'               => Sentinel::getUser()->csdt_id,
+                'kehoach_baocao_id'     => '',
+                'nhom_mc_sl_id'         => $req->linhvuc,
+                'trang_thai'            => 'todo',
+                'year'                  => date("Y", strtotime($req->startDate)),
+                'notes'              => $req->notes == null ? "" : $req->notes,
+                'created_at'            => Carbon::now()->toDateTimeString(),
+                'updated_at'            => Carbon::now()->toDateTimeString(),
+            ];
+            DB::table("kehoach_cc_solieu")->insert($data);
+    
+            return back()->with('success', 
+                        Lang::get('project/Standard/message.success.create'));
+        }else{
+            $mes = "Lĩnh vực đã được lên kế hoạch trong năm " . date("Y", strtotime($req->startDate));
+            return back()->with('warning', $mes);
+        }
+        
     }
 
 
@@ -184,7 +192,11 @@ class PlanningController extends DefinedController
             ->addColumn('ngayHoanthanh',function ($planning){
                     return date("d-m-Y", strtotime($planning->ngay_hoanthanh)); 
             })
-            ->rawColumns(['actions', 'dvThucHien', 'nsKiemTra'])            
+            
+            ->addColumn('mota_',function ($planning){
+                return $planning->mo_ta != null ? $planning->mo_ta : '<span class="badge badge-warning">Không có thông tin</span>';
+            })
+            ->rawColumns(['actions', 'dvThucHien', 'nsKiemTra', 'mota_'])            
             ->make(true);
     }
     public function showNotPlan(Request $req){

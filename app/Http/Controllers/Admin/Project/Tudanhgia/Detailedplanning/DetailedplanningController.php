@@ -742,9 +742,10 @@ class DetailedplanningController extends DefinedController
                                    ->where('baocao_chung.id_kh_chung',$keHoachChung->id)->first();
                if (!$baoCaoChung) {
                      $s = DB::table('baocao_chung')->where('baocao_chung.id_kehoach_bc',$KHBaCaoDetail->id)
-                                   ->where('baocao_chung.id_kh_chung',$keHoachChung->id)->insert([
+                                   ->insert([
                                         'ketluan' => $req->text,
                                         'id_kehoach_bc' => $KHBaCaoDetail->id,
+                                        'id_kh_chung' => $keHoachChung->id,
                                         'id_csdt' => Sentinel::getUser()->id_csdt,
                                    ]);
                  } else {

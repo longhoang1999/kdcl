@@ -175,9 +175,9 @@ class ExternalReviewController extends DefinedController{
 			
 		// }
 
+// 
 
-
-		public function index($id =null,Request $req){
+		public function index(Request $req,$id =null){
 
 			$keHoachBaoCaoList = DB::table('kehoach_baocao')
 									->select('kehoach_baocao.id as id_khbc','kehoach_baocao.*','users.*')
@@ -364,17 +364,17 @@ class ExternalReviewController extends DefinedController{
 			 $KHBaCaoDetail = DB::table('kehoach_baocao')
 			 					->where('kehoach_baocao.id',$id)->first();
 
-			 if (!$KHBaCaoDetail) {
-	            return abort(422, "Không nhận dạng được kế hoạch");
-	        }
+			//  if (!$KHBaCaoDetail) {
+	        //     return abort(422, "Không nhận dạng được kế hoạch");
+	        // }
 	        $keHoachChung = DB::table('baocao_chung')
 	        				->where('baocao_chung.id_kh_chung',$id_khc)
 	        				->where('baocao_chung.id_kehoach_bc',$id)
 	        				->first();
 
-	        if (!$keHoachChung) {
-	            return abort(422, "Không nhận dạng được kế hoạch");
-	        }
+	        // if (!$keHoachChung) {
+	        //     return abort(422, "Không nhận dạng được kế hoạch");
+	        // }
 
 	        $nhanXetKhoiList = DB::table('baocao_nhanxetkhoi')
 	        						->where('id_kehoach_bc',$KHBaCaoDetail->id)

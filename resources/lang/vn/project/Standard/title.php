@@ -103,6 +103,7 @@
 		'tmlv'			=> 'Thêm mới lĩnh vực',
 		'sllvuc'		=> 'Số lượng lĩnh vực',
 		'linhvuc'		=> 'Lĩnh vực',
+		'vldddtt'		=> 'Vui lòng điền đầy đủ thông tin',
 		// thường trực, quản lý danh mục (QL đơn vị)
 		'qldv'			=> 'Quản lý đơn vị',
 		'madvi'			=> 'Mã đơn vị',
@@ -245,6 +246,6 @@
 		'close'			=> 'Đóng',
 		'upTchuan'		=> 'Cập nhật tiêu chuẩn',
 		'upTChi'		=> 'Cập nhật tiêu chí',
-		'vldddtt'		=> 'Vui lòng điền đầy đủ thông tin',
+
 	);
 

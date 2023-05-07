@@ -566,6 +566,7 @@ Route::group(
                         Route::group(
                             ['prefix' => 'report', 'as' => 'report.', 'namespace' => 'Report'],
                             function(){
+
                                 //DS Báo cáo tự đánh giá 
                                 Route::get('index', 'ReportController@index')->name('index');
                                 //Data 

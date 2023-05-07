@@ -917,7 +917,7 @@
                     </div>
                 </div>
                 @if(isset($tieuChuan->id))
-                    <button class="border-0 btn btn-primary" onclick="setminhchung({{$tieuChuan->id}})">Chèn vào báo cáo</button>
+                    <button class="border-0 btn btn-primary" onclick="setminhchung({{$tieuChuan->id}})">@lang('project/Selfassessment/title.cvbc')</button>
                 @endif
             </div>
             
@@ -1114,6 +1114,7 @@
         }
         var check = false;
         function openselectmc(ed){
+            $('.show_all_mc').css('display','block');
             var cur_editor_id = ed.id;
             cur_editor = ed;
             var st = cur_editor_id.split('_');
@@ -1157,20 +1158,31 @@
                             });
 
                             if(!check){
+                                let tieude_all = $(`select.option_mc${tieuchuan_id} option`).filter(":selected").text();
+                                let result3 = tieude_all.length > 0 ? tieude_all : "@lang('project/Selfassessment/title.khongcodl')";
+                                // let trichyeuall = $(".selectmc_mota option:selected").attr('trichyeu');
+                                // $(`select#option_mc${tieuchuan_id} option:selected`);
+                                // let result4 = trichyeuall.length == 0
+                                //   ? "@lang('project/Selfassessment/title.khongcodl')"
+                                //   : trichyeuall.map(function() {
+                                //       return $(this).attr("trichyeu");
+                                //     }).get();
+                                // let trichyeuall = $(".selectmc_mota option:selected").attr('trichyeu');
+                                // if (!trichyeuall) {
+                                //   let trichyeuall = "@lang('project/Selfassessment/title.khongcodl')";
+                                // }
                                 $('.minhchung_tieude').empty();
                                 $('.minhchung_tieude').append( `
-                                                                <p style="font-weight: bold;margin: 0;margin-top:6px">Tiêu đề</p>
+                                                                <p style="font-weight: bold;margin: 0;margin-top:6px">@lang('project/Selfassessment/title.tieude')</p>
                                                                 <span>
-                                                                     ${$(`select.option_mc${tieuchuan_id} option`).filter(":selected").text()}
+                                                                     ${result3}
                                                                 </span>
                                                             `);
                                 $('.minhchung_trichyeu').empty();
                                 $('.minhchung_trichyeu').append(`   
-                                                                <p style="font-weight: bold;margin: 0;margin-top:6px">Trích Yếu</p>
+                                                                <p style="font-weight: bold;margin: 0;margin-top:6px">@lang('project/Selfassessment/title.trichyeu')</p>
                                                                 <span>
-                                                                    
-
-                                                                ${$(".selectmc_mota  option:selected").attr('trichyeu')})
+                                                                ${$(".selectmc_mota option:selected").attr('trichyeu')}
                                                                 </span>
                                                               `);
                                 }
@@ -1181,17 +1193,26 @@
 
                        $('.minhchung_tieude').empty();
                        $('.minhchung_trichyeu').empty();
+                       let tieude_mcg = $(`select.option_mc${tieuchuan_id} option`).filter(":selected").text();
+                       let result = tieude_mcg.length > 0 ? tieude_mcg : "@lang('project/Selfassessment/title.khongcodl')";
+                       // let selectedOptions = $(`select#option_mc${tieuchuan_id} option:selected`);
+                       // let result2 = trichyeu_mcg.length > 0 ? trichyeu_mcg : "@lang('project/Selfassessment/title.khongcodl')";
+                       // let result2 = selectedOptions.length == 0
+                       //        ? "@lang('project/Selfassessment/title.khongcodl')"
+                       //        : selectedOptions.map(function() {
+                       //            return $(this).attr("trichyeu");
+                       //          }).get();
                        $('.minhchung_tieude').append( `
-                                                        <p style="font-weight: bold;margin: 0;margin-top:6px">Tiêu đề</p>
+                                                        <p style="font-weight: bold;margin: 0;margin-top:6px">@lang('project/Selfassessment/title.tieude')</p>
                                                         <span>
-                                                        ${$(`select.option_mc${tieuchuan_id} option`).filter(":selected").text()}
-                                                        </span>
+                                                        ${result}
+                                                            </span>
                                                     `);
                        
                        $('.minhchung_trichyeu').append(`   
-                                                        <p style="font-weight: bold;margin: 0;margin-top:6px">Trích Yếu</p>
+                                                        <p style="font-weight: bold;margin: 0;margin-top:6px">@lang('project/Selfassessment/title.trichyeu')</p>
                                                         <span id="mc-trichyeu">
-                                                            ${$(`select.option_mc${tieuchuan_id} option`).filter(":selected").attr("trichyeu")} 
+                                                            ${$(".selectmc_mota option:selected").attr('trichyeu')} 
                                                           
                                                         </span>
                                                       `);
@@ -1199,14 +1220,14 @@
 
                             $('.minhchung_tieude').empty();
                             $('.minhchung_tieude').append( `
-                                                            <p style="font-weight: bold;margin: 0;margin-top:6px">Tiêu đề</p>
+                                                            <p style="font-weight: bold;margin: 0;margin-top:6px">@lang('project/Selfassessment/title.tieude')</p>
                                                             <span>
                                                                  ${$(`select.option_mc${tieuchuan_id} option`).filter(":selected").text()}
                                                             </span>
                                                         `);
                             $('.minhchung_trichyeu').empty();
                             $('.minhchung_trichyeu').append(`   
-                                                            <p style="font-weight: bold;margin: 0;margin-top:6px">Trích Yếu</p>
+                                                            <p style="font-weight: bold;margin: 0;margin-top:6px">@lang('project/Selfassessment/title.trichyeu')</p>
                                                             <span>
                                                                 
 

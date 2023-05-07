@@ -788,7 +788,7 @@
                 },
             },
             columns: [
-                { data: 'mo_ta', name: 'mo_ta' },
+                { data: 'mota_', name: 'mota_' },
                 { data: 'ngayBatdau', name: 'ngayBatdau' },
                 { data: 'ngayHoanthanh', name: 'ngayHoanthanh' },
                 { data: 'dvThucHien', name: 'dvThucHien' },

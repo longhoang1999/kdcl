@@ -125,7 +125,7 @@ class ReportController extends DefinedController
             foreach ($value->tieuchi as $key1 => $value1) {
                 if($khbc->writeFollow == 1){
                     $value1->menhde = DB::table('menhde')->where('tieuchi_id',$value1->id)->get();
-                }else{
+                }else if($khbc->writeFollow == 2){
                     $value1->menhde = DB::table('mocchuan')
                                         ->where('tieuchi_id',$value1->id)
                                         // ->where('bo_tieuchuan_id',$khbc->bo_tieuchuan_id)
@@ -202,8 +202,8 @@ class ReportController extends DefinedController
                     ]);
         return 1;
     }
-
     public function upadate_tieuchuan(Request $req){
+
         if(!$req->nhansuchuanbi || !$req->nhansuthuchien || !$req->nhansukiemtra){
             return 0;
         };
@@ -244,6 +244,8 @@ class ReportController extends DefinedController
                             ->where('tieuchuan_id', $req->id_tieuchuan);
         
         $check = $kh_tieuchuan->first();
+        // return 'df';
+        
         $id_khtieuchuan = 0;
         if($check){
             $save = $kh_tieuchuan->update($data);
@@ -282,6 +284,7 @@ class ReportController extends DefinedController
 
                     $menhde_s = DB::table("menhde")
                                     ->where("tieuchi_id",$value2)->pluck("id");
+
                     foreach($menhde_s as $value3){
                         $kehoach_mde = DB::table("kehoach_menhde")->insertGetId([
                              'id_kh_tieuchi'    => $kehoach_tchi,
@@ -300,40 +303,9 @@ class ReportController extends DefinedController
                     
                }else if($kehoachbaocao->writeFollow == 2){
                     
-                   // $save_menhde = DB::table('mocchuan')
-                   //          ->insertGetId([
-                   //              'tieuchi_id' => $value2,
-                   //          ]);
-                   // $save_bcmd = DB::table('baocao_menhde')->insert([
-                   //      'id_kehoach_bc' => $req->id_khbc,
-                   //      'mocchuan_id' => $save_menhde,
-                   //  ]);
-
-                   //  $save_bctc = DB::table("baocao_tieuchi")
-                   //                  ->insert([
-                   //                          'id_kehoach_bc' => $req->id_khbc,
-                   //                          'id_tieuchi' => $value2,
-                   //                  ]);
-                   // $menhde_id = DB::table("mocchuan")->where("tieuchi_id", $value2)->pluck("id");
-                   // foreach($menhde_id as $value3){
-                   //        $kehoach_mde = DB::table("kehoach_menhde")->insertGetId([
-                   //           'id_kh_tieuchi'    => $kehoach_tchi,
-                   //           'mocchuan_id'    => $value3,
-                   //           'id_csdt'         => Sentinel::getUser()->csdt_id,
-                   //           'nguoi_tao'       => Sentinel::getUser()->id,
-                   //        ]);
-
-                   //       DB::table('baocao_menhde')->insert([
-                   //          'id_kehoach_bc' =>    $req->id_khbc,
-                   //          'id_kh_menhde' =>     $kehoach_mde,
-                   //          'mocchuan_id' =>    $value3,
-
-                   //       ]);
-                   //  }
-
-                    
                     $menhde_s = DB::table("mocchuan")
                                     ->where("tieuchi_id",$value2)->pluck("id");
+
                     foreach($menhde_s as $value3){
                         $kehoach_mde = DB::table("kehoach_menhde")->insertGetId([
                              'id_kh_tieuchi'    => $kehoach_tchi,
@@ -342,17 +314,22 @@ class ReportController extends DefinedController
                              'nguoi_tao'       => Sentinel::getUser()->id,
                           ]);
 
-                        DB::table('baocao_menhde')->insert([
-                            'id_kehoach_bc' =>    $req->id_khbc,
-                            'id_kh_menhde' =>     $kehoach_mde,
-                            'mocchuan_id' =>    $value3,
+
+                       $save_mc = DB::table('baocao_menhde')->insert([
+                                    'id_kehoach_bc' =>    $req->id_khbc,
+                                    'id_kh_menhde' =>     $kehoach_mde,
+                                    'mocchuan_id' =>    $value3,
 
                          ]);
+                       // echo $value3;
                     }
+
+                     
                }
                
 
             }
+
           
             
                

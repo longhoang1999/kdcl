@@ -38,12 +38,22 @@
 		button i {
 			font-size: 30px !important;
 		}
+		
+		/*.select2-container .select2-dropdown {
+			max-height: 150px; 
+			overflow-y: scroll;
+		}*/
+
+
+
+
+
     </style>
 	<div class="container mt-5 block_css">
 			<div class="row form-group css-t d-flex align-items-center">
 				<label for="" class="col-4 control-label">@lang('project/Externalreview/title.tenbaocao')</label>
-				<div class="col-8">
-					<select name="" id="" class="form-control name_bc select2" >
+				<div class="col-8" id="parentDiv" style="width: 250px;">
+					<select name="" id="select2" class="form-control name_bc scrollbar" style="width: 100%">
 						@foreach($baocao as $value)
 							<option value="" id="{{$value->id}}">{{$value->ten_bc}}</option>
 						@endforeach
@@ -54,7 +64,7 @@
 			<div class="row css-t d-flex align-items-center">
 				<label for="" class="col-4 control-label ">@lang('project/Externalreview/title.ttct')</label>
 				<div class="col-8">
-					<select name="" id="" class="form-control select2">
+					<select name="" id="select2_tt" class="form-control select2">
 						@foreach($data as $nhansu)
 							<option value="{{$nhansu->id}}">{{$nhansu->name}}-({{$nhansu->ten_donvi}})</option>
 						@endforeach
@@ -97,19 +107,19 @@
                                 </button>
                                 <h4 class="modal-title">@lang('project/Selfassessment/title.nsth')</h4>
                             </div>
+                            <div class="text-center m-auto d-flex align-items-center mt-3">
+                            	<input type="text" class="search form-control" id="searchInput" placeholder="Tìm kiếm">
+                            </div>
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <div class="list-group exchangeList_th" data-target="#nhanSuThucHienAll"
+                                        <div class="list-group exchangeList_cb" data-target="#nhanSuThucHienAll"
                                              id="nhanSuThucHienList" d-form="#nhanSuThucHienForm" d-name="ns_thuchien">
                                              <b class="btn btn-primary">@lang('project/Selfassessment/title.nscb')</b>
-                                            @foreach($data as $nhansu)
-                                            	<div class="border text-center" id="{{$nhansu->id}}">
-                                            		<strong>{{$nhansu->name}}</strong>
-                                            		<p>{{$nhansu->ten_donvi}}</p>
-                                            	</div>
-
-                                            @endforeach
+                                             <div class="appen">
+                                             	
+                                             </div>
+                                            
                                         </div>
                                     </div>
 
@@ -121,6 +131,16 @@
                                         <div class="list-group exchangeList_th" data-target="#nhanSuThucHienList"
                                              id="nhanSuThucHienAll">
                                             <b class="btn btn-primary">@lang('project/Selfassessment/title.dsns')</b>
+                                            <div class="append_ns">
+	                                            @foreach($data as $nhansu)
+	                                            	<div class="convertir">
+		                                            	<div class="border text-center" id="{{$nhansu->id}}">
+		                                            		<strong class="nhansu_th">{{$nhansu->name}}</strong>
+		                                            		<p class="">{{$nhansu->ten_donvi}}</p>
+		                                            	</div>
+		                                            </div>
+	                                            @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -152,19 +172,81 @@
         dateFormat: 'd-m-Y',
     });
 
-    // $('.select2').select2({
+    $(function(){
 
-    // 	theme: "bootstrap-5",
-    //     selectionCssClass: "select2--small",
-    //     dropdownCssClass: "select2--small",
-    // });
-   	
+	    $('#select2').select2({
+
+	    	theme: "bootstrap-5",
+	        selectionCssClass: "select2--small",
+	        dropdownCssClass: "select2--small",
+	        // dropdownAutoWidth: false,
+	        // dropdownParent: $('#parentDiv'),
+	    });
+	   	
+	   	$('#select2_tt').select2({
+
+	    	theme: "bootstrap-5",
+	        selectionCssClass: "select2--small",
+	        dropdownCssClass: "select2--small",
+	        // dropdownAutoWidth: false,
+	        // dropdownParent: $('#parentDiv'),
+	    });
+	 	// const ps = new PerfectScrollbar('.scrollbar', {
+		//     suppressScrollX: true
+		//   });
+    })
+
+
   
-   		function update_menhde(){
-   			console.log('s');
-   		}
-   		$('.tienduc').on('click',function(){
-   			console.log('ssss')
-   		})
+	function update_menhde(){
+		console.log('s');
+	}
+	$('.tienduc').on('click',function(){
+		console.log('ssss')
+	})
+
+	$('.exchangeList_th').on('click','.convertir',function(){
+		let add = $(this).html();
+		$(this).remove();
+		$('.appen').append(`<div class="convertir">${add}</div>`);
+	});
+
+	$('.exchangeList_cb').on('click','.convertir',function(){
+		let add2 = $(this).html();
+		$(this).remove();
+		$('.append_ns').append(`<div class="convertir">${add2}</div>`);
+	})
+
+	$(document).ready(function() {
+	  $("#searchInput").on("keyup", function() {
+	    var query = $(this).val().toLowerCase();
+	    $('.append_ns .nhansu_th').each(function() {
+	      var text = $(this).text().toLowerCase();
+	      
+	      if (text.indexOf(query) === -1) {
+	        $(this).parent().hide();
+	      } else {
+	        $(this).parent().show();
+	      }
+	    });
+
+
+	  });
+
+	  $("#searchInput").on("keyup", function() {
+	    var query = $(this).val().toLowerCase();
+	    $('.appen strong').each(function() {
+	      var text = $(this).text().toLowerCase();
+	     
+	      if (text.indexOf(query) === -1) {
+	        $(this).parent().hide();
+	      } else {
+	        $(this).parent().show();
+	      }
+	    });
+
+	  });
+	});
+
 </script>
 @stop

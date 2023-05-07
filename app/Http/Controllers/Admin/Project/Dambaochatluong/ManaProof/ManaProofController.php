@@ -36,7 +36,7 @@ class ManaProofController extends DefinedController
         ]);
     }
 
-    public function getHD(Request $req){             
+    public function getHD(Request $req){            
         $res = DB::table('hoatdongnhom')
             ->whereNull('deleted_at');
 
@@ -44,7 +44,11 @@ class ManaProofController extends DefinedController
             $res = $res
             ->where('year',$req->year);
         }
-        
+
+        if(isset($req->linhvuc) && $req->linhvuc != ''){
+            $res = $res->where('nhom_mc_sl_id',$req->linhvuc);
+        }
+
         if(isset($req->hoatdong) && $req->hoatdong != ''){
             $res = $res->where('parent',$req->hoatdong);
         }else{
