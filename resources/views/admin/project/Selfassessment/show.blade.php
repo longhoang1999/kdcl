@@ -1132,10 +1132,14 @@
 
                     },            
                     success: function(data) {
+                        console.log(data)
                         push_minhchung.empty();
                         data.forEach(function(e){
                             e.minhChungList.forEach(function(e_child){
-                                
+                                console.log('c')
+                                console.log(e_child.tieu_de)
+                                console.log('d')
+
                                 push_minhchung.append(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
                             });
                            
@@ -1148,6 +1152,10 @@
                              // id_mcg = parseInt(id_mcg);
                             data.forEach(function(e){
                                 e.minhchung.forEach(function(e_child){
+                                    console.log('dau')
+                                    console.log(arr_mct)
+                                    console.log(e_child.id)
+                                    console.log('cuối')
                                     if(!arr_mct.includes(parseInt(e_child.id))){
                                         push_minhchung.append(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
                                     }
