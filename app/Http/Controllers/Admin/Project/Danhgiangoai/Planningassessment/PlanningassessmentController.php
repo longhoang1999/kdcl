@@ -61,6 +61,57 @@ class PlanningassessmentController extends DefinedController{
 	}
 
 	public function getdata(){
-		
+		$donvis = DB::table("role_user_dgn")->get();
+
+		return DataTables::of($donvis)  
+			->addColumn(
+				'ten_kh',
+				function ($donvi) {
+					$khbc = DB::table("kehoach_baocao")->where("id", $donvi->baocao_tdg_id)
+							->select("ten_bc");
+					if($khbc->count() > 0){
+						return $khbc->first()->ten_bc;
+					}else{
+						return "Không xác định kế hoạch";
+					}
+				}
+			)       
+			->addColumn(
+				'totruong',
+				function ($donvi) {
+					$user = DB::table("users")->where("id", $donvi->to_truong)->select("name")->first();
+					return $user->name;
+				}
+			)    
+			->addColumn(
+				'nvth',
+				function ($donvi) {
+					$user = DB::table("users")->where("id", $donvi->user_id)->select("name")->first();
+					return $user->name;
+				}
+			)  
+			->addColumn(
+				'time',
+				function ($donvi) {
+					$start = date("d-m-Y", strtotime($donvi->start_time));
+					$end = date("d-m-Y", strtotime($donvi->end_time));
+					return $start . " => " .$end;
+				}
+			)  
+			->addColumn(
+				'actions',
+				function ($donvi) { 
+					$actions = '<button class="btn btn-block" data-toggle="modal" data-target="#modalDelete" data-id="'.$donvi->id.'">'. '<i class="bi bi-trash" style="font-size: 25px;color: red;"></i>' .'</button>';
+					return $actions;
+				}
+			)
+			->rawColumns(['actions', 'truongDv', 'createHuman', 'dvcc'])
+			->make(true);
+	}
+
+	public function deletedata(Request $req){
+		DB::table("role_user_dgn")->where("id", $req->id)->delete();
+		return back()->with('success', 
+                    Lang::get('project/Standard/message.success.delete'));
 	}
 }

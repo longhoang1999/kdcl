@@ -193,7 +193,9 @@
                     <div class="col-md-8">
                         <select multiple="multiple" class="form-control col-12 select2" name="dvChuaDu[]">
                             @foreach($donvi as $dv)
-                                @continue($dv->minhChungCount==0)
+                                @php
+                                    // @continue($dv->minhChungCount==0)    
+                                @endphp
                                 <option value="{{ $dv->id }}">{{ $dv->ten_donvi }}</option>
                             @endforeach
                         </select>

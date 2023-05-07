@@ -83,8 +83,12 @@ class CheckProofController extends DefinedController
                 return $actions;
             })
             ->addColumn('lvuc',function($hdn){
-                $lvuc = DB::table("nhom_mc_sl")->where("id", $hdn->nhom_mc_sl_id)->first();
-                return $lvuc->mo_ta;
+                $lvuc = DB::table("nhom_mc_sl")->where("id", $hdn->nhom_mc_sl_id);
+                if($lvuc->count() == 0){
+                    return "Lĩnh vực không tồn tại";
+                }else{
+                    return $lvuc->first()->mo_ta;
+                }
             })
             ->addColumn('hd_parent',function($hdn){
                 return DB::table("hoatdongnhom")->where("parent", $hdn->id)->count();

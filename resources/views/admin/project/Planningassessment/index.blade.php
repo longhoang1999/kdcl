@@ -38,11 +38,16 @@
 		button i {
 			font-size: 30px !important;
 		}
-		
+		#table{
+			margin-top: 10rem;
+		}
 		/*.select2-container .select2-dropdown {
 			max-height: 150px; 
 			overflow-y: scroll;
 		}*/
+		.mt-6{
+			margin-top:6rem;
+		}
 
 
 
@@ -153,20 +158,55 @@
                     </div>
                 </div>
 
-	<!-- <table class="table table-striped table-bordered" id="table" width="100%">
+	
+	<h4 class="mt-6">Bảng phân công</h4>
+	<table class="table table-striped table-bordered" id="table" width="100%">
 		<thead>
 			<tr>
 				<th>Tên kế hoạch</th>
 				<th>Tổ trưởng chuyên trách</th>
 				<th>Nhân sự thực hiên</th>
 				<th>Thời gian</th>
+				<th>Hành động</th>
 			</tr>
 		</thead>
 		<tbody> 
 
 		</tbody>                
-	</table>  -->
+	</table> 
 </section>
+
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalDeleteLabel">
+                    @lang('project/Standard/title.thongbao')
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span class="badge badge-danger">
+                    @lang('project/Standard/message.error.hoixoa')
+                </span>
+                <br>
+                <span class="badge badge-primary">
+                    @lang('project/Standard/message.error.khoantac')
+                </span>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-danger" id="delete-standard">
+                    @lang('project/Standard/title.xoa')
+                </a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    @lang('project/Standard/title.huy')
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @stop
@@ -268,6 +308,7 @@
 
 
 	$(".save").click(function() {
+		console.log("dsvsd")
 		let arr = []
 		let a = $(".appen").find(".convertir").find(".border");
 		for(let i = 0;i < a.length; i++){
@@ -294,11 +335,70 @@
 			.then((response) => response.json())
 			.then((data) => {
 				if(data.mes == "done"){
-
+					table.ajax.reload();
 				}				
 			})
 			
 	})
 	
+
+
+	$(function () {
+        table = $('#table').DataTable({
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            searching:false,
+            ajax: "{!! route('admin.danhgiangoai.lapkehoachdanhgian.getdata') !!}",
+            order: [],  
+            columns: [
+                { data: 'ten_kh', name: 'ten_kh' },
+				{ data: 'totruong', name: 'totruong' },
+				{ data: 'nvth', name: 'nvth' },
+				{ data: 'time', name: 'time' },
+                { data: 'actions', name: 'actions' },
+            ],           
+        });
+
+    });
+
+
+	$('#modalDelete').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var routeDelete = "{!! route('admin.danhgiangoai.lapkehoachdanhgian.deletedata') !!}" + "?id=" + id;
+        var modal = $(this)
+        modal.find('#delete-standard').attr('href' ,routeDelete)
+    })
+
+
+	flatpickr('.start-date', {
+        dateFormat: 'd-m-Y',
+        minDate: "today",
+    });
+    flatpickr('.start-end', {
+        dateFormat: 'd-m-Y',
+        minDate: "today",
+    });
+
+
+	// check date
+    $(".start-end").change(function() {
+        let dateNht = new Date($(".start-end").val().split("-").reverse().join("-"))
+        let dateNbd = new Date($(".start-date").val().split("-").reverse().join("-"))
+        if(dateNht < dateNbd){
+            alert("@lang('project/QualiAssurance/title.vlcdn')")
+            $(this).val("")
+        }
+    })
+    $(".start-date").change(function() {
+        let dateNht = new Date($(".start-end").val().split("-").reverse().join("-"))
+        let dateNbd = new Date($(".start-date").val().split("-").reverse().join("-"))
+        if(dateNht < dateNbd){
+            alert("@lang('project/QualiAssurance/title.vlcdn')")
+            $(this).val("")
+        }
+    })
+    // end check date
 </script>
 @stop

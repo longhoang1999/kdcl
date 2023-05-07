@@ -750,6 +750,8 @@ Route::group(
                                 Route::get('/','PlanningassessmentController@index')->name('index');
                                 Route::post("phanquyen", 'PlanningassessmentController@phanquyen')->name('phanquyen');
                                 Route::get('get-data','PlanningassessmentController@getdata')->name('getdata');
+                                Route::get('delete-data','PlanningassessmentController@deletedata')->name('deletedata');
+                                
                             }
                         );
                     }
