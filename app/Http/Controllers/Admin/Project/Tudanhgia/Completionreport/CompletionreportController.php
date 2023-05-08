@@ -490,6 +490,44 @@ class CompletionreportController extends DefinedController
                                 ]);
                         }
 
+                        // if ($keHoachMenhDe->baoCaoMenhDe->mota) {
+                        //     $keHoachMenhDe->baoCaoMenhDe->mota = str_replace('id="addminhchunggop_', 'd-id="', $keHoachMenhDe->baoCaoMenhDe->mota);
+                        //     $dom = new Dom;
+                        //     $dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
+                        //     $contents = $dom->find('.danMinhChung');
+                        //     $arr = array();
+
+                        //     foreach ($contents as $key => $danMinhChung) {
+                        //         if (!in_array($danMinhChung->{'d-id'}, $minhChungid)) {
+                        //             $minhChungCode = "[H{$keHoachTieuChuan->tieuChuan->stt}." .
+                        //                     str_pad($keHoachTieuChuan->tieuChuan->stt, 2, '0', STR_PAD_LEFT) . "." .
+                        //                     str_pad($keHoachTieuChi->tieuChi->stt, 2, '0', STR_PAD_LEFT) .
+                        //                     "." . str_pad($minhChungStt, 2, '0', STR_PAD_LEFT) . "]";
+
+                        //             $contents[$key]->firstChild()->setText($minhChungCode);
+                        //             $minhChungid[$minhChungCode] = $danMinhChung->{'d-id'};
+                        //             $minhChungStt++;
+                        //         } else {
+                        //             $minhChungCode = array_search($danMinhChung->{'d-id'}, $minhChungid);
+                        //         }
+
+                        //         if ($checkMC->contains($minhChungCode)) {
+                        //             continue;
+                        //         }
+                        //         $checkMC->push($minhChungCode);
+                        //     }
+
+                        //     DB::table('baocao_menhde')
+                        //     ->where('id_kehoach_bc', $req->id_khbc)
+                        //     ->where('id_kh_menhde', $keHoachMenhDe->id)
+                        //     ->where('id_menhde', $keHoachMenhDe->id_menhde)
+                        //     ->update([
+                        //         "mota"  => $dom->outerHtml(),
+                        //     ]);
+
+                        // }
+
+
                                   
                     }
                 }

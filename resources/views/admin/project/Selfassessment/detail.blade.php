@@ -154,16 +154,17 @@
                                         @continue(!$keHoachTieuChuan->baoCaoTieuChuan)
                                         <strong>@lang('project/Selfassessment/title.tieuchuan') {{isset($keHoachTieuChuan->tieuChuan->stt)?$keHoachTieuChuan->tieuChuan->stt : ''  }}
                                             : {{isset($keHoachTieuChuan->tieuChuan->mo_ta)?$keHoachTieuChuan->tieuChuan->mo_ta : ''  }}</strong>
-    
-                                        @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'csgd')
-                                            @include("admin.project.Selfassessment.hoanthien.tieuchi-csdt")
-                                        @else
-                                            <p>{!! $keHoachTieuChuan->baoCaoTieuChuan->modau !!}</p>
-                                           @include("admin.project.Selfassessment.hoanthien.tieuchi-ctdt")
-                                            <div class="m-b-md m-l-md">
-                                                <b>@lang('project/Selfassessment/title.kltc') {{ $keHoachTieuChuan->tieuChuan->stt }}: </b>
-                                                {!! $keHoachTieuChuan->baoCaoTieuChuan->ketluan !!}
-                                            </div>
+                                        @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
+                                            @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'csgd')
+                                                @include("admin.project.Selfassessment.hoanthien.tieuchi-csdt")
+                                            @else
+                                                <p>{!! $keHoachTieuChuan->baoCaoTieuChuan->modau !!}</p>
+                                               @include("admin.project.Selfassessment.hoanthien.tieuchi-ctdt")
+                                                <div class="m-b-md m-l-md">
+                                                    <b>@lang('project/Selfassessment/title.kltc') {{ $keHoachTieuChuan->tieuChuan->stt }}: </b>
+                                                    {!! $keHoachTieuChuan->baoCaoTieuChuan->ketluan !!}
+                                                </div>
+                                            @endif
                                         @endif
     
                                         
