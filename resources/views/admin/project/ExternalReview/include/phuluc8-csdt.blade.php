@@ -17,45 +17,45 @@
 </style>
 <div class="m-t-md">
     <div class="h5 text-center">
-        @lang('project/ExternalReview/title.csdlkdcl')
+        @lang('project/Externalreview/title.csdlkdcl')
     </div>
 
-    <p class="text-center">@lang('project/ExternalReview/title.tdbc') {{ (($keHoachBaoCaoDetail2->thoi_diem_bao_cao)?\Carbon\Carbon::parse($keHoachBaoCaoDetail2->thoi_diem_bao_cao)->format('d/m/Y'):"Chưa cập nhật") }}</p>
+    <p class="text-center">@lang('project/Externalreview/title.tdbc') {{ (($keHoachBaoCaoDetail2->thoi_diem_bao_cao)?\Carbon\Carbon::parse($keHoachBaoCaoDetail2->thoi_diem_bao_cao)->format('d/m/Y'):"Chưa cập nhật") }}</p>
 
-    <p> <strong>@lang('project/ExternalReview/title.phan1')</strong></p>
-    <p><i><strong>@lang('project/ExternalReview/title.1')</strong></i></p>
-    <p>- @lang('project/ExternalReview/title.tiengviet')</p>
-    <p>- @lang('project/ExternalReview/title.tienganh')</p>
-    <p><i><strong>@lang('project/ExternalReview/title.2')</strong></i></p>
-    <p>- @lang('project/ExternalReview/title.viettat')</p>
-    <p>- @lang('project/ExternalReview/title.tienganh')</p>
-    <p><i><strong>@lang('project/ExternalReview/title.3')</strong></i></p>
-    <p><i><strong>@lang('project/ExternalReview/title.4')</strong></i></p>
-    <p><i><strong>@lang('project/ExternalReview/title.5')</strong></i></p>
-    <p><i><strong>@lang('project/ExternalReview/title.6') &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @lang('project/ExternalReview/title.fax')</strong></i></p>
-    <p><i><strong> @lang('project/ExternalReview/title.email') &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @lang('project/ExternalReview/title.web')</strong></i></p>
-    <p><i><strong>@lang('project/ExternalReview/title.7') </strong></i><i>@lang('project/ExternalReview/title.quyetdinh') </i></p>
-    <p><i><strong>@lang('project/ExternalReview/title.8')</strong></i></p>
-    <p><i><strong>@lang('project/ExternalReview/title.9')</strong></i></p>
-    <p><i><strong>@lang('project/ExternalReview/title.10')</strong></i></p>
+    <p> <strong>@lang('project/Externalreview/title.phan1')</strong></p>
+    <p><i><strong>@lang('project/Externalreview/title.1')</strong></i></p>
+    <p>- @lang('project/Externalreview/title.tiengviet')</p>
+    <p>- @lang('project/Externalreview/title.tienganh')</p>
+    <p><i><strong>@lang('project/Externalreview/title.2')</strong></i></p>
+    <p>- @lang('project/Externalreview/title.viettat')</p>
+    <p>- @lang('project/Externalreview/title.tienganh')</p>
+    <p><i><strong>@lang('project/Externalreview/title.3')</strong></i></p>
+    <p><i><strong>@lang('project/Externalreview/title.4')</strong></i></p>
+    <p><i><strong>@lang('project/Externalreview/title.5')</strong></i></p>
+    <p><i><strong>@lang('project/Externalreview/title.6') &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @lang('project/Externalreview/title.fax')</strong></i></p>
+    <p><i><strong> @lang('project/Externalreview/title.email') &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @lang('project/Externalreview/title.web')</strong></i></p>
+    <p><i><strong>@lang('project/Externalreview/title.7') </strong></i><i>@lang('project/Externalreview/title.quyetdinh') </i></p>
+    <p><i><strong>@lang('project/Externalreview/title.8')</strong></i></p>
+    <p><i><strong>@lang('project/Externalreview/title.9')</strong></i></p>
+    <p><i><strong>@lang('project/Externalreview/title.10')</strong></i></p>
     <div class="m-l-lg">
         <p>
             <label class="checkbox-inline">
-                <input type="checkbox" class="m-t-xs" disabled checked> @lang('project/ExternalReview/title.conglap')
+                <input type="checkbox" class="m-t-xs" disabled checked> @lang('project/Externalreview/title.conglap')
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" class="m-t-xs" disabled> @lang('project/ExternalReview/title.bancong')
+                <input type="checkbox" class="m-t-xs" disabled> @lang('project/Externalreview/title.bancong')
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" class="m-t-xs" disabled> @lang('project/ExternalReview/title.danlap')
+                <input type="checkbox" class="m-t-xs" disabled> @lang('project/Externalreview/title.danlap')
             </label>
             <label class="checkbox-inline">
-                <input type="checkbox" class="m-t-xs" disabled> @lang('project/ExternalReview/title.tuthuc')
+                <input type="checkbox" class="m-t-xs" disabled> @lang('project/Externalreview/title.tuthuc')
             </label>
         </p>
-        <p>@lang('project/ExternalReview/title.lhk')</p>
+        <p>@lang('project/Externalreview/title.lhk')</p>
     </div>
-    <p><i><strong>@lang('project/ExternalReview/title.11')</strong></i></p>
+    <p><i><strong>@lang('project/Externalreview/title.11')</strong></i></p>
 
     <div class="row m-t-lg">
         @php
@@ -73,11 +73,11 @@
             <table class="table-borderless table table-condensed">
                 <tr>
                     <td></td>
-                    <td>@lang('project/ExternalReview/title.co')</td>
-                    <td>@lang('project/ExternalReview/title.khong')</td>
+                    <td>@lang('project/Externalreview/title.co')</td>
+                    <td>@lang('project/Externalreview/title.khong')</td>
                 </tr>
                 <tr>
-                    <td>@lang('project/ExternalReview/title.chinhquy')</td>
+                    <td>@lang('project/Externalreview/title.chinhquy')</td>
                     <td><input {{ ($noidung28->chinhquy=='co')?'checked':"" }} class="radiobox" type="radio"
                                name="noidungthem[chinhquy]" value="co"></td>
                     <td><input {{ ($noidung28->chinhquy=='khong')?'checked':"" }} class="radiobox" type="radio"
@@ -85,7 +85,7 @@
                 </tr>
 
                 <tr>
-                    <td>@lang('project/ExternalReview/title.kcq')</td>
+                    <td>@lang('project/Externalreview/title.kcq')</td>
                     <td><input {{ ($noidung28->khongchinhquy=='co')?'checked':"" }} class="radiobox" type="radio"
                                name="noidungthem[khongchinhquy]" value="co"></td>
                     <td><input {{ ($noidung28->khongchinhquy=='khong')?'checked':"" }} class="radiobox" type="radio"
@@ -93,7 +93,7 @@
                 </tr>
 
                 <tr>
-                    <td>@lang('project/ExternalReview/title.tuxa')</td>
+                    <td>@lang('project/Externalreview/title.tuxa')</td>
                     <td><input {{ ($noidung28->tuxa=='co')?'checked':"" }} class="radiobox" type="radio"
                                name="noidungthem[tuxa]" value="co"></td>
                     <td><input {{ ($noidung28->tuxa=='khong')?'checked':"" }} class="radiobox" type="radio"
@@ -101,7 +101,7 @@
                 </tr>
 
                 <tr>
-                    <td>@lang('project/ExternalReview/title.lknn')</td>
+                    <td>@lang('project/Externalreview/title.lknn')</td>
                     <td><input {{ ($noidung28->nuocngoai=='co')?'checked':"" }} class="radiobox" type="radio"
                                name="noidungthem[nuocngoai]" value="co"></td>
                     <td><input {{ ($noidung28->nuocngoai=='khong')?'checked':"" }} class="radiobox" type="radio"
@@ -109,7 +109,7 @@
                 </tr>
 
                 <tr>
-                    <td>@lang('project/ExternalReview/title.lktn')</td>
+                    <td>@lang('project/Externalreview/title.lktn')</td>
                     <td><input {{ ($noidung28->trongnuoc=='co')?'checked':"" }} class="radiobox" type="radio"
                                name="noidungthem[trongnuoc]" value="co"></td>
                     <td><input {{ ($noidung28->trongnuoc=='khong')?'checked':"" }} class="radiobox" type="radio"
@@ -119,19 +119,19 @@
         </form>
     </div>
 
-    <p><i><strong>@lang('project/ExternalReview/title.12')</strong></i></p>
-    <p><em>@lang('project/ExternalReview/title.cpb')</em>
+    <p><i><strong>@lang('project/Externalreview/title.12')</strong></i></p>
+    <p><em>@lang('project/Externalreview/title.cpb')</em>
     </p>
     <table class="table table-responsive table-bordered table-striped" id="table">
         <thead>
         <tr>
-            <th>@lang('project/ExternalReview/title.tt')</th>
-            <th>@lang('project/ExternalReview/title.cbp')</th>
-            <th>@lang('project/ExternalReview/title.hvt')</th>
-            <th>@lang('project/ExternalReview/title.ns')</th>
-            <th>@lang('project/ExternalReview/title.hocvi')</th>
-            <th>@lang('project/ExternalReview/title.dienthoai')</th>
-            <th>@lang('project/ExternalReview/title.mail')</th>
+            <th>@lang('project/Externalreview/title.tt')</th>
+            <th>@lang('project/Externalreview/title.cbp')</th>
+            <th>@lang('project/Externalreview/title.hvt')</th>
+            <th>@lang('project/Externalreview/title.ns')</th>
+            <th>@lang('project/Externalreview/title.hocvi')</th>
+            <th>@lang('project/Externalreview/title.dienthoai')</th>
+            <th>@lang('project/Externalreview/title.mail')</th>
         </tr>
         </thead>
             <tbody>
@@ -156,24 +156,24 @@
         </tbody>
     </table>
 
-    <p><i><strong>@lang('project/ExternalReview/title.13')</strong></i></p>
+    <p><i><strong>@lang('project/Externalreview/title.13')</strong></i></p>
     <table class="table table-responsive table-bordered table-striped" id="table">
         <tr>
             <thead>
             <tr style="text-align:center">
-                <th rowspan="2" class="text-center">@lang('project/ExternalReview/title.stt')</th>
-                <th rowspan="2" class="text-center">@lang('project/ExternalReview/title.khoavien')</th>
-                <th colspan="2" class="text-center">@lang('project/ExternalReview/title.daihoc')</th>
-                <th colspan="2" class="text-center">@lang('project/ExternalReview/title.sdh')</th>
-                <th colspan="2" class="text-center">@lang('project/ExternalReview/title.khac')</th>
+                <th rowspan="2" class="text-center">@lang('project/Externalreview/title.stt')</th>
+                <th rowspan="2" class="text-center">@lang('project/Externalreview/title.khoavien')</th>
+                <th colspan="2" class="text-center">@lang('project/Externalreview/title.daihoc')</th>
+                <th colspan="2" class="text-center">@lang('project/Externalreview/title.sdh')</th>
+                <th colspan="2" class="text-center">@lang('project/Externalreview/title.khac')</th>
             </tr>
             <tr style="text-align:center">
-                <th>@lang('project/ExternalReview/title.sctdt')</th>
-                <th>@lang('project/ExternalReview/title.ssv')</th>
-                <th>@lang('project/ExternalReview/title.sctdt')</th>
-                <th>@lang('project/ExternalReview/title.ssv')</th>
-                <th>@lang('project/ExternalReview/title.sctdt')</th>
-                <th>@lang('project/ExternalReview/title.ssv')</th>
+                <th>@lang('project/Externalreview/title.sctdt')</th>
+                <th>@lang('project/Externalreview/title.ssv')</th>
+                <th>@lang('project/Externalreview/title.sctdt')</th>
+                <th>@lang('project/Externalreview/title.ssv')</th>
+                <th>@lang('project/Externalreview/title.sctdt')</th>
+                <th>@lang('project/Externalreview/title.ssv')</th>
             </tr>
             </thead>
             <tbody>
