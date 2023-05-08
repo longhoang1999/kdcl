@@ -114,16 +114,18 @@
                                     </p>
                                 </div>
                             </div>
-    
+                    
                             <div class="row  m-t-lg">
-                                @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
-                                    <div class="col-sm-12">
-                                        <div class="h4 text-center">@lang('project/Selfassessment/title.p1khaiq')</div>
-                                    </div>
-                                @else
-                                    <div class="col-sm-12">
-                                        <div class="h4 text-center">@lang('project/Selfassessment/title.p1hsvcsgd')</div>
-                                    </div>
+                                @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
+                                    @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
+                                        <div class="col-sm-12">
+                                            <div class="h4 text-center">@lang('project/Selfassessment/title.p1khaiq')</div>
+                                        </div>
+                                    @else
+                                        <div class="col-sm-12">
+                                            <div class="h4 text-center">@lang('project/Selfassessment/title.p1hsvcsgd')</div>
+                                        </div>
+                                    @endif
                                 @endif
     
     
@@ -135,14 +137,16 @@
                             </div>
     
                             <div class="row m-t-lg">
-                                @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
-                                    <div class="col-sm-12 m-t-lg">
-                                        <div class="h4 text-center">@lang('project/Selfassessment/title.p2dgtc')</div>
-                                    </div>
-                                @else
-                                    <div class="col-sm-12 m-t-lg">
-                                        <div class="h4 text-center">@lang('project/Selfassessment/title.p2csgd')</div>
-                                    </div>
+                                @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
+                                    @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
+                                        <div class="col-sm-12 m-t-lg">
+                                            <div class="h4 text-center">@lang('project/Selfassessment/title.p2dgtc')</div>
+                                        </div>
+                                    @else
+                                        <div class="col-sm-12 m-t-lg">
+                                            <div class="h4 text-center">@lang('project/Selfassessment/title.p2csgd')</div>
+                                        </div>
+                                    @endif
                                 @endif
     
                                 <div class="col-sm-12">
@@ -166,39 +170,42 @@
                                     @endforeach
                                 </div>
                             </div>
-    
-                            @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
-                                <div class="row m-t-lg">
-                                    <div class="col-sm-12 m-t-lg">
-                                        <div class="h4 text-center">@lang('project/Selfassessment/title.phan3lama')</div>
+                            @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
+                                @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
+                                    <div class="row m-t-lg">
+                                        <div class="col-sm-12 m-t-lg">
+                                            <div class="h4 text-center">@lang('project/Selfassessment/title.phan3lama')</div>
+                                        </div>
+        
+                                        <div class="col-sm-12">
+                                            @if(isset($keHoachBaoCaoDetail->keHoachChung->baoCaoChung))
+                                                {!! $keHoachBaoCaoDetail->keHoachChung->baoCaoChung->ketluan !!}
+                                            @endif
+                                        </div>
                                     </div>
-    
-                                    <div class="col-sm-12">
-                                        @if(isset($keHoachBaoCaoDetail->keHoachChung->baoCaoChung))
-                                            {!! $keHoachBaoCaoDetail->keHoachChung->baoCaoChung->ketluan !!}
-                                        @endif
+        
+                                    <div class="row m-t-md">
+                                        <div class="col-sm-12">
+                                            <table class="table table-striped table-bordered" id="table">
+                                                <tr>
+                                                    <td style="width:50%"></td>
+                                                    <td class="text-center">
+                                                        <p> @lang('project/Selfassessment/title.bacham')</p>
+                                                        <p class="font-bold">@lang('project/Selfassessment/title.thutruong')</p>
+                                                        <p><i>@lang('project/Selfassessment/title.khtdd')</i></p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-    
-                                <div class="row m-t-md">
-                                    <div class="col-sm-12">
-                                        <table class="table table-striped table-bordered" id="table">
-                                            <tr>
-                                                <td style="width:50%"></td>
-                                                <td class="text-center">
-                                                    <p> @lang('project/Selfassessment/title.bacham')</p>
-                                                    <p class="font-bold">@lang('project/Selfassessment/title.thutruong')</p>
-                                                    <p><i>@lang('project/Selfassessment/title.khtdd')</i></p>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
+                                @endif
                             @endif
-                            @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'csgd')
-                                @include("admin.project.Selfassessment.hoanthien.phuluc7-csdt")
-                            @elseif($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
-                                @include("admin.project.Selfassessment.hoanthien.phuluc7")
+                            @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
+                                @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'csgd')
+                                    @include("admin.project.Selfassessment.hoanthien.phuluc7-csdt")
+                                @elseif($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
+                                    @include("admin.project.Selfassessment.hoanthien.phuluc7")
+                                @endif
                             @endif
     
                             <div class="row m-t-lg">
@@ -208,10 +215,12 @@
                                     </div>
                                 </div>
                             </div>
-                            @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'csgd')
-                                @include("admin.project.Selfassessment.hoanthien.phuluc8-csdt")
-                            @elseif($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
-                                @include("admin.project.Selfassessment.hoanthien.phuluc8")
+                            @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
+                                @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'csgd')
+                                    @include("admin.project.Selfassessment.hoanthien.phuluc8-csdt")
+                                @elseif($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
+                                    @include("admin.project.Selfassessment.hoanthien.phuluc8")
+                                @endif
                             @endif
                         </div>
                     </div>

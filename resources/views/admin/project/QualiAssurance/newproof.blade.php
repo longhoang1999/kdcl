@@ -73,6 +73,7 @@
                     </div>
                     <div class="col-md-2">
                         <select class="form-control" id="year_search">
+                            <option value=""></option>
                             @for($i = intVal(date('Y'));$i >= 1990 ;$i--)
                             <option value="{{$i}}">{{$i}}</option>
                             @endfor
@@ -419,7 +420,7 @@
 
     $(function(){
       	$("#year_search").select2({
-                       
+               placeholder: "@lang('project/QualiAssurance/title.nam')",        
         });
         $("#linhvuc_search").select2({    
             placeholder: "@lang('project/QualiAssurance/title.lvuc')",

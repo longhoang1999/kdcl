@@ -186,6 +186,7 @@ tbody tr td:last-child {
             </button>
             <div >
                 @foreach($listTc as $kh_tieuchuan)
+                    
                     <div class="part-two-content">
                         <div class="tieuchuan ml-3">
                            
@@ -195,7 +196,7 @@ tbody tr td:last-child {
                                 <i class="fas fa-file"></i>    
                             </span>  
                             <span>
-                                @lang('project/Selfassessment/title.tc'){{ $kh_tieuchuan->stt }}:
+                                @lang('project/Selfassessment/title.tc'){{$kh_tieuchuan->stt }}:
                                 <a>{{ $kh_tieuchuan->mo_ta }} </a> 
                             </span>&nbsp;
                             <span class="daVietBaoCao_{{$kh_tieuchuan->id}} pl-2" d-id=""
@@ -323,6 +324,7 @@ tbody tr td:last-child {
                     </div>
                     <div id="div_tieuchi{{$kh_tieuchuan->id}}" style="display:none">
                         @foreach($kh_tieuchuan->tieuchi as $tchi)
+                            
                             <input type="text" hidden id="tieuchi_id_{{$kh_tieuchuan->id}}" value="{{$tchi->id}}">
                             <div class="part-two-tieuchi part-two-tieuchi_{{$tchi->id}} part-two-tieuchi2_{{$kh_tieuchuan->id}}">
                                 <div class="d-flex align-items-center">
@@ -336,7 +338,7 @@ tbody tr td:last-child {
                                         </span>
 
                                         <span style="padding-right: 106px;">
-                                            @lang('project/Selfassessment/title.tieuchi') {{ $tchi->stt }}:
+                                            @lang('project/Selfassessment/title.tieuchi') {{$kh_tieuchuan->stt }}.{{ $tchi->stt }}:
                                             <a href="#">{{ $tchi->mo_ta }}</a> 
 
                                             <span class="daVietBaoCao_tieuchi_{{$tchi->id}}" d-id="" d-url="">

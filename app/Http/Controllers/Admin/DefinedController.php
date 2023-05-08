@@ -104,11 +104,18 @@ class DefinedController {
             ob_end_clean();
             ob_start();
             return $response;
+        }else{
+            $file = File::get($filePath);
+            $type = File::mimeType($filePath);
+            $response = Response::make($file, 200);
+            $response->header("Content-Type", $type);
+            return $response;
         }
 
-        ob_end_clean();
-        ob_start();
-        return response()->download($filePath, $fileName . "." . $fileExt, $headers);
+        //ob_end_clean();
+        //ob_start();
+       // return response()->download($filePath, $fileName . "." . $fileExt, $headers);
+        //return response($filePath);
     }
 
     public function dataExceptDelete($query) {
