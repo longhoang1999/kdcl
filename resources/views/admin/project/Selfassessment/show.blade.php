@@ -1268,11 +1268,8 @@
                             link = link.replace('edit-mc-gop/0','edit-mc-gop/'+ e.id);
                             $('.chitiet_modal_mc').html(
                                 `<strong style ="padding-right: 17px;">Xem chi tiết</strong>
-                                <a href="${link}" title="" style="background: aquamarine; padding: 5px; border-radius: 45px;">
-                                    <i class="fas fa-eye"></i>
-                                    <span type="">
-                                        DS minh chứng các thành phần
-                                    </span>
+                                <a href="${link}" title="Xem" target = "_blank">
+                                    <i class="fas fa-eye" style="color : #00bbf8"></i>
                                  </a>
                                 `
                            );

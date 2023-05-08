@@ -300,6 +300,18 @@
                                 <input type="text" class="form-control " id="forTenDVTV" placeholder="@lang('project/ImportdataExcel/title.shvc')" required name="shvc">
                             </div>
                             <div class="form-group col-md-4">
+                                <label for="forcccd">
+                                    <span>@lang('project/ImportdataExcel/title.cccd')</span>
+                                </label>
+                                <input type="text" class="form-control " id="forcccd" placeholder="@lang('project/ImportdataExcel/title.cccd')" required name="cccd">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="fordvct">
+                                    <span>@lang('project/ImportdataExcel/title.dvct')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fordvct" placeholder="@lang('project/ImportdataExcel/title.dvct')" required name="dvct">
+                            </div>
+                            <div class="form-group col-md-4">
                                 <label for="forTenDVTA">
                                     <span>@lang('project/ImportdataExcel/title.dienthoai')</span>
                                 </label>
@@ -505,6 +517,12 @@
                                 <input class="form-control" id="forlhdlv" type="text" placeholder="@lang('project/ImportdataExcel/title.lhdlv')" required name="lhdlv">
                             </div>
                             <div class="form-group col-md-4">
+                                <label for="forshdtd">
+                                    <span>@lang('project/ImportdataExcel/title.shdtd')</span>
+                                </label>
+                                <input class="form-control" id="forshdtd" type="text" placeholder="@lang('project/ImportdataExcel/title.shdtd')" required name="shdtd">
+                            </div>
+                            <div class="form-group col-md-4">
                                 <label for="forncdhd">
                                     <span>@lang('project/ImportdataExcel/title.ncdhd')</span>
                                 </label>
@@ -537,6 +555,24 @@
                                     <span>@lang('project/ImportdataExcel/title.ckhbd')</span>
                                 </label>
                                 <input class="form-control" id="forckhbd" type="text" placeholder="@lang('project/ImportdataExcel/title.ckhbd')" required name="ckhbd">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="forxa">
+                                    <span>@lang('project/ImportdataExcel/title.xa')</span>
+                                </label>
+                                <input class="form-control" id="forxa" type="text" placeholder="@lang('project/ImportdataExcel/title.xa')" required name="xa">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="forhuyen">
+                                    <span>@lang('project/ImportdataExcel/title.huyen')</span>
+                                </label>
+                                <input class="form-control" id="forhuyen" type="text" placeholder="@lang('project/ImportdataExcel/title.huyen')" required name="huyen">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="fortinh">
+                                    <span>@lang('project/ImportdataExcel/title.tinh')</span>
+                                </label>
+                                <input class="form-control" id="fortinh" type="text" placeholder="@lang('project/ImportdataExcel/title.tinh')" required name="tinh">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="fortrangthai">
@@ -639,7 +675,7 @@
                                 <th rowspan="2" class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.thoidiem')
                                 </th>
-                                <th colspan="8" class="row_width p-2">
+                                <th colspan="10" class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.ttcn')
                                 </th>
                                 <th colspan="4" class="row_width p-2">
@@ -657,7 +693,7 @@
                                 <th colspan="5" class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.cvkm')
                                 </th>
-                                <th colspan="2" class="row_width p-2">
+                                <th colspan="3" class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.tthd')
                                 </th>
                                 <th colspan="3" class="row_width p-2">
@@ -665,6 +701,15 @@
                                 </th>
                                 <th rowspan="2" class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.ckhbd')
+                                </th>
+                                <th rowspan="2" class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.xa')
+                                </th>
+                                <th rowspan="2" class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.huyen')
+                                </th>
+                                <th rowspan="2" class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.tinh')
                                 </th>
                                 <th rowspan="2" class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.trangthai')
@@ -682,6 +727,12 @@
                                 </th>
                                 <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.shvc')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.cccd')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.dvct')
                                 </th>
                                 <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.dienthoai')
@@ -774,6 +825,9 @@
                                     @lang('project/ImportdataExcel/title.lhdlv')
                                 </th>
                                 <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.shdtd')
+                                </th>
+                                <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.ncdhd')
                                 </th>
                                 <th class="row_width p-2">
@@ -801,30 +855,32 @@
                                 <td contenteditable class=" text-center p-2 row2">${item.hodem}</td>
                                 <td contenteditable class=" text-center p-2 row3">${item.ten}</td>
                                 <td contenteditable class=" text-center p-2 row4">${item.sohieu}</td>
-                                <td contenteditable class=" text-center p-2 row5">${item.phone}</td>
-                                <td contenteditable class=" text-center p-2 row6">${item.email}</td>
-                                <td contenteditable class=" text-center p-2 row7">${item.gender}</td>
-                                <td contenteditable class=" text-center p-2 row8">${item.ngaysinh}</td>
-                                <td contenteditable class=" text-center p-2 row9">${item.quoctich}</td>
-                                <td contenteditable class=" text-center p-2 row10">${item.trinhdo}</td>
-                                <td contenteditable class=" text-center p-2 row11">${item.tdnv}</td>
-                                <td contenteditable class=" text-center p-2 row12">${item.namtn}</td>
-                                <td contenteditable class=" text-center p-2 row13">${item.noitn}</td>
-                                <td contenteditable class=" text-center p-2 row14">${item.gvsp}</td>
-                                <td contenteditable class=" text-center p-2 row15">${item.qlnn}</td>
-                                <td contenteditable class=" text-center p-2 row16">${item.llct}</td>
-                                <td contenteditable class=" text-center p-2 row17">${item.tinhoc}</td>
-                                <td contenteditable class=" text-center p-2 row18">${item.ngoaingu}</td>
-                                <td contenteditable class=" text-center p-2 row19">${item.hamphong}</td>
-                                <td contenteditable class=" text-center p-2 row20">${item.namphong}</td>
-                                <td contenteditable class=" text-center p-2 row21">${item.cdnntd}</td>
-                                <td contenteditable class=" text-center p-2 row22">${item.mscdnn}</td>
-                                <td contenteditable class=" text-center p-2 row23">${item.namtd}</td>
-                                <td contenteditable class=" text-center p-2 row24">${item.cdnnht}</td>
-                                <td contenteditable class=" text-center p-2 row25">${item.mscdht}</td>
-                                <td contenteditable class=" text-center p-2 row26">${item.cocn}</td>
-                                <td contenteditable class=" text-center p-2 row27">${item.namcn}</td>
-                                <td contenteditable class=" text-center p-2 row28">
+                                <td contenteditable class=" text-center p-2 row5">${item.cccd}</td>
+                                <td contenteditable class=" text-center p-2 row6">${item.dvct}</td>
+                                <td contenteditable class=" text-center p-2 row7">${item.phone}</td>
+                                <td contenteditable class=" text-center p-2 row8">${item.email}</td>
+                                <td contenteditable class=" text-center p-2 row9">${item.gender}</td>
+                                <td contenteditable class=" text-center p-2 row10">${item.ngaysinh}</td>
+                                <td contenteditable class=" text-center p-2 row11">${item.quoctich}</td>
+                                <td contenteditable class=" text-center p-2 row12">${item.trinhdo}</td>
+                                <td contenteditable class=" text-center p-2 row13">${item.tdnv}</td>
+                                <td contenteditable class=" text-center p-2 row14">${item.namtn}</td>
+                                <td contenteditable class=" text-center p-2 row15">${item.noitn}</td>
+                                <td contenteditable class=" text-center p-2 row16">${item.gvsp}</td>
+                                <td contenteditable class=" text-center p-2 row17">${item.qlnn}</td>
+                                <td contenteditable class=" text-center p-2 row18">${item.llct}</td>
+                                <td contenteditable class=" text-center p-2 row19">${item.tinhoc}</td>
+                                <td contenteditable class=" text-center p-2 row20">${item.ngoaingu}</td>
+                                <td contenteditable class=" text-center p-2 row21">${item.hamphong}</td>
+                                <td contenteditable class=" text-center p-2 row22">${item.namphong}</td>
+                                <td contenteditable class=" text-center p-2 row23">${item.cdnntd}</td>
+                                <td contenteditable class=" text-center p-2 row24">${item.mscdnn}</td>
+                                <td contenteditable class=" text-center p-2 row25">${item.namtd}</td>
+                                <td contenteditable class=" text-center p-2 row26">${item.cdnnht}</td>
+                                <td contenteditable class=" text-center p-2 row27">${item.mscdht}</td>
+                                <td contenteditable class=" text-center p-2 row28">${item.cocn}</td>
+                                <td contenteditable class=" text-center p-2 row29">${item.namcn}</td>
+                                <td contenteditable class=" text-center p-2 row30">
                                     <select class="listloaidv border-0 w-100">`;
                             for (const [index1, item1] of Object.entries(listdv)) { 
                                 if(item.dvsdvc == item1){
@@ -835,18 +891,22 @@
                             }    
                             add += `</select>
                                 </td>
-                                <td contenteditable class=" text-center p-2 row29">${item.cdctht}</td>
-                                <td contenteditable class=" text-center p-2 row30">${item.tdbn}</td>
-                                <td contenteditable class=" text-center p-2 row31">${item.qdbn}</td>
-                                <td contenteditable class=" text-center p-2 row32">${item.cdkm}</td>
-                                <td contenteditable class=" text-center p-2 row33">${item.tdiemkn}</td>
-                                <td contenteditable class=" text-center p-2 row34">${item.loaihd}</td>
-                                <td contenteditable class=" text-center p-2 row35">${item.ngcd}</td>
-                                <td contenteditable class=" text-center p-2 row36">${item.tggd}</td>
-                                <td contenteditable class=" text-center p-2 row37">${item.nvdpc}</td>
-                                <td contenteditable class=" text-center p-2 row38">${item.loptggd}</td>
-                                <td contenteditable class=" text-center p-2 row39">${item.ckhbd}</td>
-                                <td contenteditable class=" text-center p-2 row40">${item.trangthai}</td>
+                                <td contenteditable class=" text-center p-2 row31">${item.cdctht}</td>
+                                <td contenteditable class=" text-center p-2 row32">${item.tdbn}</td>
+                                <td contenteditable class=" text-center p-2 row33">${item.qdbn}</td>
+                                <td contenteditable class=" text-center p-2 row34">${item.cdkm}</td>
+                                <td contenteditable class=" text-center p-2 row35">${item.tdiemkn}</td>
+                                <td contenteditable class=" text-center p-2 row36">${item.loaihd}</td>
+                                <td contenteditable class=" text-center p-2 row37">${item.shdtd}</td>
+                                <td contenteditable class=" text-center p-2 row38">${item.ngcd}</td>
+                                <td contenteditable class=" text-center p-2 row39">${item.tggd}</td>
+                                <td contenteditable class=" text-center p-2 row40">${item.nvdpc}</td>
+                                <td contenteditable class=" text-center p-2 row41">${item.loptggd}</td>
+                                <td contenteditable class=" text-center p-2 row42">${item.ckhbd}</td>
+                                <td contenteditable class=" text-center p-2 row43">${item.xa}</td>
+                                <td contenteditable class=" text-center p-2 row44">${item.huyen}</td>
+                                <td contenteditable class=" text-center p-2 row45">${item.tinh}</td>
+                                <td contenteditable class=" text-center p-2 row46">${item.trangthai}</td>
                                 <td contenteditable class="text-center p-2 trash-btn">
                                     <ion-icon name="trash-outline" ></ion-icon>
                                 </td>
@@ -918,6 +978,12 @@
                 <td contenteditable class="text-center p-2 row38"></td>
                 <td contenteditable class="text-center p-2 row39"></td>
                 <td contenteditable class="text-center p-2 row40"></td>
+                <td contenteditable class="text-center p-2 row41"></td>
+                <td contenteditable class="text-center p-2 row42"></td>
+                <td contenteditable class="text-center p-2 row43"></td>
+                <td contenteditable class="text-center p-2 row44"></td>
+                <td contenteditable class="text-center p-2 row45"></td>
+                <td contenteditable class="text-center p-2 row46"></td>
                 <td contenteditable class="text-center p-2 trash-btn">
                     <ion-icon name="trash-outline"></ion-icon>
                 </td>
@@ -1096,42 +1162,48 @@
                     'hodem' :      $(this).find('.row2').text().trim(),
                     'ten' :  $(this).find('.row3').text().trim(),
                     'shvc' :   $(this).find('.row4').text().trim(),
-                    'phone' :  $(this).find('.row5').text().trim(),
-                    'email' :  $(this).find('.row6').text().trim(),
-                    'gender' : $(this).find('.row7').text().trim(),
-                    'ngaysinh' :    $(this).find('.row8').text().trim(),
-                    'quoctich' :   $(this).find('.row9').text().trim(),
-                    'tdcm': $(this).find('.row10').text().trim(),
-                    'tdnv' :    $(this).find('.row11').text().trim(),
-                    'namtn' :   $(this).find('.row12').text().trim(),
-                    'noitn' :  $(this).find('.row13').text().trim(),
-                    'gvsp' :   $(this).find('.row14').text().trim(),
-                    'qlnn' :    $(this).find('.row15').text().trim(),
-                    'llct' :    $(this).find('.row16').text().trim(),
-                    'tinhoc' :    $(this).find('.row17').text().trim(),
-                    'ngoaingu' :  $(this).find('.row18').text().trim(),
-                    'hocham' :   $(this).find('.row18').text().trim(),
-                    'namphong' : $(this).find('.row20').text().trim(),
-                    'cdnn' : $(this).find('.row21').text().trim(),
-                    'masocd' :      $(this).find('.row22').text().trim(),
-                    'namtd' :  $(this).find('.row23').text().trim(),
-                    'cdnnht' :   $(this).find('.row24').text().trim(),
-                    'masocdht' :  $(this).find('.row25').text().trim(),
-                    'chuyenngach' :  $(this).find('.row26').text().trim(),
-                    'namcn' : $(this).find('.row27').text().trim(),
-                    'dvsdvc' :    $(this).find('.row28').find('select').val(),
-                    'cdctht' :   $(this).find('.row29').text().trim(),
-                    'tdbn': $(this).find('.row30').text().trim(),
-                    'qdbn' :    $(this).find('.row31').text().trim(),
-                    'cdkm' :   $(this).find('.row32').text().trim(),
-                    'tdgkm' :  $(this).find('.row33').text().trim(),
-                    'loaihd' :   $(this).find('.row34').text().trim(),
-                    'ngaycdhd' :    $(this).find('.row35').text().trim(),
-                    'tggdht' :    $(this).find('.row36').text().trim(),
-                    'nvdpc' :    $(this).find('.row37').text().trim(),
-                    'ltggd' :  $(this).find('.row38').text().trim(),
-                    'khbd' :   $(this).find('.row39').text().trim(),
-                    'trangthai' : $(this).find('.row40').text().trim(),
+                    'cccd' :   $(this).find('.row5').text().trim(),
+                    'dvct' :   $(this).find('.row6').text().trim(),
+                    'phone' :  $(this).find('.row7').text().trim(),
+                    'email' :  $(this).find('.row8').text().trim(),
+                    'gender' : $(this).find('.row9').text().trim(),
+                    'ngaysinh' :    $(this).find('.row10').text().trim(),
+                    'quoctich' :   $(this).find('.row11').text().trim(),
+                    'tdcm': $(this).find('.row12').text().trim(),
+                    'tdnv' :    $(this).find('.row13').text().trim(),
+                    'namtn' :   $(this).find('.row14').text().trim(),
+                    'noitn' :  $(this).find('.row15').text().trim(),
+                    'gvsp' :   $(this).find('.row16').text().trim(),
+                    'qlnn' :    $(this).find('.row17').text().trim(),
+                    'llct' :    $(this).find('.row18').text().trim(),
+                    'tinhoc' :    $(this).find('.row19').text().trim(),
+                    'ngoaingu' :  $(this).find('.row20').text().trim(),
+                    'hocham' :   $(this).find('.row21').text().trim(),
+                    'namphong' : $(this).find('.row22').text().trim(),
+                    'cdnn' : $(this).find('.row23').text().trim(),
+                    'masocd' :      $(this).find('.row24').text().trim(),
+                    'namtd' :  $(this).find('.row25').text().trim(),
+                    'cdnnht' :   $(this).find('.row26').text().trim(),
+                    'masocdht' :  $(this).find('.row27').text().trim(),
+                    'chuyenngach' :  $(this).find('.row28').text().trim(),
+                    'namcn' : $(this).find('.row29').text().trim(),
+                    'dvsdvc' :    $(this).find('.row30').find('select').val(),
+                    'cdctht' :   $(this).find('.row31').text().trim(),
+                    'tdbn': $(this).find('.row32').text().trim(),
+                    'qdbn' :    $(this).find('.row33').text().trim(),
+                    'cdkm' :   $(this).find('.row34').text().trim(),
+                    'tdgkm' :  $(this).find('.row35').text().trim(),
+                    'loaihd' :   $(this).find('.row36').text().trim(),
+                    'shdtd' :   $(this).find('.row37').text().trim(),
+                    'ngaycdhd' :    $(this).find('.row38').text().trim(),
+                    'tggdht' :    $(this).find('.row39').text().trim(),
+                    'nvdpc' :    $(this).find('.row40').text().trim(),
+                    'ltggd' :  $(this).find('.row41').text().trim(),
+                    'khbd' :   $(this).find('.row42').text().trim(),
+                    'xa' :   $(this).find('.row43').text().trim(),
+                    'huyen' :   $(this).find('.row44').text().trim(),
+                    'tinh' :   $(this).find('.row45').text().trim(),
+                    'trangthai' : $(this).find('.row46').text().trim(),
                 }
                 dataSubmit.push(dataObj);
             });
@@ -1187,6 +1259,8 @@
                 $('#forHodem').val(data.hodem);
                 $('#forTen').val(data.ten);
                 $('#forTenDVTV').val(data.shvc);
+                $('#forcccd').val(data.cccd);
+                $('#fordvct').val(data.dvct);
                 $('#forTenDVTA').val(data.phone);
                 $('#forEmail').val(data.email);
                 $('#forVTTV').val(data.gender);
@@ -1217,11 +1291,15 @@
                 $('#forcdkm').val(data.cdkm);
                 $('#fortdgkm').val(data.tdgkm);
                 $('#forlhdlv').val(data.loaihd);
+                $('#forshdtd').val(data.shdtd);
                 $('#forncdhd').val(data.ngaycdhd);
                 $('#fortggd').val(data.tggdht);
                 $('#fornvdpc').val(data.nvdpc);
                 $('#forltggd').val(data.ltggd);
                 $('#forckhbd').val(data.khbd);
+                $('#forxa').val(data.xa);
+                $('#forhuyen').val(data.huyen);
+                $('#fortinh').val(data.tinh);
                 $('#fortrangthai').val(data.trangthai);
             })
     })
