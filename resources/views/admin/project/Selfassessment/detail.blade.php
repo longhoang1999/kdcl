@@ -128,14 +128,13 @@
                                     @endif
                                 @endif
     
-    
                                 <div class="col-sm-12">
                                     @if(isset($keHoachBaoCaoDetail->keHoachChung->baoCaoChung))
                                         {!! $keHoachBaoCaoDetail->keHoachChung->baoCaoChung->text !!}
                                     @endif
                                 </div>
                             </div>
-    
+                   
                             <div class="row m-t-lg">
                                 @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
                                     @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
@@ -148,16 +147,19 @@
                                         </div>
                                     @endif
                                 @endif
-    
+                                    
                                 <div class="col-sm-12">
                                     @foreach($keHoachBaoCaoDetail->keHoachTieuChuanList as $keHoachTieuChuan)
                                         @continue(!$keHoachTieuChuan->baoCaoTieuChuan)
                                         <strong>@lang('project/Selfassessment/title.tieuchuan') {{isset($keHoachTieuChuan->tieuChuan->stt)?$keHoachTieuChuan->tieuChuan->stt : ''  }}
                                             : {{isset($keHoachTieuChuan->tieuChuan->mo_ta)?$keHoachTieuChuan->tieuChuan->mo_ta : ''  }}</strong>
                                         @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
+
                                             @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'csgd')
+
                                                 @include("admin.project.Selfassessment.hoanthien.tieuchi-csdt")
                                             @else
+                                            
                                                 <p>{!! $keHoachTieuChuan->baoCaoTieuChuan->modau !!}</p>
                                                @include("admin.project.Selfassessment.hoanthien.tieuchi-ctdt")
                                                 <div class="m-b-md m-l-md">
@@ -170,6 +172,7 @@
                                         
                                     @endforeach
                                 </div>
+
                             </div>
                             @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
                                 @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
