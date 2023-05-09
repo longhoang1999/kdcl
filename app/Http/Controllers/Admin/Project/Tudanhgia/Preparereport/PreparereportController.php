@@ -527,6 +527,9 @@ class PreparereportController extends DefinedController
         // die;
 
         // báo cáo, tiêu chuẩn, tiêu chí
+        if(empty($mcgop->id_kehoach_baocao)){
+            return view('admin.project.Selfassessment.michchungpdf');
+        }
         $baocao = DB::table("kehoach_baocao")->where("id", $mcgop->id_kehoach_baocao)
                     ->first();
         $tieuchuan = DB::table("tieuchuan")->where("id", $mcgop->id_tieuchuan)->first();

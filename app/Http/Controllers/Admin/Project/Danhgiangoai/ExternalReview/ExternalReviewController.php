@@ -1305,60 +1305,63 @@ class ExternalReviewController extends DefinedController{
 
 
 		                $dom = new Dom;
-		                $dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
-		                $contents = $dom->find('.danMinhChung');  
-		                $arr = array();
-		                foreach ($contents as $key => $danMinhChung) {
-		                	if(!in_array($danMinhChung->{'d-id'}, $minhChungid)){
-		                		$minhChungCode = "[H{$keHoachTieuChuan->tieuChuan->stt}." .
-                                        str_pad($keHoachTieuChuan->tieuChuan->stt, 2, '0', STR_PAD_LEFT) . "." .
-                                        str_pad($keHoachTieuChi->tieuChi->stt, 2, '0', STR_PAD_LEFT) .
-                                        "." . str_pad($minhChungStt, 2, '0', STR_PAD_LEFT) . "]";
+		                if(isset($keHoachMenhDe->baoCaoMenhDe->mota)){
+		                	$dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
+			                $contents = $dom->find('.danMinhChung');  
+			                $arr = array();
+			                foreach ($contents as $key => $danMinhChung) {
+			                	if(!in_array($danMinhChung->{'d-id'}, $minhChungid)){
+			                		$minhChungCode = "[H{$keHoachTieuChuan->tieuChuan->stt}." .
+	                                        str_pad($keHoachTieuChuan->tieuChuan->stt, 2, '0', STR_PAD_LEFT) . "." .
+	                                        str_pad($keHoachTieuChi->tieuChi->stt, 2, '0', STR_PAD_LEFT) .
+	                                        "." . str_pad($minhChungStt, 2, '0', STR_PAD_LEFT) . "]";
 
-                                $minhChungid[$minhChungCode] = $danMinhChung->{'d-id'};
-                                $minhChungStt++;
-		                	}
-		                	else{
-		                		$minhChungCode = array_search($danMinhChung->{'d-id'}, $minhChungid);
-		                	}
+	                                $minhChungid[$minhChungCode] = $danMinhChung->{'d-id'};
+	                                $minhChungStt++;
+			                	}
+			                	else{
+			                		$minhChungCode = array_search($danMinhChung->{'d-id'}, $minhChungid);
+			                	}
 
-		                	if($checkMC->contains($minhChungCode)){
-                                continue;
-                            }
+			                	if($checkMC->contains($minhChungCode)){
+	                                continue;
+	                            }
 
-                            $checkMC->push($minhChungCode);
+	                            $checkMC->push($minhChungCode);
 
-                            if (!$danMinhChung->{'d-type'} || $danMinhChung->{'d-type'} == 'mc') {
-                                $mcDetail = DB::table('minhchung')->find($danMinhChung->{'d-id'});
-                                if ($mcDetail) {
-                                	 $mcCollect->push([
-                                        'mcCode' => $minhChungCode,
-                                        'mcType' => 'mc',
-                                        'mcDetail' => $mcDetail,
-                                        // 'qlmc'    => $mcDetail->nguoiTao->donVi->ten_ngan
-                                     ]);
-                                }
+	                            if (!$danMinhChung->{'d-type'} || $danMinhChung->{'d-type'} == 'mc') {
+	                                $mcDetail = DB::table('minhchung')->find($danMinhChung->{'d-id'});
+	                                if ($mcDetail) {
+	                                	 $mcCollect->push([
+	                                        'mcCode' => $minhChungCode,
+	                                        'mcType' => 'mc',
+	                                        'mcDetail' => $mcDetail,
+	                                        // 'qlmc'    => $mcDetail->nguoiTao->donVi->ten_ngan
+	                                     ]);
+	                                }
 
-                            } else {
-                                $mcGop = DB::table('minhchung_gop')->find($danMinhChung->{'d-id'});
-                                
-                                if ($mcGop) {
-                                	$minhChungList = DB::table('minhchung')
-                                			->leftjoin('minhchunggop_minhchung','minhchung.id','=','minhchunggop_minhchung.minhchung_id')
-                                			->where('minhchunggop_minhchung.minhchunggop_id',$danMinhChung->{'d-id'})
-                                			->get();
-                                	$mcGop->minhChungList = $minhChungList;
-                                	$mcCollect->push([
-                                        'mcCode' => $minhChungCode,
-                                        'mcType' => 'mcGop',
-                                        'mcDetail' => $mcGop,
-                                        // 'qlmc'=>$mcGop->nguoiTao->donVi->ten_ngan
-                                    ]);
-                                }
+	                            } else {
+	                                $mcGop = DB::table('minhchung_gop')->find($danMinhChung->{'d-id'});
+	                                
+	                                if ($mcGop) {
+	                                	$minhChungList = DB::table('minhchung')
+	                                			->leftjoin('minhchunggop_minhchung','minhchung.id','=','minhchunggop_minhchung.minhchung_id')
+	                                			->where('minhchunggop_minhchung.minhchunggop_id',$danMinhChung->{'d-id'})
+	                                			->get();
+	                                	$mcGop->minhChungList = $minhChungList;
+	                                	$mcCollect->push([
+	                                        'mcCode' => $minhChungCode,
+	                                        'mcType' => 'mcGop',
+	                                        'mcDetail' => $mcGop,
+	                                        // 'qlmc'=>$mcGop->nguoiTao->donVi->ten_ngan
+	                                    ]);
+	                                }
 
-                            }
-		                    
+	                            }
+			                    
+			                }
 		                }
+		                
 		            }
 		        }
 		    }

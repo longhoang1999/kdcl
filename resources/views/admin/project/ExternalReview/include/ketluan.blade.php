@@ -7,40 +7,40 @@
                     <div class="row m-t-lg">
                         <div class="col-sm-12">
                             <div class="h4 font-bold mb-sm">
-                            @lang('project/ExternalReview/title.phuluc')
+                            @lang('project/Externalreview/title.phuluc')
                             </div>
                         </div>
 
                         <div class="col-sm-12 m-t-md">
-                            <p>@lang('project/ExternalReview/title.tencsgd')</p>
-                            <p>@lang('project/ExternalReview/title.ma')</p>
-                            <p>@lang('project/ExternalReview/title.tenctdt'){{ $keHoachBaoCaoDetail2->phutrachr->ten_ctdt }}</p>
-                            <p>@lang('project/ExternalReview/title.mactdt'){{ $keHoachBaoCaoDetail2->phutrachr->ma_ctdt }}</p>
+                            <p>@lang('project/Externalreview/title.tencsgd')</p>
+                            <p>@lang('project/Externalreview/title.ma')</p>
+                            <p>@lang('project/Externalreview/title.tenctdt'){{ $keHoachBaoCaoDetail2->phutrachr->ten_ctdt }}</p>
+                            <p>@lang('project/Externalreview/title.mactdt'){{ $keHoachBaoCaoDetail2->phutrachr->ma_ctdt }}</p>
                         </div>
 
                         <div class="col-sm-12 m-t-md">
                             <table class="table table-striped table-bordered " id="table">
                                 <thead>
                                 <tr>
-                                    <th class="text-center" rowspan="3">@lang('project/ExternalReview/title.tctc')</th>
-                                    <th class="text-center" colspan="7">@lang('project/ExternalReview/title.tdg')</th>
-                                    <th class="text-center" colspan="3">@lang('project/ExternalReview/title.thtc')</th>
+                                    <th class="text-center" rowspan="3">@lang('project/Externalreview/title.tctc')</th>
+                                    <th class="text-center" colspan="7">@lang('project/Externalreview/title.tdg')</th>
+                                    <th class="text-center" colspan="3">@lang('project/Externalreview/title.thtc')</th>
                                 </tr>
                                 <tr>
-                                    <th class="text-center" colspan="3">@lang('project/ExternalReview/title.chuadat')</th>
-                                    <th class="text-center" colspan="4">@lang('project/ExternalReview/title.dat')</th>
-                                    <th class="text-center" rowspan="2">@lang('project/ExternalReview/title.muctb')</th>
-                                    <th class="text-center" rowspan="2">@lang('project/ExternalReview/title.sotcdat')</th>
-                                    <th class="text-center" rowspan="2">@lang('project/ExternalReview/title.tyledat')</th>
+                                    <th class="text-center" colspan="3">@lang('project/Externalreview/title.chuadat')</th>
+                                    <th class="text-center" colspan="4">@lang('project/Externalreview/title.dat')</th>
+                                    <th class="text-center" rowspan="2">@lang('project/Externalreview/title.muctb')</th>
+                                    <th class="text-center" rowspan="2">@lang('project/Externalreview/title.sotcdat')</th>
+                                    <th class="text-center" rowspan="2">@lang('project/Externalreview/title.tyledat')</th>
                                 </tr>
                                 <tr>
-                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/ExternalReview/title.001')</span></th>
-                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/ExternalReview/title.002')</span></th>
-                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/ExternalReview/title.003')</span></th>
-                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/ExternalReview/title.004')</span></th>
-                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/ExternalReview/title.005')</span></th>
-                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/ExternalReview/title.006')</span></th>
-                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/ExternalReview/title.007')</span></th>
+                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/Externalreview/title.001')</span></th>
+                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/Externalreview/title.002')</span></th>
+                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/Externalreview/title.003')</span></th>
+                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/Externalreview/title.004')</span></th>
+                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/Externalreview/title.005')</span></th>
+                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/Externalreview/title.006')</span></th>
+                                    <th class="text-center"><span class="badge badge-secondary">@lang('project/Externalreview/title.007')</span></th>
 
                                 </tr>
                                 </thead>
@@ -62,7 +62,7 @@
                                     @endphp
 
                                     <tr class="text-center">
-                                        <th>@lang('project/ExternalReview/title.tieuchuan'){{ isset($keHoachTieuChuan->keHoachTieuChuans->stt)?$keHoachTieuChuan->keHoachTieuChuans->stt:''  }}</th>
+                                        <th>@lang('project/Externalreview/title.tieuchuan'){{ isset($keHoachTieuChuan->keHoachTieuChuans->stt)?$keHoachTieuChuan->keHoachTieuChuans->stt:''  }}</th>
                                         @if(isset($keHoachTieuChuan->danhgia))
                                             @for($i=1;$i<=7;$i++)
                                                 @if($i==$keHoachTieuChuan->danhgia)
@@ -91,7 +91,7 @@
                                         @foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi)
                                             <tr>
                                                 <td>
-                                                @lang('project/ExternalReview/title.tieuchi') {{ $keHoachTieuChuan->keHoachTieuChuans->stt }}
+                                                @lang('project/Externalreview/title.tieuchi') {{ $keHoachTieuChuan->keHoachTieuChuans->stt }}
                                                     .{{ isset($keHoachTieuChi->tieuChi->stt)?$keHoachTieuChi->tieuChi->stt:'' }}
                                                 </td>
 
@@ -113,10 +113,10 @@
                         </div>
 
                         <div class="col-sm-12 mt-md font-italic">
-                            <p class="font-bold">@lang('project/ExternalReview/title.ghichu')</p>
+                            <p class="font-bold">@lang('project/Externalreview/title.ghichu')</p>
 
-                            @lang('project/ExternalReview/title.ghibangsn')<br>
-                            @lang('project/ExternalReview/title.mucdanhgiachung')
+                            @lang('project/Externalreview/title.ghibangsn')<br>
+                            @lang('project/Externalreview/title.mucdanhgiachung')
                         </div>
 
                     </div>
@@ -124,31 +124,31 @@
                     <div class="row m-t-lg">
                         <div class="col-sm-12">
                             <div class="h4 font-bold mb-sm">
-                            @lang('project/ExternalReview/title.phuluc7b')
+                            @lang('project/Externalreview/title.phuluc7b')
                             </div>
                         </div>
 
                         <div class="col-sm-12 m-t-md">
-                            <p>@lang('project/ExternalReview/title.tencsgd')</p>
-                            <p>@lang('project/ExternalReview/title.ma')</p>
-                            <p>@lang('project/ExternalReview/title.tenctdt'){{ $keHoachBaoCaoDetail2->phutrachr->ten_ctdt }}</p>
-                            <p>@lang('project/ExternalReview/title.mactdt'){{ $keHoachBaoCaoDetail2->phutrachr->ma_ctdt }}</p>
+                            <p>@lang('project/Externalreview/title.tencsgd')</p>
+                            <p>@lang('project/Externalreview/title.ma')</p>
+                            <p>@lang('project/Externalreview/title.tenctdt'){{ $keHoachBaoCaoDetail2->phutrachr->ten_ctdt }}</p>
+                            <p>@lang('project/Externalreview/title.mactdt'){{ $keHoachBaoCaoDetail2->phutrachr->ma_ctdt }}</p>
                         </div>
 
                         <div class="col-sm-12 m-t-md">
                             <table class="table table-striped table-bordered" id="table">
                                 <thead>
                                 <tr>
-                                    <th class="text-center" rowspan="2">@lang('project/ExternalReview/title.tctc')</th>
-                                    <th class="text-center" colspan="3">@lang('project/ExternalReview/title.kqdg')</th>
-                                    <th class="text-center" colspan="2">@lang('project/ExternalReview/title.thtc')</th>
+                                    <th class="text-center" rowspan="2">@lang('project/Externalreview/title.tctc')</th>
+                                    <th class="text-center" colspan="3">@lang('project/Externalreview/title.kqdg')</th>
+                                    <th class="text-center" colspan="2">@lang('project/Externalreview/title.thtc')</th>
                                 </tr>
                                 <tr>
-                                    <th>@lang('project/ExternalReview/title.dat')</th>
-                                    <th>@lang('project/ExternalReview/title.chuadat')</th>
-                                    <th>@lang('project/ExternalReview/title.khongdanhgia')</th>
-                                    <th>@lang('project/ExternalReview/title.sotcdat')</th>
-                                    <th>@lang('project/ExternalReview/title.tyledat')</th>
+                                    <th>@lang('project/Externalreview/title.dat')</th>
+                                    <th>@lang('project/Externalreview/title.chuadat')</th>
+                                    <th>@lang('project/Externalreview/title.khongdanhgia')</th>
+                                    <th>@lang('project/Externalreview/title.sotcdat')</th>
+                                    <th>@lang('project/Externalreview/title.tyledat')</th>
                                 </tr>
 
                                 </thead>
@@ -176,7 +176,7 @@
                                     @endphp
 
                                     <tr class="text-center">
-                                        <th>@lang('project/ExternalReview/title.tieuchuan') {{ isset($keHoachTieuChuan->keHoachTieuChuans->stt)?$keHoachTieuChuan->keHoachTieuChuans->stt:'' }}</th>
+                                        <th>@lang('project/Externalreview/title.tieuchuan') {{ isset($keHoachTieuChuan->keHoachTieuChuans->stt)?$keHoachTieuChuan->keHoachTieuChuans->stt:'' }}</th>
                                         <th></th>
                                         <th></th>
                                         <th></th>
@@ -194,25 +194,25 @@
                                         @foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi)
                                             <tr>
                                                 <td>
-                                                @lang('project/ExternalReview/title.tieuchi'){{ $keHoachTieuChuan->keHoachTieuChuans->stt }}
+                                                @lang('project/Externalreview/title.tieuchi'){{ $keHoachTieuChuan->keHoachTieuChuans->stt }}
                                                     .{{ isset($keHoachTieuChi->tieuChi->stt)?$keHoachTieuChi->tieuChi->stt:'' }}
                                                 </td>
 
                                                 @if($keHoachTieuChi->baoCaoTieuChi['danhgia']>=4)
-                                                    <td>@lang('project/ExternalReview/title.d')</td>
+                                                    <td>@lang('project/Externalreview/title.d')</td>
                                                 @else
                                                     <td></td>
                                                 @endif
 
 
                                                 @if($keHoachTieuChi->baoCaoTieuChi['danhgia']<4)
-                                                    <td>@lang('project/ExternalReview/title.c')</td>
+                                                    <td>@lang('project/Externalreview/title.c')</td>
                                                 @else
                                                     <td></td>
                                                 @endif
 
                                                 @if($keHoachTieuChi->baoCaoTieuChi['danhgia']==="")
-                                                    <td>@lang('project/ExternalReview/title.k')</td>
+                                                    <td>@lang('project/Externalreview/title.k')</td>
                                                 @else
                                                     <td></td>
                                                 @endif
@@ -222,7 +222,7 @@
                                     
                                 @endforeach
                                 <tr>
-                                    <th class="text-center" colspan="4">@lang('project/ExternalReview/title.dgc')</th>
+                                    <th class="text-center" colspan="4">@lang('project/Externalreview/title.dgc')</th>
                                     <th class="text-center">{{ $totalDat }}</th>
                                     <th class="text-center">{{ round(($totalDat/$totalTieuChi)*100,2) }}</th>
                                 </tr>
@@ -231,10 +231,10 @@
                         </div>
 
                         <div class="col-sm-12 mt-md font-italic">
-                            <p class="font-bold">@lang('project/ExternalReview/title.ghichu')</p>
+                            <p class="font-bold">@lang('project/Externalreview/title.ghichu')</p>
 
-                            @lang('project/ExternalReview/title.gmdg')<br>
-                            @lang('project/ExternalReview/title.tiletieuchi')
+                            @lang('project/Externalreview/title.gmdg')<br>
+                            @lang('project/Externalreview/title.tiletieuchi')
                         </div>
 
 
@@ -260,12 +260,12 @@
                                 <table class="table table-bordered tableKehoach table-striped " id="table">
                                     <thead>
                                     <tr>
-                                        <th width="5%">@lang('project/ExternalReview/title.stt')</th>
+                                        <th width="5%">@lang('project/Externalreview/title.stt')</th>
                                         <!-- <th>Mục tiêu</th> -->
-                                        <th width="50%">@lang('project/ExternalReview/title.nd')</th>
-                                        <th width="12%">@lang('project/ExternalReview/title.dvth')</th>
-                                        <th width="12%">@lang('project/ExternalReview/title.dvkt')</th>
-                                        <th width="13%">@lang('project/ExternalReview/title.tgth')</th>
+                                        <th width="50%">@lang('project/Externalreview/title.nd')</th>
+                                        <th width="12%">@lang('project/Externalreview/title.dvth')</th>
+                                        <th width="12%">@lang('project/Externalreview/title.dvkt')</th>
+                                        <th width="13%">@lang('project/Externalreview/title.tgth')</th>
                                         <!-- <th>Ghi chú</th> -->
                                     </tr>
                                     </thead>
@@ -289,7 +289,7 @@
                                                                     <td>{{ $keHoachHanhDong->donViKiemTra->ten_donvi }}</td>
                                                                     <td>
                                                                         {{ $keHoachHanhDong->ngay_batdau }}
-                                                                        <br>  @lang('project/ExternalReview/title.toi') <br> {{ $keHoachHanhDong->ngay_hoanthanh}}
+                                                                        <br>  @lang('project/Externalreview/title.toi') <br> {{ $keHoachHanhDong->ngay_hoanthanh}}
                                                                     </td>
                                                                 </tr>
                                                             @endforeach

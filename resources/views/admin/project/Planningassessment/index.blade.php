@@ -83,6 +83,7 @@
 						<button class="btn btn-xs pd-css" data-toggle="modal" type="button" data-target="#nhanSuThucHienModal">
 								<i class="bi bi-person-lines-fill" style="font-size: 35px;color: #5014d0;"></i>
 						</button>
+						<span class="sl_ns">0</span> nhân sự
 					</div>
 				</div>
 
@@ -306,39 +307,43 @@
 	});
 
 
-
+	
 	$(".save").click(function() {
-		console.log("dsvsd")
 		let arr = []
 		let a = $(".appen").find(".convertir").find(".border");
 		for(let i = 0;i < a.length; i++){
 			arr.push(a[i].getAttribute("id"))
 		}
-		let data = {
-			'id_bc': $(".name_bc").val(),
-			'ns_phutrach': $(".nhansu_id").val(),
-			'ds_chuanbi' : arr,
-			'start_date'	: $(".start-date").val(),
-			'end_date'	: $(".start-end").val()
-		}
-		
-		let routeApi = "{{ route('admin.danhgiangoai.lapkehoachdanhgian.phanquyen') }}";
-		fetch(routeApi, {
-			headers: {
-				'Content-Type': 'application/json',
-				'Accept': 'application/json',
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			},
-			method: "POST",
-			body: JSON.stringify(data),
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				if(data.mes == "done"){
-					alert("Lập kế hoạch thành công")
-					table.ajax.reload();
-				}				
+
+		if(arr.length == 0 || $(".name_bc").val() == "" || $(".nhansu_id").val() == "" || $(".start-date").val() == "" || $(".start-end").val() == ""){
+			alert("Bạn nhập thiếu thông tin");
+		}else{
+			let data = {
+				'id_bc': $(".name_bc").val(),
+				'ns_phutrach': $(".nhansu_id").val(),
+				'ds_chuanbi' : arr,
+				'start_date'	: $(".start-date").val(),
+				'end_date'	: $(".start-end").val()
+			}
+			
+			let routeApi = "{{ route('admin.danhgiangoai.lapkehoachdanhgian.phanquyen') }}";
+			fetch(routeApi, {
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				method: "POST",
+				body: JSON.stringify(data),
 			})
+				.then((response) => response.json())
+				.then((data) => {
+					if(data.mes == "done"){
+						alert('Cập nhật thành công');
+						table.ajax.reload();
+					}				
+				})
+		}
 			
 	})
 	
@@ -362,6 +367,17 @@
         });
 
     });
+
+	
+	$('#nhanSuThucHienModal').on('hidden.bs.modal', function (e) {
+		let arr = [];
+	  	
+	  	let a = $(".appen").find(".convertir").find(".border");
+		for(let i = 0;i < a.length; i++){
+			arr.push(a[i].getAttribute("id"))
+		}
+		$(".sl_ns").text(arr.length)
+	})
 
 
 	$('#modalDelete').on('show.bs.modal', function (event) {

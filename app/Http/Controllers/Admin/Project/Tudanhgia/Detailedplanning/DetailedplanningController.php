@@ -227,7 +227,7 @@ class DetailedplanningController extends DefinedController
                     }          
                
                     $kh_menhde_start = DB::table('kehoach_menhde')
-                                             ->select('kehoach_menhde.id as id_khmd', 'menhde.id')
+                                             ->select('kehoach_menhde.id as id_khmd','menhde.id')
                                              ->leftjoin('menhde','menhde.id','=','kehoach_menhde.id_menhde')
                                              ->where('menhde.tieuchi_id',$value->id)
                                              ->where('kehoach_menhde.id_kh_tieuchi',$value->khtt_id)
@@ -281,7 +281,11 @@ class DetailedplanningController extends DefinedController
                     }                        
                     
                }
-            
+               // var_dump($menhde_baocao);
+               // echo('<br/>');
+               // echo("hãy giúp tôi ngăt quãng ở vị trí này ở đây ");
+               // echo('<br/>');
+               
                if(isset($menhde_baocao)){
                     $value->bc_menhde = $menhde_baocao;
                     $value->bacao_menhde = $menhde_baocao;
@@ -299,6 +303,7 @@ class DetailedplanningController extends DefinedController
                
 
           }
+          // die;
           $sum_start = Collection::make($start)->avg();
           $sum_danhgia = round($sum_start);
           $kehoachtieuchuan->tieuchi = $tieuchi; 
@@ -956,17 +961,21 @@ class DetailedplanningController extends DefinedController
      }
 
     public function modalminhchung(Request $req){
+          $check = '0';
           if($req->mcg == 'mcGop'){
+               $check = "1";
                $minhchunggop = DB::table('minhchung_gop')
                               ->where('id',$req->id_minhchunggop)
                               ->first();
           }else{
+               $check = "0";
                $minhchunggop = DB::table('minhchung')
                               ->where('id',$req->id_minhchunggop)
                               ->first();
+               $minhchunggop->linkview = route('admin.dambaochatluong.manaproof.showProof',$minhchunggop->id);
           }
           
-          return array($minhchunggop);
+          return [array($minhchunggop), $check];
     }
 
     public function tontai_diemmanh(Request $req){

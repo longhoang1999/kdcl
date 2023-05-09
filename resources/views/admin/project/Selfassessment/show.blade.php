@@ -271,6 +271,7 @@
                     </div>
 
                     <div class="ibox_cotent css_width" id="show_block_content_{!!$kehoachtieuchi->id!!}" style="display: none;">
+                        {{-- @php var_dump($kehoachtieuchi->id); @endphp --}}
                     @if(isset($kehoachtieuchi->bc_menhde))     
                         @if(count($kehoachtieuchi->bc_menhde) > 0)
                             @foreach($kehoachtieuchi->bc_menhde as $menhde)
@@ -1135,8 +1136,7 @@
                         push_minhchung.empty();
                         data.forEach(function(e){
                             e.minhChungList.forEach(function(e_child){
-                                
-                                push_minhchung.append(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
+                                push_minhchung.html(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
                             });
                            
                         });
@@ -1148,11 +1148,8 @@
                              // id_mcg = parseInt(id_mcg);
                             data.forEach(function(e){
                                 e.minhchung.forEach(function(e_child){
-                                    if(!arr_mct.includes(parseInt(e_child.id))){
-                                        push_minhchung.append(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
-                                    }
-                                    
-                                    
+                                    push_minhchung.html(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
+                           
                                 });
                                
                             });
@@ -1245,7 +1242,6 @@
       
         function clickMC(id,mcg){
             var num;
-           
             $.ajax({
                 url: "{!! route('admin.tudanhgia.detailedplanning.modalminhchung') !!}",
                 type: 'POST',
@@ -1262,21 +1258,62 @@
                    $('.modal_mc_tieude').html('Tiêu đề');
                    $('.modal_mc_trichyeu').html('Trích Yếu');
                    $('.modal_mc_chitiet').html('Xem chi tiết');
-                   data.forEach(function(e){
+                   console.log(check)
+                   data[0].forEach(function(e){
                         $('.content_mc_tieude').html(e.tieu_de);
                         $('.content_mc_trichyeu').html(e.trich_yeu);
                         var link  = "{!! route('admin.tudanhgia.preparereport.editmcgop',0)!!}";  
-                        link = link.replace('edit-mc-gop/0','edit-mc-gop/'+ e.id);
-                        $('.chitiet_modal_mc').html(
-                                                    `<strong style ="padding-right: 17px;">Xem chi tiết</strong>
-                                                    <a href="${link}" title="" style="background: aquamarine; padding: 5px; border-radius: 45px;">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span type="">
-                                                            DS minh chứng các thành phần
-                                                        </span>
-                                                     </a>
-                                                    `
-                                               );
+                        
+                        if(data[1] == '1'){
+                            link = link.replace('edit-mc-gop/0','edit-mc-gop/'+ e.id);
+                            $('.chitiet_modal_mc').html(
+                                `<strong style ="padding-right: 17px;">Xem chi tiết</strong>
+                                <a href="${link}" title="Xem" target = "_blank">
+                                    <i class="fas fa-eye" style="color : #00bbf8"></i>
+                                 </a>
+                                `
+                           );
+                        }else{
+
+                            let UI = ``;
+                            if(e.duong_dan != '' || e.duong_dan != null){
+                                UI += 
+                                `<strong style ="padding-right: 17px;">Xem chi tiết</strong>
+                                <a href="${e.linkview}" target = "_blank" title="xem file" >
+                                    <i class="fas fa-download" style="color : red"></i>
+                                 </a>
+                                `;
+                            }
+                            if(e.url != '' ||  e.url != null){
+                                UI += 
+                                    `
+                                     <a href="${e.url}" target = "_blank" title = "xem đường dẫn" >
+                                        <i class="fas fa-eye" style="color : #00bbf8;padding-left: 11px;"></i>
+                                     </a>
+                                    `
+                               ;
+                            }
+                            $('.chitiet_modal_mc').html(UI);
+                            
+                           //  $('.chitiet_modal_mc').html(
+                           //      `<strong style ="padding-right: 17px;">Xem chi tiết</strong>
+                           //      <a href="${e.linkview}" title="" style="background: aquamarine; padding: 6px 11px;border-radius: 6px;" target = "_blank">
+                           //          <i class="fas fa-download"></i>
+                           //          <span type="">
+                           //              Mở   
+                           //          </span>
+                           //       </a>
+
+                           //       <a href="${e.url}" title="" style="background: aquamarine; padding: 6px 11px;border-radius: 45px;" target = "_blank">
+                           //          <i class="fas fa-eye"></i>
+                           //          <span type="">
+                           //              Mở   
+                           //          </span>
+                           //       </a>
+                           //      `
+                           // );
+                        }
+                        
                    });
                 },
             });
@@ -1298,13 +1335,15 @@
             if(cur_editor != null){
                 if(check){
                     id_mcg = parseInt(id_mcg);
-                    if(arr_mc.includes(id_mcg)){
-                        let text = '&nbsp;<a data-mce-href="mcGop" id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung mcGop" d-type="mcGop" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
-                         cur_editor.execCommand('mceInsertContent', false, text);  
-                    }else{
-                        let text = '&nbsp;<a data-mce-href="mc" id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung mcGop" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
-                         cur_editor.execCommand('mceInsertContent', false, text);  
-                    }
+                    // if(arr_mc.includes(id_mcg)){
+                    //     let text = '&nbsp;<a data-mce-href="mcGop" id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung mcGop" d-type="mcGop" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
+                    //      cur_editor.execCommand('mceInsertContent', false, text);  
+                    // }else{
+                    //     let text = '&nbsp;<a data-mce-href="mc" id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung mcGop" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
+                    //      cur_editor.execCommand('mceInsertContent', false, text);  
+                    // }
+                    let text = '&nbsp;<a data-mce-href="mc" id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
+                         cur_editor.execCommand('mceInsertContent', false, text);
                 }else{
                     let text = '&nbsp;<a data-mce-href="mcGop" id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung mcGop" d-type="mcGop" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
                      cur_editor.execCommand('mceInsertContent', false, text);  
@@ -1500,6 +1539,7 @@
             default_link_target:"_blank",
             allow_unsafe_link_target: true,
             setup: function (ed) {
+
                 ed.on('init', function(args) {
                     
                 });
