@@ -2,7 +2,7 @@
     <div class="col-sm-12">
         <div class="ibox">
             <div class="ibox-content">
-                   
+               
                     @if($key=="TĐG1")
                     <div class="row m-t-lg">
                         <div class="col-sm-12">

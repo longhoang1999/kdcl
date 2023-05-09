@@ -316,8 +316,8 @@ td{
                     </div>
                     </div>
                 @endforeach
-
-            @if($keHoachBaoCaoDetail->bo_tieuchuan->loai_tieuchuan != 'csdt')
+            @if(isset($keHoachBaoCaoDetail->bo_tieuchuan->loai_tieuchuan))
+                @if($keHoachBaoCaoDetail->bo_tieuchuan->loai_tieuchuan != 'csdt')
                     @if($keHoachTieuChuan->id_truong_nhom == Sentinel::getUser()->id || $keHoachBaoCaoDetail->ns_phutrach == Sentinel::getUser()->id || Sentinel::inRole('admin') || Sentinel::inRole('operator'))
                         <div class="group_back">
                             <div class="arrow_content_text_css">
@@ -343,6 +343,7 @@ td{
                         </div>
                     @endif
                 @endif
+            @endif
             </div>
         </div>
     </div>

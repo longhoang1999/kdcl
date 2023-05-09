@@ -567,7 +567,9 @@
         <tr>
             <td>@lang('project/Externalreview/title.soluong')</td>
             @foreach($thongKeTuyenSinh as $i=>$tkts)
-                <td>{{ $tkts[9] }}</td>
+                @if(isset($tkts[9]))
+                    <td>{{ $tkts[9] }}</td>
+                @endif
             @endforeach
         </tr>
 
@@ -575,7 +577,9 @@
             <td>@lang('project/Externalreview/title.tylenguoihoc')</td>
             
             @foreach($thongKeTuyenSinh as $i=>$tkts)
-                <td>{{ number_format(($tkts[9]/$tkts[4])*100,2)}} %</td>
+                @if(isset($tkts[9]))
+                    <td>{{ number_format(($tkts[9]/$tkts[4])*100,2)}} %</td>
+                @endif
             @endforeach
            
         </tr>

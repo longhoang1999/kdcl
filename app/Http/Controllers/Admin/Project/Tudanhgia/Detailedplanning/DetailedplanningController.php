@@ -31,7 +31,9 @@ class DetailedplanningController extends DefinedController
     
      public function data(Request $req){
           $user_id = Sentinel::getUser()->id;
-          $keHoachBaoCaoList = DB::table('kehoach_baocao')->where('trang_thai', '!=', 'completed'); 
+          $keHoachBaoCaoList = DB::table('kehoach_baocao')
+          ->where('trang_thai', '!=', 'completed')
+          ->orderBy('created_at','desc')->get();; 
           // if (Sentinel::inRole('admin') || Sentinel::inRole('operator')) {
                              
           // }else {               
@@ -222,7 +224,7 @@ class DetailedplanningController extends DefinedController
                                ->leftjoin('menhde','menhde.id','=','baocao_menhde.id_menhde')
                                ->where('baocao_menhde.id_kehoach_bc',$kehoachtieuchuan->id)
                                ->where('menhde.tieuchi_id',$value->id)
-                               ->where('baocao_menhde.id_kh_menhde',$bacao_menhde->id_khmd)
+                               // ->where('baocao_menhde.id_kh_menhde',$bacao_menhde->id_khmd)
                               ->get();
                     }          
                
@@ -258,7 +260,7 @@ class DetailedplanningController extends DefinedController
                                ->leftjoin('mocchuan','mocchuan.id','=','baocao_menhde.mocchuan_id')
                                ->where('baocao_menhde.id_kehoach_bc',$kehoachtieuchuan->id)
                                ->where('mocchuan.tieuchi_id',$value->id)
-                               ->where('id_kh_menhde',$bacao_menhde->id_khmd)
+                               // ->where('id_kh_menhde',$bacao_menhde->id_khmd)
                               ->get();
                             
 
@@ -300,7 +302,7 @@ class DetailedplanningController extends DefinedController
                if(!empty($value->menhde_baocao_start->danhgia)){
                    array_push($start,$value->menhde_baocao_start->danhgia); 
                }
-               
+                              
 
           }
           // die;

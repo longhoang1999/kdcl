@@ -23,6 +23,10 @@
         .table td:first-child, .table th:first-child, .table tr:first-child {
         padding-left: 10px;
         }
+
+        tr a.mt-4:hover{
+            cursor: pointer;
+        }
     </style>
     <div class="body-flex">
       <div class="content-body-css">
@@ -240,11 +244,15 @@
 
          $('.MC_Tc_Tchi').on('click','tr a.mt-4',function(){
             let id_mc = $(this).attr('d-id');
+            
             window.location.href = "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id_mc;
+            // window.location.href = "{!! route('admin.dambaochatluong.manaproof.showProof',0)!!}"+id_mc;
          })
          $('.pageHomeView').on('click','.danMinhChung',function(){
             let id_mcg = $(this).attr('d-id');
             window.location= "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id_mcg;
+            // window.location= "{!! route('admin.dambaochatluong.manaproof.showProof',0)!!}"+id_mcg;
+            $('.chitiet_modal_mc').html(UI);
          })
     })
 </script>
