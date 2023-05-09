@@ -329,7 +329,7 @@
                                 </div>
                                 @endforeach -->
 								
-                              	@if(5 == 6)
+                              	@if(6 == 6)
                                 <!-- Trao đổi thông tin -->
                                 <div class="menu-item">
                                     <div class="menu-content pt-8 pb-2">
