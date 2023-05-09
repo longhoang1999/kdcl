@@ -457,30 +457,30 @@ class CompletionreportController extends DefinedController
                             $dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
                             $contents = $dom->find('.danMinhChung');  
                             $arr = array();
+                            if (!empty($contents)) {
+                                foreach ($contents as $key => $danMinhChung) {
+                                    if($danMinhChung->count() > 0 && !in_array($danMinhChung->{'d-id'}, $minhChungid)){
+                                        $minhChungCode = "[H{$keHoachTieuChuan->tieuChuan->stt}." .
+                                                str_pad($keHoachTieuChuan->tieuChuan->stt, 2, '0', STR_PAD_LEFT) . "." .
+                                                str_pad($keHoachTieuChi->tieuChi->stt, 2, '0', STR_PAD_LEFT) .
+                                                "." . str_pad($minhChungStt, 2, '0', STR_PAD_LEFT) . "]";
 
-                            foreach ($contents as $key => $danMinhChung) {
-                                if(!in_array($danMinhChung->{'d-id'}, $minhChungid)){
-                                    $minhChungCode = "[H{$keHoachTieuChuan->tieuChuan->stt}." .
-                                            str_pad($keHoachTieuChuan->tieuChuan->stt, 2, '0', STR_PAD_LEFT) . "." .
-                                            str_pad($keHoachTieuChi->tieuChi->stt, 2, '0', STR_PAD_LEFT) .
-                                            "." . str_pad($minhChungStt, 2, '0', STR_PAD_LEFT) . "]";
+                                        $contents[$key]->firstChild()->setText($minhChungCode);
+                                        // $danMinhChung->innertext = $minhChungCode;
+                                        $minhChungid[$minhChungCode] = $danMinhChung->{'d-id'};
+                                        $minhChungStt++;
+                                    }
+                                    else{
+                                        $minhChungCode = array_search($danMinhChung->{'d-id'}, $minhChungid);
+                                    }
 
-                                    $contents[$key]->firstChild()->setText($minhChungCode);
-                                    // $danMinhChung->innertext = $minhChungCode;
-                                    $minhChungid[$minhChungCode] = $danMinhChung->{'d-id'};
-                                    $minhChungStt++;
+                                    if($checkMC->contains($minhChungCode)){
+                                        continue;
+                                    }
+                                    $checkMC->push($minhChungCode);
+                                    
+                                    
                                 }
-                                else{
-                                    $minhChungCode = array_search($danMinhChung->{'d-id'}, $minhChungid);
-                                }
-
-                                if($checkMC->contains($minhChungCode)){
-                                    continue;
-                                }
-                                $checkMC->push($minhChungCode);
-
-                                
-                                
                             }
                             DB::table('baocao_menhde')
                                 ->where('id_kehoach_bc',$req->id_khbc)
