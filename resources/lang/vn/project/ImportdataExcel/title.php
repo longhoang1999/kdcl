@@ -590,12 +590,17 @@
 		// Công khai thông tin về diện tích đất, tổng diện tích sàn xây dựng
 		'ckttdtd' 		=> 'Công khai thông tin về diện tích đất, tổng diện tích sàn xây dựng',
 		'cnckttdtd'		=> 'Cập nhật thông tin về diện tích đất, tổng diện tích sàn xây dựng',
-		'tendanv'		=> 'Tên dự án, nhiệm vụ khoa học công nghệ',
-		'nctvtv'		=> 'Người chủ trì và các thành viên',
-		'dttn'			=> 'Đối tác trong nước và quốc tế',
-		'tgth'			=> 'Thời gian thực hiện',
-		'kpth'			=> 'Kinh phí thực hiện (triệu đồng)',
-		'ttspnd'		=> 'Tóm tắt sản phẩm, ứng dụng thực tiễn',
+		'noidung'		=> 'Nội dung',
+		'tdtdcs'		=> 'Tổng diện tích đất cơ sở đào tạo quản lý sử dụng',
+		'tschinh'		=> 'Trụ sở chính',
+		'phtai'			=> 'Phân hiệu tại',
+		'cshtai'		=> 'Cơ sở 2 tại',
+		'tongdtsxd'		=>'Tổng diện tích sàn xây dựng phục vụ đào tạo, nghiên cứu khoa học',
+		'dientich'		=> 'Diện tích (m2)',
+		'htsd'			=> 'Hình thức sử dụng',
+		'sohuu'			=> 'Sở hữu',
+		'lienket'		=> 'Liên kết',
+		'thue'			=> 'Thuê',
 
 		//Công khai thông tin về học liệu
 		'ckttvhl'		=> 'Công khai thông tin về học liệu',

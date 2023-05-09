@@ -14,14 +14,17 @@ class CkttdtdExport implements FromCollection, WithHeadings
         $tss = DB::table('excel_import_dtd_dtxxd')->get();
         
         foreach($tss as $ts){
+            if($ts->parent == "")
+                $row1 = $ts->stt;
+            else
+                $row1 = $ts->parent . '.' . $ts->stt;
             $row = [
-                $ts->ten_du_an ,
-                $ts->nct_tvtg,
-                $ts->dttn_qt,
-                $ts->tgth,
-                $ts->kinh_phi,
-                $ts->tom_tat,
-
+                $row1,
+                $ts->noi_dung,
+                $ts->dien_tich,
+                $ts->so_huu,
+                $ts->lien_ket,
+                $ts->thue,
             ];
             array_push($getAdmissions, $row);
         }
@@ -30,12 +33,12 @@ class CkttdtdExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
-            "Tên dự án, nhiệm vụ khoa học công nghệ",
-            "Người chủ trì và các thành viên",
-            "Đối tác trong nước và quốc tế",
-            "Thời gian thực hiện",
-            "Kinh phí thực hiện (triệu đồng)",
-            "Tóm tắt sản phẩm, ứng dụng thực tiễn",
+            "Thứ tự",
+            "Nội dung",
+            "Diện tích (m2)",
+            "Sở hữu (Hình thức sử dụng)",
+            "Liên kết (Hình thức sử dụng)",
+            "Thuê (Hình thức sử dụng)",            
         ];
     }
 }

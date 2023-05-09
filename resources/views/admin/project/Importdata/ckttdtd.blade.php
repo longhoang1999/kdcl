@@ -34,9 +34,6 @@
     .row_width{
         width:7rem;
     }
-    .row_add{
-        width: 8% !important;
-    }
     .listlhcsg{
         width: 100%;
         border: none;
@@ -91,6 +88,22 @@
     .color-date{
        background: #047a7e;
     }
+    .w-stt{
+        width: 10px !important;
+    }
+    .table-show{
+        background-color: white;
+        padding: 15px;
+        box-shadow: 0 0 12px #cecece;
+        border-radius: 5px;
+    }
+    .table-show td:first-child{
+        text-align: center;
+    }
+    .table-show thead{
+        background: #2d85cb;
+        color: white;
+    }
 </style>
 
 @stop
@@ -106,37 +119,68 @@
 <section class="content-body">
     <div class="form-standard">
         <div class="item-group-button right-block mb-2">
-            <button href="" class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modal_unit" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.nhap_excel')">
+            <button href="" class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modal_unit" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.nhap_dl')">
                 <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
             </button>
             <a href="{{ route('admin.importdata.ckttdtd.exportCkttdtd') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
                 <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
             </a>
         </div>
-        
-        <table class="table table-striped table-bordered" id="table" width="100%">
-            <thead>
-             <tr>
-                <th>
-                    @lang('project/ImportdataExcel/title.tendanv')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.dttn')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.tgth')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.kpth')
-                </th>
-                <th style="width: 12%;">
-                    @lang('project/ImportdataExcel/title.hanhd')
-                </th>
-             </tr>
-            </thead>
-            <tbody>  
-            </tbody>                
-        </table>
+        <div class="table-show">
+            <table class="table table-striped table-bordered" id="table" width="100%">
+                <thead>
+                 <tr class="border ">
+                    <th  scope="col" rowspan="2">
+                        @lang('project/ImportdataExcel/title.stt')
+                    </th>
+                    <th  scope="col" rowspan="2">
+                        @lang('project/ImportdataExcel/title.noidung')
+                    </th>
+                    <th scope="col" rowspan="2">
+                        @lang('project/ImportdataExcel/title.dientich')                                  
+                    </th>
+                    <th  scope="col" colspan="3">
+                        @lang('project/ImportdataExcel/title.htsd')                                  
+                    </th>
+                    <th  scope="col" rowspan="2">
+                        @lang('project/ImportdataExcel/title.hanhd')                                  
+                    </th>
+                </tr>
+                <tr class="border ">
+                    <th  scope="col" class="p-2">
+                        @lang('project/ImportdataExcel/title.sohuu')
+                    </th>
+                    <th  scope="col" class="p-2">
+                        @lang('project/ImportdataExcel/title.lienket')
+                    </th>
+                    <th  scope="col" class="p-2 ">
+                        @lang('project/ImportdataExcel/title.thue')                                  
+                    </th>
+                </tr>
+                </thead>
+                <tbody>  
+                    @foreach($dtsan as $value)
+                        <tr>
+                            @if($value->parent == "")
+                                <td scope="row">{{ $value->stt }}</td>
+                            @else
+                                <td scope="row">{{ $value->parent }}.{{ $value->stt }}</td>
+                            @endif
+                            <td>{{ $value->noi_dung }}</td>
+                            <td>{{ $value->dien_tich }}</td>
+                            <td>{{ $value->so_huu }}</td>
+                            <td>{{ $value->lien_ket }}</td>
+                            <td>{{ $value->thue }}</td>
+                            <td>
+                                <button data-toggle="modal" data-target="#modalUpdate" class="btn btn-block mt-2" data-id="{{ $value->id }}" data-bs-placement="top" title="@lang('project/Selfassessment/title.capnhat')    ">
+                                    <i class="bi bi-pencil-square" style="font-size: 25px;color: #009ef7;"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>                
+            </table>
+        </div>
     </div>
 </section>
 <!-- /Kết thúc page trang -->
@@ -149,18 +193,17 @@
                 <h5 class="modal-title" id="modalUnitLabel">
                     @lang('project/ImportdataExcel/title.ckttdtd')
                 </h5>
-
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <input type="file" class="mb-2" name="files" id="file"  accept=".xlsx, .xls, .csv">
+                <!-- <input type="file" class="mb-2" name="files" id="file"  accept=".xlsx, .xls, .csv"> -->
                 <div class="d-flex justify-content-between">
-                    <button class="btn btn-success btn-benchmark mb-2" id="import_unit">@lang('project/Standard/title.nhap')</button>
-                    <button class="btn btn-success btn-benchmark m-2" id="add_unit">
+                    <!-- <button class="btn btn-success btn-benchmark mb-2" id="import_unit">@lang('project/Standard/title.nhap')</button> -->
+                    <!-- <button class="btn btn-success btn-benchmark m-2" id="add_unit">
                         @lang('project/ImportdataExcel/title.themtt')
-                    </button>
+                    </button> -->
                 </div>
                 <div id="css_table">
                     <table id="idtableip" class="table table-striped" border="1"></table>
@@ -255,6 +298,7 @@
 </div>
 
 
+
 <!-- modal update -->
 <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -273,43 +317,53 @@
                     <input type="hidden" id="id_unit" name="id_unit">
                     <div class="container-fuild">
                         <div class="row">
-                            <div class="form-group col-md-4">
-                                <label for="fortendanv">
-                                    <span>@lang('project/ImportdataExcel/title.tendanv')</span>
+                            <div class="form-group col-md-3">
+                                <label for="forstt">
+                                    <span>@lang('project/ImportdataExcel/title.stt')</span>
                                 </label>
-                                <input type="text" class="form-control " id="fortendanv" placeholder="@lang('project/ImportdataExcel/title.tendanv')" name="tendanv">
+                                <input type="text" class="form-control " id="forstt" placeholder="" name="stt" disabled>
                             </div>
-                            <div class="form-group col-md-4" >
-                                <label for="fornctvtv">
-                                    <span>@lang('project/ImportdataExcel/title.nctvtv')</span>
+                            <div class="form-group col-md-5">
+                                <label for="fornoidung">
+                                    <span>@lang('project/ImportdataExcel/title.noidung')</span>
                                 </label>
-                                <input type="text" class="form-control " id="fornctvtv" placeholder="@lang('project/ImportdataExcel/title.nctvtv')" name="nctvtv">
+                                <input type="text" class="form-control " id="fornoidung" placeholder="" name="noidung" >
                             </div>
-                            <div class="form-group col-md-3" >
-                                <label for="fordttn">
-                                    <span>@lang('project/ImportdataExcel/title.dttn')</span>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label for="fordientich">
+                                    <span>@lang('project/ImportdataExcel/title.dientich')</span>
                                 </label>
-                                <input type="text" class="form-control " id="fordttn" placeholder="@lang('project/ImportdataExcel/title.dttn')" name="dttn">
+                                <input type="text" class="form-control " id="fordientich" placeholder="" name="dientich">
                             </div>
-                            <div class="form-group col-md-4" >
-                                <label for="fortgth">
-                                    <span>@lang('project/ImportdataExcel/title.tgth')</span>
-                                </label>
-                                <input type="text" class="form-control " id="fortgth" placeholder="@lang('project/ImportdataExcel/title.tgth')" name="tgth">
-                            </div>
-                            <div class="form-group col-md-3" >
-                                <label for="forkpth">
-                                    <span>@lang('project/ImportdataExcel/title.kpth')</span>
-                                </label>
-                                <input type="number" class="form-control " id="forkpth" placeholder="@lang('project/ImportdataExcel/title.kpth')" name="kpth">
-                            </div>
-                            <div class="form-group col-md-4" >
-                                <label for="forttspnd">
-                                    <span>@lang('project/ImportdataExcel/title.ttspnd')</span>
-                                </label>
-                                <input type="text" class="form-control " id="forttspnd" placeholder="@lang('project/ImportdataExcel/title.ttspnd')" name="ttspnd">
-                            </div>
-                            
+                                <div class="form-group col-md-3">
+                                    <label for="forsohuu">
+                                        <span>
+                                            @lang('project/ImportdataExcel/title.htsd'):
+                                            @lang('project/ImportdataExcel/title.sohuu')
+                                        </span>
+                                    </label>
+                                    <input type="text" class="form-control " id="forsohuu" placeholder="" name="sohuu">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="forlienket">
+                                        <span>
+                                            @lang('project/ImportdataExcel/title.htsd'):
+                                            @lang('project/ImportdataExcel/title.lienket')
+                                        </span>
+                                    </label>
+                                    <input type="text" class="form-control " id="forlienket" placeholder="" name="lienket">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="forthue">
+                                        <span>
+                                            @lang('project/ImportdataExcel/title.htsd'):
+                                            @lang('project/ImportdataExcel/title.thue')
+                                        </span>
+                                    </label>
+                                    <input type="text" class="form-control " id="forthue" placeholder="" name="thue">
+                                </div>
                         </div>
                         
                     </div> 
@@ -330,7 +384,8 @@
 
 
     <!-- Kết thúc trang -->
-    </section>
+    </sectio
+    forlienketn>
 @stop
 
 
@@ -357,103 +412,112 @@
         check_date : '#047a7e',
     }
 
-    $(function(){
-        table = $('#table').DataTable({
-            responsive: true,
-            processing: true,
-            serverSide: true,
-            ajax: "{!! route('admin.importdata.ckttdtd.dataUnit') !!}",
-            columns: [
-                { data: 'ten_du_an', name: 'ten_du_an' },
-                { data: 'dttn_qt', name: 'dttn_qt' },
-                { data: 'tgth', name: 'tgth' },
-                { data: 'kinh_phi', name: 'kinh_phi' },
-                { data: 'actions', name: 'actions' ,className: 'action'},
-            ],            
-        });
-    });  
+    // $(function(){
+    //     table = $('#table').DataTable({
+    //         responsive: true,
+    //         processing: true,
+    //         serverSide: true,
+    //         ajax: "{!! route('admin.importdata.dtkhcn2.dataUnit') !!}",
+    //         columns: [
+    //             { data: 'nam', name: 'nam' },
+    //             { data: 'doanh_thu', name: 'doanh_thu' },
+    //             { data: 'ty_le_doanh_thu', name: 'ty_le_doanh_thu' },
+    //             { data: 'ty_so_doanh_thu', name: 'ty_so_doanh_thu' },
+    //             { data: 'actions', name: 'actions' },
+    //         ],            
+    //     });
+    // });  
 
-    $('#import_unit').on('click', function () {
-        var f =  $("#forMaDVIP").val(1);
-        var formData = new FormData();
-        formData.append('file', $('#file')[0].files[0]);
-        formData.append('_token', '{{csrf_token()}}');
-
-        var listloaidv = {
-            @foreach($loai_dv as $ldv)
-                {{ $ldv->id }} : '{{ $ldv->loai_donvi }}', 
-            @endforeach
-        };
-
+    var dataFix = [
+        { stt: '1', content: "@lang('project/ImportdataExcel/title.tdtdcs')",parent: '' },
+        { stt: 'a', content: "@lang('project/ImportdataExcel/title.tschinh')",parent: '' },
+        { stt: 'b', content: "@lang('project/ImportdataExcel/title.phtai')",parent: '' },
+        { stt: 'c', content: "@lang('project/ImportdataExcel/title.cshtai')",parent: '' },
+        { stt: '2', content: "@lang('project/ImportdataExcel/title.tongdtsxd')",parent: '' },
+        { stt: 'a', content: "@lang('project/ImportdataExcel/title.tschinh')",parent: '' },
+        { stt: 'b', content: "@lang('project/ImportdataExcel/title.phtai')",parent: '' },
+        { stt: 'c', content: "@lang('project/ImportdataExcel/title.cshtai')",parent: '' },
+    ];
+    $('#modal_unit').on('show.bs.modal', function (event) {
+        
         $.ajax({
             url : "{!! route('admin.importdata.ckttdtd.importUnit') !!}",
             type : 'POST',
-            data : formData,
+            // data : formData,
             processData: false,  
             contentType: false,  
-            enctype: 'multipart/form-data',
+            // enctype: 'multipart/form-data',
             success : function(data) {
                 $("#idtableip").empty();
                 $("#add_unit").show();
                 var thead = `
                         <thead class="btn-success ">
                             <tr class="border ">
-                                <th class="row_width p-2 row_add">
+                                <th class="row_width p-2 w-stt" rowspan="2">
                                     @lang('project/ImportdataExcel/title.stt')
                                 </th>
+                                <th class="row_width p-2" rowspan="2">
+                                    @lang('project/ImportdataExcel/title.noidung')
+                                </th>
+                                <th class="row_width p-2" rowspan="2">
+                                    @lang('project/ImportdataExcel/title.dientich')                                  
+                                </th>
+                                <th class="row_width p-2" colspan="3">
+                                    @lang('project/ImportdataExcel/title.htsd')                                  
+                                </th>
+                            </tr>
+                            <tr class="border ">
                                 <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.tendanv')                                  
+                                    @lang('project/ImportdataExcel/title.sohuu')
                                 </th>
                                 <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.nctvtv')                                  
+                                    @lang('project/ImportdataExcel/title.lienket')
                                 </th>
-                                <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.dttn')                                  
-                                </th>
-                                <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.tgth')                                  
-                                </th>
-                                <th class="row_width p-2 row_add">
-                                    @lang('project/ImportdataExcel/title.kpth')                                  
-                                </th>
-                                <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.ttspnd')                                  
-                                </th>
-                                <th class="row_width p-2 row_add">
-                                    @lang('project/ImportdataExcel/title.thaotac')
+                                <th class="row_width p-2 ">
+                                    @lang('project/ImportdataExcel/title.thue')                                  
                                 </th>
                             </tr>
                         </thead>
                         <tbody id="idtbody"></tbody>
                 `
                 $("#idtableip").append(thead);
-                data.forEach((item, index) => { 
-                    var add = `
-                        <tr class="row_number">
-                                <td contenteditable class="text-center p-2 row0">${item.stt}</td>
-                                <td contenteditable class="text-center p-2 row1">
-                                    ${item.tendanv}
+                dataFix.forEach((item, index) => { 
+                    if(item.parent == ""){
+                        var add = `
+                            <tr class="row_number">
+                                <td contenteditable class=" p-2 row0 w-stt">${item.stt}</td>
+                                <td contenteditable class="p-2 row1">
+                                    ${item.content}
                                 </td>
                                 <td contenteditable class="text-center p-2 row2"> 
-                                    ${item.nctvtv}
                                 </td>
-                                <td contenteditable class="text-center p-2 row3"> 
-                                    ${item.dttn}
+                                <td contenteditable class="text-center p-2 row3">
                                 </td>
-                                <td contenteditable class="text-center p-2 row4"> 
-                                    ${item.tgth}
+                                <td contenteditable class="text-center p-2 row4">
                                 </td>
-                                <td contenteditable class="text-center p-2 row5"> 
-                                    ${item.kpth}
+                                <td contenteditable class="text-center p-2 row5">
                                 </td>
-                                <td contenteditable class="text-center p-2 row6"> 
-                                    ${item.ttspnd}
+                            </tr>
+                        `;
+                    }else{
+                        var add = `
+                            <tr class="row_number">
+                                <td contenteditable class="p-2 row0 w-stt">${item.stt}</td>
+                                <td contenteditable class="p-2 row1">
+                                    ${item.content}
                                 </td>
-                                <td contenteditable class="text-center p-2 trash-btn">
-                                    <ion-icon name="trash-outline" ></ion-icon>
+                                <td contenteditable class="text-center p-2 row2"> 
+                                </td>
+                                <td contenteditable class="text-center p-2 row3">
+                                </td>
+                                <td contenteditable class="text-center p-2 row4">
+                                </td>
+                                <td contenteditable class="text-center p-2 row5">
                                 </td>
                             </tr>
                     `;
+                    }
+                    
                     $("#idtbody").append(add);
 
                     // Validate các trường excel
@@ -478,8 +542,6 @@
                 <td contenteditable class="text-center p-2 row2"></td>
                 <td contenteditable class="text-center p-2 row3"></td>
                 <td contenteditable class="text-center p-2 row4"></td>
-                <td contenteditable class="text-center p-2 row5"></td>
-                <td contenteditable class="text-center p-2 row6"></td>
                 <td contenteditable class="text-center p-2 trash-btn">
                     <ion-icon name="trash-outline"></ion-icon>
                 </td>
@@ -647,6 +709,7 @@
     })
 
 
+
     var dataSubmit = [];
     $("#import_unit_data").click(function() {
         if(checkEmpty() && checkWebsite() && checkEmail() && checkPhone()
@@ -654,13 +717,13 @@
             dataSubmit.length = 0;
             $(".row_number").each(function( index ) {
                 let dataObj = {
-                    'tendanv' :   $(this).find('.row1').text().trim(),
-                    'nctvtv' :  $(this).find('.row2').text().trim(),
-                    'dttn' :  $(this).find('.row3').text().trim(),
-                    'tgth' :  $(this).find('.row4').text().trim(),
-                    'kpth' :  $(this).find('.row5').text().trim(),
-                    'ttspnd' :  $(this).find('.row6').text().trim(),
+                    'stt': dataFix[index].stt,
                     
+                    'content' :  dataFix[index].content,
+                    'dientich' :  $(this).find('.row2').text().trim(),
+                    'sohuu' :   $(this).find('.row3').text().trim(),
+                    'lienket' :  $(this).find('.row4').text().trim(),
+                    'thue' :  $(this).find('.row5').text().trim(),
                     
                 }
                 dataSubmit.push(dataObj);
@@ -714,12 +777,17 @@
         })
             .then((response) => response.json())
             .then((data) => {
-                $("#fortendanv").val(data.ten_du_an);
-                $("#fornctvtv").val(data.nct_tvtg);
-                $("#fordttn").val(data.dttn_qt);
-                $("#fortgth").val(data.tgth);
-                $("#forkpth").val(data.kinh_phi);
-                $("#forttspnd").val(data.tom_tat);
+                if(data.parent != ""){
+                    $("#forstt").val(data.stt)
+                }else{
+                    $("#forstt").val(`${data.stt}`);
+                }  
+                $("#fornoidung").val(data.noi_dung);
+                $("#fordientich").val(data.dien_tich);
+                $("#forsohuu").val(data.so_huu);
+                $("#forlienket").val(data.lien_ket);
+                $("#forthue").val(data.thue);
+               
             })
     })
 

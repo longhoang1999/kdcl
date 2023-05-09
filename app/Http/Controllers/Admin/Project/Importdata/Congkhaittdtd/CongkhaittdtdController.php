@@ -30,36 +30,35 @@ use App\Exports\CkttdtdExport;
 class CongkhaittdtdController extends DefinedController{
 
 	public function index(){
-		$loai_dv = DB::table("loai_donvi")->select("id", "loai_donvi")->get();
-		$donvi = DB::table("donvi")->select("id", "ten_donvi", "deleted_at","loai_dv_id")
-                ->where("deleted_at", null)
-                ->get();
+		
+        $dtsan = DB::table("excel_import_dtd_dtxxd")->get();
+
 		
         return view('admin.project.Importdata.ckttdtd')->with([
-           	'loai_dv'           => $loai_dv,
-           	'donvi'             => $donvi,
+           	'dtsan'           => $dtsan,
         ]);
 	}
 
 	//Import excel unit
     public function importUnit (Request $req) {
-        $excel = new Ckttdtd;
-        Excel::import($excel, $req->file);
-        return $excel->read();
+        // $excel = new Ckttdtd;
+        // Excel::import($excel, $req->file);
+        // return $excel->read();
+        return json_encode("ok");
     }
 
     public function importDataUnit(Request $req) {
     	$data = json_decode($req->getContent());
         foreach($data as $dt){
-            if($dt->tendanv != "" && $dt->nctvtv != ""){
+            if($dt->content != "" && $dt->stt != "" ){
             	$dataInport = array(
-                    'ten_du_an'  => $dt->tendanv,
-                    'nct_tvtg' => $dt->nctvtv,
-                    'dttn_qt' => $dt->dttn,
-                    'tgth' => $dt->tgth,
-                    'kinh_phi' => $dt->kpth,
-                    'tom_tat' => $dt->ttspnd,
-                    
+                    'stt'  => $dt->stt,
+                    'parent' => $dt->parent,
+                    'noi_dung' => $dt->content,
+                    'dien_tich' => $dt->dientich,
+                    'so_huu' => $dt->sohuu,
+                    'lien_ket' => $dt->lienket,
+                    'thue' => $dt->thue,
                 );
                 DB::table("excel_import_dtd_dtxxd")->insert($dataInport);
             }
@@ -111,12 +110,10 @@ class CongkhaittdtdController extends DefinedController{
 
     public function updateUnit(Request $req){
     	$data = [
-            'ten_du_an'  => $req->tendanv,
-            'nct_tvtg' => $req->nctvtv,
-            'dttn_qt' => $req->dttn,
-            'tgth' => $req->tgth,
-            'kinh_phi' => $req->kpth,
-            'tom_tat' => $req->ttspnd,
+            'dien_tich'  => $req->dientich,
+            'so_huu' => $req->sohuu,
+            'lien_ket' => $req->lienket,
+            'thue' => $req->thue,
         ];
         DB::table("excel_import_dtd_dtxxd")->where("id", $req->id_unit)
         		->update($data);
