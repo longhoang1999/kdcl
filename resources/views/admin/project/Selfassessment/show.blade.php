@@ -2215,6 +2215,10 @@
         clickMC(id,mcg);
      })
 
+     $('.block_content').on('click','.danMinhChung',function(){
+            let id = $(this).attr('d-id');
+            window.location= "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id;
+    });
 
     </script>
 @stop
