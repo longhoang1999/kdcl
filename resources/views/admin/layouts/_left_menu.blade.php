@@ -351,7 +351,7 @@
                                     </a>
                                 </div>
                                 <!-- Chat -->
-                                <div class="menu-item">
+                                <!-- <div class="menu-item">
                                     <a class="menu-link 
                                     {!! (Request::is('admin/trao-doi-thong-tin/chat/index') 
                                         ? 'active' : '' ) !!}
@@ -361,7 +361,7 @@
                                         </span>
                                         <span class="menu-title">{{$listmenu_3[2]}}</span>
                                     </a>
-                                </div>
+                                </div> -->
                                 <!-- /Trao đổi thông tin -->
                                 @endif
 

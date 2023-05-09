@@ -365,6 +365,12 @@ Route::group(
                             function(){
                                 //Bảng Tin
                                 Route::get('index', 'MessageboardController@index')->name('index');
+                                Route::post('create-bantin', 'MessageboardController@createbantin')->name('createbantin');
+                                Route::get('render-ui', 'MessageboardController@renderUI')->name('renderUI');
+                                Route::get('xoa-comment', 'MessageboardController@xoaComment')->name('xoaComment');
+                                Route::post('post-parent', 'MessageboardController@postParent')->name('postParent');
+                                Route::get('like-post', 'MessageboardController@likePosst')->name('likePosst');
+                                
                             }
                         );
                         /*routes for Chat*/

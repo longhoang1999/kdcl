@@ -14,6 +14,7 @@
 		'xemthem'			=> 'Xem thêm',
 		'traloi'			=> 'Trả lời..',
 		'xoabl'				=> 'Xóa bình luận',
+		'dangtin'			=> 'Đăng tin',
 		// trao đổi thông tin, Chat
 		'nhom'				=> 'NHÓM',
 		'nhom1'				=> 'Nhóm 1',

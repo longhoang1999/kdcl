@@ -30,7 +30,6 @@
 .feedback{
 	display: flex;
 	margin-top: 25px;
-	width: 72rem;
 }
 .feedback .feedback-block{
 	width: 100%;
@@ -98,10 +97,9 @@
 	width: 3rem;
 	background: chartreuse;
 	height: 2rem;
-  border: solid 0.5px lightgrey;
-  outline: none;
-  position: absolute;
-  right: 13px;
+	border: solid 0.5px lightgrey;
+	outline: none;
+	right: 13px;
 }
 .comment-buttom{
 	display: flex;
@@ -216,9 +214,15 @@
 .chat .search p{
 	margin-top: 11px;
 }
+.comment2{
+	display: flex;
+}
+textarea[name="content"]{
+	margin:0 5px;
+	width: 80%;
 
+}
 .avatar{
-	width: 60px;
   height: 65px;
   border-radius: 4px;
   overflow: hidden;
