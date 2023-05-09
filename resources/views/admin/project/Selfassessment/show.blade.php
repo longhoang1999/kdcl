@@ -130,7 +130,7 @@
             @endif
     </div>
 
-
+    @php $arrss = array();@endphp 
     <div class="arrow_content">
         <div class="arrow_content_text">
            @if($keHoachBaoCaoDetail->loai_tieuchuan != 'csgd')
@@ -271,11 +271,21 @@
                     </div>
 
                     <div class="ibox_cotent css_width" id="show_block_content_{!!$kehoachtieuchi->id!!}" style="display: none;">
-                         @php $arrss = array(); $r =1; $tienduc = array();@endphp 
+                         
                       @if(isset($kehoachtieuchi->bc_menhde))     
                         @if(count($kehoachtieuchi->bc_menhde) > 0)
                             @foreach($kehoachtieuchi->bc_menhde as $menhde)
-                        
+                                @if(in_array($menhde->id, $arrss))
+                                    @php 
+                                        continue;
+                                    @endphp
+                                @else
+                                    @php
+                                        array_push($arrss, $menhde->id);
+                                    @endphp
+                                   
+                                @endif
+                              
                                <div class="ibox-title border-bottom">
                                     <div class="ibox-tools2">
                                         <h5>{{$menhde->mo_ta}}</h5>
