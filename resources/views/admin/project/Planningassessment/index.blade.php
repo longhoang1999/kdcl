@@ -335,6 +335,7 @@
 			.then((response) => response.json())
 			.then((data) => {
 				if(data.mes == "done"){
+					alert("Lập kế hoạch thành công")
 					table.ajax.reload();
 				}				
 			})
