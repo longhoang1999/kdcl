@@ -271,15 +271,12 @@
                     </div>
 
                     <div class="ibox_cotent css_width" id="show_block_content_{!!$kehoachtieuchi->id!!}" style="display: none;">
-                        {{-- @php var_dump($kehoachtieuchi->id); @endphp --}}
-                    @if(isset($kehoachtieuchi->bc_menhde))     
+                         @php $arrss = array(); $r =1; $tienduc = array();@endphp 
+                      @if(isset($kehoachtieuchi->bc_menhde))     
                         @if(count($kehoachtieuchi->bc_menhde) > 0)
                             @foreach($kehoachtieuchi->bc_menhde as $menhde)
-                                <!-- @php 
-                                    echo($menhde->id);
-                                @endphp -->
-                                {{--@continue(!$menhde->menhde)--}}
-                                <div class="ibox-title border-bottom">
+                        
+                               <div class="ibox-title border-bottom">
                                     <div class="ibox-tools2">
                                         <h5>{{$menhde->mo_ta}}</h5>
                                         @if($menhde)
@@ -586,10 +583,10 @@
                             @endforeach
                         @endif 
                     @endif
+              
                 </div>
                 </div>
             @endforeach
-
            @if($keHoachBaoCaoDetail->loai_tieuchuan != 'csgd')
                 @if($keHoachTieuChuan->id_truong_nhom == Sentinel::getUser()->id || $keHoachBaoCaoDetail->ns_phutrach == Sentinel::getUser()->id || Sentinel::inRole('admin') || Sentinel::inRole('operator'))
                     <div class="group_back">
@@ -1258,7 +1255,6 @@
                    $('.modal_mc_tieude').html('Tiêu đề');
                    $('.modal_mc_trichyeu').html('Trích Yếu');
                    $('.modal_mc_chitiet').html('Xem chi tiết');
-                   console.log(check)
                    data[0].forEach(function(e){
                         $('.content_mc_tieude').html(e.tieu_de);
                         $('.content_mc_trichyeu').html(e.trich_yeu);
