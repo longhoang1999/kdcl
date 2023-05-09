@@ -299,25 +299,17 @@ class PreparereportController extends DefinedController
             array_push($listminhchungtoithieu,$value->id);
         }
 
-        // var_dump($listminhchungtoithieu);
-        // die;
+        if(empty($mcgop->id_kehoach_baocao)){
+            return "<h1 style = 'color:red; text-align : center'>Không tìm thấy minh chứng vui lòng thêm minh chứng</h1>";
+        }
 
         // báo cáo, tiêu chuẩn, tiêu chí
-        if(isset($mcgop->id_kehoach_baocao)){
-            $baocao = DB::table("kehoach_baocao")->where("id", $mcgop->id_kehoach_baocao)
+        $baocao = DB::table("kehoach_baocao")->where("id", $mcgop->id_kehoach_baocao)
                     ->first();
-        }
-        if(isset($mcgop->id_tieuchuan)){
-            $tieuchuan = DB::table("tieuchuan")->where("id", $mcgop->id_tieuchuan)->first();
-        }
-        
-        if(isset($mcgop->id_tieuchi)){
-            $tieuchi = DB::table("tieuchi")->where("id", $mcgop->id_tieuchi)->first();
-        }
-        
+        $tieuchuan = DB::table("tieuchuan")->where("id", $mcgop->id_tieuchuan)->first();
+        $tieuchi = DB::table("tieuchi")->where("id", $mcgop->id_tieuchi)->first();
         // load list
-        if(isset($mcgop->id_kehoach_baocao)){
-            $listTC =  DB::table("kehoach_tieuchuan")
+        $listTC =  DB::table("kehoach_tieuchuan")
                     ->leftjoin('tieuchuan', 'tieuchuan.id', 
                         '=', 'kehoach_tieuchuan.tieuchuan_id')
                     ->where("kehoach_tieuchuan.id_kh_baocao", $baocao->id)
@@ -327,31 +319,22 @@ class PreparereportController extends DefinedController
                             'tieuchuan.stt', 'tieuchuan.mo_ta'
                     )
                     ->get();
-        }
-        
-        if(isset($mcgop->id_tieuchuan)){
-            $listTChi = DB::table("tieuchi")
+
+        $listTChi = DB::table("tieuchi")
                     ->leftjoin('tieuchuan', 'tieuchuan.id', '=', 'tieuchi.tieuchuan_id')
                     ->where("tieuchi.tieuchuan_id", $mcgop->id_tieuchuan)
                     ->select('tieuchi.stt', 'tieuchi.id', 'tieuchi.tieuchuan_id', 'tieuchi.mo_ta', 'tieuchuan.stt AS sttTC')
                     ->get();
-        }
 
-        if(isset($mcgop->id_tieuchi)){
-            $tchi_mctt = DB::table("role_mctt_tchi")
+        $tchi_mctt = DB::table("role_mctt_tchi")
                         ->where("tieuchi_id", $mcgop->id_tieuchi)->get();
-
-            $mctt_id = [];
-            foreach($tchi_mctt as $value){
-                array_push($mctt_id, $value->mctt_id);
-            }
-            $listMCTT = DB::table("minhchung_tt")->whereIn("id", $mctt_id)
-                    ->select('id', 'tieu_de')
-                    ->get();
+        $mctt_id = [];
+        foreach($tchi_mctt as $value){
+            array_push($mctt_id, $value->mctt_id);
         }
-
-        
-        
+        $listMCTT = DB::table("minhchung_tt")->whereIn("id", $mctt_id)
+                ->select('id', 'tieu_de')
+                ->get();
 
         return view('admin.project.Selfassessment.viewmcgop')->with([
             'kehoach_baocao' => $kehoach_baocao,

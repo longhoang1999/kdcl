@@ -31,7 +31,9 @@ class DetailedplanningController extends DefinedController
     
      public function data(Request $req){
           $user_id = Sentinel::getUser()->id;
-          $keHoachBaoCaoList = DB::table('kehoach_baocao')->where('trang_thai', '!=', 'completed'); 
+          $keHoachBaoCaoList = DB::table('kehoach_baocao')
+          ->where('trang_thai', '!=', 'completed')
+          ->orderBy('created_at','desc')->get();; 
           // if (Sentinel::inRole('admin') || Sentinel::inRole('operator')) {
                              
           // }else {               

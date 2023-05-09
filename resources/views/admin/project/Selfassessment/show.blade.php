@@ -1255,7 +1255,6 @@
                    $('.modal_mc_tieude').html('Tiêu đề');
                    $('.modal_mc_trichyeu').html('Trích Yếu');
                    $('.modal_mc_chitiet').html('Xem chi tiết');
-                   console.log(check)
                    data[0].forEach(function(e){
                         $('.content_mc_tieude').html(e.tieu_de);
                         $('.content_mc_trichyeu').html(e.trich_yeu);

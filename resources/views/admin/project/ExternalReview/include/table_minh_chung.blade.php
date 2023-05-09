@@ -55,7 +55,7 @@
                     <tr>
                         <td colspan="2">
                             <a class="mt-4 mb-4" d-type="mcGop" 
-                                d-id="${uniqueArray[i].id}">
+                                d-id="${uniqueArray[i].id}" target="_blank">
                                 <span class="text-danger font-weight-bold">
                                     ${uniqueArray[i].name}
                                 </span>   
