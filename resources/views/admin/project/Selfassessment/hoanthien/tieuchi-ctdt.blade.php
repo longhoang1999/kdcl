@@ -1,5 +1,4 @@
 <div class="m-l-md">
-
     @foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi)
         <strong>
             @lang('project/Selfassessment/title.tieuchi') {{ $keHoachTieuChuan->tieuChuan->stt }}
