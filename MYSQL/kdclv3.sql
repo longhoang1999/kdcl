@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 06, 2023 lúc 11:07 AM
+-- Thời gian đã tạo: Th5 09, 2023 lúc 12:49 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 7.4.29
 
@@ -166,7 +166,70 @@ INSERT INTO `activity_log` (`id`, `log_name`, `description`, `subject_id`, `subj
 (110, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-04 03:35:39', '2023-05-04 03:35:39'),
 (111, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-05 02:04:35', '2023-05-05 02:04:35'),
 (112, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-05 14:17:12', '2023-05-05 14:17:12'),
-(113, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-06 07:14:25', '2023-05-06 07:14:25');
+(113, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-06 07:14:25', '2023-05-06 07:14:25'),
+(114, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-07 02:57:37', '2023-05-07 02:57:37'),
+(115, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-07 02:58:41', '2023-05-07 02:58:41'),
+(116, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-07 03:27:11', '2023-05-07 03:27:11'),
+(117, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-07 07:41:10', '2023-05-07 07:41:10'),
+(118, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-07 08:34:47', '2023-05-07 08:34:47'),
+(119, ' ', 'LoggedOut', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-07 08:35:15', '2023-05-07 08:35:15'),
+(120, ' ', 'LoggedIn', 1428, 'App\\Models\\User', 1428, 'App\\Models\\User', '[]', '2023-05-07 08:35:20', '2023-05-07 08:35:20'),
+(121, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-07 08:36:57', '2023-05-07 08:36:57'),
+(122, ' ', 'LoggedOut', 1428, 'App\\Models\\User', 1428, 'App\\Models\\User', '[]', '2023-05-07 08:45:32', '2023-05-07 08:45:32'),
+(123, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-07 08:45:35', '2023-05-07 08:45:35'),
+(124, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-07 11:23:57', '2023-05-07 11:23:57'),
+(125, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-07 14:59:41', '2023-05-07 14:59:41'),
+(126, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-08 02:16:12', '2023-05-08 02:16:12'),
+(127, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-05-09 08:10:17', '2023-05-09 08:10:17'),
+(128, ' ', 'LoggedIn', 1427, 'App\\Models\\User', 1427, 'App\\Models\\User', '[]', '2023-05-09 10:34:32', '2023-05-09 10:34:32'),
+(129, ' ', 'LoggedIn', 1427, 'App\\Models\\User', 1427, 'App\\Models\\User', '[]', '2023-05-09 10:38:17', '2023-05-09 10:38:17');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `bantin`
+--
+
+CREATE TABLE `bantin` (
+  `id` int(11) NOT NULL,
+  `noidung` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `perent` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `bantin`
+--
+
+INSERT INTO `bantin` (`id`, `noidung`, `user_id`, `perent`, `created_at`, `updated_at`) VALUES
+(1, 'fwevwev', 1, 0, '2023-05-09 08:42:12', '2023-05-09 08:42:12'),
+(4, 'Long', 1, 0, '2023-05-09 09:37:48', '2023-05-09 09:37:48'),
+(10, 'gvjvh', 1, 1, '2023-05-09 10:21:21', '2023-05-09 10:21:21'),
+(11, 'ưevwevwe', 1427, 1, '2023-05-09 10:38:38', '2023-05-09 10:38:38');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `bantin_like`
+--
+
+CREATE TABLE `bantin_like` (
+  `id` int(11) NOT NULL,
+  `bantin_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `bantin_like`
+--
+
+INSERT INTO `bantin_like` (`id`, `bantin_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(3, 1, 1, '2023-05-09 10:20:56', '2023-05-09 10:20:56'),
+(4, 1, 1427, '2023-05-09 10:38:27', '2023-05-09 10:38:27');
 
 -- --------------------------------------------------------
 
@@ -225,9 +288,20 @@ CREATE TABLE `baocao_menhde` (
 INSERT INTO `baocao_menhde` (`id`, `id_kehoach_bc`, `id_kh_menhde`, `id_menhde`, `mota`, `diemmanh`, `tontai`, `danhgia`, `nguoi_viet`, `trang_thai`, `ban_goc`, `created_at`, `updated_at`, `deleted_at`, `id_csdt`, `mocchuan_id`) VALUES
 (88, 55, 94, 17, '<p>&aacute;dasdasdas</p>', NULL, NULL, 0, NULL, 'congbo', NULL, NULL, NULL, NULL, NULL, NULL),
 (89, 55, 95, 18, NULL, NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, NULL),
-(90, 56, 96, 17, NULL, NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, NULL),
+(90, 56, 96, 17, '<div class=\"menhde_minhchung_id_90  menhde_minhchung_text_10}}border-bottom\">\n<div class=\"menhde_minhchung_id_90  menhde_minhchung_text_10}}border-bottom\">fsdssss</div>\n</div>', NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, NULL),
 (91, 56, 97, 18, NULL, NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, NULL),
-(92, 57, 98, 19, '<div class=\"menhde_minhchung_id_92  menhde_minhchung_text_12}}border-bottom\"> <div class=\"menhde_minhchung_id_92  menhde_minhchung_text_12}}border-bottom\">adjhjhaskfhaskd&nbsp;<a class=\"danMinhChung mcGop\" href=\"mcGop\">[H1.01.01.01]</a><a class=\"danMinhChung mcGop\" href=\"mcGop\">[Ti&ecirc;u đề minh chứng 1] &nbsp;</a><a class=\"danMinhChung mcGop\" href=\"mcGop\">[Ti&ecirc;u đề minh chứng 1] &nbsp;</a><a d-id=\"3\" class=\"danMinhChung mcGop\" href=\"mcGop\">[H1.01.01.02]</a><a class=\"danMinhChung mcGop\" href=\"mcGop\">&nbsp;</a><a d-id=\"3\" class=\"danMinhChung mcGop\" href=\"mcGop\">[Ti&ecirc;u đề minh chứng 1] </a><a d-id=\"3\" class=\"danMinhChung mcGop\" href=\"mcGop\"></a><a d-id=\"3\" class=\"danMinhChung mcGop\" href=\"mcGop\"></a></div> </div>', NULL, NULL, 5, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, NULL);
+(92, 57, 98, 19, '<div class=\"menhde_minhchung_id_92  menhde_minhchung_text_12}}border-bottom\"> <div class=\"menhde_minhchung_id_92  menhde_minhchung_text_12}}border-bottom\">adjhjhaskfhaskd&nbsp;<a class=\"danMinhChung mcGop\" href=\"mcGop\">[H1.01.01.01]</a><a class=\"danMinhChung mcGop\" href=\"mcGop\">[Ti&ecirc;u đề minh chứng 1] &nbsp;</a><a class=\"danMinhChung mcGop\" href=\"mcGop\">[Ti&ecirc;u đề minh chứng 1] &nbsp;</a><a d-id=\"3\" class=\"danMinhChung mcGop\" href=\"mcGop\">[H1.01.01.02]</a><a class=\"danMinhChung mcGop\" href=\"mcGop\">&nbsp;</a><a d-id=\"3\" class=\"danMinhChung mcGop\" href=\"mcGop\">[Ti&ecirc;u đề minh chứng 1] </a><a d-id=\"3\" class=\"danMinhChung mcGop\" href=\"mcGop\"></a><a d-id=\"3\" class=\"danMinhChung mcGop\" href=\"mcGop\"></a></div> </div>', NULL, NULL, 5, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, NULL),
+(93, 58, 99, 21, NULL, NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, NULL),
+(94, 59, 100, NULL, NULL, NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, 14),
+(95, 61, 101, 21, '<div class=\"menhde_minhchung_id_95  menhde_minhchung_text_21}}border-bottom\">mkij</div>', NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, NULL),
+(96, 61, 102, 22, NULL, NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, NULL),
+(97, 62, 103, 21, '<div class=\"menhde_minhchung_id_97  menhde_minhchung_text_21}}border-bottom\">&nbsp;<a d-id=\"6\" class=\"danMinhChung\" href=\"mc\">[H1.01.01.01]</a> dg &nbsp;<a d-id=\"6\" class=\"danMinhChung\" href=\"mc\">[H1.01.01.02]</a></div>', NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, NULL),
+(98, 62, 104, 23, '<div class=\"menhde_minhchung_id_98  menhde_minhchung_text_21}}border-bottom\">sgd&nbsp;<a d-id=\"6\" class=\"danMinhChung\" href=\"mc\">[H1.01.01.03]</a></div>', NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, NULL),
+(99, 62, 105, 22, '<div class=\"menhde_minhchung_id_99  menhde_minhchung_text_22}}border-bottom\">sdfgsd&nbsp;<a class=\"danMinhChung\" href=\"mc\">[H1.01.02.01]</a><a d-id=\"6\" class=\"danMinhChung\" href=\"mc\">[H1.01.02.02]</a><a d-id=\"6\" class=\"danMinhChung\" href=\"mc\">[H1.01.02.03]</a></div>', NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, NULL),
+(100, 64, 106, NULL, '<div class=\"menhde_minhchung_id_100  menhde_minhchung_text_21}}border-bottom\">dgf&nbsp;<a id=\"addminhchunggop_6\" class=\"danMinhChung\" href=\"mc\">[minh chứng tt]</a>sdfgsdfg&nbsp;<a id=\"addminhchunggop_6\" class=\"danMinhChung\" href=\"mc\">[minh chứng tt] </a></div>', NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, 14),
+(101, 64, 107, NULL, NULL, NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, 15),
+(102, 64, 108, NULL, '<div class=\"menhde_minhchung_id_102  menhde_minhchung_text_22}}border-bottom\">sdfg&nbsp;<a id=\"addminhchunggop_6\" class=\"danMinhChung\" href=\"mc\">[minh chứng tt]</a>sdfg&nbsp;<a id=\"addminhchunggop_6\" class=\"danMinhChung\" href=\"mc\">[minh chứng tt] </a></div>', NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, 16),
+(103, 64, 109, NULL, NULL, NULL, NULL, 0, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL, 17);
 
 -- --------------------------------------------------------
 
@@ -329,7 +403,17 @@ INSERT INTO `baocao_tieuchi` (`id`, `id_kehoach_bc`, `id_kh_tieuchi`, `id_tieuch
 (80, 56, 0, 10, NULL, 'dangsua', NULL, NULL, NULL, NULL),
 (81, 56, 0, 11, NULL, 'dangsua', NULL, NULL, NULL, NULL),
 (82, 57, 0, 12, NULL, 'dangsua', NULL, NULL, NULL, NULL),
-(83, 57, 0, 13, NULL, 'dangsua', NULL, NULL, NULL, NULL);
+(83, 57, 0, 13, NULL, 'dangsua', NULL, NULL, NULL, NULL),
+(84, 58, 0, 21, NULL, 'dangsua', NULL, NULL, NULL, NULL),
+(85, 58, 0, 22, NULL, 'dangsua', NULL, NULL, NULL, NULL),
+(86, 59, 0, 21, NULL, 'dangsua', NULL, NULL, NULL, NULL),
+(87, 59, 0, 22, NULL, 'dangsua', NULL, NULL, NULL, NULL),
+(88, 61, 0, 21, NULL, 'dangsua', NULL, NULL, NULL, NULL),
+(89, 61, 0, 22, NULL, 'dangsua', NULL, NULL, NULL, NULL),
+(90, 62, 0, 21, NULL, 'dangsua', NULL, NULL, NULL, NULL),
+(91, 62, 0, 22, NULL, 'congbo', NULL, NULL, NULL, NULL),
+(92, 64, 0, 21, NULL, 'congbo', NULL, NULL, NULL, NULL),
+(93, 64, 0, 22, NULL, 'congbo', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -360,7 +444,9 @@ CREATE TABLE `baocao_tieuchuan` (
 INSERT INTO `baocao_tieuchuan` (`id`, `id_kehoach_bc`, `id_kh_tieuchuan`, `id_tieuchuan`, `modau`, `ketluan`, `nguoi_viet`, `trang_thai`, `ban_goc`, `created_at`, `updated_at`, `deleted_at`, `id_csdt`) VALUES
 (15, 55, 57, 8, NULL, NULL, NULL, 'congbo', NULL, NULL, NULL, NULL, NULL),
 (16, 56, 57, 8, '<p>&aacute;dsdasdasdasda</p>', NULL, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL),
-(17, 57, 59, 10, '<p>adadasdas</p>', NULL, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL);
+(17, 57, 59, 10, '<p>adadasdas</p>', NULL, NULL, 'dangsua', NULL, NULL, NULL, NULL, NULL),
+(18, 62, 63, 18, NULL, NULL, NULL, 'congbo', NULL, NULL, NULL, NULL, NULL),
+(19, 64, 60, 18, '<p>sdfg</p>', NULL, NULL, 'congbo', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -403,9 +489,7 @@ CREATE TABLE `bo_tieuchuan` (
 --
 
 INSERT INTO `bo_tieuchuan` (`id`, `tieu_de`, `loai_tieuchuan`, `nguoi_tao`, `csdt_id`, `trang_thai`, `created_at`, `updated_at`, `deleted_at`, `(deleted) ds_tieuchuan`) VALUES
-(4, 'Bộ tiêu chuẩn Kiểm định chất lượng chương trình đào tạo theo theo Thông tư số 04/2016/TT-BGDĐT ngày 14 tháng 3 năm 2022', 'csgd', 1, 1, 'active', '2023-04-11 04:13:09', '2023-04-11 04:13:09', NULL, NULL),
-(5, 'Bộ tiêu chuẩn Kiểm định csđt', 'ctdt', 1, 1, 'active', '2023-04-11 04:13:35', '2023-04-11 04:13:35', NULL, NULL),
-(6, 'Bộ tiêu chuẩn hay nhất mọi thời đại', 'ctdt', 1, 1, 'active', '2023-04-13 15:42:15', '2023-04-13 15:42:15', NULL, NULL);
+(7, 'bộ tiêu chuaannr test', 'ctdt', 1, 1, 'active', '2023-05-07 08:49:01', '2023-05-07 08:49:01', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -967,12 +1051,13 @@ CREATE TABLE `excel_import_ds_gvch` (
 
 CREATE TABLE `excel_import_dtd_dtxxd` (
   `id` int(11) NOT NULL,
-  `ten_du_an` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tên dự án, nhiệm vụ khoa học công nghệ\r\n',
-  `nct_tvtg` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Người chủ trì và các thành viên\r\n',
-  `dttn_qt` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Đối tác trong nước và quốc tế\r\n',
-  `tgth` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Thời gian thực hiên',
-  `kinh_phi` int(15) NOT NULL COMMENT 'Kinh phí thực hiện (triệu đồng)\r\n',
-  `tom_tat` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tóm tắt sản phẩm, ứng dụng thực tiễn\r\n'
+  `noi_dung` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
+  `dien_tich` int(15) NOT NULL,
+  `so_huu` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Sở hữu (Hình thức sử dụng)',
+  `lien_ket` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Liên kết (Hình thức sử dụng)',
+  `thue` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Thuê (Hình thức sử dụng)',
+  `parent` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `stt` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1048,7 +1133,7 @@ CREATE TABLE `excel_import_gvch` (
 --
 
 INSERT INTO `excel_import_gvch` (`id`, `noi_dung`, `tong_so`, `giao_su`, `pho_giao_su`, `tien_si`, `thac_si`, `dai_hoc`, `cao_dang`, `trinh_do_khac`, `hang_3`, `hang_2`, `hang_1`, `loai`, `khoinganh`) VALUES
-(3, 'Ngành Kế toán', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1),
+(3, 'Ngành Kế toáne', 14, 12, 13, 4, 15, 14, 13, 12, 14, 15, 25, 1, 3),
 (4, 'Kế toán2', 4, 435, 435, 345, 34, 34, 345, 23, 12, 43, 56, 2, 2);
 
 -- --------------------------------------------------------
@@ -1181,6 +1266,8 @@ CREATE TABLE `excel_import_nhansu` (
   `hodem` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ten` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `shvc` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Số hiệu viên chức',
+  `cccd` varchar(15) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số CCCD/ Hộ chiếu',
+  `dvct` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Đơn vị công tác (Tên Phòng/Khoa/TT)',
   `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `gender` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1211,13 +1298,29 @@ CREATE TABLE `excel_import_nhansu` (
   `cdkm` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Chức danh (chức vụ) kiêm nhiệm',
   `tdgkm` int(11) DEFAULT NULL COMMENT 'Thời điểm  giao kiêm nhiệm',
   `loaihd` int(50) DEFAULT NULL COMMENT '1	GV trong biên chế trực tiếp giảng dạy\r\n2	GV hợp đồng dài hạn trực tiếp giảng dạy\r\n3	GV kiêm nhiệm là cán bộ quản lý\r\n4	GV thỉnh giảng trong nước\r\n5	GV quốc tế\r\n',
+  `shdtd` varchar(12) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số hợp đồng tuyển dụng',
   `ngaycdhd` int(11) DEFAULT NULL COMMENT 'Ngày chấm dứt hợp đồng',
   `tggdht` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Tham gia giảng dạy/hỗ trợ/phục vụ ngành',
   `nvdpc` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Nhiệm vụ được phân công',
   `ltggd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Lớp tham gia giảng dạy',
   `khbd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Các khóa học bồi dưỡng',
+  `xa` varchar(12) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Xã/Phường thường trú',
+  `huyen` varchar(12) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Quận/Huyện thường trú',
+  `tinh` varchar(12) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tỉnh/thành phố thường trú',
   `trangthai` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Trạng thái'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_nhansu`
+--
+
+INSERT INTO `excel_import_nhansu` (`id`, `thoidiem`, `hodem`, `ten`, `shvc`, `cccd`, `dvct`, `phone`, `email`, `gender`, `ngaysinh`, `quoctich`, `tdcm`, `tdnv`, `namtn`, `noitn`, `gvsp`, `qlnn`, `llct`, `tinhoc`, `ngoaingu`, `hocham`, `namphong`, `cdnn`, `masocd`, `namtd`, `cdnnht`, `masocdht`, `chuyenngach`, `namcn`, `dvsdvc`, `cdctht`, `tdbn`, `qdbn`, `cdkm`, `tdgkm`, `loaihd`, `shdtd`, `ngaycdhd`, `tggdht`, `nvdpc`, `ltggd`, `khbd`, `xa`, `huyen`, `tinh`, `trangthai`) VALUES
+(1, 2017, 'Nguyễn Văn', 'A', '19213', '12', 'CNTT', '118222', 'abc@haui.edu.vn', 'Nam', '0000-00-00', 'Việt nam', 0, 'Chuyên ngành được đào tạo', 2023, 'Hà Nội', 'x', 'v', 'c', 'd', 'đúng', 'Tiến sĩ', 2016, 'Chuyên viên', 101333, 2007, 'Chuyên viên', 101333, '', 0, 73, '', 0, '1', '', 0, 0, '456', 0, 'Ngành A', 'Tham gia phục vụ ngành', '', '', 'Khương trung', 'Thanh Xuân', 'Hà Nội', 'Đang công tác'),
+(2, 2018, 'Nguyễn Văn', 'A', '19213', '13', 'CNTT', '118222', 'abc@haui.edu.vn', 'Nam', '0000-00-00', 'Việt nam', 0, 'Chuyên ngành được đào tạo', 2023, 'Hà Nội', 'x', 'v', 'c', 'd', 'đúng', 'Tiến sĩ', 2016, 'Chuyên viên', 101333, 2007, 'Giảng viên', 0, 'Có', 2018, 73, 'Phó trưởng phòng', 2018, '2', 'Giảng viên', 2018, 0, '678', 0, 'Ngành A', 'Tham gia giảng dạy', '1029101IT1010;1029101IT1012', 'Lớp tập huấn A', 'Khương trung', 'Thanh Xuân', 'Hà Nội', 'Đang công tác'),
+(3, 2019, 'Nguyễn Văn', 'A', '19213', '14', 'CNTT', '118222', 'abc@haui.edu.vn', 'Nam', '0000-00-00', 'Việt nam', 0, 'Chuyên ngành được đào tạo', 2023, 'Hà Nội', 'x', 'v', 'c', 'd', 'đúng', 'Tiến sĩ', 2016, 'Chuyên viên', 101333, 2007, 'Giảng viên', 0, 'Có', 2018, 73, 'Phó trưởng phòng', 2018, '3', 'Giảng viên', 2019, 0, '900', 43529, 'Ngành A', 'Tham gia giảng dạy', '1039101IT1010;1039101IT1013', 'Lớp tập huấn B', 'Khương trung', 'Thanh Xuân', 'Hà Nội', 'Đã chuyển công tác'),
+(4, 2017, 'Nguyễn Văn', 'A', '19213', '12', 'CNTT', '118222', 'abc@haui.edu.vn', 'Nam', '0000-00-00', 'Việt nam', 0, 'Chuyên ngành được đào tạo', 2023, 'Hà Nội', 'x', 'v', 'c', 'd', 'đúng', 'Tiến sĩ', 2016, 'Chuyên viên', 101333, 11, 'Chuyên viên', 101333, '', 0, 73, '', 0, '1', '', 0, 0, '456', 11, 'Ngành A', 'Tham gia phục vụ ngành', '', '', 'Khương trung', 'Thanh Xuân', 'Hà Nội', 'Đang công tác'),
+(5, 2018, 'Nguyễn Văn', 'A', '19213', '13', 'CNTT', '118222', 'abc@haui.edu.vn', 'Nam', '0000-00-00', 'Việt nam', 0, 'Chuyên ngành được đào tạo', 2023, 'Hà Nội', 'x', 'v', 'c', 'd', 'đúng', 'Tiến sĩ', 2016, 'Chuyên viên', 101333, 11, 'Giảng viên', 0, 'Có', 2018, 73, 'Phó trưởng phòng', 2018, '2', 'Giảng viên', 2018, 0, '678', 11, 'Ngành A', 'Tham gia giảng dạy', '1029101IT1010;1029101IT1012', 'Lớp tập huấn A', 'Khương trung', 'Thanh Xuân', 'Hà Nội', 'Đang công tác'),
+(6, 2019, 'Nguyễn Văn', 'A', '19213', '14', 'CNTT', '118222', 'abc@haui.edu.vn', 'Nam', '0000-00-00', 'Việt nam', 0, 'Chuyên ngành được đào tạo', 2023, 'Hà Nội', 'x', 'v', 'c', 'd', 'đúng', 'Tiến sĩ', 2016, 'Chuyên viên', 101333, 11, 'Giảng viên', 0, 'Có', 2018, 73, 'Phó trưởng phòng', 2018, '3', 'Giảng viên', 2019, 0, '900', 11, 'Ngành A', 'Tham gia giảng dạy', '1039101IT1010;1039101IT1013', 'Lớp tập huấn B', 'Khương trung', 'Thanh Xuân', 'Hà Nội', 'Đã chuyển công tác');
 
 -- --------------------------------------------------------
 
@@ -1298,12 +1401,23 @@ CREATE TABLE `excel_import_tailieu_thuvien` (
   `id` int(10) NOT NULL,
   `ma_hoc_phan` int(10) NOT NULL,
   `ten_hoc_phan` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `syctdc` varchar(80) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số yêu cầu trong đề cương HP (Giáo trình chính)',
-  `sctt` varchar(80) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số có thực tế (Giáo trình chính)',
+  `khoi_nganh` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `syctdc_sck` varchar(80) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số yêu cầu trong đề cương HP - Sách chuyên khảo (Giáo trình chính)',
+  `sach_in_sck` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Sách chuyên khảo - Số có thực tế - Sách in\r\n(Giáo trình chính)',
+  `sach_dt_sck` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'sách chuyên khảo - số có thực tế - sách điện tử\r\n(Giáo trình chính)',
+  `syctdc_sgt` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số yêu cầu trong đề cương HP - Sách giáo trình (Giáo trình chính)',
+  `sach_in_sgt` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Sách chuyên khảo - Số có thực tế - Sách giáo trình (Giáo trình chính)',
+  `sach_dt_sgt` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Sách chuyên khảo - Số có thực tế - Sách giáo trình (Giáo trình chính)',
   `ttnn` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Từ trên 5 năm (Năm xuất bản)',
   `tnndn` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Từ 5 năm đến nay (Năm xuất bản)',
-  `syctdchp` varchar(80) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số yêu cầu trong đề cương HP (Tài liệu tham khảo)',
-  `sctt_gtc` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số có thực tế (Tài liệu tham khảo)',
+  `syctdchp_stk` varchar(80) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số yêu cầu trong đề cương HP - Sách tham khảo (Tài liệu tham khảo)',
+  `sach_in_stk` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Sách thao khảo - Số có thực tế -Sách in(Tài liệu tham khảo)',
+  `sach_dt_stk` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Sách tham khảo - Số có thực tế - Sách điện tử (Tài liệu tham khảo)',
+  `syctdc_shd` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số yêu cầu trong đề cương HP - Sách hướng dẫn (Tài liệu tham khảo)',
+  `sach_in_shd` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Sách hướng dẫn - Số có thực tế - Sách in (Tài liệu tham khảo)',
+  `sach_dt_shd` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Sách hướng dẫn - Số có thực tế - Sách điện tử(Tài liệu tham khảo)',
+  `sldtcbi` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tạp chí do trường xuất bản - Số có thực tế - Số lượng đầu tạp chí bản in (Tài liệu tham khảo)',
+  `sldtcdt` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tạp chí do trường xuất bản - Số có thực tế - Số lượng đầu tạp chí điện tử (Tài liệu tham khảo)',
   `ttnn_tltk` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Từ trên 5 năm (Năm xuất bản)',
   `tnndn_tltk` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Từ 5 năm đến nay (Năm xuất bản)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -1646,7 +1760,12 @@ CREATE TABLE `export_import_ctdt` (
   `diadiem_tochuc` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Địa điểm tổ chức đào tạo',
   `slsv` int(40) DEFAULT NULL COMMENT 'Số lượng sinh viên hiện tại',
   `sl_svtn` int(11) DEFAULT NULL COMMENT 'Số sinh viên tình nguyện',
-  `ten_vanbang` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Tên văn bằng'
+  `ten_vanbang` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Tên văn bằng',
+  `tddt` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Trình độ đào tạo',
+  `tgdtc` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Thời gian đào tạo chuẩn',
+  `cttshn` int(10) NOT NULL COMMENT 'Chỉ tiêu tuyển sinh hàng năm',
+  `mkndt` varchar(10) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Mã khối ngành đào tạo',
+  `mlvdt` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Mã lĩnh vực đào tạo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1763,7 +1882,10 @@ INSERT INTO `hoatdongnhom` (`id`, `nhom_mc_sl_id`, `year`, `parent`, `kehoach_id
 (10402, 2, 2022, 0, 0, NULL, NULL, NULL, 1, '0', 'Hoạt động nhóm 3', 'N', 0, '2023-04-13 15:49:38', '2023-04-13 15:49:38', NULL),
 (10403, 2, 2022, 0, 0, NULL, NULL, NULL, 1, '0', 'Hoạt động nhóm 4', 'N', 0, '2023-04-13 15:49:38', '2023-04-13 15:49:38', NULL),
 (10404, 1, 2022, 0, 0, NULL, NULL, NULL, 1, '0', 'adasdadasd', 'N', 0, '2023-04-13 15:50:03', '2023-04-13 15:50:03', NULL),
-(10405, 2, 2022, 10400, 0, NULL, '2023-04-13', '2023-04-26', 1, '0', 'Hay cực kì luôn', 'N', 1, NULL, NULL, NULL);
+(10405, 2, 2022, 10400, 0, NULL, '2023-04-13', '2023-04-26', 1, '0', 'Hay cực kì luôn', 'N', 1, NULL, NULL, NULL),
+(10406, 1, 2023, 0, 0, NULL, NULL, NULL, 1, '0', 'oo', 'N', 0, '2023-05-08 05:38:45', '2023-05-08 05:38:45', NULL),
+(10407, 1, 2023, 0, 0, NULL, NULL, NULL, 1, '0', 'ee', 'N', 0, '2023-05-08 05:38:45', '2023-05-08 05:38:45', NULL),
+(10408, 1, 2023, 10407, 0, NULL, '2023-05-08', '2023-05-09', 1, '0', 'hhh', 'N', 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1782,7 +1904,8 @@ CREATE TABLE `hoatdongnhom_donvi` (
 --
 
 INSERT INTO `hoatdongnhom_donvi` (`id`, `hoatdongnhom_id`, `donvi_id`) VALUES
-(9, 10405, 5);
+(9, 10405, 5),
+(10, 10408, 1);
 
 -- --------------------------------------------------------
 
@@ -1808,7 +1931,8 @@ CREATE TABLE `hoatdongnhom_minhchung` (
 INSERT INTO `hoatdongnhom_minhchung` (`id`, `hoatdongnhom_id`, `minhchung_id`, `nguoitao`, `csdt_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (7, 10405, 0, 1, 1, NULL, NULL, NULL),
 (8, 10405, 5, 1, 1, '2023-04-13 15:51:58', '2023-04-13 15:51:58', NULL),
-(9, 10405, 5, 1, 1, '2023-04-13 15:53:34', '2023-04-13 15:53:34', NULL);
+(9, 10405, 5, 1, 1, '2023-04-13 15:53:34', '2023-04-13 15:53:34', NULL),
+(10, 10408, 6, 1, 1, '2023-05-08 05:45:09', '2023-05-08 05:45:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -1850,7 +1974,8 @@ INSERT INTO `huongdan` (`id`, `loai_tieuchuan`, `bo_tieuchuan_id`, `mo_ta`, `ngu
 (5, 'csgd', 4, '<p>th&igrave; thếsadf</p>', 1, 1, 'active', '2023-04-11 04:21:15', '2023-04-11 04:21:15', NULL),
 (6, 'ctdt', 5, '<p>xz</p>', 1, 1, 'active', '2023-04-11 04:23:40', '2023-04-11 04:23:40', NULL),
 (7, 'csgd', 4, '<p>Hay nhất&nbsp;</p>', 1, 1, 'active', '2023-04-13 15:45:00', '2023-04-13 15:45:00', NULL),
-(8, 'ctdt', 6, '<p>Hay nhất&nbsp;</p>', 1, 1, 'active', '2023-04-13 15:46:56', '2023-04-13 15:46:56', NULL);
+(8, 'ctdt', 6, '<p>Hay nhất&nbsp;</p>', 1, 1, 'active', '2023-04-13 15:46:56', '2023-04-13 15:46:56', NULL),
+(9, 'ctdt', 7, '<p>hat</p>', 1, 1, 'active', '2023-05-07 08:51:00', '2023-05-07 08:51:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -1886,10 +2011,16 @@ CREATE TABLE `kehoach_baocao` (
 --
 
 INSERT INTO `kehoach_baocao` (`id`, `ten_bc`, `loai_tieuchuan`, `bo_tieuchuan_id`, `ctdt_id`, `nam`, `ns_phutrach`, `nguoi_tao`, `thoi_diem_bao_cao`, `ngay_batdau_chuanbi`, `ngay_hoanthanh_chuanbi`, `ngay_batdau`, `ngay_hoanthanh`, `csdt_id`, `hien_thi`, `trang_thai`, `writeFollow`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(54, 'love ziu hoài thu', 'csdt', 4, NULL, '2023', 1427, 1, '2023-04-12', '2023-04-12', '2023-04-14', '2023-04-12', '2023-04-27', 1, 1, 'todo', 1, '2023-04-11 04:25:28', '2023-04-11 04:25:28', NULL),
 (55, 'tiến đức', 'csdt', 5, 3, '2023', 1427, 1, '2023-04-12', '2023-04-12', '2023-04-13', '2023-04-19', '2023-04-20', 1, 1, 'todo', 1, '2023-04-11 04:31:02', '2023-04-11 04:31:02', NULL),
 (56, 'Báo cáo test', 'csdt', 5, 3, '2023', 1427, 1, '2023-04-28', '2023-04-13', '2023-04-26', '2023-04-13', '2023-04-27', 1, 1, 'todo', 1, '2023-04-13 14:42:03', '2023-04-13 14:42:03', NULL),
-(57, 'Báo cáo hay', 'csdt', 6, 4, '2023', 1427, 1, '2023-05-04', '2023-04-13', '2023-04-27', '2023-04-13', '2023-04-25', 1, 1, 'todo', 1, '2023-04-13 15:57:54', '2023-04-13 15:57:54', NULL);
+(57, 'Báo cáo hay', 'csdt', 6, 4, '2023', 1427, 1, '2023-05-04', '2023-04-13', '2023-04-27', '2023-04-13', '2023-04-25', 1, 1, 'todo', 1, '2023-04-13 15:57:54', '2023-04-13 15:57:54', NULL),
+(58, 'Báo cáo tự đánh giá test123', 'csdt', 7, 3, '2023', 1427, 1, '2023-05-31', '2023-05-07', '2023-05-17', '2023-05-08', '2023-05-22', 1, 1, 'todo', 1, '2023-05-07 08:53:33', '2023-05-07 08:53:33', NULL),
+(59, 'Báo cáo tự đánh giá test345', 'csdt', 7, 4, '2023', 1428, 1, '2023-05-31', '2023-05-07', '2023-05-23', '2023-05-24', '2023-05-28', 1, 1, 'todo', 2, '2023-05-07 08:55:15', '2023-05-07 08:55:15', NULL),
+(60, 'báo cáo minh chứng', 'csdt', 7, 3, '2023', 1428, 1, '2023-05-08', '2023-05-08', '2023-05-11', '2023-05-22', '2023-05-26', 1, 1, 'todo', 1, '2023-05-08 07:40:42', '2023-05-08 07:40:42', NULL),
+(61, 'jkd', 'csdt', 7, 3, '2023', 1427, 1, '2023-05-08', '2023-05-08', '2023-05-19', '2023-05-09', '2023-05-26', 1, 1, 'todo', 1, '2023-05-08 07:43:16', '2023-05-08 07:43:16', NULL),
+(62, 'bug tiếp đi', 'csdt', 7, 3, '2023', 1427, 1, '2023-05-09', '2023-05-09', '2023-05-12', '2023-05-09', '2023-05-19', 1, 1, 'todo', 1, '2023-05-09 08:16:45', '2023-05-09 08:16:45', NULL),
+(63, 'bug mốc chuẩn', 'csdt', 7, 3, '2023', 1428, 1, '2023-05-09', '2023-05-09', '2023-05-18', '2023-05-10', '2023-06-01', 1, 1, 'todo', 2, '2023-05-09 08:20:12', '2023-05-09 08:20:12', NULL),
+(64, 'mốc chuẩn cay', 'csdt', 7, 3, '2023', 1428, 1, '2023-05-09', '2023-05-09', '2023-05-12', '2023-05-09', '2023-06-03', 1, 1, 'todo', 2, '2023-05-09 08:22:16', '2023-05-09 08:22:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -1921,7 +2052,40 @@ INSERT INTO `kehoach_baocao_nhansu` (`id`, `id_kehoach`, `id_nhansuchuanbi`, `id
 (178, 56, NULL, NULL, 1428),
 (179, 57, 1, NULL, NULL),
 (180, 57, NULL, 2840, NULL),
-(181, 57, NULL, NULL, 2841);
+(181, 57, NULL, NULL, 2841),
+(182, 58, 1428, NULL, NULL),
+(183, 58, NULL, 1428, NULL),
+(184, 58, NULL, NULL, 1427),
+(185, 59, 1427, NULL, NULL),
+(186, 59, NULL, 1427, NULL),
+(187, 59, NULL, NULL, 1428),
+(188, 60, 1, NULL, NULL),
+(189, 60, 1428, NULL, NULL),
+(190, 60, NULL, 1, NULL),
+(191, 60, NULL, 1619, NULL),
+(192, 60, NULL, NULL, 1427),
+(193, 60, NULL, NULL, 1619),
+(194, 61, 1427, NULL, NULL),
+(195, 61, 1619, NULL, NULL),
+(196, 61, NULL, 1427, NULL),
+(197, 61, NULL, 1428, NULL),
+(198, 61, NULL, NULL, 1427),
+(199, 61, NULL, NULL, 1428),
+(200, 62, 1427, NULL, NULL),
+(201, 62, 1428, NULL, NULL),
+(202, 62, NULL, 1427, NULL),
+(203, 62, NULL, 1428, NULL),
+(204, 62, NULL, NULL, 1427),
+(205, 62, NULL, NULL, 1428),
+(206, 63, 1427, NULL, NULL),
+(207, 63, 1428, NULL, NULL),
+(208, 63, NULL, 1428, NULL),
+(209, 63, NULL, NULL, 1428),
+(210, 64, 1427, NULL, NULL),
+(211, 64, 1428, NULL, NULL),
+(212, 64, NULL, 1427, NULL),
+(213, 64, NULL, 1619, NULL),
+(214, 64, NULL, NULL, 1428);
 
 -- --------------------------------------------------------
 
@@ -1954,7 +2118,10 @@ CREATE TABLE `kehoach_cc_solieu` (
 --
 
 INSERT INTO `kehoach_cc_solieu` (`id`, `tieu_de`, `noi_dung`, `dv_thuchien`, `dv_kiemtra`, `ngay_batdau`, `ngay_hoanthanh`, `nguoi_tao`, `csdt_id`, `kehoach_baocao_id`, `nhom_mc_sl_id`, `year`, `notes`, `trang_thai`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, NULL, NULL, 12, 1428, '2023-04-13', '2023-05-03', 1, 1, 0, 2, 2023, 'Hay ;ăm', 'todo', '2023-04-13 15:48:54', '2023-04-13 15:48:54', NULL);
+(3, NULL, NULL, 12, 1428, '2023-04-13', '2023-05-03', 1, 1, 0, 2, 2023, 'Hay ;ăm', 'todo', '2023-04-13 15:48:54', '2023-04-13 15:48:54', NULL),
+(5, NULL, NULL, 1, 1427, '2023-05-06', '2023-05-08', 1, 1, 0, 3, 2023, '', 'todo', '2023-05-06 10:47:32', '2023-05-06 10:47:32', NULL),
+(7, NULL, NULL, 3, 1428, '2024-05-08', '2024-05-16', 1, 1, 0, 3, 2024, '', 'todo', '2023-05-06 10:48:42', '2023-05-06 10:48:42', NULL),
+(9, NULL, NULL, 3, 1428, '2023-05-06', '2023-05-22', 1, 1, 0, 44, 2023, '', 'todo', '2023-05-06 11:13:52', '2023-05-06 11:13:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -1982,7 +2149,14 @@ INSERT INTO `kehoach_chung` (`id`, `csdt_id`, `kh_baocao_id`, `ngay_batdau`, `ng
 (52, 1, 54, NULL, NULL, 1, NULL, NULL, NULL),
 (53, 1, 55, NULL, NULL, 1, NULL, NULL, NULL),
 (54, 1, 56, NULL, NULL, 1, NULL, NULL, NULL),
-(55, 1, 57, NULL, NULL, 1, NULL, NULL, NULL);
+(55, 1, 57, NULL, NULL, 1, NULL, NULL, NULL),
+(56, 1, 58, NULL, NULL, 1, NULL, NULL, NULL),
+(57, 1, 59, NULL, NULL, 1, NULL, NULL, NULL),
+(58, 1, 60, NULL, NULL, 1, NULL, NULL, NULL),
+(59, 1, 61, NULL, NULL, 1, NULL, NULL, NULL),
+(60, 1, 62, NULL, NULL, 1, NULL, NULL, NULL),
+(61, 1, 63, NULL, NULL, 1, NULL, NULL, NULL),
+(62, 1, 64, NULL, NULL, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2039,7 +2213,10 @@ CREATE TABLE `kehoach_hd` (
 --
 
 INSERT INTO `kehoach_hd` (`id`, `kehoach_bc_id`, `menhde_id`, `tieu_de`, `noi_dung`, `de_xuat_moi`, `ns_thuchien`, `ns_kiemtra`, `ngay_batdau`, `ngay_hoanthanh`, `nguoi_tao`, `kieu_kehoach`, `csdt_id`, `trang_thai`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 57, 19, 'Hay', 'Cực hay', 'Chưa có', 4, 16, '2023-04-13', '2023-04-25', 1, 'diemmanh', 1, 'todo', NULL, NULL, NULL);
+(1, 57, 19, 'Hay', 'Cực hay', 'Chưa có', 4, 16, '2023-04-13', '2023-04-25', 1, 'diemmanh', 1, 'todo', NULL, NULL, NULL),
+(2, 64, 14, 'yétdfg', 'ưẻg', 'sdfg', 15, 13, '2023-05-02', '2023-05-18', 1, 'diemmanh', 1, 'todo', NULL, NULL, NULL),
+(3, 64, 16, 'sdfgdsfg', 'sdfg', 'sdfgsdfg', 15, 16, '2023-05-02', '2023-05-17', 1, 'tontai', 1, 'todo', NULL, NULL, NULL),
+(4, 64, 14, 'bhvnm', 'xcvb', 'xcnv', 16, 16, '2023-05-02', '2023-05-18', 1, 'tontai', 1, 'todo', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2050,7 +2227,7 @@ INSERT INTO `kehoach_hd` (`id`, `kehoach_bc_id`, `menhde_id`, `tieu_de`, `noi_du
 CREATE TABLE `kehoach_menhde` (
   `id` int(10) UNSIGNED NOT NULL,
   `id_kh_tieuchi` int(11) NOT NULL DEFAULT 0,
-  `id_menhde` int(11) NOT NULL,
+  `id_menhde` int(11) DEFAULT NULL,
   `id_csdt` int(11) NOT NULL,
   `ns_thuchien` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ns_kiemtra` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -2062,7 +2239,7 @@ CREATE TABLE `kehoach_menhde` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `loaicongviec (deleted)` enum('viet_bao_cao','ht_bao_cao') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'viet_bao_cao',
-  `mocchuan_id` int(190) NOT NULL
+  `mocchuan_id` int(190) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2074,7 +2251,18 @@ INSERT INTO `kehoach_menhde` (`id`, `id_kh_tieuchi`, `id_menhde`, `id_csdt`, `ns
 (95, 84, 18, 1, NULL, NULL, NULL, NULL, 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', 0),
 (96, 86, 17, 1, NULL, NULL, NULL, NULL, 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', 0),
 (97, 86, 18, 1, NULL, NULL, NULL, NULL, 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', 0),
-(98, 88, 19, 1, NULL, NULL, NULL, NULL, 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', 0);
+(98, 88, 19, 1, NULL, NULL, NULL, NULL, 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', 0),
+(99, 90, 21, 1, NULL, NULL, '2023-05-15', '2023-05-22', 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', NULL),
+(100, 92, NULL, 1, NULL, NULL, '2023-05-24', '2023-05-28', 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', 14),
+(101, 94, 21, 1, NULL, NULL, '2023-05-09', '2023-05-12', 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', NULL),
+(102, 95, 22, 1, NULL, NULL, '2023-05-09', '2023-05-12', 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', NULL),
+(103, 96, 21, 1, NULL, NULL, '2023-05-10', '2023-05-13', 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', NULL),
+(104, 96, 23, 1, NULL, NULL, '2023-05-10', '2023-05-13', 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', NULL),
+(105, 97, 22, 1, NULL, NULL, '2023-05-10', '2023-05-13', 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', NULL),
+(106, 98, NULL, 1, NULL, NULL, '2023-05-09', '2023-05-19', 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', 14),
+(107, 98, NULL, 1, NULL, NULL, '2023-05-09', '2023-05-19', 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', 15),
+(108, 99, NULL, 1, NULL, NULL, '2023-05-09', '2023-05-19', 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', 16),
+(109, 99, NULL, 1, NULL, NULL, '2023-05-09', '2023-05-19', 1, 'todo', NULL, NULL, NULL, 'viet_bao_cao', 17);
 
 -- --------------------------------------------------------
 
@@ -2087,6 +2275,80 @@ CREATE TABLE `kehoach_menhde_nhansu` (
   `id_nhansuthuchien` int(11) DEFAULT NULL,
   `id_nhansukiemtra` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Đang đổ dữ liệu cho bảng `kehoach_menhde_nhansu`
+--
+
+INSERT INTO `kehoach_menhde_nhansu` (`id_kehoach`, `id_nhansuthuchien`, `id_nhansukiemtra`) VALUES
+(99, 1428, NULL),
+(99, 1428, NULL),
+(99, NULL, 1427),
+(99, NULL, 1427),
+(100, 1427, NULL),
+(100, 1427, NULL),
+(100, NULL, 1428),
+(100, NULL, 1428),
+(101, 1427, NULL),
+(102, 1427, NULL),
+(101, 1427, NULL),
+(102, 1427, NULL),
+(101, 1428, NULL),
+(102, 1428, NULL),
+(101, 1428, NULL),
+(102, 1428, NULL),
+(101, NULL, 1428),
+(102, NULL, 1428),
+(101, NULL, 1428),
+(102, NULL, 1428),
+(103, 1427, NULL),
+(104, 1427, NULL),
+(105, 1427, NULL),
+(103, 1427, NULL),
+(104, 1427, NULL),
+(105, 1427, NULL),
+(103, 1428, NULL),
+(104, 1428, NULL),
+(105, 1428, NULL),
+(103, 1428, NULL),
+(104, 1428, NULL),
+(105, 1428, NULL),
+(103, NULL, 1428),
+(104, NULL, 1428),
+(105, NULL, 1428),
+(103, NULL, 1428),
+(104, NULL, 1428),
+(105, NULL, 1428),
+(103, NULL, 1427),
+(104, NULL, 1427),
+(105, NULL, 1427),
+(103, NULL, 1427),
+(104, NULL, 1427),
+(105, NULL, 1427),
+(106, 1427, NULL),
+(107, 1427, NULL),
+(108, 1427, NULL),
+(109, 1427, NULL),
+(106, 1427, NULL),
+(107, 1427, NULL),
+(108, 1427, NULL),
+(109, 1427, NULL),
+(106, 1619, NULL),
+(107, 1619, NULL),
+(108, 1619, NULL),
+(109, 1619, NULL),
+(106, 1619, NULL),
+(107, 1619, NULL),
+(108, 1619, NULL),
+(109, 1619, NULL),
+(106, NULL, 1428),
+(107, NULL, 1428),
+(108, NULL, 1428),
+(109, NULL, 1428),
+(106, NULL, 1428),
+(107, NULL, 1428),
+(108, NULL, 1428),
+(109, NULL, 1428);
 
 -- --------------------------------------------------------
 
@@ -2125,7 +2387,17 @@ INSERT INTO `kehoach_tieuchi` (`id`, `id_kh_tieuchuan`, `id_tieuchi`, `id_csdt`,
 (86, 58, 10, 1, '1428', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
 (87, 58, 11, 1, '1428', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
 (88, 59, 12, 1, '2841', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
-(89, 59, 13, 1, '2841', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc');
+(89, 59, 13, 1, '2841', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
+(90, 60, 21, 1, '1427', NULL, NULL, NULL, '2023-05-07', '2023-05-12', '2023-05-15', '2023-05-22', 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
+(91, 60, 22, 1, '1427', NULL, NULL, NULL, '2023-05-07', '2023-05-12', '2023-05-15', '2023-05-22', 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
+(92, 61, 21, 1, '1428', NULL, NULL, NULL, '2023-05-07', '2023-05-17', '2023-05-24', '2023-05-28', 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
+(93, 61, 22, 1, '1428', NULL, NULL, NULL, '2023-05-07', '2023-05-17', '2023-05-24', '2023-05-28', 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
+(94, 62, 21, 1, '1427', NULL, NULL, NULL, '2023-05-08', '2023-05-19', '2023-05-09', '2023-05-12', 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
+(95, 62, 22, 1, '1427', NULL, NULL, NULL, '2023-05-08', '2023-05-19', '2023-05-09', '2023-05-12', 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
+(96, 63, 21, 1, '1428', NULL, NULL, NULL, '2023-05-09', '2023-05-12', '2023-05-10', '2023-05-13', 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
+(97, 63, 22, 1, '1428', NULL, NULL, NULL, '2023-05-09', '2023-05-12', '2023-05-10', '2023-05-13', 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
+(98, 64, 21, 1, '1619', NULL, NULL, NULL, '2023-05-09', '2023-05-12', '2023-05-09', '2023-05-19', 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc'),
+(99, 64, 22, 1, '1619', NULL, NULL, NULL, '2023-05-09', '2023-05-12', '2023-05-09', '2023-05-19', 1, 'doing', NULL, NULL, NULL, 'chuan_bi_mc');
 
 -- --------------------------------------------------------
 
@@ -2139,6 +2411,54 @@ CREATE TABLE `kehoach_tieuchi_nhansu` (
   `id_nhansuthuchien` int(11) DEFAULT NULL,
   `id_nhansukiemtra` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Đang đổ dữ liệu cho bảng `kehoach_tieuchi_nhansu`
+--
+
+INSERT INTO `kehoach_tieuchi_nhansu` (`id_kehoach`, `id_nhansuchuanbi`, `id_nhansuthuchien`, `id_nhansukiemtra`) VALUES
+(90, 1428, NULL, NULL),
+(91, 1428, NULL, NULL),
+(90, NULL, 1428, NULL),
+(91, NULL, 1428, NULL),
+(90, NULL, NULL, 1427),
+(91, NULL, NULL, 1427),
+(92, 1427, NULL, NULL),
+(93, 1427, NULL, NULL),
+(92, NULL, 1427, NULL),
+(93, NULL, 1427, NULL),
+(92, NULL, NULL, 1428),
+(93, NULL, NULL, 1428),
+(94, 1427, NULL, NULL),
+(95, 1427, NULL, NULL),
+(94, NULL, 1427, NULL),
+(95, NULL, 1427, NULL),
+(94, NULL, 1428, NULL),
+(95, NULL, 1428, NULL),
+(94, NULL, NULL, 1428),
+(95, NULL, NULL, 1428),
+(96, 1427, NULL, NULL),
+(97, 1427, NULL, NULL),
+(96, 1428, NULL, NULL),
+(97, 1428, NULL, NULL),
+(96, NULL, 1427, NULL),
+(97, NULL, 1427, NULL),
+(96, NULL, 1428, NULL),
+(97, NULL, 1428, NULL),
+(96, NULL, NULL, 1428),
+(97, NULL, NULL, 1428),
+(96, NULL, NULL, 1427),
+(97, NULL, NULL, 1427),
+(98, 1427, NULL, NULL),
+(99, 1427, NULL, NULL),
+(98, 1428, NULL, NULL),
+(99, 1428, NULL, NULL),
+(98, NULL, 1427, NULL),
+(99, NULL, 1427, NULL),
+(98, NULL, 1619, NULL),
+(99, NULL, 1619, NULL),
+(98, NULL, NULL, 1428),
+(99, NULL, NULL, 1428);
 
 -- --------------------------------------------------------
 
@@ -2174,7 +2494,12 @@ CREATE TABLE `kehoach_tieuchuan` (
 INSERT INTO `kehoach_tieuchuan` (`id`, `id_kh_baocao`, `tieuchuan_id`, `id_csdt`, `truongnhom`, `ns_chuanbi`, `ns_thuchien`, `ns_kiemtra`, `ngay_batdau_chuanbi`, `ngay_hoanthanh_chuanbi`, `ngay_batdau`, `ngay_hoanthanh`, `nguoi_tao`, `trang_thai`, `created_at`, `updated_at`, `deleted_at`, `loaicongviec (deleted)`) VALUES
 (57, 55, 8, 0, '1428', NULL, NULL, NULL, '2023-04-12', '2023-04-13', '2023-04-19', '2023-04-20', 0, 'todo', NULL, '2023-04-11 04:31:27', NULL, 'chuan_bi_mc'),
 (58, 56, 8, 0, '1428', NULL, NULL, NULL, '2023-04-13', '2023-04-18', '2023-04-13', '2023-04-24', 0, 'todo', NULL, '2023-04-13 14:42:37', NULL, 'chuan_bi_mc'),
-(59, 57, 10, 0, '2841', NULL, NULL, NULL, '2023-04-13', '2023-04-27', '2023-04-13', '2023-04-18', 0, 'todo', NULL, '2023-04-13 15:59:23', NULL, 'chuan_bi_mc');
+(59, 57, 10, 0, '2841', NULL, NULL, NULL, '2023-04-13', '2023-04-27', '2023-04-13', '2023-04-18', 0, 'todo', NULL, '2023-04-13 15:59:23', NULL, 'chuan_bi_mc'),
+(60, 58, 18, 0, '1427', NULL, NULL, NULL, '2023-05-07', '2023-05-12', '2023-05-15', '2023-05-22', 0, 'todo', NULL, '2023-05-07 08:54:02', NULL, 'chuan_bi_mc'),
+(61, 59, 18, 0, '1428', NULL, NULL, NULL, '2023-05-07', '2023-05-17', '2023-05-24', '2023-05-28', 0, 'todo', NULL, '2023-05-07 08:55:40', NULL, 'chuan_bi_mc'),
+(62, 61, 18, 0, '1427', NULL, NULL, NULL, '2023-05-08', '2023-05-19', '2023-05-09', '2023-05-12', 0, 'todo', NULL, '2023-05-08 07:43:40', NULL, 'chuan_bi_mc'),
+(63, 62, 18, 0, '1428', NULL, NULL, NULL, '2023-05-09', '2023-05-12', '2023-05-10', '2023-05-13', 0, 'todo', NULL, '2023-05-09 08:17:19', NULL, 'chuan_bi_mc'),
+(64, 64, 18, 0, '1619', NULL, NULL, NULL, '2023-05-09', '2023-05-12', '2023-05-09', '2023-05-19', 0, 'todo', NULL, '2023-05-09 08:22:50', NULL, 'chuan_bi_mc');
 
 -- --------------------------------------------------------
 
@@ -2337,7 +2662,28 @@ INSERT INTO `kehoach_tieuchuan_nhansu` (`id_kehoach`, `id_nhansuchuanbi`, `id_nh
 (58, NULL, NULL, 1428),
 (59, 1, NULL, NULL),
 (59, NULL, 2840, NULL),
-(59, NULL, NULL, 2841);
+(59, NULL, NULL, 2841),
+(60, 1428, NULL, NULL),
+(60, NULL, 1428, NULL),
+(60, NULL, NULL, 1427),
+(61, 1427, NULL, NULL),
+(61, NULL, 1427, NULL),
+(61, NULL, NULL, 1428),
+(62, 1427, NULL, NULL),
+(62, NULL, 1427, NULL),
+(62, NULL, 1428, NULL),
+(62, NULL, NULL, 1428),
+(63, 1427, NULL, NULL),
+(63, 1428, NULL, NULL),
+(63, NULL, 1427, NULL),
+(63, NULL, 1428, NULL),
+(63, NULL, NULL, 1428),
+(63, NULL, NULL, 1427),
+(64, 1427, NULL, NULL),
+(64, 1428, NULL, NULL),
+(64, NULL, 1427, NULL),
+(64, NULL, 1619, NULL),
+(64, NULL, NULL, 1428);
 
 -- --------------------------------------------------------
 
@@ -2399,7 +2745,10 @@ INSERT INTO `menhde` (`id`, `tieuchi_id`, `stt`, `mo_ta`, `tu_khoa`, `ns_phutrac
 (17, 10, 1, 'chỉ báo một', 'chỉ báo một', '1', 1, 1, 1000, 'Y', 'N', 'active', '2023-04-11 04:19:10', '2023-04-11 04:19:10', NULL),
 (18, 10, 1, 'chỉ báo 2 khong thành pâh', 'chỉ báo 2 khong thành pâh', '1', 1, 1, 1000, 'N', 'Y', 'active', '2023-04-11 04:19:51', '2023-04-11 04:19:51', NULL),
 (19, 12, 1, 'Chỉ báo 1', 'Chỉ báo 1', '1', 1, 1, 1000, 'Y', 'Y', 'active', '2023-04-13 15:44:24', '2023-04-13 15:44:24', NULL),
-(20, 14, 1, 'Chỉ báo 1', 'Chỉ báo 1', '1', 1, 1, 1000, 'Y', 'Y', 'active', '2023-04-22 05:10:06', '2023-04-22 05:10:06', NULL);
+(20, 14, 1, 'Chỉ báo 1', 'Chỉ báo 1', '1', 1, 1, 1000, 'Y', 'Y', 'active', '2023-04-22 05:10:06', '2023-04-22 05:10:06', NULL),
+(21, 21, 1, '111', '111', '1', 1, 1, 1000, 'N', 'N', 'active', '2023-05-07 08:50:21', '2023-05-07 08:50:21', NULL),
+(22, 22, 1, 'cáo báo', 'cáo báo', '1', 1, 1, 1000, 'N', 'N', 'active', '2023-05-08 07:42:11', '2023-05-08 07:42:11', NULL),
+(23, 21, 1, 'bug nòi mắt', 'bug nòi mắt', '1', 1, 1, 1000, 'N', 'N', 'active', '2023-05-09 08:16:00', '2023-05-09 08:16:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -2458,7 +2807,8 @@ CREATE TABLE `minhchung` (
 --
 
 INSERT INTO `minhchung` (`id`, `tieuchi`, `nhom_mc_sl_id`, `minhchung_tt`, `tieu_de`, `trich_yeu`, `ls_capnhat`, `ma_hoa`, `tu_khoa`, `noi_banhanh`, `url`, `address`, `ten_file`, `duong_dan`, `sohieu`, `count_size`, `count_page`, `ngay_ban_hanh`, `nguoi_tao`, `nguoi_quan_ly`, `cong_khai`, `csdt_id`, `solieu_id`, `hoatdongnhom_id`, `loai_tieuchuan`, `bo_tieuchuan`, `trang_thai`, `tinh_trang`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(5, NULL, 2, NULL, 'Tiêu đề minh chứng 1', 'Trích yếu 1', NULL, NULL, NULL, 'Đại học công nghiệp', 'https://www.facebook.com/', 'Quận nam từ liêm', 'apple-iphone-7-32gb-rose-gold-0466-12184812-0ed464b011a994d1ce0a74401a76b6b9.jpg', 'minhchung/2023/04/13/0AbF5giX38ItG6Tz6zouARctiual5eJC2YCquKST.jpg', '1', 134655, 0, '2023-04-13', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-04-13 15:53:34', NULL);
+(5, NULL, 2, NULL, 'Tiêu đề minh chứng 5', 'Trích yếu 1', NULL, NULL, NULL, 'Đại học công nghiệp', 'https://www.facebook.com/', 'Quận nam từ liêm', 'apple-iphone-7-32gb-rose-gold-0466-12184812-0ed464b011a994d1ce0a74401a76b6b9.jpg', 'minhchung/2023/04/13/0AbF5giX38ItG6Tz6zouARctiual5eJC2YCquKST.jpg', '1', 134655, 0, '2023-04-13', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-04-13 15:53:34', NULL),
+(6, NULL, 1, NULL, 'minh chứng tt', 'sss', NULL, NULL, NULL, '333', 'http://localhost:8088/v_githup/kdcl/public/admin/dam-bao-chat-luong/manaproof/new-proof', '82 Định Công Thượng, Hoàng Mai, Hà Nội', 'IMG_0166.JPG', 'minhchung/2023/05/08/oX6ymfDPkK9xDceomsWwhMpvkTQl28e6E3MA1J5t.jpg', '333', 5331924, 0, '2023-05-08', 1, 1428, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'dangcho', NULL, '2023-05-08 05:45:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -2561,7 +2911,8 @@ CREATE TABLE `minhchung_tt` (
 INSERT INTO `minhchung_tt` (`id`, `tieu_de`, `trich_yeu`, `tu_khoa`, `nguoi_tao`, `csdt_id`, `loai_tieuchuan`, `bo_tieuchuan_id`, `trang_thai`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (3, 'Tiêu đề hướng dẫn về minh chưng', '<p>cx</p>', '', 1, 1, 'ctdt', 5, 'active', '2023-04-11 04:24:07', '2023-04-11 04:24:07', NULL),
 (4, 'Hay chưa', '<p>Qu&aacute; hay luon</p>', '', 1, 1, 'csgd', 4, 'active', '2023-04-13 15:47:42', '2023-04-13 15:47:42', NULL),
-(5, 'Hay chưa', '<p>Qu&aacute; hay luon</p>', '', 1, 1, 'ctdt', 6, 'active', '2023-04-13 15:48:05', '2023-04-13 15:48:05', NULL);
+(5, 'Hay chưa', '<p>Qu&aacute; hay luon</p>', '', 1, 1, 'ctdt', 6, 'active', '2023-04-13 15:48:05', '2023-04-13 15:48:05', NULL),
+(6, 'Minh chứng tối thiểu 1', '<p>hay qua</p>', '', 1, 1, 'ctdt', 7, 'active', '2023-05-07 08:51:26', '2023-05-07 08:51:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -2595,7 +2946,11 @@ INSERT INTO `mocchuan` (`id`, `loai_tieuchuan`, `gia_tri`, `trong_so`, `bo_tieuc
 (10, 'ctdt', '10', '23', 6, 12, 'Mốc chuẩn hay 1', 1, 1, 'active', '2023-04-13 15:44:05', '2023-04-13 15:44:05', NULL),
 (11, 'ctdt', '45', '21', 6, 12, 'Mốc chuẩn hay 2', 1, 1, 'active', '2023-04-13 15:44:05', '2023-04-13 15:44:05', NULL),
 (12, 'ctdt', '10', '23', 4, 14, 'Mốc chuẩn hay 1', 1, 1, 'active', '2023-04-22 05:10:06', '2023-04-22 05:10:06', NULL),
-(13, 'ctdt', '45', '21', 4, 14, 'Mốc chuẩn hay 2', 1, 1, 'active', '2023-04-22 05:10:06', '2023-04-22 05:10:06', NULL);
+(13, 'ctdt', '45', '21', 4, 14, 'Mốc chuẩn hay 2', 1, 1, 'active', '2023-04-22 05:10:06', '2023-04-22 05:10:06', NULL),
+(14, 'ctdt', '11', '2', 7, 21, 'Mốc chuẩn 1', 1, 1, 'active', '2023-05-07 08:50:03', '2023-05-07 08:50:03', NULL),
+(15, 'ctdt', NULL, NULL, 7, 21, 'cccccd', 1, 1, 'active', '2023-05-09 08:20:59', '2023-05-09 08:20:59', NULL),
+(16, 'ctdt', NULL, NULL, 7, 22, 'ưẻt', 1, 1, 'active', '2023-05-09 08:21:29', '2023-05-09 08:21:29', NULL),
+(17, 'ctdt', NULL, NULL, 7, 22, 'ưẻt', 1, 1, 'active', '2023-05-09 08:21:29', '2023-05-09 08:21:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -2636,7 +2991,6 @@ INSERT INTO `nhom_mc_sl` (`id`, `mo_ta`, `so_lieu_mau`, `nguoi_tao`, `donvi_id`,
 (2, 'Khoa học công nghệ', 'solieu/4chncarlMEMWpbHXqpn2L0XWkq6jsAsDhhnJjrca.xlsx', 1, 1, 1, '2020-03-28 16:50:10', '2020-04-15 15:22:34', NULL),
 (3, 'Tổ chức hành chính', 'solieu/5uysufo7D0C7MYy0JpTBzFClp4f4cmi7Turu6Hk7.xlsx', 1, 1, 1, '2020-03-28 16:50:16', '2020-04-15 15:26:25', NULL),
 (4, 'Công tác Sinh viên', NULL, 1, 1, 1, '2020-03-28 16:50:24', '2022-08-25 09:28:48', NULL),
-(5, 'Lĩnh vực A', NULL, 1, 1, 1, '2020-03-30 13:35:37', '2020-04-08 09:35:44', '2020-04-08 09:35:44'),
 (6, 'Thanh tra giáo dục', NULL, 1, 1, 1, '2020-04-08 09:36:32', '2020-04-08 09:36:32', NULL),
 (7, 'Quản trị', NULL, 1, 1, 1, '2020-04-08 09:37:32', '2020-04-08 09:37:32', NULL),
 (8, 'Tài chính kế toán', 'solieu/zs15NvfVj2jQpKm2mwBk0DUh06OQAG0sg5Mo1FiG.xlsx', 1, 1, 1, '2020-04-08 09:39:41', '2020-04-15 15:27:52', NULL),
@@ -2652,15 +3006,12 @@ INSERT INTO `nhom_mc_sl` (`id`, `mo_ta`, `so_lieu_mau`, `nguoi_tao`, `donvi_id`,
 (18, 'Thanh niên', NULL, 1, 1, 1, '2020-04-08 09:42:48', '2020-04-08 09:42:48', NULL),
 (19, 'Đào tạo thường xuyên', NULL, 1, 10, 1, '2020-04-08 09:43:00', '2022-09-27 03:42:24', NULL),
 (20, 'Hạ tầng CNTT', NULL, 1, 1, 1, '2020-04-08 09:43:14', '2020-04-08 09:43:14', NULL),
-(21, 'Việc làm sinh viên', NULL, 1, 1, 1, '2020-04-08 09:45:05', '2020-04-08 09:45:20', '2020-04-08 09:45:20'),
+(21, 'Việc làm sinh viên', NULL, 1, 1, 1, '2020-04-08 09:45:05', '2020-04-08 09:45:20', NULL),
 (22, 'Phục vụ cộng đồng', NULL, 1, 1, 1, '2020-04-08 09:45:35', '2022-08-30 03:53:28', NULL),
 (23, 'Dịch vụ việc làm', NULL, 1, 12, 1, '2020-04-08 09:45:45', '2022-09-26 07:21:00', NULL),
-(26, 'ABCD', NULL, 1, 1, 1, '2020-04-13 13:28:06', '2022-08-12 03:57:26', '2020-04-13 13:28:09'),
+(26, 'ABCD', NULL, 1, 1, 1, '2020-04-13 13:28:06', '2022-08-12 03:57:26', NULL),
 (27, 'Đào tạo sau đại học', NULL, 1, 4, 1, '2020-07-28 06:44:17', '2022-09-26 07:20:53', NULL),
-(41, 'sdbsdb', '', 1, 8, 1, '2022-09-26 07:05:55', '2022-09-26 07:05:55', '2023-03-28 03:14:23'),
-(42, 'Test 1', '', 1, 2, 1, '2022-09-29 03:46:44', '2022-09-29 03:46:44', '2023-03-28 03:14:17'),
-(43, 'Test 1', '', 1, 4, 1, '2022-12-24 08:57:06', '2022-12-24 08:57:06', '2022-12-24 09:15:40'),
-(44, 'Test 1', '', 1, 2, 1, '2023-03-28 03:14:39', '2023-03-28 03:14:39', NULL);
+(41, 'sdbsdb', '', 1, 8, 1, '2022-09-26 07:05:55', '2022-09-26 07:05:55', '2023-03-28 03:14:23');
 
 -- --------------------------------------------------------
 
@@ -2737,7 +3088,19 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (92, 1, 'wfYCqLugx7DEk3hkOQqCOwxL3zaQt3iG', '2023-05-04 03:35:39', '2023-05-04 03:35:39'),
 (93, 1, 'OS0M9t3pQEZg0My0ZsDI53RGvxOGEjr8', '2023-05-05 02:04:35', '2023-05-05 02:04:35'),
 (94, 1, 'MsSxZbxj83ehPyPzOGJECTziyFZRJZqv', '2023-05-05 14:17:12', '2023-05-05 14:17:12'),
-(95, 1, '7uQw3mmjs7AYxbABwmScWekiP13Z1ZGD', '2023-05-06 07:14:25', '2023-05-06 07:14:25');
+(95, 1, '7uQw3mmjs7AYxbABwmScWekiP13Z1ZGD', '2023-05-06 07:14:25', '2023-05-06 07:14:25'),
+(96, 1, 'F3pxXZJ3iy6wE5wEvObntQGZE36JaRzb', '2023-05-07 02:57:37', '2023-05-07 02:57:37'),
+(97, 1, 'cpElUuKCrW0yTMJaMa28nO9wmV6YxjW7', '2023-05-07 02:58:41', '2023-05-07 02:58:41'),
+(98, 1, 'VdqRyY2m2hd91xrOK9aqjVaby6k64qpl', '2023-05-07 03:27:11', '2023-05-07 03:27:11'),
+(100, 1, 'AnfdabbHF1vz3UwCw9HgxbygsvMnlZgC', '2023-05-07 08:34:47', '2023-05-07 08:34:47'),
+(102, 1, 'Da4APPCiB3ZMTJiXTRqTNHojL83jOxQX', '2023-05-07 08:36:57', '2023-05-07 08:36:57'),
+(103, 1, 'cgMelLwV6JTHivaY14Njw4ziC9ZJWrzz', '2023-05-07 08:45:35', '2023-05-07 08:45:35'),
+(104, 1, 'abHzLdpNoJpVWwCs7Y8YJhiJNhnAEuX9', '2023-05-07 11:23:57', '2023-05-07 11:23:57'),
+(105, 1, '9v08DS3moZfuHaeVFnHLeSIWe43ao2yz', '2023-05-07 14:59:41', '2023-05-07 14:59:41'),
+(106, 1, 'Llckel5DZsZaPd9FYyVykzeKKdyGVwpX', '2023-05-08 02:16:12', '2023-05-08 02:16:12'),
+(107, 1, 'lDJRxzmXArmcJwyc7Dxd3gYBjwu5Z3eG', '2023-05-09 08:10:17', '2023-05-09 08:10:17'),
+(108, 1427, 'vDBmy1KEC0TNaKsUV80LDuZJ2m2sZ2Tb', '2023-05-09 10:34:32', '2023-05-09 10:34:32'),
+(109, 1427, 'NYRBfHojMdWhW3jJnDKiBfZESAOUM8iO', '2023-05-09 10:38:17', '2023-05-09 10:38:17');
 
 -- --------------------------------------------------------
 
@@ -2822,7 +3185,9 @@ CREATE TABLE `role_gyhd_tchi` (
 INSERT INTO `role_gyhd_tchi` (`id`, `gyhd_id`, `tieuchi_id`, `bo_tieuchuan_id`, `created_at`, `updated_at`, `trang_thai`, `deleted_at`) VALUES
 (11, 6, 10, 5, '2023-04-11 04:23:40', '2023-04-11 04:23:40', 'active', NULL),
 (12, 8, 12, 6, '2023-04-13 15:46:56', '2023-04-13 15:46:56', 'active', NULL),
-(13, 8, 13, 6, '2023-04-13 15:46:56', '2023-04-13 15:46:56', 'active', NULL);
+(13, 8, 13, 6, '2023-04-13 15:46:56', '2023-04-13 15:46:56', 'active', NULL),
+(14, 9, 21, 7, '2023-05-07 08:51:00', '2023-05-07 08:51:00', 'active', NULL),
+(15, 9, 22, 7, '2023-05-07 08:51:00', '2023-05-07 08:51:00', 'active', NULL);
 
 -- --------------------------------------------------------
 
@@ -2847,7 +3212,9 @@ CREATE TABLE `role_mctt_tchi` (
 INSERT INTO `role_mctt_tchi` (`id`, `mctt_id`, `tieuchi_id`, `bo_tieuchuan_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (6, 3, 10, 5, '2023-04-11 04:24:07', '2023-04-11 04:24:07', NULL),
 (7, 5, 12, 6, '2023-04-13 15:48:05', '2023-04-13 15:48:05', NULL),
-(8, 5, 13, 6, '2023-04-13 15:48:05', '2023-04-13 15:48:05', NULL);
+(8, 5, 13, 6, '2023-04-13 15:48:05', '2023-04-13 15:48:05', NULL),
+(9, 6, 21, 7, '2023-05-07 08:51:26', '2023-05-07 08:51:26', NULL),
+(10, 6, 22, 7, '2023-05-07 08:51:26', '2023-05-07 08:51:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -4429,6 +4796,42 @@ INSERT INTO `role_users` (`user_id`, `role_id`, `created_at`, `updated_at`) VALU
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `role_user_dgn`
+--
+
+CREATE TABLE `role_user_dgn` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `start_time` date NOT NULL,
+  `end_time` date NOT NULL,
+  `baocao_tdg_id` int(11) NOT NULL,
+  `to_truong` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `role_user_dgn`
+--
+
+INSERT INTO `role_user_dgn` (`id`, `user_id`, `start_time`, `end_time`, `baocao_tdg_id`, `to_truong`) VALUES
+(19, 1619, '2023-05-15', '2023-05-30', 55, 1428),
+(20, 2838, '2023-05-15', '2023-05-30', 55, 1428),
+(21, 1427, '2023-05-02', '2023-05-04', 56, 1427),
+(22, 1619, '2023-05-08', '2023-05-09', 56, 1427),
+(23, 1427, '2023-05-23', '2023-05-30', 58, 1619),
+(25, 1, '2023-05-23', '2023-05-30', 58, 1619),
+(26, 1427, '2023-05-10', '2023-05-17', 57, 1428),
+(27, 1619, '2023-05-10', '2023-05-17', 57, 1428),
+(28, 2838, '2023-05-10', '2023-05-17', 57, 1428),
+(29, 1427, '2023-05-09', '2023-05-19', 59, 1),
+(30, 1428, '2023-05-09', '2023-05-19', 59, 1),
+(31, 1619, '2023-05-09', '2023-05-19', 59, 1),
+(32, 2839, '2023-05-09', '2023-05-19', 59, 2841),
+(33, 2840, '2023-05-09', '2023-05-18', 57, 1),
+(34, 2841, '2023-05-09', '2023-05-18', 57, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `solieu`
 --
 
@@ -4495,7 +4898,9 @@ CREATE TABLE `thongbao` (
 
 INSERT INTO `thongbao` (`id`, `nguoi_gui`, `nguoi_nhan`, `route`, `route_value`, `icon`, `tieude`, `noidung`, `csdt_id`, `trang_thai`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (9, 1, 2839, 'tailieu.hoatdongnhom.edit', '{\"id\":10405}', '', 'Bạn vừa nhận được 1 công việc', 'Xác định minh chứng cho minh chứng yêu cầu Hay cực kì luôn từ ngày 2023-04-13 đến ngày 2023-04-26', 1, 'waiting', NULL, NULL, NULL),
-(10, 1, 0, 'tailieu.hoatdongnhom.edit', '{\"id\":10405}', '', 'Bạn vừa nhận được 1 công việc', 'Xác định minh chứng cho minh chứng yêu cầu Hay cực kì luôn từ ngày 2023-04-13 đến ngày 2023-04-26', 1, 'waiting', NULL, NULL, NULL);
+(10, 1, 0, 'tailieu.hoatdongnhom.edit', '{\"id\":10405}', '', 'Bạn vừa nhận được 1 công việc', 'Xác định minh chứng cho minh chứng yêu cầu Hay cực kì luôn từ ngày 2023-04-13 đến ngày 2023-04-26', 1, 'waiting', NULL, NULL, NULL),
+(11, 1, 4059, 'tailieu.hoatdongnhom.edit', '{\"id\":10408}', '', 'Bạn vừa nhận được 1 công việc', 'Xác định minh chứng cho minh chứng yêu cầu hhh từ ngày 2023-05-08 đến ngày 2023-05-09', 1, 'waiting', NULL, NULL, NULL),
+(12, 1, 0, 'tailieu.hoatdongnhom.edit', '{\"id\":10408}', '', 'Bạn vừa nhận được 1 công việc', 'Xác định minh chứng cho minh chứng yêu cầu hhh từ ngày 2023-05-08 đến ngày 2023-05-09', 1, 'waiting', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4546,7 +4951,11 @@ INSERT INTO `tieuchi` (`id`, `tieuchuan_id`, `stt`, `tc_dieu_kien`, `mo_ta`, `tu
 (14, 13, 1, 'off', 'Tiêu chí hay nhất hệ mặt trời', 'Tiêu chí hay nhất', '1', 1, 1, 'active', '2023-04-22 05:10:06', '2023-04-22 05:10:06', NULL),
 (15, 13, 2, 'on', 'Tiêu chí hay nhì', 'Tiêu chí hay nhì', '1', 1, 1, 'active', '2023-04-22 05:10:06', '2023-04-22 05:10:06', NULL),
 (19, 10, 3, 'off', 'Tiêu chí 3', 'Tiêu chí 3', '1', 1, 1, 'active', '2023-04-22 06:48:59', '2023-04-22 06:48:59', NULL),
-(20, 10, 4, 'off', 'Tiêu chí 4', 'Tiêu chí 4', '1', 1, 1, 'active', '2023-04-22 06:48:59', '2023-04-22 06:48:59', NULL);
+(20, 10, 4, 'off', 'Tiêu chí 4', 'Tiêu chí 4', '1', 1, 1, 'active', '2023-04-22 06:48:59', '2023-04-22 06:48:59', NULL),
+(21, 18, 1, 'off', 'Tiêu chí 1', 'Tiêu chí 1', '1', 1, 1, 'active', '2023-05-07 08:49:34', '2023-05-07 08:49:34', NULL),
+(22, 18, 2, 'off', 'Tiêu chí 3', 'Tiêu chí 3', '1', 1, 1, 'active', '2023-05-07 08:49:34', '2023-05-07 08:49:34', NULL),
+(23, 20, 1, 'off', 'a', 'a', '1', 1, 1, 'active', '2023-05-08 04:07:37', '2023-05-08 04:07:37', NULL),
+(24, 20, 2, 'off', 'b', 'b', '1', 1, 1, 'active', '2023-05-08 04:07:37', '2023-05-08 04:07:37', NULL);
 
 -- --------------------------------------------------------
 
@@ -4594,7 +5003,10 @@ INSERT INTO `tieuchuan` (`id`, `bo_tieuchuan_id`, `loai_tieuchuan`, `stt`, `mo_t
 (13, 4, 'ctdt', 1, 'Tiêu chuẩn hay 2', '2023', '1', 1, 1, 'active', '2023-04-22 05:10:06', '2023-04-22 05:10:06', NULL),
 (15, 6, 'ctdt', 4, 'Tiêu chuẩn 4', '2023', '1', 1, 1, 'active', '2023-04-22 06:09:28', '2023-04-22 06:09:28', NULL),
 (16, 6, 'ctdt', 5, 'Tiêu chuẩn 5', '2023', '1', 1, 1, 'active', '2023-04-22 06:50:02', '2023-04-22 06:50:02', NULL),
-(17, 6, 'ctdt', 6, 'Tiêu chuẩn 6', '2023', '1', 1, 1, 'active', '2023-04-22 06:50:02', '2023-04-22 06:50:02', NULL);
+(17, 6, 'ctdt', 6, 'Tiêu chuẩn 6', '2023', '1', 1, 1, 'active', '2023-04-22 06:50:02', '2023-04-22 06:50:02', NULL),
+(18, 7, 'ctdt', 1, 'Long 1', '2023', '1', 1, 1, 'active', '2023-05-07 08:49:23', '2023-05-07 08:49:23', NULL),
+(19, 7, 'ctdt', 2, 'Tiêu chuẩn 4', '2023', '1', 1, 1, 'active', '2023-05-07 08:49:23', '2023-05-07 08:49:23', '2023-05-07 15:26:14'),
+(20, 7, 'ctdt', 3, 'abc', '2023', '1', 1, 1, 'active', '2023-05-08 04:07:15', '2023-05-08 04:07:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -4623,7 +5035,9 @@ CREATE TABLE `tukhoa` (
 --
 
 INSERT INTO `tukhoa` (`tk_id`, `tk_name`) VALUES
-(5, 'hay');
+(6, 'cái gì cũng đc'),
+(5, 'hay'),
+(7, 'tiếpp');
 
 -- --------------------------------------------------------
 
@@ -4642,7 +5056,9 @@ CREATE TABLE `tukhoa_minhchung` (
 --
 
 INSERT INTO `tukhoa_minhchung` (`tkmc_tk_id`, `tkmc_mc_id`, `tkmc_nhom_mc_sl_id`) VALUES
-(5, 5, 2);
+(5, 5, 2),
+(6, 6, 1),
+(7, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -4701,9 +5117,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ma_nhansu`, `name`, `email`, `password`, `permissions`, `last_login`, `first_name`, `last_name`, `nguoi_tao`, `created_at`, `updated_at`, `deleted_at`, `gender`, `dob`, `pic`, `country`, `user_state`, `city`, `address`, `phone`, `description`, `postal`, `provider`, `provider_id`, `donvi_id`, `csdt_id`, `code`, `ns`, `tdnvtcn`, `ntn`, `noitn`, `gvsp`, `qlnn`, `th`, `nn`, `hhdp`, `ndp`, `cdnnktd`, `mscnktd`, `ntd`, `qdbn`, `cdkn`) VALUES
-(1, '1002', 'John Doe', 'admin@admin.com', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-05-06 07:14:25', NULL, NULL, 1, '2022-06-30 05:43:03', '2023-05-06 07:14:25', NULL, '1', '2023-03-28', 'uploads/users/DEF/1661420665-imageAvatar.png', NULL, NULL, NULL, NULL, '0123456678', NULL, NULL, NULL, NULL, 2, 1, 'DEF', '2023-03-28', 'Chuyên ngành đào tạo', 2002, 'Khoa CNTT - ĐH công', '2022', 'Nhà nước', '2022', '2022', 'không', 2022, 'Chuyên viên', '123ABC', 2020, 'QD', 'Giảng viên'),
-(1427, '10050', 'Hoàng Anh', 'anh.hoang', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-04-16 08:51:02', NULL, NULL, 1, '2022-10-06 04:04:13', '2023-04-16 08:51:02', NULL, NULL, NULL, '', NULL, NULL, NULL, 'Trung tâm Đảm bảo Chất lượng', '0904215756', '1037', NULL, NULL, NULL, 36, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1428, '10498', 'Hoàng Minh Tuấn', 'tuan.hoang', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-04-12 14:34:27', NULL, NULL, 1, '2022-10-06 04:04:13', '2023-04-12 14:34:27', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '0915491868', '1037', NULL, NULL, NULL, 36, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1, '1002', 'John Doe', 'admin@admin.com', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-05-09 08:10:17', NULL, NULL, 1, '2022-06-30 05:43:03', '2023-05-09 08:10:17', NULL, '1', '2023-03-28', 'uploads/users/DEF/1661420665-imageAvatar.png', NULL, NULL, NULL, NULL, '0123456678', NULL, NULL, NULL, NULL, 2, 1, 'DEF', '2023-03-28', 'Chuyên ngành đào tạo', 2002, 'Khoa CNTT - ĐH công', '2022', 'Nhà nước', '2022', '2022', 'không', 2022, 'Chuyên viên', '123ABC', 2020, 'QD', 'Giảng viên'),
+(1427, '10050', 'Hoàng Anh', 'anh.hoang', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-05-09 10:38:17', NULL, NULL, 1, '2022-10-06 04:04:13', '2023-05-09 10:38:17', NULL, NULL, NULL, '', NULL, NULL, NULL, 'Trung tâm Đảm bảo Chất lượng', '0904215756', '1037', NULL, NULL, NULL, 36, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(1428, '10498', 'Hoàng Minh Tuấn', 'tuan.hoang', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-05-07 08:35:20', NULL, NULL, 1, '2022-10-06 04:04:13', '2023-05-07 08:35:20', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '0915491868', '1037', NULL, NULL, NULL, 36, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1619, '10676', 'Trịnh Thị Phương', 'phuong.trinh', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-04-16 08:36:21', NULL, NULL, 1, '2022-10-06 04:04:13', '2023-04-16 08:36:21', NULL, NULL, NULL, '', NULL, NULL, NULL, '', '0386351060', '1037', NULL, NULL, NULL, 36, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2838, '10161', 'Phùng Xuân Sơn', 'son.phung', '$2y$10$Jg.AyMQznXnKu47WbzTvOuKLuR5KzXsARkuRxXOthuiv.3xmGgX.S', NULL, NULL, NULL, NULL, 1, '2022-10-06 04:04:13', '2022-10-06 04:04:13', NULL, NULL, NULL, '', NULL, NULL, NULL, 'Thôn Di Trạch - Huyện Hoài Đức - TP Hà Nội', '0912548656', '1005', NULL, NULL, NULL, 5, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2839, '10162', 'Nguyễn Văn Thiện', 'thien.nguyen', '$2y$10$hB1S1YVY8FJxgQCcBMJj9u3CzVOZDBtjH6HI2Es7LvDOslhQahll2', NULL, NULL, NULL, NULL, 1, '2022-10-06 04:04:13', '2022-10-06 04:04:13', NULL, NULL, NULL, '', NULL, NULL, NULL, 'CQ: Phòng 301-A10 Trường ĐHCN Hà Nội-NR: Số 7-Ngõ Đồng Vàng-Đường Đông khê-Xã Đan phượng-Đan Phượng-Hà Nội', '0912503231', '1005', NULL, NULL, NULL, 5, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -6313,6 +6729,18 @@ ALTER TABLE `activity_log`
   ADD KEY `activity_log_log_name_index` (`log_name`);
 
 --
+-- Chỉ mục cho bảng `bantin`
+--
+ALTER TABLE `bantin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `bantin_like`
+--
+ALTER TABLE `bantin_like`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `baocao_chung`
 --
 ALTER TABLE `baocao_chung`
@@ -6496,6 +6924,12 @@ ALTER TABLE `excel_import_donvi`
 -- Chỉ mục cho bảng `excel_import_ds_gvch`
 --
 ALTER TABLE `excel_import_ds_gvch`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `excel_import_dtd_dtxxd`
+--
+ALTER TABLE `excel_import_dtd_dtxxd`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -6956,6 +7390,12 @@ ALTER TABLE `role_users`
   ADD PRIMARY KEY (`user_id`,`role_id`);
 
 --
+-- Chỉ mục cho bảng `role_user_dgn`
+--
+ALTER TABLE `role_user_dgn`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `solieu`
 --
 ALTER TABLE `solieu`
@@ -7039,7 +7479,19 @@ ALTER TABLE `activations`
 -- AUTO_INCREMENT cho bảng `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+
+--
+-- AUTO_INCREMENT cho bảng `bantin`
+--
+ALTER TABLE `bantin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT cho bảng `bantin_like`
+--
+ALTER TABLE `bantin_like`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `baocao_chung`
@@ -7051,7 +7503,7 @@ ALTER TABLE `baocao_chung`
 -- AUTO_INCREMENT cho bảng `baocao_menhde`
 --
 ALTER TABLE `baocao_menhde`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT cho bảng `baocao_nhanxet`
@@ -7075,13 +7527,13 @@ ALTER TABLE `baocao_noidungthem`
 -- AUTO_INCREMENT cho bảng `baocao_tieuchi`
 --
 ALTER TABLE `baocao_tieuchi`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT cho bảng `baocao_tieuchuan`
 --
 ALTER TABLE `baocao_tieuchuan`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT cho bảng `baocao_url`
@@ -7093,7 +7545,7 @@ ALTER TABLE `baocao_url`
 -- AUTO_INCREMENT cho bảng `bo_tieuchuan`
 --
 ALTER TABLE `bo_tieuchuan`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `chuc_vu`
@@ -7210,6 +7662,12 @@ ALTER TABLE `excel_import_ds_gvch`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `excel_import_dtd_dtxxd`
+--
+ALTER TABLE `excel_import_dtd_dtxxd`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT cho bảng `excel_import_dtkhcn2`
 --
 ALTER TABLE `excel_import_dtkhcn2`
@@ -7231,7 +7689,7 @@ ALTER TABLE `excel_import_giaotrinh`
 -- AUTO_INCREMENT cho bảng `excel_import_gvch`
 --
 ALTER TABLE `excel_import_gvch`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_gvchkn`
@@ -7279,7 +7737,7 @@ ALTER TABLE `excel_import_monhoc`
 -- AUTO_INCREMENT cho bảng `excel_import_nhansu`
 --
 ALTER TABLE `excel_import_nhansu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_quymodt`
@@ -7309,7 +7767,7 @@ ALTER TABLE `excel_import_taichinh`
 -- AUTO_INCREMENT cho bảng `excel_import_tailieu_thuvien`
 --
 ALTER TABLE `excel_import_tailieu_thuvien`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_tcnh`
@@ -7381,7 +7839,7 @@ ALTER TABLE `excel_import_tyle_sv_gv`
 -- AUTO_INCREMENT cho bảng `export_import_ctdt`
 --
 ALTER TABLE `export_import_ctdt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT cho bảng `export_import_dtkhcn`
@@ -7411,19 +7869,19 @@ ALTER TABLE `he_dao_tao`
 -- AUTO_INCREMENT cho bảng `hoatdongnhom`
 --
 ALTER TABLE `hoatdongnhom`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10406;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10409;
 
 --
 -- AUTO_INCREMENT cho bảng `hoatdongnhom_donvi`
 --
 ALTER TABLE `hoatdongnhom_donvi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `hoatdongnhom_minhchung`
 --
 ALTER TABLE `hoatdongnhom_minhchung`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `hoc_ham`
@@ -7435,31 +7893,31 @@ ALTER TABLE `hoc_ham`
 -- AUTO_INCREMENT cho bảng `huongdan`
 --
 ALTER TABLE `huongdan`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `kehoach_baocao`
 --
 ALTER TABLE `kehoach_baocao`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT cho bảng `kehoach_baocao_nhansu`
 --
 ALTER TABLE `kehoach_baocao_nhansu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 
 --
 -- AUTO_INCREMENT cho bảng `kehoach_cc_solieu`
 --
 ALTER TABLE `kehoach_cc_solieu`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `kehoach_chung`
 --
 ALTER TABLE `kehoach_chung`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT cho bảng `kehoach_hanhdong`
@@ -7471,25 +7929,25 @@ ALTER TABLE `kehoach_hanhdong`
 -- AUTO_INCREMENT cho bảng `kehoach_hd`
 --
 ALTER TABLE `kehoach_hd`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `kehoach_menhde`
 --
 ALTER TABLE `kehoach_menhde`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT cho bảng `kehoach_tieuchi`
 --
 ALTER TABLE `kehoach_tieuchi`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT cho bảng `kehoach_tieuchuan`
 --
 ALTER TABLE `kehoach_tieuchuan`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT cho bảng `loai_donvi`
@@ -7501,7 +7959,7 @@ ALTER TABLE `loai_donvi`
 -- AUTO_INCREMENT cho bảng `menhde`
 --
 ALTER TABLE `menhde`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
@@ -7513,7 +7971,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `minhchung`
 --
 ALTER TABLE `minhchung`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `minhchung_gop`
@@ -7525,13 +7983,13 @@ ALTER TABLE `minhchung_gop`
 -- AUTO_INCREMENT cho bảng `minhchung_tt`
 --
 ALTER TABLE `minhchung_tt`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `mocchuan`
 --
 ALTER TABLE `mocchuan`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `nhasu_cg_dgn`
@@ -7549,7 +8007,7 @@ ALTER TABLE `nhom_mc_sl`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT cho bảng `reminders`
@@ -7573,13 +8031,19 @@ ALTER TABLE `role_chucvu_users`
 -- AUTO_INCREMENT cho bảng `role_gyhd_tchi`
 --
 ALTER TABLE `role_gyhd_tchi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `role_mctt_tchi`
 --
 ALTER TABLE `role_mctt_tchi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT cho bảng `role_user_dgn`
+--
+ALTER TABLE `role_user_dgn`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT cho bảng `solieu`
@@ -7597,7 +8061,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT cho bảng `thongbao`
 --
 ALTER TABLE `thongbao`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `throttle`
@@ -7609,13 +8073,13 @@ ALTER TABLE `throttle`
 -- AUTO_INCREMENT cho bảng `tieuchi`
 --
 ALTER TABLE `tieuchi`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `tieuchuan`
 --
 ALTER TABLE `tieuchuan`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `trinhdo_hoccvi`
@@ -7627,7 +8091,7 @@ ALTER TABLE `trinhdo_hoccvi`
 -- AUTO_INCREMENT cho bảng `tukhoa`
 --
 ALTER TABLE `tukhoa`
-  MODIFY `tk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `tk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

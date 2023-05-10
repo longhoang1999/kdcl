@@ -275,10 +275,28 @@
     });
     flatpickr('#ngay_thuc_hien', {
         dateFormat: 'd-m-Y',
+        minDate: 'today',
     });
     flatpickr('#ngay_kiem_tra', {
         dateFormat: 'd-m-Y',
+        minDate: 'today',
     });
+    $("#ngay_kiem_tra").change(function() {
+        let dateNht = new Date($("#ngay_kiem_tra").val().split("-").reverse().join("-"))
+        let dateNbd = new Date($("#ngay_thuc_hien").val().split("-").reverse().join("-"))
+        if(dateNht < dateNbd){
+            alert("@lang('project/QualiAssurance/title.vlcdn')")
+            $(this).val("")
+        }
+    })
+    $("#ngay_thuc_hien").change(function() {
+        let dateNht = new Date($("#ngay_kiem_tra").val().split("-").reverse().join("-"))
+        let dateNbd = new Date($("#ngay_thuc_hien").val().split("-").reverse().join("-"))
+        if(dateNht < dateNbd){
+            alert("@lang('project/QualiAssurance/title.vlcdn')")
+            $(this).val("")
+        }
+    })
 
     $(function(){
         table = $('#table').DataTable({

@@ -50,6 +50,7 @@ class MessageboardController extends DefinedController
         $UI = DB::table("bantin")
             ->leftjoin('users', 'users.id', '=', 'bantin.user_id')
             ->select("bantin.*", "users.pic", "users.name")
+            ->orderBy('created_at', 'desc')
             ->get();
         
         $like = DB::table("bantin_like")->get();

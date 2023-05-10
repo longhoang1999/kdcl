@@ -633,7 +633,7 @@
 		'namsinh'		=> 'Năm sinh',
 		'chucdanh'		=> 'Chức danh',
 		'tddt'			=> 'Trình độ đào tạo',
-		'cngd'			=> 'Chuyên ngành đào tạo',
+		'cngd'			=> 'Chuyên ngành giảng dạy',
 		'khoinganh'		=> 'Khối ngành',
 		'male'			=> 'Nam',
 		'female'		=> 'Nữ',
