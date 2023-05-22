@@ -57,6 +57,13 @@ class AddreportController extends DefinedController
                'updated_at'            => Carbon::now()->toDateTimeString(),
 
          ];
+         if($req->ns_phutrach != ""){
+            if(DB::table("role_users")->where("user_id", $req->ns_phutrach)->where("role_id", 10)->count() == 0){
+               $us = Sentinel::findById($req->ns_phutrach);
+               $role_ = Sentinel::findRoleByName('ttchuyentrach');
+               $role_->users()->attach($us);
+            }
+         }
 
          if ($boTieuChuan->loai_tieuchuan == 'ctdt' && $req->ctdt_id != "") {
              $data['ctdt_id'] = $req->ctdt_id;
@@ -72,6 +79,11 @@ class AddreportController extends DefinedController
                'id_kehoach'   => $id_kehoach,
                'id_nhansuchuanbi'   =>   $value
             ];
+            if(DB::table("role_users")->where("user_id", $value)->where("role_id", 6)->count() == 0){
+               $us = Sentinel::findById($value);
+               $role_ = Sentinel::findRoleByName('ns_phutrach');
+               $role_->users()->attach($us);
+            }
             DB::table("kehoach_baocao_nhansu")->insert($dt);
          }
          foreach($req->ns_thuchien as $value){
@@ -79,6 +91,11 @@ class AddreportController extends DefinedController
                'id_kehoach'   => $id_kehoach,
                'id_nhansuthuchien'   =>   $value
             ];
+            if(DB::table("role_users")->where("user_id", $value)->where("role_id", 5)->count() == 0){
+               $us = Sentinel::findById($value);
+               $role_ = Sentinel::findRoleByName('ns_thuchien');
+               $role_->users()->attach($us);
+            }
             DB::table("kehoach_baocao_nhansu")->insert($dt);
          }
          foreach($req->ns_kiemtra as $value){
@@ -86,6 +103,11 @@ class AddreportController extends DefinedController
                'id_kehoach'   => $id_kehoach,
                'id_nhansukiemtra'   =>   $value
             ];
+            if(DB::table("role_users")->where("user_id", $value)->where("role_id", 7)->count() == 0){
+               $us = Sentinel::findById($value);
+               $role_ = Sentinel::findRoleByName('ns_kiemtra');
+               $role_->users()->attach($us);
+            }
             DB::table("kehoach_baocao_nhansu")->insert($dt);
          }
       return back()->with('success', 

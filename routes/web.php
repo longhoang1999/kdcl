@@ -124,6 +124,17 @@ Route::group(
         //    Route::get('/', 'JoshController@index')->name('index');
     }
 );
+Route::get('createRole', function() {
+    Sentinel::getRoleRepository()->createModel()->create([
+        'name' => 'ttchuyentrach',
+        'slug' => 'ttchuyentrach',
+    ]);
+    // Sentinel::getRoleRepository()->createModel()->create([
+    //     'name' => 'khac',
+    //     'slug' => 'khac',
+    // ]);
+});
+
 Route::group(
     ['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'operator', 'as' => 'admin.'],
     function () {
@@ -186,15 +197,15 @@ Route::group(
        
         // Route for Project
         Route::group(
-            ['namespace' => 'Project', 'middleware' => ['super_check:admin,operator,ns_thuchien,ns_phutrach,ns_kiemtra']],
+            ['namespace' => 'Project'],
             function () {
                 // Route for thường trực
                 Route::group(
-                    ['prefix' => 'thuong-truc', 'as' => 'thuongtruc.', 'namespace' => 'Thuongtruc'],
+                    ['prefix' => 'thuong-truc', 'as' => 'thuongtruc.', 'namespace' => 'Thuongtruc', 'middleware' => ['super_check:admin,operator,truongdonvi']],
                     function () {
                         /*routes for set standard*/
                         Route::group(['prefix' => 'setstandard', 'as' => 'setstandard.',
-                            'namespace' => 'Standard'],
+                            'namespace' => 'Standard','middleware' => ['super_check:admin,operator']],
                             function () {
                                 // Quản lý bộ tiêu chuẩn
                                 Route::get('index', 'StandardController@index')->name('index');
@@ -284,7 +295,9 @@ Route::group(
                                 // Quản lý danh mục
                                 Route::get('index', 'CategoryController@index')->name('index');
                                 // Lĩnh vực
-                                Route::get('manafield', 'CategoryController@field')->name('field');
+                                Route::get('manafield', 'CategoryController@field')
+                                    ->middleware(['super_check:admin,operator'])
+                                    ->name('field');
                                 Route::get('data', 'CategoryController@data')->name('data');
                                 Route::post('update-manafield', 'CategoryController@updateManafield')->name('updateManafield');
                                 Route::get('delete-manafield', 'CategoryController@deleteManafield')->name('deleteManafield');
@@ -293,7 +306,9 @@ Route::group(
                                 Route::get('export-manafield', 'CategoryController@exportManafield')->name('exportManafield');
 
                                 // Quản lý đơn vị
-                                Route::get('manaunit', 'CategoryController@unit')->name('unit');
+                                Route::get('manaunit', 'CategoryController@unit')
+                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    ->name('unit');
                                 Route::get('data-unit', 'CategoryController@dataUnit')->name('dataUnit');
                                 Route::get('delete-unit', 'CategoryController@deleteUnit')->name('deleteUnit');
                                 Route::post('update-unit', 'CategoryController@updateUnit')->name('updateUnit');
@@ -304,7 +319,9 @@ Route::group(
                                 
                                 
                                 // QL nhân sự
-                                Route::get('manahuman', 'CategoryController@human')->name('human');
+                                Route::get('manahuman', 'CategoryController@human')
+                                    ->middleware(['super_check:admin,operator'])
+                                    ->name('human');
                                 Route::post('create-manahuman', 'CategoryController@createHuman')->name('createHuman');
                                 Route::get('data-manahuman', 'CategoryController@dataHuman')->name('dataHuman');
                                 Route::get('delete-manahuman', 'CategoryController@deleteHuman')->name('deleteHuman');
@@ -314,7 +331,9 @@ Route::group(
                                 Route::get('reset-password', 'CategoryController@resetPass')->name('resetPass');
 
                                 // QL CTĐT
-                                Route::get('manactdt', 'CategoryController@ctdt')->name('ctdt');
+                                Route::get('manactdt', 'CategoryController@ctdt')
+                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    ->name('ctdt');
                                 Route::get('datactdt', 'CategoryController@datactdt')->name('datactdt');
                                 Route::get('export-ctdt', 'CategoryController@exportCTDT')->name('exportCTDT');
                                 Route::post('create-ctdt', 'CategoryController@createCTDT')->name('createCTDT');
@@ -322,7 +341,9 @@ Route::group(
                                 Route::post('update-ctdt', 'CategoryController@updateCTDT')->name('updateCTDT');
                                 
                                 // Quản lý cơ sở đào tạo
-                                Route::get('manacsdt', 'CategoryController@csdt')->name('csdt');
+                                Route::get('manacsdt', 'CategoryController@csdt')
+                                    ->middleware(['super_check:admin,operator'])
+                                    ->name('csdt');
                                 Route::get('datacsdt', 'CategoryController@datacsdt')->name('datacsdt');
                                 Route::get('export-csdt', 'CategoryController@exportCSDT')->name('exportCSDT');
                                 Route::get('delete-csdt', 'CategoryController@deleteCSDT')->name('deleteCSDT');
@@ -331,7 +352,9 @@ Route::group(
 
                                 
                                 // Quản lý link báo cáo ngoài
-                                Route::get('linkreport', 'CategoryController@linkreport')->name('linkreport');
+                                Route::get('linkreport', 'CategoryController@linkreport')
+                                    ->middleware(['super_check:admin,operator'])
+                                    ->name('linkreport');
                                 Route::get('data-linkreport', 'CategoryController@dataLinkreport')->name('dataLinkreport');
                                 Route::post('add-baocao-url', 'CategoryController@addbaocaourl')->name('addbaocaourl');
                                 Route::get('deletebaocaourl', 'CategoryController@deletebaocaourl')->name('deletebaocaourl');
@@ -418,14 +441,18 @@ Route::group(
                 );
                 // Route for function đảm bảo chất lượng
                 Route::group(
-                    ['prefix' => 'dam-bao-chat-luong', 'as' => 'dambaochatluong.', 'namespace' => 'Dambaochatluong'],
+                    ['prefix' => 'dam-bao-chat-luong', 'as' => 'dambaochatluong.', 'namespace' => 'Dambaochatluong', 'middleware' => 
+                        ['super_check:admin,operator,canboDBCL,truongdonvi']
+                    ],
                     function () {
                         /*routes for set planning*/
                         Route::group(
                             ['prefix' => 'planning', 'as' => 'planning.', 'namespace' => 'Planning'],
                             function () {
                                 // Lập kế hoạch
-                                Route::get('index', 'PlanningController@index')->name('index');
+                                Route::get('index', 'PlanningController@index')
+                                    ->middleware(['super_check:admin,operator'])
+                                    ->name('index');
                                 Route::get('delete-ccsl', 'PlanningController@deleteCcsl')->name('deleteCcsl');
                                 Route::post('create-ccsl', 'PlanningController@createCcsl')->name('createCcsl');
                                 Route::post('update-ccsl', 'PlanningController@updateCcsl')->name('updateCcsl');
@@ -566,15 +593,18 @@ Route::group(
 
                 // Route for function tự đánh giá
                 Route::group(
-                    ['prefix' => 'tu-danh-gia', 'as' => 'tudanhgia.', 'namespace' => 'Tudanhgia'],
+                    ['prefix' => 'tu-danh-gia', 'as' => 'tudanhgia.', 'namespace' => 'Tudanhgia', 'middleware' => [
+                        'super_check:admin,operator,ns_thuchien,ns_phutrach,ns_kiemtra,ttchuyentrach'
+                    ]],
                     function () {
                         // Danh sách báo cáo tự đánh giá
                         Route::group(
                             ['prefix' => 'report', 'as' => 'report.', 'namespace' => 'Report'],
                             function(){
-
                                 //DS Báo cáo tự đánh giá 
-                                Route::get('index', 'ReportController@index')->name('index');
+                                Route::get('index', 'ReportController@index')
+                                    ->middleware(['super_check:admin,operator,ttchuyentrach'])
+                                    ->name('index');
                                 //Data 
                                 Route::get('data', 'ReportController@data')->name('data');
                                 Route::get('lap-ke-hoach/{id}', 'ReportController@planning')->name('planning');
@@ -620,7 +650,9 @@ Route::group(
                             ['prefix' => 'detailedplanning', 'as' => 'detailedplanning.', 'namespace' => 'Detailedplanning'],
                             function(){
                                 //Lập kế hoạch chi tiết
-                                Route::get('index', 'DetailedplanningController@index')->name('index');
+                                Route::get('index', 'DetailedplanningController@index')
+                                    ->middleware(['super_check:admin,operator,ns_thuchien,ttchuyentrach'])
+                                    ->name('index');
                                 Route::get('data', 'DetailedplanningController@data')->name('data');
                                 Route::get('showCriteria','DetailedplanningController@showCriteria' )->name('showCriteria');
                                 Route::get('detail/{id}','DetailedplanningController@detail')->name('detail');
@@ -660,7 +692,9 @@ Route::group(
                         Route::group(
                             ['prefix' => 'commentreport', 'as' => 'commentreport.', 'namespace' => 'Commentreport'],
                             function(){
-                                Route::get('index', 'CommentreportController@index')->name('index');
+                                Route::get('index', 'CommentreportController@index')
+                                    ->middleware(['super_check:admin,operator,ns_kiemtra,ttchuyentrach']) 
+                                    ->name('index');
                                 //Data
                                 Route::get('data', 'CommentreportController@data')->name('data');
                                 Route::get('general/{id}', 'CommentreportController@general')->name('general');
@@ -680,7 +714,9 @@ Route::group(
                             ['prefix' => 'completionreport', 'as' => 'completionreport.', 'namespace' => 'Completionreport'],
                             function(){
                                 //Chuẩn bị báo cáo
-                                Route::get('index', 'CompletionreportController@index')->name('index');
+                                Route::get('index', 'CompletionreportController@index')
+                                    ->middleware(['super_check:admin,operator,ttchuyentrach'])
+                                    ->name('index');
                                 //Data
                                 Route::get('data', 'CompletionreportController@data')->name('data');
                                 Route::get('detail/{id}', 'CompletionreportController@detail')->name('detail');
@@ -701,7 +737,9 @@ Route::group(
                                 Route::get('phan-tich-yeu-cau', 'PreparereportController@requireAnalysis')->name('requireAnalysis');
                                 Route::post('search-ptyc', 'PreparereportController@searchPtyc')->name('searchPtyc');
                                 Route::get('manacollect', 'PreparereportController@manacollect')->name('manacollect');
-                                Route::get('proof-handling', 'PreparereportController@proofHandling')->name('proofHandling');
+                                Route::get('proof-handling', 'PreparereportController@proofHandling')
+                                    ->middleware(['super_check:admin,operator,ns_phutrach,ttchuyentrach'])
+                                    ->name('proofHandling');
                                 Route::post('show-minh-chung-gop', 'PreparereportController@showmcgop')->name('showmcgop');
                                 Route::get('view-mcgop/{id}', 'PreparereportController@viewmcgop')->name('viewmcgop');
                                 Route::post('xoa-mc-thanh-phan', 'PreparereportController@deleteMctp')->name('deleteMctp');
@@ -712,7 +750,9 @@ Route::group(
                                 Route::get('edit-mc-gop/{id}', 'PreparereportController@editmcgop')->name('editmcgop');
                                 
                                 // đối chiếu minh chứng
-                                Route::get('doi-chieu-mc', 'PreparereportController@proofCompare')->name('proofCompare');
+                                Route::get('doi-chieu-mc', 'PreparereportController@proofCompare')
+                                    ->middleware(['super_check:admin,operator,ns_phutrach,ttchuyentrach'])
+                                    ->name('proofCompare');
                                 Route::post('show-dsmc', 'PreparereportController@showdsmc')->name('showdsmc');
                                 Route::post('xac-nhan-tieu-chi', 'PreparereportController@xacnhanTchi')->name('xacnhanTchi');
                                 Route::post('xoa-minh-chung', 'PreparereportController@xoaMinhChung')->name('xoaMinhChung');

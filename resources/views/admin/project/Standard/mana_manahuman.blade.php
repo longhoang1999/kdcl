@@ -186,7 +186,7 @@
 </section>
 
 <!-- modal -->
-<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+<div class="modal" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -219,7 +219,7 @@
 </div>
 
 
-<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabel" aria-hidden="true">
+<div class="modal" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -305,6 +305,7 @@
                                     <!-- <span class="text-danger">*</span> -->
                                 </label>
                                 <select class="form-control " name="upchucvu" id="forChucvu">
+                                    <option value="">--Không phân quyền</option>
                                     @foreach($chucvu as $cv)
                                         <option value="{{ $cv->id }}">
                                             {{ $cv->ten_chuc_vu }}
@@ -317,7 +318,7 @@
                                     <span>@lang('project/Standard/title.donvi')</span>
                                     <!-- <span class="text-danger">*</span> -->
                                 </label>
-                                <select class="form-control " name="updonvi" id="forDonvi">
+                                <select class="form-control " name="updonvi" id="forDonvi" require>
                                     @foreach($donvi as $dv)
                                         <option value="{{ $dv->id }}">
                                             {{ $dv->ten_donvi }}

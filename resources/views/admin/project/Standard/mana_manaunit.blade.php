@@ -63,6 +63,7 @@
         <!-- Bắt đầu trang -->
 <!-- page trang ở đây -->
 <section class="content-body">
+    @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
     <div class="container-fuild mt-3">
         <div class="row">
             <div class="col-md-2">
@@ -129,6 +130,7 @@
             </div>
         </form>
     </div>
+    @endif
     <div class="form-standard">
     
         <table class="table table-striped table-bordered" id="table" width="100%">

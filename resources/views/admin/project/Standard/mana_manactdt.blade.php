@@ -25,6 +25,7 @@
 
 <!-- page trang ở đây -->
 <section class="content-body">
+    @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
     <form action="{{ route('admin.thuongtruc.manacategory.createCTDT') }}" method="post">
         @csrf
         <div class="container-fuild mt-3">
@@ -103,6 +104,7 @@
             </div>
         </div>
     </form>
+    @endif
 
     <h2 class="mt-3">
         @lang('project/Standard/title.dsctdt')

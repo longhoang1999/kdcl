@@ -104,6 +104,10 @@ class ManaProofController extends DefinedController
                 ->select('minhchung.id as mc_id','tieu_de','ngay_ban_hanh','noi_banhanh','cong_khai','count_size','ten_donvi', 'trich_yeu', 'minhchung.duong_dan', 'minhchung.url', 'minhchung.tinh_trang','minhchung.sohieu')
                 ->where('minhchung.deleted_at',NULL)
                 ->orderBy('minhchung.updated_at','desc');
+        
+        if(Sentinel::inRole('truongdonvi')){
+            $res = $res->where('donvi.id',Sentinel::getUser()->donvi_id);
+        }
 
         if(isset($req->tieude) && $req->tieude != ''){
             $res = $res->where(function ($q) use ($req){
