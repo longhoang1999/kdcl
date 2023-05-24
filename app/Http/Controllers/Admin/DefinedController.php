@@ -72,6 +72,14 @@ class DefinedController {
         return Storage::disk('public')->path($link);
     }
 
+    public function deletefile($link){
+        if (!Storage::disk('public')->exists($link)) {
+            return abort(422, Lang::get('project/quanlyminhchung/title.minhchungkhongtontai'));
+        }else{
+            Storage::disk('public')->delete($link);
+        }
+    }
+
     public function downloadfile($link,$tenfile){
 
         if (!Storage::disk('public')->exists($link)) {

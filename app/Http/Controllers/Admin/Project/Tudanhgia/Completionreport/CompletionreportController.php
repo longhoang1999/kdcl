@@ -32,6 +32,11 @@ class CompletionreportController extends DefinedController
         $bcs = DB::table('kehoach_baocao')
                 ->select('kehoach_baocao.*','ctdt.manganh')
                 ->leftjoin('ctdt','ctdt.id','=','kehoach_baocao.ctdt_id');
+        
+        if(Sentinel::inRole('ttchuyentrach')){
+            $bcs = $bcs->where("kehoach_baocao.ns_phutrach", Sentinel::getUser()->id);
+        }
+
         return DataTables::of($bcs)
             ->addColumn(
                 'tenbaocao',

@@ -80,7 +80,7 @@
                                     </a>
                                 </div>
                                 <!-- / Dashboard -->
-                                @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                                
                                 <!-- Thường trực -->
                                 <div class="menu-item ">
                                     <div class="menu-content pt-8 pb-2">
@@ -271,7 +271,7 @@
                                 </div> --}}
                                 <!-- /Đối sánh -->
                                 <!-- /Thường trực -->
-                                 @endif
+                                
                                 
 
                                 

@@ -394,9 +394,12 @@ class UpdateAciController extends DefinedController
             ->make(true);
     }
     public function deleteMcyc(Request $req) {
-        DB::table("hoatdongnhom")->where("id", $req->id_delete)->update([
-                'deleted_at'      => Carbon::now()->toDateTimeString()
-        ]);
+        DB::table("hoatdongnhom")->where("id", $req->id_delete)
+            ->delete();
+        DB::table("kehoach_hanhdong")->where("hoatdongnhom_id", $req->id_delete)->delete();
+            // ->update([
+            //         'deleted_at'      => Carbon::now()->toDateTimeString()
+            // ]);
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.delete'));
     }

@@ -25,6 +25,7 @@
         <!-- Bắt đầu trang -->
 <!-- page trang ở đây -->
 <section class="content-body">
+    @if(!Sentinel::inRole('khac'))
     <div class="form-standard">
         <h4>@lang('project/QualiAssurance/title.tkiem')</h4>
             <div class="container-fuild pl-5 ">
@@ -156,11 +157,13 @@
                 <div class="col-md-4 mb-5">
                     <input type="text" name="tieude_search" id="tieude_search" class="form-control" style="height: 100%;" placeholder="@lang('project/QualiAssurance/title.locmctt')">
                 </div>
+                @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
                 <div class="col-md-1" style="text-align: right;">                
                     <a href="{{ route('admin.dambaochatluong.manaproof.newProof') }}" class="btn btn-benchmark" style="width: 100%;" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.tmoi')">
                         <i class="bi bi-plus-square" style="font-size: 35px;color: #50cd89;"></i>
                     </a>
                 </div>
+                @endif
                 <div class="col-md-1">                
                     <a class="btn btn-benchmark" style="width: 100%;" href="{{route('admin.dambaochatluong.manaproof.exportProof')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.xuat_excel')">
                         <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
@@ -185,6 +188,8 @@
             </tbody>                
         </table> 
     </div>
+    @endif
+
 </section>
 <!-- Modal -->
 <div class="modal fade" id="delete_confirm_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

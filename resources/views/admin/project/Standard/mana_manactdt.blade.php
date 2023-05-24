@@ -25,6 +25,7 @@
 
 <!-- page trang ở đây -->
 <section class="content-body">
+    @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
     <form action="{{ route('admin.thuongtruc.manacategory.createCTDT') }}" method="post">
         @csrf
         <div class="container-fuild mt-3">
@@ -75,7 +76,7 @@
                 </div>
                 <div class="col-md-5">
                     <select class="form-control " name="dvql">
-                        <option hidden value=""></option>
+                        <option value="" hidden>@lang('project/Standard/title.dvql')</option>
                         @foreach($loai_dv as $ldv)
                             <optgroup label="{{ $ldv->loai_donvi }}">
                                 @foreach($donvi as $value)
@@ -103,6 +104,7 @@
             </div>
         </div>
     </form>
+    @endif
 
     <h2 class="mt-3">
         @lang('project/Standard/title.dsctdt')
@@ -224,6 +226,7 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <select class="form-control " id="upDvCTDT" name="up_dvql">
+                                    <option value="" hidden>@lang('project/Standard/title.dvql')</option>
                                     @foreach($loai_dv as $ldv)
                                         <optgroup label="{{ $ldv->loai_donvi }}">
                                             @foreach($donvi as $value)
@@ -356,13 +359,13 @@
         placeholder: "@lang('project/Standard/title.hdt')",
         allowClear: false
     });
-    $('select[name="dvql"]').select2({
-        placeholder: "@lang('project/Standard/title.dvql')",
-        allowClear: false
-    });
-    $('select[name="up_dvql"]').select2({
-        placeholder: "@lang('project/Standard/title.up_dvql')",
-        allowClear: false
-    });
+    // $('select[name="dvql"]').select2({
+    //     placeholder: "@lang('project/Standard/title.dvql')",
+    //     allowClear: false
+    // });
+    // $('select[name="up_dvql"]').select2({
+    //     placeholder: "@lang('project/Standard/title.up_dvql')",
+    //     allowClear: false
+    // });
 </script>
 @stop

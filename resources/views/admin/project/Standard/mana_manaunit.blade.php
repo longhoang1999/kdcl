@@ -63,6 +63,7 @@
         <!-- Bắt đầu trang -->
 <!-- page trang ở đây -->
 <section class="content-body">
+    @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
     <div class="container-fuild mt-3">
         <div class="row">
             <div class="col-md-2">
@@ -104,7 +105,7 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-control " required name="truongdvi">
+                    <select class="form-control "  name="truongdvi">
                         <option hidden></option>
                         @foreach($truong_dv as $value)
                             <option value="{{ $value->id }}">{{ $value->name }}</option>
@@ -129,6 +130,7 @@
             </div>
         </form>
     </div>
+    @endif
     <div class="form-standard">
     
         <table class="table table-striped table-bordered" id="table" width="100%">
@@ -289,12 +291,6 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <select class="form-control " id="forTruongDV" required name="truongdvi">
-                                    <option hidden value="">
-                                        @lang('project/Standard/title.truongdvi')
-                                    </option>
-                                    @foreach($truong_dv as $value)
-                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
@@ -566,37 +562,44 @@
         })
             .then((response) => response.json())
             .then((data) => {
-                $("#forMaDV").val(data.ma_donvi);
-                $("#forTenDV").val(data.ten_donvi);
-                $("#forTenNgan").val(data.ten_ngan);
-                $("#forDiaChi").val(data.dia_chi);
-                $("#forMota").val(data.mo_ta);
-                $("#forTruongDV").val(data.truong_dv);
+                $('#forTruongDV').empty().trigger("change");
+                data[1].forEach((item, index) => {
+                    var newOption = new Option(item.name, item.id, false, false);
+                    $('#forTruongDV').append(newOption).trigger('change');
+                })
+
+                /// Sai
+                $("#forMaDV").val(data[0].ma_donvi);
+                $("#forTenDV").val(data[0].ten_donvi);
+                $("#forTenNgan").val(data[0].ten_ngan);
+                $("#forDiaChi").val(data[0].dia_chi);
+                $("#forMota").val(data[0].mo_ta);
+                $("#forTruongDV").val(data[0].truong_dv);
                 $('#forTruongDV').trigger('change');
 
-                $("#forCB-DBCL").val(data.canbo_dbcl);
-                $("#forTenEN").val(data.ten_tienganh);
-                $("#forDVcu").val(data.ten_donvi_cu);
+                $("#forCB-DBCL").val(data[0].canbo_dbcl);
+                $("#forTenEN").val(data[0].ten_tienganh);
+                $("#forDVcu").val(data[0].ten_donvi_cu);
                 //$("#forCTDTName").val(data.ten_ctdt);
                 //$("#forCTDTNameEN").val(data.ten_ctdt_tienganh);
                 //$("#forCTDTOld").val(data.ten_ctdt_cu);
                 //$("#forMaCTDT").val(data.ma_ctdt);
-                $("#forLhcsgd").val(data.lhcsgd);
-                $("#forLinhvuchd").val(data.lvhd);
-                $("#forLoaiDv").val(data.loai_dv_id);
-                $("#forDienthoai").val(data.dien_thoai);
-                $("#forEmail").val(data.email);
-                $("#forwebsite").val(data.website);
-                $("#forNamTL").val(data.nam_thanhlap);
-                $("#forNamBD").val(data.nam_batdau);
-                $("#forNamCB").val(data.nam_capbang);
-                $("#forDvcc").val(data.dvcc);
+                $("#forLhcsgd").val(data[0].lhcsgd);
+                $("#forLinhvuchd").val(data[0].lvhd);
+                $("#forLoaiDv").val(data[0].loai_dv_id);
+                $("#forDienthoai").val(data[0].dien_thoai);
+                $("#forEmail").val(data[0].email);
+                $("#forwebsite").val(data[0].website);
+                $("#forNamTL").val(data[0].nam_thanhlap);
+                $("#forNamBD").val(data[0].nam_batdau);
+                $("#forNamCB").val(data[0].nam_capbang);
+                $("#forDvcc").val(data[0].dvcc);
                 // ẩn chính nó đi
                 
 
                 //CKEDITOR.instances['forMotaNamTL'].setData(data.mota_nam_thanhlap);
-                CKEDITOR.instances['forGT'].setData(data.gioi_thieu);
-                CKEDITOR.instances['forCCTC'].setData(data.co_cau_tochuc);
+                CKEDITOR.instances['forGT'].setData(data[0].gioi_thieu);
+                CKEDITOR.instances['forCCTC'].setData(data[0].co_cau_tochuc);
             })
     })
 

@@ -25,6 +25,7 @@ class SentinelOperator
             !Sentinel::inRole('canbo')  && 
             !Sentinel::inRole('ns_thuchien')  && 
             !Sentinel::inRole('ns_phutrach')  && 
+            !Sentinel::inRole('user')  && 
             !Sentinel::inRole('ns_kiemtra')
         ) {
             return redirect('my-account');

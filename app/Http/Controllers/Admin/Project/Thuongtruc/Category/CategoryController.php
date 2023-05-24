@@ -178,12 +178,17 @@ class CategoryController extends DefinedController
         $donvis = DB::table('donvi')->orderBy('id', 'desc');
         if(isset($req->id) && $req->id != ''){
             $donvis = $donvis->where("id", $req->id)->first();
-            return json_encode($donvis);
+            $users = DB::table("users")->where("donvi_id", $req->id)->select("id", "name")->get();
+            return json_encode([$donvis, $users]);
         }else{
             $donvis = $donvis
                     ->select('id', 'ma_donvi', 'ten_donvi',
                      'created_at', 'truong_dv', 'nguoi_tao', 'deleted_at', 'loai_dv_id','dvcc')
                     ->where("trang_thai", "<>" ,"deleted");
+            
+            if(Sentinel::inRole('truongdonvi')){
+                $donvis = $donvis->where("id", Sentinel::getUser()->donvi_id);
+            }
 
             return DataTables::of($donvis)               
                 ->addColumn(
@@ -277,6 +282,14 @@ class CategoryController extends DefinedController
                     Lang::get('project/Standard/message.success.delete'));
     }
     public function updateUnit(Request $req){
+        $tdv = DB::table("donvi")->where("id", $req->id_unit)->select("truong_dv")->first();
+        if($tdv->truong_dv != ""){
+            //echo $req->truongdvi;
+            $usr = Sentinel::findById($tdv->truong_dv);
+            $role = Sentinel::findRoleByName('truongdonvi');
+            $role->users()->detach($usr);
+        }
+
         $data = [
             'ma_donvi'              =>  $req->madvi,
             'ten_donvi'             =>  $req->tendvi,
@@ -313,6 +326,13 @@ class CategoryController extends DefinedController
             'co_cau_tochuc'         =>  $req->cctc,
         ];
         DB::table("donvi")->where("id", $req->id_unit)->update($data);
+
+        
+        $us = Sentinel::findById($req->truongdvi);
+        $role_ = Sentinel::findRoleByName('truongdonvi');
+        $role_->users()->attach($us);
+
+
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.update'));
     }
@@ -333,6 +353,17 @@ class CategoryController extends DefinedController
             'created_at'            =>  Carbon::now()->toDateTimeString(),
             'updated_at'            =>  Carbon::now()->toDateTimeString(),
         ];
+
+        if($req->truongdvi != ""){
+            $find = DB::table("role_users")->where("user_id", $req->truongdvi)
+                ->where("role_id", 8);
+            if($find->count() == 0){
+                $us = Sentinel::findById($req->truongdvi);
+                $role_ = Sentinel::findRoleByName('truongdonvi');
+                $role_->users()->attach($us);
+            }
+        }
+
         DB::table("donvi")->where("id", $req->id_unit)->insert($data);
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.create'));
@@ -527,7 +558,6 @@ class CategoryController extends DefinedController
         $data = [
             'ma_nhansu'     => $req->upmans,
             'name'          =>  $req->uptenns,
-            'email'         =>  $req->uptendn,
             'address'       =>  $req->updiachi,
             'phone'         =>  $req->upsdt,
             'donvi_id'      =>  $req->updonvi,
@@ -535,14 +565,46 @@ class CategoryController extends DefinedController
             'pic'           =>  $routePic
         ];
         DB::table("users")->where("id", $req->id_user)->update($data);
-        DB::table("role_chucvu_users")->where("user_id", $req->id_user)
-                ->update([
-                    'chucvu_id'     =>  $req->upchucvu,
-                ]);
+
+        
+        if($req->upchucvu == '1'){
+            $this->detachRole($req->id_user);
+            $us = Sentinel::findById($req->id_user);
+            $role_ = Sentinel::findRoleByName('truongdonvi');
+            $role_->users()->attach($us);
+        }else if($req->upchucvu == '2'){
+            $this->detachRole($req->id_user);
+            $us = Sentinel::findById($req->id_user);
+            $role_ = Sentinel::findRoleByName('canboDBCL');
+            $role_->users()->attach($us);
+        }else if($req->upchucvu == '3'){
+            $this->detachRole($req->id_user);
+            $us = Sentinel::findById($req->id_user);
+            $role_ = Sentinel::findRoleByName('khac');
+            $role_->users()->attach($us);
+        }else{
+            $this->detachRole($req->id_user);
+        }
+       
+        
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.update'));
     }
-
+    public function detachRole($id_user){
+        $us = Sentinel::findById($id_user);
+        if(DB::table("role_users")->where("user_id", $id_user)->where("role_id", 8)->count() != 0){
+            $role_1 = Sentinel::findRoleByName('truongdonvi');
+            $role_1->users()->detach($us);
+        }
+        if(DB::table("role_users")->where("user_id", $id_user)->where("role_id", 4)->count() != 0){
+            $role_2 = Sentinel::findRoleByName('canboDBCL');
+            $role_2->users()->detach($us);
+        }
+        if(DB::table("role_users")->where("user_id", $id_user)->where("role_id", 9)->count() != 0){
+            $role_3 = Sentinel::findRoleByName('khac');
+            $role_3->users()->detach($us);
+        }
+    }
 
     public function ctdt(Request $req){
         $hdt = DB::table("he_dao_tao")->select("id", "ten_hdt")->get();
@@ -559,6 +621,9 @@ class CategoryController extends DefinedController
 
     public function datactdt(Request $req) {
         $ctdts = DB::table("ctdt");
+        if(Sentinel::inRole('truongdonvi')){
+            $ctdts = $ctdts->where('donvi_id', Sentinel::getUser()->donvi_id);
+        }
         if(isset($req->id_search)  && $req->id_search != ""){
             $ctdt = $ctdts->where("id", $req->id_search)
                     ->select("id", "ma_ctdt", "tennganh", "tennganh_en", "hedaotao_id", "donvi_id", "sdt_lienhe", "dtkhoa1", "ncbkhoa1", "tentd")

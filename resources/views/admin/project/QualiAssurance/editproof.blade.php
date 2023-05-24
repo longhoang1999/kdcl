@@ -204,7 +204,7 @@
                 </button>
             </div>
         </form>
-        @if( !Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien'))
+        @if( Sentinel::inRole('admin') || Sentinel::inRole('operator') || Sentinel::inRole('truongdonvi'))
         @if($minhchung->tinh_trang == 'dangcho')
             <a href="{{ route('admin.dambaochatluong.manaproof.xacnhanMC') }}?idmc={{ $minhchung->id }}&tinh_trang=xacnhan" class="btn btn-success">
                 @lang('project/QualiAssurance/title.xacnhan')    

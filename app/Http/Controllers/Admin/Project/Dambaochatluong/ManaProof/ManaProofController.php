@@ -99,11 +99,15 @@ class ManaProofController extends DefinedController
     
     public function viewProof(Request $req){
         $res = DB::table('minhchung')
-                ->leftJoin('users','users.id','=','minhchung.nguoi_tao')
+                ->leftJoin('users','users.id','=','minhchung.nguoi_quan_ly')
                 ->leftJoin('donvi','users.donvi_id','=','donvi.id')
                 ->select('minhchung.id as mc_id','tieu_de','ngay_ban_hanh','noi_banhanh','cong_khai','count_size','ten_donvi', 'trich_yeu', 'minhchung.duong_dan', 'minhchung.url', 'minhchung.tinh_trang','minhchung.sohieu')
                 ->where('minhchung.deleted_at',NULL)
                 ->orderBy('minhchung.updated_at','desc');
+        
+        if(Sentinel::inRole('truongdonvi')){
+            $res = $res->where('donvi.id',Sentinel::getUser()->donvi_id);
+        }
 
         if(isset($req->tieude) && $req->tieude != ''){
             $res = $res->where(function ($q) use ($req){
@@ -151,6 +155,7 @@ class ManaProofController extends DefinedController
         return DataTables::of($res) 
             ->addColumn('actions',function($user){                    
                     $actions = '';
+                    
                     $actions .= ' <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="bi bi-eye-fill" style="font-size: 25px;color: #50cd89;"></i>
@@ -176,12 +181,13 @@ class ManaProofController extends DefinedController
                     }
                     $actions .= "</div> </div>";
 
-                                        
-                    $actions = $actions.'<a href="' . route('admin.dambaochatluong.manaproof.editProof',$user->mc_id) .'" 
-                    class="btn" data-bs-placement="top" title="'.Lang::get('project/QualiAssurance/title.chinhsua').'">'. '<i class="bi bi-pencil-square" style="font-size: 25px;color: #009ef7;"></i>' .'</a>';                    
-                    $actions = $actions. '<button type="button" class="btn " onclick="deleteconfirm(' . $user->mc_id . ');">
-                        '. '<i class="bi bi-trash" style="font-size: 25px;color: red;"></i>' .'
-                    </button>';
+                    if(!Sentinel::inRole('khac')){                    
+                        $actions = $actions.'<a href="' . route('admin.dambaochatluong.manaproof.editProof',$user->mc_id) .'" 
+                        class="btn" data-bs-placement="top" title="'.Lang::get('project/QualiAssurance/title.chinhsua').'">'. '<i class="bi bi-pencil-square" style="font-size: 25px;color: #009ef7;"></i>' .'</a>';                    
+                        $actions = $actions. '<button type="button" class="btn " onclick="deleteconfirm(' . $user->mc_id . ');">
+                            '. '<i class="bi bi-trash" style="font-size: 25px;color: red;"></i>' .'
+                        </button>';
+                    }
                     return $actions;
             })
             ->addColumn('ngayBan_hanh',function($user){
@@ -504,8 +510,9 @@ class ManaProofController extends DefinedController
         $candelete = false;
 
         $mc = DB::table('minhchung')->where('id',$req->id)->first();
+
         if($mc){
-            if(Sentinel::inRole('admin')){
+            if(Sentinel::inRole('admin') || Sentinel::inRole('operator')){
                 $candelete = true;
             }else{
                 $userid = Sentinel::getUser()->id;
@@ -516,9 +523,17 @@ class ManaProofController extends DefinedController
         }
 
         if($candelete){
-            $res = DB::table('minhchung')->where('id',$req->id)->update(['deleted_at' => date('Y-m-d H:i:s')]);
+            $res = DB::table('minhchung')->where('id',$req->id)->first();
+                //->update(['deleted_at' => date('Y-m-d H:i:s')]);
             if($res){
-                $res = DB::table('hoatdongnhom_minhchung')->where('minhchung_id',$req->id)->update(['deleted_at' => date('Y-m-d H:i:s')]);
+                $link = $res->duong_dan;
+                $re = DB::table('minhchung')->where('id',$req->id)->delete();
+                if($re){
+                    $re = DB::table('hoatdongnhom_minhchung')->where('minhchung_id',$req->id)
+                    ->delete();                     
+                    $this->deletefile($link);
+                }
+                // ->update(['deleted_at' => date('Y-m-d H:i:s')]);
                 return 1;  
             } 
         }

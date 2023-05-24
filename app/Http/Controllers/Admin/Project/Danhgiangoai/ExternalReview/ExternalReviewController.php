@@ -388,7 +388,7 @@ class ExternalReviewController extends DefinedController{
 									->select('kehoach_baocao.id as id_khbc','kehoach_baocao.*','users.*')
 									->leftjoin('users','users.id','=','kehoach_baocao.ns_phutrach')
 									->get();
-			if(!Sentinel::getUser()->inRole("operator") && !Sentinel::getUser()->inRole("admin")){
+			if(!Sentinel::inRole('operator') && !Sentinel::inRole('admin')){
 				foreach($keHoachBaoCaoList as $key => $value){
 					$find = DB::table("role_user_dgn")
 							->where("user_id", Sentinel::getUser()->id)
