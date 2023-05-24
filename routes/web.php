@@ -442,7 +442,7 @@ Route::group(
                 // Route for function đảm bảo chất lượng
                 Route::group(
                     ['prefix' => 'dam-bao-chat-luong', 'as' => 'dambaochatluong.', 'namespace' => 'Dambaochatluong', 'middleware' => 
-                        ['super_check:admin,operator,canboDBCL,truongdonvi']
+                        ['super_check:admin,operator,canboDBCL,truongdonvi,khac']
                     ],
                     function () {
                         /*routes for set planning*/
@@ -475,7 +475,9 @@ Route::group(
                             ['prefix' => 'updateaci', 'as' => 'updateaci.', 'namespace' => 'UpdateAci'],
                             function () {
                                 // Cập nhật hành động
-                                Route::get('index', 'UpdateAciController@index')->name('index');
+                                Route::get('index', 'UpdateAciController@index')
+                                    ->middleware(['super_check:admin,operator,canboDBCL,truongdonvi'])
+                                    ->name('index');
                                 Route::post('view-action', 'UpdateAciController@viewAction')->name('viewAction');
                                 // Quản lý hoạt động
                                 Route::get('mana-action', 'UpdateAciController@manaAction')->name('manaAction');
@@ -506,7 +508,9 @@ Route::group(
                             function () {
                                 Route::get('create-mc', "ManaProofController@newProof")->name("createMc");
                                 // quản lý minh chứng
-                                Route::get('index', 'ManaProofController@index')->name('index');
+                                Route::get('index', 'ManaProofController@index')
+                                    ->middleware(['super_check:admin,operator,canboDBCL,truongdonvi,khac'])
+                                    ->name('index');
                                 // Thêm mới minh chứng
                                 Route::get('new-proof', 'ManaProofController@newProof')->name('newProof');
                                 Route::get('edit-proof/{id}', 'ManaProofController@editProof')->name('editProof');
@@ -529,7 +533,9 @@ Route::group(
                             ['prefix' => 'kiem-tra-mc-hoat-dong', 'as' => 'checkproof.', 'namespace' => 'CheckProof'],
                             function () {
                                 // kiểm tra minh chứng theo hoạt động
-                                Route::get('index', 'CheckProofController@index')->name('index');
+                                Route::get('index', 'CheckProofController@index')
+                                    ->middleware(['super_check:admin,operator,canboDBCL,truongdonvi'])
+                                    ->name('index');
                                 Route::post('du-lieu-hoat-dong', 'CheckProofController@getData')->name('getData');
                                 Route::get('chi-tiet/{id}', 'CheckProofController@detailData')->name('detailData');
                                 Route::get('chinh-sua/{id}', 'CheckProofController@editData')->name('editData');
@@ -549,7 +555,9 @@ Route::group(
                             ['prefix' => 'ke-hoach-hanh-dong', 'as' => 'proofclaim.', 'namespace' => 'ProofClaim'],
                             function () {
                                 // kế hoạch hoạt động
-                                Route::get('index', 'ProofClaimController@index')->name('index');
+                                Route::get('index', 'ProofClaimController@index')
+                                    ->middleware(['super_check:admin,operator,canboDBCL,truongdonvi'])    
+                                    ->name('index');
                                 Route::post('danh-sach', 'ProofClaimController@getListKhhd')->name('getListKhhd');
                                 Route::get('exportlistKhhd', 'ProofClaimController@exportlistKhhd')->name('exportlistKhhd');
                                 
@@ -793,7 +801,9 @@ Route::group(
                             ['prefix' => 'lap-ke-hoach-dgn', 'as' => 'lapkehoachdanhgian.', 'namespace' => 'Planningassessment'],
                             function(){
                                 // Đánh giá ngoài
-                                Route::get('/','PlanningassessmentController@index')->name('index');
+                                Route::get('/','PlanningassessmentController@index')
+                                ->middleware(['super_check:admin,operator'])
+                                ->name('index');
                                 Route::post("phanquyen", 'PlanningassessmentController@phanquyen')->name('phanquyen');
                                 Route::get('get-data','PlanningassessmentController@getdata')->name('getdata');
                                 Route::get('delete-data','PlanningassessmentController@deletedata')->name('deletedata');
@@ -808,7 +818,7 @@ Route::group(
 
                 // Route for function Import dữ liệu thô 
                 Route::group(
-                    ['prefix' => 'import-du-lieu-excel', 'as' => 'importdata.', 'namespace' => 'Importdata'],
+                    ['prefix' => 'import-du-lieu-excel', 'as' => 'importdata.', 'namespace' => 'Importdata', 'middleware' => ['super_check:admin,operator']],
                     function(){
                         // Import thông tin cơ bản
                         Route::group(

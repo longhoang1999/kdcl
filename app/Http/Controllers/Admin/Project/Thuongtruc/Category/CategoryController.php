@@ -178,7 +178,8 @@ class CategoryController extends DefinedController
         $donvis = DB::table('donvi')->orderBy('id', 'desc');
         if(isset($req->id) && $req->id != ''){
             $donvis = $donvis->where("id", $req->id)->first();
-            return json_encode($donvis);
+            $users = DB::table("users")->where("donvi_id", $req->id)->select("id", "name")->get();
+            return json_encode([$donvis, $users]);
         }else{
             $donvis = $donvis
                     ->select('id', 'ma_donvi', 'ten_donvi',
@@ -281,6 +282,14 @@ class CategoryController extends DefinedController
                     Lang::get('project/Standard/message.success.delete'));
     }
     public function updateUnit(Request $req){
+        $tdv = DB::table("donvi")->where("id", $req->id_unit)->select("truong_dv")->first();
+        if($tdv->truong_dv != ""){
+            //echo $req->truongdvi;
+            $usr = Sentinel::findById($tdv->truong_dv);
+            $role = Sentinel::findRoleByName('truongdonvi');
+            $role->users()->detach($usr);
+        }
+
         $data = [
             'ma_donvi'              =>  $req->madvi,
             'ten_donvi'             =>  $req->tendvi,
@@ -318,12 +327,7 @@ class CategoryController extends DefinedController
         ];
         DB::table("donvi")->where("id", $req->id_unit)->update($data);
 
-        $truongdvi = DB::table("donvi")->where("id", $req->id_unit)->select("truong_dv")->first();
-        if($truongdvi->truong_dv != ""){
-            $usr = Sentinel::findById($truongdvi->truong_dv);
-            $role = Sentinel::findRoleByName('truongdonvi');
-            $role->users()->detach($usr);
-        }
+        
         $us = Sentinel::findById($req->truongdvi);
         $role_ = Sentinel::findRoleByName('truongdonvi');
         $role_->users()->attach($us);
@@ -349,6 +353,17 @@ class CategoryController extends DefinedController
             'created_at'            =>  Carbon::now()->toDateTimeString(),
             'updated_at'            =>  Carbon::now()->toDateTimeString(),
         ];
+
+        if($req->truongdvi != ""){
+            $find = DB::table("role_users")->where("user_id", $req->truongdvi)
+                ->where("role_id", 8);
+            if($find->count() == 0){
+                $us = Sentinel::findById($req->truongdvi);
+                $role_ = Sentinel::findRoleByName('truongdonvi');
+                $role_->users()->attach($us);
+            }
+        }
+
         DB::table("donvi")->where("id", $req->id_unit)->insert($data);
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.create'));

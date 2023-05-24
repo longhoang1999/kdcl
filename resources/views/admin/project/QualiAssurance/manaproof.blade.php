@@ -25,6 +25,7 @@
         <!-- Bắt đầu trang -->
 <!-- page trang ở đây -->
 <section class="content-body">
+    @if(!Sentinel::inRole('khac'))
     <div class="form-standard">
         <h4>@lang('project/QualiAssurance/title.tkiem')</h4>
             <div class="container-fuild pl-5 ">
@@ -187,6 +188,8 @@
             </tbody>                
         </table> 
     </div>
+    @endif
+
 </section>
 <!-- Modal -->
 <div class="modal fade" id="delete_confirm_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
