@@ -671,6 +671,13 @@
 		'caodang'		=> 'Cao đẳng',
 		'trinhdokhac'	=> 'Trình độ khác',
 		'hcdn'			=> 'Hạng chức danh nghề',
+		// Công khai thông tin về các hoạt động nghiên cứu khoa học, chuyển giao công nghệ, sản xuất thử và tư vấn
+		'tendanv'		=> 'Tên dự án, nhiệm vụ khoa học công nghệ',
+		'nctvtv'		=> 'Người chủ trì và các thành viên',
+		'dttn'			=> 'Đối tác trong nước và quốc tế',
+		'tgth'			=> 'Thời gian thực hiện',
+		'kpth'			=> 'Kinh phí thực hiện (triệu đồng)',
+		'ttspnd'		=> 'Tóm tắt sản phẩm, ứng dụng thực tiễn',
 		
 		
 

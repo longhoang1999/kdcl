@@ -2,6 +2,23 @@
 
 require_once 'web_builder.php';
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Carbon\Carbon;
+Route::get("active", function() {
+    $users = DB::table("users")->select("id")->get();
+    foreach($users as $us){
+        $data = [
+            'user_id'   => $us->id,
+            'code'  => 'AbVBHza2L6knwXRJNuxK2Cb67w5xG2cI',
+            'completed' => '1',
+            'completed_at' => Carbon::now()->toDateTimeString(),
+            'created_at'    => Carbon::now()->toDateTimeString(),
+            'updated_at'    => Carbon::now()->toDateTimeString(),
+        ];
+        DB::table("activations")->insert($data);
+    }
+    
+});
+
 // Route::get("create-role", function(){
 //     $role = Sentinel::getRoleRepository()->createModel()->create([
 //         'name' => 'ns_kiemtra',

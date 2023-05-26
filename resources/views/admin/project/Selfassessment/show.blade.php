@@ -138,9 +138,9 @@
                     <div class="group_back">
                         <div class="arrow_content_text_css">
                             <h5>@lang('project/Selfassessment/title.modau')</h5>
-                            @if(!Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien'))
+                            
                             <button id="show_content" onclick="showhidetieuchi()"><i class="fa fa-chevron-up" id="show_arrow"></i></button>
-                            @endif
+                           
                         </div>
                         <div id="content_text" >
                             <div class="text_contents p-5" id="show_textcontent">
@@ -247,14 +247,14 @@
                                 @elseif($kehoachtieuchi->baocao_tieuchi->trang_thai=="congbo")
                                     <div class="label label-success" style="position: absolute;left: 14px;
                                     bottom: 2px;">@lang('project/Selfassessment/title.dacongbo')</div>
-                                     @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                                     
                                     <button class="btn ladda-button btn-xs moLaiTieuChi congBoTieuChi_{{$kehoachtieuchi->id}} data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.molaitieuchi')"
                                             data-style="expand-right"
                                             d-id="{{$kehoachtieuchi->baocao_tieuchi->id}}"
                                             d-tieuchi_id="{{$kehoachtieuchi->id}}">
                                             <i class="fas fa-redo" style="font-size: 25px;color: #50cd89;"></i>
                                     </button>
-                                    @endif 
+                                    
                                 @endif
                             @else
                                 <button class="btn ladda-button btn-xs congBoTieuChi congBoTieuChi_{{$kehoachtieuchi->id}} data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.cbtc')"
@@ -299,13 +299,13 @@
                                                 </button>
                                             @elseif($menhde->trang_thai=='congbo')
                                                 <div class="label label-success">@lang('project/Selfassessment/title.dahoanthanh')</div>
-                                                @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                                               
                                                 <button class="btn ladda-button btn-xs moLaiMenhDe congBoMenhDe_css data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.molai')"
                                                         data-style="expand-right"
                                                         d-id="{{$menhde->id}}">
                                                         <i class="fas fa-redo" style="font-size: 25px;color: #50cd89;"></i>
                                                 </button>
-                                                @endif
+                                                
                                             @endif
                                         @else
                                             <button class="btn btn-xs congBoMenhDeFake congBoMenhDe_css data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.hoanthanh')">
@@ -602,9 +602,9 @@
                     <div class="group_back">
                         <div class="arrow_content_text_css">
                             <h5>@lang('project/Selfassessment/title.ketluan')</h5>
-                            @if(!Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien'))
+                            
                             <button id="show_content2" onclick="showhidetieuchi3()"><i class="fa fa-chevron-up" id="show_arrow2"></i></button>
-                            @endif
+                            
                         </div>
 
                         <div id="content_text2" >

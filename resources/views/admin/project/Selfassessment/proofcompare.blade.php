@@ -100,11 +100,11 @@
               <th scope="col">
                   @lang('project/Selfassessment/title.kmc')
               </th>
-              @if(!Sentinel::inRole('ns_kiemtra'))
+            
                   <th scope="col">
                       @lang('project/Selfassessment/title.quanly')
                   </th>
-              @endif
+            
             </tr>
           </thead>
             <tbody>
@@ -121,7 +121,7 @@
                         <td colspan="4">
                             {{ $tieuChuan->first()->stt.".".$tieuChi->stt }}
                             @php
-                                $mctt_count = DB::table("tieuchi_minhchungtt")
+                                $mctt_count = DB::table("role_mctt_tchi")
                                             ->where("tieuchi_id", $tieuChi->id);
                             @endphp
                             @if($mctt_count->count()==0)
@@ -132,7 +132,7 @@
                                 : {{ $tieuChi->mo_ta }}
                             @endif
                         </td>
-                        @if(!Sentinel::inRole('ns_kiemtra'))
+                       
                             <td class="text-center">
                                 @php
                                     $minhchung_gop = DB::table("minhchung_gop")
@@ -149,7 +149,7 @@
 
                                 @endif
                             </td>
-                        @endif
+                      
                     </tr>
 
                     @php
@@ -201,7 +201,7 @@
                                     minh chứng)
                                 @endif
                             </td>
-                            @if(!Sentinel::inRole('ns_kiemtra'))
+                           
                                 <td class="text-center">
                                     <a href="{{ 
                                         route('admin.tudanhgia.preparereport.createMcGop', 
@@ -217,7 +217,7 @@
                                         <i class="bi bi-plus-square-fill" style="font-size: 25px;color: rgb(6, 159, 210);"></i>
                                     </a>
                                 </td>
-                            @endif
+                          
                         </tr>
                         @php
                             $isHadMinhChung = false;

@@ -234,12 +234,12 @@ class PreparereportController extends DefinedController
                         $html .= ' 
                             <div class="block-minhchung">
                                 <span class="text-info">'. $mc->tieu_de .'</span>';
-                            if(!Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien')){
+                            
                                 $html .= '<button title="'. 
                                         Lang::get('project/Selfassessment/title.xmctp')
                                      .'" class="btn" data-toggle="modal" data-target="#modalDeleteItem" data-minhchunggop="'. $mcg->id .'" data-minhchung="'. $mc->id .'"><i class="bi bi-x-circle" style="font-size: 35px;color: orange;"></i></button>
                                 </div>';
-                            }
+                            
 
 
                     }
@@ -254,11 +254,11 @@ class PreparereportController extends DefinedController
                      .'" class="btn">
                         <i class="bi bi-eye-fill" style="font-size: 30px;color: #50cd89;"></i>
                         </a>';
-                    if(!Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien')){
+                   
                         $actions = $actions. '<button title="'. 
                         Lang::get('project/Selfassessment/title.xmcg')
                      .'" class="btn" data-toggle="modal" data-target="#modalDeleteGroup" data-minhchunggop="' .$mcg->id. '"><i class="bi bi-x-circle" style="font-size: 35px;color: red;"></i></button>';
-                    }
+                    
                     
                     return $actions;
                 }
