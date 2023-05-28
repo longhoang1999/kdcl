@@ -6,7 +6,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use DB;
 
-class Tkktxexport implements FromCollection, WithHeadings
+class TttnsvExport implements FromCollection, WithHeadings
 {
     public function collection()
     {
@@ -27,7 +27,7 @@ class Tkktxexport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
-            "Nội dung",
+            "Tiêu chí",
             "Năm",           
         ];
     }

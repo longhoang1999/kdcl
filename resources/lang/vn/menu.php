@@ -138,7 +138,7 @@
 			'9'			=> 'Tỉ lệ sinh viên, giảng viên',
 			'10'		=> 'Diện tích đất',
 			'11'		=> 'Đào tạo theo đơn',
-			'12'		=> 'Diện tích đất',
+			'12'		=> 'Diện tích đất,tổng diện tích sàn xây dựng',
 			'13'		=> 'Thông tin về học liệu',
 			'14'		=> 'Nghiên cứu khoa học',
 			'15'		=> 'Công khai cam kết chất lượng đào tạo',

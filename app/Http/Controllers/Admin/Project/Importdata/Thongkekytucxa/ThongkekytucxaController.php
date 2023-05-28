@@ -31,22 +31,351 @@ use App\Exports\Tkktxexport;
 class ThongkekytucxaController extends DefinedController{
 
 	public function index(){
-		$loai_dv = DB::table("loai_donvi")->select("id", "loai_donvi")->get();
-		$donvi = DB::table("donvi")->select("id", "ten_donvi", "deleted_at","loai_dv_id")
-                ->where("deleted_at", null)
+		$tttnsv = DB::table("excel_import_tk_ktx")
+                ->where("tc_number", "<>", null)
+                ->where("parent", null)
+                ->orderBy('tc_number', 'asc')
+                ->get();
+
+        $nams = DB::table("excel_import_tk_ktx")
+                ->where("nam" , "<>", null)
+                ->select("nam")
+                ->groupBy('nam')
                 ->get();
 		
         return view('admin.project.Importdata.tkktx')->with([
-           	'loai_dv'           => $loai_dv,
-           	'donvi'             => $donvi,
+           	'tttnsv'           => $tttnsv,
+           	'nams'             => $nams,
         ]);
 	}
 
 	//Import excel unit
     public function importUnit (Request $req) {
-        $excel = new Tkkytucxa;
-        Excel::import($excel, $req->file);
-        return $excel->read();
+        foreach($req->checkbox as $key => $value){
+            if($value == "on"){
+                if($key == 0){
+                    // check cha
+                    $checkTc1 = DB::table("excel_import_tk_ktx")
+                        ->where('parent', null)
+                        ->where('tc_number', 3);
+                    if($checkTc1->count() == 0){
+                        $data0 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.tdtktx'),
+                            'tc_number' => 3,
+                        ];
+                        $idParent = DB::table("excel_import_tk_ktx")
+                                ->insertGetId($data0);
+                    }else{
+                        $idParent = $checkTc1->first()->id;
+                    }
+
+                    // check con
+                    $checkCon = DB::table("excel_import_tk_ktx")
+                            ->where("nam", $req->nam[0])
+                            ->where("parent", $idParent);
+                    if($checkCon->count() == 0){
+                        $data1 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.tdtktx'),
+                            'nam'       => $req->nam[0],
+                            'gia_tri'   => $req->name3_1,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name3_1 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data1);
+                        
+                    }
+                    
+                }
+                if($key == 1){
+                    $checkTc1 = DB::table("excel_import_tk_ktx")
+                        ->where('parent', null)
+                        ->where('tc_number', 4);
+                    if($checkTc1->count() == 0){
+                        $data0 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.tdtpo'),
+                            'tc_number' => 4,
+                        ];
+                        $idParent = DB::table("excel_import_tk_ktx")
+                                ->insertGetId($data0);
+                    }else{
+                        $idParent = $checkTc1->first()->id;
+                    }
+
+                    $checkCon = DB::table("excel_import_tk_ktx")
+                            ->where("nam", $req->nam[1])
+                            ->where("parent", $idParent);
+                    if($checkCon->count() == 0){
+
+                        $data1 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.tdtpo'),
+                            'nam'       => $req->nam[1],
+                            'gia_tri'   => $req->name4_1,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name4_1 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data1);
+                            
+                    }
+                }
+                if($key == 2){
+                    
+                    $checkTc1 = DB::table("excel_import_tk_ktx")
+                        ->where('parent', null)
+                        ->where('tc_number', 5);
+                    if($checkTc1->count() == 0){
+                        $data0 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.ssvcnc'),
+                            'tc_number' => 5,
+                        ];
+                        $idParent = DB::table("excel_import_tk_ktx")
+                                ->insertGetId($data0);
+                    }else{
+                        $idParent = $checkTc1->first()->id;
+                    }
+
+                    $checkCon = DB::table("excel_import_tk_ktx")
+                            ->where("nam", $req->nam[2])
+                            ->where("parent", $idParent);
+                    if($checkCon->count() == 0){
+
+                        $data1 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.tong3'),
+                            'nam'       => $req->nam[2],
+                            'gia_tri'   => $req->name5_1,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name5_1 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data1);
+                        $data2 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.ct13'),
+                            'nam'       => $req->nam[2],
+                            'gia_tri'   => $req->name5_2,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name5_2 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data2);
+                        $data3 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.ct23'),
+                            'nam'       => $req->nam[2],
+                            'gia_tri'   => $req->name5_3,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name5_3 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data3);
+                        $data4 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.ct33'),
+                            'nam'       => $req->nam[2],
+                            'gia_tri'   => $req->name5_4,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name5_4 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data4);
+                    }
+                }
+                if($key == 3){
+                    
+                    $checkTc1 = DB::table("excel_import_tk_ktx")
+                        ->where('parent', null)
+                        ->where('tc_number', 6);
+                    if($checkTc1->count() == 0){
+                        $data0 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.slsvoktx'),
+                            'tc_number' => 6,
+                        ];
+                        $idParent = DB::table("excel_import_tk_ktx")
+                                ->insertGetId($data0);
+                    }else{
+                        $idParent = $checkTc1->first()->id;
+                    }
+                    
+                    $checkCon = DB::table("excel_import_tk_ktx")
+                            ->where("nam", $req->nam[3])
+                            ->where("parent", $idParent);
+                    if($checkCon->count() == 0){
+
+                        $data1 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.tong4'),
+                            'nam'       => $req->nam[3],
+                            'gia_tri'   => $req->name6_1,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name6_1 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data1);
+        
+                        $data2 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.ct14'),
+                            'nam'       => $req->nam[3],
+                            'gia_tri'   => $req->name6_2,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name6_2 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data2);
+                        $data3 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.ct24'),
+                            'nam'       => $req->nam[3],
+                            'gia_tri'   => $req->name6_3,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name6_3 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data3);
+                        $data4 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.ct34'),
+                            'nam'       => $req->nam[3],
+                            'gia_tri'   => $req->name6_4,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name6_4 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data4);
+                    }
+                }
+
+                if($key == 4){
+                    
+                    $checkTc1 = DB::table("excel_import_tk_ktx")
+                        ->where('parent', null)
+                        ->where('tc_number', 7);
+                    if($checkTc1->count() == 0){
+                        $data0 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.tscoktx'),
+                            'tc_number' => 7,
+                        ];
+                        $idParent = DB::table("excel_import_tk_ktx")
+                                ->insertGetId($data0);
+                    }else{
+                        $idParent = $checkTc1->first()->id;
+                    }
+                    
+                    $checkCon = DB::table("excel_import_tk_ktx")
+                            ->where("nam", $req->nam[4])
+                            ->where("parent", $idParent);
+                    if($checkCon->count() == 0){
+
+                        $data1 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.tscoktx'),
+                            'nam'       => $req->nam[4],
+                            'gia_tri'   => $req->name7_1,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name7_1 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data1);
+        
+                    }
+                }
+                if($key == 5){
+                    
+                    $checkTc1 = DB::table("excel_import_tk_ktx")
+                        ->where('parent', null)
+                        ->where('tc_number', 8);
+                    if($checkTc1->count() == 0){
+                        $data0 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.ttcsvs'),
+                            'tc_number' => 8,
+                        ];
+                        $idParent = DB::table("excel_import_tk_ktx")
+                                ->insertGetId($data0);
+                    }else{
+                        $idParent = $checkTc1->first()->id;
+                    }
+
+                    $checkCon = DB::table("excel_import_tk_ktx")
+                            ->where("nam", $req->nam[5])
+                            ->where("parent", $idParent);
+                    if($checkCon->count() == 0){
+
+                        $data1 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.bankc'),
+                            'nam'       => $req->nam[5],
+                            'gia_tri'   => $req->name8_1,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name8_1 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data1);
+                        $data2 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.dangsc'),
+                            'nam'       => $req->nam[5],
+                            'gia_tri'   => $req->name8_2,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name8_2 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data2);
+                        $data3 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.kienco'),
+                            'nam'       => $req->nam[5],
+                            'gia_tri'   => $req->name8_3,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name8_3 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data3);
+                    }
+                }
+                if($key == 6){
+                    
+                    $checkTc1 = DB::table("excel_import_tk_ktx")
+                        ->where('parent', null)
+                        ->where('tc_number', 9);
+                    if($checkTc1->count() == 0){
+                        $data0 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.ndvsd'),
+                            'tc_number' => 9,
+                        ];
+                        $idParent = DB::table("excel_import_tk_ktx")
+                                ->insertGetId($data0);
+                    }else{
+                        $idParent = $checkTc1->first()->id;
+                    }
+
+                    $checkCon = DB::table("excel_import_tk_ktx")
+                            ->where("nam", $req->nam[6])
+                            ->where("parent", $idParent);
+                    if($checkCon->count() == 0){
+
+                        $data1 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.nhanuoc'),
+                            'nam'       => $req->nam[6],
+                            'gia_tri'   => $req->name9_1,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name9_1 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data1);
+                        
+                    }
+                }
+                if($key == 7){
+                    
+                    $checkTc1 = DB::table("excel_import_tk_ktx")
+                        ->where('parent', null)
+                        ->where('tc_number', 10);
+                    if($checkTc1->count() == 0){
+                        $data0 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.htsh'),
+                            'tc_number' => 10,
+                        ];
+                        $idParent = DB::table("excel_import_tk_ktx")
+                                ->insertGetId($data0);
+                    }else{
+                        $idParent = $checkTc1->first()->id;
+                    }
+
+                    $checkCon = DB::table("excel_import_tk_ktx")
+                            ->where("nam", $req->nam[7])
+                            ->where("parent", $idParent);
+                    if($checkCon->count() == 0){
+
+                        $data1 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.muon'),
+                            'nam'       => $req->nam[7],
+                            'gia_tri'   => $req->name10_1,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name10_1 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data1);
+                        $data2 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.sohuu8'),
+                            'nam'       => $req->nam[7],
+                            'gia_tri'   => $req->name10_2,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name10_2 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data2);
+                        $data3 = [
+                            'tieu_chi' => Lang::get('project/ImportdataExcel/title.chothue8'),
+                            'nam'       => $req->nam[7],
+                            'gia_tri'   => $req->name10_3,
+                            'parent'    => $idParent
+                        ];
+                        $save = $req->name10_3 == "" ? "" : DB::table("excel_import_tk_ktx")->insert($data3);
+                       
+                    }
+                }
+            }
+        }
+        return back()->with('success', 
+                    Lang::get('project/Standard/message.success.create')); 
+
+
     }
 
     public function importDataUnit(Request $req) {
@@ -104,23 +433,24 @@ class ThongkekytucxaController extends DefinedController{
 
 
     public function deleteUnit(Request $req){
-        DB::table('excel_import_tk_ktx')->where("id", $req->id_delete)->delete();
+        foreach($req->nam_delete as $value){
+            DB::table('excel_import_tk_ktx')
+                ->where("nam", $value)
+                ->where("parent", $req->id_parent)
+                ->delete();
+        }
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.delete'));
     }
 
     public function updateUnit(Request $req){
-    	$data = [
-            'noi_dung'  => $req->noidung,
-            'n_2019' => $req->n_2019,
-            'n_2020' => $req->n_2020,
-            'n_2021' => $req->n_2021,
-            'n_2022' => $req->n_2022,
-            'n_2023' => $req->n_2023,
+        $data = [
+            'gia_tri'   => $req->tieu_chi_giatri
         ];
-        DB::table("excel_import_tk_ktx")->where("id", $req->id_unit)
-        		->update($data);
-        return back()->with('success', 
+        DB::table("excel_import_tk_ktx")
+            ->where("id", $req->id)
+            ->update($data);
+    	return back()->with('success', 
                     Lang::get('project/Standard/message.success.update'));
     }
 }

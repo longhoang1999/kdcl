@@ -29,13 +29,10 @@
         max-height: 450px;
     }
     #idtableip{
-        width:1500px;
+        width:3000px;
     }
     .row_width{
         width:7rem;
-    }
-    .row_add{
-        width: 10%;
     }
     .listlhcsg{
         width: 100%;
@@ -91,6 +88,56 @@
     .color-date{
        background: #047a7e;
     }
+    .w-stt{
+        width: 10px !important;
+    }
+    .table-show{
+        background-color: white;
+        padding: 15px;
+        box-shadow: 0 0 12px #cecece;
+        border-radius: 5px;
+    }
+    .table-show td:first-child{
+        text-align: center;
+    }
+    .table-show thead{
+        background: #2d85cb;
+        color: white;
+    }
+    .container-fuild{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .container-fuild .block-code{
+        width: 50%;
+    }
+    .container-fuild .block-code .row{
+        margin: 10px 0;
+    }
+    input[type="text"]{
+        outline: none;
+        padding: 10px;
+        margin: 5px 0;
+    }
+    .block-child{
+        display: none;
+    }
+    .table-striped td{
+        text-align: left !important;
+    }
+    .space-block{
+        justify-content: space-between;
+    }
+    .space-block-item{
+        width: 14rem;
+        display: flex;
+    }
+    .select-nam{
+        padding: 0 10px;
+        border-radius: 3px;
+        outline: none;
+        color: #474747;
+    }
 </style>
 
 @stop
@@ -105,44 +152,99 @@
 <!-- page trang ở đây -->
 <section class="content-body">
     <div class="form-standard">
-        <div class="item-group-button right-block mb-2">
-            <button href="" class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modal_unit" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.nhap_excel')">
-                <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
-            </button>
-            <a href="{{ route('admin.importdata.tkktx.exportTkktx') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
-                <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
-            </a>
+        <div class="item-group-button space-block mb-2">
+            <select class="select-nam space-block-item">
+                <option value="" >
+                    @lang('project/ImportdataExcel/title.chonnam')
+                </option>
+                @foreach($nams as $nam)
+                    <option value="{{ $nam->nam }}"  
+                        @if(isset(request()->nam) && request()->nam == $nam->nam)
+                            selected
+                        @endif
+                     >{{ $nam->nam }}</option>
+                @endforeach
+            </select>
+            <div class="space-block-item">
+                <button href="" class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modal_unit" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.nhap_dl')">
+                    <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
+                </button>
+                <a href="{{ route('admin.importdata.tkktx.exportTkktx') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
+                    <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
+                </a>
+            </div>
         </div>
-        
-        <table class="table table-striped table-bordered" id="table" width="100%">
-            <thead>
-             <tr>
-                <th>
-                    @lang('project/ImportdataExcel/title.noidung')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.n_2019')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.n_2020')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.n_2021')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.n_2022')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.n_2023')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.hanhd')
-                </th>
-             </tr>
-            </thead>
-            <tbody>  
-            </tbody>                
-        </table>
+        <div class="table-show">
+            <table class="table table-striped table-bordered" id="table" width="100%"   >
+              <thead>
+                <tr>
+                  <th scope="col">
+                      @lang('project/ImportdataExcel/title.noidung')
+                  </th>
+                  <th scope="col">
+                      @lang('project/ImportdataExcel/title.noidungnho')
+                  </th>
+                  <th scope="col">
+                      @lang('project/ImportdataExcel/title.nam')
+                  </th>
+                  <th scope="col">
+                      @lang('project/ImportdataExcel/title.giatrim')
+                  </th>
+                  <th scope="col">
+                        @lang('project/ImportdataExcel/title.hanhdong')
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($tttnsv as $value)
+                 @php
+                    $childs  = DB::table("excel_import_tk_ktx")
+                            ->where("tc_number", null)
+                            ->where("parent", $value->id)
+                            ->orderBy('id', 'asc'); 
+                    if(isset(request()->nam)) {
+                        $childs = $childs->where("nam", request()->nam);
+                    }
+                    $child = $childs->get();
+                    $groupChild = $childs->groupBy('nam')->select('nam')->get();
+                    $arr = [];
+                    foreach($groupChild as $gr){
+                        array_push($arr , $gr->nam);
+                    }
+                 @endphp
+                 <tr>
+                    <td colspan="4" style="padding-left: 11px">
+                        {{ $value->tieu_chi }}
+                    </td>
+                    <td>
+                        <button class="btn btn-delete"  data-nam="{{ implode(' ',$arr) }}" data-parent = "{{ $value->id }}">
+                            <i class="bi bi-trash" style="font-size: 25px;color: red;"></i>
+                        </button>
+                    </td> 
+                 </tr>
+                 @foreach($child as $value2)
+                 <tr>
+                     <td></td>
+                     <td class="tc_content">
+                         {{ $value2->tieu_chi }}
+                     </td>
+                     <td class="nam_content">
+                         {{ $value2->nam }}
+                     </td>
+                     <td class="giatri_content">
+                         {{ $value2->gia_tri }}
+                     </td>
+                     <td>
+                         <button class="btn btn-update" data-id="{{ $value2->id }}" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.chinhsua')">
+                            <i class="bi bi-pencil-square" style="font-size: 25px;color: #009ef7;"></i>
+                         </button>
+                     </td>
+                 </tr>
+                 @endforeach
+                @endforeach
+              </tbody>
+            </table>
+        </div>
     </div>
 </section>
 <!-- /Kết thúc page trang -->
@@ -155,64 +257,387 @@
                 <h5 class="modal-title" id="modalUnitLabel">
                     @lang('project/ImportdataExcel/title.tkktx')
                 </h5>
-
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <input type="file" class="mb-2" name="files" id="file"  accept=".xlsx, .xls, .csv">
+                <!-- <input type="file" class="mb-2" name="files" id="file"  accept=".xlsx, .xls, .csv"> -->
                 <div class="d-flex justify-content-between">
-                    <button class="btn btn-success btn-benchmark mb-2" id="import_unit">@lang('project/Standard/title.nhap')</button>
-                    <button class="btn btn-success btn-benchmark m-2" id="add_unit">
+                    <!-- <button class="btn btn-success btn-benchmark mb-2" id="import_unit">@lang('project/Standard/title.nhap')</button> -->
+                    <!-- <button class="btn btn-success btn-benchmark m-2" id="add_unit">
                         @lang('project/ImportdataExcel/title.themtt')
-                    </button>
-                </div>
-                <div id="css_table">
-                    <table id="idtableip" class="table table-striped" border="1"></table>
+                    </button> -->
                 </div>
 
-                <div class="css-note">
-                    <!-- <div class="blank"></div> -->
-                    <div class="note-group">
-                        <div class="note-item">
-                            <div class="block-note color-empty"></div>
-                            <span>
-                                @lang('project/ImportdataExcel/title.ttkdt')
-                            </span>
+                <form id="css_table" method="post" action="{{ route('admin.importdata.tkktx.importUnit') }}">
+                    @csrf
+                    <div class="container-fuild">
+                        <!-- 1 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.tdtktx')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent" >
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-7"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tdtktx')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name3_1">
+                                    </div>
+                                </div>
+                                
+                            </div>
                         </div>
-                        <div class="note-item">
-                            <div class="block-note color-number"></div>
-                            <span>
-                                @lang('project/ImportdataExcel/title.tnpls')
-                            </span>
+
+
+                        <!-- 2 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.tdtpo')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent">
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tdtpo')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name4_1">
+                                    </div>
+                                </div>
+                                
+                            </div>
                         </div>
-                        <div class="note-item">
-                            <div class="block-note color-phone"></div>
-                            <span>
-                                @lang('project/ImportdataExcel/title.tnplsdt')
-                            </span>
+
+                        <!-- 3 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.ssvcnc')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent">
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tong3')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name5_1">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.ct13')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name5_2">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.ct23')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name5_3">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.ct33')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name5_4">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="note-item">
-                            <div class="block-note color-email"></div>
-                            <span>
-                                @lang('project/ImportdataExcel/title.tnple')
-                            </span>
+                        
+                        <!-- 4 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.slsvoktx')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent">
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tong4')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name6_1">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.ct14')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name6_2">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.ct24')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name6_3">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.ct34')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name6_4">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="note-item">
-                            <div class="block-note color-website"></div>
-                            <span>
-                                @lang('project/ImportdataExcel/title.tnplw')
-                            </span>
+
+                        <!-- 5 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.tscoktx')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent">
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tscoktx')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name7_1">
+                                    </div>
+                                </div>
+    
+                            </div>
                         </div>
-                        <div class="note-item">
-                            <div class="block-note color-date"></div>
-                            <span>
-                                @lang('project/ImportdataExcel/title.tnplntn')
-                            </span>
+
+                        <!-- 6 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.ttcsvs')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent">
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.bankc')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name8_1">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.dangsc')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name8_2">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.kienco')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name8_3">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- 7 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.ndvsd')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent">
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.ndvsd')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name9_1">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 10 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.htsh')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent">
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.muon')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name10_1">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.sohuu8')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name10_2">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.chothue8')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name10_3">
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+
                     </div>
-                </div>
+                </form>
+
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="import_unit_data">
@@ -235,107 +660,83 @@
                 <h5 class="modal-title" id="modalDeleteLabel">
                     @lang('project/Standard/title.thongbao')
                 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <span class="badge badge-danger">
-                    @lang('project/Standard/message.error.hoixoaTc')
-                </span>
-                <br>
-                <span class="badge badge-primary">
-                    @lang('project/Standard/message.error.khoantac')
-                </span>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn btn-danger" id="btn-delete-unit">
-                    @lang('project/Standard/title.xoa')
-                </a>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">
-                    @lang('project/Standard/title.huy')
-                </button>
-            </div>
+            <form action="{{ route('admin.importdata.tkktx.deleteUnit') }}" method="post">
+                @csrf
+                <input type="hidden" id="id_parent" name="id_parent">
+                <div class="modal-body">
+                    <p class="font-weight-bold">
+                        @lang('project/ImportdataExcel/title.cnxoa')
+                    </p>
+                    <div class="container mb-4 container-delete">
+                        <div class="row">
+                            
+
+                        </div>
+                    </div>
+
+                    <span class="badge badge-primary">
+                        @lang('project/Standard/message.error.khoantac')
+                    </span>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">
+                        @lang('project/Standard/title.xoa')
+                    </button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                        @lang('project/Standard/title.huy')
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
 
 
 <!-- modal update -->
+<!-- Modal -->
 <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalUpdateLabel">
-                    @lang('project/ImportdataExcel/title.cntkktx')
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('admin.importdata.tkktx.updateUnit') }}" method="post" id="update-unit">
-                    @csrf
-                    <input type="hidden" id="id_unit" name="id_unit">
-                    <div class="container-fuild">
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="fornoidung">
-                                    <span>@lang('project/ImportdataExcel/title.noidung')</span>
-                                </label>
-                                <input type="text" class="form-control " id="fornoidung" placeholder="@lang('project/ImportdataExcel/title.noidung')" name="noidung">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forn_2019">
-                                    <span>@lang('project/ImportdataExcel/title.n_2019')</span>
-                                </label>
-                                <input type="number" class="form-control " id="forn_2019" placeholder="@lang('project/ImportdataExcel/title.n_2019')" name="n_2019">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forn_2020">
-                                    <span>@lang('project/ImportdataExcel/title.n_2020')</span>
-                                </label>
-                                <input type="number" class="form-control " id="forn_2020" placeholder="@lang('project/ImportdataExcel/title.n_2020')" name="n_2020">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forn_2021">
-                                    <span>@lang('project/ImportdataExcel/title.n_2021')</span>
-                                </label>
-                                <input type="number" class="form-control " id="forn_2021" placeholder="@lang('project/ImportdataExcel/title.n_2021')" name="n_2021">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forn_2022">
-                                    <span>@lang('project/ImportdataExcel/title.n_2022')</span>
-                                </label>
-                                <input type="number" class="form-control " id="forn_2022" placeholder="@lang('project/ImportdataExcel/title.n_2022')" name="n_2022">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forn_2023">
-                                    <span>@lang('project/ImportdataExcel/title.n_2023')</span>
-                                </label>
-                                <input type="number" class="form-control " id="forn_2023" placeholder="@lang('project/ImportdataExcel/title.n_2023')" name="n_2023">
-                            </div>
-                        </div>
-                        
-                    </div> 
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btn-update-unit">
-                    @lang('project/Standard/title.thaydoi')
-                </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    @lang('project/Standard/title.huy')
-                </button>
-            </div>
-        </div>
+  <div class="modal-dialog modal-ml">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalUpdateLabel">
+            @lang('project/ImportdataExcel/title.cntkktx')
+        </h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{ route('admin.importdata.tkktx.updateUnit') }}" method="post">
+            @csrf
+            <input type="hidden" class="save-id" name="id">
+          <div class="modal-body">
+            <p class="tieu_chi_con"></p>
+            <p class="tieu_chi_nam"></p>
+            <input type="text" class="tieu_chi_giatri" name="tieu_chi_giatri">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">
+                @lang('project/Standard/title.thaydoi')
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                @lang('project/Standard/title.huy')
+            </button>
+          </div>
+      </form>
     </div>
+  </div>
 </div>
+
 
 
 
     <!-- Kết thúc trang -->
-    </section>
+    </sectio
+    forlienketn>
 @stop
 
 
@@ -351,7 +752,18 @@
 
 
 <script>
-    
+    $(".checkbox-parent").click(function() {
+        if($(this).is(':checked')){ 
+            $(this).parent().parent().parent()
+                .find(".block-child").css("display", "block");
+            $(this).parent().find(".checkbox-hidden").val("on");
+        }
+        else{ 
+            $(this).parent().parent().parent()
+                .find(".block-child").css("display", "none");
+            $(this).parent().find(".checkbox-hidden").val("off");
+        }
+    })
 
     var listColor = {
         check_empty :   '#ec5757',
@@ -362,144 +774,33 @@
         check_date : '#047a7e',
     }
 
-    $(function(){
-        table = $('#table').DataTable({
-            responsive: true,
-            processing: true,
-            serverSide: true,
-            ajax: "{!! route('admin.importdata.tkktx.dataUnit') !!}",
-            columns: [
-                { data: 'noi_dung', name: 'noi_dung' },
-                { data: 'n_2019', name: 'n_2019' },
-                { data: 'n_2020', name: 'n_2020' },
-                { data: 'n_2021', name: 'n_2021' },
-                { data: 'n_2022', name: 'n_2022' },
-                { data: 'n_2023', name: 'n_2023' },
-                { data: 'actions', name: 'actions' ,className: 'action'},
-            ],            
-        });
-    });  
+    // $(function(){
+    //     table = $('#table').DataTable({
+    //         responsive: true,
+    //         processing: true,
+    //         serverSide: true,
+    //         ajax: "{!! route('admin.importdata.dtkhcn2.dataUnit') !!}",
+    //         columns: [
+    //             { data: 'nam', name: 'nam' },
+    //             { data: 'doanh_thu', name: 'doanh_thu' },
+    //             { data: 'ty_le_doanh_thu', name: 'ty_le_doanh_thu' },
+    //             { data: 'ty_so_doanh_thu', name: 'ty_so_doanh_thu' },
+    //             { data: 'actions', name: 'actions' },
+    //         ],            
+    //     });
+    // });  
 
-    $('#import_unit').on('click', function () {
-        var f =  $("#forMaDVIP").val(1);
-        var formData = new FormData();
-        formData.append('file', $('#file')[0].files[0]);
-        formData.append('_token', '{{csrf_token()}}');
+    var dataFix = [
+        { stt: '1', content: "@lang('project/ImportdataExcel/title.dtdct')", parent: ''},
+        { stt: '2', content: "@lang('project/ImportdataExcel/title.tdtsxd')", parent: ''},
+        { stt: '1', content: "@lang('project/ImportdataExcel/title.htgd')", parent: '2'},
+        { stt: '2', content: "@lang('project/ImportdataExcel/title.tvtt')", parent: '2'},
+        { stt: '3', content: "@lang('project/ImportdataExcel/title.ttnc')", parent: '2'},
+        { stt: '3', content: "@lang('project/ImportdataExcel/title.tdts')", parent: ''},
+        { stt: '1', content: "@lang('project/ImportdataExcel/title.ccdtkt')", parent: '3'},
+        { stt: '2', content: "@lang('project/ImportdataExcel/title.ctdtnkql')", parent: '3'},
+    ];
 
-        var listloaidv = {
-            @foreach($loai_dv as $ldv)
-                {{ $ldv->id }} : '{{ $ldv->loai_donvi }}', 
-            @endforeach
-        };
-
-        $.ajax({
-            url : "{!! route('admin.importdata.tkktx.importUnit') !!}",
-            type : 'POST',
-            data : formData,
-            processData: false,  
-            contentType: false,  
-            enctype: 'multipart/form-data',
-            success : function(data) {
-                $("#idtableip").empty();
-                $("#add_unit").show();
-                var thead = `
-                        <thead class="btn-success ">
-                            <tr class="border ">
-                                <th class="row_width p-2 row_add">
-                                    @lang('project/ImportdataExcel/title.stt')
-                                </th>
-                                <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.noidung')
-                                </th>
-                                <th class="row_width p-2 row_add">
-                                    @lang('project/ImportdataExcel/title.n_2019')                                  
-                                </th>
-                                <th class="row_width p-2 row_add">
-                                    @lang('project/ImportdataExcel/title.n_2020')                                  
-                                </th>
-                                <th class="row_width p-2 row_add">
-                                    @lang('project/ImportdataExcel/title.n_2021')
-                                </th>
-                                <th class="row_width p-2 row_add">
-                                    @lang('project/ImportdataExcel/title.n_2022')
-                                </th>
-                                <th class="row_width p-2 row_add">
-                                    @lang('project/ImportdataExcel/title.n_2023')
-                                </th>
-                                <th class="row_width p-2 row_add">
-                                    @lang('project/ImportdataExcel/title.thaotac')
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="idtbody"></tbody>
-                `
-                $("#idtableip").append(thead);
-                data.forEach((item, index) => { 
-                    var add = `
-                        <tr class="row_number">
-                                <td contenteditable class="text-center p-2 row0">${item.stt}</td>
-                                <td contenteditable class="text-center p-2 row1">
-                                    ${item.noidung}
-                                </td>
-                                <td contenteditable class="text-center p-2 row2"> 
-                                    ${item.n_2019}
-                                </td>
-                                <td contenteditable class="text-center p-2 row3">
-                                    ${item.n_2020}
-                                </td>
-                                <td contenteditable class="text-center p-2 row4">
-                                    ${item.n_2021}
-                                </td>
-                                <td contenteditable class="text-center p-2 row5">
-                                    ${item.n_2022}
-                                </td>
-                                <td contenteditable class="text-center p-2 row6">
-                                    ${item.n_2023}
-                                </td>
-                                <td contenteditable class="text-center p-2 trash-btn">
-                                    <ion-icon name="trash-outline" ></ion-icon>
-                                </td>
-                            </tr>
-                    `;
-                    $("#idtbody").append(add);
-
-                    // Validate các trường excel
-                    checkEmpty();
-                    checkWebsite();
-                    checkEmail();
-                    checkPhone();
-                    checkNumber();
-                    checkDate();
-                });
-                
-            }
-        });
-    })
-
-
-    $('#add_unit').on('click',()=>{
-        var adds = `
-            <tr class="row_number">
-                <td contenteditable class="text-center p-2 row0"></td>
-                <td contenteditable class="text-center p-2 row1"></td>
-                <td contenteditable class="text-center p-2 row2"></td>
-                <td contenteditable class="text-center p-2 row3"></td>
-                <td contenteditable class="text-center p-2 row4"></td>
-                <td contenteditable class="text-center p-2 row5"></td>
-                <td contenteditable class="text-center p-2 row6"></td>
-                <td contenteditable class="text-center p-2 trash-btn">
-                    <ion-icon name="trash-outline"></ion-icon>
-                </td>
-
-            </tr>
-            `;
-        $("#idtbody").prepend(adds);
-    })
-
-
-    $("#idtableip").on("click", ".trash-btn", function() {
-        $(this).parent().remove();
-    })
 
     // validate when load excel data
     function checkEmpty() {
@@ -654,87 +955,54 @@
     })
 
 
-    var dataSubmit = [];
+
     $("#import_unit_data").click(function() {
-        if(checkEmpty() && checkWebsite() && checkEmail() && checkPhone()
-            &&  checkNumber() && checkDate())   {            
-            dataSubmit.length = 0;
-            $(".row_number").each(function( index ) {
-                let dataObj = {
-                    'noidung' :   $(this).find('.row1').text().trim(),
-                    'n_2019' :  $(this).find('.row2').text().trim(),
-                    'n_2020' :   $(this).find('.row3').text().trim(),
-                    'n_2021' :  $(this).find('.row4').text().trim(),
-                    'n_2022' :  $(this).find('.row5').text().trim(),
-                    'n_2023' : $(this).find('.row6').text().trim(),
-                    
-                }
-                dataSubmit.push(dataObj);
-            });
-
-            let loadData = "{{ route('admin.importdata.tkktx.importDataUnit') }}";
-            fetch(loadData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                method: 'POST',
-                body: JSON.stringify(dataSubmit)
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if(data.mes == "done"){
-                        $("#file").val("");
-                        $("#add_unit").hide();
-                        $("#idtableip").empty();
-                        $("#modal_unit .modal-header button").click();
-                        table.ajax.reload();
-                    }
-                })
-        }else{
-            alert("@lang('project/ImportdataExcel/title.vlktldl')")
-        }
-    })
-
-    $('#modalDelete').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) 
-        var id = button.data('id') 
-        var route = "{{ route('admin.importdata.tkktx.deleteUnit') }}" + "?id_delete=" + id;
-        var modal = $(this);
-        modal.find('#btn-delete-unit').attr('href' , route);
+        $("form#css_table").submit();
     })
 
 
-    $('#modalUpdate').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) 
-        var id = button.data('id') 
-        $("#id_unit").val(id);
-        let loadData = "{{ route('admin.importdata.tkktx.dataUnit') }}" + "?id=" + id;
-        fetch(loadData, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+    $(".btn-delete").click(function() {
+        $("#id_parent").val($(this).attr("data-parent"));
+        $("#modalDelete").modal("show");
+        let arrNam = $(this).attr("data-nam").split(" ");
+        $(".container-delete .row").empty();
+        arrNam.forEach((item, index) => {
+            let UI = ` 
+                <div class="col-md-6">
+                    <input type="checkbox" id="nam1_${index}" name="nam_delete[]" value="${item}">
+                    <label for="nam1_${index}">${item}</label>
+                </div>
+             `;
+            $(".container-delete .row").append(UI);
         })
-            .then((response) => response.json())
-            .then((data) => {
-                $("#fornoidung").val(data.noi_dung);
-                $("#forn_2019").val(data.n_2019);
-                $("#forn_2020").val(data.n_2020);
-                $("#forn_2021").val(data.n_2021);
-                $("#forn_2022").val(data.n_2022);
-                $("#forn_2023").val(data.n_2023);
-                
-            })
+    })
+    
+
+    $(".btn-update").click(function() {
+        $(".tieu_chi_con").text(
+            "@lang('project/ImportdataExcel/title.noidungnho'): " + $(this).parent().parent().find(".tc_content").text()
+        );
+        $(".tieu_chi_nam").text(
+            "@lang('project/ImportdataExcel/title.nam'): " + $(this).parent().parent().find(".nam_content").text()
+        );
+        $(".tieu_chi_giatri").val($(this).parent().parent().find(".giatri_content").text().trim());
+        $('.save-id').val(
+            $(this).attr('data-id')
+        );
+        $("#modalUpdate").modal("show");
+
     })
 
-    $("#btn-update-unit").click(function() {
-        $("#update-unit").submit();
+    $(".select-nam").change(function() {
+        if($(this).val() == ""){
+            let route = "{{ route('admin.importdata.tttn.index') }}";
+            location.replace(route);
+        }else{
+            let route = "{{ route('admin.importdata.tttn.index') }}" + "?nam=" + $(this).val()
+            location.replace(route);
+        }
+        
     })
-
-
 
 </script>
 
