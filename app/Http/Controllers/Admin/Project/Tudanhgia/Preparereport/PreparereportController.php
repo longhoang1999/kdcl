@@ -254,7 +254,7 @@ class PreparereportController extends DefinedController
                      .'" class="btn">
                         <i class="bi bi-eye-fill" style="font-size: 30px;color: #50cd89;"></i>
                         </a>';
-                   
+                    
                         $actions = $actions. '<button title="'. 
                         Lang::get('project/Selfassessment/title.xmcg')
                      .'" class="btn" data-toggle="modal" data-target="#modalDeleteGroup" data-minhchunggop="' .$mcg->id. '"><i class="bi bi-x-circle" style="font-size: 35px;color: red;"></i></button>';

@@ -41,8 +41,10 @@ class ReportController extends DefinedController
 
     public function data(Request $req){
         $users = DB::table('kehoach_baocao')->orderBy("created_at", "desc");
-        if(Sentinel::inRole('ttchuyentrach')){
-            $users = $users->where("ns_phutrach", Sentinel::getUser()->id);
+        if(!Sentinel::inRole('admin') && !Sentinel::inRole('operator')){
+            if( Sentinel::inRole('ttchuyentrach')){
+                $users = $users->where("ns_phutrach", Sentinel::getUser()->id);
+            }
         }
         return DataTables::of($users) 
             ->addColumn(

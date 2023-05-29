@@ -1143,7 +1143,7 @@
                         push_minhchung.empty();
                         data.forEach(function(e){
                             e.minhChungList.forEach(function(e_child){
-                                push_minhchung.html(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
+                                push_minhchung.append(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
                             });
                            
                         });
@@ -1155,7 +1155,7 @@
                              // id_mcg = parseInt(id_mcg);
                             data.forEach(function(e){
                                 e.minhchung.forEach(function(e_child){
-                                    push_minhchung.html(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
+                                    push_minhchung.append(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
                            
                                 });
                                

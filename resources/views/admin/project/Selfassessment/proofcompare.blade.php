@@ -100,11 +100,11 @@
               <th scope="col">
                   @lang('project/Selfassessment/title.kmc')
               </th>
-            
+              
                   <th scope="col">
                       @lang('project/Selfassessment/title.quanly')
                   </th>
-            
+              
             </tr>
           </thead>
             <tbody>
@@ -132,7 +132,7 @@
                                 : {{ $tieuChi->mo_ta }}
                             @endif
                         </td>
-                       
+                        
                             <td class="text-center">
                                 @php
                                     $minhchung_gop = DB::table("minhchung_gop")
@@ -149,7 +149,7 @@
 
                                 @endif
                             </td>
-                      
+                        
                     </tr>
 
                     @php
@@ -217,7 +217,7 @@
                                         <i class="bi bi-plus-square-fill" style="font-size: 25px;color: rgb(6, 159, 210);"></i>
                                     </a>
                                 </td>
-                          
+                            
                         </tr>
                         @php
                             $isHadMinhChung = false;

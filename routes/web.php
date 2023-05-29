@@ -3,6 +3,34 @@
 require_once 'web_builder.php';
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+
+// Thường trực cho Ban Giám Hiệu và nhân sự TT đảm bảo chất lượng
+Route::get("update-per", function() {
+    $users = DB::table("users")->select("id")->where("donvi_id", "95")->get();
+    foreach($users as $us){
+        $data = [
+            'user_id'   => $us->id,
+            'role_id'  => '3',
+            'created_at'    => Carbon::now()->toDateTimeString(),
+            'updated_at'    => Carbon::now()->toDateTimeString(),
+        ];
+        DB::table("role_users")->insert($data);
+    }
+    
+});
+
+Route::get("update-time", function() {
+    $users = DB::table("users")->select("id", "created_at", "updated_at")->get();
+    foreach($users as $us){
+        $data = [
+            'created_at'    => Carbon::now()->toDateTimeString(),
+            'updated_at'    => Carbon::now()->toDateTimeString(),
+        ];
+        DB::table("users")->where("id", $us->id)->update($data);
+    }
+    
+});
 Route::get("active", function() {
     $users = DB::table("users")->select("id")->get();
     foreach($users as $us){
@@ -15,6 +43,33 @@ Route::get("active", function() {
             'updated_at'    => Carbon::now()->toDateTimeString(),
         ];
         DB::table("activations")->insert($data);
+    }
+    
+});
+
+Route::get("active-role-user", function() {
+    $users = DB::table("users")->select("id")->get();
+    foreach($users as $us){
+        $data = [
+            'user_id'   => $us->id,
+            'role_id'  => '2',
+            'created_at'    => Carbon::now()->toDateTimeString(),
+            'updated_at'    => Carbon::now()->toDateTimeString(),
+        ];
+        DB::table("role_users")->insert($data);
+    }
+    
+});
+
+Route::get("create-pass", function() {
+    $users = DB::table("users")->select("id", "password", "email")->get();
+    foreach($users as $us){
+        if($us->password == "" || $us->password == null){
+        	$pass = Hash::make($us->email );
+          	DB::table("users")->where("id",$us->id )->update([
+            	'password' => $pass
+            ]);
+        }
     }
     
 });
