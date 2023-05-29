@@ -114,6 +114,7 @@
         <table class="table table-striped table-bordered" id="table" width="100%">
             <thead>
              <tr>
+                <th>STT</th>
                 <th>
                     @lang('project/ImportdataExcel/title.loai')
                 </th>
@@ -406,6 +407,7 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.tuyensinh.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' },
                 { data: 'loai_TS', name: 'loai_TS' },
                 { data: 'dt_tg', name: 'dt_tg' },
                 { data: 's_t_t', name: 's_t_t' },
@@ -414,6 +416,13 @@
                 { data: 'hdt', name: 'hdt' },
                 { data: 'actions', name: 'actions' ,className: 'action' },
             ],            
+        });
+
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

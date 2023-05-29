@@ -169,7 +169,7 @@
                 <button href="" class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modal_unit" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.nhap_dl')">
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
-                <a href="{{ route('admin.importdata.dtsxd.exportDtSan') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
+                <a href="{{ route('admin.importdata.tttn.exportTttnsv') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
                     <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
                 </a>
             </div>
@@ -255,7 +255,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalUnitLabel">
-                    @lang('project/ImportdataExcel/title.dtsxd')
+                    @lang('project/ImportdataExcel/title.kstttnsv')
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -449,6 +449,288 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- 6 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.tlph')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent">
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tlph')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name6_1">
+                                    </div>
+                                </div>
+    
+                            </div>
+                        </div>
+
+                        <!-- 7 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.tlcvl')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent">
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tlcvl')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name7_1">
+                                    </div>
+                                </div>
+    
+                            </div>
+                        </div>
+
+                        <!-- 8 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.tlvtvl')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent">
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.vtql')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name8_1">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.vtktcn')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name8_2">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.vttn')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name8_3">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 9 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.tlsvckv')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent">
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.nhanuoc')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name9_1">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tunhan')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name9_2">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tutvl')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name9_3">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.cytnn')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name9_4">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 10 -->
+                        <div class="block-code">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>
+                                        @lang('project/ImportdataExcel/title.muctn')
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" class="checkbox-parent">
+                                    <input type="hidden" class="checkbox-hidden" name="checkbox[]" value="off">
+                                </div>
+                            </div>
+
+                            <div class="block-child">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-2">
+                                        <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.caonhat')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name10_1">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.thapnhat')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name10_2">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.duoi5tr')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name10_3">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tu5den8')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name10_4">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tu8den12')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name10_5">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tu12den15')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name10_6">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tu15den20')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name10_7">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>
+                                            @lang('project/ImportdataExcel/title.tren20')
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" name="name10_8">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
                     </div>
                 </form>
 
@@ -475,7 +757,7 @@
                 <h5 class="modal-title" id="modalDeleteLabel">
                     @lang('project/Standard/title.thongbao')
                 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -501,7 +783,7 @@
                     <button type="submit" class="btn btn-danger">
                         @lang('project/Standard/title.xoa')
                     </button>
-                    <button type="button" class="btn btn-primary" data-ds-dismiss="modal">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
                         @lang('project/Standard/title.huy')
                     </button>
                 </div>
@@ -519,7 +801,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalUpdateLabel">
-            @lang('project/ImportdataExcel/title.dtsxd')
+            @lang('project/ImportdataExcel/title.kstttnsv')
         </h5>
         <button type="button" class="close" data-ds-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>

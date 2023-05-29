@@ -30,6 +30,7 @@
             border-radius: 5px;
             box-shadow: 0 0 12px #ababab;
         }
+
     </style>
 @stop
 
@@ -95,16 +96,19 @@
                   @lang('project/Selfassessment/title.mctt')
               </th>
               <th scope="col">
+                  @lang('project/Selfassessment/title.dsmcg')
+              </th>
+              <th scope="col">
                   @lang('project/Selfassessment/title.dsmctp')
               </th>
               <th scope="col">
                   @lang('project/Selfassessment/title.kmc')
               </th>
-            
+              
                   <th scope="col">
                       @lang('project/Selfassessment/title.quanly')
                   </th>
-            
+              
             </tr>
           </thead>
             <tbody>
@@ -118,7 +122,7 @@
                         @continue
                     @endif
                     <tr>
-                        <td colspan="4">
+                        <td colspan="5">
                             {{ $tieuChuan->first()->stt.".".$tieuChi->stt }}
                             @php
                                 $mctt_count = DB::table("role_mctt_tchi")
@@ -132,33 +136,55 @@
                                 : {{ $tieuChi->mo_ta }}
                             @endif
                         </td>
-                       
+                        
                             <td class="text-center">
                                 @php
                                     $minhchung_gop = DB::table("minhchung_gop")
                                         ->where("id_tieuchi", $tieuChi->id);
                                 @endphp
                                 @if($minhchung_gop->count()>0)
-                                    
+                                    @php
+                                        $check = true;
+                                        $mcGop_ = DB::table("minhchung_gop")->where([
+                                            ['id_tieuchi', $tieuChi->id],
+                                            ['id_kehoach_baocao', $keHoachBaoCaoDetail->id]
+                                        ])->select("xacnhan")->get();
+
+                                        foreach($mcGop_ as $mcg_){
+                                            if($mcg_->xacnhan != "Y"){
+                                                $check = false;
+                                            }
+                                        }
+                                    @endphp
+                                    @if(!$check)
                                         <button type="button" class="btn xacNhanTieuChi"
                                                 data-toggle="modal" data-target="#xacnhanTC"
                                                 data-id="{{ $tieuChi->id }}"
                                                 data-toggle="tooltip" title="Xác nhận">
                                             <i class="bi bi-check-square-fill" style="font-size: 25px;color: #00bc8c;"></i>
                                         </button>
+                                    @else 
+                                        <button type="button" class="btn boxacNhanTieuChi"
+                                                data-toggle="modal" data-target="#boxacnhanTC"
+                                                data-id="{{ $tieuChi->id }}"
+                                                data-toggle="tooltip" title="Bỏ xác nhận">
+                                            <i class="bi bi-x-square-fill" style="font-size: 25px;color: red;"></i>
+                                            
+                                        </button>
+                                    @endif
 
                                 @endif
                             </td>
-                      
+                        
                     </tr>
 
                     @php
-                        $mctt_id = DB::table("tieuchi_minhchungtt")
+                        $mctt_id = DB::table("role_mctt_tchi")
                                 ->where("tieuchi_id", $tieuChi->id)
                                 ->get();
                         $array_minhchungtt_id = [];
                         foreach($mctt_id as $value){
-                            array_push($array_minhchungtt_id, $value->minhchungtt_id);
+                            array_push($array_minhchungtt_id, $value->mctt_id);
                         }
                         $mctt = DB::table("minhchung_tt")
                             ->whereIn("id", $array_minhchungtt_id)->get();
@@ -168,7 +194,7 @@
                     @foreach($mctt as $minhChungTTKey=>$minhChungTT)
                         <tr>
                             <td></td>
-                            <td colspan="3">
+                            <td colspan="4">
                                 @php
                                     $mcg_mctt = DB::table("minhchunggop_minhchungtt")
                                         ->where("minhchungtt_id", $minhChungTT->id)
@@ -217,8 +243,11 @@
                                         <i class="bi bi-plus-square-fill" style="font-size: 25px;color: rgb(6, 159, 210);"></i>
                                     </a>
                                 </td>
-                          
+                            
                         </tr>
+
+
+
                         @php
                             $isHadMinhChung = false;
                             $minhChungID = [];
@@ -238,45 +267,56 @@
                                     ->leftjoin('nhom_mc_sl AS mcsl', 'mcsl.id', '=', 'mc.nhom_mc_sl_id')
                                     ->select('mc.id', 'mc.tieu_de', 'mcsl.mo_ta', 'mc.sohieu', 'mc.ngay_ban_hanh', 'mc.nhom_mc_sl_id', 'mc.noi_banhanh', 'mc.address');
                             @endphp
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2">
+                                    <a target="_blank" href="{{ route('admin.tudanhgia.preparereport.viewmcgop', $minhChungGop->id) }}">{{ $minhChungGop->tieu_de }}</a>
+                                </td>
+                                <td class="text-center">
+                                    @if($minhchungs->count() == 1)
+                                        <button class="btn btn-xs" data-toggle="tooltip"
+                                                title="Minh chứng độc lập">
+                                            <i class="fas fa-clipboard" style="font-size: 25px;color: red;"></i>
+                                        </button>
+                                    @else
+                                        <button class="btn btn-xs" data-toggle="tooltip"
+                                                title="Minh chứng gộp">
+                                            <i class="fas fa-paste" style="font-size: 25px;color: #180cf5;"></i>
+                                        </button>
+                                    @endif
+
+                                    @if($minhChungGop->xacnhan=='Y')
+                                        <button class="btn btn-xs " data-toggle="tooltip"
+                                                title="Đã xác nhận">
+                                            <i class="bi bi-check-circle-fill" style="font-size: 25px;color: #50cd89;"></i>
+                                        </button>
+                                    @else
+                                        <button class="btn btn-xs btn-default" data-toggle="tooltip"
+                                                title="Chưa xác nhận">
+                                            <i class="far fa-circle"></i>
+                                        </button>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" data-id="{{ $minhChungGop->id }}" data-toggle="modal" data-target="#xoaMCgop">
+                                        <i class="bi bi-trash" style="font-size: 25px;color: red;"></i>
+                                    </a>
+                                </td>
+                            </tr>
                             @foreach($minhchungs->get() as $minhChung)
                                 @if(in_array($minhChung->id,$minhChungID))
                                     @continue
                                 @endif
                                 <tr>
-                                    <td colspan="2"></td>
-                                    <td>
+                                    <td colspan="3"></td>
+                                    <td colspan="2">
                                         <a href="javascript:;" class="view-minhchung"
                                            data-id="{{ $minhChung->id }}" data-minhchungJSON="{{ json_encode($minhChung) }}"
                                            data-toggle="modal" data-target="#detailMinhChung">
-                                            [Minh chứng] {{ $minhChung->tieu_de }}
+                                             {{ $minhChung->tieu_de }}
                                         </a>
                                     </td>
 
-                                    <td class="text-center">
-                                        @if($minhchungs->count() == 1)
-                                            <button class="btn btn-xs" data-toggle="tooltip"
-                                                    title="Minh chứng độc lập">
-                                                <i class="fas fa-clipboard" style="font-size: 25px;color: red;"></i>
-                                            </button>
-                                        @else
-                                            <button class="btn btn-xs" data-toggle="tooltip"
-                                                    title="Minh chứng gộp">
-                                                <i class="fas fa-paste" style="font-size: 25px;color: #180cf5;"></i>
-                                            </button>
-                                        @endif
-
-                                        @if($minhChungGop->xacnhan=='Y')
-                                            <button class="btn btn-xs " data-toggle="tooltip"
-                                                    title="Đã xác nhận">
-                                                <i class="bi bi-check-circle-fill" style="font-size: 25px;color: #50cd89;"></i>
-                                            </button>
-                                        @else
-                                            <button class="btn btn-xs btn-default" data-toggle="tooltip"
-                                                    title="Chưa xác nhận">
-                                                <i class="far fa-circle"></i>
-                                            </button>
-                                        @endif
-                                    </td>
                                     <td class="text-center">
 
                                         <button class="btn btn-xs MCGopDel" data-toggle="tooltip"
@@ -292,9 +332,35 @@
                 @endforeach
               </tbody>
         </table>
+
         {{ $listTieuChi->links() }}
         @endif
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="xoaMCgop" tabindex="-1" role="dialog" aria-labelledby="xoaMCgopLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="xoaMCgopLabel">
+            @lang('project/Selfassessment/title.thongbao')
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            @lang('project/Selfassessment/title.xoaMCgop')
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btnXoaMCgop">
+            @lang('project/Selfassessment/title.xacnhan')
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </section>
 <!-- /Kết thúc page trang -->
 
@@ -360,6 +426,9 @@
         </div>
       </div>
       <div class="modal-footer">
+        <a href="#" type="button" class="btn btn-success btn-show-minhchung" target="_blank">
+            @lang('project/Selfassessment/title.xemmc')
+        </a>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
             @lang('project/Selfassessment/title.dong')
         </button>
@@ -391,6 +460,36 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-primary btn-xacnhan">
             @lang('project/Selfassessment/title.xacnhan')
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bỏ xác nhận minh chứng -->
+
+<div class="modal fade" id="boxacnhanTC" tabindex="-1" role="dialog" aria-labelledby="boxacnhanTCLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="boxacnhanTCLabel">
+            @lang('project/Selfassessment/title.thongbao')
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <p class="font-weight-bold text-warning">
+                @lang('project/Selfassessment/title.bxntc')
+            </p>
+            <span>
+                @lang('project/Selfassessment/title.bbdxntc')
+            </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-boxacnhan">
+            @lang('project/Selfassessment/title.boxacnhan')
         </button>
       </div>
     </div>
@@ -454,6 +553,10 @@
             modal.find('#forngaybh').val(dataJSON.ngay_ban_hanh.split("-").reverse().join("-"))
             modal.find('#fornoibh').val(dataJSON.noi_banhanh)
             modal.find('#fordiachi').val(dataJSON.address)
+
+            var link = "{{ route('admin.dambaochatluong.manaproof.showProof')  }}";
+            link = link+ "/" + dataJSON.id;
+            $(".btn-show-minhchung").attr("href", link);
         })
 
 
@@ -521,6 +624,63 @@
                 })
         })
 
+        $('#boxacnhanTC').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) 
+            var id = button.data('id') 
+            var modal = $(this)
+            modal.find('.btn-boxacnhan').attr('data-id' , id)
+        })
+
+        $('.btn-boxacnhan').click(function() {
+            let idTchi = $(this).attr("data-id");
+            let idKhbc = $("#select-report").val();
+            var route = "{{ route('admin.tudanhgia.preparereport.boxacnhanTchi') }}";
+            let data = {
+                idTchi, idKhbc
+            }
+            fetch(route, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: 'POST', 
+                body: JSON.stringify(data)
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    alert(data.mes);
+                    window.location.reload();
+                })
+        })
+        
+        $('#xoaMCgop').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) 
+            var recipient = button.data('id') 
+            var modal = $(this)
+            modal.find('.btnXoaMCgop').attr('data-id' , recipient)
+        })
+        $('.btnXoaMCgop').click(function() {
+            let minhChungGop = $(this).attr("data-id")
+            let route = "{{ route('admin.tudanhgia.preparereport.deleteMcGroup') }}";
+            let data = {
+                minhchunggopid: minhChungGop
+            }
+            fetch(route, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: 'POST', 
+                body: JSON.stringify(data),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    alert("@lang('project/Selfassessment/title.xoaMCgtc')");
+                    window.location.reload();
+                })
+        })
 
         function autoChosse(){
             var queryString = location.search
@@ -632,6 +792,12 @@
                     }, 2000)
                 })
         }
+
+
+
+
+
+        
 
     </script>
 @stop
