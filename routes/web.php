@@ -1082,9 +1082,9 @@ Route::group(
                             function(){
                                 Route::get('index','ThongkekytucxaController@index')->name('index');
                                 Route::post('import-unit', 'ThongkekytucxaController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'ThongkekytucxaController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'ThongkekytucxaController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'ThongkekytucxaController@deleteUnit')->name('deleteUnit');
+                                // Route::post('import-data-unit', 'ThongkekytucxaController@importDataUnit')->name('importDataUnit');
+                                // Route::get('data-unit', 'ThongkekytucxaController@dataUnit')->name('dataUnit');
+                                Route::post('delete-unit', 'ThongkekytucxaController@deleteUnit')->name('deleteUnit');
                                 Route::post('update-unit', 'ThongkekytucxaController@updateUnit')->name('updateUnit');
 
                                 //Export thống kê ký túc xá
@@ -1223,8 +1223,8 @@ Route::group(
                                 Route::post('delete-unit', 'TtTotNghiepController@deleteUnit')->name('deleteUnit');
                                 Route::post('update-unit', 'TtTotNghiepController@updateUnit')->name('updateUnit');
 
-                                // //Export khảo sát tình trạng tốt nghiệp sinh viên
-                                // Route::get('export-tglv', 'DientichSanController@exportDtSan')->name('exportDtSan');
+                                //Export khảo sát tình trạng tốt nghiệp sinh viên
+                                Route::get('export-tglv', 'TtTotNghiepController@exportTttnsv')->name('exportTttnsv');
                             }
                         );
 
