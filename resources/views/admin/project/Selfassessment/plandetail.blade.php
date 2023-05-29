@@ -1971,6 +1971,7 @@ tbody tr td:last-child {
                         })
                         $('.ngaybd_menhde_'+menhde_id).val(data.ngay_batdau);
                         $('.ngayht_menhde_'+menhde_id).val(data.ngay_hoanthanh);
+
                         load_menhde(data.ke_hoach_tieuchi,tieuchi_id);
                         // console.log(data)
                         for (var i = 0; i < data.ke_hoach_bcns.length; i++) {

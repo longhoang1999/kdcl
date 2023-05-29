@@ -648,6 +648,7 @@ class DetailedplanningController extends DefinedController
           $kehoachbaocao = DB::table("kehoach_baocao")
                               ->where('id',$req->id_khbc)
                               ->first();
+          
           if($kehoachbaocao->writeFollow == 1){
                $baoCaoMenhDe = DB::table('baocao_menhde')
                               ->where('id_kehoach_bc',$req->id_khbc)
@@ -658,7 +659,7 @@ class DetailedplanningController extends DefinedController
                               ->where('id_menhde',$req->id_menhde)->update([
                                    'mota' => $req->mota_md,
                               ]);
-          }else{
+          }elseif($kehoachbaocao->writeFollow == 2){
 
                $baoCaoMenhDe = DB::table('baocao_menhde')
                               ->where('id_kehoach_bc',$req->id_khbc)

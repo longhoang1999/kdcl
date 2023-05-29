@@ -237,9 +237,16 @@
     });
 
     $(function(){
-         $('.show_mcg').on('click','.danMinhChung',function(){
-            let id = $(this).attr('d-id');
+         $('.show_mcg').on('click','.mcGop',function(){
+            let idmc_gop =  $(this).attr('id');
+            let id = idmc_gop.substring(idmc_gop.indexOf('_')+1);
             window.location= "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id;
+         })
+
+         $('.show_mcg').on('click','.mc',function(){
+            let idmc_gop =  $(this).attr('id');
+            let id = idmc_gop.substring(idmc_gop.indexOf('_')+1);
+            window.location= "{!! route('admin.dambaochatluong.manaproof.showProof',0)!!}"+id;
          })
 
          $('.MC_Tc_Tchi').on('click','tr a.mt-4',function(){

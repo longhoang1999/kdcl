@@ -237,6 +237,7 @@ class ManaProofController extends DefinedController
             return abort(422, Lang::get('project/Selfassessment/title.minhchungkhongtontai'));
         }
 
+
         $viewMC = false;
         
         if (Sentinel::inRole('operator')) {
@@ -264,12 +265,14 @@ class ManaProofController extends DefinedController
             return abort(422, "Bạn không được xem nội dung minh chứng này");
         }
 
-
         if (!Storage::disk('public')->exists($minhChungData->duong_dan)) {
+
             if ($minhChungData->url != '') {
                 return redirect($minhChungData->url);
             }
+
             return abort(422, Lang::get('project/QualiAssurance/message.error.minhchungkhongtontai'));
+
         }
         return $this->downloadfile($minhChungData->duong_dan,$minhChungData->ten_file);
     }

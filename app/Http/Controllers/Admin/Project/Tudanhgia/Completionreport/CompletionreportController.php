@@ -165,7 +165,7 @@ class CompletionreportController extends DefinedController
                                             ->first();
 
                         $valuekhmd->baoCaoMenhDe = $baoCaoMenhDe;
-                        // echo($valuekhmd->id_md);
+           
                         if( isset($baoCaoMenhDe->danhgia)){
                             $danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
                         }
@@ -237,11 +237,7 @@ class CompletionreportController extends DefinedController
                 $baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
                 $danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
                 $valuetc->baoCaoTieuChi = $baoCaoTieuChi;
-                // if(isset($danhGiaMenhDe)){
 
-                // }
-                
-               
             }
 
 
@@ -582,7 +578,7 @@ class CompletionreportController extends DefinedController
                                                             ->first();
 
                         if($keHoachMenhDe->baoCaoMenhDe->mota){
-                            $keHoachMenhDe->baoCaoMenhDe->mota = str_replace('id="addminhchunggop_', 'd-id="', $keHoachMenhDe->baoCaoMenhDe->mota);
+                            // $keHoachMenhDe->baoCaoMenhDe->mota = str_replace('id="addminhchunggop_', 'd-id="', $keHoachMenhDe->baoCaoMenhDe->mota);
                             $dom = new Dom;
                             $dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
                             $contents = $dom->find('.danMinhChung');  
