@@ -835,6 +835,7 @@ Route::group(
                                     ->name('proofCompare');
                                 Route::post('show-dsmc', 'PreparereportController@showdsmc')->name('showdsmc');
                                 Route::post('xac-nhan-tieu-chi', 'PreparereportController@xacnhanTchi')->name('xacnhanTchi');
+                                Route::post('bo-xac-nhan-tieu-chi', 'PreparereportController@boxacnhanTchi')->name('boxacnhanTchi');
                                 Route::post('xoa-minh-chung', 'PreparereportController@xoaMinhChung')->name('xoaMinhChung');
                                 Route::get('create-mc-gop', 'PreparereportController@createMcGop')->name('createMcGop');
                                 

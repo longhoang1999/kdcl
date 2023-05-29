@@ -742,4 +742,31 @@ class PreparereportController extends DefinedController
             'mes'   => Lang::get('project/Selfassessment/title.xnmctc'),
         ]);
     }
+
+    public function boxacnhanTchi(Request $req){
+        $kehoach_baocao = DB::table("kehoach_baocao")->where("id", $req->idKhbc);            
+        if($kehoach_baocao->count() == 0){
+            return json_encode([
+                'mes'   => Lang::get('project/Selfassessment/title.knddbc'),
+            ]);
+        }
+
+        $tieuchi = DB::table("tieuchi")->where("id", $req->idTchi);
+        if($tieuchi->count() == 0){
+            return json_encode([
+                'mes'   => Lang::get('project/Selfassessment/title.knddtc'),
+            ]);
+        }
+
+        $minhChungGop = DB::table("minhchung_gop")->where([
+            ['id_tieuchi', $req->idTchi],
+            ['id_kehoach_baocao', $req->idKhbc]
+        ])->update(['xacnhan' => 'N']);
+
+        return json_encode([
+            'mes'   => Lang::get('project/Selfassessment/title.bxnmctc'),
+        ]);
+    }
+
+    
 }
