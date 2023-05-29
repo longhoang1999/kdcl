@@ -117,7 +117,13 @@ class TuyensinhController extends DefinedController{
 	                   	else if($donvi->loai == 6)
 	                    	return Lang::get('project/ImportdataExcel/title.khac');
 	                }
-	            )        
+	            )    
+                ->addColumn(
+	                'stt',
+	                function ($donvi) {
+                        return "";
+	                }
+	            )    
 	            ->addColumn(
 	                'actions',
 	                function ($donvi) {
