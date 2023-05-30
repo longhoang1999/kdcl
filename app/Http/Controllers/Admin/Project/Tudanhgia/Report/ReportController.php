@@ -253,7 +253,6 @@ class ReportController extends DefinedController
                             ->where('tieuchuan_id', $req->id_tieuchuan);
         
         $check = $kh_tieuchuan->first();
-        // return 'df';
         
         $id_khtieuchuan = 0;
         if($check){
@@ -268,12 +267,7 @@ class ReportController extends DefinedController
             $data['tieuchuan_id'] = $req->id_tieuchuan;
             
             $id_khtieuchuan = DB::table('kehoach_tieuchuan')->insertGetId($data);
-            // $baocaotieuchan = DB::table('baocao_tieuchuan')
-            //                     ->insert([
-            //                         'id_kehoach_bc' => $req->id_khbc,
-            //                         'id_kh_tieuchuan' => $id_khtieuchuan,
-            //                         'id_tieuchuan' => $req->id_tieuchuan,
-            //                     ]);
+
            $tieuchi_id2 = DB::table("tieuchi")
                 ->where("tieuchuan_id", $req->id_tieuchuan)->pluck("id");
 
@@ -1716,6 +1710,118 @@ class ReportController extends DefinedController
         }
         
         return $arr;
+    }
+
+    public function updatebosung(Request $req){
+        $kehoachbaocao = DB::table('kehoach_baocao')
+                            ->where('id',$req->id_khbc)
+                            ->first();
+        $kh_tieuchuan = DB::table('kehoach_tieuchuan')
+                            ->where('id_kh_baocao', $req->id_khbc)
+                            ->where('tieuchuan_id', $req->id_tieuchuan)
+                            ->first();
+        $kehoach_tchi = DB::table('kehoach_tieuchi')
+                            ->where('id_kh_tieuchuan',$kh_tieuchuan->id)
+                            ->where('id_tieuchi',$req->id_tieuchi)
+                            ->first();
+        $check = DB::table("kehoach_menhde")
+                    ->where('id_kh_tieuchi',$kehoach_tchi->id)
+                    ->first();
+        $tieuchinhansu = DB::table('kehoach_tieuchi_nhansu')
+                            ->where('id_kehoach',$kehoach_tchi->id)
+                            ->get();               
+        if($kh_tieuchuan){
+            if($kehoachbaocao->writeFollow == 1){
+
+                $menhde_s = DB::table("menhde")
+                                ->where("tieuchi_id",$req->id_tieuchi)->pluck("id");
+
+                foreach($menhde_s as $value3){
+                    $check_save = DB::table("kehoach_menhde")
+                                    ->where('id_kh_tieuchi',$kehoach_tchi->id)
+                                    ->where('id_menhde',$value3)
+                                    ->first();
+                    if(!$check_save){
+                        $kehoach_mde = DB::table("kehoach_menhde")->insertGetId([
+                             'id_kh_tieuchi'    => $kehoach_tchi->id,
+                             'id_menhde'        => $value3,
+                             'id_csdt'         => Sentinel::getUser()->csdt_id,
+                             'nguoi_tao'       => Sentinel::getUser()->id,
+                             'ngay_batdau'        => $kehoach_tchi->ngay_batdau_chuanbi,
+                             'ngay_hoanthanh'        => $kehoach_tchi->ngay_hoanthanh_chuanbi,
+
+                          ]);
+
+                        DB::table('baocao_menhde')->insert([
+                            'id_kehoach_bc' =>    $req->id_khbc,
+                            'id_kh_menhde' =>     $kehoach_mde,
+                            'id_menhde' =>    $value3,
+
+                         ]);
+                        foreach($tieuchinhansu as $val){
+                            $res4 = DB::table('kehoach_menhde_nhansu')->insert([
+                                'id_kehoach'    => $kehoach_mde,
+                                'id_nhansuthuchien'  => $val->id_nhansuthuchien,
+                            ]);
+
+                            $res5 = DB::table('kehoach_menhde_nhansu')->insert([
+                                'id_kehoach'    => $kehoach_mde,
+                                'id_nhansukiemtra'  => $val->id_nhansukiemtra,
+                            ]);
+                        }
+                    }
+                    
+                        
+                }
+                    
+            }else if($kehoachbaocao->writeFollow == 2){
+                
+                $menhde_s = DB::table("mocchuan")
+                                ->where("tieuchi_id",$req->id_tieuchi)->pluck("id");
+
+                foreach($menhde_s as $value3){
+                    $check_save = DB::table("kehoach_menhde")
+                                    ->where('id_kh_tieuchi',$kehoach_tchi->id)
+                                    ->where('mocchuan_id',$value3)
+                                    ->first();
+                    if(!$check_save){
+                        $kehoach_mde = DB::table("kehoach_menhde")->insertGetId([
+                             'id_kh_tieuchi'    => $kehoach_tchi->id,
+                             'mocchuan_id'    => $value3,
+                             'id_csdt'         => Sentinel::getUser()->csdt_id,
+                             'nguoi_tao'       => Sentinel::getUser()->id,
+                             'ngay_batdau'        => $kehoach_tchi->ngay_batdau_chuanbi,
+                             'ngay_hoanthanh'        => $kehoach_tchi->ngay_hoanthanh_chuanbi,
+                          ]);
+
+                        $save_mc = DB::table('baocao_menhde')->insert([
+                                    'id_kehoach_bc' =>    $req->id_khbc,
+                                    'id_kh_menhde' =>     $kehoach_mde,
+                                    'mocchuan_id' =>    $value3,
+
+                        ]);
+
+                       foreach($tieuchinhansu as $val){
+                            $res4 = DB::table('kehoach_menhde_nhansu')->insert([
+                                'id_kehoach'    => $kehoach_mde,
+                                'id_nhansuthuchien'  => $val->id_nhansuthuchien,
+                            ]);
+
+                            $res5 = DB::table('kehoach_menhde_nhansu')->insert([
+                                'id_kehoach'    => $kehoach_mde,
+                                'id_nhansukiemtra'  => $val->id_nhansukiemtra,
+                            ]);
+                        }
+                    }
+                    
+                }       
+            }
+
+            return 1;
+            
+        }else{
+            return 0;
+        }
     }
 }
 

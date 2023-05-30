@@ -711,6 +711,7 @@ Route::group(
                                 Route::post('show_nskt_tc', 'ReportController@show_nskt_tc')->name('show_nskt_tc');
                                 Route::get('show_tctieuchi_md', 'ReportController@show_tctieuchi_md')->name('show_tctieuchi_md');
                                 Route::post('show_nskt_md', 'ReportController@show_nskt_md')->name('show_nskt_md');
+                                Route::post('updatebosung', 'ReportController@updatebosung')->name('updatebosung');
                             }
                         );
                         //Thêm mới báo cáo

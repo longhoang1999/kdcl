@@ -40,24 +40,7 @@
 @section('footer_scripts')
 
 <script>
-        
-        //  $(function () {
-        //     table = $('#table').DataTable({
-        //         responsive: true,
-        //         processing: true,
-        //         serverSide: true, 
-        //         searching:false,
-        //         ajax: "{{ route('admin.danhgiangoai.baocaotudanhgia.thuvien') }}?id="+{{$id}},
-        //         order: [], 
-        //         columns: [
-
-        //             { data: 'id'},
-        //             { data: 'id' },
-        //         ],           
-        //     });
-
-        // });
-
+  
          $( function () {
             table = $('#table').DataTable({
                 responsive: true,
@@ -86,20 +69,6 @@
             });
 
         });
-         // $('.a').on('click',function(){
-         //    $.ajax({
-         //            url: "{!! route('admin.danhgiangoai.baocaotudanhgia.thuvien') !!}",
-        
-         //            error: function(err) {
-
-         //            },
-         //            success: function(data) {   
-         //                console.log(data);
-         //            }
-
-         //        });
-         // })
-         
 
 </script>
 @stop

@@ -33,9 +33,9 @@ class CompletionreportController extends DefinedController
                 ->select('kehoach_baocao.*','ctdt.manganh')
                 ->leftjoin('ctdt','ctdt.id','=','kehoach_baocao.ctdt_id');
         
-        if(Sentinel::inRole('ttchuyentrach')){
-            $bcs = $bcs->where("kehoach_baocao.ns_phutrach", Sentinel::getUser()->id);
-        }
+        // if(Sentinel::inRole('ttchuyentrach')){
+        //     $bcs = $bcs->where("kehoach_baocao.ns_phutrach", Sentinel::getUser()->id);
+        // }
 
         return DataTables::of($bcs)
             ->addColumn(
@@ -377,12 +377,16 @@ class CompletionreportController extends DefinedController
 
     public function listMinhChung($id){
 
+            $kehoachbaocao = DB::table('kehoach_baocao')
+                                ->where('id',$id)
+                                ->first();
             $keHoachTieuChuanList = DB::table('kehoach_tieuchuan')
                                     ->where('id_kh_baocao',$id)
                                     ->get();
             $mcCollect = collect([]);
             $minhChungid = [];
             $checkMC = collect([]);
+
             foreach($keHoachTieuChuanList as $keHoachTieuChuan){
                 $keHoachTieuChuan->keHoachTieuChiList = DB::table('kehoach_tieuchi')
                                                             ->where('id_kh_tieuchuan',$keHoachTieuChuan->id)
@@ -390,6 +394,7 @@ class CompletionreportController extends DefinedController
                 $keHoachTieuChuan->tieuChuan = DB::table('tieuchuan')
                                                             ->where('id',$keHoachTieuChuan->tieuchuan_id)
                                                             ->first();
+
                 foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi){
                     $minhChungStt = 1;
                     $keHoachTieuChi->keHoachMenhDeList = DB::table('kehoach_menhde')
@@ -397,76 +402,161 @@ class CompletionreportController extends DefinedController
                                                             ->get();
                     $keHoachTieuChi->tieuChi = DB::table('tieuchi')
                                                             ->where('id',$keHoachTieuChi->id_tieuchi)
-                                                            ->first();                                         
-                    foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
-                        $keHoachMenhDe->baoCaoMenhDe = DB::table('baocao_menhde')
-                                                            ->where('id_kehoach_bc',$id)
-                                                            ->where('id_kh_menhde',$keHoachMenhDe->id)
-                                                            ->where('id_menhde',$keHoachMenhDe->id_menhde)
                                                             ->first();
 
-                        if(isset($keHoachMenhDe->baoCaoMenhDe->mota)){
-                            $dom = new Dom;
-                            $dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
-                            $contents = $dom->find('.danMinhChung');  
-                            $arr = array();
+                    if($kehoachbaocao->writeFollow == 1){
+                        foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
+                            $keHoachMenhDe->baoCaoMenhDe = DB::table('baocao_menhde')
+                                                                ->where('id_kehoach_bc',$id)
+                                                                ->where('id_kh_menhde',$keHoachMenhDe->id)
+                                                                ->where('id_menhde',$keHoachMenhDe->id_menhde)
+                                                                ->first();
 
-                            foreach ($contents as $key => $danMinhChung) {
-                                if(!in_array($danMinhChung->{'d-id'}, $minhChungid)){
-                                    $minhChungCode = "[H{$keHoachTieuChuan->tieuChuan->stt}." .
-                                            str_pad($keHoachTieuChuan->tieuChuan->stt, 2, '0', STR_PAD_LEFT) . "." .
-                                            str_pad($keHoachTieuChi->tieuChi->stt, 2, '0', STR_PAD_LEFT) .
-                                            "." . str_pad($minhChungStt, 2, '0', STR_PAD_LEFT) . "]";
-
-                                    $minhChungid[$minhChungCode] = $danMinhChung->{'d-id'};
-                                    $minhChungStt++;
-                                }
-                                else{
-                                    $minhChungCode = array_search($danMinhChung->{'d-id'}, $minhChungid);
-                                }
-
-                                if($checkMC->contains($minhChungCode)){
-                                    continue;
-                                }
-
-                                $checkMC->push($minhChungCode);
-
-                                if (!$danMinhChung->{'d-type'} || $danMinhChung->{'d-type'} == 'mc') {
-                                    $mcDetail = DB::table('minhchung')->find($danMinhChung->{'d-id'});
-                                    if ($mcDetail) {
-                                         $mcCollect->push([
-                                            'mcCode' => $minhChungCode,
-                                            'mcType' => 'mc',
-                                            'mcDetail' => $mcDetail,
-                                            // 'qlmc'    => $mcDetail->nguoiTao->donVi->ten_ngan
-                                         ]);
-                                    }
-
-                                } else {
-                                    $mcGop = DB::table('minhchung_gop')->find($danMinhChung->{'d-id'});
-                                    
-                                    if ($mcGop) {
-                                        $minhChungList = DB::table('minhchung')
-                                                ->leftjoin('minhchunggop_minhchung','minhchung.id','=','minhchunggop_minhchung.minhchung_id')
-                                                ->where('minhchunggop_minhchung.minhchunggop_id',$danMinhChung->{'d-id'})
-                                                ->get();
-                                        $mcGop->minhChungList = $minhChungList;
-                                        $mcCollect->push([
-                                            'mcCode' => $minhChungCode,
-                                            'mcType' => 'mcGop',
-                                            'mcDetail' => $mcGop,
-                                            // 'qlmc'=>$mcGop->nguoiTao->donVi->ten_ngan
-                                        ]);
-                                    }
-
-                                }
+                            if(isset($keHoachMenhDe->baoCaoMenhDe->mota)){
+                                $dom = new Dom;
+                                $dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
+                                $contents = $dom->find('.danMinhChung');
+                                   
+                                $arr = array();
                                 
+                                foreach ($contents as $key => $danMinhChung) {
+                                
+                                    $kiemthu = substr($danMinhChung->{'id'}, strpos($danMinhChung->{'id'}, "_") + 1);
+                                    if(!in_array($kiemthu, $minhChungid)){
+                                        $minhChungCode = "[H{$keHoachTieuChuan->tieuChuan->stt}." .
+                                                str_pad($keHoachTieuChuan->tieuChuan->stt, 2, '0', STR_PAD_LEFT) . "." .
+                                                str_pad($keHoachTieuChi->tieuChi->stt, 2, '0', STR_PAD_LEFT) .
+                                                "." . str_pad($minhChungStt, 2, '0', STR_PAD_LEFT) . "]";
+
+                                        $minhChungid[$minhChungCode] = $kiemthu;
+                                        $minhChungStt++;
+                                    }
+                                    else{
+                                        $minhChungCode = array_search($kiemthu, $minhChungid);
+                                    }
+
+                                    if($checkMC->contains($minhChungCode)){
+                                        continue;
+                                    }
+
+                                    $checkMC->push($minhChungCode);
+
+                                    if (!$danMinhChung->{'d-type'} || $danMinhChung->{'d-type'} == 'mc') {
+                                        $mcDetail = DB::table('minhchung')->find($kiemthu);
+                                        if ($mcDetail) {
+                                             $mcCollect->push([
+                                                'mcCode' => $minhChungCode,
+                                                'mcType' => 'mc',
+                                                'mcDetail' => $mcDetail,
+                                                // 'qlmc'    => $mcDetail->nguoiTao->donVi->ten_ngan
+                                             ]);
+                                        }
+
+                                    } else {
+                                        $mcGop = DB::table('minhchung_gop')->find($kiemthu);
+                                        
+                                        if ($mcGop) {
+                                            $minhChungList = DB::table('minhchung')
+                                                    ->leftjoin('minhchunggop_minhchung','minhchung.id','=','minhchunggop_minhchung.minhchung_id')
+                                                    ->where('minhchunggop_minhchung.minhchunggop_id',$kiemthu)
+                                                    ->get();
+                                            $mcGop->minhChungList = $minhChungList;
+                                            $mcCollect->push([
+                                                'mcCode' => $minhChungCode,
+                                                'mcType' => 'mcGop',
+                                                'mcDetail' => $mcGop,
+                                                // 'qlmc'=>$mcGop->nguoiTao->donVi->ten_ngan
+                                            ]);
+                                        }
+
+                                    }
+                                    
+                                }
                             }
+                            
                         }
+                    }elseif($kehoachbaocao->writeFollow == 2){
                         
-                    }
+                        foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
+                            $keHoachMenhDe->baoCaoMenhDe = DB::table('baocao_menhde')
+                                                                ->where('id_kehoach_bc',$id)
+                                                                ->where('id_kh_menhde',$keHoachMenhDe->id)
+                                                                ->where('mocchuan_id',$keHoachMenhDe->mocchuan_id)
+                                                                ->first();
+
+                            if(isset($keHoachMenhDe->baoCaoMenhDe->mota)){
+                                $dom = new Dom;
+                                $dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
+
+                                $contents = $dom->find('.danMinhChung');    
+                                $arr = array();
+                                $i = 0;
+                                  
+                                foreach ($contents as $key => $danMinhChung) {
+                                
+                                    $kiemthu = substr($danMinhChung->{'id'}, strpos($danMinhChung->{'id'}, "_") + 1);
+                                   
+
+                                    if(!in_array($kiemthu, $minhChungid)){
+                                        $minhChungCode = "[H{$keHoachTieuChuan->tieuChuan->stt}." .
+                                                str_pad($keHoachTieuChuan->tieuChuan->stt, 2, '0', STR_PAD_LEFT) . "." .
+                                                str_pad($keHoachTieuChi->tieuChi->stt, 2, '0', STR_PAD_LEFT) .
+                                                "." . str_pad($minhChungStt, 2, '0', STR_PAD_LEFT) . "]";
+
+                                        $minhChungid[$minhChungCode] = $kiemthu;
+                                        $minhChungStt++;
+                                    }
+                                    else{
+                                        $minhChungCode = array_search($kiemthu, $minhChungid);
+                                    }
+
+                                    if($checkMC->contains($minhChungCode)){
+                                        continue;
+                                    }
+
+                                    $checkMC->push($minhChungCode);
+                                        $i++;
+                                    if (!$danMinhChung->{'d-type'} || !$danMinhChung->{'d-type'} == 'mc') {
+                                        $mcDetail = DB::table('minhchung')->find($kiemthu);
+                                        if ($mcDetail) {
+                                             $mcCollect->push([
+                                                'mcCode' => $minhChungCode,
+                                                'mcType' => 'mc',
+                                                'mcDetail' => $mcDetail,
+                                                // 'qlmc'    => $mcDetail->nguoiTao->donVi->ten_ngan
+                                             ]);
+                                        }
+
+                                    } else {
+                                        $mcGop = DB::table('minhchung_gop')->find($kiemthu);
+                                        
+                                        if ($mcGop) {
+                                            $minhChungList = DB::table('minhchung')
+                                                    ->leftjoin('minhchunggop_minhchung','minhchung.id','=','minhchunggop_minhchung.minhchung_id')
+                                                    ->where('minhchunggop_minhchung.minhchunggop_id',$kiemthu)
+                                                    ->get();
+                                            $mcGop->minhChungList = $minhChungList;
+                                            $mcCollect->push([
+                                                'mcCode' => $minhChungCode,
+                                                'mcType' => 'mcGop',
+                                                'mcDetail' => $mcGop,
+                                                // 'qlmc'=>$mcGop->nguoiTao->donVi->ten_ngan
+                                            ]);
+                                        }
+
+                                    }
+                                    
+                                }
+                            }
+                            
+                        }
+                    }                                         
+                    
                 }
-            }
+
+            } 
+                // echo($i);
+                // die;
             return array($mcCollect);
         }
         //endcode gốc

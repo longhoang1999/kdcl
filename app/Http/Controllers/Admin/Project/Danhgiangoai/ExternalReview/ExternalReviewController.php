@@ -1148,7 +1148,7 @@ class ExternalReviewController extends DefinedController{
 										->where('users.id',$dt->nguoi_tao)
 										->first();
 						if($ten_ngan){
-							return $dt->tieu_de.$ten_ngan->ten_ngan;
+							return $dt->tieu_de.' ('.$ten_ngan->ten_ngan.')';
 						}else{
 							return 'Không có dữ liệu';
 						}
