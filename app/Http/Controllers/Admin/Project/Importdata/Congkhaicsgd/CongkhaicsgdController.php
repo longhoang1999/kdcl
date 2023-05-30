@@ -88,7 +88,13 @@ class CongkhaicsgdController extends DefinedController{
 	                ->select('ckcsgd.id', 'ckcsgd.ten_co_so', 'ckcsgd.tddgn',
 	                 'ckcsgd.ket_qua','ckcsgd.nghi_quyet','ckcsgd.cong_nhan','ckcsgd.ngay_cap','ckcsgd.gia_tri_den');
 
-	        return DataTables::of($donviExcel)        
+	        return DataTables::of($donviExcel) 
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            )        
             ->addColumn(
                 'tddgn',
                 function ($donvi) {

@@ -115,12 +115,6 @@ public function exportUnit() {
 	            	'dlex.tennganh', 'dlex.nbdck', 'dlex.trinhdo');
 
 	        return DataTables::of($donviExcel)  
-				->addColumn(
-					'stt',
-					function ($donvi) {
-						return "";
-					}
-				)  
 	        	->addColumn(
 	                'hoten',
 	                function ($donvi) {

@@ -114,7 +114,6 @@
         <table class="table table-striped table-bordered" id="table" width="100%">
             <thead>
              <tr>
-                <th>STT</th>
                 <th>
                     @lang('project/ImportdataExcel/title.stt1')
                 </th>

@@ -142,6 +142,9 @@
                     <thead>
                         <tr>
                             <th>
+                                @lang('project/ImportdataExcel/title.stt1')
+                            </th>
+                            <th>
                                 @lang('project/ImportdataExcel/title.tenchude')
                             </th>
                             <th>
@@ -381,7 +384,9 @@
                 processing: true,
                 serverSide: true,
                 ajax: "{!! route('admin.importdata.ckhnhtkh.dataUnit') !!}",
-                columns: [{
+                columns: [
+                    { data: 'stt', name: 'stt' ,className: 'stt'},
+                    {
                         data: 'tcd',
                         name: 'tcd'
                     },
@@ -404,6 +409,12 @@
                     },
                 ],
             });
+            table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
+        });
         });
 
         $('#import_unit').on('click', function() {

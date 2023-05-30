@@ -118,6 +118,9 @@
             <thead>
              <tr>
                 <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
+                <th>
                     @lang('project/ImportdataExcel/title.khoinganh')
                 </th>
                 <th>
@@ -378,11 +381,18 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.ckqmdt.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'khoi_nganh', name: 'khoi_nganh' },
                 { data: 'tien_si', name: 'tien_si' },
                 { data: 'thac_si', name: 'thac_si' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

@@ -521,6 +521,7 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.dlsinhvien.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'masv', name: 'masv' },
                 { data: 'hoten', name: 'hoten' },
                 { data: 'tennganh', name: 'tennganh' },
@@ -528,6 +529,12 @@
                 { data: 'trinhdo', name: 'trinhdo' },
                 { data: 'actions', name: 'actions',className: 'action' },
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

@@ -101,12 +101,6 @@ class Chuongtrinhdaotao extends DefinedController{
 
 	        return DataTables::of($donviExcel)  
                 ->addColumn(
-                    'stt',
-                    function ($donvi) {
-                        return "";
-                    }
-                )          
-                ->addColumn(
                     'actions',
                     function ($donvi) {
                         $actions = '<button data-toggle="modal" data-target="#modalUpdate" class="btn btn-block mt-2" data-id="'.$donvi->id.'" data-bs-placement="top" title="'.Lang::get('project/Selfassessment/title.capnhat').'">'. '<i class="bi bi-pencil-square" style="font-size: 25px;color: #009ef7;"></i>' .'</button>';
