@@ -120,7 +120,13 @@ public function exportUnit() {
 	                function ($donvi) {
 	                    return $donvi->ho . " " . $donvi->ten ;
 	                }
-	            )             
+	            )   
+				->addColumn(
+	                'stt',
+	                function ($donvi) {
+                        return "";
+	                }
+	            )            
 	            ->addColumn(
 	                'actions',
 	                function ($donvi) {

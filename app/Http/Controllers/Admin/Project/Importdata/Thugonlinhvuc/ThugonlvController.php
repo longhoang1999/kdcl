@@ -92,6 +92,12 @@ class ThugonlvController extends DefinedController{
                         return $actions;
                     }
                 )
+                ->addColumn(
+	                'stt',
+	                function ($donvi) {
+                        return "";
+	                }
+	            )  
 	            ->rawColumns(['actions'])
 	            ->make(true);
 	    }

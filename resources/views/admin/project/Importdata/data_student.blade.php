@@ -114,6 +114,7 @@
         <table class="table table-striped table-bordered" id="table" width="100%">
             <thead>
              <tr>
+                <th>STT</th>
                 <th>
                     @lang('project/ImportdataExcel/title.msv')
                 </th>
@@ -518,6 +519,7 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.dlsinhvien.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' },
                 { data: 'masv', name: 'masv' },
                 { data: 'hoten', name: 'hoten' },
                 { data: 'tennganh', name: 'tennganh' },
@@ -525,6 +527,13 @@
                 { data: 'trinhdo', name: 'trinhdo' },
                 { data: 'actions', name: 'actions',className: 'action' },
             ],            
+        });
+
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

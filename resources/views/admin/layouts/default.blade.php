@@ -195,9 +195,9 @@
                                         <!--begin::Notifications-->
                                         <div class="d-flex align-items-stretch">
                                             <!--begin::Menu wrapper-->
-                                            <div class="noti-parent topbar-item position-relative px-3 px-lg-5">
+                                            <!-- <div class="noti-parent topbar-item position-relative px-3 px-lg-5">
                                                 <i class="bi bi-app-indicator fs-3"></i>
-                                            </div>
+                                            </div> -->
                                             <!--begin::Menu-->
                                             <div class="noti-child menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px">
                                                 <!--begin::Heading-->
@@ -619,14 +619,14 @@
                             </div>
                             <!--end::Copyright-->
                             <!--begin::Menu-->
-                            <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
+                            <!-- <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
                                 <li class="menu-item">
                                     <a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
                                 </li>
                                 <li class="menu-item">
                                     <a href="https://keenthemes.com/support" target="_blank" class="menu-link px-2">Support</a>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <!--end::Menu-->
                         </div>
                         <!--end::Container-->

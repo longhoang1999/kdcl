@@ -114,6 +114,7 @@
         <table class="table table-striped table-bordered" id="table" width="100%">
             <thead>
              <tr>
+                <th>STT</th>
                 <th>
                     @lang('project/ImportdataExcel/title.khoabm')
                 </th>
@@ -424,6 +425,12 @@
                 { data: 'nam_bddt', name: 'nam_bddt' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 
