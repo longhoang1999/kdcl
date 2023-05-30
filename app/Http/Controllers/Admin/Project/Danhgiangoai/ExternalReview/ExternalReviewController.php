@@ -1170,9 +1170,9 @@ class ExternalReviewController extends DefinedController{
 
 					->addColumn('trang_t',function($dt){
 						if($dt->cong_khai == 'Y'){
-							return '<span class="badge badge-primary">'.Lang::get('project/ExternalReview/title.congkhai').'</span>';
+							return '<span class="badge badge-primary">'.Lang::get('project/Externalreview/title.congkhai').'</span>';
 						}else{
-							return '<span class="badge badge-secondary">'.Lang::get('project/ExternalReview/title.khongck').'</span>';
+							return '<span class="badge badge-secondary">'.Lang::get('project/Externalreview/title.khongck').'</span>';
 						}
 						
 					})

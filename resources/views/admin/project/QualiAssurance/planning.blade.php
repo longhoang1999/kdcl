@@ -65,7 +65,6 @@
         </div>
        
         <div class="row">
-             @if( !Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien'))
             <div class="col-md-4">
                 <select id="namlkh" class="form-control">
                     <option value="" hidden>-- @lang('project/QualiAssurance/title.cnlkh')</option>
@@ -93,7 +92,6 @@
                 </button>
             </div>
             
-            @endif
             <div class="col-md-1">
                 <a class="btn btn-benchmark mr-2" href="{{route('admin.dambaochatluong.planning.exportplaning')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.xuat_excel')">
                     <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
@@ -173,9 +171,7 @@
                             <th >@lang('project/QualiAssurance/title.nht')</th>
                             <th >@lang('project/QualiAssurance/title.dvpt')</th>
                             <th >@lang('project/QualiAssurance/title.nskt')</th>
-                            @if( !Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien'))
                             <th >@lang('project/QualiAssurance/title.hdong')</th>
-                            @endif
                          </tr>
                         </thead>
                         <tbody>  
@@ -188,9 +184,7 @@
                          <tr>
                             <th >@lang('project/QualiAssurance/title.lvuc')</th>
                             <th >@lang('project/QualiAssurance/title.trangthai')</th>
-                            @if( !Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien'))
                             <th >@lang('project/QualiAssurance/title.hdong')</th>
-                            @endif
                          </tr>
                         </thead>
                         <tbody>  
@@ -286,10 +280,7 @@
                             @lang('project/QualiAssurance/title.nskt')
                         </label>
 
-                        <select name="nskt" class="form-control item-search ns">
-                            <option hidden value="">
-                                ---- @lang('project/QualiAssurance/title.nskt')
-                            </option>
+                        <select name="nskt" id="nskt1" class="form-control item-search ns">
                             @foreach($nskt as $ns)
                                 <option value="{{ $ns->id }}">  
                                     {{ $ns->name . " - " . $ns->ten_donvi }}
@@ -461,7 +452,7 @@
                     </div>
                     <div class="col-md-12">
                         <label for="">@lang('project/QualiAssurance/title.nskt'): </label>
-                        <select name="nskt" id="" class="form-control " >
+                        <select name="nskt" id="nskt2" class="form-control " >
                             @foreach($nskt as $ns)
                                 <option value="{{ $ns->id }}">
                                     {{ $ns->name . " - " . $ns->ten_donvi }}
@@ -793,9 +784,7 @@
                 { data: 'ngayHoanthanh', name: 'ngayHoanthanh' },
                 { data: 'dvThucHien', name: 'dvThucHien' },
                 { data: 'nsKiemTra', name: 'nsKiemTra' },
-                @if( !Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien'))
                 { data: 'actions', name: 'actions' ,className: 'action'},
-                @endif
             ],            
         });
 
@@ -907,7 +896,12 @@
     //     placeholder: "@lang('project/QualiAssurance/title.donvi')",
     //     allowClear: true
     // });
-    $(".ns").select2({
+    $("#nskt1").select2({
+        placeholder: "@lang('project/QualiAssurance/title.nskt')",
+        allowClear: true,
+        dropdownParent: $('#modalLapKeHoach')
+    });
+    $("#nskt2").select2({
         placeholder: "@lang('project/QualiAssurance/title.nskt')",
         allowClear: true
     });
@@ -928,9 +922,7 @@
             columns: [
                 { data: 'mo_ta', name: 'mo_ta' , className: 'width_30'  },
                 { data: 'note', name: 'note' , className: 'width_50' },
-                @if( !Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien'))
                 { data: 'actions', name: 'actions', className: 'width_20' ,className: 'action' },
-                @endif
             ],            
         });
 
