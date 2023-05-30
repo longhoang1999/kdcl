@@ -83,7 +83,13 @@ class ThugonlvController extends DefinedController{
 	        $donviExcel = $donviExcel
 	                ->select('tglv.id', 'tglv.linh_vuc', 'tglv.bang_bieu');
 
-	        return DataTables::of($donviExcel)          
+	        return DataTables::of($donviExcel) 
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            )           
                 ->addColumn(
                     'actions',
                     function ($donvi) {

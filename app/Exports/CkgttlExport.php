@@ -15,7 +15,8 @@ class CkgttlExport implements FromCollection, WithHeadings
         
         foreach($tss as $ts){
             $row = [
-                $ts->tgt_tltk ,
+                $ts->nganh,
+                $ts->tgt_tltk,
                 $ts->nxb,
                 $ts->ke_hoach,
 
@@ -27,6 +28,7 @@ class CkgttlExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "Ngành/CTĐT",
             "Tên giáo trình, tài liệu tham khảo (kể cả giáo trình điện tử)",
             "Năm xuất bản",
             "Kế hoạch soạn thảo giáo trình, tài liệu tham khảo (kể cả giáo trình điện tử)",

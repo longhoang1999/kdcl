@@ -127,6 +127,12 @@ class NhansuController extends DefinedController{
 	            		'nsex.tdcm', 'nsex.loaihd', 'nsex.trangthai');
 
 	        return DataTables::of($nhansuExcel)  
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            ) 
 	        	->addColumn(
 	                'fullname',
 	                function ($nhansu) {

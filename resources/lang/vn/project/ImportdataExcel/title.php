@@ -8,6 +8,7 @@
 		'nttcb'			=> 'Nhập thông tin cơ bản',
 		'themtt'		=> 'Thêm thông tin',
 		'stt'			=> 'Số thứ tự',
+		'stt1'			=> 'STT',
 		'madv'			=> 'Mã đơn vị',
 		'loaidv'		=> 'Loại đơn vị',
 		'tendvTV'		=> 'Tên DV Tiếng Việt',
@@ -520,6 +521,7 @@
 		// Thông tin đồ án, khóa luận, luận văn, luận án tốt nghiệp
 		'ttdakl'		=> 'Thông tin đồ án, khóa luận, luận văn, luận án tốt nghiệp',
 		'cnttdakl'		=> 'Cập nhật thông tin đồ án, khóa luận, luận văn, luận án tốt nghiệp',
+		'nganh'			=> 'Ngành/CTĐT',
 		'tddt'			=> 'Trình độ đào tạo',
 		'tendetai'		=> 'Tên đề tài',
 		'hvtnth'		=> 'Họ và tên người thực hiện',

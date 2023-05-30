@@ -96,7 +96,13 @@ class BaibaobcController extends DefinedController{
 	                ->select('bcbcex.id', 'bcbcex.tbbbc', 'bcbcex.maso',
 	                 'bcbcex.tcd', 'bcbcex.ltc', 'bcbcex.dmtc');
 
-	        return DataTables::of($donviExcel)  
+	        return DataTables::of($donviExcel) 
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            )   
 	        	->addColumn(
 	                'danhmuc',
 	                function ($donvi) {

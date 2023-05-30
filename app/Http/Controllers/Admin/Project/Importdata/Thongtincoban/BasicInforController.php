@@ -106,6 +106,12 @@ class BasicInforController extends DefinedController{
 	             	'ldv.loai_donvi');
 
 	        return DataTables::of($donviExcel)  
+				->addColumn(
+					'stt',
+					function ($donvi) {
+						return "";
+					}
+				) 
 	        	->addColumn(
 	                'ngay_TL',
 	                function ($donvi) {

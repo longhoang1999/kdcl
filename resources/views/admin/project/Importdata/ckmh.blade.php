@@ -118,19 +118,19 @@
             <thead>
              <tr>
                 <th>
-                    @lang('project/ImportdataExcel/title.tenmonhoc')
+                    @lang('project/ImportdataExcel/title.stt1')
                 </th>
                 <th>
-                    @lang('project/ImportdataExcel/title.mdmh')
+                    @lang('project/ImportdataExcel/title.nganh')
+                </th>
+                <th>
+                    @lang('project/ImportdataExcel/title.tenmonhoc')
                 </th>
                 <th>
                     @lang('project/ImportdataExcel/title.sotinchi')
                 </th>
                 <th>
                     @lang('project/ImportdataExcel/title.ltgd')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.ppdgsv')
                 </th>
                 <th>
                     @lang('project/ImportdataExcel/title.hanhd')
@@ -277,6 +277,12 @@
                     <div class="container-fuild">
                         <div class="row">
                             <div class="form-group col-md-3">
+                                <label for="fornganh">
+                                    <span>@lang('project/ImportdataExcel/title.nganh')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fornganh" placeholder="@lang('project/ImportdataExcel/title.nganh')" name="nganh">
+                            </div>
+                            <div class="form-group col-md-3">
                                 <label for="fortenmonhoc">
                                     <span>@lang('project/ImportdataExcel/title.tenmonhoc')</span>
                                 </label>
@@ -361,13 +367,19 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.ckmh.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
+                { data: 'nganh', name: 'nganh' },
                 { data: 'ten_mon', name: 'ten_mon' },
-                { data: 'mdmh', name: 'mdmh' },
                 { data: 'so_tin_chi', name: 'so_tin_chi' },
                 { data: 'lich_day', name: 'lich_day' },
-                { data: 'ppdgsv', name: 'ppdgsv' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 
@@ -400,6 +412,9 @@
                                     @lang('project/ImportdataExcel/title.stt')
                                 </th>
                                 <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.nganh')
+                                </th>
+                                <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.tenmonhoc')
                                 </th>
                                 <th class="row_width p-2">
@@ -427,18 +442,21 @@
                         <tr class="row_number">
                                 <td contenteditable class="text-center p-2 row0">${item.stt}</td>
                                 <td contenteditable class="text-center p-2 row1">
+                                    ${item.nganh}
+                                </td>
+                                <td contenteditable class="text-center p-2 row2">
                                     ${item.tenmonhoc}
                                 </td>
-                                <td contenteditable class="text-center p-2 row2"> 
+                                <td contenteditable class="text-center p-2 row3"> 
                                     ${item.mdmh}
                                 </td>
-                                <td contenteditable class="text-center p-2 row3">
+                                <td contenteditable class="text-center p-2 row4">
                                     ${item.sotinchi}
                                 </td>
-                                 <td contenteditable class="text-center p-2 row4">
+                                 <td contenteditable class="text-center p-2 row5">
                                     ${item.ltgd}
                                 </td>
-                                <td contenteditable class="text-center p-2 row5">
+                                <td contenteditable class="text-center p-2 row6">
                                     ${item.ppdgsv}
                                 </td>
                                 <td contenteditable class="text-center p-2 trash-btn">
@@ -471,6 +489,7 @@
                 <td contenteditable class="text-center p-2 row3"></td>
                 <td contenteditable class="text-center p-2 row4"></td>
                 <td contenteditable class="text-center p-2 row5"></td>
+                <td contenteditable class="text-center p-2 row6"></td>
                 <td contenteditable class="text-center p-2 trash-btn">
                     <ion-icon name="trash-outline"></ion-icon>
                 </td>
@@ -645,11 +664,12 @@
             dataSubmit.length = 0;
             $(".row_number").each(function( index ) {
                 let dataObj = {
-                    'tenmonhoc' :   $(this).find('.row1').text().trim(),
-                    'mdmh' :  $(this).find('.row2').text().trim(),
-                    'sotinchi' :   $(this).find('.row3').text().trim(),
-                    'ltgd' :   $(this).find('.row4').text().trim(),
-                    'ppdgsv' :   $(this).find('.row5').text().trim(),
+                    'nganh' :   $(this).find('.row1').text().trim(),
+                    'tenmonhoc' :   $(this).find('.row2').text().trim(),
+                    'mdmh' :  $(this).find('.row3').text().trim(),
+                    'sotinchi' :   $(this).find('.row4').text().trim(),
+                    'ltgd' :   $(this).find('.row5').text().trim(),
+                    'ppdgsv' :   $(this).find('.row6').text().trim(),
                     
                 }
                 dataSubmit.push(dataObj);
@@ -703,6 +723,7 @@
         })
             .then((response) => response.json())
             .then((data) => {
+                $("#fornganh").val(data.nganh);
                 $("#fortenmonhoc").val(data.ten_mon);
                 $("#formdmh").val(data.mdmh);
                 $("#forsotinchi").val(data.so_tin_chi);

@@ -54,6 +54,7 @@ class ThongtindaklController extends DefinedController{
             if($dt->tendetai != "" && $dt->hvtnth != ""){
             	$dataInport = array(
                     'trinh_do_dao_tao'  => $dt->tddt,
+                    'nganh'     => $dt->nganh,
                     'ten_de_tai' => $dt->tendetai,
                     'htnth'   => $dt->hvtnth,
                     'htnhd'   => $dt->hvtnhd,
@@ -83,10 +84,16 @@ class ThongtindaklController extends DefinedController{
             return json_encode($donviExcel);
         }else{
 	        $donviExcel = $donviExcel
-	                ->select('ttdakl.id', 'ttdakl.trinh_do_dao_tao', 'ttdakl.ten_de_tai',
+	                ->select('ttdakl.id','ttdakl.nganh', 'ttdakl.trinh_do_dao_tao', 'ttdakl.ten_de_tai',
 	                 'ttdakl.htnth', 'ttdakl.htnhd', 'ttdakl.ndtt');
 
-	        return DataTables::of($donviExcel)          
+	        return DataTables::of($donviExcel)
+                ->addColumn(
+                    'stt',
+                    function ($donvi) {
+                        return "";
+                    }
+                )            
 	            ->addColumn(
 	                'actions',
 	                function ($donvi) {
@@ -110,6 +117,7 @@ class ThongtindaklController extends DefinedController{
     public function updateUnit(Request $req){
     	$data = [
             'trinh_do_dao_tao'  => $req->tddt,
+            'nganh' => $req->nganh,
             'ten_de_tai' => $req->tendetai,
             'htnth'   => $req->hvtnth,
             'htnhd'   => $req->hvtnhd,

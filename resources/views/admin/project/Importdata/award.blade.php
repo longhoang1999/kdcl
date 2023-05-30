@@ -115,6 +115,9 @@
             <thead>
              <tr>
                 <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
+                <th>
                     @lang('project/ImportdataExcel/title.tengt')
                 </th>
                 <th>
@@ -369,6 +372,7 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.giaithuong.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'tgt', name: 'tgt' },
                 { data: 'ckt', name: 'ckt' },
                 { data: 'linhvuc', name: 'linhvuc' },
@@ -376,6 +380,12 @@
                 { data: 'dvc', name: 'dvc' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

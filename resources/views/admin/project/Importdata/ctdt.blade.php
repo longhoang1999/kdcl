@@ -116,6 +116,9 @@
              <tr>
                 <th>STT</th>
                 <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
+                <th>
                     @lang('project/ImportdataExcel/title.khoabm')
                 </th>
                 <th>
@@ -418,6 +421,7 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.ctdt.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'khoa_BM', name: 'khoa_BM' },
                 { data: 'cndt', name: 'cndt' },
                 { data: 'ma_nganh', name: 'ma_nganh' },

@@ -15,6 +15,7 @@ class TtdaklExport implements FromCollection, WithHeadings
         
         foreach($tss as $ts){
             $row = [
+                $ts->nganh ,
                 $ts->trinh_do_dao_tao ,
                 $ts->ten_de_tai,
                 $ts->htnth,
@@ -29,6 +30,7 @@ class TtdaklExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "Ngành/CTĐT",
             "Trình độ đào tạo",
             "Tên đề tài",
             "Họ và tên người thực hiện",

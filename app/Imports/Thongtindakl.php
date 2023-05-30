@@ -19,11 +19,12 @@ class Thongtindakl implements ToModel,WithHeadingRow
         if($dataExport[0] != null){
             $dataPost = (object) array(
                 'stt'   =>  $dataExport[0] != null ? $dataExport[0] : "",
-                'tddt'   =>  $dataExport[1] != null ? $dataExport[1] : "",
-                'tendetai'    =>  $dataExport[2] != null ? $dataExport[2] : "",
-                'hvtnth' =>  $dataExport[3] != null ? $dataExport[3] : "",
-                'hvtnhd' =>  $dataExport[4] != null ? $dataExport[4] : "",
-                'ndtt' =>  $dataExport[5] != null ? $dataExport[5] : "",
+                'nganh'   =>  $dataExport[1] != null ? $dataExport[1] : "",
+                'tddt'   =>  $dataExport[2] != null ? $dataExport[2] : "",
+                'tendetai'    =>  $dataExport[3] != null ? $dataExport[3] : "",
+                'hvtnth' =>  $dataExport[4] != null ? $dataExport[4] : "",
+                'hvtnhd' =>  $dataExport[5] != null ? $dataExport[5] : "",
+                'ndtt' =>  $dataExport[6] != null ? $dataExport[6] : "",
               
             );
             array_push($this->data, $dataPost);

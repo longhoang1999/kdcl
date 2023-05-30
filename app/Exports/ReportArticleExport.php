@@ -19,7 +19,7 @@ class ReportArticleExport implements FromCollection, WithHeadings
                 $bbbc->maso,
                 $bbbc->linhvuc,
                 $bbbc->tacgia,
-                $bbbc->donvipk,
+                $bbbc->donvi,
                 $bbbc->tcd,
                 $bbbc->so_issn_isbn,
                 $bbbc->sodang,
