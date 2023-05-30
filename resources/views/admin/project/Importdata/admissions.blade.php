@@ -114,7 +114,9 @@
         <table class="table table-striped table-bordered" id="table" width="100%">
             <thead>
              <tr>
-                <th>STT</th>
+                <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
                 <th>
                     @lang('project/ImportdataExcel/title.loai')
                 </th>
@@ -407,7 +409,7 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.tuyensinh.dataUnit') !!}",
             columns: [
-                { data: 'stt', name: 'stt' },
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'loai_TS', name: 'loai_TS' },
                 { data: 'dt_tg', name: 'dt_tg' },
                 { data: 's_t_t', name: 's_t_t' },

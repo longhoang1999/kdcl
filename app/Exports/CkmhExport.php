@@ -15,6 +15,7 @@ class CkmhExport implements FromCollection, WithHeadings
         
         foreach($tss as $ts){
             $row = [
+                $ts->nganh,
                 $ts->ten_mon ,
                 $ts->mdmh,
                 $ts->so_tin_chi,
@@ -29,6 +30,7 @@ class CkmhExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "Ngành/CTĐT",
             "Tên môn học",
             "Mục đích môn học",
             "Số tín chỉ",

@@ -118,6 +118,12 @@
             <thead>
              <tr>
                 <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
+                <th>
+                    @lang('project/ImportdataExcel/title.nganh')
+                </th>
+                <th>
                     @lang('project/ImportdataExcel/title.tgttl')
                 </th>
                 <th>
@@ -271,12 +277,18 @@
                     <div class="container-fuild">
                         <div class="row">
                             <div class="form-group col-md-3">
+                                <label for="fornganh">
+                                    <span>@lang('project/ImportdataExcel/title.nganh')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fornganh" placeholder="@lang('project/ImportdataExcel/title.nganh')" name="nganh">
+                            </div>
+                            <div class="form-group col-md-5">
                                 <label for="fortgttl">
                                     <span>@lang('project/ImportdataExcel/title.tgttl')</span>
                                 </label>
                                 <input type="text" class="form-control " id="fortgttl" placeholder="@lang('project/ImportdataExcel/title.tgttl')" name="tgttl">
                             </div>
-                            <div class="form-group col-md-3" style="margin-top: 1.6rem;">
+                            <div class="form-group col-md-3" >
                                 <label for="fornamxb">
                                     <span>@lang('project/ImportdataExcel/title.namxb')</span>
                                 </label>
@@ -343,11 +355,19 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.ckgttl.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
+                { data: 'nganh', name: 'nganh' },
                 { data: 'tgt_tltk', name: 'tgt_tltk' },
                 { data: 'nxb', name: 'nxb' },
                 { data: 'ke_hoach', name: 'ke_hoach' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 
@@ -380,6 +400,9 @@
                                     @lang('project/ImportdataExcel/title.stt')
                                 </th>
                                 <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.nganh')
+                                </th>
+                                <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.tgttl')
                                 </th>
                                 <th class="row_width p-2 row_add">
@@ -401,12 +424,15 @@
                         <tr class="row_number">
                                 <td contenteditable class="text-center p-2 row0">${item.stt}</td>
                                 <td contenteditable class="text-center p-2 row1">
+                                    ${item.nganh}
+                                </td>
+                                <td contenteditable class="text-center p-2 row2">
                                     ${item.tgttl}
                                 </td>
-                                <td contenteditable class="text-center p-2 row2"> 
+                                <td contenteditable class="text-center p-2 row3"> 
                                     ${item.namxb}
                                 </td>
-                                <td contenteditable class="text-center p-2 row3">
+                                <td contenteditable class="text-center p-2 row4">
                                     ${item.kehoachst}
                                 </td>
                                 <td contenteditable class="text-center p-2 trash-btn">
@@ -437,6 +463,7 @@
                 <td contenteditable class="text-center p-2 row1"></td>
                 <td contenteditable class="text-center p-2 row2"></td>
                 <td contenteditable class="text-center p-2 row3"></td>
+                <td contenteditable class="text-center p-2 row4"></td>
                 <td contenteditable class="text-center p-2 trash-btn">
                     <ion-icon name="trash-outline"></ion-icon>
                 </td>
@@ -611,9 +638,10 @@
             dataSubmit.length = 0;
             $(".row_number").each(function( index ) {
                 let dataObj = {
-                    'tgttl' :   $(this).find('.row1').text().trim(),
-                    'namxb' :  $(this).find('.row2').text().trim(),
-                    'kehoachst' :   $(this).find('.row3').text().trim(),
+                    'nganh' :   $(this).find('.row1').text().trim(),
+                    'tgttl' :   $(this).find('.row2').text().trim(),
+                    'namxb' :  $(this).find('.row3').text().trim(),
+                    'kehoachst' :   $(this).find('.row4').text().trim(),
                     
                 }
                 dataSubmit.push(dataObj);
@@ -667,6 +695,7 @@
         })
             .then((response) => response.json())
             .then((data) => {
+                $("#fornganh").val(data.nganh);
                 $("#fortgttl").val(data.tgt_tltk);
                 $("#fornamxb").val(data.nxb);
                 $("#forkehoachst").val(data.ke_hoach);

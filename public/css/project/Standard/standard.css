@@ -216,3 +216,6 @@ thead{
 .form-group{
 	margin-bottom: 1rem;
 }
+td.stt{
+	text-align: center;
+}

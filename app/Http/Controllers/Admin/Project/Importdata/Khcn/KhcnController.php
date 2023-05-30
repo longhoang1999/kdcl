@@ -98,7 +98,13 @@ class KhcnController extends DefinedController{
 	                ->select('khcnex.id', 'khcnex.maso', 'khcnex.tendetai',
 	                 'khcnex.loai', 'khcnex.ketqua', 'khcnex.trangthai');
 
-	        return DataTables::of($donviExcel)              
+	        return DataTables::of($donviExcel)
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            )                
                 ->addColumn(
                     'actions',
                     function ($donvi) {

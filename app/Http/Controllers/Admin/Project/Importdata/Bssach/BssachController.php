@@ -92,7 +92,13 @@ class BssachController extends DefinedController{
 	                ->select('bssex.id', 'bssex.tensach', 'bssex.loaisach',
 	                 'bssex.chubien', 'bssex.hpsd', 'bssex.trangthai');
 
-	        return DataTables::of($donviExcel)              
+	        return DataTables::of($donviExcel)      
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            )          
             ->addColumn(
                 'actions',
                 function ($donvi) {

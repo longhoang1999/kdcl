@@ -92,7 +92,13 @@ class SangcheController extends DefinedController{
 	                ->select('scex.id', 'scex.tpmsc', 'scex.cshcn',
 	                 'scex.cshdv', 'scex.scn', 'scex.namcap');
 
-	        return DataTables::of($donviExcel)             
+	        return DataTables::of($donviExcel)      
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            )        
                 ->addColumn(
                     'actions',
                     function ($donvi) {
