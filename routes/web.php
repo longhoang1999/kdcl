@@ -1495,6 +1495,8 @@ Route::group(
                                 Route::post('update-ckcldt', 'CongkhaickclController@updateCkcldt')->name('updateCkcldt');
                                 Route::get('get-ckcldt', 'CongkhaickclController@getCkcldt')->name('getCkcldt');
 
+                                //Export công khai cam kết chất lượng đào tạo của Trường Đại học Công nghiệp Dệt May Hà Nội năm học
+                                Route::get('export-ckcldt', 'CongkhaickclController@exportCkcldt')->name('exportCkcldt');
                             }
                         );
 

@@ -30,7 +30,7 @@ class CkdsgvknExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
-            "Tên",
+            "Họ và tên",
             "Năm sinh",
             "Giới tính",
             "Chức danh",

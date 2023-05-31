@@ -273,13 +273,13 @@
                     <input type="hidden" id="id_unit" name="id_unit">
                     <div class="container-fuild">
                         <div class="row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-5">
                                 <label for="fortcsdt">
                                     <span>@lang('project/ImportdataExcel/title.tcsdt')</span>
                                 </label>
                                 <input type="text" class="form-control " id="fortcsdt" placeholder="@lang('project/ImportdataExcel/title.tcsdt')" name="tcsdt">
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 <label for="fortddgn">
                                     <span>@lang('project/ImportdataExcel/title.tddgn')</span>
                                 </label>
@@ -303,7 +303,7 @@
                                 </label>
                                 <input type="text" class="form-control " id="forcnclgd" placeholder="@lang('project/ImportdataExcel/title.cnclgd')" name="cnclgd">
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 <label for="forngaycap">
                                     <span>@lang('project/ImportdataExcel/title.ngaycap')</span>
                                 </label>

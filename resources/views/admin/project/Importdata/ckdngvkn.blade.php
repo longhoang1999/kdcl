@@ -112,6 +112,9 @@
             <thead>
              <tr>
                 <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
+                <th>
                     @lang('project/ImportdataExcel/title.hoten')
                 </th>
                 <th>
@@ -372,6 +375,7 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.ckdngv.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'hoten', name: 'hoten' },
                 { data: 'namsinh', name: 'namsinh' },
                 { data: 'chucdanh', name: 'chucdanh' },
@@ -380,6 +384,12 @@
                 { data: 'khoinganh', name: 'khoinganh' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 
