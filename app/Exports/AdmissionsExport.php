@@ -13,7 +13,7 @@ class AdmissionsExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_tuyensinh')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key =>  $ts){
             $loai = "";
             if($ts->loai == "1")
                 $loai = "Nghiên cứu sinh";
@@ -28,6 +28,7 @@ class AdmissionsExport implements FromCollection, WithHeadings
             elseif($ts->loai == "6")
                 $loai = "Khác";
             $row = [
+                $key + 1,
                 $ts->dt_tg ,
                 $loai,
                 $ts->ctdt,
@@ -48,6 +49,7 @@ class AdmissionsExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Đối tượng, thời gian (năm)",
             "Loại",
             "Chương trình đào tạo",

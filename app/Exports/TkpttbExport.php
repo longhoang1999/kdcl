@@ -13,8 +13,9 @@ class TkpttbExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_tk_phong_tb')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key =>  $ts){
             $row = [
+                $key + 1,
                 $ts->tp_gd_lap,
                 $ts->so_luong,
                 $ts->dien_tich_xay,
@@ -39,6 +40,7 @@ class TkpttbExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Tên phòng/Giảng đường/Lab",
             "Số lượng",
             "Diện tích sàn xây dựng (m2)",

@@ -109,7 +109,7 @@
             <button href="" class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modal_unit" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.nhap_excel')">
                 <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
             </button>
-            <a href="{{ route('admin.importdata.tkktx.exportTkktx') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
+            <a href="{{ route('admin.importdata.tkmt.exportTkmt') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
                 <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
             </a>
         </div>
@@ -117,6 +117,9 @@
         <table class="table table-striped table-bordered" id="table" width="100%">
             <thead>
              <tr>
+                <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
                 <th>
                     @lang('project/ImportdataExcel/title.donvi')
                 </th>
@@ -378,6 +381,7 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.tkmt.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'don_vi', name: 'don_vi' },
                 { data: 'tong_so', name: 'tong_so' },
                 { data: 'so_may_moi', name: 'so_may_moi' },
@@ -387,6 +391,12 @@
                 { data: 'ghi_chu', name: 'ghi_chu' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

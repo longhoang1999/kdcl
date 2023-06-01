@@ -13,8 +13,9 @@ class CksvgvExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_tyle_sv_gv')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->khoi_nganh ,
                 $ts->ty_le,
 
@@ -26,6 +27,7 @@ class CksvgvExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Khối ngành",
             "Tỷ lệ Sinh viên/Giảng viên cơ hữu quy đổi",
             

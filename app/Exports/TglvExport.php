@@ -13,8 +13,9 @@ class TglvExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_thu_gon_lv')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->linh_vuc ,
                 $ts->bang_bieu,
 
@@ -26,6 +27,7 @@ class TglvExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Lĩnh vực",
             "Bảng biểu",
             

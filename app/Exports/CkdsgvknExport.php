@@ -13,8 +13,9 @@ class CkdsgvknExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_gvtkn')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->hoten,
                 $ts->namsinh,
                 $ts->gioitinh == "1" ? "Nam" : "Nữ",
@@ -30,6 +31,7 @@ class CkdsgvknExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Họ và tên",
             "Năm sinh",
             "Giới tính",

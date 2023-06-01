@@ -13,9 +13,10 @@ class CkhnhtkhExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_hn_htkh')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $time = $this->convertTime($ts->tgtc);
             $row = [
+                $key + 1,
                 $ts->tcd ,
                 $time,
                 $ts->ddtc,
@@ -34,6 +35,7 @@ class CkhnhtkhExport implements FromCollection, WithHeadings
     } 
     public function headings() :array {
         return [
+            "STT",
             "Tên chủ đề hội nghị, hội thảo khoa học",
             "Thời gian tổ chức",
             "Địa điểm tổ chức",

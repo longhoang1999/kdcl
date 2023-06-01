@@ -1041,6 +1041,8 @@ Route::group(
                                 //Export tuyển sinh
                                 Route::get('export-admissions', 'TuyensinhController@exportAdmissions')->name('exportAdmissions');
 
+
+                                Route::get('delete-table-data', 'TuyensinhController@deleteDataTable')->name('deleteDataTable');
                             }
                         );
 

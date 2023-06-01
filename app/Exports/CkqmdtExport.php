@@ -13,8 +13,9 @@ class CkqmdtExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_quymodt')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->khoi_nganh ,
                 $ts->tien_si   ,
                 $ts->thac_si,
@@ -33,6 +34,7 @@ class CkqmdtExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Khối ngành",
             "Tiến sĩ",
             "Thạc sĩ",

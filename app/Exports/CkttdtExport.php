@@ -13,8 +13,9 @@ class CkttdtExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_tt_dao_tao')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->ten_don_vi ,
                 $ts->so_luong,
                 $ts->tddt,
@@ -29,6 +30,7 @@ class CkttdtExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Tên đơn vị đặt hàng đào tạo",
             "Số lượng",
             "Trình độ đào tạo",

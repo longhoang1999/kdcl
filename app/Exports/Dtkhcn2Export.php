@@ -13,8 +13,9 @@ class Dtkhcn2Export implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_dtkhcn2')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->nam ,
                 $ts->doanh_thu,
                 $ts->ty_le_doanh_thu,
@@ -28,6 +29,7 @@ class Dtkhcn2Export implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Năm",
             "Doanh thu từ NCKH và chuyển giao công nghệ (triệu VNĐ)",
             "Tỷ lệ doanh thu từ NCKH và chuyển giao công nghệ so với tổng kinh phí đầu vào của CSGD (%)",

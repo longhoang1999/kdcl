@@ -115,6 +115,9 @@
             <thead>
              <tr>
                 <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
+                <th>
                     @lang('project/ImportdataExcel/title.donvi')
                 </th>
                 <th>
@@ -378,12 +381,19 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.kdcl.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'doi_tuong', name: 'doi_tuong' },
                 { data: 'btcdg', name: 'btcdg' },
                 { data: 'nhtbcttdg1', name: 'nhtbcttdg1' },
                 { data: 'ncnbctdg', name: 'so_may_cu' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

@@ -12,9 +12,10 @@ class CongkhaittvhlExport implements FromCollection, WithHeadings
     {
         $getKhcn = [];
         $khcns = DB::table('excel_import_hoclieu_tv_tthl')->get();
-        foreach($khcns as $khcn){
+        foreach($khcns as $key => $khcn){
             
             $row = [
+                $key + 1,
                 $khcn->ten ,
                 $khcn->so_luong,
 
@@ -26,6 +27,7 @@ class CongkhaittvhlExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Tên",
             "Số Lượng",
         ];

@@ -12,9 +12,10 @@ class CompilationBookExport implements FromCollection, WithHeadings
     {
         $getBssach = [];
         $bsss = DB::table('excel_import_biensoansach')->get();
-        foreach($bsss as $bss){
+        foreach($bsss as $key =>  $bss){
             
             $row = [
+                $key + 1,
                 $bss->donvi,
                 $bss->masach,
                 $bss->tensach,
@@ -37,6 +38,7 @@ class CompilationBookExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Đơn vị",
             "Mã sách",
             "Tên sách",

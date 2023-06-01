@@ -13,8 +13,9 @@ class CknckhExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_hoat_dong_nckh')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->ten_du_an ,
                 $ts->nct_ctv,
                 $ts->cdttn_qt,
@@ -30,6 +31,7 @@ class CknckhExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Tên dự án, nhiệm vụ khoa học công nghệ",
             "Người chủ trì và các thành viên",
             "Đối tác trong nước và quốc tế",

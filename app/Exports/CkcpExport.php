@@ -13,8 +13,9 @@ class CkcpExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_tt_phong')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->ten,
                 $ts->so_luong,
                 $ts->muc_dich_su_dung,
@@ -32,6 +33,7 @@ class CkcpExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Tên",
             "Số lượng",
             "Mục đích sử dụng",

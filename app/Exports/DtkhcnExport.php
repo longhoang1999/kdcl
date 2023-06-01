@@ -12,9 +12,10 @@ class DtkhcnExport implements FromCollection, WithHeadings
     {
         $getDtkhcn = [];
         $dtkhcns = DB::table('export_import_dtkhcn')->get();
-        foreach($dtkhcns as $dtkhcn){
+        foreach($dtkhcns as $key => $dtkhcn){
             
             $row = [
+                $key + 1,
                 $dtkhcn->tenhd ,
                 $dtkhcn->mahd,
                 $dtkhcn->sanphamcua,
@@ -31,6 +32,7 @@ class DtkhcnExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Tên hợp đồng",
             "Mã hợp đồng",
             "Sản phẩm của (Option)",

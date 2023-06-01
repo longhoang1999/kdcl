@@ -54,7 +54,6 @@
 <!-- page trang ở đây -->
 <section class="content-body">
     <div class="form-standard">
-        @if( !Sentinel::inRole('ns_kiemtra') )
         <h4>@lang('project/QualiAssurance/title.qlmcyc')</h4>
         <form action="{{ route('admin.dambaochatluong.updateaci.updateMcyc') }}" method="post">
             @csrf
@@ -94,7 +93,6 @@
             </div>
         </form>
         
-        @endif
         <div class="block-flex mt-5 mb-5">
             <h3>@lang('project/QualiAssurance/title.dsmcyc')</h3>
             

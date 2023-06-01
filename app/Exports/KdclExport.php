@@ -13,8 +13,9 @@ class KdclExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_kdcl')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->doi_tuong ,
                 $ts->btcdg   ,
                 $ts->nhtbcttdg1,
@@ -33,6 +34,7 @@ class KdclExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Đối tượng",
             "Bộ tiêu chuẩn đánh giá",
             "Năm hoàn thành báo cáo TĐG lần 1 ",

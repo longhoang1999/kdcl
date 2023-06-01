@@ -13,8 +13,9 @@ class TtdaklExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_doan_khoaluan')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->nganh ,
                 $ts->trinh_do_dao_tao ,
                 $ts->ten_de_tai,
@@ -30,6 +31,7 @@ class TtdaklExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Ngành/CTĐT",
             "Trình độ đào tạo",
             "Tên đề tài",

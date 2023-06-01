@@ -103,6 +103,10 @@
 <section class="content-body">
     <div class="form-standard">
         <div class="item-group-button right-block mb-2">
+            <button class="btn" data-toggle="modal" data-target="#modalDeleteAll__" data-nametable="excel_import_tuyensinh">
+                <i class="bi bi-trash" style="font-size: 25px;color: red;"></i>
+            </button>
+
             <button href="" class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modal_unit" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.nhap_excel')">
                 <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
             </button>
@@ -226,6 +230,8 @@
         </div>
     </div>
 </div>
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">

@@ -187,8 +187,8 @@
 		'qllbc'			=> 'Quản lý link báo cáo',
 		'mabc'			=> 'Mã báo cáo',
 		'tenbc'			=> 'Tên báo cáo',
-		'lbchddt'		=> 'Link báo cáo từ ĐHĐT',
-		'dslbchddt'		=> 'Danh sách link báo cáo từ ĐHĐT',
+		'lbchddt'		=> 'Link báo cáo từ CSDL',
+		'dslbchddt'		=> 'Danh sách link báo cáo từ CSDL',
 		// thường trực, đối sách (Tiêu chí đối sách)
 		'doisach'		=> 'Đối sách',
 		'qltcds'		=> 'Quản lý tiêu chí đối sách',

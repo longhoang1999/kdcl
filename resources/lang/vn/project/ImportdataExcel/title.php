@@ -9,6 +9,9 @@
 		'themtt'		=> 'Thêm thông tin',
 		'stt'			=> 'Số thứ tự',
 		'stt1'			=> 'STT',
+		'deleteAll'		=> 'Xóa trắng dữ liệu bảng',
+		'canhbao'		=> 'Cảnh báo',
+		'hdkht'			=> 'Hành động của bạn không thể hoàn tác',
 		'madv'			=> 'Mã đơn vị',
 		'loaidv'		=> 'Loại đơn vị',
 		'tendvTV'		=> 'Tên DV Tiếng Việt',
@@ -471,7 +474,7 @@
 		'thue'			=> 'Thuê',
 		
 		// khảo sát tình trạng tốt nghiệm sinh viên
-		'kstttnsv'	=> 'Khảo sát tình trạng tốt nghiệm sinh viên',
+		'kstttnsv'	=> 'Khảo sát tình trạng tốt nghiệp sinh viên',
 		'cactchi'	=> 'Các tiêu chí',
 		'namtn'		=> 'Năm tốt nghiệp',
 		'dgsvtn'	=> '3. Đánh giá của sinh viên tốt nghiệp về chất lượng đào tạo của nhà trường',

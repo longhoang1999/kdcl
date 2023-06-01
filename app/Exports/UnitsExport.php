@@ -12,9 +12,10 @@ class UnitsExport implements FromCollection, WithHeadings
     {
         $getUnit = [];
         $nss = DB::table('excel_import_nhansu')->get();
-        foreach($nss as $ns){
+        foreach($nss as $key => $ns){
            
             $row = [
+                $key + 1,
                 $ns->thoidiem ,
                 $ns->hodem,
                 $ns->ten,
@@ -70,6 +71,7 @@ class UnitsExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Thời điểm",
             "Họ đệm",
             "Tên",

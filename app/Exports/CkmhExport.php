@@ -13,8 +13,9 @@ class CkmhExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_monhoc')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->nganh,
                 $ts->ten_mon ,
                 $ts->mdmh,
@@ -30,6 +31,7 @@ class CkmhExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Ngành/CTĐT",
             "Tên môn học",
             "Mục đích môn học",

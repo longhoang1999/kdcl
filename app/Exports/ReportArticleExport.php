@@ -12,9 +12,10 @@ class ReportArticleExport implements FromCollection, WithHeadings
     {
         $getbbbc = [];
         $bbbcs = DB::table('excel_import_baibao_baocao')->get();
-        foreach($bbbcs as $bbbc){
+        foreach($bbbcs as $key => $bbbc){
             
             $row = [
+                $key + 1,
                 $bbbc->tbbbc ,
                 $bbbc->maso,
                 $bbbc->linhvuc,
@@ -37,6 +38,7 @@ class ReportArticleExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Tên bài báo/báo cáo",
             "Mã số",
             "Lĩnh vực",
