@@ -183,7 +183,7 @@
         </a>
     </li>
     
-    <li class="{{ ($page=='dugiotructuyen')?'active':'' }}">
+   {{-- <li class="{{ ($page=='dugiotructuyen')?'active':'' }}">
         <a href="{{ route('admin.danhgiangoai.baocaotudanhgia.dugiotructuyen',['id'=>$id]) }}">
             <i class="fas fa-clock"></i>
             <span class="nav-label">@lang('project/Externalreview/title.dugiott')</span>
@@ -196,7 +196,7 @@
             <span class="nav-label">@lang('project/Externalreview/title.pvtt')</span>
         </a>
     </li>
-
+    --}}
     
 @endif
 

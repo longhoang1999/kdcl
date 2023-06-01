@@ -530,6 +530,7 @@ class DetailedplanningController extends DefinedController
 
     public function updategeneral(Request $req){
 
+
           try {
                $KHBaCaoDetail = DB::table('kehoach_baocao')->where('kehoach_baocao.id',$req->kh)->first();
 
@@ -537,9 +538,10 @@ class DetailedplanningController extends DefinedController
                      return abort(422, Lang::get('project/Selfassessment/title.knddck'));
                  }
 
-               if (!Sentinel::inRole('admin') || Sentinel::inRole('operator') && $KHBaCaoDetail->ns_phutrach != ASentinel::getUser()->id) {
-                     return abort(401, Lang::get('project/Selfassessment/title.tcbtc'));
-                 }
+               // if (!Sentinel::inRole('admin') || Sentinel::inRole('operator') && $KHBaCaoDetail->ns_phutrach != ASentinel::getUser()->id) {
+               //       return abort(401, Lang::get('project/Selfassessment/title.tcbtc'));
+               // }
+               // return "d";
                $keHoachChung = DB::table('kehoach_chung')
                                    ->where('kehoach_chung.kh_baocao_id',$KHBaCaoDetail->id)
                                    ->where('kehoach_chung.id',$req->id_kehoacchung)->first();
@@ -554,27 +556,29 @@ class DetailedplanningController extends DefinedController
                $baoCaoChung = DB::table('baocao_chung')
                                    ->where('baocao_chung.id_kehoach_bc',$KHBaCaoDetail->id)
                                    ->where('baocao_chung.id_kh_chung',$keHoachChung->id)->first();
+
               
                if (!$baoCaoChung) {
-                     $s = DB::table('baocao_chung')
+
+                    $s = DB::table('baocao_chung')
                                    ->insert([
                                         'text' => $req->text,
                                         'id_kehoach_bc' => $KHBaCaoDetail->id,
                                         'id_csdt' => Sentinel::getUser()->id_csdt,
                                         'id_kh_chung' => $keHoachChung->id,
                                    ]);
-                 } else {
+               } else{
 
-                     $baoCaoChung->text = $req->text;
+                    $baoCaoChung->text = $req->text;
                      
-                     $save = DB::table('baocao_chung')
-                                   ->where('baocao_chung.id_kehoach_bc',$KHBaCaoDetail->id)
-                                   ->where('baocao_chung.id_kh_chung',$keHoachChung->id)
-                                   ->update([
-                                             'text' => $req->text,
-                                           ]);
+                    $save = DB::table('baocao_chung')
+                              ->where('baocao_chung.id_kehoach_bc',$KHBaCaoDetail->id)
+                              ->where('baocao_chung.id_kh_chung',$keHoachChung->id)
+                              ->update([
+                                        'text' => $req->text,
+                                      ]);
                      
-                 }
+               }
                return back()->with('success', 
                          Lang::get('project/Selfassessment/title.capnhattc'));
           } catch (\Exception $e) {
@@ -735,9 +739,9 @@ class DetailedplanningController extends DefinedController
                      return abort(422, Lang::get('project/Selfassessment/title.knddck'));
                  }
 
-               if (!Sentinel::inRole('admin') || Sentinel::inRole('operator') && $KHBaCaoDetail->ns_phutrach != ASentinel::getUser()->id) {
-                     return abort(401, Lang::get('project/Selfassessment/title.tcbtc'));
-                 }
+               // if (!Sentinel::inRole('admin') || Sentinel::inRole('operator') && $KHBaCaoDetail->ns_phutrach != ASentinel::getUser()->id) {
+               //       return abort(401, Lang::get('project/Selfassessment/title.tcbtc'));
+               //   }
                $keHoachChung = DB::table('kehoach_chung')->where('kehoach_chung.kh_baocao_id',$KHBaCaoDetail->id)
                                    ->where('kehoach_chung.id',$req->id_kehoacchung)->first();
 
