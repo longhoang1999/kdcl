@@ -50,7 +50,8 @@
              {{--  @include("admin.project.ExternalReview.include.tieuchuan_tieuchi") --}}
             @if($page == 'tieuchuan')
                 @if(!$khtc)<!-- Nếu không có  id tiêu chí -->
-                    {{--@include ('kdcl::danhgiangoai.tonghop.include.tieuchuan_tieuchi')--}}
+                   
+                    @include ('admin.project.ExternalReview.include.tieuchuan_tieuchi')
                 @else
                     @include ('admin.project.ExternalReview.include.tieuchi')
                 @endif
@@ -204,7 +205,6 @@
 
     function show_tieuchuan_chidl(a){
         $add_row = $(`.arrow_tc_${a}`);
-        console.log($add_row)
          if($(`#tieuchuan_child_${a}`).is(':visible')){
             $(`#tieuchuan_child_${a}`).hide();
             $add_row.removeClass('active');
@@ -255,12 +255,17 @@
             window.location.href = "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id_mc;
             // window.location.href = "{!! route('admin.dambaochatluong.manaproof.showProof',0)!!}"+id_mc;
          })
-         $('.pageHomeView').on('click','.danMinhChung',function(){
-            let id_mcg = $(this).attr('d-id');
-            window.location= "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id_mcg;
-            // window.location= "{!! route('admin.dambaochatluong.manaproof.showProof',0)!!}"+id_mcg;
-            $('.chitiet_modal_mc').html(UI);
-         })
+         
+         $('body').on('click','.mcGop',function(){
+
+            let id = $(this).attr('id').split('_')[1];
+            window.location= "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id;
+        }); 
+
+        $('body').on('click','.mc',function(){
+            let id = $(this).attr('id').split('_')[1];
+            window.location= "{!! route('admin.dambaochatluong.manaproof.showProof',0) !!}"+id;
+        });
     })
 </script>
 @stop

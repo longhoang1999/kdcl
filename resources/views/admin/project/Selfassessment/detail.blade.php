@@ -316,12 +316,12 @@
     }
     $('.show_mcg').on('click','.mcGop',function(){
 
-            let id = $(this).attr('d-id');
+            let id = $(this).attr('id').split('_')[1];
             window.location= "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id;
     }); 
 
     $('.show_mcg').on('click','.mc',function(){
-            let id = $(this).attr('d-id');
+            let id = $(this).attr('id').split('_')[1];
             window.location= "{!! route('admin.dambaochatluong.manaproof.showProof',0) !!}"+id;
     });
     $('#xacNhanHoanThanh').on('click',function(){
