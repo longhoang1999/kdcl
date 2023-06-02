@@ -38,7 +38,7 @@ class ExternalReviewController extends DefinedController{
     							->where('kehoach_baocao.id',$id)->first();
 
     			if ($keHoachBaoCaoDetail2) {
-
+    				$danhGiaMenhDe = [];
 		        	$keHoachBaoCaoDetail2->keHoachTieuChuanList = $keHoachTieuChuanList = DB::table('kehoach_tieuchuan')->where('id_kh_baocao',$keHoachBaoCaoDetail2->id)->get();
 		        	$keHoachBaoCaoDetail2->phutrach = DB::table('users')
 		        										->select('excel_import_donvi.*','excel_import_donvi.ma_donvi as id_donvi')
@@ -50,8 +50,7 @@ class ExternalReviewController extends DefinedController{
 		        										->leftjoin('donvi','donvi.id','=','users.donvi_id')
 		        										->where('users.id',$keHoachBaoCaoDetail2->ns_phutrach)->first();
 	
-		        	// echo($keHoachBaoCaoDetail2->phutrachr->ten_ctdt);
-		        	// die;								
+						
 		        	$keHoachBaoCaoDetail2->ctdt = DB::table('ctdt')
 		        										->where('id',$keHoachBaoCaoDetail2->ctdt_id)->first();
 		        	$keHoachBaoCaoDetail2->keHoachChung = DB::table('kehoach_chung')
@@ -66,12 +65,110 @@ class ExternalReviewController extends DefinedController{
 		        	foreach($keHoachTieuChuanList as $keHoachTieuChuan){
 		        		$tieuChuan = DB::table('tieuchuan')->where('id',$keHoachTieuChuan->tieuchuan_id)->first();
 		        		$keHoachTieuChuan->tieuChuan = $tieuChuan;
+		        		$keHoachTieuChuan->baoCaoTieuChuan = DB::table('baocao_tieuchuan')
+		        												->where('id_kehoach_bc',$id)
+		        												->where('id_kh_tieuchuan',$keHoachTieuChuan->id)
+		        												->where('id_tieuchuan',$keHoachTieuChuan->tieuchuan_id)
+		        												->first();
+		        		
 		        		if($tieuChuan){
 		        			$keHoachTieuChuan->moTaWithStt = "TC $tieuChuan->stt: $tieuChuan->mo_ta";
 			            	$keHoachTieuChuan->keHoachTieuChiList =	$keHoachTieuChiList = DB::table('kehoach_tieuchi')->where('id_kh_tieuchuan',$keHoachTieuChuan->id)->get();
 			            	foreach($keHoachTieuChiList as $keHoachTieuChi){
 			            		$tieuChi = DB::table('tieuchi')->where('id',$keHoachTieuChi->id_tieuchi)->first();
-			            		$keHoachTieuChi->tieuChi = $tieuChi;
+			            		if($keHoachBaoCaoDetail2->writeFollow == 1){
+			            			$keHoachTieuChi->keHoachMenhDeList = $menhde = DB::table('menhde')
+											            					->where('tieuchi_id',$tieuChi->id)
+											            					->get();
+				            		$keHoachTieuChi->tieuChi = $tieuChi;
+				            		foreach($menhde as $value){
+				            			
+				            			$value->khmenhde = DB::table('kehoach_menhde')
+            												->where('id_kh_tieuchi',$keHoachTieuChi->id)
+            												->where('id_menhde',$value->id)
+            												->first();
+
+				            			$baoCaoMenhDe = DB::table('baocao_menhde')
+				            								->where('id_kehoach_bc',$id)
+				            								->where('id_kh_menhde',$value->khmenhde->id)
+				            								->where('id_menhde',$value->khmenhde->id_menhde)
+				            								->first();
+				            			
+				            			$value->baoCaoMenhDe = $baoCaoMenhDe;
+
+				            			$baoCaoMenhDe->keHoachHanhDongList = DB::table('kehoach_hd')
+				            													->where('menhde_id',$value->khmenhde->id_menhde)
+				            													->where('kehoach_bc_id',$id)
+				            													->whereNull('deleted_at')
+				            													->get();
+
+				            			foreach($baoCaoMenhDe->keHoachHanhDongList as $val){
+				            				$val->donViThucHien = DB::table('donvi')
+				            										->where('id',$val->ns_thuchien)
+				            										->first();
+					            			$val->donViKiemTra = DB::table('donvi')
+					            									->where('id',$val->ns_kiemtra)
+					            									->first();
+				            			}
+				            				
+				            			
+				            			
+				            			$danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
+				            		}
+				            		
+				            		
+
+				                	$baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
+				                	$danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
+				                	$keHoachTieuChi->baoCaoTieuChi = $baoCaoTieuChi;
+			            		}elseif($keHoachBaoCaoDetail2->writeFollow == 2){
+			            			$keHoachTieuChi->keHoachMenhDeList = $menhde = DB::table('mocchuan')
+											            					->where('tieuchi_id',$tieuChi->id)
+											            					->get();
+				            		$keHoachTieuChi->tieuChi = $tieuChi;
+				            		foreach($menhde as $value){
+				            			
+				            			$value->khmenhde = DB::table('kehoach_menhde')
+            												->where('id_kh_tieuchi',$keHoachTieuChi->id)
+            												->where('mocchuan_id',$value->id)
+            												->first();
+
+				            			$baoCaoMenhDe = DB::table('baocao_menhde')
+				            								->where('id_kehoach_bc',$id)
+				            								->where('id_kh_menhde',$value->khmenhde->id)
+				            								->where('mocchuan_id',$value->khmenhde->mocchuan_id)
+				            								->first();
+				            			
+				            			$value->baoCaoMenhDe = $baoCaoMenhDe;
+
+				            			$baoCaoMenhDe->keHoachHanhDongList = DB::table('kehoach_hd')
+				            													->where('mocchuan_id',$value->khmenhde->mocchuan_id)
+				            													->where('kehoach_bc_id',$id)
+				            													->whereNull('deleted_at')
+				            													->get();
+
+				            			foreach($baoCaoMenhDe->keHoachHanhDongList as $val){
+				            				$val->donViThucHien = DB::table('donvi')
+				            										->where('id',$val->ns_thuchien)
+				            										->first();
+					            			$val->donViKiemTra = DB::table('donvi')
+					            									->where('id',$val->ns_kiemtra)
+					            									->first();
+				            			}
+				            				
+				            			
+				            			
+				            			$danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
+				            		}
+				            		
+				            		
+
+				                	$baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
+				                	$danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
+				                	$keHoachTieuChi->baoCaoTieuChi = $baoCaoTieuChi;
+			            		}
+			            		
+
 			            		if($tieuChi){
 			            			$keHoachTieuChi->moTaWithStt = "$tieuChuan->stt.$tieuChi->stt: $tieuChi->mo_ta";
 			            		}
@@ -1351,8 +1448,7 @@ class ExternalReviewController extends DefinedController{
 		            }
 		        }
 		    }
-		    dd($mcCollect);
-		   	die;
+		 
     	 }
 
     	 public function listMinhChung($keHoachBaoCaoDetail,$idTieuChuan = null,$idTieuChi = null,$statusMC = true){

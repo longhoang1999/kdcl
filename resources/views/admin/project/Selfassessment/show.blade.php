@@ -2021,23 +2021,46 @@
                     $('.keHoach_tontai').empty();          
                     $('.keHoach_diemmanh').empty();          
                     data.forEach(function(keHoach){
-                        $('#keHoach_' + keHoach.kieu_kehoach + '_' + keHoach.menhde_id).append(
-                            "<tr>" +
-                                "<td class='text-center'>" + keHoach.noi_dung + "</td>" +
-                                "<td class='text-center'>" + keHoach.nhanSuThucHien.ten_donvi + "</td>" +
-                                "<td class='text-center'>" + keHoach.nhanSuKiemTra.ten_donvi + "</td>" +
-                                "<td class='text-center'>" + keHoach.ngay_batdau + "</td>" +
-                                "<td class=text-center'>" + keHoach.ngay_hoanthanh + "</td>" +
-                                @if(isset($tieuChuan->trang_thai))
-                                    @if($tieuChuan->trang_thai!='congbo')
-                                        "<td><button class='btn btn-xs detailKeHoach_"+keHoach.id+" show_chitiet_khhd' d-id='" + keHoach.id + "' + data-bs-toggle='tooltip' data-bs-placement='top' title='@lang('project/Selfassessment/title.xemctkh')'>" +
-                                        "<i class='fas fa-info-circle' style='font-size: 25px;color: #009ef7;'></i></button></td>" +
-                                        "<td><button class='btn btn-xs deleteKeHoach_"+keHoach.id+"' onclick='delete_diemmanh("+keHoach.id+")' d-id_menhde='" + keHoach.menhde_id + "' d-id='" + keHoach.id + "'data-bs-toggle='tooltip' data-bs-placement='top' title='@lang('project/Selfassessment/title.xoakehoach')'>" +
-                                        "<i class='fas fa-minus-circle' style='font-size: 25px;color: red;'></i></button></td>" +
+                        if(keHoach.kehoachbaocao.writeFollow == 1){
+                            $('#keHoach_' + keHoach.kieu_kehoach + '_' + keHoach.menhde_id).append(
+                                "<tr>" +
+                                    "<td class='text-center'>" + keHoach.noi_dung + "</td>" +
+                                    "<td class='text-center'>" + keHoach.nhanSuThucHien.ten_donvi + "</td>" +
+                                    "<td class='text-center'>" + keHoach.nhanSuKiemTra.ten_donvi + "</td>" +
+                                    "<td class='text-center'>" + keHoach.ngay_batdau + "</td>" +
+                                    "<td class=text-center'>" + keHoach.ngay_hoanthanh + "</td>" +
+                                    @if(isset($tieuChuan->trang_thai))
+                                        @if($tieuChuan->trang_thai!='congbo')
+                                            "<td><button class='btn btn-xs detailKeHoach_"+keHoach.id+" show_chitiet_khhd' d-id='" + keHoach.id + "' + data-bs-toggle='tooltip' data-bs-placement='top' title='@lang('project/Selfassessment/title.xemctkh')'>" +
+                                            "<i class='fas fa-info-circle' style='font-size: 25px;color: #009ef7;'></i></button></td>" +
+                                            "<td><button class='btn btn-xs deleteKeHoach_"+keHoach.id+"' onclick='delete_diemmanh("+keHoach.id+")' d-id_menhde='" + keHoach.menhde_id + "' d-id='" + keHoach.id + "'data-bs-toggle='tooltip' data-bs-placement='top' title='@lang('project/Selfassessment/title.xoakehoach')'>" +
+                                            "<i class='fas fa-minus-circle' style='font-size: 25px;color: red;'></i></button></td>" +
+                                        @endif
                                     @endif
-                                @endif
-                            "</tr>"
-                        );
+                                "</tr>"
+                            );
+                        }else{
+                            $('#keHoach_' + keHoach.kieu_kehoach + '_' + keHoach.mocchuan_id).append(
+                                "<tr>" +
+                                    "<td class='text-center'>" + keHoach.noi_dung + "</td>" +
+                                    "<td class='text-center'>" + keHoach.nhanSuThucHien.ten_donvi + "</td>" +
+                                    "<td class='text-center'>" + keHoach.nhanSuKiemTra.ten_donvi + "</td>" +
+                                    "<td class='text-center'>" + keHoach.ngay_batdau + "</td>" +
+                                    "<td class=text-center'>" + keHoach.ngay_hoanthanh + "</td>" +
+                                    @if(isset($tieuChuan->trang_thai))
+                                        @if($tieuChuan->trang_thai!='congbo')
+                                            "<td><button class='btn btn-xs detailKeHoach_"+keHoach.id+" show_chitiet_khhd' d-id='" + keHoach.id + "' + data-bs-toggle='tooltip' data-bs-placement='top' title='@lang('project/Selfassessment/title.xemctkh')'>" +
+                                            "<i class='fas fa-info-circle' style='font-size: 25px;color: #009ef7;'></i></button></td>" +
+                                            "<td><button class='btn btn-xs deleteKeHoach_"+keHoach.id+"' onclick='delete_diemmanh("+keHoach.id+")' d-id_menhde='" + keHoach.menhde_id + "' d-id='" + keHoach.id + "'data-bs-toggle='tooltip' data-bs-placement='top' title='@lang('project/Selfassessment/title.xoakehoach')'>" +
+                                            "<i class='fas fa-minus-circle' style='font-size: 25px;color: red;'></i></button></td>" +
+                                        @endif
+                                    @endif
+                                "</tr>"
+                            );
+                        }
+                        
+
+                        
                     })
                     
                 },                    

@@ -15,19 +15,23 @@
                     @foreach($keHoachBaoCaoDetail2->keHoachTieuChuanList as $keHoachTieuChuan)
                         @if($keHoachTieuChuan->tieuchuan_id == $kh)
                        {{-- @continue(!$keHoachTieuChuan->baoCaoTieuChuan) --}}
-                        <strong>Tiêu chuẩn {{ $keHoachTieuChuan->tieuChuan->stt }}
+                        <strong>@lang('project/Externalreview/title.tieuchuan') {{ $keHoachTieuChuan->tieuChuan->stt }}
                             : {{ $keHoachTieuChuan->tieuChuan->mo_ta }}</strong>
 
 
                             @if($keHoachBaoCaoDetail2->loai_tieuchuan_bc == 'csgd')
                                 @include("admin.project.ExternalReview.include.tieuchi-csdt")
                             @else
-                                <p>{!! str_replace('&nbsp;',' ',$keHoachTieuChuan->baoCaoTieuChuan->modau) !!}</p>
-                                @include("kdcl::danhgiangoai.tonghop.include.tieuchi-ctdt")
+                                @if(isset($keHoachTieuChuan->baoCaoTieuChuan->modau))
+                                    <p>{!! str_replace('&nbsp;',' ',$keHoachTieuChuan->baoCaoTieuChuan->modau) !!}</p>
+                                @endif
+                                @include("admin.project.ExternalReview.include.tieuchi-ctdt")
 
                                 <div class="m-b-md m-l-md">
                                     <b>Kết luận tiêu chuẩn {{ $keHoachTieuChuan->tieuChuan->stt }}: </b>
-                                    {!! str_replace('&nbsp;',' ',$keHoachTieuChuan->baoCaoTieuChuan->ketluan) !!}
+                                    @if(isset($keHoachTieuChuan->baoCaoTieuChuan->ketluan))
+                                        {!! str_replace('&nbsp;',' ',$keHoachTieuChuan->baoCaoTieuChuan->ketluan) !!}
+                                    @endif
                                 </div>
                             @endif
 

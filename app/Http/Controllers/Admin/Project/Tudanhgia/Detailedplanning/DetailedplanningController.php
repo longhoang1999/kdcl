@@ -283,10 +283,7 @@ class DetailedplanningController extends DefinedController
                     }                        
                     
                }
-               // var_dump($menhde_baocao);
-               // echo('<br/>');
-               // echo("hãy giúp tôi ngăt quãng ở vị trí này ở đây ");
-               // echo('<br/>');
+
                
                if(isset($menhde_baocao)){
                     $value->bc_menhde = $menhde_baocao;
@@ -305,7 +302,6 @@ class DetailedplanningController extends DefinedController
                               
 
           }
-          // die;
           $sum_start = Collection::make($start)->avg();
           $sum_danhgia = round($sum_start);
           $kehoachtieuchuan->tieuchi = $tieuchi; 
@@ -688,21 +684,43 @@ class DetailedplanningController extends DefinedController
                if($date1->gt($date2)){
                      return 0;
                }
-               $baoCaoKeHoach = DB::table('kehoach_hd')->insert([
-                              'kehoach_bc_id' => $req->id_khbc,
-                              'menhde_id'     => $req->id_menhde,
-                              'tieu_de'       =>   $req->tieu_de,
-                              'noi_dung'      => $req->noi_dung,
-                              'de_xuat_moi'   => $req->de_xuat_moi,
-                              'ns_thuchien'   => $req->ns_thuchien,
-                              'ns_kiemtra'    => $req->ns_kiemtra,
-                              'ngay_batdau'   => $this->toDBDate($req->ngay_batdau),
-                              'ngay_hoanthanh'=> $this->toDBDate($req->ngay_hoanthanh),
-                              'kieu_kehoach'  => $req->kieu_kehoach,
-                              'trang_thai'    => 'todo',
-                              'nguoi_tao'     => Sentinel::getUser()->id,
-                              'csdt_id'       => Sentinel::getUser()->csdt_id,
-                           ]);
+               $kehoachbaocao = DB::table('kehoach_baocao')
+                                   ->where('id',$req->id_khbc)
+                                   ->first();
+               if($kehoachbaocao->writeFollow == 1){
+                    $baoCaoKeHoach = DB::table('kehoach_hd')->insert([
+                                        'kehoach_bc_id' => $req->id_khbc,
+                                        'menhde_id'     => $req->id_menhde,
+                                        'tieu_de'       =>   $req->tieu_de,
+                                        'noi_dung'      => $req->noi_dung,
+                                        'de_xuat_moi'   => $req->de_xuat_moi,
+                                        'ns_thuchien'   => $req->ns_thuchien,
+                                        'ns_kiemtra'    => $req->ns_kiemtra,
+                                        'ngay_batdau'   => $this->toDBDate($req->ngay_batdau),
+                                        'ngay_hoanthanh'=> $this->toDBDate($req->ngay_hoanthanh),
+                                        'kieu_kehoach'  => $req->kieu_kehoach,
+                                        'trang_thai'    => 'todo',
+                                        'nguoi_tao'     => Sentinel::getUser()->id,
+                                        'csdt_id'       => Sentinel::getUser()->csdt_id,
+                                     ]);     
+               }elseif($kehoachbaocao->writeFollow == 2){
+                    $baoCaoKeHoach = DB::table('kehoach_hd')->insert([
+                                        'kehoach_bc_id' => $req->id_khbc,
+                                        'mocchuan_id'     => $req->id_menhde,
+                                        'tieu_de'       =>   $req->tieu_de,
+                                        'noi_dung'      => $req->noi_dung,
+                                        'de_xuat_moi'   => $req->de_xuat_moi,
+                                        'ns_thuchien'   => $req->ns_thuchien,
+                                        'ns_kiemtra'    => $req->ns_kiemtra,
+                                        'ngay_batdau'   => $this->toDBDate($req->ngay_batdau),
+                                        'ngay_hoanthanh'=> $this->toDBDate($req->ngay_hoanthanh),
+                                        'kieu_kehoach'  => $req->kieu_kehoach,
+                                        'trang_thai'    => 'todo',
+                                        'nguoi_tao'     => Sentinel::getUser()->id,
+                                        'csdt_id'       => Sentinel::getUser()->csdt_id,
+                                     ]);  
+               }
+               
 
                return 1;
           }catch (\Exception $e) {
@@ -988,6 +1006,10 @@ class DetailedplanningController extends DefinedController
     public function tontai_diemmanh(Request $req){
           try {
 
+            $kehoachbaocao = DB::table('kehoach_baocao')
+                                   ->where('id',$req->id_khbc)
+                                   ->first();
+
             $baoCaoKeHoachData = DB::table('kehoach_hd')
                                    ->where('kehoach_bc_id','=',$req->id_khbc )
                                    ->whereNull('deleted_at')
@@ -1004,6 +1026,8 @@ class DetailedplanningController extends DefinedController
                               ->first();
                 $baoCaoKeHoach->nhanSuThucHien = $donvi_th;
                 $baoCaoKeHoach->nhanSuKiemTra = $donvi_kt;
+                $baoCaoKeHoach->kehoachbaocao = $kehoachbaocao;
+
             }
             return response()->json($baoCaoKeHoachData);
         } catch (\Exception $e) {
