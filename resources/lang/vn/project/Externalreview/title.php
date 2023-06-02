@@ -316,6 +316,15 @@
 		'congkhai'			=> 'Công khai',
 		'khongck'			=> 'Không công khai',
 		'khongcodulieu'		=> 'Không có dữ liệu',
+		'tudanhdm'		    => 'Tự đánh giá tiêu chí đạt mức:',
+		'dgcvtc'		    => 'Đánh giá chung về tiêu chuẩn',
+		'tomtatdm'		    => '1. Tóm tắt các điểm mạnh:',
+		'tomtatdtt'		    => '2. Tóm tắt các điểm tồn tại:',
+		'khctien'		    => '3. Kế hoạch cải tiến:',
+		'phathuydm'		    => 'Phát huy điểm mạnh',
+		'khacphuctt'		=> 'Khắc phục tồn tại',
+		'mucdg'		        => '4. Mức đánh giá:',
+		'tieuchuantc'		=> 'Tiêu chuẩn/Tiêu chí',
 
 	);
 
