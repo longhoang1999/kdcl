@@ -103,12 +103,16 @@
 <section class="content-body">
     <div class="form-standard">
         <div class="item-group-button right-block mb-2">
+    
             <button href="" class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modal_unit" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.nhap_excel')">
                 <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
             </button>
             <a href="{{ route('admin.importdata.dlsinhvien.exportUnit') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
                 <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
             </a>
+            <button class="btn" data-toggle="modal" data-target="#modalDeleteAll__" data-nametable="excel_import_dlsinhvien" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.xoatatca')">
+                <i class="bi bi-trash" style="font-size: 35px;color: red;"></i>
+            </button>
         </div>
         
         <table class="table table-striped table-bordered" id="table" width="100%">

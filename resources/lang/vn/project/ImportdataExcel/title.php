@@ -50,6 +50,7 @@
 		'sdtlh'			=> 'Số điện thoại liên hệ',
 		'nhap_excel'	=> 'Nhập Excel',
 		'xuat_excel'    => 'Xuất Excel',
+		'xoatatca'		=> 'Xóa tất cả dữ liệu',
 		// Nhân sự 
 		'ttns'			=> 'Thông tin nhân sự',
 		'thoidiem'		=> 'Thời điểm',
