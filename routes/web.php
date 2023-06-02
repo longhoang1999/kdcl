@@ -1369,22 +1369,7 @@ Route::group(
                             }
                         );
 
-                        // Import công khai thông tin kiểm định cơ sở giáo dục và chương trình giáo dục
-                        Route::group(
-                            ['prefix' => 'cong-khai-co-so-giao-duc', 'as' => 'ckcsgd.', 'namespace' => 'Congkhaicsgd'],
-                            function(){
-                                Route::get('index','CongkhaicsgdController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaicsgdController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaicsgdController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaicsgdController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaicsgdController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaicsgdController@updateUnit')->name('updateUnit');
-
-                                //Export công khai thông tin kiểm định cơ sở giáo dục và chương trình giáo dục
-                                Route::get('export-ckcsgd', 'CongkhaicsgdController@exportCkcsgd')->name('exportCkcsgd');
-
-                            }
-                        );
+                        
 
                         // Import công khai tỷ lệ sinh viên/giảng viên quy đổi 
                         Route::group(
