@@ -118,6 +118,9 @@
             <thead>
              <tr>
                 <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
+                <th>
                     @lang('project/ImportdataExcel/title.nam')
                 </th>
                 <th>
@@ -353,12 +356,19 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.dtkhcn2.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' },
                 { data: 'nam', name: 'nam' },
                 { data: 'doanh_thu', name: 'doanh_thu' },
                 { data: 'ty_le_doanh_thu', name: 'ty_le_doanh_thu' },
                 { data: 'ty_so_doanh_thu', name: 'ty_so_doanh_thu' },
                 { data: 'actions', name: 'actions',className: 'action' },
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

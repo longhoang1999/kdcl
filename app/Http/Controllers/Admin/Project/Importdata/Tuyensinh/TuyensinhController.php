@@ -74,6 +74,13 @@ class TuyensinhController extends DefinedController{
         return json_encode($respon);
     }
 
+    public function deleteDataTable(Request $req){
+        if($req->nametable != null && $req->nametable != ""){
+            DB::table($req->nametable)->delete();
+        }
+        return back()->with('success', 
+                    Lang::get('project/Standard/message.success.delete'));
+    }
 
     //Export excel Admissions
 	public function ExportAdmissions() {
@@ -117,7 +124,13 @@ class TuyensinhController extends DefinedController{
 	                   	else if($donvi->loai == 6)
 	                    	return Lang::get('project/ImportdataExcel/title.khac');
 	                }
-	            )        
+	            )    
+                ->addColumn(
+	                'stt',
+	                function ($donvi) {
+                        return "";
+	                }
+	            )    
 	            ->addColumn(
 	                'actions',
 	                function ($donvi) {

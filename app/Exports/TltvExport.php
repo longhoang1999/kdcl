@@ -13,8 +13,9 @@ class TltvExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_tailieu_thuvien')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->ma_hoc_phan ,
                 $ts->ten_hoc_phan,
                 $ts->khoi_nganh,
@@ -45,6 +46,7 @@ class TltvExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Mã học phần",
             "Tên học phần",
             "Khối ngành",

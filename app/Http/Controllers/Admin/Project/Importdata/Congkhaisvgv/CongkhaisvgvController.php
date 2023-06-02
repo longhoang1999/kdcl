@@ -84,7 +84,12 @@ class CongkhaisvgvController extends DefinedController{
 	                 );
 
 	        return DataTables::of($donviExcel)          
-	       
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            ) 
             ->addColumn(
 	                'actions',
 	                function ($donvi) {

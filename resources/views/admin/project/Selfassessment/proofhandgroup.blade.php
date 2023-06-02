@@ -596,6 +596,7 @@
                         data.forEach((item, index) => {
                             var option = new Option(item.tieu_de, item.id , true, true);
                             $("#select_mctt").append(option);
+                            $('#select_mctt').val(null).trigger('change');
                         })
                     }
                 })

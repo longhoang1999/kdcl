@@ -88,7 +88,12 @@ class CongkhainckhController extends DefinedController{
 	                 'cknckh.cdttn_qt','cknckh.tgth','cknckh.kpth','cknckh.tom_tat');
 
 	        return DataTables::of($donviExcel)          
-	       
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            ) 
             ->addColumn(
 	                'actions',
 	                function ($donvi) {

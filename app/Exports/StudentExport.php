@@ -12,9 +12,10 @@ class StudentExport implements FromCollection, WithHeadings
     {
         $getStudent = [];
         $svs = DB::table('excel_import_dlsinhvien')->get();
-        foreach($svs as $sv){
+        foreach($svs as $key => $sv){
             
             $row = [
+                $key + 1,
                 $sv->masv ,
                 $sv->ho,
                 $sv->ten,
@@ -55,6 +56,7 @@ class StudentExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Mã SV",
             "Họ",
             "Tên",

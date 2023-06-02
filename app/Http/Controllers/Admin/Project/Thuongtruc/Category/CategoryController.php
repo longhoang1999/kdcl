@@ -423,23 +423,34 @@ class CategoryController extends DefinedController
             // create Account
             $activeAcc = true;
             $user = Sentinel::register($data, $activeAcc);
+
+            $us = Sentinel::findById($user->id);
+            $activation = Activation::create($us);
+
             // admin role
-            $role = Sentinel::findRoleById("1");
+            if($req->chucvu == 2){
+                $role = Sentinel::findRoleById("4");
+            }else if($req->chucvu == 3){
+                $role = Sentinel::findRoleById("9");
+            }else if($req->chucvu == 4){
+                $role = Sentinel::findRoleById("2");
+            }
             if ($role) {
                 $role->users()->attach($user);
             }
+
             activity($user->full_name)
                 ->performedOn($user)
                 ->causedBy($user)
                 ->log('New User Created by '.Sentinel::getUser()->full_name);
             // create role
-            $dataRole = [
-                'user_id'   =>  $user->id,
-                'chucvu_id' =>  $req->chucvu,
-                'created_at'    =>  Carbon::now()->toDateTimeString(),
-                'updated_at'    =>  Carbon::now()->toDateTimeString(),
-            ];
-            DB::table("role_chucvu_users")->insert($dataRole);
+            // $dataRole = [
+            //     'user_id'   =>  $user->id,
+            //     'chucvu_id' =>  $req->chucvu,
+            //     'created_at'    =>  Carbon::now()->toDateTimeString(),
+            //     'updated_at'    =>  Carbon::now()->toDateTimeString(),
+            // ];
+            // DB::table("role_chucvu_users")->insert($dataRole);
             return back()->with('success', 
                     Lang::get('project/Standard/message.success.create'));
         }
@@ -474,13 +485,15 @@ class CategoryController extends DefinedController
                 ->addColumn(
                     'tenChucvu',
                     function ($user) {
-                        $chucvu = DB::table("role_chucvu_users")
-                                    ->where("user_id", $user->id)
-                                    ->select("chucvu_id")->first();
-                        if($chucvu)
-                            return DB::table("chuc_vu")->where("id", $chucvu->chucvu_id)
-                                ->select("ten_chuc_vu")->first()->ten_chuc_vu;
-                        else return " ";
+                        $chucvu = "";
+                        $role = DB::table("role_users")->where("user_id", $user->id)->select("role_id")->get();
+                        foreach($role as $value){
+                            if($value->role_id != "2"){
+                                $r = DB::table("roles")->select("fullname")->where("id", $value->role_id)->first();
+                                $chucvu .= '<span class="badge badge-warning">'. $r->fullname .'</span>';
+                            }
+                        }
+                        return $chucvu;
                     }
                 )
                 ->addColumn(
@@ -514,7 +527,7 @@ class CategoryController extends DefinedController
                         return $actions;
                     }
                 )
-                ->rawColumns(['actions', 'createHuman'])
+                ->rawColumns(['actions', 'createHuman', 'tenChucvu'])
                 ->make(true);
         }
     }

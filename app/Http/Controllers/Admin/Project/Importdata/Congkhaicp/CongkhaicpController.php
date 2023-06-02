@@ -91,7 +91,12 @@ class CongkhaicpController extends DefinedController{
                      'ckcp.thue');
 
 	        return DataTables::of($donviExcel)          
-	       
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            ) 
             ->addColumn(
 	                'actions',
 	                function ($donvi) {

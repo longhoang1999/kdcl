@@ -38,7 +38,8 @@ class ExternalReviewController extends DefinedController{
     							->where('kehoach_baocao.id',$id)->first();
 
     			if ($keHoachBaoCaoDetail2) {
-		        	$keHoachTieuChuanList = DB::table('kehoach_tieuchuan')->where('id_kh_baocao',$keHoachBaoCaoDetail2->id)->get();
+
+		        	$keHoachBaoCaoDetail2->keHoachTieuChuanList = $keHoachTieuChuanList = DB::table('kehoach_tieuchuan')->where('id_kh_baocao',$keHoachBaoCaoDetail2->id)->get();
 		        	$keHoachBaoCaoDetail2->phutrach = DB::table('users')
 		        										->select('excel_import_donvi.*','excel_import_donvi.ma_donvi as id_donvi')
 		        										->leftjoin('excel_import_donvi','excel_import_donvi.id','=','users.donvi_id')
@@ -64,12 +65,13 @@ class ExternalReviewController extends DefinedController{
 
 		        	foreach($keHoachTieuChuanList as $keHoachTieuChuan){
 		        		$tieuChuan = DB::table('tieuchuan')->where('id',$keHoachTieuChuan->tieuchuan_id)->first();
+		        		$keHoachTieuChuan->tieuChuan = $tieuChuan;
 		        		if($tieuChuan){
 		        			$keHoachTieuChuan->moTaWithStt = "TC $tieuChuan->stt: $tieuChuan->mo_ta";
 			            	$keHoachTieuChuan->keHoachTieuChiList =	$keHoachTieuChiList = DB::table('kehoach_tieuchi')->where('id_kh_tieuchuan',$keHoachTieuChuan->id)->get();
 			            	foreach($keHoachTieuChiList as $keHoachTieuChi){
 			            		$tieuChi = DB::table('tieuchi')->where('id',$keHoachTieuChi->id_tieuchi)->first();
-
+			            		$keHoachTieuChi->tieuChi = $tieuChi;
 			            		if($tieuChi){
 			            			$keHoachTieuChi->moTaWithStt = "$tieuChuan->stt.$tieuChi->stt: $tieuChi->mo_ta";
 			            		}
@@ -320,6 +322,8 @@ class ExternalReviewController extends DefinedController{
 				$nhanXetKhoiLists = $nhanXetKhoiList;
 				
 			}elseif($page == 'tieuchuan'){
+				list($mcCollect) = $this->listMinhChung($keHoachBaoCaoDetail2);
+	            $minhChungList = $mcCollect;
 				$khtc = $req->idkhtc;
 				$kh = $req->idkh;
 			}elseif($page == 'ketluan'){
@@ -1148,7 +1152,7 @@ class ExternalReviewController extends DefinedController{
 										->where('users.id',$dt->nguoi_tao)
 										->first();
 						if($ten_ngan){
-							return $dt->tieu_de.$ten_ngan->ten_ngan;
+							return $dt->tieu_de.' ('.$ten_ngan->ten_ngan.')';
 						}else{
 							return 'Không có dữ liệu';
 						}
@@ -1170,9 +1174,9 @@ class ExternalReviewController extends DefinedController{
 
 					->addColumn('trang_t',function($dt){
 						if($dt->cong_khai == 'Y'){
-							return '<span class="badge badge-primary">'.Lang::get('project/ExternalReview/title.congkhai').'</span>';
+							return '<span class="badge badge-primary">'.Lang::get('project/Externalreview/title.congkhai').'</span>';
 						}else{
-							return '<span class="badge badge-secondary">'.Lang::get('project/ExternalReview/title.khongck').'</span>';
+							return '<span class="badge badge-secondary">'.Lang::get('project/Externalreview/title.khongck').'</span>';
 						}
 						
 					})
@@ -1353,6 +1357,9 @@ class ExternalReviewController extends DefinedController{
 
     	 public function listMinhChung($keHoachBaoCaoDetail,$idTieuChuan = null,$idTieuChi = null,$statusMC = true){
 
+    	 	$kehoachbaocao = DB::table('kehoach_baocao')
+                                ->where('id',$keHoachBaoCaoDetail->id)
+                                ->first();
 		    $keHoachTieuChuanList = DB::table('kehoach_tieuchuan')
 		                            ->where('id_kh_baocao',$keHoachBaoCaoDetail->id)
 		                            ->get();
@@ -1374,73 +1381,148 @@ class ExternalReviewController extends DefinedController{
 		            $keHoachTieuChi->tieuChi = DB::table('tieuchi')
 		                                                    ->where('id',$keHoachTieuChi->id_tieuchi)
 		                                                    ->first();                                         
-		            foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
-		                $keHoachMenhDe->baoCaoMenhDe = DB::table('baocao_menhde')
-		                                                    ->where('id_kehoach_bc',$keHoachBaoCaoDetail->id)
-		                                                    ->where('id_kh_menhde',$keHoachMenhDe->id)
-		                                                    ->where('id_menhde',$keHoachMenhDe->id_menhde)
-		                                                    ->first();
+		            if($kehoachbaocao->writeFollow == 1){
+                        foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
+                            $keHoachMenhDe->baoCaoMenhDe = DB::table('baocao_menhde')
+                                                                ->where('id_kehoach_bc',$keHoachBaoCaoDetail->id)
+                                                                ->where('id_kh_menhde',$keHoachMenhDe->id)
+                                                                ->where('id_menhde',$keHoachMenhDe->id_menhde)
+                                                                ->first();
 
+                            if(isset($keHoachMenhDe->baoCaoMenhDe->mota)){
+                                $dom = new Dom;
+                                $dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
 
-		                $dom = new Dom;
-		                if(isset($keHoachMenhDe->baoCaoMenhDe->mota)){
-		                	$dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
-			                $contents = $dom->find('.danMinhChung');  
-			                $arr = array();
-			                foreach ($contents as $key => $danMinhChung) {
-			                	if(!in_array($danMinhChung->{'d-id'}, $minhChungid)){
-			                		$minhChungCode = "[H{$keHoachTieuChuan->tieuChuan->stt}." .
-	                                        str_pad($keHoachTieuChuan->tieuChuan->stt, 2, '0', STR_PAD_LEFT) . "." .
-	                                        str_pad($keHoachTieuChi->tieuChi->stt, 2, '0', STR_PAD_LEFT) .
-	                                        "." . str_pad($minhChungStt, 2, '0', STR_PAD_LEFT) . "]";
+                                $anchorTags = $dom->find('.danMinhChung');
 
-	                                $minhChungid[$minhChungCode] = $danMinhChung->{'d-id'};
-	                                $minhChungStt++;
-			                	}
-			                	else{
-			                		$minhChungCode = array_search($danMinhChung->{'d-id'}, $minhChungid);
-			                	}
+                                foreach ($anchorTags as $anchorTag) {
+                                    $anchorData = $anchorTag->outerHtml;
 
-			                	if($checkMC->contains($minhChungCode)){
-	                                continue;
-	                            }
+                                    $classValue = $anchorTag->getAttribute('class');
+                                    $idValue = $anchorTag->getAttribute('id');
+                                    $valueAfterUnderscore = substr($idValue, strpos($idValue, '_') + 1);
+                                    // echo($valueAfterUnderscore);
+                                    if (strpos($classValue, 'mcGop') !== false) {
+                                        $sohieubh = '__';
+                                        $tenmc = '';
+                                        $noibanhanh = '';
+                                        $minhchunggop = DB::table('minhchung_gop')
+                                                            ->where('id',$valueAfterUnderscore)
+                                                            ->first();
+                                        if($minhchunggop){
+                                            $tenmc = $minhchunggop->tieu_de;
+                                            $sohieubh = DB::table('minhchung')
+                                                                ->leftjoin('minhchunggop_minhchung','minhchung.id','=','minhchunggop_minhchung.minhchung_id')
+                                                                ->where('minhchunggop_minhchung.minhchunggop_id',$minhchunggop->id)
+                                                                ->count();
+                                        }
 
-	                            $checkMC->push($minhChungCode);
+                                        $mcCollect->push([
+                                            'mamc' => $anchorData,
+                                            'minhchung' => Lang::get('project/Selfassessment/title.mcgop'),
+                                            'tenmc' => $tenmc,
+                                            'sohieubh' => $sohieubh,
+                                            'noibanhanh' => $noibanhanh,
+                                        ]);
+                                    }else{
+                                        $noibanhanh = '';
+                                        $tenmc = '';
+                                        $sohieubh = '__';
+                                        $minhchung = DB::table('minhchung')
+                                                            ->where('id',$valueAfterUnderscore)
+                                                            ->first();
+                                        if($minhchung){
+                                            $tenmc = $minhchung->tieu_de;
+                                            $ngaybh = $this->toShowDate($minhchung->ngay_ban_hanh);
+                                            $sohieubh = $minhchung->sohieu.','.$ngaybh;
+                                            $noibanhanh = $minhchung->noi_banhanh;
+                                        }
+                                        
+                                        $mcCollect->push([
+                                            'mamc' => $anchorData,
+                                            'minhchung' => Lang::get('project/Selfassessment/title.minhchung'),
+                                            'tenmc' => $tenmc,
+                                            'sohieubh' => $sohieubh,
+                                            'noibanhanh' => $noibanhanh,
+                                        ]);
+                                    }
+                                }
+                               
+                            }
+                            
+                        }
+                    }elseif($kehoachbaocao->writeFollow == 2){
+                       
+                        foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
+                            $keHoachMenhDe->baoCaoMenhDe = DB::table('baocao_menhde')
+                                                                ->where('id_kehoach_bc',$keHoachBaoCaoDetail->id)
+                                                                ->where('id_kh_menhde',$keHoachMenhDe->id)
+                                                                ->where('mocchuan_id',$keHoachMenhDe->mocchuan_id)
+                                                                ->first();
 
-	                            if (!$danMinhChung->{'d-type'} || $danMinhChung->{'d-type'} == 'mc') {
-	                                $mcDetail = DB::table('minhchung')->find($danMinhChung->{'d-id'});
-	                                if ($mcDetail) {
-	                                	 $mcCollect->push([
-	                                        'mcCode' => $minhChungCode,
-	                                        'mcType' => 'mc',
-	                                        'mcDetail' => $mcDetail,
-	                                        // 'qlmc'    => $mcDetail->nguoiTao->donVi->ten_ngan
-	                                     ]);
-	                                }
+                            if(isset($keHoachMenhDe->baoCaoMenhDe->mota)){
+                                $dom = new Dom;
+                                $dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
 
-	                            } else {
-	                                $mcGop = DB::table('minhchung_gop')->find($danMinhChung->{'d-id'});
-	                                
-	                                if ($mcGop) {
-	                                	$minhChungList = DB::table('minhchung')
-	                                			->leftjoin('minhchunggop_minhchung','minhchung.id','=','minhchunggop_minhchung.minhchung_id')
-	                                			->where('minhchunggop_minhchung.minhchunggop_id',$danMinhChung->{'d-id'})
-	                                			->get();
-	                                	$mcGop->minhChungList = $minhChungList;
-	                                	$mcCollect->push([
-	                                        'mcCode' => $minhChungCode,
-	                                        'mcType' => 'mcGop',
-	                                        'mcDetail' => $mcGop,
-	                                        // 'qlmc'=>$mcGop->nguoiTao->donVi->ten_ngan
-	                                    ]);
-	                                }
+                                $anchorTags = $dom->find('.danMinhChung');
 
-	                            }
-			                    
-			                }
-		                }
-		                
-		            }
+                                foreach ($anchorTags as $anchorTag) {
+                                    $anchorData = $anchorTag->outerHtml;
+
+                                    $classValue = $anchorTag->getAttribute('class');
+                                    $idValue = $anchorTag->getAttribute('id');
+                                    $valueAfterUnderscore = substr($idValue, strpos($idValue, '_') + 1);
+                                    // echo($valueAfterUnderscore);
+                                    if (strpos($classValue, 'mcGop') !== false) {
+                                        $sohieubh = '__';
+                                        $tenmc = '';
+                                        $noibanhanh = '';
+                                        $minhchunggop = DB::table('minhchung_gop')
+                                                            ->where('id',$valueAfterUnderscore)
+                                                            ->first();
+                                        if($minhchunggop){
+                                            $tenmc = $minhchunggop->tieu_de;
+                                            $sohieubh = DB::table('minhchung')
+                                                                ->leftjoin('minhchunggop_minhchung','minhchung.id','=','minhchunggop_minhchung.minhchung_id')
+                                                                ->where('minhchunggop_minhchung.minhchunggop_id',$minhchunggop->id)
+                                                                ->count();
+                                        }
+
+                                        $mcCollect->push([
+                                            'mamc' => $anchorData,
+                                            'minhchung' => Lang::get('project/Selfassessment/title.mcgop'),
+                                            'tenmc' => $tenmc,
+                                            'sohieubh' => $sohieubh,
+                                            'noibanhanh' => $noibanhanh,
+                                        ]);
+                                    }else{
+                                        $noibanhanh = '';
+                                        $tenmc = '';
+                                        $sohieubh = '__';
+                                        $minhchung = DB::table('minhchung')
+                                                            ->where('id',$valueAfterUnderscore)
+                                                            ->first();
+                                        if($minhchung){
+                                            $tenmc = $minhchung->tieu_de;
+                                            $ngaybh = $this->toShowDate($minhchung->ngay_ban_hanh);
+                                            $sohieubh = $minhchung->sohieu.','.$ngaybh;
+                                            $noibanhanh = $minhchung->noi_banhanh;
+                                        }
+                                        
+                                        $mcCollect->push([
+                                            'mamc' => $anchorData,
+                                            'minhchung' => Lang::get('project/Selfassessment/title.minhchung'),
+                                            'tenmc' => $tenmc,
+                                            'sohieubh' => $sohieubh,
+                                            'noibanhanh' => $noibanhanh,
+                                        ]);
+                                    }
+                                }
+                               
+                            }
+                            
+                        }
+                    } 
 		        }
 		    }
 		

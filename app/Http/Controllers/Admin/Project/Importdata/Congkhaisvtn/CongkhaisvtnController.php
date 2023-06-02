@@ -88,7 +88,12 @@ class CongkhaisvtnController extends DefinedController{
 	                 'cksvtn.xuat_sac','cksvtn.gioi','cksvtn.kha','cksvtn.ty_le');
 
 	        return DataTables::of($donviExcel)          
-	       
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            ) 
             ->addColumn(
 	                'actions',
 	                function ($donvi) {

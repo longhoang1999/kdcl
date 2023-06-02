@@ -12,11 +12,12 @@ class BasiclnforExport implements FromCollection, WithHeadings
     {
         $getBasiclnfor = [];
         $dvs = DB::table('excel_import_donvi')->get();
-        foreach($dvs as $dv){
+        foreach($dvs as $key => $dv){
             //loại đơn vị
             $ldv = DB::table('loai_donvi')->where("id", $dv->loai_dv_id)->select('loai_donvi')
                     ->first();
             $row = [
+                $key + 1,
                 $dv->ma_donvi ,
                 $ldv->loai_donvi,
                 $dv->ten_donvi_TV,
@@ -46,6 +47,7 @@ class BasiclnforExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Mã đơn vị",
             "Loại đơn vị",
             "Tên đơn vị (*)(Tiếng Việt)",

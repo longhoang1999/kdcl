@@ -118,6 +118,9 @@
             <thead>
              <tr>
                 <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
+                <th>
                     @lang('project/ImportdataExcel/title.noidung')
                 </th>
                 <th>
@@ -369,6 +372,7 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.tktc.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'noi_dung', name: 'noi_dung' },
                 { data: 'n_2019', name: 'n_2019' },
                 { data: 'n_2020', name: 'n_2020' },
@@ -377,6 +381,12 @@
                 { data: 'n_2023', name: 'n_2023' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

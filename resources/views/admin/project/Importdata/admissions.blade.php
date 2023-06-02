@@ -103,6 +103,10 @@
 <section class="content-body">
     <div class="form-standard">
         <div class="item-group-button right-block mb-2">
+            <button class="btn" data-toggle="modal" data-target="#modalDeleteAll__" data-nametable="excel_import_tuyensinh">
+                <i class="bi bi-trash" style="font-size: 25px;color: red;"></i>
+            </button>
+
             <button href="" class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modal_unit" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.nhap_excel')">
                 <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
             </button>
@@ -114,6 +118,9 @@
         <table class="table table-striped table-bordered" id="table" width="100%">
             <thead>
              <tr>
+                <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
                 <th>
                     @lang('project/ImportdataExcel/title.loai')
                 </th>
@@ -223,6 +230,8 @@
         </div>
     </div>
 </div>
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
@@ -406,6 +415,7 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.tuyensinh.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'loai_TS', name: 'loai_TS' },
                 { data: 'dt_tg', name: 'dt_tg' },
                 { data: 's_t_t', name: 's_t_t' },
@@ -414,6 +424,13 @@
                 { data: 'hdt', name: 'hdt' },
                 { data: 'actions', name: 'actions' ,className: 'action' },
             ],            
+        });
+
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

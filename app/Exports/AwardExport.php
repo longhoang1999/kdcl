@@ -12,9 +12,10 @@ class AwardExport implements FromCollection, WithHeadings
     {
         $getgiaithuong = [];
         $gts = DB::table('excel_import_giaithuong')->get();
-        foreach($gts as $gt){
+        foreach($gts as $key => $gt){
             
             $row = [
+                $key + 1,
                 $gt->tgt ,
                 $gt->ckt,
                 $gt->linhvuc,
@@ -31,6 +32,7 @@ class AwardExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Tên giải thưởng",
             "Cấp khen thưởng",
             "Lĩnh vực",

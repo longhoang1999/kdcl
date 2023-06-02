@@ -234,12 +234,12 @@ class PreparereportController extends DefinedController
                         $html .= ' 
                             <div class="block-minhchung">
                                 <span class="text-info">'. $mc->tieu_de .'</span>';
-                            if(!Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien')){
+                            
                                 $html .= '<button title="'. 
                                         Lang::get('project/Selfassessment/title.xmctp')
                                      .'" class="btn" data-toggle="modal" data-target="#modalDeleteItem" data-minhchunggop="'. $mcg->id .'" data-minhchung="'. $mc->id .'"><i class="bi bi-x-circle" style="font-size: 35px;color: orange;"></i></button>
                                 </div>';
-                            }
+                            
 
 
                     }
@@ -254,11 +254,11 @@ class PreparereportController extends DefinedController
                      .'" class="btn">
                         <i class="bi bi-eye-fill" style="font-size: 30px;color: #50cd89;"></i>
                         </a>';
-                    if(!Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien')){
+                    
                         $actions = $actions. '<button title="'. 
                         Lang::get('project/Selfassessment/title.xmcg')
                      .'" class="btn" data-toggle="modal" data-target="#modalDeleteGroup" data-minhchunggop="' .$mcg->id. '"><i class="bi bi-x-circle" style="font-size: 35px;color: red;"></i></button>';
-                    }
+                    
                     
                     return $actions;
                 }
@@ -742,4 +742,31 @@ class PreparereportController extends DefinedController
             'mes'   => Lang::get('project/Selfassessment/title.xnmctc'),
         ]);
     }
+
+    public function boxacnhanTchi(Request $req){
+        $kehoach_baocao = DB::table("kehoach_baocao")->where("id", $req->idKhbc);            
+        if($kehoach_baocao->count() == 0){
+            return json_encode([
+                'mes'   => Lang::get('project/Selfassessment/title.knddbc'),
+            ]);
+        }
+
+        $tieuchi = DB::table("tieuchi")->where("id", $req->idTchi);
+        if($tieuchi->count() == 0){
+            return json_encode([
+                'mes'   => Lang::get('project/Selfassessment/title.knddtc'),
+            ]);
+        }
+
+        $minhChungGop = DB::table("minhchung_gop")->where([
+            ['id_tieuchi', $req->idTchi],
+            ['id_kehoach_baocao', $req->idKhbc]
+        ])->update(['xacnhan' => 'N']);
+
+        return json_encode([
+            'mes'   => Lang::get('project/Selfassessment/title.bxnmctc'),
+        ]);
+    }
+
+    
 }

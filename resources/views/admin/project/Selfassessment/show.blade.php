@@ -138,9 +138,9 @@
                     <div class="group_back">
                         <div class="arrow_content_text_css">
                             <h5>@lang('project/Selfassessment/title.modau')</h5>
-                            @if(!Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien'))
+                            
                             <button id="show_content" onclick="showhidetieuchi()"><i class="fa fa-chevron-up" id="show_arrow"></i></button>
-                            @endif
+                           
                         </div>
                         <div id="content_text" >
                             <div class="text_contents p-5" id="show_textcontent">
@@ -247,14 +247,14 @@
                                 @elseif($kehoachtieuchi->baocao_tieuchi->trang_thai=="congbo")
                                     <div class="label label-success" style="position: absolute;left: 14px;
                                     bottom: 2px;">@lang('project/Selfassessment/title.dacongbo')</div>
-                                     @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                                     
                                     <button class="btn ladda-button btn-xs moLaiTieuChi congBoTieuChi_{{$kehoachtieuchi->id}} data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.molaitieuchi')"
                                             data-style="expand-right"
                                             d-id="{{$kehoachtieuchi->baocao_tieuchi->id}}"
                                             d-tieuchi_id="{{$kehoachtieuchi->id}}">
                                             <i class="fas fa-redo" style="font-size: 25px;color: #50cd89;"></i>
                                     </button>
-                                    @endif 
+                                    
                                 @endif
                             @else
                                 <button class="btn ladda-button btn-xs congBoTieuChi congBoTieuChi_{{$kehoachtieuchi->id}} data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.cbtc')"
@@ -299,13 +299,13 @@
                                                 </button>
                                             @elseif($menhde->trang_thai=='congbo')
                                                 <div class="label label-success">@lang('project/Selfassessment/title.dahoanthanh')</div>
-                                                @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                                               
                                                 <button class="btn ladda-button btn-xs moLaiMenhDe congBoMenhDe_css data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.molai')"
                                                         data-style="expand-right"
                                                         d-id="{{$menhde->id}}">
                                                         <i class="fas fa-redo" style="font-size: 25px;color: #50cd89;"></i>
                                                 </button>
-                                                @endif
+                                                
                                             @endif
                                         @else
                                             <button class="btn btn-xs congBoMenhDeFake congBoMenhDe_css data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.hoanthanh')">
@@ -602,9 +602,9 @@
                     <div class="group_back">
                         <div class="arrow_content_text_css">
                             <h5>@lang('project/Selfassessment/title.ketluan')</h5>
-                            @if(!Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien'))
+                            
                             <button id="show_content2" onclick="showhidetieuchi3()"><i class="fa fa-chevron-up" id="show_arrow2"></i></button>
-                            @endif
+                            
                         </div>
 
                         <div id="content_text2" >
@@ -1143,7 +1143,7 @@
                         push_minhchung.empty();
                         data.forEach(function(e){
                             e.minhChungList.forEach(function(e_child){
-                                push_minhchung.html(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
+                                push_minhchung.append(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
                             });
                            
                         });
@@ -1155,7 +1155,7 @@
                              // id_mcg = parseInt(id_mcg);
                             data.forEach(function(e){
                                 e.minhchung.forEach(function(e_child){
-                                    push_minhchung.html(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
+                                    push_minhchung.append(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
                            
                                 });
                                
@@ -1164,17 +1164,7 @@
                             if(!check){
                                 let tieude_all = $(`select.option_mc${tieuchuan_id} option`).filter(":selected").text();
                                 let result3 = tieude_all.length > 0 ? tieude_all : "@lang('project/Selfassessment/title.khongcodl')";
-                                // let trichyeuall = $(".selectmc_mota option:selected").attr('trichyeu');
-                                // $(`select#option_mc${tieuchuan_id} option:selected`);
-                                // let result4 = trichyeuall.length == 0
-                                //   ? "@lang('project/Selfassessment/title.khongcodl')"
-                                //   : trichyeuall.map(function() {
-                                //       return $(this).attr("trichyeu");
-                                //     }).get();
-                                // let trichyeuall = $(".selectmc_mota option:selected").attr('trichyeu');
-                                // if (!trichyeuall) {
-                                //   let trichyeuall = "@lang('project/Selfassessment/title.khongcodl')";
-                                // }
+
                                 $('.minhchung_tieude').empty();
                                 $('.minhchung_tieude').append( `
                                                                 <p style="font-weight: bold;margin: 0;margin-top:6px">@lang('project/Selfassessment/title.tieude')</p>
@@ -1199,13 +1189,7 @@
                        $('.minhchung_trichyeu').empty();
                        let tieude_mcg = $(`select.option_mc${tieuchuan_id} option`).filter(":selected").text();
                        let result = tieude_mcg.length > 0 ? tieude_mcg : "@lang('project/Selfassessment/title.khongcodl')";
-                       // let selectedOptions = $(`select#option_mc${tieuchuan_id} option:selected`);
-                       // let result2 = trichyeu_mcg.length > 0 ? trichyeu_mcg : "@lang('project/Selfassessment/title.khongcodl')";
-                       // let result2 = selectedOptions.length == 0
-                       //        ? "@lang('project/Selfassessment/title.khongcodl')"
-                       //        : selectedOptions.map(function() {
-                       //            return $(this).attr("trichyeu");
-                       //          }).get();
+
                        $('.minhchung_tieude').append( `
                                                         <p style="font-weight: bold;margin: 0;margin-top:6px">@lang('project/Selfassessment/title.tieude')</p>
                                                         <span>
@@ -1249,6 +1233,8 @@
       
         function clickMC(id,mcg){
             var num;
+            console.log(mcg)
+            console.log(id)
             $.ajax({
                 url: "{!! route('admin.tudanhgia.detailedplanning.modalminhchung') !!}",
                 type: 'POST',
@@ -1268,10 +1254,9 @@
                    data[0].forEach(function(e){
                         $('.content_mc_tieude').html(e.tieu_de);
                         $('.content_mc_trichyeu').html(e.trich_yeu);
-                        var link  = "{!! route('admin.tudanhgia.preparereport.editmcgop',0)!!}";  
-                        
+                        var link  = "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}";      
                         if(data[1] == '1'){
-                            link = link.replace('edit-mc-gop/0','edit-mc-gop/'+ e.id);
+                            link = link.replace('view-mcgop/0','view-mcgop/'+ e.id);
                             $('.chitiet_modal_mc').html(
                                 `<strong style ="padding-right: 17px;">Xem chi tiết</strong>
                                 <a href="${link}" title="Xem" target = "_blank">
@@ -1282,7 +1267,8 @@
                         }else{
 
                             let UI = ``;
-                            if(e.duong_dan != '' || e.duong_dan != null){
+                            if(e.duong_dan != '' && e.duong_dan != null){
+                                
                                 UI += 
                                 `<strong style ="padding-right: 17px;">Xem chi tiết</strong>
                                 <a href="${e.linkview}" target = "_blank" title="xem file" >
@@ -1290,7 +1276,7 @@
                                  </a>
                                 `;
                             }
-                            if(e.url != '' ||  e.url != null){
+                            if(e.url != '' &&  e.url != null){
                                 UI += 
                                     `
                                      <a href="${e.url}" target = "_blank" title = "xem đường dẫn" >
@@ -1300,24 +1286,6 @@
                                ;
                             }
                             $('.chitiet_modal_mc').html(UI);
-                            
-                           //  $('.chitiet_modal_mc').html(
-                           //      `<strong style ="padding-right: 17px;">Xem chi tiết</strong>
-                           //      <a href="${e.linkview}" title="" style="background: aquamarine; padding: 6px 11px;border-radius: 6px;" target = "_blank">
-                           //          <i class="fas fa-download"></i>
-                           //          <span type="">
-                           //              Mở   
-                           //          </span>
-                           //       </a>
-
-                           //       <a href="${e.url}" title="" style="background: aquamarine; padding: 6px 11px;border-radius: 45px;" target = "_blank">
-                           //          <i class="fas fa-eye"></i>
-                           //          <span type="">
-                           //              Mở   
-                           //          </span>
-                           //       </a>
-                           //      `
-                           // );
                         }
                         
                    });
@@ -1341,17 +1309,10 @@
             if(cur_editor != null){
                 if(check){
                     id_mcg = parseInt(id_mcg);
-                    // if(arr_mc.includes(id_mcg)){
-                    //     let text = '&nbsp;<a data-mce-href="mcGop" id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung mcGop" d-type="mcGop" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
-                    //      cur_editor.execCommand('mceInsertContent', false, text);  
-                    // }else{
-                    //     let text = '&nbsp;<a data-mce-href="mc" id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung mcGop" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
-                    //      cur_editor.execCommand('mceInsertContent', false, text);  
-                    // }
-                    let text = '&nbsp;<a data-mce-href="mc" id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
+                    let text = '&nbsp;<a id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung mc addminhchunggop_' + id_mcg + ' danMinhChungs" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
                          cur_editor.execCommand('mceInsertContent', false, text);
                 }else{
-                    let text = '&nbsp;<a data-mce-href="mcGop" id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung mcGop" d-type="mcGop" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
+                    let text = '&nbsp;<a id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung mcGop addminhchunggop_' + id_mcg + ' danMinhChungs" d-type="mcGop" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
                      cur_editor.execCommand('mceInsertContent', false, text);  
                 }
                      
@@ -1555,12 +1516,14 @@
                     var id = e.target.id;
                     var clas = e.target.class;
                     let mcg = e.target.classList.value;
+
                     if(mcg.includes('mcGop')){
                         mcg = 'mcGop';
                     }else{
                         mcg = 'mc';
                     }
 
+                    // console.log(mcg)
                     if(id != undefined && id != '' && id.includes('addminhchunggop_')){
                         var idmcg = id.split('_')[1];
                      
@@ -1732,7 +1695,7 @@
                 },
 
                 success: function(data) {
-                    console.log(data)
+                  
                     if(data){
                         $('.add_text_md').html(data);
                     }
@@ -1796,6 +1759,7 @@
                     },
 
                     success: function(data) {
+
                         alert("@lang('project/Selfassessment/title.capnhatthanhcong')");
                          $('.update_mota_bc_'+ menhde_id).html(data);
                          $(`#shows_${menhde_id}`).hide();
@@ -2212,23 +2176,17 @@
             });
             $('.option_mc').select2();
             $('.danMinhChung').click(function(e){
-                // console.log(this);
-                
+           
                 e.preventDefault();
             });
         });
         $('.checks').select2();
         $('.minhChungAllow').on('click','.danMinhChung',function(){
-        let idmc_gop =  $(this).attr('id');
-        let mcg = $(this).attr('data-mce-href');
-        let id = idmc_gop.substring(idmc_gop.indexOf('_')+1);
-        clickMC(id,mcg);
-     })
-
-     $('.block_content').on('click','.danMinhChung',function(){
-            let id = $(this).attr('d-id');
-            window.location= "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id;
-    });
+            let idmc_gop =  $(this).attr('id');
+            let mcg = $(this).hasClass('mcGop') ? 'mcGop' : 'mc';
+            let id = idmc_gop.substring(idmc_gop.indexOf('_')+1);
+            clickMC(id,mcg);
+        })
 
     </script>
 @stop

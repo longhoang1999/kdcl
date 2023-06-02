@@ -13,8 +13,9 @@ class Tktcexport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_tk_tai_chinh')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->noi_dung ,
                 $ts->n_2019,
                 $ts->n_2020,
@@ -30,6 +31,7 @@ class Tktcexport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Nội dung",
             "2019",
             "2020",

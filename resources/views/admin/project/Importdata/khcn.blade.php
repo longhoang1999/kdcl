@@ -115,6 +115,9 @@
             <thead>
              <tr>
                 <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
+                <th>
                     @lang('project/ImportdataExcel/title.maso')
                 </th>
                 <th>
@@ -427,6 +430,7 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.khcn.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'maso', name: 'maso' },
                 { data: 'tendetai', name: 'tendetai' },
                 { data: 'loai', name: 'loai' },
@@ -434,6 +438,12 @@
                 { data: 'trangthai', name: 'trangthai' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

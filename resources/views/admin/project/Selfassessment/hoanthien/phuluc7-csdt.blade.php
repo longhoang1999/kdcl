@@ -46,43 +46,44 @@
                 }
                 
                 ?>
-                if(isset($keHoachTieuChuan->tieuChuan->stt)){
-                    @switch(isset($keHoachTieuChuan->tieuChuan->stt))
-                        @case(1)
-                            <tr style="font-weight: bold">
-                                <td>{{$romanNum}}</td>
-                                <td>@lang('project/Selfassessment/title.linhvuc1')</td>
-                                <td class="text-center" id="avgLv1"></td>
-                                <td></td>
-                            </tr>
-                        @break
-                        @case(9)
-                            <tr style="font-weight: bold">
-                                <td>{{$romanNum}}</td>
-                                <td>@lang('project/Selfassessment/title.linhvuc2')</td>
-                                <td class="text-center" id="avgLv2"></td>
-                                <td></td>
-                            </tr>
-                        @break
-                        @case(13)
-                            <tr style="font-weight: bold">
-                                <td>{{$romanNum}}</td>
-                                <td>@lang('project/Selfassessment/title.linhvuc3')</td>
-                                <td class="text-center" id="avgLv3"></td>
-                                <td></td>
-                            </tr>
-                        @break
-                        @case(22)
-                            <tr style="font-weight: bold">
-                                <td>{{$romanNum}}</td>
-                                <td>@lang('project/Selfassessment/title.linhvuc4')</td>
-                                <td class="text-center " id="avgLv4"></td>
-                                <td></td>
-                            </tr>
-                        @break
-                        @default
-                    @endswitch
-                }
+          
+                    @if(isset($keHoachTieuChuan->tieuChuan->stt))
+                        @switch(isset($keHoachTieuChuan->tieuChuan->stt))
+                            @case(1)
+                                <tr style="font-weight: bold">
+                                    <td>{{$romanNum}}</td>
+                                    <td>@lang('project/Selfassessment/title.linhvuc1')</td>
+                                    <td class="text-center" id="avgLv1"></td>
+                                    <td></td>
+                                </tr>
+                            @break
+                            @case(9)
+                                <tr style="font-weight: bold">
+                                    <td>{{$romanNum}}</td>
+                                    <td>@lang('project/Selfassessment/title.linhvuc2')</td>
+                                    <td class="text-center" id="avgLv2"></td>
+                                    <td></td>
+                                </tr>
+                            @break
+                            @case(13)
+                                <tr style="font-weight: bold">
+                                    <td>{{$romanNum}}</td>
+                                    <td>@lang('project/Selfassessment/title.linhvuc3')</td>
+                                    <td class="text-center" id="avgLv3"></td>
+                                    <td></td>
+                                </tr>
+                            @break
+                            @case(22)
+                                <tr style="font-weight: bold">
+                                    <td>{{$romanNum}}</td>
+                                    <td>@lang('project/Selfassessment/title.linhvuc4')</td>
+                                    <td class="text-center " id="avgLv4"></td>
+                                    <td></td>
+                                </tr>
+                            @break
+                            @default
+                        @endswitch
+                @endif
                 
 
                 <tr style="font-weight: bold">

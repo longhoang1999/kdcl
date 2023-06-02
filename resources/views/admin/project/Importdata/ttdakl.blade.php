@@ -118,16 +118,16 @@
             <thead>
              <tr>
                 <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
+                <th>
+                    @lang('project/ImportdataExcel/title.nganh')
+                </th>
+                <th>
                     @lang('project/ImportdataExcel/title.tddt')
                 </th>
                 <th>
                     @lang('project/ImportdataExcel/title.tendetai')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.hvtnth')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.hvtnhd')
                 </th>
                 <th>
                     @lang('project/ImportdataExcel/title.ndtt')
@@ -276,13 +276,19 @@
                     <input type="hidden" id="id_unit" name="id_unit">
                     <div class="container-fuild">
                         <div class="row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-3">
+                                <label for="fornganh">
+                                    <span>@lang('project/ImportdataExcel/title.nganh')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fornganh" placeholder="@lang('project/ImportdataExcel/title.nganh')" name="nganh">
+                            </div>
+                            <div class="form-group col-md-3">
                                 <label for="fortddt">
                                     <span>@lang('project/ImportdataExcel/title.tddt')</span>
                                 </label>
                                 <input type="text" class="form-control " id="fortddt" placeholder="@lang('project/ImportdataExcel/title.tddt')" name="tddt">
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="fortendetai">
                                     <span>@lang('project/ImportdataExcel/title.tendetai')</span>
                                 </label>
@@ -300,7 +306,7 @@
                                 </label>
                                 <input type="text" class="form-control " id="forhvtnhd" placeholder="@lang('project/ImportdataExcel/title.hvtnhd')" name="hvtnhd">
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="forndtt">
                                     <span>@lang('project/ImportdataExcel/title.ndtt')</span>
                                 </label>
@@ -361,13 +367,19 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.ttdakl.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
+                { data: 'nganh', name: 'nganh' },
                 { data: 'trinh_do_dao_tao', name: 'trinh_do_dao_tao' },
                 { data: 'ten_de_tai', name: 'ten_de_tai' },
-                { data: 'htnth', name: 'htnth' },
-                { data: 'htnhd', name: 'htnhd' },
                 { data: 'ndtt', name: 'ndtt' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 
@@ -400,6 +412,9 @@
                                     @lang('project/ImportdataExcel/title.stt')
                                 </th>
                                 <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.nganh')
+                                </th>
+                                <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.tddt')
                                 </th>
                                 <th class="row_width p-2">
@@ -427,18 +442,21 @@
                         <tr class="row_number">
                                 <td contenteditable class="text-center p-2 row0">${item.stt}</td>
                                 <td contenteditable class="text-center p-2 row1">
+                                    ${item.nganh}
+                                </td>
+                                <td contenteditable class="text-center p-2 row2">
                                     ${item.tddt}
                                 </td>
-                                <td contenteditable class="text-center p-2 row2"> 
+                                <td contenteditable class="text-center p-2 row3"> 
                                     ${item.tendetai}
                                 </td>
-                                <td contenteditable class="text-center p-2 row3">
+                                <td contenteditable class="text-center p-2 row4">
                                     ${item.hvtnth}
                                 </td>
-                                <td contenteditable class="text-center p-2 row4">
+                                <td contenteditable class="text-center p-2 row5">
                                     ${item.hvtnhd}
                                 </td>
-                                <td contenteditable class="text-center p-2 row5">
+                                <td contenteditable class="text-center p-2 row6">
                                     ${item.ndtt}
                                 </td>
                                 <td contenteditable class="text-center p-2 trash-btn">
@@ -471,6 +489,7 @@
                 <td contenteditable class="text-center p-2 row3"></td>
                 <td contenteditable class="text-center p-2 row4"></td>
                 <td contenteditable class="text-center p-2 row5"></td>
+                <td contenteditable class="text-center p-2 row6"></td>
                 <td contenteditable class="text-center p-2 trash-btn">
                     <ion-icon name="trash-outline"></ion-icon>
                 </td>
@@ -645,11 +664,12 @@
             dataSubmit.length = 0;
             $(".row_number").each(function( index ) {
                 let dataObj = {
-                    'tddt' :   $(this).find('.row1').text().trim(),
-                    'tendetai' :  $(this).find('.row2').text().trim(),
-                    'hvtnth' :   $(this).find('.row3').text().trim(),
-                    'hvtnhd' :  $(this).find('.row4').text().trim(),
-                    'ndtt' :  $(this).find('.row5').text().trim(),
+                    'nganh' :   $(this).find('.row1').text().trim(),
+                    'tddt' :   $(this).find('.row2').text().trim(),
+                    'tendetai' :  $(this).find('.row3').text().trim(),
+                    'hvtnth' :   $(this).find('.row4').text().trim(),
+                    'hvtnhd' :  $(this).find('.row5').text().trim(),
+                    'ndtt' :  $(this).find('.row6').text().trim(),
                     
                 }
                 dataSubmit.push(dataObj);
@@ -703,6 +723,7 @@
         })
             .then((response) => response.json())
             .then((data) => {
+                $("#fornganh").val(data.nganh);
                 $("#fortddt").val(data.trinh_do_dao_tao);
                 $("#fortendetai").val(data.ten_de_tai);
                 $("#forhvtnth").val(data.htnth);

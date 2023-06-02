@@ -115,6 +115,9 @@
             <thead>
              <tr>
                 <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
+                <th>
                     @lang('project/ImportdataExcel/title.tplgd')
                 </th>
                 <th>
@@ -414,12 +417,19 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.tkpttb.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'tp_gd_lap', name: 'tp_gd_lap' },
                 { data: 'so_luong', name: 'so_luong' },
                 { data: 'dien_tich_xay', name: 'dien_tich_xay' },
                 { data: 'doi_tuong_sd', name: 'doi_tuong_sd' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

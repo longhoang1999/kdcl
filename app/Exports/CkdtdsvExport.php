@@ -13,8 +13,9 @@ class CkdtdsvExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_dientich_sv')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->ten ,
                 $ts->ty_le,
 
@@ -26,6 +27,7 @@ class CkdtdsvExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Tên",
             "Tỷ lệ",
             

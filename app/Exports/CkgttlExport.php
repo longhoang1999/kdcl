@@ -13,9 +13,11 @@ class CkgttlExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_giaotrinh')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
-                $ts->tgt_tltk ,
+                $key + 1,
+                $ts->nganh,
+                $ts->tgt_tltk,
                 $ts->nxb,
                 $ts->ke_hoach,
 
@@ -27,6 +29,8 @@ class CkgttlExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
+            "Ngành/CTĐT",
             "Tên giáo trình, tài liệu tham khảo (kể cả giáo trình điện tử)",
             "Năm xuất bản",
             "Kế hoạch soạn thảo giáo trình, tài liệu tham khảo (kể cả giáo trình điện tử)",

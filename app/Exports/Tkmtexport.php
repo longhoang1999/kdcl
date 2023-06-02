@@ -13,8 +13,9 @@ class Tkmtexport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_tk_mt')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $row = [
+                $key + 1,
                 $ts->don_vi ,
                 $ts->tong_so,
                 $ts->so_may_moi,
@@ -31,6 +32,7 @@ class Tkmtexport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Đơn vị",
             "Tổng số",
             "Số máy mới (Từ 5 năm trở lại)",

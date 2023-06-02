@@ -99,7 +99,7 @@ class Chuongtrinhdaotao extends DefinedController{
                      'ctdt.slsv','ctdt.sl_svtn','ctdt.ten_vanbang','ctdt.tddt',
                      'ctdt.tgdtc','ctdt.cttshn','ctdt.mkndt','ctdt.mlvdt');
 
-	        return DataTables::of($donviExcel)          
+	        return DataTables::of($donviExcel)  
                 ->addColumn(
                     'actions',
                     function ($donvi) {
@@ -108,6 +108,12 @@ class Chuongtrinhdaotao extends DefinedController{
                         return $actions;
                     }
                 )
+                ->addColumn(
+	                'stt',
+	                function ($donvi) {
+                        return "";
+	                }
+	            )  
 	            ->rawColumns(['actions'])
 	            ->make(true);
 	    }

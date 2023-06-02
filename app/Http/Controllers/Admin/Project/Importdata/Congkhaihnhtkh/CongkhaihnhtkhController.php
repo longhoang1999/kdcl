@@ -54,7 +54,7 @@ class CongkhaihnhtkhController extends DefinedController{
             if($dt->tenchude != "" && $dt->tgtc != ""){
             	$dataInport = array(
                     'tcd'  => $dt->tenchude,
-                    'tgtc' => $dt->tgtc,
+                    'tgtc' => date("Y-m-d", strtotime($dt->tgtc)),
                     'ddtc'   => $dt->diadiemtc,
                     'so_luong'   => $dt->sldbtd,
                     
@@ -85,7 +85,13 @@ class CongkhaihnhtkhController extends DefinedController{
 	                ->select('hnhtkh.id', 'hnhtkh.tcd', 'hnhtkh.ddtc',
 	                 'hnhtkh.tgtc', 'hnhtkh.so_luong');
 
-	        return DataTables::of($donviExcel)          
+	        return DataTables::of($donviExcel)
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            )           
 	        ->addColumn(
                 'tgtc',
                 function ($donvi) {

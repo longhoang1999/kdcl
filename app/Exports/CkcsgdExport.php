@@ -13,11 +13,12 @@ class CkcsgdExport implements FromCollection, WithHeadings
         $getAdmissions = [];
         $tss = DB::table('excel_import_csgd_ctgd')->get();
         
-        foreach($tss as $ts){
+        foreach($tss as $key => $ts){
             $time = $this->convertTime($ts->ngay_cap);
             $time_1 = $this->convertTime($ts->gia_tri_den);
             $time_2 = $this->convertTime($ts->tddgn);
             $row = [
+                $key + 1,
                 $ts->ten_co_so,
                 $time_2,
                 $ts->ket_qua,
@@ -39,6 +40,7 @@ class CkcsgdExport implements FromCollection, WithHeadings
     } 
     public function headings() :array {
         return [
+            "STT",
             "Tên cơ sở đào tạo hoặc các chương trình đào tạo",
             "Thời điểm đánh giá ngoài",
             "Kết quả đánh giá/Công nhận",

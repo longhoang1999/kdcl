@@ -620,7 +620,7 @@
                                     </a>
                                 </div>
                                 <!-- Nhận xét báo cáo -->
-                                @if( !Sentinel::inRole('ns_thuchien'))
+                             
                                 <div class="menu-item">
                                     <a class="menu-link 
                                     {!! (Request::is('admin/tu-danh-gia/commentreport/index')
@@ -633,7 +633,7 @@
                                         <span class="menu-title">{{$listmenu_7[4]}}</span>
                                     </a>
                                 </div>
-                                @endif
+                            
                                 <!-- Hoàn thiện báo cáo -->
                                 <div class="menu-item">
                                     <a class="menu-link 

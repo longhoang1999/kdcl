@@ -12,22 +12,22 @@
         <div class="ibox tieuchuantieuchi">
             <div class="ibox-content ">
                 <div class="">
-                    @foreach($keHoachBaoCaoListDetail as $keHoachTieuChuan)
-                        @if($keHoachTieuChuan->id_tieuchuan == $kh)
-                        {{--@continue(!$keHoachTieuChuan->baoCaoTieuChuan)--}}
-                        <strong>@lang('project/Externalreview/title.tieuchuan') {{ $keHoachTieuChuan->keHoachTieuChuans->stt }}
-                            : {{ $keHoachTieuChuan->keHoachTieuChuans->mo_ta }}</strong>
+                    @foreach($keHoachBaoCaoDetail2->keHoachTieuChuanList as $keHoachTieuChuan)
+                        @if($keHoachTieuChuan->tieuchuan_id == $kh)
+                       {{-- @continue(!$keHoachTieuChuan->baoCaoTieuChuan) --}}
+                        <strong>Tiêu chuẩn {{ $keHoachTieuChuan->tieuChuan->stt }}
+                            : {{ $keHoachTieuChuan->tieuChuan->mo_ta }}</strong>
 
 
-                            @if($keHoachBaoCaoDetail2->loai_tieuchuan == 'csgd')
-                                {{--@include("kdcl::danhgiangoai.tonghop.include.tieuchi-csdt")--}}
+                            @if($keHoachBaoCaoDetail2->loai_tieuchuan_bc == 'csgd')
+                                @include("admin.project.ExternalReview.include.tieuchi-csdt")
                             @else
-                                <p>{!! str_replace('&nbsp;',' ',$keHoachTieuChuan->keHoachTieuChuans->modau) !!}</p>
+                                <p>{!! str_replace('&nbsp;',' ',$keHoachTieuChuan->baoCaoTieuChuan->modau) !!}</p>
                                 @include("kdcl::danhgiangoai.tonghop.include.tieuchi-ctdt")
 
                                 <div class="m-b-md m-l-md">
-                                    <b>@lang('project/Externalreview/title.kltchuan') {{ $keHoachTieuChuan->keHoachTieuChuans->stt }}: </b>
-                                    {!! str_replace('&nbsp;',' ',$keHoachTieuChuan->keHoachTieuChuans->ketluan) !!}
+                                    <b>Kết luận tiêu chuẩn {{ $keHoachTieuChuan->tieuChuan->stt }}: </b>
+                                    {!! str_replace('&nbsp;',' ',$keHoachTieuChuan->baoCaoTieuChuan->ketluan) !!}
                                 </div>
                             @endif
 

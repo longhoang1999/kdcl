@@ -12,9 +12,10 @@ class InventExport implements FromCollection, WithHeadings
     {
         $getsangche = [];
         $scs = DB::table('excel_import_sangche')->get();
-        foreach($scs as $sc){
+        foreach($scs as $key => $sc){
             
             $row = [
+                $key + 1,
                 $sc->tpmsc ,
                 $sc->maso,
                 $sc->loai,
@@ -34,6 +35,7 @@ class InventExport implements FromCollection, WithHeadings
 
     public function headings() :array {
         return [
+            "STT",
             "Tên phát minh/sáng chế",
             "Mã số",
             "Loại",

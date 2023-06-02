@@ -87,7 +87,13 @@ class GiaithuongController extends DefinedController{
 	                ->select('gtex.tgt', 'gtex.ckt', 'gtex.id',
 	                 'gtex.linhvuc', 'gtex.dvc', 'gtex.ndc');
 
-	        return DataTables::of($donviExcel)              
+	        return DataTables::of($donviExcel) 
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            )              
                 ->addColumn(
                     'actions',
                     function ($donvi) {

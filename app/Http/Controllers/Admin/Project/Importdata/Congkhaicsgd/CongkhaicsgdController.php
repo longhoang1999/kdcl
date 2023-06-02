@@ -54,12 +54,12 @@ class CongkhaicsgdController extends DefinedController{
             if($dt->tcsdt != "" && $dt->tcsdt != ""){
             	$dataInport = array(
                     'ten_co_so'  => $dt->tcsdt,
-                    'tddgn' => $dt->tddgn,
+                    'tddgn' => date("Y-m-d", strtotime($dt->tddgn)),
                     'ket_qua'   => $dt->kqdgcn,
                     'nghi_quyet'   => $dt->nqchd,
                     'cong_nhan'   => $dt->cnclgd,
-                    'ngay_cap'   => $dt->ngaycap,
-                    'gia_tri_den'   => $dt->giatriden,
+                    'ngay_cap'   =>  date("Y-m-d", strtotime($dt->ngaycap)),
+                    'gia_tri_den'   => date("Y-m-d", strtotime($dt->giatriden)),
                     
                 );
                 DB::table("excel_import_csgd_ctgd")->insert($dataInport);
@@ -88,7 +88,13 @@ class CongkhaicsgdController extends DefinedController{
 	                ->select('ckcsgd.id', 'ckcsgd.ten_co_so', 'ckcsgd.tddgn',
 	                 'ckcsgd.ket_qua','ckcsgd.nghi_quyet','ckcsgd.cong_nhan','ckcsgd.ngay_cap','ckcsgd.gia_tri_den');
 
-	        return DataTables::of($donviExcel)        
+	        return DataTables::of($donviExcel) 
+            ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            )        
             ->addColumn(
                 'tddgn',
                 function ($donvi) {

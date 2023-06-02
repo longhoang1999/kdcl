@@ -314,12 +314,16 @@
        fileDownload.click();
        document.body.removeChild(fileDownload);
     }
-    $('.show_mcg').on('click','.danMinhChung',function(){
+    $('.show_mcg').on('click','.mcGop',function(){
 
-            let id = $(this).attr('d-id');
+            let id = $(this).attr('id').split('_')[1];
             window.location= "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id;
-    });
+    }); 
 
+    $('.show_mcg').on('click','.mc',function(){
+            let id = $(this).attr('id').split('_')[1];
+            window.location= "{!! route('admin.dambaochatluong.manaproof.showProof',0) !!}"+id;
+    });
     $('#xacNhanHoanThanh').on('click',function(){
         let id_khbc = $(this).attr('d-id');
         $('.add_conten').html(`<p>"@lang('project/Selfassessment/title.ktldxn')"</p>`);
@@ -361,13 +365,20 @@
                 },
 
                 success: function(data) {
-                   
-                    console.log(data)
+                 
                 },
             })
         })
            
     })
+
+    $(document).ready(function() {
+        
+        $("a[d-id]").each(function() {
+          var dId = $(this).attr("d-id");
+          $('.addminhchunggop_' + dId).attr("id", "addminhchunggop_" + dId);
+        });
+    });
 </script>
 @stop
 

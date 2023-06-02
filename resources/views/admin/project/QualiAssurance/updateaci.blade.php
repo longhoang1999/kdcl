@@ -74,13 +74,13 @@
                     <div class="col-md-1">
                         <button class="btn btn-block" id="btn-search" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Standard/title.timkiem')"><i class="bi bi-search" style="font-size: 35px;color: #009ef7;"></i></button>
                     </div>
-                    @if( !Sentinel::inRole('ns_kiemtra') )
+                   
                     <div class="col-md-1">
                         <button class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modalCreateHD" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.themhd')">
                             <i class="bi bi-plus-square" style="font-size: 35px;color: #50cd89;"></i>
                         </button>
                     </div>
-                    @endif
+                   
                     <div class="col-md-1">
                         <a class="btn btn-benchmark mr-2" href="{{route('admin.dambaochatluong.updateaci.exceltaction')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.xuat_excel')">
                             <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>

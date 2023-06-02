@@ -330,7 +330,7 @@ tbody tr td:last-child {
                                 <div class="d-flex align-items-center">
                                     <div class="tieuchi ml-4">
                                         @if($khbc->writeFollow == 1 || $khbc->writeFollow == 2)
-                                            <button class="btn btn-success button_css" id="div_tieuchi-1{{$tchi->id}}" onclick="showhidemenhde({{$tchi->id}});return false;"><i class="fa fa-plus"></i></button>
+                                            <button class="btn btn-success button_css" id="div_tieuchi-1{{$tchi->id}}" onclick="showhidemenhde({{$tchi->id}});updatebosung({{$id_kehoach_bc}},{{$kh_tieuchuan->id}},{{$tchi->id}});"><i class="fa fa-plus"></i></button>
                                         @endif
                                         
                                         <span style="color:red;">
@@ -1971,6 +1971,7 @@ tbody tr td:last-child {
                         })
                         $('.ngaybd_menhde_'+menhde_id).val(data.ngay_batdau);
                         $('.ngayht_menhde_'+menhde_id).val(data.ngay_hoanthanh);
+
                         load_menhde(data.ke_hoach_tieuchi,tieuchi_id);
                         // console.log(data)
                         for (var i = 0; i < data.ke_hoach_bcns.length; i++) {
@@ -2199,7 +2200,6 @@ tbody tr td:last-child {
                 },
 
                 success: function(data) {
-                    console.log(data)
                     if(data == 1){
                         $('#div_lkh_part_two'+tc_id).hide();
                         $('#btn_part_two_'+tc_id).html('<i class="fa fa-plus"></i>');
@@ -2213,6 +2213,7 @@ tbody tr td:last-child {
                         $('.part-two-menhde2_'+tc_id).css('border-radius','82px');
                         check_start();
                         alert(`@lang('project/Selfassessment/title.capnhatthanhcong')`);
+
                     }else{
                         alert(`@lang('project/Selfassessment/title.capnhatkhl')`);
                     }
@@ -2371,12 +2372,6 @@ tbody tr td:last-child {
     }
     $(function () {
         check_start();
-        // flatpickr('#gioihan_start', {
-        //     dateFormat: 'd-m-Y',
-        // });
-        // flatpickr('#gioihan_end', {
-        //     dateFormat: 'd-m-Y',
-        // });
        let ngay_bd = $('#gioihan_start').val();
        let ngay_kt = $('#gioihan_end').val();
         $("#ngay_bat_dau").flatpickr({
@@ -2524,9 +2519,25 @@ tbody tr td:last-child {
         })
     }
     
-    // $('.check_time').on('change','.start-date',function(){
-    //     console.log($(this).val());
-    // })
-     
+    function updatebosung(id_khbc,id_tieuchuan,id_tieuchi){
+        $.ajax({
+                url: "{{route('admin.tudanhgia.report.updatebosung')}}",
+                type: "POST",
+                data:{
+                    id_khbc : id_khbc,
+                    id_tieuchuan : id_tieuchuan,
+                    id_tieuchi : id_tieuchi,
+    
+                },    
+                error: function(err) {
+                },
+
+                success: function(data) {
+                    check_start();
+                    console.log(data)
+                    
+                },
+        })
+    }
 </script>
 @stop

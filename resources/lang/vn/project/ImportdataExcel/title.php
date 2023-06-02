@@ -8,6 +8,10 @@
 		'nttcb'			=> 'Nhập thông tin cơ bản',
 		'themtt'		=> 'Thêm thông tin',
 		'stt'			=> 'Số thứ tự',
+		'stt1'			=> 'STT',
+		'deleteAll'		=> 'Xóa trắng dữ liệu bảng',
+		'canhbao'		=> 'Cảnh báo',
+		'hdkht'			=> 'Hành động của bạn không thể hoàn tác',
 		'madv'			=> 'Mã đơn vị',
 		'loaidv'		=> 'Loại đơn vị',
 		'tendvTV'		=> 'Tên DV Tiếng Việt',
@@ -291,6 +295,33 @@
 		//Thống kê ký túc xá
 		'tkktx'			=> 'Thống kê ký túc xá',
 		'cntkktx'		=> 'Cập nhật thống kê ký túc xá',
+		'tdtktx'		=> '1. Tổng diện tích KTX',
+		'tdtpo'			=> '2. Tổng diện tích phòng ở (m2)',
+		'ssvcnc'		=> '3. Số sinh viên có nhu cầu ở ký túc xá',
+		'tong3'			=> '3.1 Tổng',
+		'ct13'			=> '3.2 Chương trình 1',
+		'ct23'			=> '3.3 Chương trình 2',
+		'ct33'			=> '3.4 Chương trình 3',
+		'slsvoktx'		=> '4. Số lượng sinh viên được ở ký túc xá (Người)',
+		'tong4'			=> '4.1 Tổng',
+		'ct14'			=> '4.2 Chương trình 1',
+		'ct24'			=> '4.3 Chương trình 2',
+		'ct34'			=> '4.4 Chương trình 3',
+		'tscoktx'		=> '5. Tổng số chỗ ở KTX',
+		'ttcsvs'		=> '6. Tình trạng CSVC KTX',
+		'bankc'			=> '6.1 Bán kiên cố',
+		'dangsc'		=> '6.2 Đang sửa chữa',
+		'kienco'		=> '6.3 Kiên cố',
+		'ndvsd'			=> '7. Năm đưa vào sử dụng',
+		'htsh'			=> '8. Hình thức sở hữu',
+		'muon'			=> '8.1 Mượn',
+		'sohuu8'		=> '8.2 Sở hữu',
+		'chothue8'		=> '8.3 Cho thuê',
+		'noidung'		=> 'Nội dung',
+		'noidungnho'	=> 'Nội dung nhỏ',
+		'giatrim'		=> 'Giá trị (m2)',
+
+
 
 		//Thống kê máy tính
 		'cntttkmt'		=> 'Cập nhật thông tin thống kê máy tính',
@@ -443,7 +474,7 @@
 		'thue'			=> 'Thuê',
 		
 		// khảo sát tình trạng tốt nghiệm sinh viên
-		'kstttnsv'	=> 'Khảo sát tình trạng tốt nghiệm sinh viên',
+		'kstttnsv'	=> 'Khảo sát tình trạng tốt nghiệp sinh viên',
 		'cactchi'	=> 'Các tiêu chí',
 		'namtn'		=> 'Năm tốt nghiệp',
 		'dgsvtn'	=> '3. Đánh giá của sinh viên tốt nghiệp về chất lượng đào tạo của nhà trường',
@@ -460,6 +491,26 @@
 		'duyccv'	=> '5.1 Tỷ lệ sinh viên đáp ứng yêu cầu của công việc, có thể sử dụng được ngay (%)',
 		'yccvcdt'	=>  '5.2 Tỷ lệ sinh viên cơ bản đáp ứng yêu cầu của công việc, nhưng phải đào tạo thêm (%)',
 		'tlsvdtl'	=> '5.3 Tỷ lệ sinh viên phải được đào tạo lại hoặc đào tạo bổ sung ít nhất 6 tháng (%)',
+		'tlph'		=> '6. Tỉ lệ phản hồi/tổng số SVTN',
+		'tlcvl'		=> '7. Tỉ lệ có việc làm/ tổng số SV phản hồi',
+		'tlvtvl'	=> '8. Tỉ lệ vị trí việc làm',
+		'vtql'		=> '8.1 Vị trí quản lý',
+		'vtktcn'	=> '8.2 Vị trí kỹ thuật, chuyên môn ngành',
+		'vttn'		=> '8.3 Vị trí trái ngành',
+		'tlsvckv'	=> '9. Tỉ lệ SV ở các khu vực làm việc',
+		'nhanuoc'	=> '9.1 Nhà nước',
+		'tunhan'	=> '9.2 Tư nhân',
+		'tutvl'		=> '9.3 Tự tạo việc làm',
+		'cytnn'		=> '9.4 Có yếu tố nước ngoài',
+		'muctn'		=> '10. Mức thu nhập',
+		'caonhat'	=> '10.1 Cao nhất',
+		'thapnhat'	=> '10.2 Thấp nhất',
+		'duoi5tr'	=> '10.3 Dưới 5 triệu (%)',
+		'tu5den8'	=> '10.4 Từ 5-8 triệu (%)',
+		'tu8den12'	=> '10.5 Trên 8-12 triệu (%)',
+		'tu12den15'	=> '10.6 Trên 12-15 triệu (%)',
+		'tu15den20'	=> '10.7 Trên 15-20 triệu (%)',
+		'tren20'	=> '10.8 Trên 20 triệu (%)',
 		'tccha'	=> 'Tiêu chí cha',
 		'tccon' => 'Tiêu chí con',
 		'giatri'	=> 'Giá trị',
@@ -473,6 +524,7 @@
 		// Thông tin đồ án, khóa luận, luận văn, luận án tốt nghiệp
 		'ttdakl'		=> 'Thông tin đồ án, khóa luận, luận văn, luận án tốt nghiệp',
 		'cnttdakl'		=> 'Cập nhật thông tin đồ án, khóa luận, luận văn, luận án tốt nghiệp',
+		'nganh'			=> 'Ngành/CTĐT',
 		'tddt'			=> 'Trình độ đào tạo',
 		'tendetai'		=> 'Tên đề tài',
 		'hvtnth'		=> 'Họ và tên người thực hiện',
@@ -671,6 +723,17 @@
 		'caodang'		=> 'Cao đẳng',
 		'trinhdokhac'	=> 'Trình độ khác',
 		'hcdn'			=> 'Hạng chức danh nghề',
+      	// Công khai thông tin về các hoạt động nghiên cứu khoa học, chuyển giao công nghệ, sản xuất thử và tư vấn
+		'tendanv'		=> 'Tên dự án, nhiệm vụ khoa học công nghệ',
+		'nctvtv'		=> 'Người chủ trì và các thành viên',
+		'dttn'			=> 'Đối tác trong nước và quốc tế',
+		'tgth'			=> 'Thời gian thực hiện',
+		'kpth'			=> 'Kinh phí thực hiện (triệu đồng)',
+		'ttspnd'		=> 'Tóm tắt sản phẩm, ứng dụng thực tiễn',
+      
+      
+      
+      
 		
 		
 

@@ -115,6 +115,9 @@
             <thead>
              <tr>
                 <th>
+                    @lang('project/ImportdataExcel/title.stt1')
+                </th>
+                <th>
                     @lang('project/ImportdataExcel/title.mhp')
                 </th>
                 <th>
@@ -451,12 +454,19 @@
             serverSide: true,
             ajax: "{!! route('admin.importdata.tltv.dataUnit') !!}",
             columns: [
+                { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'ma_hoc_phan', name: 'ma_hoc_phan' },
                 { data: 'ten_hoc_phan', name: 'ten_hoc_phan' },
                 { data: 'syctdc_sck', name: 'syctdc_sck' },
                 { data: 'sach_in_sck', name: 'sach_in_sck' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
+        });
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#table').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+                cell.innerHTML = i + 1 + PageInfo.start;
+            });
         });
     });  
 

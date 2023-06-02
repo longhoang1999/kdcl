@@ -53,6 +53,7 @@ class CongkhaigttlController extends DefinedController{
         foreach($data as $dt){
             if($dt->tgttl != "" && $dt->namxb != ""){
             	$dataInport = array(
+                    'nganh'     => $dt->nganh,
                     'tgt_tltk'  => $dt->tgttl,
                     'nxb' => $dt->namxb,
                     'ke_hoach'   => $dt->kehoachst,
@@ -81,11 +82,16 @@ class CongkhaigttlController extends DefinedController{
             return json_encode($donviExcel);
         }else{
 	        $donviExcel = $donviExcel
-	                ->select('gttl.id', 'gttl.tgt_tltk', 'gttl.nxb',
+	                ->select('gttl.id','gttl.nganh', 'gttl.tgt_tltk', 'gttl.nxb',
 	                 'gttl.ke_hoach');
 
 	        return DataTables::of($donviExcel)          
-	       
+	        ->addColumn(
+                'stt',
+                function ($donvi) {
+                    return "";
+                }
+            )  
             ->addColumn(
 	                'actions',
 	                function ($donvi) {
@@ -108,6 +114,7 @@ class CongkhaigttlController extends DefinedController{
 
     public function updateUnit(Request $req){
     	$data = [
+            'nganh' => $req->nganh,
             'tgt_tltk'  => $req->tgttl,
             'nxb' => $req->namxb,
             'ke_hoach'   => $req->kehoachst,

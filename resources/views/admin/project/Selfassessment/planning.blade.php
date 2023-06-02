@@ -114,9 +114,9 @@
                     texto += '<div class="alert alert-warning">' + "@lang('project/Selfassessment/message.alert.kocobctc')" + '</div>';
                 }else{
                     let temp = 0;
-                    @if(!Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien'))
+                  
                         texto += data.phan1 ;
-                    @endif
+                    
                     texto += data.phan2 ;
                     var name_trangthai = '';
                     var testm = '';
@@ -127,19 +127,19 @@
                             var css_color;
                             if(value.baoCaoTieuChuan != undefined){
                                 if(value.baoCaoTieuChuan.trang_thai_bctc == 'nhanxet'){
-                                    @if(!Sentinel::inRole('ns_kiemtra'))
+                                 
                                     name_trangthai = '<i class="fas fa-pen"></i>' + "@lang('project/Selfassessment/title.suabaocao')";
                                     css_color = 'css_color_organe';
 
                                     testm = `<a href="{{ route('admin.tudanhgia.detailedplanning.show')}}?id=${value.id_kh_baocao}&tieuchuan_id=${value.tieuchuan_id} " class="${css_trangthai } ${css_color}">`+name_trangthai+ '</a>';
-                                    @endif
+                                    
                                 }else if(value.baoCaoTieuChuan.trang_thai_bctc == 'dangsua'){
-                                    @if(!Sentinel::inRole('ns_kiemtra'))
+                                  
                                     name_trangthai = '<i class="fas fa-pen"></i>' + "@lang('project/Selfassessment/title.suabaocao')";
                                     css_color = 'css_color_organe';
 
                                     testm =`<a href="{{ route('admin.tudanhgia.detailedplanning.show')}}?id=${value.id_kh_baocao}&tieuchuan_id=${value.tieuchuan_id} " class="${css_trangthai } ${css_color}">`+name_trangthai+ '</a>';
-                                    @endif
+                                   
                                 }
                                 else{
                                     name_trangthai = '<i class="fas fa-eye"></i>' + "@lang('project/Selfassessment/title.xembaocao')";
@@ -148,12 +148,12 @@
                                     testm =`<a href="{{ route('admin.tudanhgia.detailedplanning.show')}}?id=${value.id_kh_baocao}&tieuchuan_id=${value.tieuchuan_id} " class="${css_trangthai } ${css_color}">`+name_trangthai+ '</a>';
                                 } 
                             }else{
-                                @if(!Sentinel::inRole('ns_kiemtra'))
+                            
                                 name_trangthai = '<i class="fas fa-pen"></i>' + "@lang('project/Selfassessment/title.vietbc')"
                                 css_color = 'css_color_organe';
 
                                 testm =`<a href="{{ route('admin.tudanhgia.detailedplanning.show')}}?id=${value.id_kh_baocao}&tieuchuan_id=${value.tieuchuan_id} " class="${css_trangthai } ${css_color}">`+name_trangthai+ '</a>';
-                                @endif
+                           
                             }
                                   
                             // console.log(value.id_kh_baocao);
@@ -171,9 +171,9 @@
                         }           
 
                     })
-                    @if(!Sentinel::inRole('ns_kiemtra') && !Sentinel::inRole('ns_thuchien'))
+                 
                     texto += data.phan3;
-                    @endif
+                 
                 }
                 $("#div_showbc").empty();
                 $('#div_showbc').html(textout);    

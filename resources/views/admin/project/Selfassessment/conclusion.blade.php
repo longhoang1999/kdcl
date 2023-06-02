@@ -134,9 +134,6 @@
         function update_kl(){
                let kh = $('.id_kh').val();
                let id_kehoacchung = $('.id_khc').val();
-               // let text = $('#tinymce_full').val();
-               // let a = tinymce.get('#tinymce_full').getContent();
-               // let modau = tinymce.activeEditor.getContent();
                tinymce.triggerSave();
                let text = $('.text_kl').val();
   

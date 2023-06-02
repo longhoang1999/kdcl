@@ -195,9 +195,9 @@
                                         <!--begin::Notifications-->
                                         <div class="d-flex align-items-stretch">
                                             <!--begin::Menu wrapper-->
-                                            <div class="noti-parent topbar-item position-relative px-3 px-lg-5">
+                                            <!-- <div class="noti-parent topbar-item position-relative px-3 px-lg-5">
                                                 <i class="bi bi-app-indicator fs-3"></i>
-                                            </div>
+                                            </div> -->
                                             <!--begin::Menu-->
                                             <div class="noti-child menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px">
                                                 <!--begin::Heading-->
@@ -619,14 +619,14 @@
                             </div>
                             <!--end::Copyright-->
                             <!--begin::Menu-->
-                            <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
+                            <!-- <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
                                 <li class="menu-item">
                                     <a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
                                 </li>
                                 <li class="menu-item">
                                     <a href="https://keenthemes.com/support" target="_blank" class="menu-link px-2">Support</a>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <!--end::Menu-->
                         </div>
                         <!--end::Container-->
@@ -3749,6 +3749,36 @@
             </span>
             <!--end::Svg Icon-->
         </div>
+
+        <!-- Modal delete All -->
+        <div class="modal fade" id="modalDeleteAll__" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        @lang('project/ImportdataExcel/title.canhbao')
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @lang('project/ImportdataExcel/title.deleteAll') <br>
+                    <span class="text-danger">@lang('project/ImportdataExcel/title.hdkht')</span>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="deleteAllTable__" class="btn btn-danger">
+                        @lang('project/ImportdataExcel/title.deleteAll')
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal delete All -->
+
+
+
+
         <!--end::Scrolltop-->
         <!--end::Main-->
         <script>var hostUrl = "{{ asset('assets/') }}";</script>
@@ -3790,7 +3820,14 @@
 
         <script type="text/javascript" src="{{ asset('assets/js/custom.js') }}"></script>
 
-
+        <script>
+            $('#modalDeleteAll__').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) 
+                var recipient = button.data('nametable') 
+                var modal = $(this)
+                modal.find('#deleteAllTable__').attr('href', "{{ route('admin.importdata.tuyensinh.deleteDataTable') }}?nametable=" + recipient)
+            })
+        </script>
 
         @yield('footer_scripts')
     </body>

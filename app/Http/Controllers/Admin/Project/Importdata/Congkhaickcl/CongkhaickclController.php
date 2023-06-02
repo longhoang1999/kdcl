@@ -25,7 +25,7 @@ use App\Models\Country;
 use App\Imports\Cknckh;
 
 // export excel
-use App\Exports\CknckhExport;
+use App\Exports\CkcldtExport;
 
 class CongkhaickclController extends DefinedController{
 
@@ -94,8 +94,8 @@ class CongkhaickclController extends DefinedController{
 
 
     //Export excel bài báo-báo cáo
-    public function exportCknckh() {
-        return Excel::download(new CknckhExport, 'Cong-khai-nghien-cuu-khoa-hoc.xlsx');
+    public function exportCkcldt() {
+        return Excel::download(new CkcldtExport, 'Cong-khai-cam-ket-chat-luong-dao-tao.xlsx');
     }
 
 
