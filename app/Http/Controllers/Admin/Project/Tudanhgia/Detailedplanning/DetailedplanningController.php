@@ -34,15 +34,6 @@ class DetailedplanningController extends DefinedController
           $keHoachBaoCaoList = DB::table('kehoach_baocao')
           ->where('trang_thai', '!=', 'completed')
           ->orderBy('created_at','desc')->get();; 
-          // if (Sentinel::inRole('admin') || Sentinel::inRole('operator')) {
-                             
-          // }else {               
-          //      $keHoachBaoCaoList = DB::table('kehoach_baocao')
-          //           ->leftJoin('kehoach_baocao_nhansu','kehoach_baocao_nhansu.kehoach_baocao_id','=','kehoach_baocao.id')
-          //           ->whereRaw("(id_nhansuthuchien = ? OR ns_phutrach = ?)", [$user_id,$user_id])
-          //           ->where('trang_thai', '!=', 'completed');              
-          // }
-
           if(isset($req->id) && $req->id > 0){
                $bc = $keHoachBaoCaoList->where('id',$req->id)->first();
                $kehoachung = DB::table('kehoach_chung')->select('kehoach_chung.id')

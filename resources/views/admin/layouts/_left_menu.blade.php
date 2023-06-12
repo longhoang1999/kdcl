@@ -686,7 +686,7 @@
                             <!-- /Đánh giá ngoài -->
 
                                 
-                            {{-- <!-- Tổng hợp -->
+                            <!-- Tổng hợp -->
                                 <div class="menu-item">
                                     <div class="menu-content pt-8 pb-0">
                                         <span class="menu-section text-muted text-uppercase  ls-1">
@@ -696,7 +696,7 @@
                                 </div>
                                 <!-- Đảm bảo chất lượng -->
                                 <div class="menu-item">
-                                    <a class="menu-link" href="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                    <a class="menu-link" href="{{route('admin.tonghop.dbcl.index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                         <span class="menu-icon">
                                             {!! $icon_array[array_rand($icon_array, 1) ] !!}
                                         </span>
@@ -705,7 +705,7 @@
                                 </div>
                                 <!-- Báo cáo tiến độ -->
                                 <div class="menu-item">
-                                    <a class="menu-link" href="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                    <a class="menu-link" href="{{route('admin.tonghop.dbcl.baocaotiendo')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                         <span class="menu-icon">
                                             {!! $icon_array[array_rand($icon_array, 1) ] !!}
                                         </span>
@@ -714,7 +714,7 @@
                                 </div>
                                 <!-- DS báo cáo TĐG -->
                                 <div class="menu-item">
-                                    <a class="menu-link" href="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                    <a class="menu-link" href="{{route('admin.tudanhgia.completionreport.index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                         <span class="menu-icon">
                                             {!! $icon_array[array_rand($icon_array, 1) ] !!}
                                         </span>
@@ -722,7 +722,7 @@
                                     </a>
                                 </div>
                                 <!-- Báo cáo nhận xét -->
-                                <div class="menu-item">
+                                {{-- <div class="menu-item">
                                     <a class="menu-link" href="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                         <span class="menu-icon">
                                             {!! $icon_array[array_rand($icon_array, 1) ] !!}
@@ -730,7 +730,8 @@
                                         <span class="menu-title">{{$listmenu_9[4]}}</span>
                                     </a>
                                 </div>
-                            <!-- /Tổng hợp --> --}}
+                                --}}
+                            <!-- /Tổng hợp --> 
 
 
                             <!-- Import dữ liệu thô -->

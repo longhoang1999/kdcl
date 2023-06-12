@@ -667,10 +667,28 @@ Route::group(
                                 Route::get('index', 'SyntResultController@index')->name('index');
                             }
                         );
-
                     }   
                 );
 
+                // Tổng hợp
+                Route::group(
+                    ['prefix' => 'tonghop', 'as' => 'tonghop.', 'namespace' => 'Tonghop'],
+                    function(){
+                        //Tổng hợp
+                        Route::group(
+                            ['prefix' => 'tong-hop', 'as' => 'dbcl.', 'namespace' => 'Dambaocl'],
+                            function(){
+                                // Tổng hợp
+                                Route::get('index', 'ToghopControntroller@index')->name('index');
+                                Route::get('datadbcl', 'ToghopControntroller@datadbcl')->name('datadbcl');
+                                Route::get('baocaotiendo', 'ToghopControntroller@baocaotiendo')->name('baocaotiendo');
+                                Route::get('data', 'ToghopControntroller@data')->name('data');
+                                Route::get('minhchungyc', 'ToghopControntroller@minhchungyc')->name('minhchungyc');
+                                Route::get('datamcyc', 'ToghopControntroller@datamcyc')->name('datamcyc');
+                            }
+                        );
+                    }
+                );
                 // Route for function tự đánh giá
                 Route::group(
                     ['prefix' => 'tu-danh-gia', 'as' => 'tudanhgia.', 'namespace' => 'Tudanhgia', 'middleware' => [

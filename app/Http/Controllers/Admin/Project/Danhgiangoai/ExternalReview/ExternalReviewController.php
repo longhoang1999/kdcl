@@ -146,6 +146,7 @@ class ExternalReviewController extends DefinedController{
 				            													->where('kehoach_bc_id',$id)
 				            													->whereNull('deleted_at')
 				            													->get();
+				            			var_dump($value->khmenhde->mocchuan_id);die;
 
 				            			foreach($baoCaoMenhDe->keHoachHanhDongList as $val){
 				            				$val->donViThucHien = DB::table('donvi')
