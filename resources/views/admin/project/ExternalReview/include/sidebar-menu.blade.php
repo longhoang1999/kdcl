@@ -39,34 +39,17 @@
                                     @endphp arrow_tc_{{$i}}">
                             <a data-toggle="tooltip" data-placement="right"
                                data-original-title="{{-- explode(':',$keHoachTieuChuan->tieuChuan->moTaWithStt)[1] --}}"
-                               title="" href="#" class="d-flex align-items-center" onclick="show_tieuchuan_chidl({{$i}})">
+                               title="" href="<?php
+                                                    if(!empty($keHoachTieuChuans->tieuchuan->id)){
+                                                       echo( route('admin.danhgiangoai.baocaotudanhgia.index',['idkh'=>$keHoachTieuChuans->tieuchuan->id,'id'=>$id,'page'=>'tieuchuan']));
+                                                    }
+                                                ?>" class="d-flex align-items-center" onclick="show_tieuchuan_chidl({{$i}})">
                                 <p class="title_tieuChuan m-0">
                                     <i class="fas fa-file-signature"></i> @lang('project/Externalreview/title.tieuchuan') {{$i}} 
                                 </p>
                                 <span class="label onLink" href="{{-- route('admin.danhgiangoai.baocaotudanhgia.index',['idkh'=>$keHoachTieuChuans->tieuchuan->id, 'id'=>$id,'page'=>'tieuchuan']) --}}" style="color: black !important; margin: 0 13px; background: wheat;">...</span>
                                 <span class="fa arrow"></span>
                             </a>
-
-                            @if($keHoachTieuChuans->tieuchi)
-                                <ul class="nav-second-level firtLevel ml-5" id="tieuchuan_child_{{$i}}" style="display: none;">
-                                    @php $stt = 0; @endphp
-                                    @foreach($keHoachTieuChuans->tieuchi as $keHoachTieuChi)
-                                        @php $stt++;  @endphp
-                                        <li class="{{ ($keHoachTieuChi->id == $khtc)?'active':'' }}">
-
-                                            <a href="<?php
-                                                        if(!empty($keHoachTieuChuans->tieuchuan->id)){
-                                                           echo( route('admin.danhgiangoai.baocaotudanhgia.index',['idkh'=>$keHoachTieuChuans->tieuchuan->id,'idkhtc'=>$keHoachTieuChi->id, 'id'=>$id,'page'=>'tieuchuan']));
-                                                        }
-                                                    ?>"  data-toggle="tooltip" data-placement="right" data-original-title="{{-- explode(':',$keHoachTieuChi->tieuChi->moTaWithStt)[1] --}}">
-                                                <i class="fas fa-edit"></i>
-                                                <span class="nav-label ml-2">@lang('project/Externalreview/title.tieuchi') {{$i}}.{{$stt}} {{-- explode(":",$keHoachTieuChi->tieuChi->moTaWithStt)[0]  --}}</span>
-                                            </a>
-                                        </li>
-                                
-                                    @endforeach
-                                </ul>
-                            @endif
                         </li>
                     @endforeach
                 </ul>
