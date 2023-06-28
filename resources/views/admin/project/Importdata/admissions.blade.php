@@ -103,6 +103,7 @@
 <section class="content-body">
     <div class="form-standard">
         <div class="item-group-button right-block mb-2">
+            
             <button class="btn" data-toggle="modal" data-target="#modalDeleteAll__" data-nametable="excel_import_tuyensinh">
                 <i class="bi bi-trash" style="font-size: 25px;color: red;"></i>
             </button>
