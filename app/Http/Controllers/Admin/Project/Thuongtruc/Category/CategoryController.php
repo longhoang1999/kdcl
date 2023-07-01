@@ -488,7 +488,7 @@ class CategoryController extends DefinedController
                         $chucvu = "";
                         $role = DB::table("role_users")->where("user_id", $user->id)->select("role_id")->get();
                         foreach($role as $value){
-                            if($value->role_id != "2"){
+                            if($value->role_id == "4" || $value->role_id == "9"){
                                 $r = DB::table("roles")->select("fullname")->where("id", $value->role_id)->first();
                                 $chucvu .= '<span class="badge badge-warning">'. $r->fullname .'</span>';
                             }

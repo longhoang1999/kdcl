@@ -171,6 +171,7 @@
                             <th >@lang('project/QualiAssurance/title.nht')</th>
                             <th >@lang('project/QualiAssurance/title.dvpt')</th>
                             <th >@lang('project/QualiAssurance/title.nskt')</th>
+                            <th >@lang('project/QualiAssurance/title.notes')</th>
                             <th >@lang('project/QualiAssurance/title.hdong')</th>
                          </tr>
                         </thead>
@@ -784,6 +785,7 @@
                 { data: 'ngayHoanthanh', name: 'ngayHoanthanh' },
                 { data: 'dvThucHien', name: 'dvThucHien' },
                 { data: 'nsKiemTra', name: 'nsKiemTra' },
+                { data: 'notes', name: 'notes' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
         });

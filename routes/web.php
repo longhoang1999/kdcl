@@ -706,6 +706,9 @@ Route::group(
                                 //Data 
                                 Route::get('data', 'ReportController@data')->name('data');
                                 Route::get('lap-ke-hoach/{id}', 'ReportController@planning')->name('planning');
+                                Route::get('delete-plan', 'ReportController@deletePlan')->name('deletePlan');
+                                Route::get('get-data-current', 'ReportController@getDataCurrent')->name('getDataCurrent');
+                                
                                 //update date
                                 Route::get('upadate_kq', 'ReportController@upadate_kq')->name('upadate_kq');
                                 Route::get('upadate_tieuchuan', 'ReportController@upadate_tieuchuan')->name('upadate_tieuchuan');
@@ -740,6 +743,7 @@ Route::group(
                                 Route::get('index', 'AddreportController@index')->name('index');
                                 Route::post('insert', 'AddreportController@insert')->name('insert');
                                 Route::get('searchLtc', 'AddreportController@searchLtc')->name('searchLtc');
+                                Route::post('update', 'AddreportController@update')->name('update');
                                 
                             }
                         );

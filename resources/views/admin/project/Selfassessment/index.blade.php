@@ -32,6 +32,8 @@
     }
     td.action{
         justify-content: center;
+        flex-wrap: wrap;
+        width: 190px;
     }
 </style>
 @stop
@@ -247,6 +249,210 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalDeleteLabel">
+                    @lang('project/Standard/title.thongbao')
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span class="badge ">
+                    @lang('project/Selfassessment/title.hoixoaKH')
+                </span>
+                <br>
+                <span class="badge ">
+                    @lang('project/Standard/message.error.khoantac')
+                </span>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-danger" id="btn-delete-manafield">
+                    @lang('project/Standard/title.xoa')
+                </a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    @lang('project/Standard/title.huy')
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalUpdateBC" tabindex="-1" role="dialog" aria-labelledby="modalUpdateBCLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalUpdateBCLabel">
+            @lang('project/Selfassessment/title.csbctdg')
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form action="{{ route('admin.tudanhgia.addreport.update') }}" method="post" id="form-lkhNew-up">
+        @csrf
+            <input type="hidden" id="id_baocao-up" value="" name="id_baocao">
+          <div class="modal-body">
+            <div class="container-fuild">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="btc-select">
+                                @lang('project/Selfassessment/title.botc')
+                            </label>
+                            <br>
+                            <select class="btc-select" name="bo_tieuchuan" id="btc-select-up">
+                                <option value=""></option>
+                                @foreach($btc as $value)
+                                    <option value="{{ $value->id }}">{{ $value->tieu_de }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="nganh-select">
+                                @lang('project/Selfassessment/title.nganh')
+                            </label>
+                            <br>
+                            <select class="nganh-select form-control" name="ctdt_id" id="nganh-select-up">
+                                <option value="">--@lang('project/Selfassessment/title.chonnganh')</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="ten_baocao">
+                                @lang('project/Selfassessment/title.tenbc')
+                            </label>
+                            <br>
+                            <input type="text" placeholder="@lang('project/Selfassessment/title.tenbc')" id="ten_baocao-up" class="form-control" name="ten_bc">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ngay_chot">
+                                @lang('project/Selfassessment/title.ncsl')
+                            </label>
+                            <br>
+                            <input name="thoi_diem_bao_cao" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_chot-id" type="text" placeholder="@lang('project/Selfassessment/title.ncsl')" required> 
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="ngay_cbi_start">
+                                @lang('project/Selfassessment/title.khcb')
+                            </label>
+                            <br>
+                            <input name="ngay_batdau_chuanbi" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_cbi_start-id" type="text" placeholder="@lang('project/Selfassessment/title.tungay')" required>  
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label></label>
+                            <br>
+                            <input name="ngay_hoanthanh_chuanbi" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_cbi_end-id" type="text" placeholder="@lang('project/Selfassessment/title.denngay')" required>  
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="ngay_vietbc_start">
+                                @lang('project/Selfassessment/title.khvbc')
+                            </label>
+                            <br>
+                            <input name="ngay_batdau" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_vietbc_start-id" type="text" placeholder="@lang('project/Selfassessment/title.tungay')" required>    
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label></label>
+                            <br>
+                            <input name="ngay_hoanthanh" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_vietbc_end-id" type="text" placeholder="@lang('project/Selfassessment/title.denngay')" required>   
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="centers">
+                            @lang('project/Selfassessment/title.ttct')
+                        </label>
+                        <select name="ns_phutrach" id="centers-id" class="searchs ttct">
+                            <option value="" hidden></option>
+                            @foreach($user as $value)
+                                <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <label for="multiple-nscb">
+                            @lang('project/Selfassessment/title.nscb')
+                        </label>
+                        <select class="multiple-nscb js-states form-control" multiple="multiple" name="ns_chuanbi[]" id="multiple-nscb-id">
+                            @foreach($user as $value)
+                                <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
+                            @endforeach  
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="multiple-nsth">
+                            @lang('project/Selfassessment/title.nsth')
+                        </label>
+                        <select class="multiple-nsth js-states form-control" multiple="multiple" name="ns_thuchien[]" id="multiple-nsth-id">
+                            @foreach($user as $value)
+                                <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
+                            @endforeach  
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="multiple-nskt">
+                            @lang('project/Selfassessment/title.nskt')
+                        </label>
+                        <select class="multiple-nskt js-states form-control" multiple="multiple" name="ns_kiemtra[]" id="multiple-nskt-id">
+                            @foreach($user as $value)
+                                <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
+                            @endforeach  
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="write-follow">
+                            @lang('project/Selfassessment/title.vbctheo')
+                        </label>
+                        <select name="writeFollow" id="write-follow-id" class="js-states form-control" >
+                            <option value="" hidden>
+                                @lang('project/Selfassessment/title.vbctheo')
+                            </option>
+                            <option value="1">
+                                @lang('project/Selfassessment/title.chỉbao')
+                            </option>  
+                            <option value="2">
+                                @lang('project/Selfassessment/title.mocchuan')
+                            </option>  
+                        </select>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning btn-lkhNew-up">
+                @lang('project/Selfassessment/title.chinhsua')
+            </button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
 <!-- /Kết thúc page trang -->
 
 
@@ -401,5 +607,93 @@
             })
         
     })
+
+
+    $('#modalDelete').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var recipient = button.data('id') 
+
+        let route = "{{ route('admin.tudanhgia.report.deletePlan') }}" + "?id_planning=" + recipient;
+        var modal = $(this)
+        modal.find('#btn-delete-manafield').attr('href' , route)
+    })
+
+    
+    $('#modalUpdateBC').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var recipient = button.data('id') 
+        console.log(recipient)
+
+        let route = "{{ route('admin.tudanhgia.report.getDataCurrent') }}" + "?id_planning=" + recipient;
+        fetch(route, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                $("#id_baocao-up").val(data[0].id)
+                $("#ten_baocao-up").val(data[0].ten_bc)
+                $("#btc-select-up").val(data[0].bo_tieuchuan_id).trigger('change')
+                $("#ngay_chot-id").val(data[0].thoi_diem_bao_cao);
+                $("#ngay_cbi_start-id").val(data[0].ngay_batdau_chuanbi);
+                $("#ngay_cbi_end-id").val(data[0].ngay_hoanthanh_chuanbi);
+                $("#ngay_vietbc_start-id").val(data[0].ngay_batdau);
+                $("#ngay_vietbc_end-id").val(data[0].ngay_hoanthanh);
+                $("#centers-id").val(data[0].ns_phutrach).trigger('change')
+                $("#write-follow-id").val(data[0].writeFollow)
+                $("#nganh-select-up").val(data[0].ctdt_id)
+                let idNscb = [];
+                data[1].forEach(item => {
+                    idNscb.push(item.id_nhansuchuanbi);
+                })
+                $("#multiple-nscb-id").val(idNscb).trigger('change')
+                
+
+                let idNsth = [];
+                data[2].forEach(item => {
+                    idNsth.push(item.id_nhansuthuchien)
+                })
+                $("#multiple-nsth-id").val(idNsth).trigger('change')
+
+                let idNskt = [];
+                data[3].forEach(item => {
+                    idNskt.push(item.id_nhansukiemtra)
+                })
+                $("#multiple-nskt-id").val(idNskt).trigger('change')
+            })
+    })
+
+    $(".btn-lkhNew-up").click(function() {
+        if($("#ngay_cbi_end-id").val() == "" || $("#ngay_cbi_start-id").val() == "" 
+            || $("#ngay_vietbc_end-id").val() == "" ||  $("#ngay_vietbc_start-id").val() == "")
+            alert("@lang('project/QualiAssurance/title.vldddtt')")
+        else 
+            $("#form-lkhNew-up").submit();
+    })
+
+
+    flatpickr('#ngay_chot-id', {
+        dateFormat: 'd-m-Y',
+        minDate: "today",
+    });
+    flatpickr('#ngay_cbi_end-id', {
+        dateFormat: 'd-m-Y',
+        minDate: "today",
+    });
+    flatpickr('#ngay_cbi_start-id', {
+        dateFormat: 'd-m-Y',
+        minDate: "today",
+    });
+    flatpickr('#ngay_vietbc_start-id', {
+        dateFormat: 'd-m-Y',
+        minDate: "today",
+    });
+    flatpickr('#ngay_vietbc_end-id', {
+        dateFormat: 'd-m-Y',
+        minDate: "today",
+    });
 </script>
 @stop

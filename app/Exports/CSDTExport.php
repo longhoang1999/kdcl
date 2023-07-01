@@ -24,7 +24,7 @@ class CSDTExport extends DefaultExport implements FromCollection, WithHeadings
                 $csdt->sdt_lienhe,
                 $csdt->ns_phutrach,
                 $csdt->trang_thai,
-                $csdt->han_noptien,
+                date("d/m/Y", strtotime($csdt->created_at)),
             ];
             array_push($getCTDT, $row);
         }
@@ -38,7 +38,7 @@ class CSDTExport extends DefaultExport implements FromCollection, WithHeadings
             "SĐT liên hệ",
             "Người Phụ Trách",
             "Trạng Thái",
-            "Hạn Nộp Tiền",
+            "Ngày tạo",
         ];
     }
 }

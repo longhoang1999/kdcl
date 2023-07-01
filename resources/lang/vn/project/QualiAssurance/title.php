@@ -11,6 +11,7 @@
 		'nht'			=> 'Ngày hoàn thành',
 		'dvpt'			=> 'ĐV Phụ trách',
 		'nskt'			=> 'Nhân sự kiểm tra',
+		'notes'			=> 'Ghi chú',
 		'hdong'			=> 'Hành động',
 		'cnkh'			=> 'Cập nhật kế hoạch',
 		'xoa'			=> 'Xóa',

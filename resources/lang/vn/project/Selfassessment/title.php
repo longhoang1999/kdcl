@@ -113,6 +113,8 @@
 
 		//Thêm mới báo cáo
 		'tmbctdg'			=> 	'Tạo mới báo cáo TĐG',
+		'csbctdg'			=>  'Chỉnh sửa báo cáo TĐG',
+		'chinhsua'			=> 	'Chỉnh sửa',
 		'ttbctđg'			=> 	'Thông tin báo cáo TĐG',
 		'tmbc'				=> 	'Thêm mới báo cáo',
 		'botc'				=> 	'Bộ tiêu chuẩn',
@@ -167,6 +169,7 @@
 		'lkh'				=> 'Lập kế hoạch',
 		'lcbtc'				=> 'Lựa chọn bộ tiêu chuẩn',
 		'nganh'				=> 'Chọn ngành',
+		'chsua'				=> 'Chỉnh sửa',
 		//Nhận xét báo cáo
 		'dxnx'				=> 'Đã xóa nhận xét',
 		'dtnx'				=> 'Đã thêm nhận xét',
@@ -461,6 +464,7 @@
 		'mtctcncdxl'		=> 'Minh chứng trong tiêu chí này chưa được xử lý',
 		'ccmcctcn'			=> 'Chưa có mốc chuẩn cho tiêu chí này',
 		'bclkhct'			=> 'Báo cáo (chỉ những báo cáo được lên kế hoạch chi tiết)',
+		'hoixoaKH'			=> 'Bạn có thực sự muốn xóa kế hoạch này không',
 
 	);
 

@@ -38,6 +38,14 @@ class ReportController extends DefinedController
             'ctdtList'  => $ctdtList
         ]);
     }
+    public function getDataCurrent(Request $req){
+        $users = DB::table('kehoach_baocao')->where("id", $req->id_planning)->first();
+        $nscb = DB::table("kehoach_baocao_nhansu")->where("id_kehoach", $users->id)->where("id_nhansuchuanbi", "<>", null)->get();
+        $nsth = DB::table("kehoach_baocao_nhansu")->where("id_kehoach", $users->id)->where("id_nhansuthuchien", "<>", null)->get();
+        $nskt = DB::table("kehoach_baocao_nhansu")->where("id_kehoach", $users->id)->where("id_nhansukiemtra", "<>", null)->get();
+
+        return json_encode([$users, $nscb, $nsth, $nskt]);
+    }
 
     public function data(Request $req){
         $users = DB::table('kehoach_baocao')->orderBy("created_at", "desc");
@@ -80,6 +88,7 @@ class ReportController extends DefinedController
             ->addColumn(
                 'action',
                 function ($user) {
+                    $actions = '';
                     if(Sentinel::inRole('admin') || Sentinel::inRole('operator') || Sentinel::inRole('ns_phutrach')){
                         $actions =
                                 '<a href="'.
@@ -104,6 +113,15 @@ class ReportController extends DefinedController
                                         .
                                    '</a>';
                     }
+
+                    $actions .= '<a href="#" class="btn" data-bs-placement="top" title="'.Lang::get('project/Selfassessment/title.chsua').'"  data-id='.$user->id.' data-toggle="modal" data-target="#modalUpdateBC">'.
+                                    '<i data-bs-placement="top" title="'.Lang::get('project/Selfassessment/title.chsua').'" class="bi bi-pencil-square" style="font-size: 25px;color: #ce186a;"></i>'
+                                        .
+                                '</a>';
+                    $actions .= '<a href="#" class="btn" data-bs-placement="top" title="'.Lang::get('project/       Selfassessment/title.xoa').'" data-id='.$user->id.' data-toggle="modal" data-target="#modalDelete">'.
+                                    '<i data-bs-placement="top" title="'.Lang::get('project/Selfassessment/title.xoa').'" class="bi bi-trash" style="font-size: 25px;color: #d9214e;"></i>'
+                                        .
+                                '</a>';
                     
                     return $actions;
                 }
@@ -111,6 +129,18 @@ class ReportController extends DefinedController
             ->rawColumns(['action'])
             ->make(true);
     }
+    public function deletePlan(Request $req){        
+        $kehoach_old = DB::table("kehoach_baocao")->where("id", $req->id_planning);
+        $us1 = Sentinel::findById($kehoach_old->first()->ns_phutrach);
+        $role_1 = Sentinel::findRoleByName('ttchuyentrach');
+        $role_1->users()->detach($us1);
+    
+        DB::table("kehoach_baocao_nhansu")->where("id_kehoach", $req->id_planning)->delete();
+        $kehoach_old->delete();
+
+        return Redirect::back()->with('success',"Xóa báo cáo tự đánh giá thành công");
+    }
+
 
     public function planning(Request $req){
         $id = $req->id;
