@@ -140,107 +140,151 @@ class ToghopControntroller extends DefinedController
                     $arrout['kehoachchung'] = $kehoachung;
 
                     $tieuchuan = DB::table('kehoach_tieuchuan')
-                              ->select('kehoach_tieuchuan.*','tieuchuan.mo_ta','tieuchuan.stt as stt_tc')
+                              ->select('kehoach_tieuchuan.*','tieuchuan.mo_ta','tieuchuan.stt as stt_tc','tieuchuan.id as id_tc')
                               ->leftjoin('tieuchuan','tieuchuan.id','=','kehoach_tieuchuan.tieuchuan_id')
                               ->where('kehoach_tieuchuan.id_kh_baocao',$req->id)
                               ->orderBy('stt_tc','ASC')->get();
                     foreach ($tieuchuan as $key => $value) {
+                         $baocaotc = DB::table('baocao_tieuchuan')
+                                        ->select('users.name','baocao_tieuchuan.updated_at')
+                                        ->where('baocao_tieuchuan.id_tieuchuan',$value->id_tc)
+                                        ->where('baocao_tieuchuan.id_kh_tieuchuan',$value->id)
+                                        ->where('id_kehoach_bc',$req->id)
+                                        ->leftjoin('users','users.id','baocao_tieuchuan.nguoi_viet')
+                                        ->first();
+                         $value->nguoiviet = $baocaotc->name;
+                         $value->ngayhoanthanh = $this->toShowDate($baocaotc->updated_at);
                          $tieuchi = DB::table('tieuchi')->where('tieuchuan_id',$value->tieuchuan_id)->get();
                          $tieuchi_id = DB::table('tieuchi')->where('tieuchuan_id',$value->tieuchuan_id)->first();
                          $value->tieuchi = $tieuchi; 
-                         $value->kehoachtieuchi = DB::table('kehoach_tieuchi')
-                                                       ->where('id_kh_tieuchuan',$value->id)
-                                                       ->where('id_tieuchi',$tieuchi_id->id)
-                                                       ->get();
+                         
                          $tieuChuanTiendo = [];
-                         foreach($value->kehoachtieuchi as $pttc){
-                              $pttc->tiendo = 0;
-                              $tieuChiTienDo = [];
-                              $menhde = DB::table('menhde')
-                                             ->where('tieuchi_id',$pttc->id_tieuchi)
-                                             ->first();
-                              $mocchuan = DB::table('mocchuan')
-                                             ->where('tieuchi_id',$pttc->id_tieuchi)
-                                             ->first();
+ 
                               if($bc->writeFollow == 1){
-                                   $pttc->kehoachmenhde = DB::table('kehoach_menhde')
-                                                  ->where('id_kh_tieuchi',$pttc->id)
-                                                  ->where('id_menhde',$menhde->id)
-                                                  ->get();
-                                   $tieuChiTienDo = [];
-                                   foreach($pttc->kehoachmenhde as $khmd){
-                                        $khmd->tiendo = 0;
-                                        $baocaomenhde = DB::table('baocao_menhde')
-                                                       ->where('id_kehoach_bc',$bc->id)
-                                                       ->where('id_kh_menhde',$khmd->id)
-                                                       ->where('id_menhde',$khmd->id_menhde)
-                                                       ->first();
-                                        if(!$baocaomenhde){
-                                             $khmd->tiendo = 0;
-                                        }else{
-                                             if(strlen($baocaomenhde->mota) > 1){
-                                                  $khmd->tiendo++;
-                                             }
-                                             if(strlen($baocaomenhde->diemmanh) > 1){
-                                                  $khmd->tiendo++;
-                                             }
-                                             if(strlen($baocaomenhde->tontai) > 1){
-                                                  $khmd->tiendo++;
-                                             }
+                                   foreach($value->tieuchi as $pttc){
+                                        $pttc->kehoachtieuchi = DB::table('kehoach_tieuchi')
+                                                                 ->where('id_kh_tieuchuan',$value->id)
+                                                                 ->where('id_tieuchi',$pttc->id)
+                                                                 ->get();
+                                        $pttc->tiendo = 0;
+                                        $tieuChiTienDo = [];
+                                        foreach($pttc->kehoachtieuchi as $valmd){
+                                             $valmd->tiendo = 0;
+                                             $valmd->kehoachmenhde = DB::table('kehoach_menhde')
+                                                       ->where('kehoach_menhde.id_kh_tieuchi',$valmd->id)
+                                                       ->get();
 
-                                             if($baocaomenhde->trang_thai == "dangsua"){
-                                                  $khmd->tiendo = round($khmd->tiendo / 4, 2) * 100;
-                                             }else{
-                                                  $khmd->tiendo = 100;
+                                             $tieuChiTienDo = [];
+                                        
+                                             foreach ($valmd->kehoachmenhde as $khmd) {
+                                                 $khmd->tiendo = 0;
+                                                 $khmd->baocaomenhde = DB::table('baocao_menhde')
+                                                     ->select('menhde.stt', 'menhde.mo_ta', 'users.name', 'baocao_menhde.trang_thai', 'baocao_menhde.mota', 'baocao_menhde.diemmanh', 'baocao_menhde.tontai', 'baocao_menhde.updated_at', 'baocao_menhde.danhgia')
+                                                     ->leftJoin('menhde', 'menhde.id', '=', 'baocao_menhde.id_menhde')
+                                                     ->leftJoin('users', 'users.id', '=', 'baocao_menhde.nguoi_viet')
+                                                     ->where('baocao_menhde.id_kehoach_bc', $bc->id)
+                                                     ->where('baocao_menhde.id_kh_menhde', $khmd->id)
+                                                     // ->where('baocao_menhde.id_menhde', $khmd->menhde_id)
+                                                     ->first();
+                                                 $khmd->ngayht = $this->toShowDate($khmd->baocaomenhde->updated_at);
+                                                 if (!$khmd->baocaomenhde) {
+                                                     $khmd->tiendo = 0;
+                                                 } else {
+                                                     if ($khmd->baocaomenhde && strlen($khmd->baocaomenhde->mota) > 1) {
+                                                         $khmd->tiendo++;
+                                                     }
+                                                     if ($khmd->baocaomenhde && strlen($khmd->baocaomenhde->diemmanh) > 1) {
+                                                         $khmd->tiendo++;
+                                                     }
+                                                     if ($khmd->baocaomenhde && strlen($khmd->baocaomenhde->tontai) > 1) {
+                                                         $khmd->tiendo++;
+                                                     }
+                                                     if ($khmd->baocaomenhde && $khmd->baocaomenhde->danhgia) {
+                                                         $khmd->tiendo++;
+                                                     }
+                                                     if ($khmd->baocaomenhde && $khmd->baocaomenhde->trang_thai == "dangsua") {
+                                                         $khmd->tiendo = round($khmd->tiendo / 4, 2) * 100;
+                                                     } else {
+                                                         $khmd->tiendo = 100;
+                                                     }
+                                                 }
+                                                 
+                                               
+                                                 array_push($tieuChiTienDo, $khmd->tiendo);
+                                                
                                              }
+                                           
+                                             $pttc->tiendo = round(collect($tieuChiTienDo)->avg(), 2);
+                                             $tieuChuanTiendo[] = $pttc->tiendo;
+
+                                        
+                                                  
                                         }
-
-                                        $tieuChiTienDo[] = $khmd->tiendo;
                                    }
-                                   
+                                      
 
                               }else if($bc->writeFollow == 2){
-                                   $pttc->kehoachmenhde = DB::table('kehoach_menhde')
-                                                  ->where('id_kh_tieuchi',$pttc->id)
-                                                  ->where('mocchuan_id',$mocchuan->id)
-                                                  ->get();
-                                   $tieuChiTienDo = [];
+                                   foreach($value->tieuchi as $pttc){
+                                        $pttc->kehoachtieuchi = DB::table('kehoach_tieuchi')
+                                                                 ->where('id_kh_tieuchuan',$value->id)
+                                                                 ->where('id_tieuchi',$pttc->id)
+                                                                 ->get();
+                                        $pttc->tiendo = 0;
+                                        $tieuChiTienDo = [];
+                                        foreach($pttc->kehoachtieuchi as $valmd){
+                                             $valmd->tiendo = 0;
+                                             $valmd->kehoachmenhde = DB::table('kehoach_menhde')
+                                                       ->where('kehoach_menhde.id_kh_tieuchi',$valmd->id)
+                                                       ->get();
 
-                                   foreach($pttc->kehoachmenhde as $khmd){
-                                        $khmd->tiendo = 0;
-                                        $baocaomenhde = DB::table('baocao_menhde')
-                                                       ->where('id_kehoach_bc',$bc->id)
-                                                       ->where('id_kh_menhde',$khmd->id)
-                                                       ->where('mocchuan_id',$khmd->mocchuan_id)
-                                                       ->first();
-                                        if(!$baocaomenhde){
-                                             $khmd->tiendo = 0;
-                                        }else{
-                                             if(strlen($baocaomenhde->mota) > 1){
-                                                  $khmd->tiendo++;
+                                             $tieuChiTienDo = [];
+                                        
+                                             foreach ($valmd->kehoachmenhde as $khmd) {
+                                                 $khmd->tiendo = 0;
+                                                 $khmd->baocaomenhde = DB::table('baocao_menhde')
+                                                     ->select('mocchuan.stt', 'mocchuan.mo_ta', 'users.name', 'baocao_menhde.trang_thai', 'baocao_menhde.mota', 'baocao_menhde.diemmanh', 'baocao_menhde.tontai', 'baocao_menhde.updated_at', 'baocao_menhde.danhgia')
+                                                     ->leftJoin('mocchuan', 'mocchuan.id', '=', 'baocao_menhde.mocchuan_id')
+                                                     ->leftJoin('users', 'users.id', '=', 'baocao_menhde.nguoi_viet')
+                                                     ->where('baocao_menhde.id_kehoach_bc', $bc->id)
+                                                     ->where('baocao_menhde.id_kh_menhde', $khmd->id)
+                                                     // ->where('baocao_menhde.id_menhde', $khmd->menhde_id)
+                                                     ->first();
+                                                 $khmd->ngayht = $this->toShowDate($khmd->baocaomenhde->updated_at);
+                                                 if (!$khmd->baocaomenhde) {
+                                                     $khmd->tiendo = 0;
+                                                 } else {
+                                                     if ($khmd->baocaomenhde && strlen($khmd->baocaomenhde->mota) > 1) {
+                                                         $khmd->tiendo++;
+                                                     }
+                                                     if ($khmd->baocaomenhde && strlen($khmd->baocaomenhde->diemmanh) > 1) {
+                                                         $khmd->tiendo++;
+                                                     }
+                                                     if ($khmd->baocaomenhde && strlen($khmd->baocaomenhde->tontai) > 1) {
+                                                         $khmd->tiendo++;
+                                                     }
+                                                     if ($khmd->baocaomenhde && $khmd->baocaomenhde->danhgia) {
+                                                         $khmd->tiendo++;
+                                                     }
+                                                     if ($khmd->baocaomenhde && $khmd->baocaomenhde->trang_thai == "dangsua") {
+                                                         $khmd->tiendo = round($khmd->tiendo / 4, 2) * 100;
+                                                     } else {
+                                                         $khmd->tiendo = 100;
+                                                     }
+                                                 }
+                                                 
+                                               
+                                                 array_push($tieuChiTienDo, $khmd->tiendo);
+                                                
                                              }
-                                             if(strlen($baocaomenhde->diemmanh) > 1){
-                                                  $khmd->tiendo++;
-                                             }
-                                             if(strlen($baocaomenhde->tontai) > 1){
-                                                  $khmd->tiendo++;
-                                             }
-
-                                             if($baocaomenhde->trang_thai == "dangsua"){
-                                                  $khmd->tiendo = round($khmd->tiendo / 4, 2) * 100;
-                                             }else{
-                                                  $khmd->tiendo = 100;
-                                             }
+                                           
+                                             $pttc->tiendo = round(collect($tieuChiTienDo)->avg(), 2);
+                                             $tieuChuanTiendo[] = $pttc->tiendo;
+      
                                         }
-
-                                        $tieuChiTienDo[] = $khmd->tiendo;
                                    }
+
                               }
 
-                              $pttc->tiendo = round(collect($tieuChiTienDo)->avg(),2);
-                              $tieuChuanTiendo[] = $pttc->tiendo;
-                              
-                         }
                          $value->tiendo = round(collect($tieuChuanTiendo)->avg(),2);
                          $value->link = "https://www.google.com.vn";    
                          $baoCaoTieuChuan = DB::table('baocao_tieuchuan')
@@ -262,7 +306,7 @@ class ToghopControntroller extends DefinedController
           }else{         
                return DataTables::of($keHoachBaoCaoList)
                     ->addColumn('actions',function($bc){
-                        return '<input type="radio" name="selectbc" id="selectbc_' . $bc->id . '" class="form-control">';
+                        return '<input type="radio" name="selectbc" id="selectbc_' . $bc->id . '" attr="' . $bc->id . '" class="form-control">';
                     })               
                     ->rawColumns(['actions'])
                     ->make(true);
@@ -330,4 +374,120 @@ class ToghopControntroller extends DefinedController
                     ->rawColumns(['ngay','thoigiancl','trangthai'])
                     ->make(true);
      }
+
+
+     // Báo cáo nhận xét
+     public function baocaonhanxet(){
+
+               $keHoachBaoCaoList = DB::table('kehoach_baocao')
+                                        ->get();
+
+               $user = DB::table('users')
+                              ->get();
+
+          return view('admin.project.Synthetic.danhgianoibo')
+                         ->with([
+                                   'keHoachBaoCaoList'  => $keHoachBaoCaoList,
+                                   'userList' => $user,
+                         ]);
+     }
+
+
+     public function datafgnb(Request $req){
+          $i = 1;
+          $kehoachbaocao = DB::table('kehoach_baocao')
+                              ->where('id',$req->id_khbc)
+                              ->first();
+          if($kehoachbaocao->writeFollow == 1){
+               $baocaonhanhxetkhoi = DB::table('baocao_nhanxetkhoi')
+                                   ->select('baocao_nhanxetkhoi.id','tieuchuan.stt as stt_tchuan','tieuchi.stt as stt_tchi','baocao_nhanxetkhoi.nhanxet','menhde.mo_ta')
+                                   ->leftjoin('baocao_menhde','baocao_menhde.id','=','baocao_nhanxetkhoi.id_menhde_bc')
+                                   ->leftjoin('menhde','menhde.id','=','baocao_menhde.id_menhde')
+                                   ->leftjoin('tieuchi','tieuchi.id','=','menhde.tieuchi_id')
+                                   ->leftjoin('tieuchuan','tieuchuan.id','=','tieuchi.tieuchuan_id')
+                                   ->where('baocao_nhanxetkhoi.id_kehoach_bc','=',$req->id_khbc)
+                                   ->where('baocao_nhanxetkhoi.nguoi_tao','=',$req->id_user)
+                                   ->where('menhde.mo_ta','<>','');
+               }else{
+                    $baocaonhanhxetkhoi = DB::table('baocao_nhanxetkhoi')
+                                   ->select('baocao_nhanxetkhoi.id','tieuchuan.stt as stt_tchuan','tieuchi.stt as stt_tchi','baocao_nhanxetkhoi.nhanxet','mocchuan.mo_ta')
+                                   ->leftjoin('baocao_menhde','baocao_menhde.id','=','baocao_nhanxetkhoi.id_menhde_bc')
+                                   ->leftjoin('mocchuan','mocchuan.id','=','baocao_menhde.mocchuan_id')
+                                   ->leftjoin('tieuchi','tieuchi.id','=','mocchuan.tieuchi_id')
+                                   ->leftjoin('tieuchuan','tieuchuan.id','=','tieuchi.tieuchuan_id')
+                                   ->where('baocao_nhanxetkhoi.id_kehoach_bc','=',$req->id_khbc)
+                                   ->where('baocao_nhanxetkhoi.nguoi_tao','=',$req->id_user)
+                                   ->where('mocchuan.mo_ta','<>','');
+               }
+               
+
+
+
+          return DataTables::of($baocaonhanhxetkhoi)
+
+                    ->addColumn('stt',function($dt) use (&$i) {
+                         return $i++;
+                    })
+
+                    ->addColumn('tctc',function($dt){
+                         if($dt->stt_tchuan){
+                              return $dt->stt_tchuan.'.'.$dt->stt_tchi;     
+                         }
+                         
+                         
+                    })
+                    ->make(true);
+     }
+     public function bacaohoanthanh(Request $req)
+     {
+         $kehoachbaocao = DB::table('kehoach_baocao')
+             ->select('tieuchuan.mo_ta','tieuchuan.stt','baocao_tieuchuan.nguoi_viet','baocao_tieuchuan.trang_thai','baocao_tieuchuan.updated_at','tieuchi.stt as stt_tieuchi','tieuchi.mo_ta as mo_ta_tieuchi')
+             ->leftJoin('kehoach_tieuchuan', 'kehoach_tieuchuan.id_kh_baocao', '=', 'kehoach_baocao.id')
+             ->leftJoin('tieuchuan', 'tieuchuan.id', '=', 'kehoach_tieuchuan.tieuchuan_id')
+             ->leftjoin('baocao_tieuchuan','baocao_tieuchuan.id_kh_tieuchuan','=','kehoach_tieuchuan.id')
+             ->leftjoin('kehoach_tieuchi','kehoach_tieuchi.id_kh_tieuchuan','=','kehoach_tieuchuan.id')
+             ->leftjoin('tieuchi','tieuchi.id','kehoach_tieuchi.id_tieuchi')
+             ->orderBy('kehoach_baocao.created_at', 'desc')
+             ->where('kehoach_baocao.id', $req->id_bc);
+
+         return DataTables::of($kehoachbaocao)
+                    ->addColumn('motawith',function($dt){
+                         if($dt->mo_ta){
+                              return "TC".$dt->stt." : ".$dt->mo_ta;
+                         }else{
+                              return "Không có dữ liệu";
+                         }
+                    })
+
+                    ->addColumn('nguoiviet',function($dt){
+                         $nguoiviet = DB::table('users')
+                                        ->where('users.id',$dt->nguoi_viet)
+                                        ->first();
+
+                         if($nguoiviet){
+                              return $nguoiviet->name;
+                         }else{
+                              return "Không có dữ liệu";
+                         }
+                    })
+                    ->addColumn('tieuchi',function($dt){
+                         if($dt->stt_tieuchi){
+                              return "TC".$dt->stt.".".$dt->stt_tieuchi." : ".$dt->mo_ta_tieuchi;
+                         }else{
+                              return "không có dữ liệu";
+                         }
+                    })
+                    ->addColumn('ngayhoanthanh',function($dt){
+                         if($dt->updated_at){
+                              return $this->toShowDate($dt->updated_at);
+                         }else{
+                              return "Không có dữ liệu";
+                         }
+                    })
+                    ->make(true);
+     }
 }
+
+
+
+

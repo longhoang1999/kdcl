@@ -685,6 +685,10 @@ Route::group(
                                 Route::get('data', 'ToghopControntroller@data')->name('data');
                                 Route::get('minhchungyc', 'ToghopControntroller@minhchungyc')->name('minhchungyc');
                                 Route::get('datamcyc', 'ToghopControntroller@datamcyc')->name('datamcyc');
+                                Route::get('baocaonhanxet', 'ToghopControntroller@baocaonhanxet')->name('baocaonhanxet');
+                                Route::post('datafgnb', 'ToghopControntroller@datafgnb')->name('datafgnb');
+                                Route::post('bacaohoanthanh', 'ToghopControntroller@bacaohoanthanh')->name('bacaohoanthanh');
+
                             }
                         );
                     }

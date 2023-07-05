@@ -406,6 +406,7 @@ td{
                             <label class="col-sm-2 control-label">@lang('project/Selfassessment/title.noidung')</label>
                             <div class="col-sm-12">
                                 <textarea name="nhanxet" class="form-control"></textarea>
+
                             </div>
                         </div>
 
