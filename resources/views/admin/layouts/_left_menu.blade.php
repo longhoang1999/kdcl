@@ -722,15 +722,15 @@
                                     </a>
                                 </div>
                                 <!-- Báo cáo nhận xét -->
-                                {{-- <div class="menu-item">
-                                    <a class="menu-link" href="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{route('admin.tonghop.dbcl.baocaonhanxet')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                         <span class="menu-icon">
                                             {!! $icon_array[array_rand($icon_array, 1) ] !!}
                                         </span>
                                         <span class="menu-title">{{$listmenu_9[4]}}</span>
                                     </a>
                                 </div>
-                                --}}
+                                
                             <!-- /Tổng hợp --> 
 
 
