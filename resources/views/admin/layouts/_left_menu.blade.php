@@ -7,6 +7,7 @@
     $listmenu_7 = Lang::get('menu.7_list');
     $listmenu_8 = Lang::get('menu.8_list');
     $listmenu_9 = Lang::get('menu.9_list');
+    $listmenu_9_4 = Lang::get('menu.9_4_list');
     $listmenu_10 = Lang::get('menu.10_list');
     $listmenu_2_1 = Lang::get('menu.2_1_list');
     $listmenu_2_2 = Lang::get('menu.2_2_list');
@@ -723,12 +724,42 @@
                                 </div>
                                 <!-- Báo cáo nhận xét -->
                                 <div class="menu-item">
-                                    <a class="menu-link" href="{{route('admin.tonghop.dbcl.baocaonhanxet')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                                        <span class="menu-icon">
-                                            {!! $icon_array[array_rand($icon_array, 1) ] !!}
-                                        </span>
-                                        <span class="menu-title">{{$listmenu_9[4]}}</span>
-                                    </a>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                            <span class="menu-link">
+                                                <span class="menu-icon">
+                                                {!! $icon_array[array_rand($icon_array, 1) ] !!}
+                                            </span>
+                                            <span class="menu-title">{{$listmenu_9[4]}}</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
+                                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                                <!-- Đánh giá nội bộ -->
+                                                <div class="menu-item">
+                                                    <a class="menu-link 
+                                                    {!! (Request::is('admin/import-du-lieu-excel/tuyen-sinh/index')
+                                                    ? 'active' : '' ) !!}
+                                                     " href="{{ route('admin.tonghop.dbcl.baocaonhanxet') }}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">{{$listmenu_9_4[1]}}</span>
+                                                    </a>
+                                                </div>
+
+                                                <!-- Đánh giá ngoài -->
+                                                <div class="menu-item">
+                                                    <a class="menu-link 
+                                                    {!! (Request::is('admin/import-du-lieu-excel/du-lieu-sinh-vien/index')
+                                                    ? 'active' : '' ) !!}
+                                                     " href="{{ route('admin.tonghop.dbcl.baocaodgn') }}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
+                                                        </span>
+                                                        <span class="menu-title">{{$listmenu_9_4[2]}}</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
                                 
                             <!-- /Tổng hợp --> 

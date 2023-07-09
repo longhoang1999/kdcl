@@ -54,7 +54,7 @@ class DefinedController {
 
             }
             $path = $file->store($dest, 'public');
-            
+            // echo($file);die;
             return $path;
             // return true;
             // $response['success'] = true;
@@ -158,4 +158,6 @@ class DefinedController {
             } 
         }
     }
+
+    
 }

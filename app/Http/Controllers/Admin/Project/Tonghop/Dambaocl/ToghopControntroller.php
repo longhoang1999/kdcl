@@ -486,6 +486,90 @@ class ToghopControntroller extends DefinedController
                     })
                     ->make(true);
      }
+
+     public function baocaodgn(){
+
+          return view('admin.project.Synthetic.danhgiangoai');
+     }
+
+    public function datadgn(Request $req)
+     {
+         $kehoachbaocao = DB::table('kehoach_baocao')
+             ->whereNotNull('duong_dan');
+
+         return DataTables::of($kehoachbaocao)
+             ->addColumn('actions', function ($dt) {
+                 return '<a href="' . route('admin.tonghop.dbcl.showfile', ['id' => $dt->id]) . '" target="_blank" title="xem file"><i class="bi bi-eye-fill" style="font-size: 25px;color: #50cd89;"></i></a>';
+             })
+             ->rawColumns(['actions'])
+             ->make(true);
+     }
+
+
+     public function tailieudgn(){
+          $kehoachbaobao = DB::table('kehoach_baocao')
+                              ->get();
+          return view('admin.project.Synthetic.tailieudgn');
+     }
+
+     public function baocaodgn_nx(Request $req){
+          $kehoachbaobao = DB::table('kehoach_baocao')
+                              ->where('nam',$req->nam)
+                              ->where('duong_dan',null)
+                              ->get();
+          return $kehoachbaobao;
+     }
+
+     public function uploadfile(Request $req){
+        // $filename = $req->filename;
+        // $size = $req->size;
+
+        // $checkmcexisted = DB::table('minhchung')
+        //                 ->where('count_size',$size)
+        //                 ->where('ten_file',$filename)->first();
+        
+        // if($checkmcexisted){
+        //     return route('admin.dambaochatluong.manaproof.editProof',$checkmcexisted->id);
+        // }else{
+        //     return 1;
+        // }
+     }
+
+     public function update_nx(Request $req){
+
+          $data = array(
+          );
+          $duong_dan = '';
+
+          if($file = $req->file('file')){
+           
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();               
+            $size = $file->getClientSize();
+
+            $checkmcexisted = DB::table('kehoach_baocao')
+                            ->where('id',$req->idkhbc);
+           
+            $duong_dan = $this->upload($file, 'minhchung');            
+            if($duong_dan == false){
+                return Redirect::back()->withInput()->with('error',Lang::get('project/QualiAssurance/message.error.uploadfile'));
+            }   
+            $data['duong_dan'] = $duong_dan;
+            $data['ten_file'] = $filename;
+            $checkmcexisted->update($data);
+
+
+           return redirect()->route('admin.tonghop.dbcl.baocaodgn')->with('success',Lang::get('project/QualiAssurance/message.success.update'));
+        }
+     }
+
+     public function showfile(Request $req){
+          $id = $req->id;
+
+        $minhChungData = DB::table('kehoach_baocao')->where('id',$id)->first();
+   
+        return $this->downloadfile($minhChungData->duong_dan,$minhChungData->ten_file);
+     }
 }
 
 
