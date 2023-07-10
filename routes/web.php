@@ -696,6 +696,7 @@ Route::group(
                                 Route::post('uploadfile', 'ToghopControntroller@uploadfile')->name('uploadfile');
                                 Route::post('update_nx', 'ToghopControntroller@update_nx')->name('update_nx');
                                 Route::get('showfile', 'ToghopControntroller@showfile')->name('showfile');
+                                Route::get('deletefiles', 'ToghopControntroller@deletefiles')->name('deletefiles');
                                 
 
 
