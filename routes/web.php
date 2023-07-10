@@ -688,6 +688,16 @@ Route::group(
                                 Route::get('baocaonhanxet', 'ToghopControntroller@baocaonhanxet')->name('baocaonhanxet');
                                 Route::post('datafgnb', 'ToghopControntroller@datafgnb')->name('datafgnb');
                                 Route::post('bacaohoanthanh', 'ToghopControntroller@bacaohoanthanh')->name('bacaohoanthanh');
+                                Route::get('baocaodgn', 'ToghopControntroller@baocaodgn')->name('baocaodgn');
+
+                                Route::post('datadgn', 'ToghopControntroller@datadgn')->name('datadgn');
+                                Route::get('tailieudgn', 'ToghopControntroller@tailieudgn')->name('tailieudgn');
+                                Route::post('baocaodgn_nx', 'ToghopControntroller@baocaodgn_nx')->name('baocaodgn_nx');
+                                Route::post('uploadfile', 'ToghopControntroller@uploadfile')->name('uploadfile');
+                                Route::post('update_nx', 'ToghopControntroller@update_nx')->name('update_nx');
+                                Route::get('showfile', 'ToghopControntroller@showfile')->name('showfile');
+                                
+
 
                             }
                         );

@@ -77,6 +77,10 @@
 			'3' 		=> 'DS Báo cáo TĐG',
 			'4' 		=> 'Báo cáo nhận xét',
 		),
+		'9_4_list' 		=> array(
+			'1' 		=> 'Đánh giá nội bộ',
+			'2' 		=> 'Đánh giá ngoài',
+		),
 		'10'			=> 'Import dữ liệu',
 		'10_list' 		=> array(
 			'1' 		=> 'Đào tạo',

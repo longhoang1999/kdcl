@@ -383,6 +383,7 @@ class ManaProofController extends DefinedController
     }
 
     public function updateMC(Request $req){
+        // echo($req->file('file'));die;
         $mc_id = $req->mc_id;
         $str = explode('-', $req->ngay_ban_hanh);
         if(sizeof($str) == 3){
