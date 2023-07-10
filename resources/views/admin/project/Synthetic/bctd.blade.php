@@ -186,12 +186,13 @@
             },            
             
             success: function(data) {
-                var texto = '<li class="dd-item">' + data.solieutonghop + '</li>';
+                var texto = `<li class="dd-item">${(data.solieutonghop)?data.solieutonghop:"Không có dữ liệu"}</li>`;
                 var texto2;
                 var tableht;
                 var tabcht;
-                texto += '<li class="dd-item">' + data.cosodulieu + '</li>';
-                if(data.tieuchuan_tieuchi == 0){
+                texto += `<li class="dd-item">${(data.cosodulieu)?data.cosodulieu:"Không có dữ liệu"}</li>`;
+                
+                if(data.tieuchuan_tieuchi == 0 || data.tieuchuan_tieuchi == undefined || data.tieuchuan_tieuchi == null){
                     texto += '<div class="alert alert-warning">' + "@lang('project/Selfassessment/message.alert.kocobctc')" + '</div>';
                 }else{
                     let temp = 0;
@@ -224,7 +225,7 @@
                             tableht += `<tr>
                                             <td colspan="3">TC ${value.stt_tc} : ${value.mo_ta}</td>
                                             <td>${value.nguoiviet}</td>
-                                            <td>${value.baoCaoTieuChuan.trang_thai_bctc}</td>
+                                            <td>${(value.baoCaoTieuChuan)?value.baoCaoTieuChuan.trang_thai_bctc:"Không có dữ liệu"}</td>
                                             <td>${value.ngayhoanthanh}</td>
                                             <td>${value.tiendo}</td>
 
@@ -261,7 +262,7 @@
                             tabcht += `<tr>
                                             <td colspan="3">TC ${value.stt_tc} : ${value.mo_ta}</td>
                                             <td>${value.nguoiviet}</td>
-                                            <td>${value.baoCaoTieuChuan.trang_thai_bctc}</td>
+                                            <td>${(value.baoCaoTieuChuan)?value.baoCaoTieuChuan.trang_thai_bctc:"Không có dữ liệu"}</td>
                                             <td>${value.ngayhoanthanh}</td>
                                             <td style="color:red;width: 10%;">${value.tiendo} %</td>
 
