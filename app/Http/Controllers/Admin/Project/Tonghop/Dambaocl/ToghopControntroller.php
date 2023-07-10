@@ -132,7 +132,7 @@ class ToghopControntroller extends DefinedController
                $kehoachung = DB::table('kehoach_chung')->select('kehoach_chung.id')
                                    ->where('kehoach_chung.kh_baocao_id','=',$bc->id)->first();
                $arrout = array();
-               if($bc){
+               if($bc && $kehoachung){
                     $arrout['solieutonghop'] = '<a class="synthetic" href="'.route('admin.danhgiangoai.baocaotudanhgia.baoCaoKhac',[$req->id]).'"><i class="fas fa-tasks"></i><span style="color:blue;font-weight:bold;">' . Lang::get('project/Selfassessment/title.slth') . '</span>';
                     $arrout['cosodulieu'] = '<a class="data" href="'.route('admin.danhgiangoai.baocaotudanhgia.index',['id'=>$req->id,'tag'=>'pl1','page'=>'phuluc']).'"><i class="fas fa-edit"></i><span style="color:blue;font-weight:bold;">' . Lang::get('project/Selfassessment/title.csdl') . '</span>';
                     $arrout['phan1'] = '<a class="a_css" href="' . route('admin.tudanhgia.detailedplanning.general',[$req->id,$kehoachung->id]).'"><span class="label label-primary"><i class="fas fa-edit"></i></span><span style="color:blue;font-weight:bold;">' . Lang::get('project/Selfassessment/title.phan1') . '</span></a>';
@@ -152,8 +152,15 @@ class ToghopControntroller extends DefinedController
                                         ->where('id_kehoach_bc',$req->id)
                                         ->leftjoin('users','users.id','baocao_tieuchuan.nguoi_viet')
                                         ->first();
-                         $value->nguoiviet = $baocaotc->name;
-                         $value->ngayhoanthanh = $this->toShowDate($baocaotc->updated_at);
+                         $value->nguoiviet = "Không có dữ liệu";
+                         $value->ngayhoanthanh = "Không có dữ liệu";
+                         if($baocaotc){
+
+                              $value->nguoiviet = $baocaotc->name;
+                              $value->ngayhoanthanh = $this->toShowDate($baocaotc->updated_at);
+                         }
+                         
+                         
                          $tieuchi = DB::table('tieuchi')->where('tieuchuan_id',$value->tieuchuan_id)->get();
                          $tieuchi_id = DB::table('tieuchi')->where('tieuchuan_id',$value->tieuchuan_id)->first();
                          $value->tieuchi = $tieuchi; 
