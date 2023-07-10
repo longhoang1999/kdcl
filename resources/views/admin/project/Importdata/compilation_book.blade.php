@@ -283,7 +283,12 @@
                                 <label for="fordonvi">
                                     <span>@lang('project/ImportdataExcel/title.donvi')</span>
                                 </label>
-                                <input type="text" class="form-control " id="fordonvi" placeholder="@lang('project/ImportdataExcel/title.donvi')" name="donvi">
+                                <select name="donvi" class="form-control" id="donvi_update">
+                                    @foreach($dvex as $value)
+                                        <option value="{{ $value->id }}"  
+                                        >{{ $value->ten_donvi_TV }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="formasach">
@@ -434,8 +439,8 @@
         formData.append('_token', '{{csrf_token()}}');
 
         var listloaidv = {
-            @foreach($loai_dv as $ldv)
-                {{ $ldv->id }} : '{{ $ldv->loai_donvi }}', 
+            @foreach($dvex as $ldv)
+                {{ $ldv->ma_donvi }} : '{{ $ldv->ten_donvi_TV }}', 
             @endforeach
         };
 
@@ -506,8 +511,16 @@
                     var add = `
                         <tr class="row_number">
                                 <td contenteditable class="text-center p-2 row0">${item.stt}</td>
-                                <td contenteditable class="text-center p-2 row1">
-                                    ${item.donvi}
+                                <td class="text-center p-2 row1">
+                                    <select class="tndv border-0 w-100">`;
+                                    for (const [index1, item1] of Object.entries(listloaidv)) {
+                                        if(item.donvi == index1){
+                                            add += `<option selected value="${index1}">${item1}</option>`; 
+                                        }else{
+                                            add += `<option value="${index1}">${item1}</option>`; 
+                                        }
+                                    }               
+                                    add += `</select>
                                 </td>
                                 <td contenteditable class="text-center p-2 row2">
                                     ${item.masach}
@@ -570,7 +583,13 @@
         var adds = `
             <tr class="row_number">
                 <td contenteditable class="text-center p-2 row0"></td>
-                <td contenteditable class="text-center p-2 row1"></td>
+                <td class="check-select text-center p-2 row1">
+                    <select class="listloaidv border-0 w-100">
+                        @foreach($dvex as $ldv)
+                            <option value="{{ $ldv->ma_donvi }}">{{ $ldv->ten_donvi_TV }}</option>
+                        @endforeach
+                    </select>
+                </td>
                 <td contenteditable class="text-center p-2 row2"></td>
                 <td contenteditable class="text-center p-2 row3"></td>
                 <td contenteditable class="text-center p-2 row4"></td>
@@ -758,7 +777,7 @@
             $(".row_number").each(function( index ) {
                 let dataObj = {
                     'stt' :   $(this).find('.row0').text().trim(),
-                    'donvi' :   $(this).find('.row1').text().trim(),
+                    'donvi' :   $(this).find('.row1').find('select').val(),
                     'masach' :   $(this).find('.row2').text().trim(),
                     'tensach' :  $(this).find('.row3').text().trim(),
                     'loaisach' :   $(this).find('.row4').text().trim(),
@@ -792,7 +811,7 @@
                         $("#file").val("");
                         $("#add_unit").hide();
                         $("#idtableip").empty();
-                        $("#modal_unit").modal("hide");
+                        $("#modal_unit").find("button.close").click();
                         table.ajax.reload();
                     }
                 })
@@ -824,7 +843,9 @@
         })
             .then((response) => response.json())
             .then((data) => {
-                $("#fordonvi").val(data.donvi);
+                $("#donvi_update").val(data.donvi);
+                
+
                 $("#formasach").val(data.masach);
                 $("#fortensach").val(data.tensach);
                 $("#forloaisach").val(data.loaisach);

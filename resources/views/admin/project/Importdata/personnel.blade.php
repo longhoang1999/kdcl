@@ -88,6 +88,7 @@
     .color-date{
        background: #047a7e;
     }
+    
 </style>
 
 @stop
@@ -659,7 +660,7 @@
 
     var listdv = {
         @foreach($donvi as $dv)
-            {{ $dv->id }} : '{{ $dv->ten_donvi_TV }}', 
+            {{ $dv->ma_donvi }} : '{{ $dv->ten_donvi_TV }}', 
         @endforeach
     };
 
@@ -896,7 +897,7 @@
                                 <td contenteditable class=" text-center p-2 row30">
                                     <select class="listloaidv border-0 w-100">`;
                             for (const [index1, item1] of Object.entries(listdv)) { 
-                                if(item.dvsdvc == item1){
+                                if(item.dvsdvc == index1){
                                     add += `<option selected value="${index1}">${item1}</option>`; 
                                 }else{
                                     add += `<option value="${index1}">${item1}</option>`; 
@@ -972,15 +973,15 @@
                 <td contenteditable class="text-center p-2 row25"></td>
                 <td contenteditable class="text-center p-2 row26"></td>
                 <td contenteditable class="text-center p-2 row27"></td>
-                <td contenteditable class="text-center p-2 row28">
+                <td contenteditable class="text-center p-2 row28"></td>
+                <td contenteditable class="text-center p-2 row29"></td>
+                <td contenteditable class="text-center p-2 row30">
                     <select class="listloaidv border-0 w-100">`;
             for (const [index1, item1] of Object.entries(listdv)) { 
                 adds += `<option value="${index1}">${item1}</option>`; 
             }    
             adds += `</select>
                 </td>
-                <td contenteditable class="text-center p-2 row29"></td>
-                <td contenteditable class="text-center p-2 row30"></td>
                 <td contenteditable class="text-center p-2 row31"></td>
                 <td contenteditable class="text-center p-2 row32"></td>
                 <td contenteditable class="text-center p-2 row33"></td>
@@ -1236,7 +1237,7 @@
                         $("#file").val("");
                         $("#add_unit").hide();
                         $("#idtableip").empty();
-                        $("#modal_unit").modal("hide");
+                        $("#modal_unit").find("button.close").click();
                         table.ajax.reload();
                     }
                 })

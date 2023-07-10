@@ -31,7 +31,7 @@ class NhansuController extends DefinedController{
 
 	public function index(){
 		$donvi = DB::table("excel_import_donvi")
-				->select("id", "ten_donvi_TV")
+				->select("id", "ten_donvi_TV", "ma_donvi")
                 ->where("deleted_at", null)
                 ->get();
 		
@@ -52,6 +52,8 @@ class NhansuController extends DefinedController{
         foreach($data as $dt){
             if($dt->thoidiem != "" && $dt->hodem != "" && $dt->ten != ""){
                 //$check = DB::table("excel_import_nhansu")->where("ma_donvi", $dt->madv);
+                $iddv = DB::table("excel_import_donvi")->select("id", "ma_donvi")
+                        ->where("ma_donvi",  $dt->dvsdvc)->first();
                 $dataInport = array(
                     'thoidiem' =>   $dt->thoidiem,
                     'hodem' =>   $dt->hodem,
@@ -82,7 +84,7 @@ class NhansuController extends DefinedController{
                     'masocdht' =>   $dt->masocdht,
                     'chuyenngach' =>   $dt->chuyenngach,
                     'namcn' =>   $dt->namcn,
-                    'dvsdvc'  =>   $dt->dvsdvc,
+                    'dvsdvc'  =>   $iddv->id,
                     'cdctht' =>   $dt->cdctht,
                     'tdbn'	=>   $dt->tdbn,
                     'qdbn' =>   $dt->qdbn,

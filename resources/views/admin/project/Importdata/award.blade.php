@@ -319,7 +319,12 @@
                                 <label for="fordonvicap">
                                     <span>@lang('project/ImportdataExcel/title.donvicap')</span>
                                 </label>
-                                <input type="text" class="form-control " id="fordonvicap" placeholder="@lang('project/ImportdataExcel/title.donvicap')" name="donvicap">
+                                <select name="donvicap" class="form-control" id="donvi_update">
+                                    @foreach($dvex as $value)
+                                        <option value="{{ $value->id }}"  
+                                        >{{ $value->ten_donvi_TV }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         
@@ -380,7 +385,7 @@
                 { data: 'ckt', name: 'ckt' },
                 { data: 'linhvuc', name: 'linhvuc' },
                 { data: 'ndc', name: 'ndc' },
-                { data: 'dvc', name: 'dvc' },
+                { data: 'donvicap', name: 'donvicap' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
         });
@@ -399,8 +404,8 @@
         formData.append('_token', '{{csrf_token()}}');
 
         var listloaidv = {
-            @foreach($loai_dv as $ldv)
-                {{ $ldv->id }} : '{{ $ldv->loai_donvi }}', 
+            @foreach($dvex as $ldv)
+                {{ $ldv->ma_donvi }} : '{{ $ldv->ten_donvi_TV }}', 
             @endforeach
         };
 
@@ -471,8 +476,16 @@
                                 <td contenteditable class="text-center p-2 row6">
                                     ${item.nguoidc}
                                 </td>
-                                <td contenteditable class="text-center p-2 row7">
-                                    ${item.donvicap}
+                                <td class="text-center p-2 row7">
+                                    <select class="tndv border-0 w-100">`;
+                                    for (const [index1, item1] of Object.entries(listloaidv)) {
+                                        if(item.donvicap == index1){
+                                            add += `<option selected value="${index1}">${item1}</option>`; 
+                                        }else{
+                                            add += `<option value="${index1}">${item1}</option>`; 
+                                        }
+                                    }               
+                                    add += `</select>
                                 </td>
                                 <td contenteditable class="text-center p-2 trash-btn">
                                     <ion-icon name="trash-outline" ></ion-icon>
@@ -505,7 +518,13 @@
                 <td contenteditable class="text-center p-2 row4"></td>
                 <td contenteditable class="text-center p-2 row5"></td>
                 <td contenteditable class="text-center p-2 row6"></td>
-                <td contenteditable class="text-center p-2 row7"></td>
+                <td class="check-select text-center p-2 row7">
+                    <select class="listloaidv border-0 w-100">
+                        @foreach($dvex as $ldv)
+                            <option value="{{ $ldv->ma_donvi }}">{{ $ldv->ten_donvi_TV }}</option>
+                        @endforeach
+                    </select>
+                </td>
                 <td contenteditable class="text-center p-2 trash-btn">
                     <ion-icon name="trash-outline"></ion-icon>
                 </td>
@@ -687,12 +706,11 @@
                     'nam' :  $(this).find('.row4').text().trim(),
                     'doituong' :  $(this).find('.row5').text().trim(),
                     'nguoidc' : $(this).find('.row6').text().trim(),
-                    'donvicap' : $(this).find('.row7').text().trim(),
+                    'donvicap' : $(this).find('.row7').find('select').val(),
                     
                 }
                 dataSubmit.push(dataObj);
             });
-
             let loadData = "{{ route('admin.importdata.giaithuong.importDataUnit') }}";
             fetch(loadData, {
                 headers: {
@@ -709,7 +727,7 @@
                         $("#file").val("");
                         $("#add_unit").hide();
                         $("#idtableip").empty();
-                        $("#modal_unit").modal("hide");
+                        $("#modal_unit").find("button.close").click();
                         table.ajax.reload();
                     }
                 })
@@ -747,7 +765,7 @@
                 $("#fornam").val(data.nam);
                 $("#fordoituong").val(data.doituong);
                 $("#fornguoidc").val(data.ndc);
-                $("#fordonvicap").val(data.dvc);
+                $("#donvi_update").val(data.dvc);
             })
     })
 

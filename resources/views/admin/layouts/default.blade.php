@@ -97,6 +97,12 @@
             #kt_aside_logo{
                 background-color: deepskyblue;
             }
+            #css_table::-webkit-scrollbar {
+                height: 1em
+            }
+            #css_table::-webkit-scrollbar-thumb {
+                background: #c9c8c7;
+            }
         </style>
     </head>
     <!--end::Head-->

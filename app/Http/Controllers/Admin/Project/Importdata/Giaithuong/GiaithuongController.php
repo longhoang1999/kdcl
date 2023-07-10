@@ -35,10 +35,12 @@ class GiaithuongController extends DefinedController{
 		$donvi = DB::table("donvi")->select("id", "ten_donvi", "deleted_at","loai_dv_id")
                 ->where("deleted_at", null)
                 ->get();
+        $dvex = DB::table("excel_import_donvi")->select("ten_donvi_TV", "ma_donvi", "id")->get();
 		
         return view('admin.project.Importdata.award')->with([
            	'loai_dv'           => $loai_dv,
            	'donvi'             => $donvi,
+            'dvex'              => $dvex,
         ]);
 	}
 
@@ -53,6 +55,8 @@ class GiaithuongController extends DefinedController{
     	$data = json_decode($req->getContent());
         foreach($data as $dt){
             if($dt->tengt != "" ){
+                $iddv = DB::table("excel_import_donvi")->select("id", "ma_donvi")
+                        ->where("ma_donvi",  $dt->donvicap)->first();
                 $dataInport = array(
                     'tgt'  => $dt->tengt,
                     'ckt' => $dt->capkhent,
@@ -60,7 +64,7 @@ class GiaithuongController extends DefinedController{
                     'nam' => $dt->nam,
                     'doituong' => $dt->doituong,
                     'ndc' => $dt->nguoidc,
-                    'dvc' => $dt->donvicap,
+                    'dvc' => $iddv->id,
                 );
                 DB::table("excel_import_giaithuong")->insert($dataInport);
             }
@@ -88,12 +92,20 @@ class GiaithuongController extends DefinedController{
 	                 'gtex.linhvuc', 'gtex.dvc', 'gtex.ndc');
 
 	        return DataTables::of($donviExcel) 
-            ->addColumn(
-                'stt',
-                function ($donvi) {
-                    return "";
-                }
-            )              
+                ->addColumn(
+                    'stt',
+                    function ($donvi) {
+                        return "";
+                    }
+                )            
+                ->addColumn(
+                    'donvicap',
+                    function ($donvi) {
+                        $iddv = DB::table("excel_import_donvi")->select("id", "ten_donvi_TV", "ma_donvi")
+                                ->where("id",  $donvi->dvc)->first();
+                        return $iddv->ten_donvi_TV;
+                    }
+                )      
                 ->addColumn(
                     'actions',
                     function ($donvi) {

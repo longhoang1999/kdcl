@@ -34,10 +34,12 @@ class BssachController extends DefinedController{
 		$donvi = DB::table("donvi")->select("id", "ten_donvi", "deleted_at","loai_dv_id")
                 ->where("deleted_at", null)
                 ->get();
+        $dvex = DB::table("excel_import_donvi")->select("ten_donvi_TV", "ma_donvi", "id")->get();
 		
         return view('admin.project.Importdata.compilation_book')->with([
            	'loai_dv'           => $loai_dv,
            	'donvi'             => $donvi,
+            'dvex'              => $dvex
         ]);
 	}
 
@@ -52,8 +54,10 @@ class BssachController extends DefinedController{
     	$data = json_decode($req->getContent());
         foreach($data as $dt){
             if(true){
+                $iddv = DB::table("excel_import_donvi")->select("id", "ma_donvi")
+                        ->where("ma_donvi",  $dt->donvi)->first();
                 $dataInport = array(
-                    'donvi'  => $dt->donvi,
+                    'donvi'  => $iddv->id,
                     'masach'  => $dt->masach,
                     'tensach' => $dt->tensach,
                     'loaisach' => $dt->loaisach,
