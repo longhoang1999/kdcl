@@ -506,7 +506,7 @@ class ToghopControntroller extends DefinedController
 
          return DataTables::of($kehoachbaocao)
              ->addColumn('actions', function ($dt) {
-                 return '<a href="' . route('admin.tonghop.dbcl.showfile', ['id' => $dt->id]) . '" target="_blank" title="xem file"><i class="bi bi-eye-fill" style="font-size: 25px;color: #50cd89;"></i></a>';
+                 return '<a href="' . route('admin.tonghop.dbcl.showfile', ['id' => $dt->id]) . '" target="_blank" title="xem file"><i class="bi bi-eye-fill" style="font-size: 25px;color: #50cd89;"></i></a><a href="' . route('admin.tonghop.dbcl.deletefiles', ['id' => $dt->id]) . '" style="margin-left : 15px" title="xóa"><i class="bi bi-trash" style="font-size: 25px;color: red;"></i></a>';
              })
              ->rawColumns(['actions'])
              ->make(true);
@@ -576,6 +576,16 @@ class ToghopControntroller extends DefinedController
         $minhChungData = DB::table('kehoach_baocao')->where('id',$id)->first();
    
         return $this->downloadfile($minhChungData->duong_dan,$minhChungData->ten_file);
+     }
+
+     public function deletefiles(Request $req){
+          $del = DB::table('kehoach_baocao')
+                    ->where('id',$req->id)
+                    ->update([
+                         "duong_dan" => null,
+                         "ten_file"  => null,
+                    ]);
+          return Redirect()->route('admin.tonghop.dbcl.baocaodgn')->with('success',"Xóa thành công");
      }
 }
 
