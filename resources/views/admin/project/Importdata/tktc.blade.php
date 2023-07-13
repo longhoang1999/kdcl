@@ -127,21 +127,6 @@
                     @lang('project/ImportdataExcel/title.noidung')
                 </th>
                 <th>
-                    @lang('project/ImportdataExcel/title.n_2019')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.n_2020')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.n_2021')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.n_2022')
-                </th>
-                <th>
-                    @lang('project/ImportdataExcel/title.n_2023')
-                </th>
-                <th>
                     @lang('project/ImportdataExcel/title.hanhd')
                 </th>
              </tr>
@@ -291,38 +276,28 @@
                                 </label>
                                 <input type="text" class="form-control " id="fornoidung" placeholder="@lang('project/ImportdataExcel/title.noidung')" name="noidung">
                             </div>
-                            <div class="form-group col-md-3">
-                                <label for="forn_2019">
-                                    <span>@lang('project/ImportdataExcel/title.n_2019')</span>
-                                </label>
-                                <input type="number" class="form-control " id="forn_2019" placeholder="@lang('project/ImportdataExcel/title.n_2019')" name="n_2019">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forn_2020">
-                                    <span>@lang('project/ImportdataExcel/title.n_2020')</span>
-                                </label>
-                                <input type="number" class="form-control " id="forn_2020" placeholder="@lang('project/ImportdataExcel/title.n_2020')" name="n_2020">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forn_2021">
-                                    <span>@lang('project/ImportdataExcel/title.n_2021')</span>
-                                </label>
-                                <input type="number" class="form-control " id="forn_2021" placeholder="@lang('project/ImportdataExcel/title.n_2021')" name="n_2021">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forn_2022">
-                                    <span>@lang('project/ImportdataExcel/title.n_2022')</span>
-                                </label>
-                                <input type="number" class="form-control " id="forn_2022" placeholder="@lang('project/ImportdataExcel/title.n_2022')" name="n_2022">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forn_2023">
-                                    <span>@lang('project/ImportdataExcel/title.n_2023')</span>
-                                </label>
-                                <input type="number" class="form-control " id="forn_2023" placeholder="@lang('project/ImportdataExcel/title.n_2023')" name="n_2023">
+                            <div class="col-md-2">
+                                <button class="btn btn-add btn-benchmark mr-2 mt-3 ml-4 pl-3 pr-3" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm mới">
+                                    <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
+                                </button>
                             </div>
                         </div>
-                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table_render">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Năm</th>
+                                            <th scope="col">Doanh thu</th>
+                                            <th scope="col">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div> 
                 </form>
             </div>
@@ -377,11 +352,6 @@
             columns: [
                 { data: 'stt', name: 'stt' ,className: 'stt'},
                 { data: 'noi_dung', name: 'noi_dung' },
-                { data: 'n_2019', name: 'n_2019' },
-                { data: 'n_2020', name: 'n_2020' },
-                { data: 'n_2021', name: 'n_2021' },
-                { data: 'n_2022', name: 'n_2022' },
-                { data: 'n_2023', name: 'n_2023' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
         });
@@ -424,19 +394,19 @@
                                 <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.noidung')
                                 </th>
-                                <th class="row_width p-2 row_add">
+                                <th class="row_width p-2 row_add year_1" contenteditable>
                                     @lang('project/ImportdataExcel/title.n_2019')                                  
                                 </th>
-                                <th class="row_width p-2 row_add">
+                                <th class="row_width p-2 row_add year_2" contenteditable>
                                     @lang('project/ImportdataExcel/title.n_2020')                                  
                                 </th>
-                                <th class="row_width p-2 row_add">
+                                <th class="row_width p-2 row_add year_3" contenteditable>
                                     @lang('project/ImportdataExcel/title.n_2021')
                                 </th>
-                                <th class="row_width p-2 row_add">
+                                <th class="row_width p-2 row_add year_4" contenteditable>
                                     @lang('project/ImportdataExcel/title.n_2022')
                                 </th>
-                                <th class="row_width p-2 row_add">
+                                <th class="row_width p-2 row_add year_5" contenteditable>
                                     @lang('project/ImportdataExcel/title.n_2023')
                                 </th>
                                 <th class="row_width p-2 row_add">
@@ -673,13 +643,19 @@
             &&  checkNumber() && checkDate())   {            
             dataSubmit.length = 0;
             $(".row_number").each(function( index ) {
+                let key1 = $("#modal_unit").find(".year_1").text().trim();
+                let key2 = $("#modal_unit").find(".year_2").text().trim();
+                let key3 = $("#modal_unit").find(".year_3").text().trim();
+                let key4 = $("#modal_unit").find(".year_4").text().trim();
+                let key5 = $("#modal_unit").find(".year_5").text().trim();
+                
                 let dataObj = {
                     'noidung' :   $(this).find('.row1').text().trim(),
-                    'n_2019' :  $(this).find('.row2').text().trim(),
-                    'n_2020' :   $(this).find('.row3').text().trim(),
-                    'n_2021' :  $(this).find('.row4').text().trim(),
-                    'n_2022' :  $(this).find('.row5').text().trim(),
-                    'n_2023' : $(this).find('.row6').text().trim(),
+                    [key1] :  $(this).find('.row2').text().trim(),
+                    [key2] :   $(this).find('.row3').text().trim(),
+                    [key3] :  $(this).find('.row4').text().trim(),
+                    [key4] :  $(this).find('.row5').text().trim(),
+                    [key5] : $(this).find('.row6').text().trim(),
                     
                 }
                 dataSubmit.push(dataObj);
@@ -733,13 +709,26 @@
         })
             .then((response) => response.json())
             .then((data) => {
-                $("#fornoidung").val(data.noi_dung);
-                $("#forn_2019").val(data.n_2019);
-                $("#forn_2020").val(data.n_2020);
-                $("#forn_2021").val(data.n_2021);
-                $("#forn_2022").val(data.n_2022);
-                $("#forn_2023").val(data.n_2023);
-                
+                $("#fornoidung").val(data[0].noi_dung);
+                $(".table_render tbody").empty();
+                data[1].forEach((item, index) => {
+                    let UI = `
+                        <tr>
+                            <td>
+                                <input name="id_nam[]" class="form-control" value='${item.nam}'>
+                            </td>
+                            <td>
+                                <input name="doanhthu[]" class="form-control" value='${item.doanhthu}'>
+                            </td> 
+                            <td>
+                                <button class="btn btn-block btn-delete-item">
+                                    <i class="bi bi-trash" style="font-size: 25px;color: red;"></i>
+                                </button>
+                            </td> 
+                        </tr>
+                    `;
+                    $(".table_render tbody").append(UI);
+                })
             })
     })
 
@@ -747,6 +736,29 @@
         $("#update-unit").submit();
     })
 
+
+    $(".btn-add").click(function() {
+        let UI = `
+            <tr>
+                <td>
+                    <input name="id_nam[]" class="form-control">
+                </td>
+                <td>
+                    <input name="doanhthu[]" class="form-control">
+                </td> 
+                <td>
+                    <button class="btn btn-block btn-delete-item">
+                        <i class="bi bi-trash" style="font-size: 25px;color: red;"></i>
+                    </button>
+                </td> 
+            </tr>
+        `;
+        $(".table_render tbody").append(UI);
+    })
+
+    $("#modalUpdate").on('click', '.btn-delete-item', function() {
+        $(this).parent().parent().remove();
+    })
 
 
 </script>

@@ -32,9 +32,8 @@ class ThongkekytucxaController extends DefinedController{
 
 	public function index(){
 		$tttnsv = DB::table("excel_import_tk_ktx")
-                ->where("tc_number", "<>", null)
                 ->where("parent", null)
-                ->orderBy('tc_number', 'asc')
+                ->orderBy('id', 'asc')
                 ->get();
 
         $nams = DB::table("excel_import_tk_ktx")

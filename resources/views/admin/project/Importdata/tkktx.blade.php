@@ -202,7 +202,6 @@
                 @foreach($tttnsv as $value)
                  @php
                     $childs  = DB::table("excel_import_tk_ktx")
-                            ->where("tc_number", null)
                             ->where("parent", $value->id)
                             ->orderBy('id', 'asc'); 
                     if(isset(request()->nam)) {
@@ -292,20 +291,25 @@
 
                             <div class="block-child">
                                 <div class="row">
-                                    <div class="col-md-7"></div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-7">
                                         <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
                                     </div>
-                                    <div class="col-md-7">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.tdtktx')
-                                        </label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name3_1">
+                                    <div class="col-md-2">
+                                        <button class="btn btn-benchmark mr-2" type="button" id="btn-add-item" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm item">
+                                                <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
+                                        </button>
                                     </div>
                                 </div>
-                                
+                                <div class="block_render_one">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.tdtktx')" class="form-control">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="name3_1">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -326,20 +330,25 @@
 
                             <div class="block-child">
                                 <div class="row">
-                                    <div class="col-md-8"></div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-8">
                                         <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
                                     </div>
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.tdtpo')
-                                        </label>
-                                    </div>
                                     <div class="col-md-1">
-                                        <input type="text" name="name4_1">
+                                        <button class="btn btn-benchmark mr-2" type="button" id="btn-add-item" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm item">
+                                            <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
+                                        </button>
                                     </div>
                                 </div>
-                                
+                                <div class="block_render">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.tdtpo')" class="form-control">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="name4_1">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -998,10 +1007,10 @@
 
     $(".select-nam").change(function() {
         if($(this).val() == ""){
-            let route = "{{ route('admin.importdata.tttn.index') }}";
+            let route = "{{ route('admin.importdata.tkktx.index') }}";
             location.replace(route);
         }else{
-            let route = "{{ route('admin.importdata.tttn.index') }}" + "?nam=" + $(this).val()
+            let route = "{{ route('admin.importdata.tkktx.index') }}" + "?nam=" + $(this).val()
             location.replace(route);
         }
         

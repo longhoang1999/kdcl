@@ -51,18 +51,22 @@ class ThongketaichinhController extends DefinedController{
 
     public function importDataUnit(Request $req) {
     	$data = json_decode($req->getContent());
-        foreach($data as $dt){
+        foreach($data as $key => $dt){
             if($dt->noidung != "" ){
             	$dataInport = array(
                     'noi_dung'  => $dt->noidung,
-                    'n_2019' => $dt->n_2019,
-                    'n_2020' => $dt->n_2020,
-                    'n_2021' => $dt->n_2021,
-                    'n_2022' => $dt->n_2022,
-                    'n_2023' => $dt->n_2023,
-                    
                 );
-                DB::table("excel_import_tk_tai_chinh")->insert($dataInport);
+                $id = DB::table("excel_import_tk_tai_chinh")->insertGetId($dataInport);
+                foreach((array)$dt as $year => $money){
+                    if($year != 'noidung'){
+                        $dataImport2 = array(
+                            'parent_id'  => $id,
+                            'nam'       => $year,
+                            'doanhthu'  => $money
+                        );
+                        DB::table("excel_import_tk_tai_chinh")->insert($dataImport2);
+                    }
+                }
             }
         }
         $respon = [
@@ -82,11 +86,13 @@ class ThongketaichinhController extends DefinedController{
     	$donviExcel = DB::table("excel_import_tk_tai_chinh AS tktc");
         if(isset($req->id) && $req->id != ''){
             $donviExcel = $donviExcel->where("tktc.id", $req->id)->first();
-            return json_encode($donviExcel);
+            $child = DB::table("excel_import_tk_tai_chinh AS tktc")
+                    ->where("parent_id", $donviExcel->id)->get();
+            return json_encode([$donviExcel, $child]);
         }else{
 	        $donviExcel = $donviExcel
-	                ->select('tktc.id', 'tktc.noi_dung', 'tktc.n_2019',
-	                 'tktc.n_2020', 'tktc.n_2021', 'tktc.n_2022','tktc.n_2023');
+                    ->where('parent_id', null)
+	                ->select('tktc.id', 'tktc.noi_dung');
 
 	        return DataTables::of($donviExcel)          
                 ->addColumn(
@@ -111,21 +117,33 @@ class ThongketaichinhController extends DefinedController{
 
     public function deleteUnit(Request $req){
         DB::table('excel_import_tk_tai_chinh')->where("id", $req->id_delete)->delete();
+        DB::table('excel_import_tk_tai_chinh')->where("parent_id", $req->id_delete)->delete();
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.delete'));
     }
 
     public function updateUnit(Request $req){
+        $parent = DB::table("excel_import_tk_tai_chinh")->where("parent_id", null)
+                ->where("id", $req->id_unit);
+
     	$data = [
             'noi_dung'  => $req->noidung,
-            'n_2019' => $req->n_2019,
-            'n_2020' => $req->n_2020,
-            'n_2021' => $req->n_2021,
-            'n_2022' => $req->n_2022,
-            'n_2023' => $req->n_2023,
         ];
-        DB::table("excel_import_tk_tai_chinh")->where("id", $req->id_unit)
-        		->update($data);
+        $parent->update($data);
+        
+        DB::table("excel_import_tk_tai_chinh")->where("parent_id", $req->id_unit)->delete();
+
+
+        foreach($req->id_nam as $key => $value){
+            if($value != "" && $req->doanhthu[$key] != ""){
+                $data2 = [
+                    'parent_id' => $req->id_unit,
+                    'nam'       => $value,
+                    'doanhthu'  => $req->doanhthu[$key]
+                ];
+                DB::table("excel_import_tk_tai_chinh")->insert($data2);
+            }
+        }
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.update'));
     }

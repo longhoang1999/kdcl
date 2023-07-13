@@ -34,8 +34,10 @@ class DtkhcnController extends DefinedController{
 		$donvi = DB::table("donvi")->select("id", "ten_donvi", "deleted_at","loai_dv_id")
                 ->where("deleted_at", null)
                 ->get();
+        $dvex = DB::table("excel_import_donvi")->select("ten_donvi_TV", "ma_donvi", "id")->get();
 		
         return view('admin.project.Importdata.dtkhcn')->with([
+            'dvex'              => $dvex,
            	'loai_dv'           => $loai_dv,
            	'donvi'             => $donvi,
         ]);
@@ -54,11 +56,13 @@ class DtkhcnController extends DefinedController{
             if($dt->mahd != ""){
                 $check = DB::table("export_import_dtkhcn")->where("mahd", $dt->mahd);
                 if($check->count() == 0){
+                    $iddv = DB::table("excel_import_donvi")->select("id", "ma_donvi")
+                        ->where("ma_donvi",  $dt->dvtn)->first();
                     $dataInport = array(
                         'tenhd'  => $dt->tenhd,
                         'mahd' => $dt->mahd,
                         'sanphamcua' => $dt->sanphamcua,
-                        'dvtn' => $dt->dvtn,
+                        'dvtn' => $iddv->id,
                         'namcg' => $dt->namcg,
                         'stcg' => $dt->stcg,
                         'trangthai' => $dt->trangthai,
@@ -98,6 +102,14 @@ class DtkhcnController extends DefinedController{
                         return $actions;
                     }
                 )
+                ->addColumn(
+                    'donvitn',
+                    function ($donvi) {
+                        $iddv = DB::table("excel_import_donvi")->select("id", "ten_donvi_TV", "ma_donvi")
+                                ->where("id",  $donvi->dvtn)->first();
+                        return $iddv->ten_donvi_TV;
+                    }
+                )   
                 ->addColumn(
 					'stt',
 					function ($donvi) {

@@ -301,7 +301,12 @@
                                 <label for="fordvtn">
                                     <span>@lang('project/ImportdataExcel/title.dvtn')</span>
                                 </label>
-                                <input type="text" class="form-control " id="fordvtn" placeholder="@lang('project/ImportdataExcel/title.dvtn')" name="dvtn">
+                                <select name="dvtn" class="form-control" id="fordvtn">
+                                    @foreach($dvex as $value)
+                                        <option value="{{ $value->id }}"  
+                                        >{{ $value->ten_donvi_TV }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="fornamcg">
@@ -378,7 +383,7 @@
                 { data: 'stt', name: 'stt' },
                 { data: 'mahd', name: 'mahd' },
                 { data: 'tenhd', name: 'tenhd' },
-                { data: 'dvtn', name: 'dvtn' },
+                { data: 'donvitn', name: 'donvitn' },
                 { data: 'namcg', name: 'namcg' },
                 { data: 'trangthai', name: 'trangthai' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
@@ -399,8 +404,8 @@
         formData.append('_token', '{{csrf_token()}}');
 
         var listloaidv = {
-            @foreach($loai_dv as $ldv)
-                {{ $ldv->id }} : '{{ $ldv->loai_donvi }}', 
+            @foreach($dvex as $ldv)
+                {{ $ldv->ma_donvi }} : '{{ $ldv->ten_donvi_TV }}', 
             @endforeach
         };
 
@@ -462,8 +467,16 @@
                                 <td contenteditable class=" text-center p-2 row3">
                                     ${item.sanphamcua}
                                 </td>
-                                <td contenteditable class="text-center p-2 row4">
-                                    ${item.dvtn}
+                                <td class="text-center p-2 row4">
+                                    <select class="tndv border-0 w-100">`;
+                                    for (const [index1, item1] of Object.entries(listloaidv)) {
+                                        if(item.dvtn == index1){
+                                            add += `<option selected value="${index1}">${item1}</option>`; 
+                                        }else{
+                                            add += `<option value="${index1}">${item1}</option>`; 
+                                        }
+                                    }               
+                                    add += `</select>
                                 </td>
                                 <td contenteditable class="text-center p-2 row5">
                                     ${item.namcg}
@@ -502,7 +515,13 @@
                 <td contenteditable class="text-center p-2 row1"></td>
                 <td contenteditable class="text-center p-2 row2"></td>
                 <td contenteditable class="text-center p-2 row3"></td>
-                <td contenteditable class="text-center p-2 row4"></td>
+                <td class="check-select text-center p-2 row4">
+                    <select class="listloaidv border-0 w-100">
+                        @foreach($dvex as $ldv)
+                            <option value="{{ $ldv->ma_donvi }}">{{ $ldv->ten_donvi_TV }}</option>
+                        @endforeach
+                    </select>
+                </td>
                 <td contenteditable class="text-center p-2 row5"></td>
                 <td contenteditable class="text-center p-2 row6"></td>
                 <td contenteditable class="text-center p-2 row7"></td>
@@ -684,7 +703,7 @@
                     'tenhd' :      $(this).find('.row1').text().trim(),
                     'mahd' :  $(this).find('.row2').text().trim(),
                     'sanphamcua' :   $(this).find('.row3').text().trim(),
-                    'dvtn' :  $(this).find('.row4').text().trim(),
+                    'dvtn' :  $(this).find('.row4').find('select').val(),
                     'namcg' :  $(this).find('.row5').text().trim(),
                     'stcg' : $(this).find('.row6').text().trim(),
                     'trangthai' :   $(this).find('.row7').text().trim(),
@@ -709,7 +728,7 @@
                         $("#file").val("");
                         $("#add_unit").hide();
                         $("#idtableip").empty();
-                        $("#modal_unit").modal("hide");
+                        $("#modal_unit").find("button.close").click();
                         table.ajax.reload();
                     }
                 })
