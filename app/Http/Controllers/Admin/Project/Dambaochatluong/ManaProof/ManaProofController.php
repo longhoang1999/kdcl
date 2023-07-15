@@ -529,14 +529,19 @@ class ManaProofController extends DefinedController
         if($candelete){
             $res = DB::table('minhchung')->where('id',$req->id)->first();
                 //->update(['deleted_at' => date('Y-m-d H:i:s')]);
+
             if($res){
                 $link = $res->duong_dan;
                 $re = DB::table('minhchung')->where('id',$req->id)->delete();
+
                 if($re){
+
                     $re = DB::table('hoatdongnhom_minhchung')->where('minhchung_id',$req->id)
-                    ->delete();                     
+                    ->delete();     
+
                     $this->deletefile($link);
                 }
+
                 // ->update(['deleted_at' => date('Y-m-d H:i:s')]);
                 return 1;  
             } 
