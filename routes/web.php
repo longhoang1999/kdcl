@@ -1130,7 +1130,8 @@ Route::group(
 
                                 //Export thống kê ký túc xá
                                 Route::get('export-tkktx', 'ThongkekytucxaController@exportTkktx')->name('exportTkktx');
-
+                                Route::get('delete-all', 'ThongkekytucxaController@deleteAll')->name('deleteAll');
+                                
                             }
                         );
 

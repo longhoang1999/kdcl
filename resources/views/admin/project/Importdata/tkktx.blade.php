@@ -172,7 +172,7 @@
                 <a href="{{ route('admin.importdata.tkktx.exportTkktx') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
                     <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
                 </a>
-                <button class="btn" data-toggle="modal" data-target="#modalDeleteAll__" data-nametable="excel_import_tk_ktx" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.xoatatca')">
+                <button class="btn" data-toggle="modal" data-target="#modalDeleteAll__ns" data-nametable="excel_import_tk_ktx" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.xoatatca')">
                     <i class="bi bi-trash" style="font-size: 35px;color: red;"></i>
                 </button>
             </div>
@@ -295,18 +295,18 @@
                                         <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
                                     </div>
                                     <div class="col-md-2">
-                                        <button class="btn btn-benchmark mr-2" type="button" id="btn-add-item" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm item">
+                                        <button data-check="1" class="btn btn-benchmark mr-2 btn-add-item" type="button" sdata-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm item">
                                                 <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <div class="block_render_one">
+                                <div class="block_render_ block_render_one">
                                     <div class="row">
                                         <div class="col-md-7">
-                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.tdtktx')" class="form-control">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.tdtktx')" class="form-control" name="key1[]">
                                         </div>
                                         <div class="col-md-1">
-                                            <input type="text" name="name3_1">
+                                            <input type="text" name="value1[]">
                                         </div>
                                     </div>
                                 </div>
@@ -334,18 +334,18 @@
                                         <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
                                     </div>
                                     <div class="col-md-1">
-                                        <button class="btn btn-benchmark mr-2" type="button" id="btn-add-item" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm item">
+                                        <button data-check="2" class="btn btn-benchmark mr-2 btn-add-item" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm item">
                                             <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <div class="block_render">
+                                <div class="block_render_ block_render">
                                     <div class="row">
-                                        <div class="col-md-8">
-                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.tdtpo')" class="form-control">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.tdtpo')" class="form-control" name="key2[]">
                                         </div>
                                         <div class="col-md-1">
-                                            <input type="text" name="name4_1">
+                                            <input type="text" name="value2[]">
                                         </div>
                                     </div>
                                 </div>
@@ -368,47 +368,40 @@
 
                             <div class="block-child">
                                 <div class="row">
-                                    <div class="col-md-8"></div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-8">
                                         <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
                                     </div>
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.tong3')
-                                        </label>
-                                    </div>
                                     <div class="col-md-1">
-                                        <input type="text" name="name5_1">
+                                        <button data-check="3" class="btn btn-benchmark mr-2 btn-add-item" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm item">
+                                            <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.ct13')
-                                        </label>
+                            
+                                <div class="block_render_">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.tong3')" class="form-control" name="key3[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value3[]">
+                                        </div>
                                     </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name5_2">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.ct13')" class="form-control" name="key3[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value3[]">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.ct23')
-                                        </label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name5_3">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.ct33')
-                                        </label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name5_4">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.ct23')" class="form-control" name="key3[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value3[]">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -429,47 +422,39 @@
                             </div>
                             <div class="block-child">
                                 <div class="row">
-                                    <div class="col-md-8"></div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-8">
                                         <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
                                     </div>
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.tong4')
-                                        </label>
-                                    </div>
                                     <div class="col-md-1">
-                                        <input type="text" name="name6_1">
+                                        <button data-check="4" class="btn btn-benchmark mr-2 btn-add-item" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm item">
+                                            <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.ct14')
-                                        </label>
+                                <div class="block_render_">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.tong4')" class="form-control" name="key4[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value4[]">
+                                        </div>
                                     </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name6_2">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.ct14')" class="form-control" name="key4[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value4[]">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.ct24')
-                                        </label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name6_3">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.ct34')
-                                        </label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name6_4">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.ct24')" class="form-control" name="key4[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value4[]">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -490,20 +475,25 @@
                             </div>
                             <div class="block-child">
                                 <div class="row">
-                                    <div class="col-md-8"></div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-8">
                                         <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
                                     </div>
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.tscoktx')
-                                        </label>
-                                    </div>
                                     <div class="col-md-1">
-                                        <input type="text" name="name7_1">
+                                        <button data-check="5" class="btn btn-benchmark mr-2 btn-add-item" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm item">
+                                            <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
+                                        </button>
                                     </div>
                                 </div>
-    
+                                <div class="block_render_">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.tscoktx')" class="form-control" name="key5[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value5[]">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -523,37 +513,39 @@
 
                             <div class="block-child">
                                 <div class="row">
-                                    <div class="col-md-8"></div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-8">
                                         <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
                                     </div>
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.bankc')
-                                        </label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name8_1">
+                                    <div class="col-md-2">
+                                        <button data-check="6" class="btn btn-benchmark mr-2 btn-add-item" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm item">
+                                            <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.dangsc')
-                                        </label>
+                                <div class="block_render_">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.bankc')" class="form-control" name="key6[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value6[]">
+                                        </div>
                                     </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name8_2">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.dangsc')" class="form-control" name="key6[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value6[]">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.kienco')
-                                        </label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name8_3">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.kienco')" class="form-control" name="key6[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value6[]">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -575,17 +567,23 @@
 
                             <div class="block-child">
                                 <div class="row">
-                                    <div class="col-md-8"></div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-8">
                                         <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
                                     </div>
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.ndvsd')
-                                        </label>
+                                    <div class="col-md-2">
+                                        <button data-check="7" class="btn btn-benchmark mr-2 btn-add-item" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm item">
+                                            <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
+                                        </button>
                                     </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name9_1">
+                                </div>
+                                <div class="block_render_">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.ndvsd')" class="form-control" name="key7[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value7[]">
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -608,41 +606,41 @@
 
                             <div class="block-child">
                                 <div class="row">
-                                    <div class="col-md-8"></div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-8">
                                         <input type="text" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam[]">
                                     </div>
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.muon')
-                                        </label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name10_1">
+                                    <div class="col-md-2">
+                                        <button data-check="8" class="btn btn-benchmark mr-2 btn-add-item" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm item">
+                                            <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.sohuu8')
-                                        </label>
+                                <div class="block_render_">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.muon')" class="form-control" name="key8[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value8[]">
+                                        </div>
                                     </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name10_2">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.sohuu8')" class="form-control" name="key8[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value8[]">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" placeholder="Tiêu đề" value="@lang('project/ImportdataExcel/title.chothue8')" class="form-control" name="key8[]">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="text" name="value8[]">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <label>
-                                            @lang('project/ImportdataExcel/title.chothue8')
-                                        </label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="text" name="name10_3">
-                                    </div>
-                                </div>
-                                
-                                
                             </div>
                         </div>
 
@@ -745,6 +743,27 @@
 
 
 
+
+<!-- Modal -->
+<div class="modal fade" id="modalDeleteAll__ns" tabindex="-1" aria-labelledby="modalDeleteAll__nsLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDeleteAll__nsLabel">Cảnh báo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            Xóa trắng dữ liệu bảng <br>
+            <span class="text-danger">Hành động của bạn không thể hoàn tác</span>
+      </div>
+      <div class="modal-footer">
+            <a href="" id="deleteAllTable__ns" class="btn btn-danger">
+                Xóa trắng dữ liệu bảng                   
+             </a>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Kết thúc trang -->
     </sectio
@@ -1016,6 +1035,35 @@
         
     })
 
+
+
+    $("#modal_unit").on('click', ".btn-add-item", function(){
+        let check = $(this).attr('data-check');
+        let UI = `
+            <div class="row">
+                <div class="col-md-7">
+                    <input type="text" placeholder="Tiêu đề" name="key${check}[]" class="form-control">
+                </div>
+                <div class="col-md-1">
+                    <input type="text" name="value${check}[]">
+                </div>
+            </div>
+        `;
+        $(this).parent().parent().parent().find(".block_render_").append(UI);
+    })
+
+
+
+    
+
+    
+
+    $('#modalDeleteAll__ns').on('show.bs.modal', function (event) {
+        // var button = $(event.relatedTarget) 
+        // var recipient = button.data('nametable')
+        var route = "{{ route('admin.importdata.tkktx.deleteAll') }}";
+        $("#deleteAllTable__ns").attr('href', route);
+    })
 </script>
 
 

@@ -197,7 +197,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">@lang('project/QualiAssurance/title.xoamc')</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -205,7 +205,7 @@
             <h5>@lang('project/QualiAssurance/message.confirm.delete')</h5>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('project/QualiAssurance/title.huy')</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang('project/QualiAssurance/title.huy')</button>
           <button type="button" onclick="deletemc();return false;" class="btn btn-primary">@lang('project/QualiAssurance/title.xoa')</button>
         </div>
       </div>
@@ -291,7 +291,7 @@
                     }else{
                         alert("@lang('project/QualiAssurance/message.error.delete')");
                     }
-                    $('#delete_confirm_modal').modal('hide');
+                    $('#delete_confirm_modal').find('button.close').click();
                 }
             });
         }
