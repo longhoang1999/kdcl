@@ -81,7 +81,10 @@ class ReportController extends DefinedController
                 function ($user) {
                     $userName = DB::table("users")
                         ->where("id", $user->ns_phutrach)->select("name")->first();
-                    return $userName->name;
+                    if($userName){
+                        return $userName->name;
+                    }
+                    
                 }
             ) 
                       

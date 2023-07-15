@@ -80,14 +80,23 @@ class PlanningassessmentController extends DefinedController{
 				'totruong',
 				function ($donvi) {
 					$user = DB::table("users")->where("id", $donvi->to_truong)->select("name")->first();
-					return $user->name;
+					if($user){
+						return $user->name;
+					}else{
+						return "Không có dữ liệu";
+					}
+					
 				}
 			)    
 			->addColumn(
 				'nvth',
 				function ($donvi) {
 					$user = DB::table("users")->where("id", $donvi->user_id)->select("name")->first();
-					return $user->name;
+					if($user){
+						return $user->name;
+					}else{
+						return "Không có dữ liệu";
+					}
 				}
 			)  
 			->addColumn(

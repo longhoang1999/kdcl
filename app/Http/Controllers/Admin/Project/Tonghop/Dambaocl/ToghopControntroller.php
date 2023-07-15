@@ -413,7 +413,7 @@ class ToghopControntroller extends DefinedController
                                    ->leftjoin('tieuchi','tieuchi.id','=','menhde.tieuchi_id')
                                    ->leftjoin('tieuchuan','tieuchuan.id','=','tieuchi.tieuchuan_id')
                                    ->where('baocao_nhanxetkhoi.id_kehoach_bc','=',$req->id_khbc)
-                                   ->where('baocao_nhanxetkhoi.nguoi_tao','=',$req->id_user)
+                                   // ->where('baocao_nhanxetkhoi.nguoi_tao','=',$req->id_user)
                                    ->where('menhde.mo_ta','<>','');
                }else{
                     $baocaonhanhxetkhoi = DB::table('baocao_nhanxetkhoi')
@@ -423,7 +423,7 @@ class ToghopControntroller extends DefinedController
                                    ->leftjoin('tieuchi','tieuchi.id','=','mocchuan.tieuchi_id')
                                    ->leftjoin('tieuchuan','tieuchuan.id','=','tieuchi.tieuchuan_id')
                                    ->where('baocao_nhanxetkhoi.id_kehoach_bc','=',$req->id_khbc)
-                                   ->where('baocao_nhanxetkhoi.nguoi_tao','=',$req->id_user)
+                                   // ->where('baocao_nhanxetkhoi.nguoi_tao','=',$req->id_user)
                                    ->where('mocchuan.mo_ta','<>','');
                }
                

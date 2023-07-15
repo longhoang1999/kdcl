@@ -34,8 +34,9 @@
     </h2>
     <div class="line"></div><br/>
     <div class="form-group" style="background: white;padding: 20px 43px;box-shadow: 2px 2px 11px lightgray;">
-            <h3 class="mb-3">Tìm kiếm</h3>
+           
             <div class="row ">
+                <div class="col-md-2 " style="display: flex;justify-content: flex-start;align-items: center;"> <h3 class="mb-3">Tìm kiếm</h3></div>
                 <div class="col-md-5">   
                     <select name="" id="select2" class="id_khbc form-control" data-placeholder="Chọn báo cáo">
                         <option value="" hidden></option>
@@ -46,7 +47,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-sm-5">
+                <!-- <div class="col-sm-5">
                     <select class="form-control user_id" name="nguoi_tao" id="select_user" data-placeholder="Chọn người viết">
                         <option hidden></option>
                         @foreach($userList as $user)
@@ -61,10 +62,10 @@
                     <button class="search" style="background: none !important; outline: none !important;border: none !important;" title="Tìm kiếm và nhận xét">
                         <i class="bi bi-search" style="color: blue; font-size: 26px;"></i>
                     </button>
-                </div>
+                </div> -->
             </div>
     </div>
-    <div style="background-color: white;">   
+    <div style="background-color: white;box-shadow: 3px 2px 7px 2px lightgray;">   
          <table class="table table-striped table-bordered" id="table" width="100%">
             <thead>
                 <tr>
@@ -90,7 +91,7 @@
 @section('footer_scripts')
 <script>
 
-    $('.search').on('click',function(){
+    $('.id_khbc').on('change',function(){
         let id_user = $('.user_id').val();
         let id_khbc = $('.id_khbc').val();
         if ($.fn.DataTable.isDataTable('#table')) {
