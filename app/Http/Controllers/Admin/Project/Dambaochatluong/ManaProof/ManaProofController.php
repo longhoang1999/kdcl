@@ -529,8 +529,10 @@ class ManaProofController extends DefinedController
         if($candelete){
             $res = DB::table('minhchung')->where('id',$req->id)->first();
                 //->update(['deleted_at' => date('Y-m-d H:i:s')]);
+
             if($res){
                 $link = $res->duong_dan;
+<<<<<<< HEAD
                 $re = DB::table('minhchung')->where('id',$req->id);
                 if($re->count() > 0){
                     $hdn_mc = DB::table('hoatdongnhom_minhchung')->where('minhchung_id',$req->id)
@@ -538,6 +540,18 @@ class ManaProofController extends DefinedController
                     $this->deletefile($link);
                 }
                 $re->delete();
+=======
+                $re = DB::table('minhchung')->where('id',$req->id)->delete();
+
+                if($re){
+
+                    $re = DB::table('hoatdongnhom_minhchung')->where('minhchung_id',$req->id)
+                    ->delete();     
+
+                    $this->deletefile($link);
+                }
+
+>>>>>>> origin/tienducs
                 // ->update(['deleted_at' => date('Y-m-d H:i:s')]);
                 return 1;  
             } 

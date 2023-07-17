@@ -274,6 +274,7 @@
 
     function deletemc(){
         if(id_del > 0){
+            console.log(id_del)
             $.ajax({
                 url: "{!! route('admin.dambaochatluong.manaproof.deleteMC') !!}",
                 type: 'POST',
@@ -284,7 +285,8 @@
                 error: function(err) {
 
                 },            
-                success: function(data) {                
+                success: function(data) {
+                console.log(data)                
                     if(data == 1){
                         alert("@lang('project/QualiAssurance/message.success.delete')");
                         table.ajax.reload();

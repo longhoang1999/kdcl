@@ -72,7 +72,12 @@ class CategoryController extends DefinedController
                 function ($linhvuc) {
                     $donvi = DB::table("donvi")->where("id", $linhvuc->donvi_id)
                             ->select("ten_donvi")->first();
-                    return $donvi->ten_donvi;
+                    if($donvi){
+                        return $donvi->ten_donvi;
+                    }else{
+                        return "Không có dữ liệu";
+                    }
+                    
                 }
             )
             ->addColumn(
@@ -80,7 +85,12 @@ class CategoryController extends DefinedController
                 function ($linhvuc) {
                     $donvi = DB::table("donvi")->where("id", $linhvuc->donvi_id)
                             ->select("id")->first();
-                    return $donvi->id;
+                    if($donvi){
+                        return $donvi->id;
+                    }else{
+                        return "Không có dữ liệu";
+                    }
+                    
                 }
             )
             ->addColumn(
