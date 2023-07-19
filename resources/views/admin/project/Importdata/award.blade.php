@@ -291,37 +291,86 @@
                                 </label>
                                 <input type="text" class="form-control " id="forcapkhent" placeholder="@lang('project/ImportdataExcel/title.capkhent')" name="capkhent">
                             </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="forsoqd">
+                                    <span>@lang('project/ImportdataExcel/title.soqd')</span>
+                                </label>
+                                <input type="text" class="form-control " id="forsoqd" placeholder="@lang('project/ImportdataExcel/title.soqd')" name="soqd">
+                            </div>
+
                             <div class="form-group col-md-3">
                                 <label for="forlinhvuc">
                                     <span>@lang('project/ImportdataExcel/title.linhvuc')</span>
                                 </label>
                                 <input type="text" class="form-control " id="forlinhvuc" placeholder="@lang('project/ImportdataExcel/title.linhvuc')" name="linhvuc">
                             </div>
+
                             <div class="form-group col-md-3">
-                                <label for="fornam">
-                                    <span>@lang('project/ImportdataExcel/title.nam')</span>
+                                <label for="fortgkt">
+                                    <span>@lang('project/ImportdataExcel/title.tgkt')</span>
                                 </label>
-                                <input type="number" class="form-control " id="fornam" placeholder="@lang('project/ImportdataExcel/title.nam')" name="nam">
+                                <input type="text" class="form-control " id="fortgkt" placeholder="@lang('project/ImportdataExcel/title.tgkt')" name="tgkt">
                             </div>
+
                             <div class="form-group col-md-3">
                                 <label for="fordoituong">
                                     <span>@lang('project/ImportdataExcel/title.doituong')</span>
                                 </label>
                                 <input type="text" class="form-control " id="fordoituong" placeholder="@lang('project/ImportdataExcel/title.doituong')" name="doituong">
                             </div>
+
+
                             <div class="form-group col-md-3">
-                                <label for="fornguoidc">
-                                    <span>@lang('project/ImportdataExcel/title.nguoidc')</span>
+                                <label for="forchucvu">
+                                    <span>@lang('project/ImportdataExcel/title.chucvu')</span>
                                 </label>
-                                <input type="text" class="form-control " id="fornguoidc" placeholder="@lang('project/ImportdataExcel/title.nguoidc')" name="nguoidc">
+                                <input type="text" class="form-control " id="forchucvu" placeholder="@lang('project/ImportdataExcel/title.chucvu')" name="chucvu">
                             </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="fordonvict">
+                                    <span>@lang('project/ImportdataExcel/title.donvict')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fordonvict" placeholder="@lang('project/ImportdataExcel/title.donvict')" name="donvict">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="forlopod">
+                                    <span>@lang('project/ImportdataExcel/title.lopod')</span>
+                                </label>
+                                <input type="text" class="form-control " id="forlopod" placeholder="@lang('project/ImportdataExcel/title.lopod')" name="lopod">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="formasv">
+                                    <span>@lang('project/ImportdataExcel/title.masv')</span>
+                                </label>
+                                <input type="text" class="form-control " id="formasv" placeholder="@lang('project/ImportdataExcel/title.masv')" name="masv">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="forngdc">
+                                    <span>@lang('project/ImportdataExcel/title.ngdc')</span>
+                                </label>
+                                <input type="text" class="form-control " id="forngdc" placeholder="@lang('project/ImportdataExcel/title.ngdc')" name="ngdc">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="fordvctkt">
+                                    <span>@lang('project/ImportdataExcel/title.dvctkt')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fordvctkt" placeholder="@lang('project/ImportdataExcel/title.dvctkt')" name="dvctkt">
+                            </div>
+
+
                             <div class="form-group col-md-3">
                                 <label for="fordonvicap">
                                     <span>@lang('project/ImportdataExcel/title.donvicap')</span>
                                 </label>
-                                <select name="donvicap" class="form-control" id="donvi_update">
+                                <select name="donvicap" class="form-control" id="fordonvicap">
                                     @foreach($dvex as $value)
-                                        <option value="{{ $value->id }}"  
+                                        <option value="{{ $value->ma_donvi  }}"  
                                         >{{ $value->ten_donvi_TV }}</option>
                                     @endforeach
                                 </select>
@@ -381,10 +430,10 @@
             ajax: "{!! route('admin.importdata.giaithuong.dataUnit') !!}",
             columns: [
                 { data: 'stt', name: 'stt' ,className: 'stt'},
-                { data: 'tgt', name: 'tgt' },
-                { data: 'ckt', name: 'ckt' },
+                { data: 'tengt', name: 'tengt' },
+                { data: 'capkhent', name: 'capkhent' },
                 { data: 'linhvuc', name: 'linhvuc' },
-                { data: 'ndc', name: 'ndc' },
+                { data: 'ngdc', name: 'ngdc' },
                 { data: 'donvicap', name: 'donvicap' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
@@ -432,16 +481,35 @@
                                     @lang('project/ImportdataExcel/title.capkhent')                                  
                                 </th>
                                 <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.soqd')                                  
+                                </th>
+                                <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.linhvuc')
                                 </th>
                                 <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.nam')
+                                    @lang('project/ImportdataExcel/title.tgkt')
                                 </th>
                                 <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.doituong')
                                 </th>
                                 <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.nguoidc')
+                                    @lang('project/ImportdataExcel/title.chucvu')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.donvict')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.lopod')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.masv')
+                                </th>
+
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.ngdc')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.dvctkt')
                                 </th>
                                 <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.donvicap')
@@ -465,18 +533,37 @@
                                     ${item.capkhent}
                                 </td>
                                 <td contenteditable class="text-center p-2 row3">
-                                    ${item.linhvuc}
+                                    ${item.soqd}
                                 </td>
                                 <td contenteditable class="text-center p-2 row4">
-                                    ${item.nam}
+                                    ${item.linhvuc}
                                 </td>
                                 <td contenteditable class="text-center p-2 row5">
-                                    ${item.doituong}
+                                    ${item.tgkt}
                                 </td>
                                 <td contenteditable class="text-center p-2 row6">
-                                    ${item.nguoidc}
+                                    ${item.doituong}
                                 </td>
-                                <td class="text-center p-2 row7">
+                                <td contenteditable class="text-center p-2 row7">
+                                    ${item.chucvu}
+                                </td>
+                                <td contenteditable class="text-center p-2 row8">
+                                    ${item.donvict}
+                                </td>
+                                <td contenteditable class="text-center p-2 row9">
+                                    ${item.lopod}
+                                </td>
+                                <td contenteditable class="text-center p-2 row10">
+                                    ${item.masv}
+                                </td>
+                                
+                                <td contenteditable class="text-center p-2 row11">
+                                    ${item.ngdc}
+                                </td>
+                                <td contenteditable class="text-center p-2 row12">
+                                    ${item.dvctkt}
+                                </td>
+                                <td class="text-center p-2 row13">
                                     <select class="tndv border-0 w-100">`;
                                     for (const [index1, item1] of Object.entries(listloaidv)) {
                                         if(item.donvicap == index1){
@@ -518,7 +605,13 @@
                 <td contenteditable class="text-center p-2 row4"></td>
                 <td contenteditable class="text-center p-2 row5"></td>
                 <td contenteditable class="text-center p-2 row6"></td>
-                <td class="check-select text-center p-2 row7">
+                <td contenteditable class="text-center p-2 row7"></td>
+                <td contenteditable class="text-center p-2 row8"></td>
+                <td contenteditable class="text-center p-2 row9"></td>
+                <td contenteditable class="text-center p-2 row10"></td>
+                <td contenteditable class="text-center p-2 row11"></td>
+                <td contenteditable class="text-center p-2 row12"></td>
+                <td class="check-select text-center p-2 row13">
                     <select class="listloaidv border-0 w-100">
                         @foreach($dvex as $ldv)
                             <option value="{{ $ldv->ma_donvi }}">{{ $ldv->ten_donvi_TV }}</option>
@@ -701,12 +794,19 @@
                 let dataObj = {
                     'stt' :   $(this).find('.row0').text().trim(),
                     'tengt' :   $(this).find('.row1').text().trim(),
-                    'capkhent' :  $(this).find('.row2').text().trim(),
-                    'linhvuc' :   $(this).find('.row3').text().trim(),
-                    'nam' :  $(this).find('.row4').text().trim(),
-                    'doituong' :  $(this).find('.row5').text().trim(),
-                    'nguoidc' : $(this).find('.row6').text().trim(),
-                    'donvicap' : $(this).find('.row7').find('select').val(),
+                    'capkhent' :   $(this).find('.row2').text().trim(),
+                    'soqd' :  $(this).find('.row3').text().trim(),
+
+                    'linhvuc' :   $(this).find('.row4').text().trim(),
+                    'tgkt' :  $(this).find('.row5').text().trim(),
+                    'doituong' :  $(this).find('.row6').text().trim(),
+                    'chucvu' : $(this).find('.row7').text().trim(),
+                    'donvict' :   $(this).find('.row8').text().trim(),
+                    'lopod' :  $(this).find('.row9').text().trim(),
+                    'masv' :   $(this).find('.row10').text().trim(),
+                    'ngdc' :  $(this).find('.row11').text().trim(),
+                    'dvctkt' :  $(this).find('.row12').text().trim(),
+                    'donvicap' : $(this).find('.row13').find('select').val(),
                     
                 }
                 dataSubmit.push(dataObj);
@@ -759,13 +859,19 @@
         })
             .then((response) => response.json())
             .then((data) => {
-                $("#fortengt").val(data.tgt);
-                $("#forcapkhent").val(data.ckt);
+                $("#fortengt").val(data.tengt);
+                $("#forcapkhent").val(data.capkhent);
+                $("#forsoqd").val(data.soqd);
                 $("#forlinhvuc").val(data.linhvuc);
-                $("#fornam").val(data.nam);
+                $("#fortgkt").val(data.tgkt);
                 $("#fordoituong").val(data.doituong);
-                $("#fornguoidc").val(data.ndc);
-                $("#donvi_update").val(data.dvc);
+                $("#forchucvu").val(data.chucvu);
+                $("#fordonvict").val(data.donvict);
+                $("#forlopod").val(data.lopod);
+                $("#formasv").val(data.masv);
+                $("#forngdc").val(data.ngdc);
+                $("#fordvctkt").val(data.dvctkt);
+                $("#fordonvicap").val(data.donvicap);
             })
     })
 

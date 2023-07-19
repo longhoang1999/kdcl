@@ -31,11 +31,16 @@ use App\Exports\DtSanExport;
 class DientichSanController extends DefinedController{
 
 	public function index(){
-		$dtsan = DB::table("excel_import_dientich_xaydung")->get();
+        $dtsan = DB::table("excel_import_dientich_xaydung")
+                ->orderBy('id', 'asc');
+                
+		$nams = DB::table("excel_import_dientich_xaydung")
+                ->select('nam')
+                ->distinct()->get();
 
-		
         return view('admin.project.Importdata.dtsxd')->with([
            	'dtsan'           => $dtsan,
+            'nams'               =>$nams
         ]);
 	}
 
@@ -49,6 +54,10 @@ class DientichSanController extends DefinedController{
 
     public function importDataUnit(Request $req) {
     	$data = json_decode($req->getContent());
+        $checkEmp = DB::table('excel_import_dientich_xaydung')->where('nam', $data[0]->year_data);
+        if($checkEmp->count() > 0){
+            $checkEmp->delete();
+        }
         foreach($data as $dt){
             if($dt->content != "" && $dt->stt != "" ){
             	$dataInport = array(
@@ -59,6 +68,7 @@ class DientichSanController extends DefinedController{
                     'so_huu' => $dt->sohuu,
                     'lien_ket' => $dt->lienket,
                     'thue' => $dt->thue,
+                    'nam'   =>  $dt->year_data
                 );
                 DB::table("excel_import_dientich_xaydung")->insert($dataInport);
             }

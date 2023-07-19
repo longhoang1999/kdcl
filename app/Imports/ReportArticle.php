@@ -27,11 +27,13 @@ class ReportArticle implements ToModel,WithHeadingRow
                 'tapchidang' =>  $dataExport[6] != null ? $dataExport[6] : "",
                 'soissn' =>  $dataExport[7] != null ? $dataExport[7] : "",
                 'sodang' =>  $dataExport[8] != null ? $dataExport[8] : "",
-                'namdang' =>  $dataExport[9] != null ? $dataExport[9] : "",
-                'loai' =>  $dataExport[10] != null ? $dataExport[10] : "",
-                'loaitc' =>  $dataExport[11] != null ? $dataExport[11] : "",
-                'dmtc' =>  $dataExport[12] != null ? $dataExport[12] : "",
-                'url' =>  $dataExport[13] != null ? $dataExport[13] : "",
+                'tgcb' =>  $dataExport[9] != null ? $dataExport[9] : "",
+
+                'namdang' =>  $dataExport[10] != null ? $dataExport[10] : "",
+                'loai' =>  $dataExport[11] != null ? $dataExport[11] : "",
+                'loaitc' =>  $dataExport[12] != null ? $dataExport[12] : "",
+                'dmtc' =>  $dataExport[13] != null ? $dataExport[13] : "",
+                'url' =>  $dataExport[14] != null ? $dataExport[14] : "",
               
             );
             array_push($this->data, $dataPost);

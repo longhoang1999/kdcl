@@ -27,19 +27,31 @@ class BasicInformation implements ToModel,WithHeadingRow
                 'tenvtTV' =>  $dataExport[5] != null ? $dataExport[5] : "",
                 'tenvtTA' =>  $dataExport[6] != null ? $dataExport[6] : "",
                 'tenTD' =>  $dataExport[7] != null ? $dataExport[7] : "",
-                'cqbcq' =>  $dataExport[8] != null ? $dataExport[8] : "",
-                'ntl' =>  $dataExport[9] != null ? $dataExport[9] : "",
-                'soqd' =>  $dataExport[10] != null ? $dataExport[10] : "",
-                'lvhd' =>  $dataExport[11] != null ? $dataExport[11] : "",
-                'diachi' =>  $dataExport[12] != null ? $dataExport[12] : "",
-                'sdtlh' =>  $dataExport[13] != null ? $dataExport[13] : "",
-                'fax' =>  $dataExport[14] != null ? $dataExport[14] : "",
-                'email' =>  $dataExport[15] != null ? $dataExport[15] : "",
-                'website' =>  $dataExport[16] != null ? $dataExport[16] : "",
-                'notes' =>  $dataExport[17] != null ? $dataExport[17] : "",
-                'lhcsgd' =>  $dataExport[18] != null ? $dataExport[18] : "",
-                'tgdtk1' =>  $dataExport[19] != null ? $dataExport[19] : "",
-                'tgcbk1' =>  $dataExport[20] != null ? $dataExport[20] : "",
+
+                'loaiht' =>  $dataExport[8] != null ? $dataExport[8] : "",
+                'sqdcdlh' =>  $dataExport[9] != null ? $dataExport[9] : "",
+                'ntncdlh' =>  $dataExport[10] != null ? $dataExport[10] : "",
+
+                'cqbcq' =>  $dataExport[11] != null ? $dataExport[11] : "",
+                'ntl' =>  $dataExport[12] != null ? $dataExport[12] : "",
+                'soqd' =>  $dataExport[13] != null ? $dataExport[13] : "",
+
+                'soqdcapp' =>  $dataExport[14] != null ? $dataExport[14] : "",
+                'ngcapphd' =>  $dataExport[15] != null ? $dataExport[15] : "",
+                'plcs' =>  $dataExport[16] != null ? $dataExport[16] : "",
+                'lhcsdt' =>  $dataExport[17] != null ? $dataExport[17] : "",
+                'soqdgtc' =>  $dataExport[18] != null ? $dataExport[18] : "",
+
+
+
+                'sdtlh' =>  $dataExport[19] != null ? $dataExport[19] : "",
+                'fax' =>  $dataExport[20] != null ? $dataExport[20] : "",
+                'email' =>  $dataExport[21] != null ? $dataExport[21] : "",
+                'website' =>  $dataExport[22] != null ? $dataExport[22] : "",
+                'notes' =>  $dataExport[23] != null ? $dataExport[23] : "",
+                'lhcsgd' =>  $dataExport[24] != null ? $dataExport[24] : "",
+                'tgdtk1' =>  $dataExport[25] != null ? $dataExport[25] : "",
+                'tgcbk1' =>  $dataExport[26] != null ? $dataExport[26] : "",
             );
             array_push($this->data, $dataPost);
         }

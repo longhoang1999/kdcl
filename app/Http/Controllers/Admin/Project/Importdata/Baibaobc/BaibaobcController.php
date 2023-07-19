@@ -63,6 +63,8 @@ class BaibaobcController extends DefinedController{
                         'tcd' => $dt->tapchidang,
                         'so_issn_isbn' => $dt->soissn,
                         'sodang' => $dt->sodang,
+                        'tgcb' => $dt->tgcb,
+
                         'namdang' => $dt->namdang,
                         'loai' => $dt->loai,
                         'ltc' => $dt->loaitc,
@@ -144,6 +146,8 @@ class BaibaobcController extends DefinedController{
             'tcd'  => $req->tapchidang,
             'so_issn_isbn'   => $req->soissn,
             'sodang' => $req->sodang,
+            'tgcb' => $req->tgcb,
+
             'namdang'		=> $req->namdang,
             'loai'	=> $req->loai,
             'ltc'		=> $req->loaitc,

@@ -830,7 +830,7 @@
                                         </div>
 
                                         <!-- Thu gọn lĩnh vực -->
-                                        <div class="menu-item">
+                                        <!-- <div class="menu-item">
                                             <a class="menu-link 
                                             {!! (Request::is('admin/import-du-lieu-excel/thu-gon-linh-vuc/index')
                                             ? 'active' : '' ) !!}
@@ -840,7 +840,7 @@
                                                 </span>
                                                 <span class="menu-title">{{ $listmenu_10_1[4] }}</span>
                                             </a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
 
@@ -854,6 +854,8 @@
                                         || Request::is('admin/import-du-lieu-excel/bai-bao-bao-cao/index')
                                         || Request::is('admin/import-du-lieu-excel/sang-che/index')
                                         || Request::is('admin/import-du-lieu-excel/giai-thuong/index')
+                                        || Request::is('admin/import-du-lieu-excel/sang-kien-kinh-nghiem/index')
+                                        || Request::is('admin/import-du-lieu-excel/hoi-thao-hoi-nghi/index')
                                     ? 'show' : '' ) !!}
 
                                  ">
@@ -932,6 +934,31 @@
                                             </a>
                                         </div>
 
+                                        <!-- Sáng kiến kinh nghiệm -->
+                                        <div class="menu-item">
+                                            <a class="menu-link 
+                                            {!! (Request::is('admin/import-du-lieu-excel/sang-kien-kinh-nghiem/index')
+                                            ? 'active' : '' ) !!}
+                                             " href="{{ $linkMenuTenParent[40] }}">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">{{ $listmenu_10_2[6] }}</span>
+                                            </a>
+                                        </div>
+                                        
+                                        <!-- Hội thảo hội nghị -->
+                                        <div class="menu-item">
+                                            <a class="menu-link 
+                                            {!! (Request::is('admin/import-du-lieu-excel/hoi-thao-hoi-nghi/index')
+                                            ? 'active' : '' ) !!}
+                                             " href="{{ $linkMenuTenParent[41] }}">
+                                                <span class="menu-bullet">
+                                                    <span class="bullet bullet-dot"></span>
+                                                </span>
+                                                <span class="menu-title">{{ $listmenu_10_2[7] }}</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                                 

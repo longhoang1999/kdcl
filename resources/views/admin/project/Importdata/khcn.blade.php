@@ -304,6 +304,18 @@
                                 <input type="text" class="form-control " id="forcapdetai" placeholder="@lang('project/ImportdataExcel/title.capdetai')" name="capdetai">
                             </div>
                             <div class="form-group col-md-3">
+                                <label for="fortgbd">
+                                    <span>@lang('project/ImportdataExcel/title.tgbd')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fortgbd" placeholder="@lang('project/ImportdataExcel/title.tgbd')" name="tgbd">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="fortgnt">
+                                    <span>@lang('project/ImportdataExcel/title.tgnt')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fortgnt" placeholder="@lang('project/ImportdataExcel/title.tgnt')" name="tgnt">
+                            </div>
+                            <div class="form-group col-md-3">
                                 <label for="fornamdk">
                                     <span>@lang('project/ImportdataExcel/title.namdk')</span>
                                 </label>
@@ -491,6 +503,13 @@
                                     @lang('project/ImportdataExcel/title.capdetai')
                                 </th>
                                 <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.tgbd')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.tgnt')
+                                </th>
+
+                                <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.namdk')
                                 </th>
                                 <th class="row_width p-2">
@@ -553,33 +572,40 @@
                                     ${item.capdetai}
                                 </td>
                                 <td contenteditable class="text-center p-2 row5">
-                                    ${item.namdk}
+                                    ${item.tgbd}
                                 </td>
                                 <td contenteditable class="text-center p-2 row6">
-                                    ${item.namnghiemt}
+                                    ${item.tgnt}
                                 </td>
+
                                 <td contenteditable class="text-center p-2 row7">
-                                    ${item.linhvuc}
+                                    ${item.namdk}
                                 </td>
                                 <td contenteditable class="text-center p-2 row8">
-                                    ${item.nganhclq}
+                                    ${item.namnghiemt}
                                 </td>
                                 <td contenteditable class="text-center p-2 row9">
-                                    ${item.dvctri}
+                                    ${item.linhvuc}
                                 </td>
                                 <td contenteditable class="text-center p-2 row10">
-                                    ${item.cndtai}
+                                    ${item.nganhclq}
                                 </td>
                                 <td contenteditable class="text-center p-2 row11">
-                                    ${item.tvtgdt}
+                                    ${item.dvctri}
                                 </td>
                                 <td contenteditable class="text-center p-2 row12">
-                                    ${item.nhd}
+                                    ${item.cndtai}
                                 </td>
                                 <td contenteditable class="text-center p-2 row13">
-                                    ${item.dvcnph}
+                                    ${item.tvtgdt}
                                 </td>
                                 <td contenteditable class="text-center p-2 row14">
+                                    ${item.nhd}
+                                </td>
+                                <td contenteditable class="text-center p-2 row15">
+                                    ${item.dvcnph}
+                                </td>
+                                <td contenteditable class="text-center p-2 row16">
                                     <select >`
                             if(item.kinhphi == "@lang('project/ImportdataExcel/title.tudo')")
                                 add += "<option selected value = '1'>@lang('project/ImportdataExcel/title.tuco')</option>"
@@ -598,10 +624,10 @@
                                         
                             add += `</select>
                                 </td>
-                                <td contenteditable class="text-center p-2 row15">
+                                <td contenteditable class="text-center p-2 row17">
                                     ${item.ketqua}
                                 </td>
-                                <td contenteditable class="text-center p-2 row16">
+                                <td contenteditable class="text-center p-2 row18">
                                     ${item.trangthai}
                                 </td>
                                 <td contenteditable class="text-center p-2 trash-btn">
@@ -642,15 +668,17 @@
                 <td contenteditable class="text-center p-2 row11"></td>
                 <td contenteditable class="text-center p-2 row12"></td>
                 <td contenteditable class="text-center p-2 row13"></td>
-                <td contenteditable class="text-center p-2 row14">
+                <td contenteditable class="text-center p-2 row14"></td>
+                <td contenteditable class="text-center p-2 row15"></td>
+                <td contenteditable class="text-center p-2 row16">
                     <select>
                         <option value = '1'>@lang('project/ImportdataExcel/title.tuco')</option>
                         <option value = '2'>@lang('project/ImportdataExcel/title.ngansach')</option>
                         <option value = '3'>@lang('project/ImportdataExcel/title.taitro')</option>
                     </select>
                 </td>
-                <td contenteditable class="text-center p-2 row15"></td>
-                <td contenteditable class="text-center p-2 row16"></td>
+                <td contenteditable class="text-center p-2 row17"></td>
+                <td contenteditable class="text-center p-2 row18"></td>
                 <td contenteditable class="text-center p-2 trash-btn">
                     <ion-icon name="trash-outline"></ion-icon>
                 </td>
@@ -830,18 +858,22 @@
                     'maso' :  $(this).find('.row2').text().trim(),
                     'loai' :   $(this).find('.row3').text().trim(),
                     'capdetai' :  $(this).find('.row4').text().trim(),
-                    'namdk' :  $(this).find('.row5').text().trim(),
-                    'namnghiemt' : $(this).find('.row6').text().trim(),
-                    'linhvuc' :    $(this).find('.row7').text().trim(),
-                    'nganhclq' :   $(this).find('.row8').text().trim(),
-                    'dvctri': $(this).find('.row9').text().trim(),
-                    'cndtai' :    $(this).find('.row10').text().trim(),
-                    'tvtgdt' :   $(this).find('.row11').text().trim(),
-                    'nhd' :   $(this).find('.row12').text().trim(),
-                    'dvcnph' :  $(this).find('.row13').text().trim(),
-                    'kinhphi' :   $(this).find('.row14').find('select').val(),
-                    'ketqua' :   $(this).find('.row15').text().trim(),
-                    'trangthai' :   $(this).find('.row16').text().trim(),
+                    'tgbd' :  $(this).find('.row5').text().trim(),
+                    'tgnt' :  $(this).find('.row6').text().trim(),
+
+                    'namdk' :  $(this).find('.row7').text().trim(),
+                    'namnghiemt' : $(this).find('.row8').text().trim(),
+                    'linhvuc' :    $(this).find('.row9').text().trim(),
+                    'nganhclq' :   $(this).find('.row10').text().trim(),
+                    'dvctri': $(this).find('.row11').text().trim(),
+                    'cndtai' :    $(this).find('.row12').text().trim(),
+                    'tvtgdt' :   $(this).find('.row13').text().trim(),
+                    'nhd' :   $(this).find('.row14').text().trim(),
+                    'dvcnph' :  $(this).find('.row15').text().trim(),
+
+                    'kinhphi' :   $(this).find('.row16').find('select').val(),
+                    'ketqua' :   $(this).find('.row17').text().trim(),
+                    'trangthai' :   $(this).find('.row18').text().trim(),
                     
                 }
                 dataSubmit.push(dataObj);
@@ -900,6 +932,10 @@
                 $('#formaso').val(data.maso);
                 $('#forloai').val(data.loai);
                 $('#forcapdetai').val(data.capdetai);
+                $('#fortgbd').val(data.tgbd);
+                $('#fortgnt').val(data.tgnt);
+
+
                 $('#fornamdk').val(data.namdk);
                 $('#fornamnghiemt').val(data.namnt);
                 $('#forlinhvuc').val(data.linhvuc);

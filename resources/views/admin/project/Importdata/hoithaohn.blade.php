@@ -1,7 +1,7 @@
 @extends('admin/layouts/default')
 {{-- Page title --}}
 @section('title')
-    @lang('project/ImportdataExcel/title.bbbc')
+    @lang('project/ImportdataExcel/title.hthnghi')
 @parent
 @stop
 
@@ -93,7 +93,7 @@
 @stop
 
 @section('title_page')
-    @lang('project/ImportdataExcel/title.bbbc')
+    @lang('project/ImportdataExcel/title.hthnghi')
 @stop
 
 @section('content')
@@ -106,10 +106,10 @@
             <button href="" class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modal_unit" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.nhap_excel')">
                 <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
             </button>
-            <a href="{{ route('admin.importdata.baibaobc.exportUnit') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
+            <a href="{{ route('admin.importdata.hoithaohoinghi.exportUnit') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.xuat_excel')">
                 <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
             </a>
-            <button class="btn" data-toggle="modal" data-target="#modalDeleteAll__" data-nametable="excel_import_baibao_baocao" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.xoatatca')">
+            <button class="btn" data-toggle="modal" data-target="#modalDeleteAll__" data-nametable="excel_import_hoithohn" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.xoatatca')">
                 <i class="bi bi-trash" style="font-size: 35px;color: red;"></i>
             </button>
         </div>
@@ -121,19 +121,19 @@
                     @lang('project/ImportdataExcel/title.stt1')
                 </th>
                 <th>
-                    @lang('project/ImportdataExcel/title.tbbbc')
+                    @lang('project/ImportdataExcel/title.chude')
                 </th>
                 <th>
-                    @lang('project/ImportdataExcel/title.maso')
+                    @lang('project/ImportdataExcel/title.diadiem')
                 </th>
                 <th>
-                    @lang('project/ImportdataExcel/title.tapchidang')
+                    @lang('project/ImportdataExcel/title.tgtc')
                 </th>
                 <th>
-                    @lang('project/ImportdataExcel/title.loaitc')
+                    @lang('project/ImportdataExcel/title.sodb')
                 </th>
                 <th>
-                    @lang('project/ImportdataExcel/title.dmtc')
+                    @lang('project/ImportdataExcel/title.ghichu')
                 </th>
                 <th>
                     @lang('project/ImportdataExcel/title.hanhd')
@@ -153,7 +153,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalUnitLabel">
-                    @lang('project/ImportdataExcel/title.ttbbbc')
+                    @lang('project/ImportdataExcel/title.hthnghi')
                 </h5>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -274,101 +274,53 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.importdata.baibaobc.updateUnit') }}" method="post" id="update-unit">
+                <form action="{{ route('admin.importdata.hoithaohoinghi.updateUnit') }}" method="post" id="update-unit">
                     @csrf
                     <input type="hidden" id="id_unit" name="id_unit">
                     <div class="container-fuild">
                         <div class="row">
                             <div class="form-group col-md-3">
-                                <label for="fortbbbc">
-                                    <span>@lang('project/ImportdataExcel/title.tbbbc')</span>
+                                <label for="forchude">
+                                    <span>@lang('project/ImportdataExcel/title.chude')</span>
                                 </label>
-                                <input type="text" class="form-control " id="fortbbbc" placeholder="@lang('project/ImportdataExcel/title.tbbbc')" name="tbbbc">
+                                <input type="text" class="form-control " id="forchude" placeholder="@lang('project/ImportdataExcel/title.chude')" name="chude">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="formaso">
-                                    <span>@lang('project/ImportdataExcel/title.maso')</span>
+                                <label for="fordvct">
+                                    <span>@lang('project/ImportdataExcel/title.dvct')</span>
                                 </label>
-                                <input type="text" class="form-control " id="formaso" placeholder="@lang('project/ImportdataExcel/title.maso')" name="maso">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forlinhvuc">
-                                    <span>@lang('project/ImportdataExcel/title.linhvuc')</span>
-                                </label>
-                                <input type="text" class="form-control " id="forlinhvuc" placeholder="@lang('project/ImportdataExcel/title.linhvuc')" name="linhvuc">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="fortacgia">
-                                    <span>@lang('project/ImportdataExcel/title.tacgia')</span>
-                                </label>
-                                <input type="text" class="form-control " id="fortacgia" placeholder="@lang('project/ImportdataExcel/title.tacgia')" name="tacgia">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="fordonvipk">
-                                    <span>@lang('project/ImportdataExcel/title.donvipk')</span>
-                                </label>
-                                <input type="text" class="form-control " id="fordonvipk" placeholder="@lang('project/ImportdataExcel/title.donvipk')" name="donvipk">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="fortapchidang">
-                                    <span>@lang('project/ImportdataExcel/title.tapchidang')</span>
-                                </label>
-                                <input type="text" class="form-control " id="fortapchidang" placeholder="@lang('project/ImportdataExcel/title.tapchidang')" name="tapchidang">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forsoissn">
-                                    <span>@lang('project/ImportdataExcel/title.soissn')</span>
-                                </label>
-                                <input type="text" class="form-control " id="forsoissn" placeholder="@lang('project/ImportdataExcel/title.soissn')" name="soissn">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forsodang">
-                                    <span>@lang('project/ImportdataExcel/title.sodang')</span>
-                                </label>
-                                <input type="text" class="form-control " id="forsodang" placeholder="@lang('project/ImportdataExcel/title.sodang')" name="sodang">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="fortgcb">
-                                    <span>@lang('project/ImportdataExcel/title.tgcb')</span>
-                                </label>
-                                <input type="text" class="form-control " id="fortgcb" placeholder="@lang('project/ImportdataExcel/title.tgcb')" name="tgcb">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="fornamdang">
-                                    <span>@lang('project/ImportdataExcel/title.namdang')</span>
-                                </label>
-                                <input type="text" class="form-control " id="fornamdang" placeholder="@lang('project/ImportdataExcel/title.namdang')" name="namdang">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forloai">
-                                    <span>@lang('project/ImportdataExcel/title.loai')</span>
-                                </label>
-                                <input type="text" class="form-control " id="forloai" placeholder="@lang('project/ImportdataExcel/title.loai')" name="loai">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="forloaitc">
-                                    <span>@lang('project/ImportdataExcel/title.loaitc')</span>
-                                </label>
-                                <input type="text" class="form-control " id="forloaitc" placeholder="@lang('project/ImportdataExcel/title.loaitc')" name="loaitc">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="fordmtc">
-                                    <span>@lang('project/ImportdataExcel/title.dmtc')</span>
-                                </label>
-                                <select name="dmtc" id="fordmtc" class="form-control">
-                                    <option value='1'>@lang('project/ImportdataExcel/title.dmisi')</option>
-                                    <option value='2'>@lang('project/ImportdataExcel/title.dmsc')</option>
-                                    <option value='3'>@lang('project/ImportdataExcel/title.dmk')</option>
+                                <select name="dvct" class="form-control" id="fordvct">
+                                    @foreach($dvex as $value)
+                                        <option value="{{ $value->id  }}"  
+                                        >{{ $value->ten_donvi_TV }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="forurl">
-                                    <span>@lang('project/ImportdataExcel/title.url')</span>
+                                <label for="fordiadiem">
+                                    <span>@lang('project/ImportdataExcel/title.diadiem')</span>
                                 </label>
-                                <input type="text" class="form-control " id="forurl" placeholder="@lang('project/ImportdataExcel/title.url')" name="url">
+                                <input type="text" class="form-control " id="fordiadiem" placeholder="@lang('project/ImportdataExcel/title.diadiem')" name="diadiem">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="fortgtc">
+                                    <span>@lang('project/ImportdataExcel/title.tgtc')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fortgtc" placeholder="@lang('project/ImportdataExcel/title.tgtc')" name="tgtc">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="forsodb">
+                                    <span>@lang('project/ImportdataExcel/title.sodb')</span>
+                                </label>
+                                <input type="text" class="form-control " id="forsodb" placeholder="@lang('project/ImportdataExcel/title.sodb')" name="sodb">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="forghichu">
+                                    <span>@lang('project/ImportdataExcel/title.ghichu')</span>
+                                </label>
+                                <input type="text" class="form-control " id="forghichu" placeholder="@lang('project/ImportdataExcel/title.ghichu')" name="ghichu">
                             </div>
                         </div>
-                        
                     </div> 
                 </form>
             </div>
@@ -419,14 +371,14 @@
             responsive: true,
             processing: true,
             serverSide: true,
-            ajax: "{!! route('admin.importdata.baibaobc.dataUnit') !!}",
+            ajax: "{!! route('admin.importdata.hoithaohoinghi.dataUnit') !!}",
             columns: [
                 { data: 'stt', name: 'stt' ,className: 'stt'},
-                { data: 'tbbbc', name: 'tbbbc' },
-                { data: 'maso', name: 'maso' },
-                { data: 'tcd', name: 'tcd' },
-                { data: 'ltc', name: 'ltc' },
-                { data: 'danhmuc', name: 'danhmuc' },
+                { data: 'chude', name: 'chude' },
+                { data: 'diadiem', name: 'diadiem' },
+                { data: 'tgtc', name: 'tgtc' },
+                { data: 'sodb', name: 'sodb' },
+                { data: 'ghichu', name: 'ghichu' },
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
         });
@@ -438,6 +390,10 @@
         });
     });  
 
+
+
+
+
     $('#import_unit').on('click', function () {
         var f =  $("#forMaDVIP").val(1);
         var formData = new FormData();
@@ -445,13 +401,13 @@
         formData.append('_token', '{{csrf_token()}}');
 
         var listloaidv = {
-            @foreach($loai_dv as $ldv)
-                {{ $ldv->id }} : '{{ $ldv->loai_donvi }}', 
+            @foreach($dvex as $ldv)
+                {{ $ldv->ma_donvi }} : '{{ $ldv->ten_donvi_TV }}', 
             @endforeach
         };
 
         $.ajax({
-            url : "{!! route('admin.importdata.baibaobc.importUnit') !!}",
+            url : "{!! route('admin.importdata.hoithaohoinghi.importUnit') !!}",
             type : 'POST',
             data : formData,
             processData: false,  
@@ -467,48 +423,24 @@
                                     @lang('project/ImportdataExcel/title.stt')
                                 </th>
                                 <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.tbbbc')
+                                    @lang('project/ImportdataExcel/title.chude')
                                 </th>
                                 <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.maso')                                  
+                                    @lang('project/ImportdataExcel/title.dvct')                                  
                                 </th>
                                 <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.linhvuc')
+                                    @lang('project/ImportdataExcel/title.diadiem')                                  
                                 </th>
                                 <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.tacgia')
+                                    @lang('project/ImportdataExcel/title.tgtc')
                                 </th>
                                 <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.donvipk')
+                                    @lang('project/ImportdataExcel/title.sodb')
                                 </th>
                                 <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.tapchidang')
+                                    @lang('project/ImportdataExcel/title.ghichu')
                                 </th>
-                                <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.soissn')
-                                </th>
-                                <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.sodang')
-                                </th>
-                                <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.tgcb')
-                                </th>
-                                
-                                <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.namdang')
-                                </th>
-                                <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.loai')
-                                </th>
-                                <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.loaitc')
-                                </th>
-                                <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.dmtc')
-                                </th>
-                                <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.url')
-                                </th>
+
                                 <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.thaotac')
                                 </th>
@@ -522,63 +454,33 @@
                         <tr class="row_number">
                                 <td contenteditable class="text-center p-2 row0">${item.stt}</td>
                                 <td contenteditable class="text-center p-2 row1">
-                                    ${item.tbbbc}
+                                    ${item.chude}
                                 </td>
-                                <td contenteditable class="text-center p-2 row2">
-                                    ${item.maso}
+                                <td class="text-center p-2 row2">
+                                    <select class="tndv border-0 w-100">`;
+                                    for (const [index1, item1] of Object.entries(listloaidv)) {
+                                        if(item.dvct == index1){
+                                            add += `<option selected value="${index1}">${item1}</option>`; 
+                                        }else{
+                                            add += `<option value="${index1}">${item1}</option>`; 
+                                        }
+                                    }               
+                                    add += `</select>
                                 </td>
-                                <td contenteditable class=" text-center p-2 row3">
-                                    ${item.linhvuc}
+                                <td contenteditable class="text-center p-2 row3">
+                                    ${item.diadiem}
                                 </td>
                                 <td contenteditable class="text-center p-2 row4">
-                                    ${item.tacgia}
+                                    ${item.tgtc}
                                 </td>
                                 <td contenteditable class="text-center p-2 row5">
-                                    ${item.donvipk}
+                                    ${item.sodb}
                                 </td>
                                 <td contenteditable class="text-center p-2 row6">
-                                    ${item.tapchidang}
+                                    ${item.ghichu}
                                 </td>
-                                <td contenteditable class="text-center p-2 row7">
-                                    ${item.soissn}
-                                </td>
-                                <td contenteditable class="text-center p-2 row8">
-                                    ${item.sodang}
-                                </td>
-                                <td contenteditable class="text-center p-2 row9">
-                                    ${item.tgcb}
-                                </td>
-                                <td contenteditable class="text-center p-2 row10">
-                                    ${item.namdang}
-                                </td>
-                                <td contenteditable class="text-center p-2 row11">
-                                    ${item.loai}
-                                </td>
-                                <td contenteditable class="text-center p-2 row12">
-                                    ${item.loaitc}
-                                </td>
-                                <td contenteditable class="text-center p-2 row13">
-                                    <select>`
-                            if(item.dmtc == "@lang('project/ImportdataExcel/title.dmisi')")
-                                add += "<option selected value = '1'>@lang('project/ImportdataExcel/title.dmisi')</option>";
-                            else
-                                add += "<option value = '1'>@lang('project/ImportdataExcel/title.dmisi')</option>";
-
-                            if(item.dmtc == "@lang('project/ImportdataExcel/title.dmsc')")
-                                add += "<option selected value = '2'>@lang('project/ImportdataExcel/title.dmsc')</option>";
-                            else
-                                add += "<option value = '2'>@lang('project/ImportdataExcel/title.dmsc')</option>";
-
-                            if(item.dmtc == "@lang('project/ImportdataExcel/title.dmk')")
-                                add += "<option selected value = '3'>@lang('project/ImportdataExcel/title.dmk')</option>";
-                            else
-                                add += "<option value = '3'>@lang('project/ImportdataExcel/title.dmk')</option>";
-
-                            add += `</select>
-                                </td>
-                                <td contenteditable class="text-center p-2 row14">
-                                    ${item.url}
-                                </td>
+                                
+                                
                                 <td contenteditable class="text-center p-2 trash-btn">
                                     <ion-icon name="trash-outline" ></ion-icon>
                                 </td>
@@ -605,25 +507,18 @@
             <tr class="row_number">
                 <td contenteditable class="text-center p-2 row0"></td>
                 <td contenteditable class="text-center p-2 row1"></td>
-                <td contenteditable class="text-center p-2 row2"></td>
+                <td class="check-select text-center p-2 row2">
+                    <select class="listloaidv border-0 w-100">
+                        @foreach($dvex as $ldv)
+                            <option value="{{ $ldv->ma_donvi }}">{{ $ldv->ten_donvi_TV }}</option>
+                        @endforeach
+                    </select>
+                </td>
                 <td contenteditable class="text-center p-2 row3"></td>
                 <td contenteditable class="text-center p-2 row4"></td>
                 <td contenteditable class="text-center p-2 row5"></td>
                 <td contenteditable class="text-center p-2 row6"></td>
-                <td contenteditable class="text-center p-2 row7"></td>
-                <td contenteditable class="text-center p-2 row8"></td>
-                <td contenteditable class="text-center p-2 row9"></td>
-                <td contenteditable class="text-center p-2 row10"></td>
-                <td contenteditable class="text-center p-2 row11"></td>
-                <td contenteditable class="text-center p-2 row12"></td>
-                <td contenteditable class="text-center p-2 row13">
-                    <select>
-                        <option value='1'>@lang('project/ImportdataExcel/title.dmisi')</option>
-                        <option value='2'>@lang('project/ImportdataExcel/title.dmsc')</option>
-                        <option value='3'>@lang('project/ImportdataExcel/title.dmk')</option>
-                    </select>
-                </td>
-                <td contenteditable class="text-center p-2 row14"></td>
+                
                 <td contenteditable class="text-center p-2 trash-btn">
                     <ion-icon name="trash-outline"></ion-icon>
                 </td>
@@ -799,27 +694,18 @@
             $(".row_number").each(function( index ) {
                 let dataObj = {
                     'stt' :   $(this).find('.row0').text().trim(),
-                    'tbbbc' :   $(this).find('.row1').text().trim(),
-                    'maso' :  $(this).find('.row2').text().trim(),
-                    'linhvuc' :   $(this).find('.row3').text().trim(),
-                    'tacgia' :  $(this).find('.row4').text().trim(),
-                    'donvipk' :  $(this).find('.row5').text().trim(),
-                    'tapchidang' :  $(this).find('.row6').text().trim(),
-                    'soissn' : $(this).find('.row7').text().trim(),
-                    'sodang' : $(this).find('.row8').text().trim(),
-                    'tgcb' : $(this).find('.row9').text().trim(),
+                    'chude' :   $(this).find('.row1').text().trim(),
+                    'dvct' :   $(this).find('.row2').find('select').val(),
+                    'diadiem' :  $(this).find('.row3').text().trim(),
 
-                    'namdang' : $(this).find('.row10').text().trim(),
-                    'loai' : $(this).find('.row11').text().trim(),
-                    'loaitc' : $(this).find('.row12').text().trim(),
-                    'dmtc' :   $(this).find('.row13').find('select').val(),
-                    'url' :   $(this).find('.row14').text().trim(),
-                    
+                    'tgtc' :   $(this).find('.row4').text().trim(),
+                    'sodb' :  $(this).find('.row5').text().trim(),
+                    'ghichu' :  $(this).find('.row6').text().trim(),
+
                 }
                 dataSubmit.push(dataObj);
             });
-
-            let loadData = "{{ route('admin.importdata.baibaobc.importDataUnit') }}";
+            let loadData = "{{ route('admin.importdata.hoithaohoinghi.importDataUnit') }}";
             fetch(loadData, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -835,7 +721,6 @@
                         $("#file").val("");
                         $("#add_unit").hide();
                         $("#idtableip").empty();
-                        $("#modal_unit").modal("hide");
                         $("#modal_unit").find("button.close").click();
                         table.ajax.reload();
                     }
@@ -848,7 +733,7 @@
     $('#modalDelete').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) 
         var id = button.data('id') 
-        var route = "{{ route('admin.importdata.baibaobc.deleteUnit') }}" + "?id_delete=" + id;
+        var route = "{{ route('admin.importdata.hoithaohoinghi.deleteUnit') }}" + "?id_delete=" + id;
         var modal = $(this);
         modal.find('#btn-delete-unit').attr('href' , route);
     })
@@ -858,7 +743,7 @@
         var button = $(event.relatedTarget) 
         var id = button.data('id') 
         $("#id_unit").val(id);
-        let loadData = "{{ route('admin.importdata.baibaobc.dataUnit') }}" + "?id=" + id;
+        let loadData = "{{ route('admin.importdata.hoithaohoinghi.dataUnit') }}" + "?id=" + id;
         fetch(loadData, {
             headers: {
                 'Content-Type': 'application/json',
@@ -868,21 +753,12 @@
         })
             .then((response) => response.json())
             .then((data) => {
-                $('#fortbbbc').val(data.tbbbc);
-                $('#formaso').val(data.maso);
-                $('#forlinhvuc').val(data.linhvuc);
-                $('#fortacgia').val(data.tacgia);
-                $('#fordonvipk').val(data.donvi);
-                $('#fortapchidang').val(data.tcd);
-                $('#forsoissn').val(data.so_issn_isbn);
-                $('#forsodang').val(data.sodang);
-                $('#fortgcb').val(data.tgcb);
-
-                $('#fornamdang').val(data.namdang);
-                $('#forloai').val(data.loai);
-                $('#forloaitc').val(data.ltc);
-                $('#fordmtc').val(data.dmtc);
-                $('#forurl').val(data.url);
+                $("#forchude").val(data.chude);
+                $("#fordvct").val(data.dvct);
+                $("#fordiadiem").val(data.diadiem);
+                $("#fortgtc").val(data.tgtc);
+                $("#forsodb").val(data.sodb);
+                $("#forghichu").val(data.ghichu);
             })
     })
 

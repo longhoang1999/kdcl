@@ -63,6 +63,12 @@ class BssachController extends DefinedController{
                     'loaisach' => $dt->loaisach,
                     'chubien' => $dt->chubien,
                     'thanhvien' => $dt->thanhvien,
+
+                    'dvchutri' => $dt->dvchutri,
+                    'tgdk' => $dt->tgdk,
+                    'tgnt' => $dt->tgnt,
+                    'tgxb' => $dt->tgxb,
+
                     'namdk' => $dt->namdk,
                     'namnt' => $dt->namnt,
                     'namxb' => $dt->namxuatban,
@@ -131,6 +137,12 @@ class BssachController extends DefinedController{
             'loaisach' => $req->loaisach,
             'chubien' => $req->chubien,
             'thanhvien' => $req->thanhvien,
+
+            'dvchutri' => $req->dvchutri,
+            'tgdk' => $req->tgdk,
+            'tgnt' => $req->tgnt,
+            'tgxb' => $req->tgxb,
+
             'namdk' => $req->namdk,
             'namnt'	=> $req->namnt,
             'namxb' => $req->namxuatban,

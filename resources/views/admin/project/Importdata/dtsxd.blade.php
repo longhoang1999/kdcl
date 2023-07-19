@@ -31,8 +31,11 @@
     #idtableip{
         width:3000px;
     }
-    .row_width{
-        width:7rem;
+    .row_content{
+        width: 50rem;
+    }
+    #idtableip{
+        width: 120%;
     }
     .listlhcsg{
         width: 100%;
@@ -129,6 +132,22 @@
                 <i class="bi bi-trash" style="font-size: 35px;color: red;"></i>
             </button>
         </div>
+        <div class="row mb-5">
+            <div class="col-md-4"> 
+                <select class="select-nam space-block-item form-control">
+                    <option value="" >
+                        @lang('project/ImportdataExcel/title.chonnam')
+                    </option>
+                    @foreach($nams as $nam)
+                        <option value="{{ $nam->nam }}"  
+                            @if(isset(request()->nam) && request()->nam == $nam->nam)
+                                selected
+                            @endif
+                            >{{ $nam->nam }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <div class="table-show">
             <table class="table table-striped table-bordered" id="table" width="100%">
                 <thead>
@@ -146,6 +165,9 @@
                         @lang('project/ImportdataExcel/title.htsd')                                  
                     </th>
                     <th  scope="col" rowspan="2">
+                        @lang('project/ImportdataExcel/title.nam')                                  
+                    </th>
+                    <th  scope="col" rowspan="2">
                         @lang('project/ImportdataExcel/title.hanhd')                                  
                     </th>
                 </tr>
@@ -161,7 +183,13 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody>  
+                <tbody> 
+                    @php 
+                        if(isset(request()->nam)) {
+                            $dtsan = $dtsan->where("nam", request()->nam);
+                        }
+                        $dtsan = $dtsan->get();
+                    @endphp
                     @foreach($dtsan as $value)
                         <tr>
                             @if($value->parent == "")
@@ -174,6 +202,7 @@
                             <td>{{ $value->so_huu }}</td>
                             <td>{{ $value->lien_ket }}</td>
                             <td>{{ $value->thue }}</td>
+                            <td>{{ $value->nam }}</td>
                             <td>
                                 <button data-toggle="modal" data-target="#modalUpdate" class="btn btn-block mt-2" data-id="{{ $value->id }}" data-bs-placement="top" title="@lang('project/Selfassessment/title.capnhat')    ">
                                     <i class="bi bi-pencil-square" style="font-size: 25px;color: #009ef7;"></i>
@@ -209,6 +238,12 @@
                     </button> -->
                 </div>
                 <div id="css_table">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="year_data">Năm nhập dữ liệu</label>
+                            <input type="number" id="year_data" class="form-control" placeholder="Năm nhập dữ liệu">
+                        </div>
+                    </div>
                     <table id="idtableip" class="table table-striped" border="1"></table>
                 </div>
 
@@ -459,7 +494,7 @@
                                 <th class="row_width p-2 w-stt" rowspan="2">
                                     @lang('project/ImportdataExcel/title.stt')
                                 </th>
-                                <th class="row_width p-2" rowspan="2">
+                                <th class="row_content p-2" rowspan="2">
                                     @lang('project/ImportdataExcel/title.noidung')
                                 </th>
                                 <th class="row_width p-2" rowspan="2">
@@ -492,7 +527,7 @@
                                 <td contenteditable class="p-2 row1">
                                     ${item.content}
                                 </td>
-                                <td contenteditable class="text-center p-2 row2"> 
+                                <td contenteditable class="text-center check-number p-2 row2"> 
                                 </td>
                                 <td contenteditable class="text-center p-2 row3">
                                 </td>
@@ -509,7 +544,7 @@
                                 <td contenteditable class="p-2 row1">
                                     ${item.content}
                                 </td>
-                                <td contenteditable class="text-center p-2 row2"> 
+                                <td contenteditable class="text-center check-number p-2 row2"> 
                                 </td>
                                 <td contenteditable class="text-center p-2 row3">
                                 </td>
@@ -542,7 +577,7 @@
             <tr class="row_number">
                 <td contenteditable class="text-center p-2 row0"></td>
                 <td contenteditable class="text-center p-2 row1"></td>
-                <td contenteditable class="text-center p-2 row2"></td>
+                <td contenteditable class="text-center p-2 row2 check-number"></td>
                 <td contenteditable class="text-center p-2 row3"></td>
                 <td contenteditable class="text-center p-2 row4"></td>
                 <td contenteditable class="text-center p-2 trash-btn">
@@ -716,7 +751,7 @@
     var dataSubmit = [];
     $("#import_unit_data").click(function() {
         if(checkEmpty() && checkWebsite() && checkEmail() && checkPhone()
-            &&  checkNumber() && checkDate())   {            
+            &&  checkNumber() && checkDate() && $("#year_data").val() != "")   {            
             dataSubmit.length = 0;
             $(".row_number").each(function( index ) {
                 let dataObj = {
@@ -727,7 +762,7 @@
                     'sohuu' :   $(this).find('.row3').text().trim(),
                     'lienket' :  $(this).find('.row4').text().trim(),
                     'thue' :  $(this).find('.row5').text().trim(),
-                    
+                    'year_data': $("#year_data").val()
                 }
                 dataSubmit.push(dataObj);
             });
@@ -749,7 +784,8 @@
                         $("#add_unit").hide();
                         $("#idtableip").empty();
                         $("#modal_unit .modal-header button").click();
-                        table.ajax.reload();
+                        // table.ajax.reload();
+                        location.reload();
                     }
                 })
         }else{
@@ -799,7 +835,16 @@
     })
 
 
-
+    $(".select-nam").change(function() {
+        if($(this).val() == ""){
+            let route = "{{ route('admin.importdata.dtsxd.index') }}";
+            location.replace(route);
+        }else{
+            let route = "{{ route('admin.importdata.dtsxd.index') }}" + "?nam=" + $(this).val()
+            location.replace(route);
+        }
+        
+    })
 </script>
 
 

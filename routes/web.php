@@ -1064,6 +1064,43 @@ Route::group(
                                 Route::get('export-unit', 'GiaithuongController@exportUnit')->name('exportUnit');
                             }
                         );
+                        // Import sáng kiến kinh nghiệm
+                        Route::group(
+                            ['prefix' => 'sang-kien-kinh-nghiem', 'as' => 'sangkienkinhnghiem.', 'namespace' => 'Sangkienkinhnghiem'],
+                            function(){
+                                Route::get('index','Sangkienkinhnghiem@index')->name('index');
+
+
+                                Route::post('import-unit', 'Sangkienkinhnghiem@importUnit')->name('importUnit');
+                                Route::post('import-data-unit', 'Sangkienkinhnghiem@importDataUnit')->name('importDataUnit');
+                                Route::get('data-unit', 'Sangkienkinhnghiem@dataUnit')->name('dataUnit');
+                                Route::get('delete-unit', 'Sangkienkinhnghiem@deleteUnit')->name('deleteUnit');
+                                Route::post('update-unit', 'Sangkienkinhnghiem@updateUnit')->name('updateUnit');
+
+                                // //Export sáng kiến kinh nghiệm
+                                Route::get('export-unit', 'Sangkienkinhnghiem@exportUnit')->name('exportUnit');
+                            }
+                        );
+
+                        // Import hội thảo hội nghị
+                        Route::group(
+                            ['prefix' => 'hoi-thao-hoi-nghi', 'as' => 'hoithaohoinghi.', 'namespace' => 'Hoithaohoinghi'],
+                            function(){
+                                Route::get('index','Hoithaohoinghi@index')->name('index');
+
+
+                                Route::post('import-unit', 'Hoithaohoinghi@importUnit')->name('importUnit');
+                                Route::post('import-data-unit', 'Hoithaohoinghi@importDataUnit')->name('importDataUnit');
+                                Route::get('data-unit', 'Hoithaohoinghi@dataUnit')->name('dataUnit');
+                                Route::get('delete-unit', 'Hoithaohoinghi@deleteUnit')->name('deleteUnit');
+                                Route::post('update-unit', 'Hoithaohoinghi@updateUnit')->name('updateUnit');
+
+                                // //Export hội thảo hội nghị
+                                Route::get('export-unit', 'Hoithaohoinghi@exportUnit')->name('exportUnit');
+                            }
+                        );
+
+
                         // Import tuyển sinh
                         Route::group(
                             ['prefix' => 'tuyen-sinh', 'as' => 'tuyensinh.', 'namespace' => 'Tuyensinh'],

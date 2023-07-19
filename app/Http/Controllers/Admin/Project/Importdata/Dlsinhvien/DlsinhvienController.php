@@ -64,6 +64,8 @@ class DlsinhvienController extends DefinedController{
 						'phone' => $dt->phone,
 						'cccd' => $dt->cccd,
 	                    'lop'  => $dt->lop,
+						'sonha'  => $dt->sonha,
+
 	                    'xa'  => $dt->xa,
 	                    'huyen'   => $dt->huyen,
 	                    'tinh' => $dt->tinh,
@@ -80,6 +82,9 @@ class DlsinhvienController extends DefinedController{
 	                    'nbdck'		=> $dt->nbdck,
 	                    'nktkh'		=> $dt->nktkh,
 	                    'trangthai'		=> $dt->trangthai,
+	                    'ngaychuyen'		=> $dt->ngaychuyen,
+	                    'soqd'		=> $dt->soqd,
+
 	                    'namnh'		=> $dt->namnh,
 	                    'namtn'		=> $dt->namtn,
 	                    'namqd'		=> $dt->namqd,
@@ -158,6 +163,8 @@ public function exportUnit() {
 			'phone' => $req->phone,
 			'cccd' => $req->cccd,
             'lop'  => $req->lop,
+			'sonha'  => $req->sonha,
+
             'xa'  => $req->xa,
             'huyen'  => $req->huyen,
             'tinh'  => $req->tinh,
@@ -174,6 +181,9 @@ public function exportUnit() {
             'nbdck'  => $req->nbdck,
             'nktkh'  => $req->nktkh,
             'trangthai'  => $req->trangthai,
+            'ngaychuyen'  => $req->ngaychuyen,
+            'soqd'  => $req->soqd,
+
             'namnh'  => $req->namnh,
             'namtn'  => $req->namtn,
             'namqd'  => $req->namqd,

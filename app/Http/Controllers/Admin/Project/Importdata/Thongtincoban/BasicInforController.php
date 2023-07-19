@@ -53,7 +53,7 @@ class BasicInforController extends DefinedController{
         foreach($data as $dt){
             if($dt->tendvTV != "" && $dt->tendvTA != "" 
                     &&  $dt->tenvtTV != "" && $dt->tenvtTA
-                    &&  $dt->ntl != "" && $dt->lvhd
+                    &&  $dt->ntl != "" 
                 ){
                 $check = DB::table("excel_import_donvi")->where("ma_donvi", $dt->madv);
                 if($check->count() == 0){
@@ -65,11 +65,22 @@ class BasicInforController extends DefinedController{
                         'viet_tat_TA'  => $dt->tenvtTA,
                         'loai_dv_id'   => $dt->loaidv,
                         'ten_truoc_day' => $dt->tenTD,
+
+						'loaiht'	=> $dt->loaiht,
+						'sqdcdlh'	=> $dt->sqdcdlh,
+						'ntncdlh'	=> $dt->ntncdlh,
+
                         'chu_quan'		=> $dt->cqbcq,
                         'ngay_thanh_lap'	=> date("Y-m-d", strtotime($dt->ntl)),
 						'soqd'			=> $dt->soqd,
-                        'lv_hoat_dong'		=> $dt->lvhd,
-                        'diachi'			=> $dt->diachi,
+
+						'soqdcapp'			=> $dt->soqdcapp,
+						'ngcapphd'			=> $dt->ngcapphd,
+						'plcs'				=> $dt->plcs,
+						'lhcsdt'			=> $dt->lhcsdt,
+						'soqdgtc'			=> $dt->soqdgtc,
+
+
                         'phone'			=> $dt->sdtlh,
                         'fax'			=> $dt->fax,
                         'email'			=> $dt->email,
@@ -150,11 +161,22 @@ class BasicInforController extends DefinedController{
 	            'viet_tat_TA'  => $req->viettatTA,
 	            'loai_dv_id'   => $req->loaidv,
 	            'ten_truoc_day' => $req->tentruocday,
+
+	            'loaiht' => $req->loaiht,
+	            'sqdcdlh' => $req->sqdcdlh,
+	            'ntncdlh' => $req->ntncdlh,
+				
 	            'chu_quan'		=> $req->chuquan,
 	            'ngay_thanh_lap'	=> date("Y-m-d", strtotime($req->ngay_thanhlap)),
 				'soqd'			=> $req->soqd,
-	            'lv_hoat_dong'		=> $req->lvhoatdong,
-	            'diachi'			=> $req->diachi,
+
+				'soqdcapp'			=> $req->soqdcapp,
+				'ngcapphd'			=> $req->ngcapphd,
+				'plcs'				=> $req->plcs,
+				'lhcsdt'			=> $req->lhcsdt,
+				'soqdgtc'			=> $req->soqdgtc,
+
+
 	            'phone'			=> $req->phone,
 	            'fax'			=> $req->fax,
 	            'email'			=> $req->email,

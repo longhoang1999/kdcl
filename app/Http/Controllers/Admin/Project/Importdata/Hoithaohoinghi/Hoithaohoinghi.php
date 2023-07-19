@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin\Project\Importdata\Thongkemaytinh;
+<?php namespace App\Http\Controllers\Admin\Project\Importdata\Hoithaohoinghi;
 use App\Http\Controllers\Admin\DefinedController;
 use App\Http\Requests\UserRequest;
 use App\Mail\Register;
@@ -22,13 +22,13 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Country;
 
 //Import Excel
-use App\Imports\Admissions;
-use App\Imports\Tkmaytinh;
+use App\Imports\Hoithaohn;
+
 // export excel
-use App\Exports\Tkmtexport;
+use App\Exports\HoithaohoinghiExport;
 
 
-class ThongkemaytinhController extends DefinedController{
+class Hoithaohoinghi extends DefinedController{
 
 	public function index(){
 		$loai_dv = DB::table("loai_donvi")->select("id", "loai_donvi")->get();
@@ -37,16 +37,16 @@ class ThongkemaytinhController extends DefinedController{
                 ->get();
         $dvex = DB::table("excel_import_donvi")->select("ten_donvi_TV", "ma_donvi", "id")->get();
 		
-        return view('admin.project.Importdata.tkmt')->with([
+        return view('admin.project.Importdata.hoithaohn')->with([
            	'loai_dv'           => $loai_dv,
            	'donvi'             => $donvi,
-            'dvex'              => $dvex
+            'dvex'              => $dvex,
         ]);
 	}
 
 	//Import excel unit
     public function importUnit (Request $req) {
-        $excel = new Tkmaytinh;
+        $excel = new Hoithaohn;
         Excel::import($excel, $req->file);
         return $excel->read();
     }
@@ -54,20 +54,18 @@ class ThongkemaytinhController extends DefinedController{
     public function importDataUnit(Request $req) {
     	$data = json_decode($req->getContent());
         foreach($data as $dt){
-            if($dt->donvi != "" && $dt->tongso != ""){
+            if($dt->chude != "" ){
                 $iddv = DB::table("excel_import_donvi")->select("id", "ma_donvi")
-                        ->where("ma_donvi",  $dt->donvi)->first();
-            	$dataInport = array(
-                    'don_vi'  => $iddv->id,
-                    'tong_so' => $dt->tongso,
-                    'so_may_moi'   => $dt->tongso,
-                    'so_may_cu'   => $dt->smc,
-                    'dchtvp'  => $dt->dcvp,
-                    'dcht'  => $dt->dcht,
-                    'ghi_chu' => $dt->ghichu,
-                    
+                        ->where("ma_donvi",  $dt->dvct)->first();
+                $dataInport = array(
+                    'chude' => $dt->chude,
+                    'dvct' => $iddv->id,
+                    'diadiem' => $dt->diadiem,
+                    'tgtc' => $dt->tgtc,
+                    'sodb' => $dt->sodb,
+                    'ghichu' => $dt->ghichu,
                 );
-                DB::table("excel_import_tk_mt")->insert($dataInport);
+                DB::table("excel_import_hoithohn")->insert($dataInport);
             }
         }
         $respon = [
@@ -77,23 +75,32 @@ class ThongkemaytinhController extends DefinedController{
     }
 
 
-    //Export excel 
-	public function exportTkmt() {
-        return Excel::download(new Tkmtexport, 'Tkmtexport.xlsx');
+    //Export excel giải thưởng
+    public function exportUnit() {
+        return Excel::download(new HoithaohoinghiExport, 'Hội thảo hội nghị.xlsx');
     }
 
-    
     public function dataUnit(Request $req){
-    	$donviExcel = DB::table("excel_import_tk_mt AS tkmt");
+    	$donviExcel = DB::table("excel_import_hoithohn AS gtex");
         if(isset($req->id) && $req->id != ''){
-            $donviExcel = $donviExcel->where("tkmt.id", $req->id)->first();
+            $donviExcel = $donviExcel->where("gtex.id", $req->id)->first();
             return json_encode($donviExcel);
         }else{
-	        $donviExcel = $donviExcel
-	                ->select('tkmt.id', 'tkmt.don_vi', 'tkmt.tong_so',
-	                 'tkmt.so_may_moi', 'tkmt.so_may_cu', 'tkmt.dchtvp','tkmt.dcht','tkmt.ghi_chu');
-
-	        return DataTables::of($donviExcel)          
+	        return DataTables::of($donviExcel) 
+                ->addColumn(
+                    'stt',
+                    function ($donvi) {
+                        return "";
+                    }
+                )            
+                ->addColumn(
+                    'donvicap',
+                    function ($donvi) {
+                        $iddv = DB::table("excel_import_donvi")->select("id", "ten_donvi_TV", "ma_donvi")
+                                ->where("id",  $donvi->dvct)->first();
+                        return $iddv->ten_donvi_TV;
+                    }
+                )      
                 ->addColumn(
                     'actions',
                     function ($donvi) {
@@ -102,12 +109,6 @@ class ThongkemaytinhController extends DefinedController{
                         return $actions;
                     }
                 )
-                ->addColumn(
-                    'stt',
-                    function ($donvi) {
-                        return "";
-                    }
-                ) 
 	            ->rawColumns(['actions'])
 	            ->make(true);
 	    }
@@ -115,22 +116,21 @@ class ThongkemaytinhController extends DefinedController{
 
 
     public function deleteUnit(Request $req){
-        DB::table('excel_import_tk_mt')->where("id", $req->id_delete)->delete();
+        DB::table('excel_import_hoithohn')->where("id", $req->id_delete)->delete();
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.delete'));
     }
 
     public function updateUnit(Request $req){
     	$data = [
-            'don_vi'  => $req->donvi,
-            'tong_so' => $req->tongso,
-            'so_may_moi' => $req->smm,
-            'so_may_cu' => $req->smc,
-            'dchtvp' => $req->dcvp,
-            'dcht' => $req->dcht,
-            'ghi_chu' => $req->ghichu,
+            'chude' => $req->chude,
+            'dvct' => $req->dvct,
+            'diadiem' => $req->diadiem,
+            'tgtc' => $req->tgtc,
+            'sodb' => $req->sodb,
+            'ghichu' => $req->ghichu,		
         ];
-        DB::table("excel_import_tk_mt")->where("id", $req->id_unit)
+        DB::table("excel_import_hoithohn")->where("id", $req->id_unit)
         		->update($data);
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.update'));

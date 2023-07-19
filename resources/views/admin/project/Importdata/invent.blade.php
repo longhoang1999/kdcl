@@ -750,7 +750,8 @@
                         $("#file").val("");
                         $("#add_unit").hide();
                         $("#idtableip").empty();
-                        $("#modal_unit").modal("hide");
+                        $("#modal_unit").find("button.close").click();
+
                         table.ajax.reload();
                     }
                 })

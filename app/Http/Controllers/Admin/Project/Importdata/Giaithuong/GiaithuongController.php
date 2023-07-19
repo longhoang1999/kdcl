@@ -58,13 +58,20 @@ class GiaithuongController extends DefinedController{
                 $iddv = DB::table("excel_import_donvi")->select("id", "ma_donvi")
                         ->where("ma_donvi",  $dt->donvicap)->first();
                 $dataInport = array(
-                    'tgt'  => $dt->tengt,
-                    'ckt' => $dt->capkhent,
-                    'linhvuc' => $dt->linhvuc,
-                    'nam' => $dt->nam,
-                    'doituong' => $dt->doituong,
-                    'ndc' => $dt->nguoidc,
-                    'dvc' => $iddv->id,
+                    'tengt' => $dt->tengt,
+                    'capkhent'  => $dt->capkhent,
+                    'soqd'      => $dt->soqd,
+                    'linhvuc'   => $dt->linhvuc,
+                    'tgkt'      => $dt->tgkt,
+                    'doituong'  => $dt->doituong,
+                    'chucvu'    => $dt->chucvu,
+                    'donvict'   => $dt->donvict,
+                    'lopod'     => $dt->lopod,
+                    'masv'      => $dt->masv,
+                    'ngdc'       => $dt->ngdc,
+                    'dvctkt'    => $dt->dvctkt,
+                    'donvicap'  => $dt->donvicap
+
                 );
                 DB::table("excel_import_giaithuong")->insert($dataInport);
             }
@@ -87,10 +94,6 @@ class GiaithuongController extends DefinedController{
             $donviExcel = $donviExcel->where("gtex.id", $req->id)->first();
             return json_encode($donviExcel);
         }else{
-	        $donviExcel = $donviExcel
-	                ->select('gtex.tgt', 'gtex.ckt', 'gtex.id',
-	                 'gtex.linhvuc', 'gtex.dvc', 'gtex.ndc');
-
 	        return DataTables::of($donviExcel) 
                 ->addColumn(
                     'stt',
@@ -102,7 +105,7 @@ class GiaithuongController extends DefinedController{
                     'donvicap',
                     function ($donvi) {
                         $iddv = DB::table("excel_import_donvi")->select("id", "ten_donvi_TV", "ma_donvi")
-                                ->where("id",  $donvi->dvc)->first();
+                                ->where("ma_donvi",  $donvi->donvicap)->first();
                         return $iddv->ten_donvi_TV;
                     }
                 )      
@@ -128,13 +131,19 @@ class GiaithuongController extends DefinedController{
 
     public function updateUnit(Request $req){
     	$data = [
-            'tgt'  => $req->tengt,
-            'ckt' => $req->capkhent,
-			'linhvuc' => $req->linhvuc,
-			'nam' => $req->nam,
-			'doituong' => $req->doituong,
-			'ndc' => $req->nguoidc,
-			'dvc'=> $req->donvicap,
+            'tengt' => $req->tengt,
+            'capkhent'  => $req->capkhent,
+            'soqd'      => $req->soqd,
+            'linhvuc'   => $req->linhvuc,
+            'tgkt'      => $req->tgkt,
+            'doituong'  => $req->doituong,
+            'chucvu'    => $req->chucvu,
+            'donvict'   => $req->donvict,
+            'lopod'     => $req->lopod,
+            'masv'      => $req->masv,
+            'ngdc'       => $req->ngdc,
+            'dvctkt'    => $req->dvctkt,
+            'donvicap'  => $req->donvicap
 			
         ];
         DB::table("excel_import_giaithuong")->where("id", $req->id_unit)

@@ -105,6 +105,8 @@
 			'3' 		=> 'Bài báo',
 			'4'			=> 'Phát minh - sáng chế',
 			'5'			=> 'Giải thưởng',
+			'6'			=> 'Sáng kiến kinh nghiệm',
+			'7'			=> 'Hội thảo, hội nghị',
 		),
 		'10_3_list' 	=> array(
 			'1' 		=> 'Thông tin cơ bản',
@@ -237,6 +239,8 @@
 			'37'		=> route('admin.importdata.cktcnh.index'),
 			'38'		=> route('admin.importdata.ckdngv.index'),
 			'39'		=> route('admin.importdata.ckdngvch.index'),
+			'40'		=> route('admin.importdata.sangkienkinhnghiem.index'),
+			'41'		=> route('admin.importdata.hoithaohoinghi.index'),
 
 		),
 	);

@@ -25,13 +25,19 @@ class CompilationBook implements ToModel,WithHeadingRow
                 'loaisach' =>  $dataExport[4] != null ? $dataExport[4] : "",
                 'chubien' =>  $dataExport[5] != null ? $dataExport[5] : "",
                 'thanhvien' =>  $dataExport[6] != null ? $dataExport[6] : "",
-                'namdk' =>  $dataExport[7] != null ? $dataExport[7] : "",
-                'namnt' =>  $dataExport[8] != null ? $dataExport[8] : "",
-                'namxuatban' =>  $dataExport[9] != null ? $dataExport[9] : "",
-                'nhaxuatban' =>  $dataExport[10] != null ? $dataExport[10] : "",
-                'hpsd' =>  $dataExport[11] != null ? $dataExport[11] : "",
-                'nhsd' =>  $dataExport[12] != null ? $dataExport[12] : "",
-                'trangthai' =>  $dataExport[13] != null ? $dataExport[13] : "",
+
+                'dvchutri' =>  $dataExport[7] != null ? $dataExport[7] : "",
+                'tgdk' =>  $dataExport[8] != null ? $dataExport[8] : "",
+                'tgnt' =>  $dataExport[9] != null ? $dataExport[9] : "",
+                'tgxb' =>  $dataExport[10] != null ? $dataExport[10] : "",
+
+                'namdk' =>  $dataExport[11] != null ? $dataExport[11] : "",
+                'namnt' =>  $dataExport[12] != null ? $dataExport[12] : "",
+                'namxuatban' =>  $dataExport[13] != null ? $dataExport[13] : "",
+                'nhaxuatban' =>  $dataExport[14] != null ? $dataExport[14] : "",
+                'hpsd' =>  $dataExport[15] != null ? $dataExport[15] : "",
+                'nhsd' =>  $dataExport[16] != null ? $dataExport[16] : "",
+                'trangthai' =>  $dataExport[17] != null ? $dataExport[17] : "",
               
             );
             array_push($this->data, $dataPost);

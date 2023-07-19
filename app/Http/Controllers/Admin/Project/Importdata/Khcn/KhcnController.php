@@ -59,6 +59,8 @@ class KhcnController extends DefinedController{
                         'tendetai' => $dt->tdtda,
                         'loai' => $dt->loai,
                         'capdetai' => $dt->capdetai,
+                        'tgbd' => $dt->tgbd,
+                        'tgnt' => $dt->tgnt,
                         'namdk' => $dt->namdk,
                         'namnt' => $dt->namnghiemt,
                         'linhvuc' => $dt->linhvuc,
@@ -131,6 +133,9 @@ class KhcnController extends DefinedController{
             'maso' => $req->maso,
 			'loai'=> $req->loai,
 			'capdetai'=> $req->capdetai,
+            'tgbd'=> $req->tgbd,
+            'tgnt'=> $req->tgnt,
+
 			'namdk'=> $req->namdk,
 			'namnt'=> $req->namnghiemt,
 			'linhvuc'=> $req->linhvuc,

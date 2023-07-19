@@ -134,9 +134,6 @@
                     @lang('project/ImportdataExcel/title.ntl')
                 </th>
                 <th>
-                    @lang('project/ImportdataExcel/title.lvhd')
-                </th>
-                <th>
                     @lang('project/ImportdataExcel/title.hanhd')
                 </th>
              </tr>
@@ -336,6 +333,28 @@
                                 </label>
                                 <input type="text" class="form-control " id="forTenTD" placeholder="@lang('project/ImportdataExcel/title.tentd')" required name="tentruocday">
                             </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="forloaiht">
+                                    <span>@lang('project/ImportdataExcel/title.loaiht')</span>
+                                </label>
+                                <input type="text" class="form-control " id="forloaiht" placeholder="@lang('project/ImportdataExcel/title.loaiht')" name="loaiht">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="forsqdcdlh">
+                                    <span>@lang('project/ImportdataExcel/title.sqdcdlh')</span>
+                                </label>
+                                <input type="text" class="form-control " id="forsqdcdlh" placeholder="@lang('project/ImportdataExcel/title.sqdcdlh')" name="sqdcdlh">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="forntncdlh">
+                                    <span>@lang('project/ImportdataExcel/title.ntncdlh')</span>
+                                </label>
+                                <input type="text" class="form-control " id="forntncdlh" placeholder="@lang('project/ImportdataExcel/title.ntncdlh')" name="ntncdlh">
+                            </div>
+
+
+
                             <div class="form-group col-md-4">
                                 <label for="forChuquan">
                                     <span>@lang('project/ImportdataExcel/title.cqBcq')</span>
@@ -357,13 +376,38 @@
                                 </label>
                                 <input class="form-control" id="forsoqd" type="text" placeholder="@lang('project/ImportdataExcel/title.soqd')" required name="soqd"> 
                             </div>
+
                             <div class="form-group col-md-4">
-                                <label for="forLvhd">
-                                    <span>@lang('project/ImportdataExcel/title.lvhd')</span>
-                                    <span class="text-danger">*</span>
+                                <label for="forsoqdcapp">
+                                    <span>@lang('project/ImportdataExcel/title.soqdcapp')</span>
                                 </label>
-                                <input class="form-control" id="forLvhd" type="text" placeholder="@lang('project/ImportdataExcel/title.lvhd')" required name="lvhoatdong"> 
+                                <input class="form-control" id="forsoqdcapp" type="text" placeholder="@lang('project/ImportdataExcel/title.soqdcapp')" name="soqdcapp"> 
                             </div>
+                            <div class="form-group col-md-4">
+                                <label for="forngcapphd">
+                                    <span>@lang('project/ImportdataExcel/title.ngcapphd')</span>
+                                </label>
+                                <input class="form-control" id="forngcapphd" type="text" placeholder="@lang('project/ImportdataExcel/title.ngcapphd')" name="ngcapphd"> 
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="forplcs">
+                                    <span>@lang('project/ImportdataExcel/title.plcs')</span>
+                                </label>
+                                <input class="form-control" id="forplcs" type="text" placeholder="@lang('project/ImportdataExcel/title.plcs')" name="plcs"> 
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="forlhcsdt">
+                                    <span>@lang('project/ImportdataExcel/title.lhcsdt')</span>
+                                </label>
+                                <input class="form-control" id="forlhcsdt" type="text" placeholder="@lang('project/ImportdataExcel/title.lhcsdt')" name="lhcsdt"> 
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="forsoqdgtc">
+                                    <span>@lang('project/ImportdataExcel/title.soqdgtc')</span>
+                                </label>
+                                <input class="form-control" id="forsoqdgtc" type="text" placeholder="@lang('project/ImportdataExcel/title.soqdgtc')" name="soqdgtc"> 
+                            </div>
+
                             <div class="form-group col-md-4">
                                 <label for="forSdtlh">
                                     <span>@lang('project/ImportdataExcel/title.sdtlh')</span>
@@ -416,14 +460,6 @@
                                     <span>@lang('project/ImportdataExcel/title.tgcbk1')</span>
                                 </label>
                                 <input class="form-control" id="forTgcbk1" type="text" placeholder="@lang('project/ImportdataExcel/title.tgcbk1')" required name="tgcbk1"> 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label for="forDiachi">
-                                    <span>@lang('project/ImportdataExcel/title.diachi')</span>
-                                </label>
-                                <textarea class="form-control" placeholder="@lang('project/ImportdataExcel/title.tgcbk1')" id="forDiachi" name="diachi"></textarea>
                             </div>
                         </div>
                     </div> 
@@ -483,7 +519,7 @@
                 { data: 'ten_donvi_TV', name: 'ten_donvi_TV' },
                 { data: 'loai_donvi', name: 'loai_donvi' },
                 { data: 'ngay_TL', name: 'ngay_TL' },
-                { data: 'lv_hoat_dong', name: 'lv_hoat_dong' },
+               
                 { data: 'actions', name: 'actions' ,className: 'action'},
             ],            
         });
@@ -548,6 +584,17 @@
                                 <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.tentd')
                                 </th>
+
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.loaiht')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.sqdcdlh')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.ntncdlh')
+                                </th>
+
                                 <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.cqBcq')
                                 </th>
@@ -558,13 +605,23 @@
                                 <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.soqd')
                                 </th>
+                                
                                 <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.lvhd')
-                                    <span class="icon-oblig">*</span>
+                                    @lang('project/ImportdataExcel/title.soqdcapp')
                                 </th>
                                 <th class="row_width p-2">
-                                    @lang('project/ImportdataExcel/title.diachi')
+                                    @lang('project/ImportdataExcel/title.ngcapphd')
                                 </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.plcs')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.lhcsdt')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.soqdgtc')
+                                </th>
+
                                 <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.sdtlh')
                                 </th>
@@ -639,43 +696,67 @@
                                 <td contenteditable class="text-center p-2 row7">
                                     ${item.tenTD}
                                 </td>
+
                                 <td contenteditable class="text-center p-2 row8">
+                                    ${item.loaiht}
+                                </td>
+                                <td contenteditable class="text-center p-2 row9">
+                                    ${item.sqdcdlh}
+                                </td>
+                                <td contenteditable class="text-center p-2 row10">
+                                    ${item.ntncdlh}
+                                </td>
+                                
+
+
+                                <td contenteditable class="text-center p-2 row11">
                                     ${item.cqbcq}
                                 </td>
-                                <td contenteditable class="check-empty check-date text-center p-2 row9">
+                                <td contenteditable class="check-empty check-date text-center p-2 row12">
                                     ${item.ntl}
                                 </td>
-                                <td contenteditable class="check-empty text-center p-2 row10">
+                                <td contenteditable class="check-empty text-center p-2 row13">
                                     ${item.soqd}
                                 </td>
-                                <td contenteditable class="check-empty text-center p-2 row11">
-                                    ${item.lvhd}
+
+                                <td contenteditable class="check-empty text-center p-2 row14">
+                                    ${item.soqdcapp}
                                 </td>
-                                <td contenteditable class="text-center p-2 row12">
-                                    ${item.diachi}
+                                <td contenteditable class="check-empty text-center p-2 row15">
+                                    ${item.ngcapphd}
                                 </td>
-                                <td contenteditable class="check-phone text-center p-2 row13">
+                                <td contenteditable class="check-empty text-center p-2 row16">
+                                    ${item.plcs}
+                                </td>
+                                <td contenteditable class="check-empty text-center p-2 row17">
+                                    ${item.lhcsdt}
+                                </td>
+                                <td contenteditable class="check-empty text-center p-2 row18">
+                                    ${item.soqdgtc}
+                                </td>
+
+                                <td contenteditable class="check-phone text-center p-2 row19">
                                     ${item.sdtlh}
                                 </td>
-                                <td contenteditable class="text-center p-2 row14">
+                                <td contenteditable class="text-center p-2 row20">
                                     ${item.fax}
                                 </td>
-                                <td contenteditable class="check-email text-center p-2 row15">
+                                <td contenteditable class="check-email text-center p-2 row21">
                                     ${item.email}
                                 </td>
-                                <td contenteditable class="check-website text-center p-2 row16">
+                                <td contenteditable class="check-website text-center p-2 row22">
                                     ${item.website}
                                 </td>
-                                <td contenteditable class="text-center p-2 row17">
+                                <td contenteditable class="text-center p-2 row23">
                                     ${item.notes}
                                 </td>
-                                <td contenteditable class="text-center p-2 row18">
+                                <td contenteditable class="text-center p-2 row24">
                                     ${item.lhcsgd}
                                 </td>
-                                <td contenteditable class="check-number text-center p-2 row19">
+                                <td contenteditable class="check-number text-center p-2 row25">
                                     ${item.tgdtk1}
                                 </td>
-                                <td contenteditable class="check-number text-center p-2 row20">
+                                <td contenteditable class="check-number text-center p-2 row26">
                                     ${item.tgcbk1}
                                 </td>
                                 <td contenteditable class="text-center p-2 trash-btn">
@@ -716,19 +797,29 @@
                 <td contenteditable class="check-empty text-center p-2 row5"></td>
                 <td contenteditable class="check-empty text-center p-2 row6"></td>
                 <td contenteditable class="text-center p-2 row7"></td>
+
                 <td contenteditable class="text-center p-2 row8"></td>
-                <td contenteditable class="check-empty check-date text-center p-2 row9"></td>
-                <td contenteditable class="check-empty text-center p-2 row10"></td>
-                <td contenteditable class="text-center p-2 row11"></td>
-                <td contenteditable class="check-phone text-center p-2 row12"></td>
+                <td contenteditable class="text-center p-2 row9"></td>
+                <td contenteditable class="text-center p-2 row10"></td>
+                
+                <td contenteditable class="check-empty text-center p-2 row11"></td>
+                <td contenteditable class="check-empty text-center p-2 row12"></td>
                 <td contenteditable class="text-center p-2 row13"></td>
-                <td contenteditable class="check-email text-center p-2 row14"></td>
-                <td contenteditable class="check-website text-center p-2 row15"></td>
+
+                <td contenteditable class="text-center p-2 row14"></td>
+                <td contenteditable class="text-center p-2 row15"></td>
                 <td contenteditable class="text-center p-2 row16"></td>
                 <td contenteditable class="text-center p-2 row17"></td>
-                <td contenteditable class="check-number text-center p-2 row18"></td>
-                <td contenteditable class="check-number text-center p-2 row19"></td>
-                <td contenteditable class="check-number text-center p-2 row20"></td>
+                <td contenteditable class="text-center p-2 row18"></td>
+                <td contenteditable class="text-center p-2 row19"></td>
+                
+                <td contenteditable class="text-center p-2 row20"></td>
+                <td contenteditable class="check-email text-center p-2 row21"></td>
+                <td contenteditable class="check-website text-center p-2 row22"></td>
+                <td contenteditable class="text-center p-2 row23"></td>
+                <td contenteditable class="text-center p-2 row24"></td>
+                <td contenteditable class="check-number text-center p-2 row25"></td>
+                <td contenteditable class="check-number text-center p-2 row26"></td>
                 <td contenteditable class="text-center p-2 trash-btn">
                     <ion-icon name="trash-outline"></ion-icon>
                 </td>
@@ -911,19 +1002,32 @@
                     'tenvtTV' :  $(this).find('.row5').text().trim(),
                     'tenvtTA' : $(this).find('.row6').text().trim(),
                     'tenTD' :    $(this).find('.row7').text().trim(),
-                    'cqbcq' :   $(this).find('.row8').text().trim(),
-                    'ntl': $(this).find('.row9').text().trim(),
-                    'soqd' :    $(this).find('.row10').text().trim(),
-                    'lvhd' :    $(this).find('.row11').text().trim(),
-                    'diachi' :   $(this).find('.row12').text().trim(),
-                    'sdtlh' :  $(this).find('.row13').text().trim(),
-                    'fax' :   $(this).find('.row14').text().trim(),
-                    'email' :    $(this).find('.row15').text().trim(),
-                    'website' :    $(this).find('.row16').text().trim(),
-                    'notes' :    $(this).find('.row17').text().trim(),
-                    'lhcsgd' :  $(this).find('.row18').text().trim(),
-                    'tgdtk1' :   $(this).find('.row19').text().trim(),
-                    'tgcbk1' : $(this).find('.row20').text().trim(),
+
+                    'loaiht' :    $(this).find('.row8').text().trim(),
+                    'sqdcdlh' :    $(this).find('.row9').text().trim(),
+                    'ntncdlh' :    $(this).find('.row10').text().trim(),
+
+
+
+                    'cqbcq' :   $(this).find('.row11').text().trim(),
+                    'ntl': $(this).find('.row12').text().trim(),
+                    'soqd' :    $(this).find('.row13').text().trim(),
+
+                    'soqdcapp' :    $(this).find('.row14').text().trim(),
+                    'ngcapphd' :    $(this).find('.row15').text().trim(),
+                    'plcs' :    $(this).find('.row16').text().trim(),
+                    'lhcsdt' :    $(this).find('.row17').text().trim(),
+                    'soqdgtc' :    $(this).find('.row18').text().trim(),
+
+
+                    'sdtlh' :  $(this).find('.row19').text().trim(),
+                    'fax' :   $(this).find('.row20').text().trim(),
+                    'email' :    $(this).find('.row21').text().trim(),
+                    'website' :    $(this).find('.row22').text().trim(),
+                    'notes' :    $(this).find('.row23').text().trim(),
+                    'lhcsgd' :  $(this).find('.row24').text().trim(),
+                    'tgdtk1' :   $(this).find('.row25').text().trim(),
+                    'tgcbk1' : $(this).find('.row26').text().trim(),
                 }
                 dataSubmit.push(dataObj);
             });
@@ -984,10 +1088,21 @@
                 $('#forVTTV').val(data.viet_tat_TV);
                 $('#forVTTA').val(data.viet_tat_TA);
                 $('#forTenTD').val(data.ten_truoc_day);
+
+                $('#forloaiht').val(data.loaiht);
+                $('#forsqdcdlh').val(data.sqdcdlh);
+                $('#forntncdlh').val(data.ntncdlh);
+
                 $('#forChuquan').val(data.chu_quan);
                 $('#forNtl').val(data.ngay_thanh_lap);
                 $('#forsoqd').val(data.soqd);
-                $('#forLvhd').val(data.lv_hoat_dong);
+
+                $('#forsoqdcapp').val(data.soqdcapp);
+                $('#forngcapphd').val(data.ngcapphd);
+                $('#forplcs').val(data.plcs);
+                $('#forlhcsdt').val(data.lhcsdt);
+                $('#forsoqdgtc').val(data.soqdgtc);
+
                 $('#forSdtlh').val(data.phone);
                 $('#forFax').val(data.fax);
                 $('#forEmail').val(data.email);
@@ -996,7 +1111,6 @@
                 $('#forLhcsgd').val(data.loai_hinh);
                 $('#forTgbdk1').val(data.tgdtk1);
                 $('#forTgcbk1').val(data.tgcbk1);
-                $('#forDiachi').val(data.diachi);
                 
             })
     })

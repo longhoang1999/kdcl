@@ -320,6 +320,32 @@
                                 </label>
                                 <input type="text" class="form-control " id="forthanhvien" placeholder="@lang('project/ImportdataExcel/title.thanhvien')" name="thanhvien">
                             </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="fordvchutri">
+                                    <span>@lang('project/ImportdataExcel/title.dvchutri')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fordvchutri" placeholder="@lang('project/ImportdataExcel/title.dvchutri')" name="dvchutri">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="fortgdk">
+                                    <span>@lang('project/ImportdataExcel/title.tgdk')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fortgdk" placeholder="@lang('project/ImportdataExcel/title.tgdk')" name="tgdk">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="fortgnt">
+                                    <span>@lang('project/ImportdataExcel/title.tgnt')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fortgnt" placeholder="@lang('project/ImportdataExcel/title.tgnt')" name="tgnt">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="fortgxb">
+                                    <span>@lang('project/ImportdataExcel/title.tgxb')</span>
+                                </label>
+                                <input type="text" class="form-control " id="fortgxb" placeholder="@lang('project/ImportdataExcel/title.tgxb')" name="tgxb">
+                            </div>
+
                             <div class="form-group col-md-3">
                                 <label for="fornamdk">
                                     <span>@lang('project/ImportdataExcel/title.namdk')</span>
@@ -478,6 +504,20 @@
                                 <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.thanhvien')
                                 </th>
+
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.dvchutri')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.tgdk')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.tgnt')
+                                </th>
+                                <th class="row_width p-2">
+                                    @lang('project/ImportdataExcel/title.tgxb')
+                                </th>
+
                                 <th class="row_width p-2">
                                     @lang('project/ImportdataExcel/title.namdk')
                                 </th>
@@ -537,25 +577,39 @@
                                 <td contenteditable class="text-center p-2 row6">
                                     ${item.thanhvien}
                                 </td>
+
                                 <td contenteditable class="text-center p-2 row7">
-                                    ${item.namdk}
+                                    ${item.dvchutri}
                                 </td>
                                 <td contenteditable class="text-center p-2 row8">
-                                    ${item.namnt}
+                                    ${item.tgdk}
                                 </td>
                                 <td contenteditable class="text-center p-2 row9">
-                                    ${item.namxuatban}
+                                    ${item.tgnt}
                                 </td>
                                 <td contenteditable class="text-center p-2 row10">
-                                    ${item.nhaxuatban}
+                                    ${item.tgxb}
                                 </td>
+
                                 <td contenteditable class="text-center p-2 row11">
-                                    ${item.hpsd}
+                                    ${item.namdk}
                                 </td>
                                 <td contenteditable class="text-center p-2 row12">
-                                    ${item.nhsd}
+                                    ${item.namnt}
                                 </td>
                                 <td contenteditable class="text-center p-2 row13">
+                                    ${item.namxuatban}
+                                </td>
+                                <td contenteditable class="text-center p-2 row14">
+                                    ${item.nhaxuatban}
+                                </td>
+                                <td contenteditable class="text-center p-2 row15">
+                                    ${item.hpsd}
+                                </td>
+                                <td contenteditable class="text-center p-2 row16">
+                                    ${item.nhsd}
+                                </td>
+                                <td contenteditable class="text-center p-2 row17">
                                     ${item.trangthai}
                                 </td>
                                 <td contenteditable class="text-center p-2 trash-btn">
@@ -602,6 +656,10 @@
                 <td contenteditable class="text-center p-2 row11"></td>
                 <td contenteditable class="text-center p-2 row12"></td>
                 <td contenteditable class="text-center p-2 row13"></td>
+                <td contenteditable class="text-center p-2 row14"></td>
+                <td contenteditable class="text-center p-2 row15"></td>
+                <td contenteditable class="text-center p-2 row16"></td>
+                <td contenteditable class="text-center p-2 row17"></td>
                 <td contenteditable class="text-center p-2 trash-btn">
                     <ion-icon name="trash-outline"></ion-icon>
                 </td>
@@ -783,13 +841,19 @@
                     'loaisach' :   $(this).find('.row4').text().trim(),
                     'chubien' :  $(this).find('.row5').text().trim(),
                     'thanhvien' :  $(this).find('.row6').text().trim(),
-                    'namdk' : $(this).find('.row7').text().trim(),
-                    'namnt' : $(this).find('.row8').text().trim(),
-                    'namxuatban' : $(this).find('.row9').text().trim(),
-                    'nhaxuatban' : $(this).find('.row10').text().trim(),
-                    'hpsd' : $(this).find('.row11').text().trim(),
-                    'nhsd' : $(this).find('.row12').text().trim(),
-                    'trangthai' :   $(this).find('.row13').text().trim(),
+
+                    'dvchutri' :  $(this).find('.row7').text().trim(),
+                    'tgdk' :  $(this).find('.row8').text().trim(),
+                    'tgnt' :  $(this).find('.row9').text().trim(),
+                    'tgxb' :  $(this).find('.row10').text().trim(),
+
+                    'namdk' : $(this).find('.row11').text().trim(),
+                    'namnt' : $(this).find('.row12').text().trim(),
+                    'namxuatban' : $(this).find('.row13').text().trim(),
+                    'nhaxuatban' : $(this).find('.row14').text().trim(),
+                    'hpsd' : $(this).find('.row15').text().trim(),
+                    'nhsd' : $(this).find('.row16').text().trim(),
+                    'trangthai' :   $(this).find('.row17').text().trim(),
                     
                 }
                 dataSubmit.push(dataObj);
@@ -851,6 +915,12 @@
                 $("#forloaisach").val(data.loaisach);
                 $("#forchubien").val(data.chubien);
                 $("#forthanhvien").val(data.thanhvien);
+
+                $("#fordvchutri").val(data.dvchutri);
+                $("#fortgdk").val(data.tgdk);
+                $("#fortgnt").val(data.tgnt);
+                $("#fortgxb").val(data.tgxb);
+
                 $("#fornamdk").val(data.namdk);
                 $("#fornamnt").val(data.namnt);
                 $("#fornamxuatban").val(data.namxb);
