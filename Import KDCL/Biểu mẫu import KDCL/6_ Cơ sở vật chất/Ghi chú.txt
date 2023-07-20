@@ -1,0 +1,2 @@
+﻿Phần "Diện tích ký túc xá", "Diện tích sàn xây dựng" vui lòng nhập dữ liệu bằng tay, 
+do cấu trúc bảng excel quá phức tạp không import được

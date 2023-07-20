@@ -106,7 +106,7 @@ class DlsinhvienController extends DefinedController{
 
 //Export excel Admissions
 public function exportUnit() {
-	return Excel::download(new StudentExport, 'student.xlsx');
+	return Excel::download(new StudentExport, 'Dữ liệu sinh viên.xlsx');
 }
 
     public function dataUnit(Request $req){

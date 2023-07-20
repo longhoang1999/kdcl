@@ -1569,6 +1569,9 @@ Route::group(
                                 Route::get('index','CongkhaitcnhController@index')->name('index');
                                 Route::post('updatedata','CongkhaitcnhController@updatedata')->name('updatedata');
                                 Route::post('loaddata','CongkhaitcnhController@loaddata')->name('loaddata');
+
+                                Route::get('exportCktcnh','CongkhaitcnhController@exportCktcnh')->name('exportCktcnh');
+
                             }
                         );
                         

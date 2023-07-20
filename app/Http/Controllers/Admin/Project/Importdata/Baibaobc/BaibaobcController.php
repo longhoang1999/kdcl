@@ -84,7 +84,7 @@ class BaibaobcController extends DefinedController{
 
     //Export excel bài báo-báo cáo
     public function exportUnit() {
-        return Excel::download(new ReportArticleExport, 'reportarticle.xlsx');
+        return Excel::download(new ReportArticleExport, 'Bài báo báo cáo.xlsx');
     }
 
 

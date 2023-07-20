@@ -35,7 +35,7 @@
 <section class="content-body">
     <div class="form-standard">
         <div class="item-group-button right-block mb-2">
-            <a href="{{ route('admin.importdata.cknckh.exportCknckh') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
+            <a href="{{ route('admin.importdata.cktcnh.exportCktcnh') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
                 <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
             </a>
             <button class="btn" data-toggle="modal" data-target="#modalDeleteAll__" data-nametable="excel_import_tcnh" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.xoatatca')">

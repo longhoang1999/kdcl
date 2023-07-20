@@ -11,20 +11,28 @@ class Tktcexport implements FromCollection, WithHeadings
     public function collection()
     {
         $getAdmissions = [];
-        $tss = DB::table('excel_import_tk_tai_chinh')->get();
+        $tss = DB::table('excel_import_tk_tai_chinh')->where('parent_id', null)->get();
         
         foreach($tss as $key => $ts){
             $row = [
                 $key + 1,
                 $ts->noi_dung ,
-                $ts->n_2019,
-                $ts->n_2020,
-                $ts->n_2021,
-                $ts->n_2022,
-                $ts->n_2023,
-
+                "",
+                "",
             ];
             array_push($getAdmissions, $row);
+
+            $tssChild = DB::table('excel_import_tk_tai_chinh')->where('parent_id', $ts->id)->get();
+            foreach($tssChild as $key2 => $child){
+                $row2 = [
+                    ($key + 1) . "." . ($key2 + 1),
+                    "" ,
+                    $child->doanhthu,
+                    $child->nam,
+                ];
+                array_push($getAdmissions, $row2);
+            }
+            
         }
         return collect($getAdmissions);
     }
@@ -33,11 +41,8 @@ class Tktcexport implements FromCollection, WithHeadings
         return [
             "STT",
             "Nội dung",
-            "2019",
-            "2020",
-            "2021",
-            "2022",
-            "2023",
+            "Doanh thu",
+            "Năm",
             
         ];
     }

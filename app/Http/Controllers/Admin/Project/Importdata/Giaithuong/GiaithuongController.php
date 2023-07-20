@@ -85,7 +85,7 @@ class GiaithuongController extends DefinedController{
 
     //Export excel giải thưởng
     public function exportUnit() {
-        return Excel::download(new AwardExport, 'award.xlsx');
+        return Excel::download(new AwardExport, 'Giải thưởng.xlsx');
     }
 
     public function dataUnit(Request $req){

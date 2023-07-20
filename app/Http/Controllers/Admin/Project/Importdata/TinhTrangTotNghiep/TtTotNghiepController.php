@@ -470,7 +470,7 @@ class TtTotNghiepController extends DefinedController{
 
     //Export excel Admissions
 	public function exportTttnsv() {
-        return Excel::download(new TttnsvExport, 'TttnsvExport.xlsx');
+        return Excel::download(new TttnsvExport, 'Tình trạng tốt nghiệp sinh viên.xlsx');
     }
 
     

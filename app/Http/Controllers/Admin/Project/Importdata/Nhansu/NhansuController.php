@@ -134,7 +134,7 @@ class NhansuController extends DefinedController{
 
     //Export excel Unit
 	public function ExportUnit() {
-        return Excel::download(new UnitsExport, 'unit.xlsx');
+        return Excel::download(new UnitsExport, 'Thông tin nhân sự.xlsx');
     }
     
     public function dataUnit(Request $req){

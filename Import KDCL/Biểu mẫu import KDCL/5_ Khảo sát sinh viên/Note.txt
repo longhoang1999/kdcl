@@ -1,0 +1,2 @@
+﻿Bảng khảo sát tình trạng tốt nghiệp sinh viên không thể import excel do cấu trúc bảng quá phức tạp
+Người dùng vui lòng nhập dữ liệu bằng tay do hệ thống cung cấp

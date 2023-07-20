@@ -539,7 +539,7 @@ class ThongkekytucxaController extends DefinedController{
 
     //Export excel Admissions
 	public function exportTkktx() {
-        return Excel::download(new Tkktxexport, 'Tkktxexport.xlsx');
+        return Excel::download(new Tkktxexport, 'Thông kê ký túc xá.xlsx');
     }
 
     

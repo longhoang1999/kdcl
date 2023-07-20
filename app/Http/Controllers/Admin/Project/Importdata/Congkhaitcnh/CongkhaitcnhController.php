@@ -26,6 +26,7 @@ use App\Imports\Cksvtn;
 
 // export excel
 use App\Exports\CksvtnExport;
+use App\Exports\CktcnhExport;
 
 class CongkhaitcnhController extends DefinedController{
 
@@ -41,7 +42,9 @@ class CongkhaitcnhController extends DefinedController{
         return $excel->read();
     }
     public function updatedata(Request $req){
-        $find = DB::table("excel_import_tcnh")->where("nam", $req->year)->delete();
+        $find = DB::table("excel_import_tcnh")
+                ->where("parent_II", $req->childGloble)
+                ->where("nam", $req->year)->delete();
         foreach($req->donvitinhArr as $key => $donvitinhArr){
             if($donvitinhArr != "" && $req->hp1namArr[$key] != "" && $req->hpkhoaArr[$key] != ""){
                 $data = [
@@ -109,8 +112,8 @@ class CongkhaitcnhController extends DefinedController{
 
 
     //Export excel bài báo-báo cáo
-    public function exportCksvtn() {
-        return Excel::download(new CksvtnExport, 'Cong-khai-sinh-vien-tot-nghiep.xlsx');
+    public function exportCktcnh() {
+        return Excel::download(new CktcnhExport, 'Cong khai tài chính năm học.xlsx');
     }
 
 

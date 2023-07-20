@@ -87,7 +87,7 @@ class KhcnController extends DefinedController{
 
     //Export excel Khcn
     public function exportUnit() {
-	return Excel::download(new KhcnExport, 'khcn.xlsx');
+	return Excel::download(new KhcnExport, 'Khoa học công nghệ.xlsx');
     }
 
     public function dataUnit(Request $req){

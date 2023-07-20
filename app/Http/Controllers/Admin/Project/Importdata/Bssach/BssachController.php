@@ -89,7 +89,7 @@ class BssachController extends DefinedController{
 
     //Export excel Biên soạn sách
     public function exportUnit() {
-        return Excel::download(new CompilationBookExport, 'biensoansach.xlsx');
+        return Excel::download(new CompilationBookExport, 'Biên soạn sách.xlsx');
         }
 
     public function dataUnit(Request $req){

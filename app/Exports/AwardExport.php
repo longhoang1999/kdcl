@@ -13,16 +13,21 @@ class AwardExport implements FromCollection, WithHeadings
         $getgiaithuong = [];
         $gts = DB::table('excel_import_giaithuong')->get();
         foreach($gts as $key => $gt){
-            
             $row = [
                 $key + 1,
-                $gt->tgt ,
-                $gt->ckt,
-                $gt->linhvuc,
-                $gt->nam,
-                $gt->doituong,
-                $gt->ndc,
-                $gt->dvc,
+                $gt->tengt       ,
+                $gt->capkhent        ,
+                $gt->soqd            ,
+                $gt->linhvuc         ,
+                $gt->tgkt            ,
+                $gt->doituong        ,
+                $gt->chucvu          ,
+                $gt->donvict         ,
+                $gt->lopod           ,
+                $gt->masv            ,
+                $gt->ngdc             ,
+                $gt->dvctkt          ,
+                $gt->donvicap        
 
             ];
             array_push($getgiaithuong, $row);
@@ -33,12 +38,20 @@ class AwardExport implements FromCollection, WithHeadings
     public function headings() :array {
         return [
             "STT",
-            "Tên giải thưởng",
+            "Tên giải thưởng/ Hình thức KT",
             "Cấp khen thưởng",
+            "Số Quyết định",
+
             "Lĩnh vực",
-            "Năm",
-            "Đối tượng",
+            "Thời gian khen thưởng (mm/yyyy)",
+            "Đối tượng KT",
+            "Chức vụ",
+            "Đơn vị công tác",
+            "Lớp ổn định",
+            "Mã sinh viên",
+
             "Người được cấp",
+            "Đơn vị chủ tri của đối tượng được khen thưởng",
             "Đơn vị cấp",
     
         ];

@@ -101,7 +101,7 @@ class BasicInforController extends DefinedController{
     }
 	//Export excel unit
 	public function ExportBasiclnfor() {
-        return Excel::download(new BasiclnforExport, 'basiclnfor.xlsx');
+        return Excel::download(new BasiclnforExport, 'Export_Thông tin cơ bản.xlsx');
     }
 
     public function dataUnit(Request $req){

@@ -25,11 +25,19 @@ class BasiclnforExport implements FromCollection, WithHeadings
                 $dv->viet_tat_TV,
                 $dv->viet_tat_TA,
                 $dv->ten_truoc_day,
+
+                $dv->loaiht,
+                $dv->sqdcdlh,
+                $dv->ntncdlh,
                 $dv->chu_quan,
                 date("d/m/Y", strtotime($dv->ngay_thanh_lap)),
                 $dv->soqd,
-                $dv->lv_hoat_dong,
-                $dv->diachi,
+                $dv->soqdcapp,
+                $dv->ngcapphd,
+                $dv->plcs,
+                $dv->lhcsdt,
+                $dv->soqdgtc,
+
                 $dv->phone,
                 $dv->fax,
                 $dv->email,
@@ -38,7 +46,6 @@ class BasiclnforExport implements FromCollection, WithHeadings
                 $dv->loai_hinh,
                 $dv->tgdtk1,
                 $dv->tgcbk1,
-
             ];
             array_push($getBasiclnfor, $row);
         }
@@ -55,11 +62,20 @@ class BasiclnforExport implements FromCollection, WithHeadings
             "Tên viết tắt (*)(Tiếng Việt)",
             "Tên viết tắt (*)(Tiếng Anh)",
             "Tên trước đây",
+
+            "Loại hình trường",
+            "Số quyết định chuyển đổi loại hình",
+            "Ngày tháng năm ký quyết định chuyển đổi loại hình",
+
             "Cơ quan/Bộ chủ quản",
-            "Ngày thành lập",
-            "Số quyết định",
-            "Lĩnh vực hoạt động",
-            "Địa chỉ",
+            "Ngày quyết định thành lập",
+            
+            "Số quyết định thành lập",
+            "Số quyết định cấp phép hoạt động",
+            "Ngày được cấp phép hoạt động",
+            "Phân loại cơ sở",
+            "Loại hình cơ sở đào tạo",
+            "Số quyết định thành lập, giao tự chủ",
             "Số điện thoại liên hệ",
             "Số fax",
             "Email",

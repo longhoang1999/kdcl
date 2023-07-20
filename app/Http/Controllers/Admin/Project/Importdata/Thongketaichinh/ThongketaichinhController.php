@@ -78,7 +78,7 @@ class ThongketaichinhController extends DefinedController{
 
     //Export excel Admissions
 	public function exportTktc() {
-        return Excel::download(new Tktcexport, 'Tktcexport.xlsx');
+        return Excel::download(new Tktcexport, 'Thông kê tài chính.xlsx');
     }
 
     

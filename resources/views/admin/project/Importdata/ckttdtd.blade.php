@@ -433,13 +433,13 @@
 
     var dataFix = [
         { stt: '1', content: "@lang('project/ImportdataExcel/title.tdtdcs')",parent: '' },
-        { stt: 'a', content: "@lang('project/ImportdataExcel/title.tschinh')",parent: '' },
-        { stt: 'b', content: "@lang('project/ImportdataExcel/title.phtai')",parent: '' },
-        { stt: 'c', content: "@lang('project/ImportdataExcel/title.cshtai')",parent: '' },
+        { stt: 'a', content: "@lang('project/ImportdataExcel/title.tschinh')",parent: '1' },
+        { stt: 'b', content: "@lang('project/ImportdataExcel/title.phtai')",parent: '1' },
+        { stt: 'c', content: "@lang('project/ImportdataExcel/title.cshtai')",parent: '1' },
         { stt: '2', content: "@lang('project/ImportdataExcel/title.tongdtsxd')",parent: '' },
-        { stt: 'a', content: "@lang('project/ImportdataExcel/title.tschinh')",parent: '' },
-        { stt: 'b', content: "@lang('project/ImportdataExcel/title.phtai')",parent: '' },
-        { stt: 'c', content: "@lang('project/ImportdataExcel/title.cshtai')",parent: '' },
+        { stt: 'a', content: "@lang('project/ImportdataExcel/title.tschinh')",parent: '2' },
+        { stt: 'b', content: "@lang('project/ImportdataExcel/title.phtai')",parent: '2' },
+        { stt: 'c', content: "@lang('project/ImportdataExcel/title.cshtai')",parent: '2' },
     ];
     $('#modal_unit').on('show.bs.modal', function (event) {
         
@@ -721,6 +721,7 @@
             $(".row_number").each(function( index ) {
                 let dataObj = {
                     'stt': dataFix[index].stt,
+                    'parent': dataFix[index].parent,
                     
                     'content' :  dataFix[index].content,
                     'dientich' :  $(this).find('.row2').text().trim(),
@@ -749,7 +750,8 @@
                         $("#add_unit").hide();
                         $("#idtableip").empty();
                         $("#modal_unit .modal-header button").click();
-                        table.ajax.reload();
+                        //table.ajax.reload();
+                        location.reload();
                     }
                 })
         }else{
