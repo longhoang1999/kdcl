@@ -751,7 +751,6 @@
         }
     })
 
-    
     $(document).ready(function(){
         // $(".years").select2({
         //     placeholder: "@lang('project/QualiAssurance/title.nam')",
@@ -770,6 +769,7 @@
             responsive: true,
             processing: true,
             serverSide: true,
+
             ajax:  {
                 url: "{!! route('admin.dambaochatluong.planning.showPlan') !!}",
                 type: 'POST',

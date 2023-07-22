@@ -74,11 +74,14 @@ class UpdateAciController extends DefinedController
             })
             ->addColumn('actions',function ($hdn){
                     $actions = '<a href="'. route('admin.dambaochatluong.updateaci.manaAction', ['id' => $hdn->id_hdn]) .'" class="btn mt-2 btn-block" data-bs-placement="top" title="'.Lang::get('project/QualiAssurance/title.qlhd').'">'. '<i class="bi bi-gear-fill" style="font-size: 25px;color: #009ef7;"></i>' .'</a>';
-                    if( !Sentinel::inRole('ns_kiemtra') ){
+                    if( Sentinel::inRole('ns_kiemtra') !== false){
                         $actions = $actions . '<button type="button" class="btn btn-block" data-toggle="modal" data-target="#modalDelete" data-id="'. $hdn->id_hdn .'">
                             '. '<i class="bi bi-trash" style="font-size: 25px;color: red;"></i>' .'
                         </button>';
                     }
+                    // $actions = $actions . '<button type="button" class="btn btn-block" data-toggle="modal" data-target="#modalDelete" data-id="'. $hdn->id_hdn .'">
+                    //         '. '<i class="bi bi-trash" style="font-size: 25px;color: red;"></i>' .'
+                    //     </button>';
                 
                     return $actions;
             })

@@ -78,10 +78,10 @@
             @lang('project/Selfassessment/title.xlmc')
         </a>
     </div>
-    <div class="form pl-5 pr-5 container-fuild">
+    <div class="form pl-5 pr-5 container-fuild" style="display: block;">
         <div class="row block-form">
             <label for="select-report" class="col-md-5">
-                @lang('project/Selfassessment/title.bclkhct'): 
+                @lang('project/Selfassessment/title.baocao'): 
             </label>
             <select name="" id="select-report" class="form-control col-md-7">
                 <option value="" hidden></option>

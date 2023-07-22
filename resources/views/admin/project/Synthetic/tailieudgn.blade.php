@@ -19,7 +19,7 @@
 @stop
 
 @section('title_page')
-    @lang('project/QualiAssurance/title.qlmc')
+    Quản lý báo cáo đánh giá ngoài
 @stop
 
 @section('content')

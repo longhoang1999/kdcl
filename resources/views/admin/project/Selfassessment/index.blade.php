@@ -179,7 +179,7 @@
                         <label for="centers">
                             @lang('project/Selfassessment/title.ttct')
                         </label>
-                        <select name="ns_phutrach" id="centers" class="searchs ttct">
+                        <select name="ns_phutrach" id="centers" class="searchs ttct" multiple="multiple">
                             <option value="" hidden></option>
                             @foreach($user as $value)
                                 <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
