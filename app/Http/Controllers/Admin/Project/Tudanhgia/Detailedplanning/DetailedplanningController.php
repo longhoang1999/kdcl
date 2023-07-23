@@ -25,6 +25,7 @@ use App\Models\Country;
 
 class DetailedplanningController extends DefinedController
 {
+    
      public function index(Request $req){                        
           return view('admin.project.Selfassessment.planning');
      }

@@ -118,9 +118,7 @@
                             <th>Tiêu chuẩn</th>
                             <th>Tiêu chí</th>
                             <th>Mốc chuẩn / chỉ báo</th>
-                            <th>Người viết</th>
                             <th>Trạng thái</th>
-                            <th>Ngày hoàn thành</th>
                             <th></th>
                         </thead>
                         <tbody class="tbodys" id="table_showbcht">                        
@@ -134,9 +132,7 @@
                             <th>Tiêu chuẩn</th>
                             <th>Tiêu chí</th>
                             <th>Mốc chuẩn / chỉ báo</th>
-                            <th>Người viết</th>
                             <th>Trạng thái</th>
-                            <th>Ngày hoàn thành</th>
                             <th></th>
                         </thead>
                         <tbody class="tbodys" id="table_showbccht">                        
@@ -224,9 +220,7 @@
                         if(value.tiendo == 100){
                             tableht += `<tr>
                                             <td colspan="3">TC ${value.stt_tc} : ${value.mo_ta}</td>
-                                            <td>${value.nguoiviet}</td>
                                             <td>${(value.baoCaoTieuChuan)?value.baoCaoTieuChuan.trang_thai_bctc:"Không có dữ liệu"}</td>
-                                            <td>${value.ngayhoanthanh}</td>
                                             <td>${value.tiendo}</td>
 
                                         </tr>`
@@ -235,9 +229,7 @@
                                 tableht += `<tr>
                                             <td></td>
                                             <td colspan="2">${value.stt_tc}.${value.tieuchi[i].stt} : ${value.tieuchi[i].mo_ta}</td>
-                                            <td></td>
                                             <td>dangsua</td>
-                                            <td></td>
                                             <td>${value.tieuchi[i].tiendo}</td>
                                            
                                         </tr>` 
@@ -248,10 +240,8 @@
                                         tableht += `<tr>
                                                     <td></td>
                                                     <td></td>
-                                                    <td>Mệnh đề ${value.stt_tc}.${value.tieuchi[i].stt}.${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].baocaomenhde.stt} : ${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].baocaomenhde.mo_ta}</td>
-                                                    <td>${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].baocaomenhde.name}</td>
+                                                    <td>MC/CB : ${value.stt_tc}.${value.tieuchi[i].stt}.${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].baocaomenhde.stt} : ${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].baocaomenhde.mo_ta}</td>
                                                     <td>${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].baocaomenhde.trang_thai}</td>
-                                                    <td>${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].ngayht}</td>
                                                     <td>${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].tiendo}</td>
                                                 </tr>`;
                                     }
@@ -261,9 +251,7 @@
                         }else{
                             tabcht += `<tr>
                                             <td colspan="3">TC ${value.stt_tc} : ${value.mo_ta}</td>
-                                            <td>${value.nguoiviet}</td>
                                             <td>${(value.baoCaoTieuChuan)?value.baoCaoTieuChuan.trang_thai_bctc:"Không có dữ liệu"}</td>
-                                            <td>${value.ngayhoanthanh}</td>
                                             <td style="color:red;width: 10%;">${value.tiendo} %</td>
 
                                         </tr>`
@@ -272,9 +260,7 @@
                                 tabcht += `<tr>
                                             <td></td>
                                             <td colspan="2">${value.stt_tc}.${value.tieuchi[i].stt} : ${value.tieuchi[i].mo_ta}</td>
-                                            <td></td>
                                             <td>dangsua</td>
-                                            <td></td>
                                             <td style="color:red;width: 10%;">${value.tieuchi[i].tiendo} %</td>
                                            
                                         </tr>` 
@@ -285,10 +271,8 @@
                                         tabcht += `<tr>
                                                     <td></td>
                                                     <td></td>
-                                                    <td>Mệnh đề ${value.stt_tc}.${value.tieuchi[i].stt}.${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].baocaomenhde.stt} : ${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].baocaomenhde.mo_ta}</td>
-                                                    <td>${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].baocaomenhde.name}</td>
+                                                    <td>MC/CB : ${value.stt_tc}.${value.tieuchi[i].stt}.${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].baocaomenhde.stt} : ${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].baocaomenhde.mo_ta}</td>
                                                     <td>${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].baocaomenhde.trang_thai}</td>
-                                                    <td>${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].ngayht}</td>
                                                     <td style="color:red;width: 10%;">${value.tieuchi[i].kehoachtieuchi[j].kehoachmenhde[t].tiendo} %</td>
                                                 </tr>`;
                                     }
@@ -297,6 +281,7 @@
                             }
                         }  
 
+                        
 
 
                     })
@@ -344,103 +329,6 @@
             }   
         });
     });
-
-
-    // $('#table .tbodys').on('click', 'tr', function () {
-    //     let idkh_bc = $(this).find('input').attr('attr');
-    //     if (typeof newTable !== 'undefined') {
-    //         newTable.destroy();
-    //     }
-    //     newTable = $('#table_hoanthanh').DataTable({
-    //         responsive: true,
-    //         processing: true,
-    //         serverSide: true,
-    //         searching: false,
-    //         ajax: {
-    //             url: "{!! route('admin.tonghop.dbcl.bacaohoanthanh') !!}",
-    //             type: "POST",
-    //             data: {
-    //                 id_bc: idkh_bc
-    //             }
-    //         },
-    //         order: [],
-    //         columns: [
-    //             {
-    //                 data: null,
-    //                 className: 'details-control',
-    //                 orderable: false,
-    //                 defaultContent: '',
-    //                 createdCell: function (cell, cellData, rowData, rowIndex, colIndex) {
-    //                     $(cell).attr('colspan', 3);
-    //                 },
-    //                 render: function (data, type, row, meta) {
-    //                     return data.motawith;
-    //                 }
-    //             },
-    //             { data: 'nguoiviet', name: 'nguoiviet' },
-    //             { data: 'trang_thai', name: 'trang_thai' },
-    //             { data: 'ngayhoanthanh', name: 'ngayhoanthanh' },
-
-                
-    //         ],
-    //         createdRow: function (row, data, dataIndex) {
-    //             $(row).addClass('parent-row');
-    //         }
-    //     });
-    // });
-// $('#table .tbodys').on('click', 'tr', function () {
-//     let idkh_bc = $(this).find('input').attr('attr');
-//     if (typeof newTable !== 'undefined') {
-//         newTable.destroy();
-//     }
-//     newTable = $('#table_hoanthanh').DataTable({
-//         responsive: true,
-//         processing: true,
-//         serverSide: true,
-//         searching: false,
-//         ajax: {
-//             url: "{!! route('admin.tonghop.dbcl.bacaohoanthanh') !!}",
-//             type: "POST",
-//             data: {
-//                 id_bc: idkh_bc
-//             }
-//         },
-//         order: [],
-//         columns: [
-//             {
-//                 data: null,
-//                 className: 'details-control',
-//                 orderable: false,
-//                 defaultContent: '',
-//                 createdCell: function (cell, cellData, rowData, rowIndex, colIndex) {
-//                     $(cell).attr('colspan', 3);
-//                 },
-//                 render: function (data, type, row, meta) {
-//                     return data.motawith;
-//                 }
-//             },
-//             { data: 'nguoiviet', name: 'nguoiviet' },
-//             { data: 'trang_thai', name: 'trang_thai' },
-//             { data: 'ngayhoanthanh', name: 'ngayhoanthanh' },
-//             { data: 'tieuchi', name: 'tieuchi', visible: false }, // Ẩn cột "tieuchi"
-//         ],
-//         createdRow: function (row, data, dataIndex) {
-//             $(row).addClass('parent-row');
-//             $(row).after('<tr><td colspan="4">' + data.tieuchi + '</td></tr>'); // Append dữ liệu "tieuchi" vào sau mỗi bản ghi
-//         }
-//     });
-// });
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

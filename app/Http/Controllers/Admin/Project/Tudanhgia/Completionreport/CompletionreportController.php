@@ -25,7 +25,7 @@ use PHPHtmlParser\Dom;
 
 class CompletionreportController extends DefinedController
 {
-     public function index(Request $req){                        
+     public function index(Request $req){     
           return view('admin.project.Selfassessment.completereport');
      }
      public function data(Request $req){

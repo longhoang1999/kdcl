@@ -196,7 +196,7 @@
                                 </div> -->
                                 <div class="form-group">
                                     <label for="textcontent">
-                                        @lang('project/Standard/title.ndmctt')
+                                        @lang('project/Standard/title.ndgyhd')
                                     </label>
                                     <textarea id="textcontent" name="ndmctt"></textarea>
                                 </div>

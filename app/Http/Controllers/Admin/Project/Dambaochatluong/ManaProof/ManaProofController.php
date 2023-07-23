@@ -539,6 +539,7 @@ class ManaProofController extends DefinedController
                     $this->deletefile($link);
                 }
                 $re->delete();
+
                 // ->update(['deleted_at' => date('Y-m-d H:i:s')]);
                 return 1;  
             } 

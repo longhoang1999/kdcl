@@ -584,6 +584,7 @@ class StandardController extends DefinedController
     public function findStandard(Request $req){
         $findStandard = DB::table("bo_tieuchuan")
             ->where("loai_tieuchuan", $req->ldg)
+            ->where("deleted_at",null)
             ->select("id", "tieu_de")
             ->get();
         return json_encode($findStandard);

@@ -42,6 +42,7 @@
 		'nguoitao'		=> 'Người tạo',
 		'tbtc'			=> 'Tên Bộ tiêu chuẩn',
 		'chinhsua'		=> 'Chỉnh sửa',
+		'ndgyhd'		=>	'Nội dung gợi ý hướng dẫn',
 		// thường trực, thiết lập bộ tiêu chuẩn
 		'chbtc'			=> 'Cấu hình bộ tiêu chuẩn',
 		// thường trực, thêm mới tiêu chuẩn

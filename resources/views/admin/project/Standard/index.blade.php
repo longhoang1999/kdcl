@@ -81,7 +81,7 @@
     <div class="my_modal modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered mw-650px">
             <div class="modal-content">
-                <form class="form" action="{{ route('admin.thuongtruc.setstandard.createStandard') }}" id="kt_modal_add_customer_form" method="POST">
+                <form class="form" action="{{ route('admin.thuongtruc.setstandard.createStandard') }}" id="kt_modal_add_customer_form" method="POST" style="display: block ;">
                     @csrf
                     <div class="modal-header" id="kt_modal_add_customer_header">
                         <h2 class="fw-bolder">

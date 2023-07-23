@@ -803,6 +803,7 @@ Route::group(
                                 Route::post('tontai_diemmanh', 'DetailedplanningController@tontai_diemmanh')->name('tontai_diemmanh');
                                 Route::post('delete_diemmanh', 'DetailedplanningController@delete_diemmanh')->name('delete_diemmanh');
                                 Route::post('show_tontai_diemmanh', 'DetailedplanningController@show_tontai_diemmanh')->name('show_tontai_diemmanh');
+
                             }
                         );
 
@@ -841,6 +842,20 @@ Route::group(
                                 Route::post('exit_hoanthanh', 'CompletionreportController@exit_hoanthanh')->name('exit_hoanthanh');
                                 Route::post('exit_molai', 'CompletionreportController@exit_molai')->name('exit_molai');
                                 Route::post('encode', 'CompletionreportController@encode')->name('encode');
+                            }
+                        );
+
+                        // Cơ sở dữ liệu
+                        Route::group(
+                            ['prefix' => 'database', 'as' => 'database.', 'namespace' => 'Database'],
+                            function(){
+                                //Chuẩn bị báo cáo
+                                Route::get('index', 'databaseController@index')->name('index');
+                                Route::get('data', 'databaseController@data')->name('data');
+                                Route::get('data_school/{id}', 'databaseController@data_school')->name('data_school');
+                                Route::get('data_school_csgd/{id}', 'databaseController@data_school_csgd')->name('data_school_csgd');
+                                Route::post('save_data', 'databaseController@save_data')->name('save_data');
+                                
                             }
                         );
 
