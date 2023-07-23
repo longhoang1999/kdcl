@@ -835,8 +835,7 @@
 
 
     <!-- Kết thúc trang -->
-    </sectio
-    forlienketn>
+    </section>
 @stop
 
 

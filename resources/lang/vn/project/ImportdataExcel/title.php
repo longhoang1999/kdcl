@@ -813,10 +813,13 @@
 		'kpth'			=> 'Kinh phí thực hiện (triệu đồng)',
 		'ttspnd'		=> 'Tóm tắt sản phẩm, ứng dụng thực tiễn',
       
-      
-      
-      
-		
+		// excel 2
+		'cnht'			=> 'Chọn năm hiển thị',
+		'export'		=> 'Export',
+		'cnhtdl'		=> 'Chọn năm hiển thị dữ liệu',
+		'tdlm'			=> 'Thêm dữ liệu mới',
+		'vlcnxhdl'		=> 'Vui lòng chọn năm xuất dữ liệu',
+		'ndl'			=> 'Năm dữ liệu',
 		
 
 	);					

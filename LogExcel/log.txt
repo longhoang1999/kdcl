@@ -1,0 +1,40 @@
+﻿1. Tuyển sinh
+2. Dữ liệu sinh viên
+3. Chương trình đào tạo
+4. Khoa học công nghệ
+5. Biên soạn sách
+6. Bài báo
+7. Phát minh sáng chế
+8. Giải thưởng
+9. Sáng kiến kinh nghiệm
+10. Hội thảo hội nghị
+11. Thông tin cơ bản
+12. Nhân sự
+13. Doanh thu khoa học công nghệ
+14. Doanh thu khoa học công nghệ 2
+15. Thống kê tài chính
+16. Khảo sát tình trạng tốt nghiệm sinh viên
+17. Diện tính KTX
+18. Thống kê phòng học, thiết bị
+19. Thông kê máy tính
+20. Diện tích sàn xây dựng
+21. Kiểm định
+22. Tài liệu thư viện
+23. Đồ án khóa luận
+24. Hội nghị hội thảo
+25. Giáo trình tài liệu
+26. Môn học
+27. Quy mô đào tạo
+28. Thông tin các phòng
+29. Thông tin sinh viên tốt nghiệp
+30. Thông tin cơ sở giáo dục
+31. Tỉ lệ sinh viên, giảng viên
+32. Diện tích đất
+33. Đào tạo theo đơn
+34. Diện tích đất, tổng diện tích sàn xây dựng
+35. Thông tin về học liệu
+36. Nghiên cứu khoa học
+37. Công khai cam kết chất lượng đào tạo
+38. Công khai tài chính năm học
+39. Công khai đội ngũ giảng viên theo khối ngành
+40. Công khai đội ngũ giảng viên theo khối ngành
