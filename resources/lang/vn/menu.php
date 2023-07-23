@@ -59,6 +59,7 @@
 			'3' 		=> 'Báo cáo tự đánh giá',
 			'4' 		=> 'Nhận xét báo cáo',
 			'5' 		=> 'Hoàn thiện báo cáo',
+			'6' 		=> 'Cơ sở dữ liệu',
 		),
 		'7_1_list' 		=> array(
 			//'1' 		=> 'Phân tích yêu cầu',
@@ -189,6 +190,7 @@
 			'3' 		=> route('admin.tudanhgia.detailedplanning.index'),
 			'4' 		=> route('admin.tudanhgia.commentreport.index'),
 			'5' 		=> route('admin.tudanhgia.completionreport.index'),
+			'6' 		=> route('admin.tudanhgia.database.index'),
 		),
 		'7_list_child' 	=> array(
 			//'1' 		=> route('admin.tudanhgia.preparereport.requireAnalysis'),

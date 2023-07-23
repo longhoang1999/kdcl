@@ -647,6 +647,20 @@
                                         <span class="menu-title">{{$listmenu_7[5]}}</span>
                                     </a>
                                 </div>
+
+                                <!-- Cơ sở dữ liệu -->
+
+                                <div class="menu-item">
+                                    <a class="menu-link 
+                                    {!! (Request::is('admin/tu-danh-gia/completionreport/index')
+                                    ? 'active' : '' ) !!}
+                                     " href="{{ $linkMenuSevenParent[6] }}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                        <span class="menu-icon">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span class="menu-title">{{$listmenu_7[6]}}</span>
+                                    </a>
+                                </div>
                             <!-- /Tự đánh giá -->
                                 
 

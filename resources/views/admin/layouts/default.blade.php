@@ -3825,7 +3825,6 @@
 
 
         <script type="text/javascript" src="{{ asset('assets/js/custom.js') }}"></script>
-
         <script>
             $('#modalDeleteAll__').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget) 

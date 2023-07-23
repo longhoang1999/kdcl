@@ -489,6 +489,7 @@ class ExternalReviewController extends DefinedController{
 			$keHoachBaoCaoList = DB::table('kehoach_baocao')
 									->select('kehoach_baocao.id as id_khbc','kehoach_baocao.*','users.*')
 									->leftjoin('users','users.id','=','kehoach_baocao.ns_phutrach')
+									->where('kehoach_baocao.deleted_at',null)
 									->get();
 			if(!Sentinel::inRole('operator') && !Sentinel::inRole('admin')){
 				foreach($keHoachBaoCaoList as $key => $value){
