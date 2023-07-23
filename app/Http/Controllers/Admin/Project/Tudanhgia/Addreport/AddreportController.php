@@ -57,6 +57,7 @@ class AddreportController extends DefinedController
                'updated_at'            => Carbon::now()->toDateTimeString(),
 
          ];
+
          if($req->ns_phutrach != ""){
             if(DB::table("role_users")->where("user_id", $req->ns_phutrach)->where("role_id", 10)->count() == 0){
                $us = Sentinel::findById($req->ns_phutrach);
@@ -71,6 +72,10 @@ class AddreportController extends DefinedController
 
          $id_kehoach = DB::table("kehoach_baocao")->insertGetId($data);
 
+         $cosodulieu = DB::table('coso_dulieu')
+                        ->insert([
+                           'id_khbc' => $id_kehoach,
+                        ]);
          // thêm mới những cái bổ sung
 
          

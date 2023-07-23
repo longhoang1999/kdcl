@@ -149,9 +149,20 @@ class databaseController extends DefinedController
                     ]);
      }
 
-     public function data_school_csgd(){
-
-          return view('admin.project.Database.data_school_csgd');
+     public function data_school_csgd(Request $req){
+          $id = $req->id;
+          $data = DB::table('coso_dulieu')
+                    ->where('id_khbc',$req->id)
+                    ->first();
+          $dulieu = json_decode($data->dulieu);
+          list($keHoachBaoCaoList2,$keHoachBaoCaoDetail2) = $this->baseIndex($id);
+          list($noiDungThem) = $this->getDataPhuLucCSDT($keHoachBaoCaoDetail2);
+          return view('admin.project.Database.data_school_csgd')
+                         ->with([
+                              "dulieu"  => $dulieu,
+                              "keHoachBaoCaoDetail2"  => $keHoachBaoCaoDetail2,
+                              'noiDungThem' => $noiDungThem,
+                         ]);
      }
 
 
@@ -190,10 +201,10 @@ class databaseController extends DefinedController
                                                                       ->where('kh_baocao_id',$keHoachBaoCaoDetail2->id)
                                                                       ->first();
 
-                    $keHoachBaoCaoDetail2->keHoachChung->baoCaoChung = DB::table('baocao_chung')
-                                                                                     ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
-                                                                                     ->where('id_kh_chung',$keHoachBaoCaoDetail2->keHoachChung->id)
-                                                                                     ->first();
+                    // $keHoachBaoCaoDetail2->keHoachChung->baoCaoChung = DB::table('baocao_chung')
+                    //                                                                  ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
+                    //                                                                  ->where('id_kh_chung',$keHoachBaoCaoDetail2->keHoachChung->id)
+                    //                                                                  ->first();
 
                     foreach($keHoachTieuChuanList as $keHoachTieuChuan){
                          $tieuChuan = DB::table('tieuchuan')->where('id',$keHoachTieuChuan->tieuchuan_id)->first();
@@ -353,5 +364,16 @@ class databaseController extends DefinedController
                ]);
 
                return 1;
+          }
+
+          public function getDataPhuLucCSDT($keHoachBaoCaoDetail2){
+
+               $noiDungThem = DB::table('baocao_noidungthem')         
+                                        ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
+                                        ->get();
+
+
+            return array($noiDungThem);
+
           }
 }
