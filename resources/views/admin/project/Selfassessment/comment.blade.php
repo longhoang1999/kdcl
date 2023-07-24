@@ -31,7 +31,7 @@
                     </a>
                     <div class="media-body p-4">
                         <a href="#">
-                            {{ $nhanXetKhoi->name }} ({{ $nhanXetKhoi->tendonvi->ten_donvi }})
+                            {{ $nhanXetKhoi->name }} ({{ ($nhanXetKhoi->tendonvi) ? $nhanXetKhoi->tendonvi->ten_donvi : ""}})
                         </a><br>
                         {!! nl2br($nhanXetKhoi->nhanxet) !!}
                     </div>

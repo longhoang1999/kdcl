@@ -28,10 +28,9 @@ class ExternalReviewController extends DefinedController{
 
 			$keHoachBaoCaoList2 = DB::table('kehoach_baocao')->get();
 
-			// if ($id) {
-	        //     $keHoachBaoCaoDetail = DB::table('kehoach_baocao')->find(3);
-	        // }
+			
     		if($id){
+
     			$keHoachBaoCaoDetail2 = DB::table('kehoach_baocao')
     							->select('kehoach_baocao.*','bo_tieuchuan.loai_tieuchuan as loai_tieuchuan_bc')
     							->leftjoin('bo_tieuchuan','bo_tieuchuan.id','=','kehoach_baocao.bo_tieuchuan_id')
@@ -56,11 +55,13 @@ class ExternalReviewController extends DefinedController{
 		        	$keHoachBaoCaoDetail2->keHoachChung = DB::table('kehoach_chung')
 		        											->where('kh_baocao_id',$keHoachBaoCaoDetail2->id)
 		        											->first();
-
-		        	$keHoachBaoCaoDetail2->keHoachChung->baoCaoChung = DB::table('baocao_chung')
+		        	if($keHoachBaoCaoDetail2->keHoachChung){
+		        		$keHoachBaoCaoDetail2->keHoachChung->baoCaoChung = DB::table('baocao_chung')
 					        											->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
 					        											->where('id_kh_chung',$keHoachBaoCaoDetail2->keHoachChung->id)
 					        											->first();
+		        	}										
+		        	
 
 		        	foreach($keHoachTieuChuanList as $keHoachTieuChuan){
 		        		$tieuChuan = DB::table('tieuchuan')->where('id',$keHoachTieuChuan->tieuchuan_id)->first();
@@ -76,11 +77,15 @@ class ExternalReviewController extends DefinedController{
 			            	$keHoachTieuChuan->keHoachTieuChiList =	$keHoachTieuChiList = DB::table('kehoach_tieuchi')->where('id_kh_tieuchuan',$keHoachTieuChuan->id)->get();
 			            	foreach($keHoachTieuChiList as $keHoachTieuChi){
 			            		$tieuChi = DB::table('tieuchi')->where('id',$keHoachTieuChi->id_tieuchi)->first();
+
 			            		if($keHoachBaoCaoDetail2->writeFollow == 1){
+
 			            			$keHoachTieuChi->keHoachMenhDeList = $menhde = DB::table('menhde')
 											            					->where('tieuchi_id',$tieuChi->id)
 											            					->get();
+
 				            		$keHoachTieuChi->tieuChi = $tieuChi;
+
 				            		foreach($menhde as $value){
 				            			
 				            			$value->khmenhde = DB::table('kehoach_menhde')
@@ -122,6 +127,7 @@ class ExternalReviewController extends DefinedController{
 				                	$danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
 				                	$keHoachTieuChi->baoCaoTieuChi = $baoCaoTieuChi;
 			            		}elseif($keHoachBaoCaoDetail2->writeFollow == 2){
+
 			            			$keHoachTieuChi->keHoachMenhDeList = $menhde = DB::table('mocchuan')
 											            					->where('tieuchi_id',$tieuChi->id)
 											            					->get();
@@ -146,7 +152,7 @@ class ExternalReviewController extends DefinedController{
 				            													->where('kehoach_bc_id',$id)
 				            													->whereNull('deleted_at')
 				            													->get();
-				            			var_dump($value->khmenhde->mocchuan_id);die;
+				            		
 
 				            			foreach($baoCaoMenhDe->keHoachHanhDongList as $val){
 				            				$val->donViThucHien = DB::table('donvi')
@@ -356,7 +362,6 @@ class ExternalReviewController extends DefinedController{
 		}
 
 		public function index(Request $req,$id =null){
-
 			$keHoachBaoCaoList = DB::table('kehoach_baocao')
 									->select('kehoach_baocao.id as id_khbc','kehoach_baocao.*','users.*')
 									->leftjoin('users','users.id','=','kehoach_baocao.ns_phutrach')->get();
@@ -393,9 +398,14 @@ class ExternalReviewController extends DefinedController{
 			$tuoitb = null;
 			$Bang13_CSGD = null;
 			$minhChungList = null;
+			$dulieu = '';
+          	$list = "";
+          	$sua = "xem";
+			
 
 			list($keHoachBaoCaoList2,$keHoachBaoCaoDetail2) = $this->baseIndex($id);
-	
+
+
 			list($keHoachBaoCaoDetail) = $this->listDatakeHoachBaoCaoDetail($id);
 
 			list($keHoachBaoCaokehoachchung,$keHoachTieuChuan) = $this->scollSearch($id);
@@ -414,10 +424,13 @@ class ExternalReviewController extends DefinedController{
 				$id_khc = DB::table('kehoach_chung')
 	        				->where('kehoach_chung.kh_baocao_id',$id)
 	        				->first();
-				list($KHBaCaoDetail,$keHoachChung,$nhanXetKhoiList) = $this->getKhaiquat($id,$id_khc->id);
-				$keHoachChungs = $keHoachChung;
-				$KHBaCaoDetails = $KHBaCaoDetail;
-				$nhanXetKhoiLists = $nhanXetKhoiList;
+	        	if($id_khc){
+	        		list($KHBaCaoDetail,$keHoachChung,$nhanXetKhoiList) = $this->getKhaiquat($id,$id_khc->id);
+					$keHoachChungs = $keHoachChung;
+					$KHBaCaoDetails = $KHBaCaoDetail;
+					$nhanXetKhoiLists = $nhanXetKhoiList;
+	        	}
+				
 				
 			}elseif($page == 'tieuchuan'){
 				list($mcCollect) = $this->listMinhChung($keHoachBaoCaoDetail2);
@@ -437,10 +450,24 @@ class ExternalReviewController extends DefinedController{
 	            }else{
 	            	if($req->tag != 'pl3'){
 	            		if($keHoachBaoCaoDetail2->loai_tieuchuan_bc == 'csgd'){
-	            			list($ThongKeTruongDonViList,$TruongPhoDonViPhuTrach,$noiDungThem,$Bang13_CSGD) = $this->getDataPhuLucCSDT($keHoachBaoCaoDetail2);
-
+	            		  $data = DB::table('coso_dulieu')
+			                    ->where('id_khbc',$req->id)
+			                    ->first();
+			          	  $dulieu = json_decode($data->dulieu);
+				          list($keHoachBaoCaoList2,$keHoachBaoCaoDetail2) = $this->baseIndex2($id);
+				          list($noiDungThem) = $this->getDataPhuLucCSDT($keHoachBaoCaoDetail2);
+				          
+				          $list = $this->showFileData($id);
 	            		}else{
-	            			list($ThongKeTruongDonViList,$TruongPhoDonViPhuTrach,$noiDungThem,$Trinhdo,$tongSoNganhDaoTao,$Gvcohuunam,$Gvcohuunu,$Gvkhacmen,$Gvkhacwn,$list_tdcm,$arrayngoaingu,$thongKeTuyenSinh,$tuoitb) = $this->getDataPhuLuc($keHoachBaoCaoDetail2);
+	            			
+				            $data = DB::table('coso_dulieu')
+				                    ->where('id_khbc',$req->id)
+				                    ->first();
+				          	$dulieu = json_decode($data->dulieu);
+				            list($keHoachBaoCaoList2,$keHoachBaoCaoDetail2) = $this->baseIndex2($id);
+				            list($noiDungThem) = $this->getDataPhuLuc($keHoachBaoCaoDetail2);
+				            $list = $this->showFileData($id);
+	            			// list($ThongKeTruongDonViList,$TruongPhoDonViPhuTrach,$noiDungThem,$Trinhdo,$tongSoNganhDaoTao,$Gvcohuunam,$Gvcohuunu,$Gvkhacmen,$Gvkhacwn,$list_tdcm,$arrayngoaingu,$thongKeTuyenSinh,$tuoitb) = $this->getDataPhuLuc($keHoachBaoCaoDetail2);
 	            		}
 	            	}
 	            }
@@ -452,6 +479,7 @@ class ExternalReviewController extends DefinedController{
 								'keHoachBaoCaoList' => $keHoachBaoCaoList,
 								'page' => $page,
 								'id' => $id,
+								'idkhbc' => $id,
 								'keHoachBaoCaoListDetail' => $keHoachBaoCaoDetail,
 								'keHoachBaoCaoList2' => $keHoachBaoCaoList2,
 								'keHoachBaoCaoDetail2' => $keHoachBaoCaoDetail2,
@@ -481,6 +509,9 @@ class ExternalReviewController extends DefinedController{
 								'noiDungThem' => $noiDungThem,
 								'Bang13_CSGD' => $Bang13_CSGD,
 								'minhChungList' => $minhChungList,
+								"dulieu"  => $dulieu,
+                                'data'    => $list,
+                                'check'   => $sua,
 							
 						]);
 		}
@@ -679,516 +710,25 @@ class ExternalReviewController extends DefinedController{
 		}
 
 		public function getDataPhuLucCSDT($keHoachBaoCaoDetail2){
-			$maDonVi = 0;
-        	$maNganh = '0';
-			$ThongKeTruongDonViList = DB::table('excel_import_nhansu')->get();
 
-			$TruongPhoDonViPhuTrach = DB::table('excel_import_nhansu')
-										->where('dvsdvc',$maDonVi)
-										->get();
-			$noiDungThem = DB::table('baocao_noidungthem')		
-								->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
-								->get();
+	        $noiDungThem = DB::table('baocao_noidungthem')         
+                                ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
+                                ->get();
 
-			$Bang13_CSGD = DB::table('excel_import_dlsinhvien')
-								->select('excel_import_dlsinhvien.*','excel_import_donvi.ten_donvi_TV')
-								->leftjoin('excel_import_donvi','excel_import_dlsinhvien.ma_donvi_daotao','=','excel_import_donvi.ma_donvi')
-								->where('excel_import_donvi.loai_dv_id',2)
-								->get();			
-			// ThongKeTruongDonVi::orderBy("UserTyPe", 'desc')
-            // ->orderBy("DepartmentName", 'asc')
-            // ->where([['UserTyPe', '>=', 4] ->get(); //26
 
-            return array($ThongKeTruongDonViList,$TruongPhoDonViPhuTrach,$noiDungThem,$Bang13_CSGD);
+	        return array($noiDungThem);
 
-		}
+	     }
 
 		public function getDataPhuLuc($keHoachBaoCaoDetail2){
-			$maDonVi = $keHoachBaoCaoDetail2->phutrach->id_donvi;
-			$manganh = $keHoachBaoCaoDetail2->ctdt->manganh;
-			$ThongKeTruongDonViList = DB::table('excel_import_nhansu')
-										->where('dvsdvc','<>',$maDonVi)
-										->get();
-			$TruongPhoDonViPhuTrach = DB::table('excel_import_nhansu')
-										->where('dvsdvc',$maDonVi)
-										->get();
-			$Trinhdo = DB::table('excel_import_nhansu')
-										->selectRaw('tdcm, count(tdcm) as total')
-										->where('dvsdvc',$maDonVi)
-										->get();
-										// mã đơn vị với số hiệu viên chức đang sai k biết lấy dữ liệu từ bảng nào
-			$noiDungThem = DB::table('baocao_noidungthem')
-								->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
-								->get();
+               
+               $noiDungThem = DB::table('baocao_noidungthem')
+                                        ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
+                                        ->get();
 
-			$tongSoNganhDaoTao = DB::table('excel_import_nhansu')
-										->where('dvsdvc',$maDonVi)
-										->count('tdcm');
-			$Gvcohuunam = DB::table('excel_import_nhansu')
-										->where('gender','Nam')
-										->whereRaw("LOWER(loaihd) like 'Cơ hữu%'")
-										->count();
-			$Gvcohuunu = DB::table('excel_import_nhansu')
-										->where('gender','<>','Nam')
-										->whereRaw("LOWER(loaihd) like 'Cơ hữu%'")
-										->count();
-
-			$Gvkhacmen = DB::table('excel_import_nhansu')
-										->where('gender','Nam')
-										->count();
-			$Gvkhacwn = DB::table('excel_import_nhansu')
-										->where('gender','<>','Nam')
-										->count();
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('tdcm, count(*) as total,trinhdo_hoccvi.ten_trinhdo')
-										->whereNotIn('hocham',[1,2])
-										->leftjoin('trinhdo_hoccvi','trinhdo_hoccvi.id','=','excel_import_nhansu.tdcm')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('tdcm')->get();
-			$list_tdcm = array();
-		
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_trinhdo][0] = $value->total;
-				$list_tdcm[$value->ten_trinhdo][1] = 0;
-				$list_tdcm[$value->ten_trinhdo][2] = 0;
-				$list_tdcm[$value->ten_trinhdo][3] = 0;
-				$list_tdcm[$value->ten_trinhdo][4] = 0;
-				$list_tdcm[$value->ten_trinhdo][5] = 0;
-				$list_tdcm[$value->ten_trinhdo][6] = 0;
-				$list_tdcm[$value->ten_trinhdo][7] = 0;
-				$list_tdcm[$value->ten_trinhdo][8] = 0;
-				$list_tdcm[$value->ten_trinhdo][9] = 0;
-				$list_tdcm[$value->ten_trinhdo][10] = 0;
-				$list_tdcm[$value->ten_trinhdo][11] = 0;
-				$list_tdcm[$value->ten_trinhdo][12] = 0;
-				$list_tdcm[$value->ten_trinhdo][13] = 0;
-				$list_tdcm[$value->ten_trinhdo][14] = 0;
-				$list_tdcm[$value->ten_trinhdo][15] = 0;
-
-				if($value->ten_trinhdo == 'Tiến sĩ'){
-					$list_tdcm[$value->ten_trinhdo][7] = 2.0;
-				}else if($value->ten_trinhdo == 'Thạc sĩ'){
-					$list_tdcm[$value->ten_trinhdo][7] = 1.0;
-				}else{
-					$list_tdcm[$value->ten_trinhdo][7] = 0.3;
-				}
-
-			}							
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('hocham, count(*) as total,hoc_ham.ten_hocham')
-										->whereIn('hocham',[1,2])
-										->leftjoin('hoc_ham','hoc_ham.id','=','excel_import_nhansu.hocham')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('hocham')->get();
-					
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_hocham][0] = $value->total;
-				$list_tdcm[$value->ten_hocham][1] = 0;
-				$list_tdcm[$value->ten_hocham][2] = 0;
-				$list_tdcm[$value->ten_hocham][3] = 0;
-				$list_tdcm[$value->ten_hocham][4] = 0;
-				$list_tdcm[$value->ten_hocham][5] = 0;
-				$list_tdcm[$value->ten_hocham][6] = 0;
-				$list_tdcm[$value->ten_hocham][7] = 3.0;
-				$list_tdcm[$value->ten_hocham][8] = 0;
-				$list_tdcm[$value->ten_hocham][9] = 0;
-				$list_tdcm[$value->ten_hocham][10] = 0;
-				$list_tdcm[$value->ten_hocham][11] = 0;
-				$list_tdcm[$value->ten_hocham][12] = 0;
-				$list_tdcm[$value->ten_hocham][13] = 0;
-				$list_tdcm[$value->ten_hocham][14] = 0;
-				$list_tdcm[$value->ten_hocham][15] = 0;
-
-
-			}
-
-			// Khong co hoc ham
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('tdcm, count(*) as total,trinhdo_hoccvi.ten_trinhdo')
-										->whereNotIn('hocham',[1,2])
-										->where('loaihd',1)
-										->leftjoin('trinhdo_hoccvi','trinhdo_hoccvi.id','=','excel_import_nhansu.tdcm')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('tdcm')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_trinhdo][1] = $value->total;
-			}							
-
-			// co hoc ham
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('hocham, count(*) as total,hoc_ham.ten_hocham')
-										->whereIn('hocham',[1,2])
-										->where('loaihd',1)
-										->leftjoin('hoc_ham','hoc_ham.id','=','excel_import_nhansu.hocham')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('hocham')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_hocham][1] = $value->total;
-			}
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('tdcm, count(*) as total,trinhdo_hoccvi.ten_trinhdo')
-										->whereNotIn('hocham',[1,2])
-										->where('loaihd',2)
-										->leftjoin('trinhdo_hoccvi','trinhdo_hoccvi.id','=','excel_import_nhansu.tdcm')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('tdcm')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_trinhdo][2] = $value->total;
-			}							
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('hocham, count(*) as total,hoc_ham.ten_hocham')
-										->whereIn('hocham',[1,2])
-										->where('loaihd',2)
-										->leftjoin('hoc_ham','hoc_ham.id','=','excel_import_nhansu.hocham')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('hocham')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_hocham][2] = $value->total;
-			}
-
-
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('tdcm, count(*) as total,trinhdo_hoccvi.ten_trinhdo')
-										->whereNotIn('hocham',[1,2])
-										->where('loaihd',3)
-										->leftjoin('trinhdo_hoccvi','trinhdo_hoccvi.id','=','excel_import_nhansu.tdcm')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('tdcm')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_trinhdo][3] = $value->total;
-			}							
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('hocham, count(*) as total,hoc_ham.ten_hocham')
-										->whereIn('hocham',[1,2])
-										->where('loaihd',3)
-										->leftjoin('hoc_ham','hoc_ham.id','=','excel_import_nhansu.hocham')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('hocham')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_hocham][3] = $value->total;
-			}
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('tdcm, count(*) as total,trinhdo_hoccvi.ten_trinhdo')
-										->whereNotIn('hocham',[1,2])
-										->where('loaihd',4)
-										->leftjoin('trinhdo_hoccvi','trinhdo_hoccvi.id','=','excel_import_nhansu.tdcm')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('tdcm')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_trinhdo][4] = $value->total;
-			}							
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('hocham, count(*) as total,hoc_ham.ten_hocham')
-										->whereIn('hocham',[1,2])
-										->where('loaihd',4)
-										->leftjoin('hoc_ham','hoc_ham.id','=','excel_import_nhansu.hocham')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('hocham')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_hocham][4] = $value->total;
-			}
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('tdcm, count(*) as total,trinhdo_hoccvi.ten_trinhdo')
-										->whereNotIn('hocham',[1,2])
-										->where('loaihd',5)
-										->leftjoin('trinhdo_hoccvi','trinhdo_hoccvi.id','=','excel_import_nhansu.tdcm')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('tdcm')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_trinhdo][5] = $value->total;
-			}							
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('hocham, count(*) as total,hoc_ham.ten_hocham')
-										->whereIn('hocham',[1,2])
-										->where('loaihd',5)
-										->leftjoin('hoc_ham','hoc_ham.id','=','excel_import_nhansu.hocham')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('hocham')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_hocham][5] = $value->total;
-			}
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('tdcm, count(*) as total,trinhdo_hoccvi.ten_trinhdo')
-										->whereNotIn('hocham',[1,2])
-										->where('gender','Nam')
-										->whereNotIn('loaihd',[4,5])
-										->leftjoin('trinhdo_hoccvi','trinhdo_hoccvi.id','=','excel_import_nhansu.tdcm')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('tdcm')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_trinhdo][8] = $value->total;
-			}
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('hocham, count(*) as total,hoc_ham.ten_hocham')
-										->whereIn('hocham',[1,2])
-										->where('gender','Nam')
-										->whereNotIn('loaihd',[4,5])
-										->leftjoin('hoc_ham','hoc_ham.id','=','excel_import_nhansu.hocham')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('hocham')->get();
-
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_hocham][8] = $value->total;
-			}
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('tdcm, count(*) as total,trinhdo_hoccvi.ten_trinhdo')
-										->whereNotIn('hocham',[1,2])
-										->where('gender','<>','Nam')
-										->whereNotIn('loaihd',[4,5])
-										->leftjoin('trinhdo_hoccvi','trinhdo_hoccvi.id','=','excel_import_nhansu.tdcm')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('tdcm')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_trinhdo][9] = $value->total;
-			}
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('hocham, count(*) as total,hoc_ham.ten_hocham')
-										->whereIn('hocham',[1,2])
-										->where('gender','<>','Nam')
-										->whereNotIn('loaihd',[4,5])
-										->leftjoin('hoc_ham','hoc_ham.id','=','excel_import_nhansu.hocham')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('hocham')->get();
-			
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_hocham][9] = $value->total;
-			
-			}
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('tdcm, count(*) as total,trinhdo_hoccvi.ten_trinhdo')
-										->whereNotIn('hocham',[1,2])
-										->whereNotIn('loaihd',[4,5])
-										->leftjoin('trinhdo_hoccvi','trinhdo_hoccvi.id','=','excel_import_nhansu.tdcm')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('tdcm')->get();
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_trinhdo][15] = $value->total;
-			
-			}
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('hocham, count(*) as total,hoc_ham.ten_hocham')
-										->whereIn('hocham',[1,2])
-										->whereNotIn('loaihd',[4,5])
-										->leftjoin('hoc_ham','hoc_ham.id','=','excel_import_nhansu.hocham')
-										// ->where('dvsdvc',$maDonVi)
-										->groupBy('hocham')->get();
-
-			foreach ($tdcm as $key => $value) {
-				$list_tdcm[$value->ten_hocham][15] = $value->total;
-			
-			}
-
-
-			$tuoitb = DB::table('excel_import_nhansu')
-										->selectRaw('AVG(TIMESTAMPDIFF(year,ngaysinh, now())) as tuoitb')
-										->whereNotIn('loaihd',[4,5])
-										// ->where('dvsdvc',$maDonVi)
-										->first();
-			// delay
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('trinhdo_hoccvi.ten_trinhdo,ROUND(DATEDIFF(CURDATE(), excel_import_nhansu.ngaysinh) / 365, 0) AS years')
-										->whereNotIn('hocham',[1,2])
-										->whereNotIn('loaihd',[4,5])
-										->leftjoin('trinhdo_hoccvi','trinhdo_hoccvi.id','=','excel_import_nhansu.tdcm')
-										// ->where('dvsdvc',$maDonVi)
-										->get();
-			
-			foreach ($tdcm as $key => $value) {
-				if($value->years == 30){
-					$list_tdcm[$value->ten_trinhdo][10] += 1;
-				}else if($value->years > 30 && $value->years < 41){
-					$list_tdcm[$value->ten_trinhdo][11] += 1;
-				}else if($value->years > 40 && $value->years < 51){
-					$list_tdcm[$value->ten_trinhdo][12] += 1;
-				}else if($value->years > 50 && $value->years < 61){
-					$list_tdcm[$value->ten_trinhdo][13] += 1;
-				}else if( $value->years > 60){
-					$list_tdcm[$value->ten_trinhdo][14] += 1;
-				}
-				
-				
-			}
-
-			$tdcm = DB::table('excel_import_nhansu')
-										->selectRaw('hoc_ham.ten_hocham,ROUND(DATEDIFF(CURDATE(), excel_import_nhansu.ngaysinh) / 365, 0) AS years')
-										->whereIn('hocham',[1,2])
-										->whereNotIn('loaihd',[4,5])
-										->leftjoin('hoc_ham','hoc_ham.id','=','excel_import_nhansu.hocham')
-										// ->where('dvsdvc',$maDonVi)
-										->get();
-
-			foreach ($tdcm as $key => $value) {
-				
-				if($value->years == 30){
-					$list_tdcm[$value->ten_hocham][10] += 1;
-				}else if($value->years > 30 && $value->years < 41){
-					$list_tdcm[$value->ten_hocham][11] += 1;
-				}else if($value->years > 40 && $value->years < 51){
-					$list_tdcm[$value->ten_hocham][12] += 1;
-				}else if($value->years > 50 && $value->years < 61){
-					$list_tdcm[$value->ten_hocham][13] += 1;
-				}else if( $value->years > 60){
-					$list_tdcm[$value->ten_hocham][14] += 1;
-				}
-			}
-
-	
-			$arrayuse = array();
-
-			//Ngoai ngữ
-			$ngoainguall = DB::table('excel_import_nhansu')
-										->where('loaihd','<',4)
-										// ->where('dvsdvc',$maDonVi)
-										->count();
-			
-			// array_push($arrayuse,$ngoaingu);
-			$ngoaingu = DB::table('excel_import_nhansu')
-										->where('loaihd','<',4)
-										->where('ngoaingu',1)
-										// ->where('dvsdvc',$maDonVi)
-										->count();
-		
-			array_push($arrayuse,$ngoaingu);
-			$ngoaingu = DB::table('excel_import_nhansu')
-										->where('loaihd','<',4)
-										->where('ngoaingu',2)
-										// ->where('dvsdvc',$maDonVi)
-										->count();
-		
-			array_push($arrayuse,$ngoaingu);
-			$ngoaingu = DB::table('excel_import_nhansu')
-										->where('loaihd','<',4)
-										->where('ngoaingu',3)
-										// ->where('dvsdvc',$maDonVi)
-										->count();
-			array_push($arrayuse,$ngoaingu);
-			$ngoaingu = DB::table('excel_import_nhansu')
-										->where('loaihd','<',4)
-										->where('ngoaingu',4)
-										// ->where('dvsdvc',$maDonVi)
-										->count();
-			array_push($arrayuse,$ngoaingu);
-			$ngoaingu = DB::table('excel_import_nhansu')
-										->where('loaihd','<',4)
-										->where('ngoaingu',5)
-										// ->where('dvsdvc',$maDonVi)
-										->count();
-		
-			array_push($arrayuse,$ngoaingu);
-			array_push($arrayuse,$ngoainguall);
-			// array_push($arrayuse,'Tổng');
-			$tinhoc1 = DB::table('excel_import_nhansu')
-										->where('loaihd','<',4)
-										->where('tinhoc',1)
-										// ->where('dvsdvc',$maDonVi)
-										->count();
-		
-			$tinhoc2 = DB::table('excel_import_nhansu')
-										->where('loaihd','<',4)
-										->where('tinhoc',2)
-										// ->where('dvsdvc',$maDonVi)
-										->count();
-		
-			$tinhoc3 = DB::table('excel_import_nhansu')
-										->where('loaihd','<',4)
-										->where('tinhoc',3)
-										// ->where('dvsdvc',$maDonVi)
-										->count();
-			$tinhoc4 = DB::table('excel_import_nhansu')
-										->where('loaihd','<',4)
-										->where('tinhoc',4)
-										// ->where('dvsdvc',$maDonVi)
-										->count();
-			$tinhoc5 = DB::table('excel_import_nhansu')
-										->where('loaihd','<',4)
-										->where('tinhoc',5)
-										// ->where('dvsdvc',$maDonVi)
-										->count();
-										
-			$arrayngoaingu = array();
-			foreach($arrayuse as $key => $value){
-				if($ngoainguall != 0){
-					$arrayngoaingu[$key][0] = $value/$ngoainguall*100;
-					$arrayngoaingu[$key][1] = "Luôn sử dụng (trên 80% thời gian của công việc)";
-					$arrayngoaingu[$key][2] = "Thường sử dụng (trên 60-80% thời gian của công việc)";
-					$arrayngoaingu[$key][3] = "Đôi khi sử dụng (trên 40-60% thời gian của công việc)";
-					$arrayngoaingu[$key][4] = "Ít khi sử dụng (trên 20-40% thời gian của công việc)";
-					$arrayngoaingu[$key][5] = "Hiếm khi sử dụng hoặc không sử dụng (0-20% thời gian của công việc)";
-					$arrayngoaingu[$key][6] = "Tổng";
-					$arrayngoaingu[$key][7] = $tinhoc1/$ngoainguall*100;
-					$arrayngoaingu[$key][8] = $tinhoc2/$ngoainguall*100;
-					$arrayngoaingu[$key][9] = $tinhoc3/$ngoainguall*100;
-					$arrayngoaingu[$key][10] = $tinhoc4/$ngoainguall*100;
-					$arrayngoaingu[$key][11] = $tinhoc5/$ngoainguall*100;
-					$arrayngoaingu[$key][12] = $ngoainguall/$ngoainguall*100;
-				}
-				
-			}
-
-			$fiveYearsAgo = $keHoachBaoCaoDetail2->nam - 5;
-			$fiveYears = $keHoachBaoCaoDetail2->nam;
-			$alltuyensin = DB::table('excel_import_tuyensinh')
-									->selectRaw('dt_tg, sum(stsdt) as sum1, sum(s_t_t) as sum2, sum(tlct) as sum3, sum(snhtt) as sum4, sum(dtdv) as sum5, sum(dtbcnhdt) as sum6, sum(slsvqtnh) as sum7')
-									// ->where('mctdt_mn',$manganh)
-									->where('dt_tg','>',$fiveYearsAgo)
-									->where('dt_tg','<=',$fiveYears)
-									->groupBy('dt_tg')
-									->get();
-			$thongKeTuyenSinh = array();
-			foreach($alltuyensin as $key => $value){
-				$thongKeTuyenSinh[$key][0]= $value->dt_tg;
-				$thongKeTuyenSinh[$key][1]= $value->sum1;
-				$thongKeTuyenSinh[$key][2]= $value->sum2;
-				$thongKeTuyenSinh[$key][3]= $value->sum3;
-				$thongKeTuyenSinh[$key][4]= $value->sum4;
-				$thongKeTuyenSinh[$key][5]= $value->sum5;
-				$thongKeTuyenSinh[$key][6]= $value->sum6;
-				$thongKeTuyenSinh[$key][7]= $value->sum7;
-				$thongKeTuyenSinh[$key][8]= 0;
-				
-			}
-			
-			$ThongKeTuyenSinh_SoLuongSV = DB::table('excel_import_tuyensinh')
-											->selectRaw('dt_tg,sum(snhtt) as sum1')
-											->whereNotIn('loai',[5,6])
-											// ->where('mctdt_mn',$manganh)
-											->where('dt_tg','>',$fiveYearsAgo)
-											->where('dt_tg','<=',$fiveYears)
-											->groupBy('dt_tg')
-											->get();
-
-			foreach($ThongKeTuyenSinh_SoLuongSV as $key => $value){
-				$thongKeTuyenSinh[$key][8]= $value->sum1;
-			}
-
-			$ThongKeSV = DB::table('excel_import_tuyensinh')
-											->selectRaw('dt_tg,sum(slsvqtnh) as sum1')
-											->whereIn('loai',[3,4])
-											// ->where('mctdt_mn',$manganh)
-											->where('dt_tg','>',$fiveYearsAgo)
-											->where('dt_tg','<=',$fiveYears)
-											->groupBy('dt_tg')
-											->get();
-
-			foreach($ThongKeSV as $key => $value){
-				$thongKeTuyenSinh[$key][9]= $value->sum1;
-			}									
-			return array($ThongKeTruongDonViList,$TruongPhoDonViPhuTrach,$noiDungThem,$Trinhdo,$tongSoNganhDaoTao,$Gvcohuunam,$Gvcohuunu,$Gvkhacmen,$Gvkhacwn,$list_tdcm,$arrayngoaingu,$thongKeTuyenSinh,$tuoitb);
-		}
+                                                          
+               return array($noiDungThem);
+          }
 		public function baoCaoKhac(Request $req){
 			$url = '';
 			list($keHoachBaoCaoList,$keHoachBaoCaoDetail) = $this->baseIndex($req->id);
@@ -1627,5 +1167,209 @@ class ExternalReviewController extends DefinedController{
 		    return array($mcCollect);
 		}
 
+		public function showFileData($idbc){
+
+              $getFile = DB::table('coso_dulieu')->where('id_khbc', $idbc);
+              $dataJson = json_decode($getFile->first()->Url_ex);
+              $tableList = [];
+
+              foreach ($dataJson as $key => $value) {
+                  if ($value != '0') {
+                      $address = public_path($value);
+                      $a = Excel::toArray([], $address);
+
+                      $table = "";
+                      $UI = "";
+                      foreach ($a[0] as $subKey => $subValue) { // Change the variable names here to avoid conflicts
+                          $td = "";
+                          if ($subKey == 0) {
+                              foreach ($subValue as $val) {
+                                  if (trim($val) != "") {
+                                      $td .= '<th>' . trim($val) . '</th>';
+                                  }
+                              }
+                          } else {
+                              foreach ($subValue as $val) {
+                                  if (trim($val) != "") {
+                                      $td .= '<td>' . trim($val) . '</td>';
+                                  }
+                              }
+                          }
+
+                          if ($td != "") {
+                              $UI .= '<tr>' . $td . '</tr>';
+                          }
+                      }
+
+                      $table = '<table class="table ">' . $UI . '</table>';
+                      $tableList[$key] = $table; // Assign the $table to the corresponding $key in $tableList
+                  }
+              }
+
+              return $tableList;
+         }
+
+         public function baseIndex2($id = null){
+               $keHoachBaoCaoDetail2 = null;
+
+               $keHoachBaoCaoList2 = DB::table('kehoach_baocao')->get();
+
+               // if ($id) {
+             //     $keHoachBaoCaoDetail = DB::table('kehoach_baocao')->find(3);
+             // }
+          if($id){
+               $keHoachBaoCaoDetail2 = DB::table('kehoach_baocao')
+                                   ->select('kehoach_baocao.*','bo_tieuchuan.loai_tieuchuan as loai_tieuchuan_bc')
+                                   ->leftjoin('bo_tieuchuan','bo_tieuchuan.id','=','kehoach_baocao.bo_tieuchuan_id')
+                                   ->where('kehoach_baocao.id',$id)->first();
+
+               if ($keHoachBaoCaoDetail2) {
+                    $danhGiaMenhDe = [];
+                    $keHoachBaoCaoDetail2->keHoachTieuChuanList = $keHoachTieuChuanList = DB::table('kehoach_tieuchuan')->where('id_kh_baocao',$keHoachBaoCaoDetail2->id)->get();
+                    $keHoachBaoCaoDetail2->phutrach = DB::table('users')
+                                                                 // ->select('excel_import_donvi.*','excel_import_donvi.ma_donvi as id_donvi')
+                                                                 // ->leftjoin('excel_import_donvi','excel_import_donvi.id','=','users.donvi_id')
+                                                                 ->leftjoin('donvi','donvi.id','=','users.donvi_id')
+                                                                 ->where('users.id',$keHoachBaoCaoDetail2->ns_phutrach)->first();
+
+                    $keHoachBaoCaoDetail2->phutrachr = DB::table('users')
+                                                                 ->select('donvi.*','donvi.ma_donvi as id_donvi')
+                                                                 ->leftjoin('donvi','donvi.id','=','users.donvi_id')
+                                                                 ->where('users.id',$keHoachBaoCaoDetail2->ns_phutrach)->first();
+     
+                              
+                    $keHoachBaoCaoDetail2->ctdt = DB::table('ctdt')
+                                                                 ->where('id',$keHoachBaoCaoDetail2->ctdt_id)->first();
+                    $keHoachBaoCaoDetail2->keHoachChung = DB::table('kehoach_chung')
+                                                                      ->where('kh_baocao_id',$keHoachBaoCaoDetail2->id)
+                                                                      ->first();
+
+                    // $keHoachBaoCaoDetail2->keHoachChung->baoCaoChung = DB::table('baocao_chung')
+                    //                                                                  ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
+                    //                                                                  ->where('id_kh_chung',$keHoachBaoCaoDetail2->keHoachChung->id)
+                    //                                                                  ->first();
+
+                    foreach($keHoachTieuChuanList as $keHoachTieuChuan){
+                         $tieuChuan = DB::table('tieuchuan')->where('id',$keHoachTieuChuan->tieuchuan_id)->first();
+                         $keHoachTieuChuan->tieuChuan = $tieuChuan;
+                         $keHoachTieuChuan->baoCaoTieuChuan = DB::table('baocao_tieuchuan')
+                                                                           ->where('id_kehoach_bc',$id)
+                                                                           ->where('id_kh_tieuchuan',$keHoachTieuChuan->id)
+                                                                           ->where('id_tieuchuan',$keHoachTieuChuan->tieuchuan_id)
+                                                                           ->first();
+                         
+                         if($tieuChuan){
+                              $keHoachTieuChuan->moTaWithStt = "TC $tieuChuan->stt: $tieuChuan->mo_ta";
+                              $keHoachTieuChuan->keHoachTieuChiList = $keHoachTieuChiList = DB::table('kehoach_tieuchi')->where('id_kh_tieuchuan',$keHoachTieuChuan->id)->get();
+                              foreach($keHoachTieuChiList as $keHoachTieuChi){
+                                   $tieuChi = DB::table('tieuchi')->where('id',$keHoachTieuChi->id_tieuchi)->first();
+                                   if($keHoachBaoCaoDetail2->writeFollow == 1){
+                                        $keHoachTieuChi->keHoachMenhDeList = $menhde = DB::table('menhde')
+                                                                                          ->where('tieuchi_id',$tieuChi->id)
+                                                                                          ->get();
+                                        $keHoachTieuChi->tieuChi = $tieuChi;
+                                        foreach($menhde as $value){
+                                             
+                                             $value->khmenhde = DB::table('kehoach_menhde')
+                                                                      ->where('id_kh_tieuchi',$keHoachTieuChi->id)
+                                                                      ->where('id_menhde',$value->id)
+                                                                      ->first();
+
+                                             $baoCaoMenhDe = DB::table('baocao_menhde')
+                                                                      ->where('id_kehoach_bc',$id)
+                                                                      ->where('id_kh_menhde',$value->khmenhde->id)
+                                                                      ->where('id_menhde',$value->khmenhde->id_menhde)
+                                                                      ->first();
+                                             
+                                             $value->baoCaoMenhDe = $baoCaoMenhDe;
+
+                                             $baoCaoMenhDe->keHoachHanhDongList = DB::table('kehoach_hd')
+                                                                                               ->where('menhde_id',$value->khmenhde->id_menhde)
+                                                                                               ->where('kehoach_bc_id',$id)
+                                                                                               ->whereNull('deleted_at')
+                                                                                               ->get();
+
+                                             foreach($baoCaoMenhDe->keHoachHanhDongList as $val){
+                                                  $val->donViThucHien = DB::table('donvi')
+                                                                                ->where('id',$val->ns_thuchien)
+                                                                                ->first();
+                                                  $val->donViKiemTra = DB::table('donvi')
+                                                                                ->where('id',$val->ns_kiemtra)
+                                                                                ->first();
+                                             }
+                                                  
+                                             
+                                             
+                                             $danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
+                                        }
+                                        
+                                        
+
+                                        $baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
+                                        $danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
+                                        $keHoachTieuChi->baoCaoTieuChi = $baoCaoTieuChi;
+                                   }elseif($keHoachBaoCaoDetail2->writeFollow == 2){
+                                        $keHoachTieuChi->keHoachMenhDeList = $menhde = DB::table('mocchuan')
+                                                                                          ->where('tieuchi_id',$tieuChi->id)
+                                                                                          ->get();
+                                        $keHoachTieuChi->tieuChi = $tieuChi;
+                                        foreach($menhde as $value){
+                                             
+                                             $value->khmenhde = DB::table('kehoach_menhde')
+                                                                      ->where('id_kh_tieuchi',$keHoachTieuChi->id)
+                                                                      ->where('mocchuan_id',$value->id)
+                                                                      ->first();
+
+                                             $baoCaoMenhDe = DB::table('baocao_menhde')
+                                                                      ->where('id_kehoach_bc',$id)
+                                                                      ->where('id_kh_menhde',$value->khmenhde->id)
+                                                                      ->where('mocchuan_id',$value->khmenhde->mocchuan_id)
+                                                                      ->first();
+                                             
+                                             $value->baoCaoMenhDe = $baoCaoMenhDe;
+
+                                             $baoCaoMenhDe->keHoachHanhDongList = DB::table('kehoach_hd')
+                                                                                               ->where('mocchuan_id',$value->khmenhde->mocchuan_id)
+                                                                                               ->where('kehoach_bc_id',$id)
+                                                                                               ->whereNull('deleted_at')
+                                                                                               ->get();
+                                      
+
+                                             foreach($baoCaoMenhDe->keHoachHanhDongList as $val){
+                                                  $val->donViThucHien = DB::table('donvi')
+                                                                                ->where('id',$val->ns_thuchien)
+                                                                                ->first();
+                                                  $val->donViKiemTra = DB::table('donvi')
+                                                                                ->where('id',$val->ns_kiemtra)
+                                                                                ->first();
+                                             }
+                                                  
+                                             
+                                             
+                                             $danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
+                                        }
+                                        
+                                        
+
+                                        $baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
+                                        $danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
+                                        $keHoachTieuChi->baoCaoTieuChi = $baoCaoTieuChi;
+                                   }
+                                   
+
+                                   if($tieuChi){
+                                        $keHoachTieuChi->moTaWithStt = "$tieuChuan->stt.$tieuChi->stt: $tieuChi->mo_ta";
+                                   }
+                                   
+                              }
+                         }
+                         
+                         
+                    }
+                  }
+          }
+               
+             return array($keHoachBaoCaoList2,$keHoachBaoCaoDetail2);
+          }
 }
 

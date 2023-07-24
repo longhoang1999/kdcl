@@ -12,7 +12,7 @@
 @stop
 
 @section('title_page')
-    @lang('project/Selfassessment/title.hoantbc')
+    <h2>Cơ sở dữ liệu</h2>
     
 @stop
 

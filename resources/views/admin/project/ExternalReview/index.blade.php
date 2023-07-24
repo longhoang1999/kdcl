@@ -65,9 +65,9 @@
                             <div class="ibox-content">
                                 @if($tag == 'pl1')      <!-- phụ lục 1 -->
                                     @if($keHoachBaoCaoDetail2->loai_tieuchuan_bc == 'csgd')
-                                        @include("admin.project.ExternalReview.include.phuluc8-csdt")
+                                        @include("admin.project.Database.data_school_csgd")
                                     @elseif($keHoachBaoCaoDetail2->loai_tieuchuan_bc == 'ctdt')
-                                        @include("admin.project.ExternalReview.include.phuluc8")
+                                        @include("admin.project.Database.display_data")
                                     @else
                                         <h6>@lang('project/Externalreview/title.kcpl')</h6>
                                     @endif
