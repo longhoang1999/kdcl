@@ -359,8 +359,15 @@ class CheckProofController extends DefinedController
             ->addColumn('donVi',function($mc){
                 $lv = DB::table("nhom_mc_sl")->where("id", $mc->nhom_mc_sl_id)
                             ->select("donvi_id")->first();
-                return DB::table("donvi")->where("id", $lv->donvi_id)
-                        ->select("ten_donvi")->first()->ten_donvi;
+                $checkdv = DB::table("donvi")
+                                ->where("id", $lv->donvi_id)
+                                ->select("ten_donvi")
+                                ->first();
+                if($checkdv){
+                    return $checkdv->ten_donvi;
+                }else{
+                    return "Không có dữ liệu";
+                }
             })
             ->addColumn('trang_thai',function($mc){
                 if($mc->tinh_trang == 'xacnhan')

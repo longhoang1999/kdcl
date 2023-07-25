@@ -711,12 +711,12 @@ class ExternalReviewController extends DefinedController{
 
 		public function getDataPhuLucCSDT($keHoachBaoCaoDetail2){
 
-	        $noiDungThem = DB::table('baocao_noidungthem')         
-                                ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
-                                ->get();
+	        $noiDungThem = DB::table('baocao_noidungthem')
+                                        ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
+                                        ->first();
 
-
-	        return array($noiDungThem);
+            $noidung = json_decode($noiDungThem->noidung);                                           
+            return array($noidung);
 
 	     }
 
@@ -724,10 +724,10 @@ class ExternalReviewController extends DefinedController{
                
                $noiDungThem = DB::table('baocao_noidungthem')
                                         ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
-                                        ->get();
+                                        ->first();
 
-                                                          
-               return array($noiDungThem);
+               $noidung = json_decode($noiDungThem->noidung);                                           
+               return array($noidung);
           }
 		public function baoCaoKhac(Request $req){
 			$url = '';

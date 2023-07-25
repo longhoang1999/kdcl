@@ -858,6 +858,8 @@ Route::group(
                                 Route::post('save_data_csgd', 'databaseController@save_data_csgd')->name('save_data_csgd');
                                 Route::post('save_file_ctdt', 'databaseController@save_file_ctdt')->name('save_file_ctdt');
                                 Route::post('save_file_csgd', 'databaseController@save_file_csgd')->name('save_file_csgd');
+                                Route::get('apiNoiDungThem', 'databaseController@apiNoiDungThem')->name('apiNoiDungThem');
+                                
                                 
                             }
                         );

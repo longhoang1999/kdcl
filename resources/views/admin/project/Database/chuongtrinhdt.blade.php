@@ -1,25 +1,4 @@
-@extends('admin/layouts/default')
-@section('title')
-    @lang('project/Selfassessment/title.hoantbc')
-@parent
-@stop
 
-@section('header_styles')
-
-<style type="text/css">
-
-</style>
-@stop
-
-@section('title_page')
-    <h2>Cơ sở dữ liệu</h2>
-    
-@stop
-
-@section('content')
-    <section class="content indexpage pr-3 pl-3">
-    	<!-- Thêm tệp CSS của SweetAlert2 -->
-        <!-- Bắt đầu trang -->
         @if($check == "sua")
             <style>
                 .import_ex table{
@@ -52,13 +31,13 @@
                 .edit_input {
                   -moz-appearance: textfield; /* Firefox */
                 }
-
                 .table-borderless{
                     border: 1px solid;
                 }
                 .table-borderless tr,td{
                     border: 1px solid;
                 } 
+
             </style>
         
         @else
@@ -832,20 +811,6 @@
 	    	</div>
 		</form>
 
-
-<!-- page trang ở đây -->
-
-    
-<!-- /Kết thúc page trang -->
-
-    <!-- Kết thúc trang -->
-</section>
-
-@stop
-
-
-
-@section('footer_scripts')
 <!-- Thêm tệp JavaScript của SweetAlert2 -->
 <script src="{{ asset('js/xlsx.full.min.js') }}"></script>
 <script type="text/javascript">
@@ -924,5 +889,4 @@
 </script>
 
 <script type="text/javascript" src="{{ asset('js/baocaoctdt.js') }}"></script>
-@stop
 

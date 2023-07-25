@@ -6,7 +6,7 @@
 
 {{-- Page title --}}
 @section('title')
-    @lang( $baseLang . '.cnhd')
+    @lang( $baseLang . '.qlhd')
 @parent
 @stop
 

@@ -38,6 +38,13 @@
     td{
         text-align: center;
     }
+    
+    .table-borderless{
+        border: 1px solid;
+     }
+    .table-borderless tr,td{
+        border: 1px solid;
+     } 
 </style>
 @stop
 
@@ -221,9 +228,9 @@
                             </div>
                             @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
                                 @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'csgd')
-                                    @include("admin.project.Selfassessment.hoanthien.phuluc8-csdt")
+                                    @include("admin.project.Database.cosogiaoduc")
                                 @elseif($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
-                                    @include("admin.project.Selfassessment.hoanthien.phuluc8")
+                                    @include("admin.project.Database.chuongtrinhdt")
                                 @endif
                             @endif
                         </div>
@@ -379,6 +386,81 @@
           $('.addminhchunggop_' + dId).attr("id", "addminhchunggop_" + dId);
         });
     });
+
+
+
+    $('.edit_input').on('change',function() {
+        let val = $(this).val();
+        let key = $(this).attr('data_key');
+         $.ajax({
+            url: "{!! route('admin.tudanhgia.database.save_data_csgd') !!}",
+            type: "POST",
+            data:{
+                val : val,
+                key : key,
+                ikhbc : {{$idkhbc}},
+                _token: '{{ csrf_token() }}'
+            },    
+            error: function(err) {
+
+            },
+
+            success: function(data) {
+                if(data ==1){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công!',
+                        text: 'Bạn đã cập nhật thành công.',
+                    });
+                }else{
+                    Swal.fire({
+                        icon: 'Warning',
+                        title: 'Thất bại!',
+                        text: 'Bạn đã cập nhật thất bại.',
+                    });
+                }
+            },
+        })
+    })
+
+    @if($check != "sua")
+        $('.edit_input').prop('disabled', true);
+        $('.radiobox').prop('disabled', true);
+    @else 
+        $("#save_contenty").on('change','.radiobox',function(){
+        let key = $(this).attr('data_key');
+        let val = $(this).val();
+        
+        $.ajax({
+                url: "{{route('admin.tudanhgia.database.apiNoiDungThem')}}",
+                type: "GET",
+                data:{
+                    id : {{$idkhbc}},
+                    key : key,
+                    val : val,
+                },    
+                error: function(err) {
+                },
+
+                success: function(data) {
+                    console.log(data);
+                    if(data ==1){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thành công!',
+                            text: 'Bạn đã cập nhật thành công.',
+                        });
+                    }else{
+                        Swal.fire({
+                            icon: 'Warning',
+                            title: 'Thất bại!',
+                            text: 'Bạn đã cập nhật thất bại.',
+                        });
+                    }
+                },
+            })
+        })
+    @endif
 </script>
 @stop
 

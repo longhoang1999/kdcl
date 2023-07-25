@@ -87,6 +87,14 @@ class AddreportController extends DefinedController
                            'dulieu'  => $dulieu,
                            'Url_ex'  => $Url_ex
                         ]);
+            $js = '{"chinhquy":"co","khongchinhquy":"co","tuxa":"co","nuocngoai":"co","trongnuoc":"co"}';
+            $baocaothem = DB::table('baocao_noidungthem')
+                        ->insert([
+                           'id_kehoach_bc' => $id_kehoach,
+                           'id_csdt' => Sentinel::getUser()->csdt_id,
+                           'noidung' => $js,
+
+                        ]);
          }else{
             $dulieu = '{"g21_slnhcq": "0", "g28_tysdtnckh": "0", "g31_tyssddxb": "0", "g33_tysbdtc": "0", "g35_tysbbc": "0", "g42_1": "0", "g42_2": "0", "g42_3": "0", "g42_4": "0", "g42_5": "0", "g43_1": "0", "g43_2": "0", "g43_3": "0", "g43_4": "0", "g43_5": "0", "g44_1": "0", "g44_2": "0", "g44_3": "0", "g44_4": "0", "g44_5": "0", "g45_1": "0", "g45_2": "0", "g45_3": "0", "g45_4": "0", "g45_5": "0", "g46_1": "0", "g46_2": "0", "g46_3": "0", "g46_4": "0", "g46_5": "0", "g47_1": "0", "g47_2": "0", "g47_3": "0", "g47_4": "0", "g47_5": "0", "g48_1": "0", "g48_2": "0", "g48_3": "0", "g48_4": "0", "g48_5": "0", "vii_1_tsgvch": "0", "vii_1_tlgvch": "0", "vii_1_tlgvchts": "0", "vii_1_tlgvchths": "0", "vii_2_tssvcq": "0", "vii_2_tssvtgv": "0", "vii_2_tlsvtn": "0", "vii_3_tlsvtl": "0", "vii_3_tlsvknct": "0", "vii_4_tlsvdn": "0", "vii_4_tlsvtn": "0", "vii_4_tlttdvl": "0", "vii_4_tnbq": "0", "vii_5_tlsvduyc": "0", "vii_5_tlsvcb": "0", "vii_6_tlsdtnckh": "0", "vii_6_dtnckh": "0", "vii_6_tssxb": "0", "vii_6_tsbdtc": "0", "vii_6_tsbbc": "0", "vii_7_tsdts": "0", "vii_7_tscokt": "0"}';
             $Url_ex = '{"g12": "0", "g13": "0", "g14": "0", "g15": "0", "g16": "0", "g17": "0", "g18_1": "0", "g18_2": "0", "g19_1": "0", "g19_2": "0", "g20": "0", "g21": "0", "g22": "0", "g23": "0", "g24": "0", "g25": "0", "g26": "0", "g27": "0", "g28": "0", "g29": "0", "g30": "0", "g31": "0", "g32": "0", "g33": "0", "g34": "0", "g35": "0", "g36": "0", "g37": "0", "g38_1": "0", "g38_2": "0", "g39": "0", "g40": "0", "g41": "0", "gvi": "0"}';
@@ -96,6 +104,14 @@ class AddreportController extends DefinedController
                            'id_khbc' => $id_kehoach,
                            'dulieu'  => $dulieu,
                            'Url_ex'  => $Url_ex
+                        ]);
+            $js = '{"chinhquy":"co","khongchinhquy":"co","tuxa":"co","nuocngoai":"co","trongnuoc":"co"}';
+            $baocaothem = DB::table('baocao_noidungthem')
+                        ->insert([
+                           'id_kehoach_bc' => $id_kehoach,
+                           'id_csdt' => Sentinel::getUser()->csdt_id,
+                           'noidung' => $js,
+
                         ]);
          }
          

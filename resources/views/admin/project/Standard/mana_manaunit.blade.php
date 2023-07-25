@@ -208,7 +208,7 @@
                                     <span>@lang('project/Standard/title.madvi')</span>
                                     <!-- <span class="text-danger">*</span> -->
                                 </label>
-                                <input type="number" class="form-control " id="forMaDV" placeholder="@lang('project/Standard/title.madvi')" name="madvi">
+                                <input type="number" class="form-control chec_rq" id="forMaDV" placeholder="@lang('project/Standard/title.madvi')" name="madvi">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="forTenDV">
@@ -263,7 +263,7 @@
                                     <span>@lang('project/Standard/title.mota')</span>
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" class="form-control " id="forMota" placeholder="@lang('project/Standard/title.mota')" required name="mota">
+                                <input type="text" class="form-control chec_rq" id="forMota" placeholder="@lang('project/Standard/title.mota')" required name="mota">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="forLinhvuchd">
@@ -452,16 +452,18 @@
                             </div> 
                         </div>
                     </div> 
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="btn-update-unit">
+                            @lang('project/Standard/title.thaydoi')
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            @lang('project/Standard/title.huy')
+                        </button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btn-update-unit">
-                    @lang('project/Standard/title.thaydoi')
-                </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    @lang('project/Standard/title.huy')
-                </button>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -603,9 +605,9 @@
             })
     })
 
-    $("#btn-update-unit").click(function() {
-        $("#update-unit").submit();
-    })
+    // $("#btn-update-unit").click(function() {
+    //     $("#update-unit").submit();
+    // })
 
     $.fn.modal.Constructor.prototype._enforceFocus = function() {
         // modal_this = this
@@ -889,6 +891,8 @@
         placeholder: "@lang('project/Standard/title.truongdvi')",
         allowClear: false
     });
+
+    $(".chec_rq").prop("required", true);
 </script>
 
 

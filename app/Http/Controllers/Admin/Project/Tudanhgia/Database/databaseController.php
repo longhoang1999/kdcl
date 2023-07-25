@@ -113,6 +113,7 @@ class databaseController extends DefinedController
      public function data_school(Request $req){
           $sua = "sua";
           $id = $req->id;
+          // echo $id;die;
           $data = DB::table('coso_dulieu')
                     ->where('id_khbc',$req->id)
                     ->first();
@@ -279,7 +280,6 @@ class databaseController extends DefinedController
                                                                                                ->where('kehoach_bc_id',$id)
                                                                                                ->whereNull('deleted_at')
                                                                                                ->get();
-                                             var_dump($value->khmenhde->mocchuan_id);die;
 
                                              foreach($baoCaoMenhDe->keHoachHanhDongList as $val){
                                                   $val->donViThucHien = DB::table('donvi')
@@ -315,18 +315,18 @@ class databaseController extends DefinedController
                   }
           }
                
-             return array($keHoachBaoCaoList2,$keHoachBaoCaoDetail2);
-          }
+        return array($keHoachBaoCaoList2,$keHoachBaoCaoDetail2);
+     }
 
 
           public function getDataPhuLuc($keHoachBaoCaoDetail2){
                
                $noiDungThem = DB::table('baocao_noidungthem')
                                         ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
-                                        ->get();
+                                        ->first();
 
-                                                          
-               return array($noiDungThem);
+               $noidung = json_decode($noiDungThem->noidung);                                           
+               return array($noidung);
           }
 
           public function save_data(Request $req){
@@ -385,12 +385,12 @@ class databaseController extends DefinedController
 
           public function getDataPhuLucCSDT($keHoachBaoCaoDetail2){
 
-               $noiDungThem = DB::table('baocao_noidungthem')         
+               $noiDungThem = DB::table('baocao_noidungthem')
                                         ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
-                                        ->get();
+                                        ->first();
 
-
-            return array($noiDungThem);
+               $noidung = json_decode($noiDungThem->noidung);                                           
+               return array($noidung);
 
           }
 
@@ -543,6 +543,23 @@ class databaseController extends DefinedController
                return redirect()->route('admin.tudanhgia.database.data_school_csgd',['id' => $req->id])->with('success','Thành công');
           }
 
+          public function apiNoiDungThem(Request $req){
+
+               $data = DB::table('baocao_noidungthem')
+                                        ->where('id_kehoach_bc',$req->id);
+
+            
+               $datas = json_decode($data->first()->noidung);
+
+               $datas->{$req->key} = $req->val;
+
+               $save = json_encode($datas);
+               $data->update([
+                    "noidung" =>  $save,
+               ]);
+
+               return 1;
+         }
 
 
 }
