@@ -6,6 +6,18 @@
         </span>
     </div>
 </div>
+<!-- Phân quyền Excel -->
+<div class="menu-item">
+    <a class="menu-link 
+    {!! (Request::is('admin/import-excel-2/lap-ke-hoach-excel/index') 
+        ? 'active' : '' ) !!}
+        " href="{{ $linkMenuTenParent[42] }}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+        <span class="menu-icon">
+            {!! $icon_array[array_rand($icon_array, 1) ] !!}
+        </span>
+        <span class="menu-title">{{$listmenu_10[10]}}</span>
+    </a>
+</div>
 <!-- Đào tạo -->
 <div data-kt-menu-trigger="click" class="menu-item menu-accordion 
 {!! (Request::is('admin/import-excel-2/tuyen-sinh/index')

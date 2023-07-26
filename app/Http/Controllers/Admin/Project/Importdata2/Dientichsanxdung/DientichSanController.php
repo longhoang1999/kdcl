@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin\Project\Importdata\Dientichsanxdung;
+<?php namespace App\Http\Controllers\Admin\Project\Importdata2\Dientichsanxdung;
 use App\Http\Controllers\Admin\DefinedController;
 use App\Http\Requests\UserRequest;
 use App\Mail\Register;
@@ -29,20 +29,80 @@ use App\Exports\DtSanExport;
 
 
 class DientichSanController extends DefinedController{
-
-	public function index(){
-        $dtsan = DB::table("excel_import_dientich_xaydung")
-                ->orderBy('id', 'asc');
-                
-		$nams = DB::table("excel_import_dientich_xaydung")
-                ->select('nam')
-                ->distinct()->get();
-
-        return view('admin.project.Importdata.dtsxd')->with([
-           	'dtsan'           => $dtsan,
-            'nams'               =>$nams
+    public function index(){
+		$loai_dv = DB::table("loai_donvi")->select("id", "loai_donvi")->get();
+		$donvi = DB::table("donvi")->select("id", "ten_donvi", "deleted_at","loai_dv_id")
+                ->where("deleted_at", null)
+                ->get();
+        $getFile = DB::table('excel_import_data2')->where('type_excel', '20')->select("id", "year")->get();
+		
+        return view('admin.project.Importdata2.dtsxd')->with([
+            'loai_dv'           => $loai_dv,
+            'donvi'             => $donvi,
+            'getFile'           => $getFile
         ]);
-	}
+	}  
+
+    public function showFileData(Request $req){
+        $getFile = DB::table('excel_import_data2')->where('id',$req->id )
+                    ->first();
+        $address = public_path($getFile->url);
+        $a = Excel::toArray([],$address);
+        $table = "";
+        $UI = "";
+        foreach($a[0] as $key => $value) {
+            $td = "";
+            if($key == 0){
+                foreach($value as $val){
+                    if(trim($val) != ""){
+                        $td .=   '<th>'.  trim($val)   .'</th>';
+                    }
+                }
+            }else{
+                foreach($value as $val){
+                    if(trim($val) != ""){
+                        $td .=   '<td>'.  trim($val) .'</td>';
+                    }
+                }
+            }
+            if( $td != ""){
+                $UI .= '<tr>
+                            '.$td.'
+                        </tr>  
+                ';
+            }
+        }
+        $table = '<table class="table ">' . $UI . '</table>';
+        return json_encode([
+            'data'  => $table,
+            'href'  => asset($getFile->url)
+        ]);
+    }
+
+    public function addfilenew(Request $req) {
+        if($req->file('file') != null){
+            $check = DB::table('excel_import_data2')->where("type_excel", '20')
+                        ->where("year", $req->year);
+            if($check->count() > 0){
+                File::delete(public_path($check->first()->url));
+                $check->delete();
+            }
+            $image = $req->file('file');
+            $picName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('UpdateExcelFile/Dientichsanxdung'), $picName);
+
+            $data = [
+                'type_excel'    => '20',
+                'year'  => $req->year,
+                'url'   => 'UpdateExcelFile/Dientichsanxdung/'.$picName,
+                'created_at'        => date('Y-m-d H:i:s'),
+                'updated_at'        => date('Y-m-d H:i:s'),
+            ];
+            DB::table('excel_import_data2')->insert($data);
+        }
+        return back()->with('success', 
+                Lang::get('project/Standard/message.success.create'));
+    }
 
 	//Import excel unit
     public function importUnit (Request $req) {

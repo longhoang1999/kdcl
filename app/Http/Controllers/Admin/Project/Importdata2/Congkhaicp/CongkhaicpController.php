@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Admin\Project\Importdata\Congkhaicp;
+<?php namespace App\Http\Controllers\Admin\Project\Importdata2\Congkhaicp;
 use App\Http\Controllers\Admin\DefinedController;
 use App\Http\Requests\UserRequest;
 use App\Mail\Register;
@@ -28,18 +28,81 @@ use App\Imports\Ckcp;
 use App\Exports\CkcpExport;
 
 class CongkhaicpController extends DefinedController{
-
-	public function index(){
+    public function index(){
 		$loai_dv = DB::table("loai_donvi")->select("id", "loai_donvi")->get();
 		$donvi = DB::table("donvi")->select("id", "ten_donvi", "deleted_at","loai_dv_id")
                 ->where("deleted_at", null)
                 ->get();
+        $getFile = DB::table('excel_import_data2')->where('type_excel', '28')->select("id", "year")->get();
 		
-        return view('admin.project.Importdata.ckcp')->with([
-           	'loai_dv'           => $loai_dv,
-           	'donvi'             => $donvi,
+        return view('admin.project.Importdata2.ckcp')->with([
+            'loai_dv'           => $loai_dv,
+            'donvi'             => $donvi,
+            'getFile'           => $getFile
         ]);
-	}
+	} 
+
+    public function showFileData(Request $req){
+        $getFile = DB::table('excel_import_data2')->where('id',$req->id )
+                    ->first();
+        $address = public_path($getFile->url);
+        $a = Excel::toArray([],$address);
+        $table = "";
+        $UI = "";
+        foreach($a[0] as $key => $value) {
+            $td = "";
+            if($key == 0){
+                foreach($value as $val){
+                    if(trim($val) != ""){
+                        $td .=   '<th>'.  trim($val)   .'</th>';
+                    }
+                }
+            }else{
+                foreach($value as $val){
+                    if(trim($val) != ""){
+                        $td .=   '<td>'.  trim($val) .'</td>';
+                    }
+                }
+            }
+            if( $td != ""){
+                $UI .= '<tr>
+                            '.$td.'
+                        </tr>  
+                ';
+            }
+        }
+        $table = '<table class="table ">' . $UI . '</table>';
+        return json_encode([
+            'data'  => $table,
+            'href'  => asset($getFile->url)
+        ]);
+    }
+
+
+    public function addfilenew(Request $req) {
+        if($req->file('file') != null){
+            $check = DB::table('excel_import_data2')->where("type_excel", '28')
+                        ->where("year", $req->year);
+            if($check->count() > 0){
+                File::delete(public_path($check->first()->url));
+                $check->delete();
+            }
+            $image = $req->file('file');
+            $picName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('UpdateExcelFile/Congkhaicp'), $picName);
+
+            $data = [
+                'type_excel'    => '28',
+                'year'  => $req->year,
+                'url'   => 'UpdateExcelFile/Congkhaicp/'.$picName,
+                'created_at'        => date('Y-m-d H:i:s'),
+                'updated_at'        => date('Y-m-d H:i:s'),
+            ];
+            DB::table('excel_import_data2')->insert($data);
+        }
+        return back()->with('success', 
+                Lang::get('project/Standard/message.success.create'));
+    }
 
 	//Import excel unit
     public function importUnit (Request $req) {

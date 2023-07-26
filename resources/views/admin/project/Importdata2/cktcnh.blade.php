@@ -11,14 +11,35 @@
 <link href="{{ asset('vendors/bootstrap3-wysihtml5-bower/css/bootstrap3-wysihtml5.min.css') }}"  rel="stylesheet" media="screen"/>
 <link href="{{ asset('css/pages/editor.css') }}" rel="stylesheet" type="text/css"/>
 <style>
-    .wrraper-table{
-        padding: 2rem;
-        background: white;
-        border-radius: 5px;
-        box-shadow: 0 0 12px grey;
+    table, th, td{
+        border: 1px solid #414141 !important;
     }
-    .table td:first-child{
-        padding-left: 0.75rem !important ;
+    th{
+        font-weight: bold !important;
+        padding: 10px 5px !important;
+        background-color: #00bfff !important;
+    }
+    tr:nth-child(odd){
+        background-color: #f1f1f1 !important;
+    }
+    td{
+        text-align: center !important;
+        padding: 10px 5px !important;
+    }
+    #excel_data, #excel_data2{
+        padding: 5px;
+    }
+    .table{
+        width: 2000px !important;
+    }
+    #excel_data, #excel_data2{
+        overflow-x:auto;
+    }
+    #excel_data::-webkit-scrollbar, #excel_data2::-webkit-scrollbar {
+                height: 1em
+            }
+    #excel_data::-webkit-scrollbar-thumb, #excel_data2::-webkit-scrollbar-thumb {
+        background: #c9c8c7;
     }
 </style>
 
@@ -29,230 +50,65 @@
 @stop
 
 @section('content')
-    <section class="content indexpage pr-3 pl-3">
+<section class="content indexpage pr-3 pl-3">
         <!-- Bắt đầu trang -->
 <!-- page trang ở đây -->
 <section class="content-body">
     <div class="form-standard">
-        <div class="item-group-button right-block mb-2">
-            <a href="{{ route('admin.importdata.cktcnh.exportCktcnh') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
-                <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
-            </a>
-            <button class="btn" data-toggle="modal" data-target="#modalDeleteAll__" data-nametable="excel_import_tcnh" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.xoatatca')">
-                <i class="bi bi-trash" style="font-size: 35px;color: red;"></i>
-            </button>
-        </div>
+        <div class="card">
+    		<div class="card-body">
+    			<div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-between">
+                            <h1>@lang('project/ImportdataExcel/title.cnht')</h1>
+                            <a id="export-data" href="" class="btn btn-success">@lang('project/ImportdataExcel/title.export')</a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-md-12">
+                    <select class="form-control" id="selectYear">
+                        <option value="" >--@lang('project/ImportdataExcel/title.cnhtdl')</option>
+                        @foreach($getFile as $value)
+                            <option value="{{ $value->id }}">{{ $value->year }}</option>
+                        @endforeach
+                    </select>
+                </div>
+    		</div>
+    	</div>
+        <div id="excel_data2" class="mt-5"></div>
         
-        <div class="wrraper-table">
-            <select name="" id="year" class="form-control">
-                <option value="" hidden>-- @lang('project/ImportdataExcel/title.cnck')</option>
-                @for($i = intVal(date('Y')) + 1 ;$i >= 2017; $i--)
-                    <option  value="{{ $i }}" 
-                        @if($i == intVal(date('Y')))
-                            selected
-                        @endif
-                    >{{$i}}</option>
-                @endfor
-            </select>
-            <br>
-            <table class="table table-striped table-bordered" id="table" width="100%">
-                <thead>
-                 <tr>
-                    <th>
-                        @lang('project/ImportdataExcel/title.stt')
-                    </th>
-                    <th>
-                        @lang('project/ImportdataExcel/title.noidung')
-                    </th>
-                    <th>
-                        @lang('project/ImportdataExcel/title.xemct')
-                    </th>
-                 </tr>
-                </thead>
-                <tbody>  
-                    <tr>
-                        <td>I</td>
-                        <td>Học phí chính quy chương trình đại trà</td>
-                        <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Tiến sĩ</td>
-                        <td>
-                            <button data-p="I" data-c="1" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Thạc sỹ</td>
-                        <td>
-                            <button data-p="I" data-c="2" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Đại học</td>
-                        <td>
-                            <button data-p="I" data-c="3" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Cao đẳng sư phạm</td>
-                        <td>
-                            <button data-p="I" data-c="4" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Trung cấp sư phạm</td>
-                        <td>
-                            <button data-p="I" data-c="5" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>II</td>
-                        <td>Học phí chính quy chương trình khác</td>
-                        <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Tiến sĩ</td>
-                        <td>
-                            <button data-p="II" data-c="1" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Thạc sỹ</td>
-                        <td>
-                            <button data-p="II" data-c="2" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Đại học</td>
-                        <td>
-                            <button data-p="II" data-c="3" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Cao đẳng sư phạm</td>
-                        <td>
-                            <button data-p="II" data-c="4" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Trung cấp sư phạm</td>
-                        <td>
-                            <button data-p="II" data-c="5" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>III</td>
-                        <td>Học phí hình thức vừa học vừa làm</td>
-                        <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Đại học</td>
-                        <td>
-                            <button data-p="III" data-c="3" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Cao đẳng sư phạm</td>
-                        <td>
-                            <button data-p="III" data-c="4" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Trung cấp sư phạm</td>
-                        <td>
-                            <button data-p="III" data-c="5" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IV</td>
-                        <td>Tổng thu năm</td>
-                        <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Từ ngân sách</td>
-                        <td>
-                            <button data-p="IV" data-c="6" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Từ học phí</td>
-                        <td>
-                            <button data-p="IV" data-c="7" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Từ nghiên cứu khoa học và chuyển giao công nghệ</td>
-                        <td>
-                            <button data-p="IV" data-c="8" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Từ nguồn hợp pháp khác</td>
-                        <td>
-                            <button data-p="IV" data-c="9" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Từ nguồn sản xuất dịch vụ</td>
-                        <td>
-                            <button data-p="IV" data-c="10" class="btn btn-info btn-show" >Xem chi tiết</button>
-                        </td>
-                    </tr>
-                </tbody>                
-            </table>
-        </div>
+        <div class="card mt-4">
+    		<div class="card-body">
+    			<div class="row">
+                    <div class="col-md-12">
+                        <h1>@lang('project/ImportdataExcel/title.tdlm')</h1>
+                    </div>
+                </div>
+                <hr>
+                <form class="row" action="{{ route('admin.importdata2.cktcnh.addfilenew') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="col-md-4">
+                        <input name="file" type="file" id="excel_file"  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required/>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" placeholder="@lang('project/ImportdataExcel/title.ndl')" name="year" required>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-benchmark mr-2" type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm mới">
+                            <i class="bi bi-plus-square " style="font-size: 30px;color: #009ef7;"></i>
+                        </button>
+                    </div>
+                </form>
+
+    		</div>
+    	</div>
+        <div id="excel_data" class="mt-5"></div>
+
+
     </div>
 </section>
 <!-- /Kết thúc page trang -->
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Xem chi tiết</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="container-fuild ">
-            <div class="row">
-                <div class="col-md-5">
-                    Năm: <span class="year-info"></span> <br>
-                    Nội dung: <span class="content2"></span> <br>
-                    <span class="content2-child"></span>
-                </div>
-                <div class="col-md-2">
-                    <button class="btn btn-primary btn_add">Thêm mới</button>
-                </div>
-            </div>
-            <div class="add_content"></div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-update">Cập nhật</button>
-      </div>
-    </div>
-  </div>
-</div>
 
     <!-- Kết thúc trang -->
     </section>
@@ -270,336 +126,87 @@
 <script src="{{ asset('vendors/airDatepicker/js/datepicker.en.js') }}" type="text/javascript"></script>
 
 
+<script src="{{ asset('js/xlsx.full.min.js') }}"></script>
 <script>
-    
-    $(".btn-show").click(function() {
-        let parent =$(this).attr("data-p");
-        let child = $(this).attr("data-c");
-        if(parent == "I"){
-            if(child == "1"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("I: Học phí chính quy chương trình đại trà")
-                $(".content2-child").text("1. Tiến sĩ")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "2"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("I: Học phí chính quy chương trình đại trà")
-                $(".content2-child").text("2. Thạc sỹ")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "3"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("I: Học phí chính quy chương trình đại trà")
-                $(".content2-child").text("3. Đại học")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "4"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("I: Học phí chính quy chương trình đại trà")
-                $(".content2-child").text("4. Cao đẳng sư phạm")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "5"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("I: Học phí chính quy chương trình đại trà")
-                $(".content2-child").text("5. Trung tâm sư phạm")
-                $("#exampleModal").modal("show")
-            }
-        } 
-        if(parent == "II"){
-            if(child == "1"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("II: Học phí chính quy chương trình khác")
-                $(".content2-child").text("1. Tiến sĩ")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "2"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("II: Học phí chính quy chương trình khác")
-                $(".content2-child").text("2. Thạc sỹ")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "3"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("II: Học phí chính quy chương trình khác")
-                $(".content2-child").text("3. Đại học")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "4"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("II: Học phí chính quy chương trình khác")
-                $(".content2-child").text("4. Cao đẳng sư phạm")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "5"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("II: Học phí chính quy chương trình khác")
-                $(".content2-child").text("5. Trung tâm sư phạm")
-                $("#exampleModal").modal("show")
-            }
-        } 
-        if(parent == "III"){
-            if(child == "3"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("III: Học phí hình thức vừa học vừa làm")
-                $(".content2-child").text("1. Đại học")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "4"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("III: Học phí hình thức vừa học vừa làm")
-                $(".content2-child").text("2. Cao đẳng sư phạm")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "5"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("III: Học phí hình thức vừa học vừa làm")
-                $(".content2-child").text("3. Trung tâm sư phạm")
-                $("#exampleModal").modal("show")
-            }
-        } 
-        if(parent == "IV"){
-            if(child == "6"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("IV: Tổng thu năm")
-                $(".content2-child").text("1. Từ ngân sách")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "7"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("IV: Tổng thu năm")
-                $(".content2-child").text("2. Từ học phí")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "8"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("IV: Tổng thu năm")
-                $(".content2-child").text("3. Từ nghiên cứu khoa học và chuyển giao công nghệ")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "9"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("IV: Tổng thu năm")
-                $(".content2-child").text("4. Từ nguồn hợp pháp khác")
-                $("#exampleModal").modal("show")
-            }
-            if(child == "10"){
-                loaddata(parent, child);
-                $(".year-info").text($("#year").val())
-                $(".content2").text("IV: Tổng thu năm")
-                $(".content2-child").text("5. Từ nguồn sản xuất dịch vụ")
-                $("#exampleModal").modal("show")
-            }
-        } 
-    })
-    var parentGloble;
-    var childGloble;
+    const excel_file = document.getElementById('excel_file');
+    excel_file.addEventListener('change', (event) => {
+        if(!['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'].includes(event.target.files[0].type))
+        {
+            document.getElementById('excel_data').innerHTML = '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
 
-    function loaddata(parent, child){
-        parentGloble = parent;
-        childGloble = child;
+            // excel_file.value = '';
 
-        $(".add_content").empty();
-        let data = {
-            parentGloble, childGloble, 
-            'year': $("#year").val(),
+            return false;
         }
-        let loadData = "{{ route('admin.importdata.cktcnh.loaddata') }}";
-        fetch(loadData, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            method: "POST",
-            body: JSON.stringify(data),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                data.forEach((item, index) => {
-                    let UI;
-                    if(parentGloble == "IV" || childGloble == "4" || childGloble == "5"){
-                        UI = ` 
-                            <div class="row">
-                                <div class="col-md-3">
-                                    Đơn vị tính: <br>
-                                    <select class="form-control donvitinh" value='${item.donvitinh}'>
-                                        <option value="1">Triệu đồng/năm</option>
-                                        <option value="2">Tỷ đồng</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    @lang('project/ImportdataExcel/title.hp1nam'): <br>
-                                    <input type="number" class="form-control hp1nam" value="${item.hocphi_1nam}">
-                                </div>
-                                <div class="col-md-3">
-                                    @lang('project/ImportdataExcel/title.hpkhoa'): <br>
-                                    <input type="number" class="form-control hpkhoa" value="${item.hocphi_cakhoa}">
-                                </div>
-                            </div>
-                         `;
-                        $(".btn_add").hide()
-
-                    }else{
-                        UI = ` 
-                            <div class="row">
-                                <div class="col-md-3">
-                                    Khối ngành: <br>
-                                    <input type="text" class="form-control khoinganh" value='${item.ten_khoinganh}'>
-                                </div>
-                                <div class="col-md-3">
-                                    Đơn vị tính: <br>
-                                    <select class="form-control donvitinh" value='${item.donvitinh}'>
-                                        <option value="1">Triệu đồng/năm</option>
-                                        <option value="2">Tỷ đồng</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    @lang('project/ImportdataExcel/title.hp1nam'): <br>
-                                    <input type="number" class="form-control hp1nam" value="${item.hocphi_1nam}">
-                                </div>
-                                <div class="col-md-3">
-                                    @lang('project/ImportdataExcel/title.hpkhoa'): <br>
-                                    <input type="number" class="form-control hpkhoa" value="${item.hocphi_cakhoa}">
-                                </div>
-                            </div>
-                         `
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(event.target.files[0]);
+        reader.onload = function(event){
+            var data = new Uint8Array(reader.result);
+            var work_book = XLSX.read(data, {type:'array'});
+            var sheet_name = work_book.SheetNames;
+            var sheet_data = XLSX.utils.sheet_to_json(work_book.Sheets[sheet_name[0]], {header:1});
+            if(sheet_data.length > 0)
+            {
+                var table_output = '<table class="table ">';
+                for(var row = 0; row < sheet_data.length; row++)
+                {
+                    table_output += '<tr>';
+                    for(var cell = 0; cell < sheet_data[row].length; cell++)
+                    {
+                        if(row == 0)
+                        {
+                            table_output += '<th>'+sheet_data[row][cell]+'</th>';
+                        }
+                        else
+                        {
+                            table_output += '<td>'+sheet_data[row][cell]+'</td>';
+                        }
                     }
-                    
-                     $(".add_content").append(UI)
-                })
-            })
-    }
-
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        $(".btn_add").show();
-    })
-
-    $(".btn_add").click(function() {
-        let UI = "";
-        if(parentGloble == "IV" || childGloble == "4" || childGloble == "5"){
-            UI = ` 
-                <div class="row">
-                    <div class="col-md-4">
-                        Đơn vị tính: <br>
-                        <select class="form-control donvitinh">
-                            <option value="1">Triệu đồng/năm</option>
-                            <option value="2">Tỷ đồng</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        @lang('project/ImportdataExcel/title.hp1nam'): <br>
-                        <input type="number" class="form-control hp1nam">
-                    </div>
-                    <div class="col-md-4">
-                        @lang('project/ImportdataExcel/title.hpkhoa'): <br>
-                        <input type="number" class="form-control hpkhoa">
-                    </div>
-                </div>
-             `;
-            $(".btn_add").hide()
-         }else{
-            UI = ` 
-                <div class="row">
-                    <div class="col-md-3">
-                        Khối ngành: <br>
-                        <input type="text" class="form-control khoinganh">
-                    </div>
-                    <div class="col-md-3">
-                        Đơn vị tính: <br>
-                        <select class="form-control donvitinh">
-                            <option value="1">Triệu đồng/năm</option>
-                            <option value="2">Tỷ đồng</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        @lang('project/ImportdataExcel/title.hp1nam'): <br>
-                        <input type="number" class="form-control hp1nam">
-                    </div>
-                    <div class="col-md-3">
-                        @lang('project/ImportdataExcel/title.hpkhoa'): <br>
-                        <input type="number" class="form-control hpkhoa">
-                    </div>
-                </div>
-             `;
-         }
-         $(".add_content").append(UI)
-    })
-
-    $(".btn-update").click(function(){
-        let khoinganh = document.querySelectorAll(".khoinganh")
-        let khoinganhArr = []; 
-        if(khoinganh.length != 0){
-            for(let i = 0; i< khoinganh.length; i++){
-                khoinganhArr.push(khoinganh[i].value)
-            }
-        }
-        
-        
-        let donvitinh = document.querySelectorAll(".donvitinh");
-        let donvitinhArr = []; 
-        for(let i = 0; i< donvitinh.length; i++){
-            donvitinhArr.push(donvitinh[i].value)
-        }
-
-        let hp1nam = document.querySelectorAll(".hp1nam");
-        let hp1namArr = []; 
-        for(let i = 0; i< hp1nam.length; i++){
-            hp1namArr.push(hp1nam[i].value)
-        }
-
-        let hpkhoa = document.querySelectorAll(".hpkhoa");
-        let hpkhoaArr = []; 
-        for(let i = 0; i< hpkhoa.length; i++){
-            hpkhoaArr.push(hpkhoa[i].value)
-        }
-
-        let data = {
-            'year': $("#year").val(),
-            'childGloble': childGloble,
-            'parentGloble': parentGloble,
-            'khoinganhArr': khoinganhArr,
-            'donvitinhArr': donvitinhArr,
-            'hp1namArr': hp1namArr,
-            'hpkhoaArr': hpkhoaArr
-        }
-        let loadData = "{{ route('admin.importdata.cktcnh.updatedata') }}";
-        fetch(loadData, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            method: "POST",
-            body: JSON.stringify(data),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if(data.mes == "done"){
-                    $("#exampleModal").find("button.close").trigger("click");
+                    table_output += '</tr>';
                 }
+                table_output += '</table>';
+                document.getElementById('excel_data').innerHTML = table_output;
+            }
+            // excel_file.value = '';
+        }
+    });
+
+
+
+    $("#selectYear").on("change", function() {
+        if($(this).val() == ""){
+            document.getElementById('excel_data2').innerHTML = "";
+            $("#export-data").attr('href', "")
+        }else{
+            let data = {
+                'id': $(this).val()
+            }
+            let routeApi = "{{ route('admin.importdata2.cktcnh.showFileData') }}";
+            fetch(routeApi, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: "POST",
+                body: JSON.stringify(data),
             })
+                .then((response) => response.json())
+                .then((data) => {	
+                    document.getElementById('excel_data2').innerHTML = data.data;
+                    $("#export-data").attr('href', data.href)
+                })
+        }
     })
 
+    $("#export-data").click(function(e){
+        e.preventDefault();
+        if($(this).attr('href') == ""){
+            alert("@lang('project/ImportdataExcel/title.vlcnxhdl')")
+        }else{
+            location.href = $(this).attr('href');
+        }
+    })
 </script>
-
 
 @stop

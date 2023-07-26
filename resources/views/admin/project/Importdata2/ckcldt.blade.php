@@ -11,94 +11,35 @@
 <link href="{{ asset('vendors/bootstrap3-wysihtml5-bower/css/bootstrap3-wysihtml5.min.css') }}"  rel="stylesheet" media="screen"/>
 <link href="{{ asset('css/pages/editor.css') }}" rel="stylesheet" type="text/css"/>
 <style>
-    .cke_chrome{
-        margin: 0 !important;
-        width: 100% !important;
+    table, th, td{
+        border: 1px solid #414141 !important;
     }
-    .cke_dialog_tabs{
-        display: flex !important;
+    th{
+        font-weight: bold !important;
+        padding: 10px 5px !important;
+        background-color: #00bfff !important;
     }
-    #modal_unit .modal-xl{
-        width: 1420px !important;
-        max-width: unset !important;
+    tr:nth-child(odd){
+        background-color: #f1f1f1 !important;
     }
-    #css_table{
-        overflow-x: auto;
-        width:100%;
-        overflow-y: auto;
-        max-height: 450px;
+    td{
+        text-align: center !important;
+        padding: 10px 5px !important;
     }
-    #idtableip{
-        width:3000px;
+    #excel_data, #excel_data2{
+        padding: 5px;
     }
-    .row_width{
-        width:7rem;
+    .table{
+        width: 2000px !important;
     }
-    .row_add{
-        width: 8% !important;
+    #excel_data, #excel_data2{
+        overflow-x:auto;
     }
-    .listlhcsg{
-        width: 100%;
-        border: none;
-        outline: none;
-    }
-    .trash-btn{
-        font-size: 20px;
-        cursor: pointer;
-    }
-    .icon-oblig{
-        color: red;
-        font-size: 25px;
-    }
-    .css-note{
-        text-align: right;
-        display: flex;
-        justify-content: space-between;
-    }
-    .blank{
-        width: 10px;
-    }
-    .note-group{
-        display: flex;
-        flex-wrap: wrap;
-    }
-    .note-item{
-        width: 350px;
-        display: flex;
-        margin: 5px 0;
-    }
-    .block-note{
-        width: 40px;
-        height: 20px;
-        border: 1px solid gray;
-        margin-right: 4px;
-    }
-    .color-empty{
-        background: #ec5757;
-    }
-    .color-number{
-        background: #5765ec;
-    }
-    .color-phone{
-        background: #ce7d27;
-    }
-    .color-website{
-        background: #57a7ec;
-    }
-    .color-email{
-        background: #7306c0;
-    }
-    .color-date{
-       background: #047a7e;
-    }
-    .wrraper-table{
-        padding: 2rem;
-        background: white;
-        border-radius: 5px;
-        box-shadow: 0 0 12px grey;
-    }
-    .table td:first-child{
-        padding-left: 0.75rem !important ;
+    #excel_data::-webkit-scrollbar, #excel_data2::-webkit-scrollbar {
+                height: 1em
+            }
+    #excel_data::-webkit-scrollbar-thumb, #excel_data2::-webkit-scrollbar-thumb {
+        background: #c9c8c7;
     }
 </style>
 
@@ -109,121 +50,66 @@
 @stop
 
 @section('content')
-    <section class="content indexpage pr-3 pl-3">
+<section class="content indexpage pr-3 pl-3">
         <!-- Bắt đầu trang -->
 <!-- page trang ở đây -->
 <section class="content-body">
     <div class="form-standard">
-        <div class="item-group-button right-block mb-2">
-            <!-- <button href="" class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modal_unit" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.nhap_excel')">
-                <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
-            </button> -->
-            <a href="{{ route('admin.importdata.ckcldt.exportCkcldt') }}" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
-                <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
-            </a>
-            <button class="btn" data-toggle="modal" data-target="#modalDeleteAll__" data-nametable="excel_import_cccldt" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.xoatatca')">
-                <i class="bi bi-trash" style="font-size: 35px;color: red;"></i>
-            </button>
-        </div>
+        <div class="card">
+    		<div class="card-body">
+    			<div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-between">
+                            <h1>@lang('project/ImportdataExcel/title.cnht')</h1>
+                            <a id="export-data" href="" class="btn btn-success">@lang('project/ImportdataExcel/title.export')</a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-md-12">
+                    <select class="form-control" id="selectYear">
+                        <option value="" >--@lang('project/ImportdataExcel/title.cnhtdl')</option>
+                        @foreach($getFile as $value)
+                            <option value="{{ $value->id }}">{{ $value->year }}</option>
+                        @endforeach
+                    </select>
+                </div>
+    		</div>
+    	</div>
+        <div id="excel_data2" class="mt-5"></div>
         
-        <div class="wrraper-table">
-            <select name="" id="year" class="form-control">
-                <option value="" hidden>-- @lang('project/ImportdataExcel/title.cnck')</option>
-                @for($i = intVal(date('Y')) + 1 ;$i >= 2017; $i--)
-                    <option  value="{{ $i }}" 
-                        @if($i == intVal(date('Y')))
-                            selected
-                        @endif
-                    >{{$i}}</option>
-                @endfor
-            </select>
-            <br>
-            <table class="table table-striped table-bordered" id="table" width="100%">
-                <thead>
-                 <tr>
-                    <th>
-                        @lang('project/ImportdataExcel/title.stt')
-                    </th>
-                    <th>
-                        @lang('project/ImportdataExcel/title.noidung')
-                    </th>
-                    <th>
-                        @lang('project/ImportdataExcel/title.tddhcq')
-                    </th>
-                 </tr>
-                </thead>
-                <tbody>  
-                    <tr>
-                        <td>I</td>
-                        <td>@lang('project/ImportdataExcel/title.dkkyts')</td>
-                        <td contenteditable id="dkkyts">
-                            {!! $current == "" ?  "" : $current->dkdkts !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td rowspan="3">II</td>
-                        <td rowspan="3">@lang('project/ImportdataExcel/title.mtkt')</td>
-                        <td>
-                            @lang('project/ImportdataExcel/title.kienthuc'): 
-                            <div contenteditable id="kienthuc">
-                                {!! $current == "" ?  "" : $current->kienthuc !!}
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @lang('project/ImportdataExcel/title.kynang'): 
-                            <div contenteditable id="kynang">
-                                {!! $current == "" ?  "" : $current->kynang !!}
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @lang('project/ImportdataExcel/title.nltctn'):
-                            <div contenteditable id="nltctn">
-                                {!! $current == "" ?  "" : $current->nltctn !!}
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>III</td>
-                        <td>@lang('project/ImportdataExcel/title.ccshd')</td>
-                        <td contenteditable id="ccshd">
-                            {!! $current == "" ?  "" : $current->ccshd !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>IV</td>
-                        <td>@lang('project/ImportdataExcel/title.ctdtnt')</td>
-                        <td contenteditable id="ctdtnt">
-                            {!! $current == "" ?  "" : $current->ctdt !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>V</td>
-                        <td>@lang('project/ImportdataExcel/title.knhtrt')</td>
-                        <td contenteditable id="knhtrt">
-                            {!! $current == "" ?  "" : $current->knht !!}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>VI</td>
-                        <td>@lang('project/ImportdataExcel/title.vtlv')</td>
-                        <td contenteditable id="vtlv">
-                            {!! $current == "" ?  "" : $current->vtstn !!}
-                        </td>
-                    </tr>
-                </tbody>                
-            </table>
+        <div class="card mt-4">
+    		<div class="card-body">
+    			<div class="row">
+                    <div class="col-md-12">
+                        <h1>@lang('project/ImportdataExcel/title.tdlm')</h1>
+                    </div>
+                </div>
+                <hr>
+                <form class="row" action="{{ route('admin.importdata2.ckcldt.addfilenew') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="col-md-4">
+                        <input name="file" type="file" id="excel_file"  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required/>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" placeholder="@lang('project/ImportdataExcel/title.ndl')" name="year" required>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-benchmark mr-2" type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Thêm mới">
+                            <i class="bi bi-plus-square " style="font-size: 30px;color: #009ef7;"></i>
+                        </button>
+                    </div>
+                </form>
 
-            <button id="btn-update" class="btn btn-primary">
-                @lang('project/ImportdataExcel/title.capnhat')
-            </button>
-        </div>
+    		</div>
+    	</div>
+        <div id="excel_data" class="mt-5"></div>
+
+
     </div>
 </section>
 <!-- /Kết thúc page trang -->
+
     <!-- Kết thúc trang -->
     </section>
 @stop
@@ -239,70 +125,87 @@
 <script src="{{ asset('vendors/airDatepicker/js/datepicker.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('vendors/airDatepicker/js/datepicker.en.js') }}" type="text/javascript"></script>
 
-
+<script src="{{ asset('js/xlsx.full.min.js') }}"></script>
 <script>
-    
-    $("#btn-update").click(function() {
-        let data = {
-            "dkkyts": dkkyts.textContent,
-            "kienthuc": kienthuc.textContent,
-            "kynang": kynang.textContent,
-            "nltctn": nltctn.textContent,
-            "ccshd": ccshd.textContent,
-            "ctdtnt": ctdtnt.textContent,
-            "knhtrt": knhtrt.textContent,
-            "vtlv": vtlv.textContent,
-            "year": year.value
+    const excel_file = document.getElementById('excel_file');
+    excel_file.addEventListener('change', (event) => {
+        if(!['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'].includes(event.target.files[0].type))
+        {
+            document.getElementById('excel_data').innerHTML = '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
+
+            // excel_file.value = '';
+
+            return false;
         }
-
-        let routeApi = "{{ route('admin.importdata.ckcldt.updateCkcldt') }}";
-        fetch(routeApi, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            method: "POST", 
-            body: JSON.stringify(data),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if(data.mes == "done"){
-                    location.reload();
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(event.target.files[0]);
+        reader.onload = function(event){
+            var data = new Uint8Array(reader.result);
+            var work_book = XLSX.read(data, {type:'array'});
+            var sheet_name = work_book.SheetNames;
+            var sheet_data = XLSX.utils.sheet_to_json(work_book.Sheets[sheet_name[0]], {header:1});
+            if(sheet_data.length > 0)
+            {
+                var table_output = '<table class="table ">';
+                for(var row = 0; row < sheet_data.length; row++)
+                {
+                    table_output += '<tr>';
+                    for(var cell = 0; cell < sheet_data[row].length; cell++)
+                    {
+                        if(row == 0)
+                        {
+                            table_output += '<th>'+sheet_data[row][cell]+'</th>';
+                        }
+                        else
+                        {
+                            table_output += '<td>'+sheet_data[row][cell]+'</td>';
+                        }
+                    }
+                    table_output += '</tr>';
                 }
-            })
-    })
-    
+                table_output += '</table>';
+                document.getElementById('excel_data').innerHTML = table_output;
+            }
+            // excel_file.value = '';
+        }
+    });
 
-    $("#year").change(function(){
-        let routeApi = "{{ route('admin.importdata.ckcldt.getCkcldt') }}?nam=" 
-                + $("#year").val();
-        fetch(routeApi, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if(data.result == ""){
-                    alert("Năm công khai không có dữ liệu");
-                }else{
-                    dkkyts.textContent = data.result.dkdkts;
-                    kienthuc.textContent = data.result.kienthuc;
-                    kynang.textContent = data.result.kynang;
-                    nltctn.textContent = data.result.nltctn;
-                    ccshd.textContent = data.result.ccshd;
-                    ctdtnt.textContent = data.result.ctdt;
-                    knhtrt.textContent = data.result.knht;
-                    vtlv.textContent = data.result.vtstn;
-                    console.log(data)
-                }
+
+
+    $("#selectYear").on("change", function() {
+        if($(this).val() == ""){
+            document.getElementById('excel_data2').innerHTML = "";
+            $("#export-data").attr('href', "")
+        }else{
+            let data = {
+                'id': $(this).val()
+            }
+            let routeApi = "{{ route('admin.importdata2.ckcldt.showFileData') }}";
+            fetch(routeApi, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: "POST",
+                body: JSON.stringify(data),
             })
+                .then((response) => response.json())
+                .then((data) => {	
+                    document.getElementById('excel_data2').innerHTML = data.data;
+                    $("#export-data").attr('href', data.href)
+                })
+        }
     })
 
+    $("#export-data").click(function(e){
+        e.preventDefault();
+        if($(this).attr('href') == ""){
+            alert("@lang('project/ImportdataExcel/title.vlcnxhdl')")
+        }else{
+            location.href = $(this).attr('href');
+        }
+    })
 </script>
-
 
 @stop
