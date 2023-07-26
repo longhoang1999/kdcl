@@ -224,7 +224,7 @@
                                 <tr>
                                     <th class="text-center" colspan="4">@lang('project/Externalreview/title.dgc')</th>
                                     <th class="text-center">{{ $totalDat }}</th>
-                                    <th class="text-center">{{ round(($totalDat/$totalTieuChi)*100,2) }}</th>
+                                    <th class="text-center">{{$percentage = ($totalTieuChi != 0) ? round(($totalDat / $totalTieuChi) * 100, 2) : 0}}</th>
                                 </tr>
                                 </tbody>
                             </table>

@@ -27,7 +27,10 @@ class ReportController extends DefinedController
 {
 
     public function index(Request $req){
-        $btc = DB::table("bo_tieuchuan")->select("id", "tieu_de", "loai_tieuchuan")->get();
+        $btc = DB::table("bo_tieuchuan")
+                ->select("id", "tieu_de", "loai_tieuchuan")
+                ->where('deleted_at',null)
+                ->get();
         $user = DB::table("users")
             ->leftjoin("donvi", "users.donvi_id", "=", "donvi.id")
             ->select("users.id","users.name", "donvi.ten_donvi")->get();

@@ -179,6 +179,7 @@
                 $noidung28 = json_decode('{"chinhquy":"co","khongchinhquy":"co","tuxa":"co","nuocngoai":"co","trongnuoc":"co"}');
             }
         @endphp
+        
         <form method="POST" class="col-md-6 noiDungThem phuluc28" action="{{-- route("hoanthanh.api.noidungthem") --}}">
             @csrf
             <input type="hidden" value="phuluc28" name="ten">

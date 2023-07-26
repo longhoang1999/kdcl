@@ -1,24 +1,4 @@
-@extends('admin/layouts/default')
-@section('title')
-    @lang('project/Selfassessment/title.hoantbc')
-@parent
-@stop
 
-@section('header_styles')
-
-<style type="text/css">
-
-</style>
-@stop
-
-@section('title_page')
-    <h2>Cơ sở dữ liệu</h2>
-    
-@stop
-
-@section('content')
-    <section class="content indexpage pr-3 pl-3">
-        <!-- Bắt đầu trang -->
         @if($check == "sua")
             <style>
                 .import_ex table{
@@ -51,13 +31,6 @@
                 .edit_input {
                   -moz-appearance: textfield; /* Firefox */
                 }
-
-                .table-borderless{
-                    border: 1px solid;
-                }
-                .table-borderless tr,td{
-                    border: 1px solid;
-                } 
 
             </style>
         
@@ -105,16 +78,22 @@
                 #btn_submit{
                     display: none;
                 }
+                .table-borderless{
+                    border: 1px solid;
+                }
+                .table-borderless tr,td{
+                    border: 1px solid;
+                } 
             </style>
         
         
         @endif
       <div class="m-t-md">
-      		<div class="h5 text-center">
+            <div class="h5 text-center">
                 @lang('project/Externalreview/title.csdlkdcl')
             </div>
 
-		    <p class="text-center">@lang('project/Externalreview/title.tdbc') {{ (($keHoachBaoCaoDetail2->thoi_diem_bao_cao)?\Carbon\Carbon::parse($keHoachBaoCaoDetail2->thoi_diem_bao_cao)->format('d/m/Y'):"Chưa cập nhật") }}</p>
+            <p class="text-center">@lang('project/Externalreview/title.tdbc') {{ (($keHoachBaoCaoDetail2->thoi_diem_bao_cao)?\Carbon\Carbon::parse($keHoachBaoCaoDetail2->thoi_diem_bao_cao)->format('d/m/Y'):"Chưa cập nhật") }}</p>
             <p> <strong>@lang('project/Externalreview/title.phan1')</strong></p>
             <p><i><strong>@lang('project/Externalreview/title.1')</strong></i></p>
             <p>- @lang('project/Externalreview/title.tiengviet')</p>
@@ -205,7 +184,7 @@
         <form action="{{route('admin.tudanhgia.database.save_file_csgd')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="text" hidden value="{{$idkhbc}}" name="id">
-    		<p><i><strong>@lang('project/Externalreview/title.12')</strong></i></p>
+            <p><i><strong>@lang('project/Externalreview/title.12')</strong></i></p>
             <p><em>@lang('project/Externalreview/title.cpb')</em>
             </p> 
             <div class="parent_ex">
@@ -951,96 +930,14 @@
                 <button id="btn_submit" class="btn btn-success w-25" type="submit">Cập nhật bảng biểu</button>
             </div>
         </form>
-<!-- page trang ở đây -->
-
-    
-<!-- /Kết thúc page trang -->
-
-    <!-- Kết thúc trang -->
-</section>
-
-@stop
 
 
-
-@section('footer_scripts')
 <script src="{{ asset('js/xlsx.full.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/baocaoctdt.js') }}"></script>
 <script type="text/javascript">
-    $('.edit_input').on('change',function() {
-        let val = $(this).val();
-        let key = $(this).attr('data_key');
-         $.ajax({
-            url: "{!! route('admin.tudanhgia.database.save_data_csgd') !!}",
-            type: "POST",
-            data:{
-                val : val,
-                key : key,
-                ikhbc : {{$idkhbc}},
-                _token: '{{ csrf_token() }}'
-            },    
-            error: function(err) {
-
-            },
-
-            success: function(data) {
-                if(data ==1){
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Thành công!',
-                        text: 'Bạn đã cập nhật thành công.',
-                    });
-                }else{
-                    Swal.fire({
-                        icon: 'Warning',
-                        title: 'Thất bại!',
-                        text: 'Bạn đã cập nhật thất bại.',
-                    });
-                }
-            },
-        })
-    })
-
-    @if($check != "sua")
-        $('.edit_input').prop('disabled', true);
-        $('.radiobox').prop('disabled', true);
-    @else 
-        $("#save_contenty").on('change','.radiobox',function(){
-        let key = $(this).attr('data_key');
-        let val = $(this).val();
-        
-        $.ajax({
-                url: "{{route('admin.tudanhgia.database.apiNoiDungThem')}}",
-                type: "GET",
-                data:{
-                    id : {{$idkhbc}},
-                    key : key,
-                    val : val,
-                },    
-                error: function(err) {
-                },
-
-                success: function(data) {
-                    console.log(data);
-                    if(data ==1){
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Thành công!',
-                            text: 'Bạn đã cập nhật thành công.',
-                        });
-                    }else{
-                        Swal.fire({
-                            icon: 'Warning',
-                            title: 'Thất bại!',
-                            text: 'Bạn đã cập nhật thất bại.',
-                        });
-                    }
-                },
-            })
-        })
-    @endif
+    
     
     
 </script>
-@stop
+
 

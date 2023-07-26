@@ -1,6 +1,6 @@
 <div class="m-t-md">
     <div  class="form-horizontal">
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label class="col-sm-2 control-label">Mã minh chứng</label>
             <div class="col-sm-6">
                 <input type="text" value=""  id="mykeySearchInputMc"  name="search" placeholder="Nhập mã minh chứng để tìm kiếm" class="form-control">
@@ -12,7 +12,7 @@
                     <i class="fas fa-search"></i> Tìm kiếm
                 </button>
             </div>
-        </div>
+        </div> -->
         <div class="hr-line-dashed"></div>
     </div>
     <div id="phuluc10">

@@ -131,6 +131,8 @@ class UpdateAciController extends DefinedController
                                 ->select("truong_dv", "canbo_dbcl");
                         if ($donVi->count() > 0) {
                             $donVi = $donVi->first();
+                            // echo($donVi->truong_dv);
+                            // die;
                             $dataThongBao1 = [
                                 'nguoi_gui'     => Sentinel::getUser()->id,
                                 'nguoi_nhan'    => $donVi->truong_dv,

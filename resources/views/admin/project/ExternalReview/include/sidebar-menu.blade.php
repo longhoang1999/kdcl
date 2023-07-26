@@ -1,6 +1,14 @@
 
 <input type="hidden" value="{{($id)?$id:''}}" id="idShowSibar">
-    
+    <style>
+        #kt_aside{
+            background: #ffff;
+        }
+
+        #side-menu a{
+            color: #888c9f !important;
+        }
+    </style>
 @if($id)
     @if(isset($keHoachBaoCaokehoachchung->id))
         @if($keHoachBaoCaokehoachchung->id)

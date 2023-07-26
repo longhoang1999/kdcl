@@ -564,7 +564,7 @@
 
     flatpickr('#ngay_chot', {
         dateFormat: 'd-m-Y',
-        minDate: "today",
+        // minDate: "today",
     });
     flatpickr('#ngay_cbi_end', {
         dateFormat: 'd-m-Y',

@@ -25,31 +25,9 @@ use App\Models\Country;
 
 class databaseController extends DefinedController
 {
-     public function dulieutest(Request $req){
-          // $arr = [
-          //      "ck" => 0,
-          //      "sk" => 0
-          // ];
-          // $arr = json_encode($arr);
-
-          // DB::table('dulieutest')
-          //      ->insert([
-          //           "daitest" => $arr,
-          //      ]);
-
-
-          $data = DB::table('dulieutest'); 
-          $datas = json_decode($data->first()->daitest);
-
-          $datas->{$req->key} = $req->val;
-
-          $da = json_encode($datas);
-          $data->update([
-               "daitest" => $da,
-          ]);
-     }
-
+     
      public function index(){
+
           return view('admin.project.Database.index');
      }
 
@@ -133,25 +111,48 @@ class databaseController extends DefinedController
      
 
      public function data_school(Request $req){
+          $sua = "sua";
           $id = $req->id;
+          // echo $id;die;
           $data = DB::table('coso_dulieu')
                     ->where('id_khbc',$req->id)
                     ->first();
           $dulieu = json_decode($data->dulieu);
           list($keHoachBaoCaoList2,$keHoachBaoCaoDetail2) = $this->baseIndex($id);
           list($noiDungThem) = $this->getDataPhuLuc($keHoachBaoCaoDetail2);
-          // dd($keHoachBaoCaoDetail2);die;
+          
+          $list = $this->showFileData($id);
           return view('admin.project.Database.display_data')
                     ->with([
                          "dulieu"  => $dulieu,
                          "keHoachBaoCaoDetail2"  => $keHoachBaoCaoDetail2,
                          'noiDungThem' => $noiDungThem,
+                         'idkhbc' => $id,
+                         'data'    => $list,
+                         'check'   => $sua,
+
                     ]);
      }
 
-     public function data_school_csgd(){
-
-          return view('admin.project.Database.data_school_csgd');
+     public function data_school_csgd(Request $req){
+          $sua = "sua";
+          $id = $req->id;
+          $data = DB::table('coso_dulieu')
+                    ->where('id_khbc',$req->id)
+                    ->first();
+          $dulieu = json_decode($data->dulieu);
+          list($keHoachBaoCaoList2,$keHoachBaoCaoDetail2) = $this->baseIndex($id);
+          list($noiDungThem) = $this->getDataPhuLucCSDT($keHoachBaoCaoDetail2);
+          $list = $this->showFileData($id);
+          return view('admin.project.Database.data_school_csgd')
+                         ->with([
+                              "dulieu"  => $dulieu,
+                              "keHoachBaoCaoDetail2"  => $keHoachBaoCaoDetail2,
+                              'noiDungThem' => $noiDungThem,
+                              "idkhbc"  => $id,
+                              'data'    => $list,
+                              'check'   => $sua,
+                         ]);
      }
 
 
@@ -190,10 +191,10 @@ class databaseController extends DefinedController
                                                                       ->where('kh_baocao_id',$keHoachBaoCaoDetail2->id)
                                                                       ->first();
 
-                    $keHoachBaoCaoDetail2->keHoachChung->baoCaoChung = DB::table('baocao_chung')
-                                                                                     ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
-                                                                                     ->where('id_kh_chung',$keHoachBaoCaoDetail2->keHoachChung->id)
-                                                                                     ->first();
+                    // $keHoachBaoCaoDetail2->keHoachChung->baoCaoChung = DB::table('baocao_chung')
+                    //                                                                  ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
+                    //                                                                  ->where('id_kh_chung',$keHoachBaoCaoDetail2->keHoachChung->id)
+                    //                                                                  ->first();
 
                     foreach($keHoachTieuChuanList as $keHoachTieuChuan){
                          $tieuChuan = DB::table('tieuchuan')->where('id',$keHoachTieuChuan->tieuchuan_id)->first();
@@ -279,7 +280,6 @@ class databaseController extends DefinedController
                                                                                                ->where('kehoach_bc_id',$id)
                                                                                                ->whereNull('deleted_at')
                                                                                                ->get();
-                                             var_dump($value->khmenhde->mocchuan_id);die;
 
                                              foreach($baoCaoMenhDe->keHoachHanhDongList as $val){
                                                   $val->donViThucHien = DB::table('donvi')
@@ -315,18 +315,18 @@ class databaseController extends DefinedController
                   }
           }
                
-             return array($keHoachBaoCaoList2,$keHoachBaoCaoDetail2);
-          }
+        return array($keHoachBaoCaoList2,$keHoachBaoCaoDetail2);
+     }
 
 
           public function getDataPhuLuc($keHoachBaoCaoDetail2){
                
                $noiDungThem = DB::table('baocao_noidungthem')
                                         ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
-                                        ->get();
+                                        ->first();
 
-                                                          
-               return array($noiDungThem);
+               $noidung = json_decode($noiDungThem->noidung);                                           
+               return array($noidung);
           }
 
           public function save_data(Request $req){
@@ -342,7 +342,8 @@ class databaseController extends DefinedController
                //      ]);
 
 
-               $data = DB::table('coso_dulieu'); 
+               $data = DB::table('coso_dulieu')
+                         ->where('id_khbc',$req->ikhbc); 
                $datas = json_decode($data->first()->dulieu);
 
                $datas->{$req->key} = $req->val;
@@ -354,4 +355,211 @@ class databaseController extends DefinedController
 
                return 1;
           }
+
+          public function save_data_csgd(Request $req){
+               // $arr = [
+               //      "ck" => 0,
+               //      "sk" => 0
+               // ];
+               // $arr = json_encode($arr);
+
+               // DB::table('dulieutest')
+               //      ->insert([
+               //           "daitest" => $arr,
+               //      ]);
+
+
+               $data = DB::table('coso_dulieu')
+                         ->where('id_khbc',$req->ikhbc); 
+               $datas = json_decode($data->first()->dulieu);
+
+               $datas->{$req->key} = $req->val;
+
+               $save = json_encode($datas);
+               $data->update([
+                    "dulieu" => $save,
+               ]);
+
+               return 1;
+          }
+
+          public function getDataPhuLucCSDT($keHoachBaoCaoDetail2){
+
+               $noiDungThem = DB::table('baocao_noidungthem')
+                                        ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
+                                        ->first();
+
+               $noidung = json_decode($noiDungThem->noidung);                                           
+               return array($noidung);
+
+          }
+
+         //  public function showFileData($idbc){
+         //     $getFile = DB::table('coso_dulieu')->where('id_khbc', $idbc);
+         //     $dataJson = json_decode($getFile->first()->Url_ex);
+         //     $tableList = [];
+
+         //     foreach($dataJson as $key => $value){ 
+         //       if($value != '0'){
+         //          $address = public_path($value);
+
+         //          $a = Excel::toArray([],$address);
+
+
+         //          $table = "";
+         //          $UI = "";
+         //          foreach($a[0] as $key => $value) {
+         //              $td = "";
+         //              if($key == 0){
+         //                  foreach($value as $val){
+         //                      if(trim($val) != ""){
+         //                          $td .=   '<th>'.  trim($val)   .'</th>';
+         //                      }
+         //                  }
+         //              }else{
+         //                  foreach($value as $val){
+         //                      if(trim($val) != ""){
+         //                          $td .=   '<td>'.  trim($val) .'</td>';
+         //                      }
+         //                  }
+         //              }
+         //              if( $td != ""){
+         //                  $UI .= '<tr>
+         //                              '.$td.'
+         //                          </tr>  
+         //                  ';
+         //              }
+         //          }
+         //          $table = '<table class="table ">' . $UI . '</table>';
+         //           //dd($table);
+         //          array_push($tableList[$key], $table);
+         //      }
+         //     }
+         //     return $tableList;
+         // }
+
+          public function showFileData($idbc){
+
+              $getFile = DB::table('coso_dulieu')->where('id_khbc', $idbc);
+              $dataJson = json_decode($getFile->first()->Url_ex);
+              $tableList = [];
+
+              foreach ($dataJson as $key => $value) {
+                  if ($value != '0') {
+                      $address = public_path($value);
+                      $a = Excel::toArray([], $address);
+
+                      $table = "";
+                      $UI = "";
+                      foreach ($a[0] as $subKey => $subValue) { // Change the variable names here to avoid conflicts
+                          $td = "";
+                          if ($subKey == 0) {
+                              foreach ($subValue as $val) {
+                                  if (trim($val) != "") {
+                                      $td .= '<th>' . trim($val) . '</th>';
+                                  }
+                              }
+                          } else {
+                              foreach ($subValue as $val) {
+                                  if (trim($val) != "") {
+                                      $td .= '<td>' . trim($val) . '</td>';
+                                  }
+                              }
+                          }
+
+                          if ($td != "") {
+                              $UI .= '<tr>' . $td . '</tr>';
+                          }
+                      }
+
+                      $table = '<table class="table ">' . $UI . '</table>';
+                      $tableList[$key] = $table; // Assign the $table to the corresponding $key in $tableList
+                  }
+              }
+
+              return $tableList;
+          }
+
+          public function save_file_ctdt(Request $req){
+
+               $dataMau = DB::table("coso_dulieu")->where("id_khbc", $req->id);
+               $dataJson = json_decode($dataMau->first()->Url_ex);
+
+               $permitted_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+              // dd($dataJson);
+               foreach($dataJson as $key => $value){
+                    $image = $req->file([$key]);
+                     if($image != null){
+                         $randomText = substr(str_shuffle($permitted_chars), 0, 20);
+                         $picName = $randomText.time().'.'.$image->getClientOriginalExtension();
+                         
+                         File::delete(public_path($dataJson->{$key}));
+                         
+
+                         $image->move(public_path('excel_cosodl'), $picName);
+
+                         $dataJson->{$key} = 'excel_cosodl/'.$picName;
+                    }
+               }
+
+               $dataJson = json_encode($dataJson);
+               $dataMau->update([
+                    'Url_ex'  => $dataJson
+               ]);
+
+                    return redirect()->route('admin.tudanhgia.database.data_school',['id' => $req->id])->with('success','Thành công');
+               
+          }
+
+          public function save_file_csgd(Request $req){
+               $dataMau = DB::table("coso_dulieu")->where("id_khbc", $req->id);
+               
+               $dataJson = json_decode($dataMau->first()->Url_ex);
+
+               $permitted_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+              // dd($dataJson);
+               foreach($dataJson as $key => $value){
+                    $image = $req->file([$key]);
+                   
+                     if($image != null){
+
+                         $randomText = substr(str_shuffle($permitted_chars), 0, 20);
+                         $picName = $randomText.time().'.'.$image->getClientOriginalExtension();
+                         
+                         File::delete(public_path($dataJson->{$key}));
+                         
+
+                         $image->move(public_path('excel_cosodl'), $picName);
+
+                         $dataJson->{$key} = 'excel_cosodl/'.$picName;
+                    }
+               }
+
+               $dataJson = json_encode($dataJson);
+              
+               $dataMau->update([
+                    'Url_ex'  => $dataJson
+               ]);
+               return redirect()->route('admin.tudanhgia.database.data_school_csgd',['id' => $req->id])->with('success','Thành công');
+          }
+
+          public function apiNoiDungThem(Request $req){
+
+               $data = DB::table('baocao_noidungthem')
+                                        ->where('id_kehoach_bc',$req->id);
+
+            
+               $datas = json_decode($data->first()->noidung);
+
+               $datas->{$req->key} = $req->val;
+
+               $save = json_encode($datas);
+               $data->update([
+                    "noidung" =>  $save,
+               ]);
+
+               return 1;
+         }
+
+
 }

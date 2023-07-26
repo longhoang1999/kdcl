@@ -634,20 +634,7 @@
                                         <span class="menu-title">{{$listmenu_7[4]}}</span>
                                     </a>
                                 </div>
-                            
-                                <!-- Hoàn thiện báo cáo -->
-                                <div class="menu-item">
-                                    <a class="menu-link 
-                                    {!! (Request::is('admin/tu-danh-gia/completionreport/index')
-                                    ? 'active' : '' ) !!}
-                                     " href="{{ $linkMenuSevenParent[5] }}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                                        <span class="menu-icon">
-                                            {!! $icon_array[array_rand($icon_array, 1) ] !!}
-                                        </span>
-                                        <span class="menu-title">{{$listmenu_7[5]}}</span>
-                                    </a>
-                                </div>
-
+                                
                                 <!-- Cơ sở dữ liệu -->
 
                                 <div class="menu-item">
@@ -661,6 +648,21 @@
                                         <span class="menu-title">{{$listmenu_7[6]}}</span>
                                     </a>
                                 </div>
+                                
+                                <!-- Hoàn thiện báo cáo -->
+                                <div class="menu-item">
+                                    <a class="menu-link 
+                                    {!! (Request::is('admin/tu-danh-gia/completionreport/index')
+                                    ? 'active' : '' ) !!}
+                                     " href="{{ $linkMenuSevenParent[5] }}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                        <span class="menu-icon">
+                                            {!! $icon_array[array_rand($icon_array, 1) ] !!}
+                                        </span>
+                                        <span class="menu-title">{{$listmenu_7[5]}}</span>
+                                    </a>
+                                </div>
+
+                                
                             <!-- /Tự đánh giá -->
                                 
 

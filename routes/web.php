@@ -852,9 +852,14 @@ Route::group(
                                 //Chuẩn bị báo cáo
                                 Route::get('index', 'databaseController@index')->name('index');
                                 Route::get('data', 'databaseController@data')->name('data');
-                                Route::get('data_school/{id}', 'databaseController@data_school')->name('data_school');
+                                Route::get('data_school/{id?}', 'databaseController@data_school')->name('data_school');
                                 Route::get('data_school_csgd/{id}', 'databaseController@data_school_csgd')->name('data_school_csgd');
                                 Route::post('save_data', 'databaseController@save_data')->name('save_data');
+                                Route::post('save_data_csgd', 'databaseController@save_data_csgd')->name('save_data_csgd');
+                                Route::post('save_file_ctdt', 'databaseController@save_file_ctdt')->name('save_file_ctdt');
+                                Route::post('save_file_csgd', 'databaseController@save_file_csgd')->name('save_file_csgd');
+                                Route::get('apiNoiDungThem', 'databaseController@apiNoiDungThem')->name('apiNoiDungThem');
+                                
                                 
                             }
                         );
