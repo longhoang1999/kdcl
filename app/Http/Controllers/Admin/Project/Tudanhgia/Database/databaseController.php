@@ -52,6 +52,7 @@ class databaseController extends DefinedController
                               ->addColumn(
                                    'ten_donvi',
                                    function($keHoachBaoCaoList){
+                                        
                                         $ten_dv = DB::table('donvi')->where('id',$keHoachBaoCaoList->donvi_id)->first();
                                         if($ten_dv){
                                              return $ten_dv->ten_donvi;

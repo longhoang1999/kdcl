@@ -1,6 +1,6 @@
 @extends('admin/layouts/default')
 @section('title')
-    @lang('project/Selfassessment/title.hoantbc')
+    Cơ sở dữ liệu
 @parent
 @stop
 

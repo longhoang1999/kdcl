@@ -1,6 +1,6 @@
 @extends('admin/layouts/default')
 @section('title')
-    @lang('project/Selfassessment/title.hoantbc')
+    Cơ sở dữ liệu
 @parent
 @stop
 
@@ -117,22 +117,22 @@
 
 		    <p class="text-center">@lang('project/Externalreview/title.tdbc2') {{ (($keHoachBaoCaoDetail2)?\Carbon\Carbon::parse($keHoachBaoCaoDetail2->thoi_diem_bao_cao)->format('d/m/Y'):"Chưa cập nhật") }}</p>
 
-		    <p> <strong>@lang('project/Externalreview/title.phan1') </strong></p>
-		    <p><i><strong>@lang('project/Externalreview/title.1')</strong></i></p>
-		    <p>- @lang('project/Externalreview/title.tiengviet')</p>
-		    <p>- @lang('project/Externalreview/title.tienganh')</p>
-		    <p><i><strong>@lang('project/Externalreview/title.2')</strong></i></p>
-		    <p>- @lang('project/Externalreview/title.viettat')</p>
-		    <p>- @lang('project/Externalreview/title.tienganh')</p>
-		    <p><i><strong>@lang('project/Externalreview/title.3')</strong></i></p>
-		    <p><i><strong>@lang('project/Externalreview/title.4')</strong></i></p>
-		    <p><i><strong>@lang('project/Externalreview/title.5')</strong></i></p>
-		    <p><i><strong>@lang('project/Externalreview/title.6') &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@lang('project/Externalreview/title.fax')</strong></i></p>
-		    <p><i><strong>@lang('project/Externalreview/title.email') &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @lang('project/Externalreview/title.web')</strong></i></p>
-		    <p><i><strong>@lang('project/Externalreview/title.7') </strong></i><i>@lang('project/Externalreview/title.quyetdinh') </i></p>
-		    <p><i><strong>@lang('project/Externalreview/title.8')</strong></i></p>
-		    <p><i><strong>@lang('project/Externalreview/title.9')</strong></i></p>
-		    <p><i><strong>@lang('project/Externalreview/title.10')</strong></i></p>
+		    <p> <strong>@lang('project/Externalreview/title.phan1')</strong></p>
+            <p><i><strong>@lang('project/Externalreview/title.1')</strong></i></p>
+            <p>- TRƯỜNG ĐẠI HỌC HỌC CÔNG NGHIỆP DỆT MAY HÀ NỘI</p>
+            <p>- HA NOI INDUSTRIAL TEXTTILE GARMENT UNIVERSITY</p>
+            <p><i><strong>@lang('project/Externalreview/title.2')</strong></i></p>
+            <p>- ĐHCNDMHN</p>
+            <p>- HTU</p>
+            <p><i><strong>@lang('project/Externalreview/title.3')</strong></i></p>
+            <p><i><strong>4. Cơ quan/Bộ chủ quản: Tập đoàn Dệt May Việt Nam</strong></i></p>
+            <p><i><strong>5. Địa chỉ : Lệ Chi - Gia Lâm - Hà Nội</strong></i></p>
+            <p><i><strong>6. Thông tin liên hệ: Điện thoại: (0234) 38276514 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @lang('project/Externalreview/title.fax')</strong></i></p>
+            <p><i><strong> phongtchc@hict.edu.vn &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   ww.hict.edu.vn</strong></i></p>
+            <p><i><strong>@lang('project/Externalreview/title.7') </strong></i><i>01/06/2015 (QĐ 3993/VPCP- ĐMDN) </i></p>
+            <p><i><strong>8. Thời gian bắt đầu đào tạo khóa I: 2016</strong></i></p>
+            <p><i><strong>9. Thời gian cấp bằng tốt nghiệp cho khoá I:  2020</strong></i></p>
+            <p><i><strong>@lang('project/Externalreview/title.10') </strong></i></p>
 		    <div class="m-l-lg">
 		        <p>
 		            <label class="checkbox-inline">
