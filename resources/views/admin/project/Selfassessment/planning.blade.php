@@ -110,6 +110,7 @@
                 var texto = '<li class="dd-item">' + data.solieutonghop + '</li>';
                 var texto2;
                 texto += '<li class="dd-item">' + data.cosodulieu + '</li>';
+
                 if(data.tieuchuan_tieuchi == 0){
                     texto += '<div class="alert alert-warning">' + "@lang('project/Selfassessment/message.alert.kocobctc')" + '</div>';
                 }else{
