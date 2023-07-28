@@ -2089,6 +2089,15 @@ Route::group(
                             ['prefix' => 'lap-ke-hoach-excel', 'as' => 'lkhex.', 'namespace' => 'LapkehoachExcel'],
                             function(){
                                 Route::get('index','LapkehoachExcelController@index')->name('index');
+                                Route::get('data','LapkehoachExcelController@data')->name('data');
+                                Route::post('create-kehoach','LapkehoachExcelController@createKH')->name('createKH');
+
+                                Route::post('get-data-one','LapkehoachExcelController@getDataOne')->name('getDataOne');
+
+                                Route::post('update-kehoach','LapkehoachExcelController@updateKH')->name('updateKH');
+                                Route::get('delete-kehoach','LapkehoachExcelController@deleteKehoach')->name('deleteKehoach');
+
+                                
                             }
                         );
 

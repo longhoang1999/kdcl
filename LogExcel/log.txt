@@ -2,24 +2,40 @@
 2. Dữ liệu sinh viên
 3. Chương trình đào tạo
 4. Khoa học công nghệ
+=> Đào tạo
+
 5. Biên soạn sách
 6. Bài báo
 7. Phát minh sáng chế
 8. Giải thưởng
 9. Sáng kiến kinh nghiệm
 10. Hội thảo hội nghị
+=> Khoa học công nghệ
+
 11. Thông tin cơ bản
 12. Nhân sự
+=> Nhân sự
+
 13. Doanh thu khoa học công nghệ
 14. Doanh thu khoa học công nghệ 2
 15. Thống kê tài chính
+=> Tài chính
+
 16. Khảo sát tình trạng tốt nghiệm sinh viên
+=> Khảo sát sinh viên
+
 17. Diện tính KTX
 18. Thống kê phòng học, thiết bị
 19. Thông kê máy tính
 20. Diện tích sàn xây dựng
+=> Cơ sở vất chất
+
 21. Kiểm định
+=> Kiểm định
+
 22. Tài liệu thư viện
+=> Tài liệu thư viện
+
 23. Đồ án khóa luận
 24. Hội nghị hội thảo
 25. Giáo trình tài liệu
@@ -38,3 +54,4 @@
 38. Công khai tài chính năm học
 39. Công khai đội ngũ giảng viên theo khối ngành
 40. Công khai đội ngũ giảng viên theo khối ngành
+=> Tài liệu 3 công khai

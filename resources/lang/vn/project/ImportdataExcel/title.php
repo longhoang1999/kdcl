@@ -820,6 +820,20 @@
 		'tdlm'			=> 'Thêm dữ liệu mới',
 		'vlcnxhdl'		=> 'Vui lòng chọn năm xuất dữ liệu',
 		'ndl'			=> 'Năm dữ liệu',
-		
+		'lkhbb'			=> 'Lập kế hoạch phân quyền import excel',
+
+		'danhmuc'		=> 'Danh mục',
+		'tenbang'		=> 'Tên bảng',
+		'donvi'			=> 'Đơn vị phân công',
+		'nskt'			=> 'Nhân sự kiểm tra',
+		'kehoach'		=> 'Kế hoạch',
+		'phancong'		=> 'Phân công',
+		'chdanhmuc'		=> 'Chọn danh mục',
+		'chonbang'		=> 'Chọn bảng',
+		'tgth'			=> 'Thời gian thực hiện',
+		'gcndkh'		=> 'Ghi chú nội dung kế hoạch',
+		'ttll'			=> 'Thông tin lập lịch kê hoạch',
+		'dong'			=> 'Đóng',
+		'skhpq'			=> 'Sửa kế hoạch phân quyền'
 
 	);					
