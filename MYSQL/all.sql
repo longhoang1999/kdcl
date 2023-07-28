@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 13, 2023 lúc 08:39 AM
+-- Thời gian đã tạo: Th7 28, 2023 lúc 09:24 AM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 7.4.29
 
@@ -637,7 +637,27 @@ INSERT INTO `activity_log` (`id`, `log_name`, `description`, `subject_id`, `subj
 (324, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-09 22:14:18', '2023-07-09 22:14:18'),
 (325, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-10 14:48:20', '2023-07-10 14:48:20'),
 (326, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-10 09:14:42', '2023-07-10 09:14:42'),
-(327, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-10 14:02:10', '2023-07-10 14:02:10');
+(327, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-10 14:02:10', '2023-07-10 14:02:10'),
+(328, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-13 06:40:30', '2023-07-13 06:40:30'),
+(329, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-14 07:33:40', '2023-07-14 07:33:40'),
+(330, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-15 04:35:48', '2023-07-15 04:35:48'),
+(331, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-15 04:35:48', '2023-07-15 04:35:48'),
+(332, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-17 06:14:11', '2023-07-17 06:14:11'),
+(333, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-18 02:25:23', '2023-07-18 02:25:23'),
+(334, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-18 15:11:32', '2023-07-18 15:11:32'),
+(335, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-18 22:18:44', '2023-07-18 22:18:44'),
+(336, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-19 05:51:49', '2023-07-19 05:51:49'),
+(337, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-20 02:39:58', '2023-07-20 02:39:58'),
+(338, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-21 07:26:42', '2023-07-21 07:26:42'),
+(339, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-21 13:49:39', '2023-07-21 13:49:39'),
+(340, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-23 02:15:31', '2023-07-23 02:15:31'),
+(341, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-23 06:32:00', '2023-07-23 06:32:00'),
+(342, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-24 07:20:39', '2023-07-24 07:20:39'),
+(343, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-24 15:24:48', '2023-07-24 15:24:48'),
+(344, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-25 03:51:06', '2023-07-25 03:51:06'),
+(345, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-26 06:26:49', '2023-07-26 06:26:49'),
+(346, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-26 15:58:57', '2023-07-26 15:58:57'),
+(347, ' ', 'LoggedIn', 1, 'App\\Models\\User', 1, 'App\\Models\\User', '[]', '2023-07-27 02:51:35', '2023-07-27 02:51:35');
 
 -- --------------------------------------------------------
 
@@ -968,6 +988,19 @@ CREATE TABLE `chuyen_gia_dgn` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `coso_dulieu`
+--
+
+CREATE TABLE `coso_dulieu` (
+  `id` int(12) NOT NULL,
+  `dulieu` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Url_ex` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_khbc` int(12) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `countries`
 --
 
@@ -1168,6 +1201,7 @@ CREATE TABLE `excel_import_baibao_baocao` (
   `tcd` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tạp chí đăng',
   `so_issn_isbn` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `sodang` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `tgcb` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Thời gian công bố (mm/yyyy)',
   `namdang` int(5) NOT NULL,
   `loai` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `ltc` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Loại tạp chí',
@@ -1179,18 +1213,13 @@ CREATE TABLE `excel_import_baibao_baocao` (
 -- Đang đổ dữ liệu cho bảng `excel_import_baibao_baocao`
 --
 
-INSERT INTO `excel_import_baibao_baocao` (`id`, `tbbbc`, `maso`, `linhvuc`, `tacgia`, `donvi`, `tcd`, `so_issn_isbn`, `sodang`, `namdang`, `loai`, `ltc`, `dmtc`, `url`) VALUES
-(19, 'Đào tạo nhân lực chủ chốt để triển khai công nghệ sản xuất t', 'BB1911', 'KHCN', 'Nguyễn Thu Phương', 'TTĐBCL', 'Tạp chí Giáo dục nghề nghiệp', '2', '5', 0, 'Bài báo', 'Tạp chí Giáo dục nghề nghiệp', '1', ''),
-(20, 'Tăng cường giáo dục ý thức chấp hành pháp luật cho học sinh,', 'BB1912', 'KHGD', 'Nguyễn Thu Phương', 'TTĐBCL', 'Tạp chí Dạy và học ngày nay', '3', '6', 0, 'Bài báo', 'Tạp chí Dạy và học ngày nay', '1', ''),
-(21, 'Optimizing curing conditions in flame retardant treatment fo', 'BB1913', 'KHCN', 'Nguyễn Thu Phương', 'TTĐBCL', 'Texteh 9 international conference procee', '5', '9', 0, 'Bài báo', 'Texteh 9 international conference proceedings\n  (2', '1', ''),
-(22, 'Thách thức đối với nguồn nhân lực dệt may Việt Nam trong bối', 'BB1914', 'KHCN', 'Nguyễn Thu Phương', 'TTĐBCL', 'Tạp chí Khoa học & Công nghệ Bộ Công Thư', '6', '8', 0, 'Báo cáo hội thảo', 'Tạp chí Khoa học & Công nghệ Bộ Công Thương', '1', ''),
-(23, 'Chất lượng nguồn nhân lực quản lý đơn hàng tại các doanh ngh', 'BB1915', 'KHCN', 'Nguyễn Thu Phương', 'TTĐBCL', 'Tạp chí Kinh tế và Dự báo', '8', '7', 0, 'Báo cáo hội thảo', 'Tạp chí Kinh tế và Dự báo', '1', ''),
-(24, 'Các yếu tố ảnh hưởng tới cơ cấu nguồn vốn của các doanh nghi', 'BB1916', 'KHCN', 'Nguyễn Thu Phương', 'TTĐBCL', 'Kỷ yếu Hội thảo khoa học quốc tế \"Phát', '9', '3', 0, 'Kỷ yếu Hội thảo', 'Kỷ yếu Hội thảo khoa học quốc tế \"Phát triển bền', '1', ''),
-(25, 'Influence of crosslinking agent on the effectiveness of flam', 'BB1917', 'KHCN', 'Nguyễn Thu Phương', 'TTĐBCL', 'Industria textila', '4', '2', 0, 'Kỷ yếu Hội thảo', 'Industria textila', '1', ''),
-(26, 'Triển khai tự đánh giá chất lượng cơ sở giáo dục - Góc nhìn ', 'BB1918', 'KHGD', 'Nguyễn Thu Phương', 'TTĐBCL', 'Kỷ yếu Hội thảo Bảo đảm & Kiểm định chất', '6', '6', 0, 'Kỷ yếu Hội thảo', 'Kỷ yếu Hội thảo Bảo đảm & Kiểm định chất lượng giá', '1', ''),
-(27, 'Study on contents of Pyrovatex CP New and Knittex FFRC in fl', 'BB1919', 'KHGD', 'Nguyễn Văn Trung', 'TTĐBCL', 'Proceeding Indonesian Textile Conference', '3', '4', 0, 'Proceeding Indonesian Textile Conference', 'Proceeding Indonesian Textile Conference (Internat', '1', ''),
-(28, 'Biện chứng giữa tính dân tộc và tính giai cấp trong văn hóa ', 'BB1920', 'KHGD', 'Nguyễn Văn Trung', 'TTĐBCL', 'Tạp chí Dạy và học ngày nay', '2', '2', 0, 'Tạp chí', 'Tạp chí Dạy và học ngày nay', '1', ''),
-(29, 'Cách mạng công nghiệp 4.0 và tác động đến tình hình lao động', 'BB1921', 'KHCN', 'Nguyễn Văn Trung', 'TTĐBCL', 'Hội thảo khoa học về tác động của CMCN 4', '1', '5', 0, 'Hội thảo khoa học', 'Hội thảo khoa học về tác động của CMCN 4.0 đến lao', '1', '');
+INSERT INTO `excel_import_baibao_baocao` (`id`, `tbbbc`, `maso`, `linhvuc`, `tacgia`, `donvi`, `tcd`, `so_issn_isbn`, `sodang`, `tgcb`, `namdang`, `loai`, `ltc`, `dmtc`, `url`) VALUES
+(36, 'Hoàng', '4', '1', 'Nam', '5', '6', '7', '8', '06/2022', 2022, 'Bài báo', 'Tạp chí KH quốc tế', '1', '2'),
+(37, '3', '5', '2', 'Thông', '5', '6', '7', '8', '06/2023', 2020, 'Bài báo', 'Tạp chí KH cấp Ngành trong nước', '1', '4'),
+(38, '4', '6', '3', 'Đức', '5', '6', '7', '8', '06/2023', 2021, 'Bài báo', 'Tạp chí / tập san của cấp trường', '1', '6'),
+(39, '5', '7', '4', 'Long', '5', '6', '7', '8', '06/2023', 2020, 'Báo cáo hội thảo', 'Hội thảo quốc tế', '1', '8'),
+(40, '6', '8', '5', 'Hoài Anh', '5', '6', '7', '8', '06/2023', 2023, 'Báo cáo hội thảo', 'Hội thảo trong nước', '1', '10'),
+(41, '7', '9', '6', 'Đại', '5', '6', '7', '8', '06/2023', 2023, 'Báo cáo hội thảo', 'Hội thảo của trường (HaUI)', '1', '12');
 
 -- --------------------------------------------------------
 
@@ -1206,6 +1235,10 @@ CREATE TABLE `excel_import_biensoansach` (
   `loaisach` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `chubien` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `thanhvien` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `dvchutri` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Đơn vị chủ trì biên soạn',
+  `tgdk` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Thời gian đăng ký (mm/yyyy)',
+  `tgnt` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Thời gian nghiệm thu (mm/yyyy)',
+  `tgxb` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT ' Thời gian xuất bản (mm/yyyy)',
   `namdk` int(10) NOT NULL COMMENT 'Năm đăng ký',
   `namnt` int(10) NOT NULL COMMENT 'Năm nghiệm thu',
   `namxb` int(10) NOT NULL COMMENT 'Năm xuất bản',
@@ -1214,6 +1247,16 @@ CREATE TABLE `excel_import_biensoansach` (
   `nhsd` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Ngành học sử dụng',
   `trangthai` varchar(30) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_biensoansach`
+--
+
+INSERT INTO `excel_import_biensoansach` (`id`, `donvi`, `masach`, `tensach`, `loaisach`, `chubien`, `thanhvien`, `dvchutri`, `tgdk`, `tgnt`, `tgxb`, `namdk`, `namnt`, `namxb`, `nhaxb`, `hpsd`, `nhsd`, `trangthai`) VALUES
+(18, '89', '2', 'Sách giáo khoa', 'Sách chuyên khảo', 'Hoàng Nam', '1', '1', '06/2023', '06/2024', '06/2025', 2002, 2022, 2023, 'Thanh niên', 'Kỳ 1', 'CNTT', 'Đã xuất bản'),
+(19, '89', '3', 'Sách giáo khoa 1', 'Sách giáo trình', 'Hoàng Nam', '1', '1', '06/2022', '06/2023', '06/2024', 2005, 2023, 2023, 'Thanh niên', 'Kỳ 2', 'CNTT', 'Chưa xuất bản'),
+(20, '90', '4', 'Sách giáo khoa 2', 'Sách tham khảo', 'Hoàng Nam', '1', '2', '06/2021', '06/2022', '06/2023', 2006, 2021, 2023, 'Thanh niên', 'Kỳ 3', 'CNTT', 'Chưa xuất bản'),
+(21, '91', '5', 'Sách giáo khoa 3', 'Sách hướng dẫn', 'Hoàng Nam', '1', '3', '06/2020', '06/2021', '06/2022', 2007, 2020, 2023, 'Thanh niên', 'Kỳ 4', 'CNTT', 'Chưa xuất bản');
 
 -- --------------------------------------------------------
 
@@ -1233,13 +1276,6 @@ CREATE TABLE `excel_import_cccldt` (
   `vtstn` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '	Vị trí làm sau khi tốt nghiệp',
   `nam` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `excel_import_cccldt`
---
-
-INSERT INTO `excel_import_cccldt` (`id`, `dkdkts`, `kienthuc`, `kynang`, `nltctn`, `ccshd`, `ctdt`, `knht`, `vtstn`, `nam`) VALUES
-(5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2023);
 
 -- --------------------------------------------------------
 
@@ -1280,6 +1316,70 @@ INSERT INTO `excel_import_csgd_ctgd` (`id`, `ten_co_so`, `tddgn`, `ket_qua`, `ng
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `excel_import_data2`
+--
+
+CREATE TABLE `excel_import_data2` (
+  `id` int(11) NOT NULL,
+  `type_excel` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+  `url` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_data2`
+--
+
+INSERT INTO `excel_import_data2` (`id`, `type_excel`, `year`, `url`, `created_at`, `updated_at`) VALUES
+(10, 2, 2023, 'UpdateExcelFile/Dlsinhvien/1690099774.xlsx', '2023-07-23 08:09:34', '2023-07-23 08:09:34'),
+(11, 1, 2023, 'UpdateExcelFile/Tuyensinh/1690099801.xlsx', '2023-07-23 08:10:01', '2023-07-23 08:10:01'),
+(13, 2, 2022, 'UpdateExcelFile/Dlsinhvien/1690099862.xlsx', '2023-07-23 08:11:02', '2023-07-23 08:11:02'),
+(15, 3, 2023, 'UpdateExcelFile/Chuongtrinhdaotao/1690104067.xlsx', '2023-07-23 09:21:07', '2023-07-23 09:21:07'),
+(16, 4, 2020, 'UpdateExcelFile/Khcn/1690105024.xlsx', '2023-07-23 09:37:04', '2023-07-23 09:37:04'),
+(17, 5, 2023, 'UpdateExcelFile/Bssach/1690106142.xlsx', '2023-07-23 09:55:42', '2023-07-23 09:55:42'),
+(19, 6, 2022, 'UpdateExcelFile/Baibaobc/1690106547.xlsx', '2023-07-23 10:02:27', '2023-07-23 10:02:27'),
+(20, 7, 2022, 'UpdateExcelFile/Sangche/1690106928.xlsx', '2023-07-23 10:08:48', '2023-07-23 10:08:48'),
+(21, 8, 2020, 'UpdateExcelFile/Giaithuong/1690107345.xlsx', '2023-07-23 10:15:45', '2023-07-23 10:15:45'),
+(22, 9, 2021, 'UpdateExcelFile/Sangkienkinhnghiem/1690107765.xlsx', '2023-07-23 10:22:45', '2023-07-23 10:22:45'),
+(23, 10, 2018, 'UpdateExcelFile/Hoithaohoinghi/1690108119.xlsx', '2023-07-23 10:28:39', '2023-07-23 10:28:39'),
+(24, 11, 2010, 'UpdateExcelFile/Thongtincoban/1690108398.xlsx', '2023-07-23 10:33:18', '2023-07-23 10:33:18'),
+(25, 12, 2019, 'UpdateExcelFile/Nhansu/1690109529.xlsx', '2023-07-23 10:52:09', '2023-07-23 10:52:09'),
+(26, 13, 2011, 'UpdateExcelFile/Dtkhcn/1690109840.xlsx', '2023-07-23 10:57:20', '2023-07-23 10:57:20'),
+(27, 13, 2019, 'UpdateExcelFile/Dtkhcn/1690110205.xlsx', '2023-07-23 11:03:25', '2023-07-23 11:03:25'),
+(28, 14, 2019, 'UpdateExcelFile/Dtkhcn2/1690110252.xlsx', '2023-07-23 11:04:12', '2023-07-23 11:04:12'),
+(29, 14, 2020, 'UpdateExcelFile/Dtkhcn2/1690110604.xlsx', '2023-07-23 11:10:04', '2023-07-23 11:10:04'),
+(30, 15, 2022, 'UpdateExcelFile/Thongketaichinh/1690112223.xlsx', '2023-07-23 11:37:03', '2023-07-23 11:37:03'),
+(31, 16, 2020, 'UpdateExcelFile/TinhTrangTotNghiep/1690112636.xlsx', '2023-07-23 11:43:56', '2023-07-23 11:43:56'),
+(32, 17, 2012, 'UpdateExcelFile/Thongkekytucxa/1690112965.xlsx', '2023-07-23 11:49:25', '2023-07-23 11:49:25'),
+(33, 18, 2011, 'UpdateExcelFile/Tkphongtrangthietbi/1690184922.xlsx', '2023-07-24 07:48:42', '2023-07-24 07:48:42'),
+(34, 19, 2018, 'UpdateExcelFile/Thongkemaytinh/1690189308.xlsx', '2023-07-24 09:01:48', '2023-07-24 09:01:48'),
+(35, 20, 2021, 'UpdateExcelFile/Dientichsanxdung/1690189723.xlsx', '2023-07-24 09:08:43', '2023-07-24 09:08:43'),
+(36, 21, 1999, 'UpdateExcelFile/Kdcl/1690190094.xlsx', '2023-07-24 09:14:54', '2023-07-24 09:14:54'),
+(37, 22, 2011, 'UpdateExcelFile/Tlthuvien/1690190672.xlsx', '2023-07-24 09:24:32', '2023-07-24 09:24:32'),
+(38, 23, 2023, 'UpdateExcelFile/Thongtindakl/1690212689.xlsx', '2023-07-24 15:31:29', '2023-07-24 15:31:29'),
+(39, 24, 2011, 'UpdateExcelFile/Congkhaihnhtkh/1690212935.xlsx', '2023-07-24 15:35:35', '2023-07-24 15:35:35'),
+(40, 25, 2011, 'UpdateExcelFile/Congkhaigttl/1690214052.xlsx', '2023-07-24 15:54:12', '2023-07-24 15:54:12'),
+(41, 26, 2010, 'UpdateExcelFile/Congkhaimh/1690214309.xlsx', '2023-07-24 15:58:29', '2023-07-24 15:58:29'),
+(42, 27, 2011, 'UpdateExcelFile/Congkhaiqmdt/1690214663.xlsx', '2023-07-24 16:04:23', '2023-07-24 16:04:23'),
+(43, 28, 2013, 'UpdateExcelFile/Congkhaicp/1690214928.xlsx', '2023-07-24 16:08:48', '2023-07-24 16:08:48'),
+(44, 29, 2011, 'UpdateExcelFile/Congkhaisvtn/1690215205.xlsx', '2023-07-24 16:13:25', '2023-07-24 16:13:25'),
+(45, 30, 2011, 'UpdateExcelFile/Congkhaicsgd/1690215895.xlsx', '2023-07-24 16:24:55', '2023-07-24 16:24:55'),
+(46, 31, 2011, 'UpdateExcelFile/Congkhaisvgv/1690257530.xlsx', '2023-07-25 03:58:50', '2023-07-25 03:58:50'),
+(47, 32, 2018, 'UpdateExcelFile/Congkhaidtdsv/1690258154.xlsx', '2023-07-25 04:09:14', '2023-07-25 04:09:14'),
+(48, 33, 2017, 'UpdateExcelFile/Congkhaittdt/1690258642.xlsx', '2023-07-25 04:17:22', '2023-07-25 04:17:22'),
+(49, 34, 2010, 'UpdateExcelFile/Congkhaittdtd/1690259171.xlsx', '2023-07-25 04:26:11', '2023-07-25 04:26:11'),
+(50, 35, 2019, 'UpdateExcelFile/Congkhaittvhl/1690259589.xlsx', '2023-07-25 04:33:09', '2023-07-25 04:33:09'),
+(51, 36, 2011, 'UpdateExcelFile/Congkhainckh/1690259959.xlsx', '2023-07-25 04:39:19', '2023-07-25 04:39:19'),
+(52, 37, 2011, 'UpdateExcelFile/Congkhaickcl/1690262638.xlsx', '2023-07-25 05:23:58', '2023-07-25 05:23:58'),
+(53, 38, 2016, 'UpdateExcelFile/Congkhaitcnh/1690352870.xlsx', '2023-07-26 06:27:50', '2023-07-26 06:27:50'),
+(54, 39, 2018, 'UpdateExcelFile/Congkhaidngv/1690355443.xlsx', '2023-07-26 07:10:43', '2023-07-26 07:10:43'),
+(55, 40, 2020, 'UpdateExcelFile/Congkhaidngvch/1690355745.xlsx', '2023-07-26 07:15:45', '2023-07-26 07:15:45');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `excel_import_dientich_sv`
 --
 
@@ -1294,8 +1394,9 @@ CREATE TABLE `excel_import_dientich_sv` (
 --
 
 INSERT INTO `excel_import_dientich_sv` (`id`, `ten`, `ty_le`) VALUES
-(5, 'Diện tích đất/sinh viên', '15,74'),
-(6, 'Diện tích sàn/sinh viên', '11,07');
+(7, 'Diện tích sàn/sinh viên', '4,64 m2/sv'),
+(8, 'Diện tích đất/sinh viên', '18,07 m2/sv'),
+(9, 'Diện tích sàn/sinh viên', '7,64 m2/sv');
 
 -- --------------------------------------------------------
 
@@ -1311,22 +1412,31 @@ CREATE TABLE `excel_import_dientich_xaydung` (
   `lien_ket` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Liên kết (Hình thức lao động)',
   `thue` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Thuê (Hình thức lao động)',
   `stt` int(11) NOT NULL,
-  `parent` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL
+  `parent` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nam` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `excel_import_dientich_xaydung`
 --
 
-INSERT INTO `excel_import_dientich_xaydung` (`id`, `noi_dung`, `dien_tich`, `so_huu`, `lien_ket`, `thue`, `stt`, `parent`) VALUES
-(25, 'Tổng diện tích đất của trường', 22, '', '', '', 1, ''),
-(26, 'Tổng diện tích sàn xây dựng phục vụ đào tạo, nghiên cứu khoa học của trường', 0, '', '', '', 2, ''),
-(27, 'Hội trường, giảng đường, phòng học các loại, phòng đa năng, phòng làm việc của giáo sư, phó giáo sư, giảng viên cơ hữu', 0, '', '', '', 1, '2'),
-(28, 'Thư viện, trung tâm học liệu', 0, '', '', '', 2, '2'),
-(29, 'Trung tâm nghiên cứu, phòng thí nghiệm, thực nghiệm, cơ sở thực hành, thực tập, luyện tập', 0, '', '', '', 3, '2'),
-(30, 'Tổng diện tích sàn xây dựng phục vụ đào tạo, nghiên cứu khoa học của các đơn vị trong trường thực hiện CTĐT', 0, '', '', '', 3, ''),
-(31, 'CTĐT ngành Kế toán', 0, '', '', '', 1, '3'),
-(32, 'CTĐT ngành KQLKD', 0, '', '', '', 2, '3');
+INSERT INTO `excel_import_dientich_xaydung` (`id`, `noi_dung`, `dien_tich`, `so_huu`, `lien_ket`, `thue`, `stt`, `parent`, `nam`) VALUES
+(97, 'Tổng diện tích đất của trường', 1213, '12', '', '', 1, '', 2019),
+(98, 'Tổng diện tích sàn xây dựng phục vụ đào tạo, nghiên cứu khoa học của trường', 123, '312', '', '', 2, '', 2019),
+(99, 'Hội trường, giảng đường, phòng học các loại, phòng đa năng, phòng làm việc của giáo sư, phó giáo sư, giảng viên cơ hữu', 312, '123213', '', '', 1, '2', 2019),
+(100, 'Thư viện, trung tâm học liệu', 312, '3213', '', '', 2, '2', 2019),
+(101, 'Trung tâm nghiên cứu, phòng thí nghiệm, thực nghiệm, cơ sở thực hành, thực tập, luyện tập', 21312, '321', '', '', 3, '2', 2019),
+(102, 'Tổng diện tích sàn xây dựng phục vụ đào tạo, nghiên cứu khoa học của các đơn vị trong trường thực hiện CTĐT', 3123, '21123', '', '', 3, '', 2019),
+(103, 'CTĐT ngành Kế toán', 23, '13312', '', '', 1, '3', 2019),
+(104, 'CTĐT ngành KQLKD', 31, '12123', '', '', 2, '3', 2019),
+(105, 'Tổng diện tích đất của trường', 234234, '', '', '', 1, '', 2020),
+(106, 'Tổng diện tích sàn xây dựng phục vụ đào tạo, nghiên cứu khoa học của trường', 234, '', '', '', 2, '', 2020),
+(107, 'Hội trường, giảng đường, phòng học các loại, phòng đa năng, phòng làm việc của giáo sư, phó giáo sư, giảng viên cơ hữu', 23434, '', '', '', 1, '2', 2020),
+(108, 'Thư viện, trung tâm học liệu', 234, '', '', '', 2, '2', 2020),
+(109, 'Trung tâm nghiên cứu, phòng thí nghiệm, thực nghiệm, cơ sở thực hành, thực tập, luyện tập', 324234, '', '', '', 3, '2', 2020),
+(110, 'Tổng diện tích sàn xây dựng phục vụ đào tạo, nghiên cứu khoa học của các đơn vị trong trường thực hiện CTĐT', 1231312312, '', '', '', 3, '', 2020),
+(111, 'CTĐT ngành Kế toán', 12312312, '', '', '', 1, '3', 2020),
+(112, 'CTĐT ngành KQLKD', 3123, '', '', '', 2, '3', 2020);
 
 -- --------------------------------------------------------
 
@@ -1368,8 +1478,27 @@ CREATE TABLE `excel_import_dlsinhvien` (
   `baocaobo` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Báo cáo Bộ',
   `trinhdo` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `namdulien` int(11) DEFAULT NULL COMMENT 'Năm dữ liệu',
-  `ma_donvi_daotao` int(11) NOT NULL
+  `ma_donvi_daotao` int(11) NOT NULL,
+  `sonha` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ngaychuyen` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `soqd` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_dlsinhvien`
+--
+
+INSERT INTO `excel_import_dlsinhvien` (`id`, `masv`, `ho`, `ten`, `ntns`, `gioitinh`, `email`, `phone`, `cccd`, `lop`, `xa`, `huyen`, `tinh`, `dantoc`, `quoctich`, `tennganh`, `manganh`, `manganhTS`, `kqxhtnam1`, `kqxhtnam2`, `kqxhtnam3`, `kqxhtnam4`, `kqxhtnam5`, `nbdck`, `nktkh`, `trangthai`, `namnh`, `namtn`, `namqd`, `namnb`, `baocaobo`, `trinhdo`, `namdulien`, `ma_donvi_daotao`, `sonha`, `ngaychuyen`, `soqd`) VALUES
+(45, '2019603823', 'Nguyễn Đình', 'Thắng', '09/09/2002', 'Nam', 'abc@gmail.com', '1234', '856', '2019DHDTTT04', 'Xã Hợp Tiến', 'Huyện Mỹ Đức', 'Hà Nội', 'Kinh', 'Việt Nam', 'Công nghệ kỹ thuật điện tử - viễn t', '7510302', '7510302', '', '', '', '', '', 2019, 2023, 'Thôi học', 2019, 0, 0, 0, '1', 'Đại học', 3, 0, 'Xóm2/thôn 3', '09/10/2023', '1QĐ'),
+(46, '0941050213', 'Nguyễn Văn', 'Hùng', '09/09/2003', 'Nữ', 'abc@gmail.com', '1234', '856', 'ÐH Công nghệ kỹ thuật Điệ', 'Thị trấn Đà Bắc', 'Huyện Đà Bắc', 'Hòa Bình', 'Kinh', 'Việt Nam', 'Công nghệ kỹ thuật điện tử - viễn t', '7510302', '7510302', '', '', '', '', '', 2014, 2018, 'Thôi học', 2014, 0, 0, 2020, '1', 'Đại học', 3, 0, 'Xóm2/thôn 4', '09/10/2024', '2QĐ'),
+(47, '2018604104', 'Trần Thị', 'Xuân', '09/09/2004', 'Nam', 'abc@gmail.com', '1234', '856', '2018DHKETO09', 'Xã Vũ Bản', 'Huyện Bình Lục', 'Hà Nam', 'Kinh', 'Việt Nam', 'Kế toán', '7340301', '7340301', '1', '', '', '', '', 2018, 2022, 'Thôi học', 2018, 2019, 0, 0, '1', 'Đại học', 3, 0, 'Xóm2/thôn 5', '09/10/2025', '2QĐ'),
+(48, '2019604437', 'Trương Tiến', 'Nam', '09/09/2005', 'Nữ', 'abc@gmail.com', '1234', '856', '2019DHDTTT05', 'Xã Đồng Quang', 'Huyện Gia Lộc', 'Hải Dương', 'Kinh', 'Việt Nam', 'Công nghệ kỹ thuật điện tử - viễn t', '7510302', '7510302', '', '', '', '', '', 2019, 2023, 'Thôi học', 2019, 0, 0, 0, '1', 'Đại học', 3, 0, 'Xóm2/thôn 6', '09/10/2026', '2QĐ'),
+(49, '2019603430', 'Nguyễn Văn', 'Tân', '09/09/2006', 'Nam', 'abc@gmail.com', '1234', '856', '2019DHDTTT01', 'Xã Thuận Thành', 'Huyện Phổ Yên', 'Thái Nguyên', 'Kinh', 'Việt Nam', 'Công nghệ kỹ thuật điện tử - viễn t', '7510206', '7510206', '', '', '', '', '', 2019, 2023, 'Thôi học', 2019, 0, 0, 0, '1', 'Đại học', 3, 0, 'Xóm2/thôn 7', '09/10/2027', '2QĐ'),
+(50, '2020602801', 'Phạm Đức', 'Trung', '09/09/2007', 'Nữ', 'abc@gmail.com', '1234', '856', '2020DHDTTT03', 'Xã Trung Giã', 'Huyện Sóc Sơn', 'Hà Nội', 'Kinh', 'Việt Nam', 'Công nghệ kỹ thuật điện tử - viễn t', '7510302', '7510302', '', '', '', '', '', 2020, 2024, 'Bảo lưu', 2020, 0, 0, 0, '1', 'Đại học', 3, 0, 'Số 5/tổ 7', '09/10/2028', '2QĐ'),
+(51, '2019607974', 'Vương Xuân', 'Hưng', '09/09/2008', 'Nam', 'abc@gmail.com', '1234', '856', 'LT CĐ - ĐH Điện 2', 'Xã Minh Tân', 'Huyện Nam Sách', 'Hải Dương', 'Kinh', 'Việt Nam', 'Công nghệ kỹ thuật điện, điện tử', '7510301', '7510301', '', '', '', '', '', 2019, 2021, 'Bảo lưu', 2019, 0, 0, 0, '1', 'Liên thông', 3, 0, 'Số 5/tổ 8', '09/10/2029', '2QĐ'),
+(52, '2018500563', 'Ngô Ánh', 'Dương', '09/09/2009', 'Nữ', 'abc@gmail.com', '1234', '856', '2018CDDHKK01', 'Thị trấn Mạo Khê', 'Huyện Đông Triều', 'Quảng Ninh', 'Kinh', 'Việt Nam', 'Kỹ thuật máy lạnh và điều hoà không', '6520205', '6520205', '', '', '', '', '', 2018, 2021, 'Bảo lưu', 2018, 0, 0, 0, '', 'Cao đẳng', 3, 0, 'Xóm2/thôn 7', '09/10/2030', '2QĐ'),
+(53, '1134170229', 'Trần Thị Hồng', 'Mai', '09/09/2010', 'Nam', 'abc@gmail.com', '1234', '856', 'CĐN-ĐH Kế toán(507) 2', 'Phường Vĩnh Phúc', 'Quận Ba Đình', 'Hà Nội', 'Kinh', 'Việt Nam', 'Kế toán', 'NULL', 'NULL', '', '', '', '', '', 2016, 2018, 'Tốt nghiệp', 2016, 0, 0, 2018, '', 'Liên thông', 3, 0, 'Số 5/tổ 10', '09/10/2031', '2QĐ'),
+(54, '1074071427', 'Nguyễn Ngọc', 'Phượng', '09/09/2011', 'Nữ', 'abc@gmail.com', '1234', '856', 'CĐĐH Kế toán 13', 'Phường Thượng Thanh', 'Quận Long Biên', 'Hà Nội', 'Kinh', 'Việt Nam', 'Kế toán', 'NULL', 'NULL', '', '', '', '', '', 2015, 2019, 'Gia Hạn', 2015, 2019, 0, 0, '', 'Cao đẳng', 3, 0, 'Xóm2/thôn 7', '09/10/2032', '2QĐ');
 
 -- --------------------------------------------------------
 
@@ -1488,8 +1617,26 @@ CREATE TABLE `excel_import_donvi` (
   `ghichu` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `loai_hinh` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Loại hình cơ sở giáo dục',
   `tgdtk1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Thời gian bắt đầu đào tạo khóa I',
-  `tgcbk1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Thời gian cấp bằng tốt nghiệp cho khoá I'
+  `tgcbk1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Thời gian cấp bằng tốt nghiệp cho khoá I',
+  `loaiht` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sqdcdlh` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ntncdlh` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `soqdcapp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ngcapphd` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `plcs` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lhcsdt` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `soqdgtc` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_donvi`
+--
+
+INSERT INTO `excel_import_donvi` (`id`, `ten_donvi_TV`, `ten_donvi_TA`, `viet_tat_TV`, `viet_tat_TA`, `loai_dv_id`, `ten_truoc_day`, `chu_quan`, `ngay_thanh_lap`, `soqd`, `lv_hoat_dong`, `diachi`, `ma_donvi`, `created_at`, `updated_at`, `deleted_at`, `phone`, `email`, `website`, `fax`, `ghichu`, `loai_hinh`, `tgdtk1`, `tgcbk1`, `loaiht`, `sqdcdlh`, `ntncdlh`, `soqdcapp`, `ngcapphd`, `plcs`, `lhcsdt`, `soqdgtc`) VALUES
+(88, '321', '321', '321', '321', 3, '321', '321', '1970-01-07', '321', '', NULL, '4', NULL, NULL, NULL, '321', '321', '321', '321', '321', '321', '321', '321', '321', '321', '321', '321', '321', '321', '321', '321'),
+(89, 'Trường Đại học Công nghiệp Hà Nội', 'Ha Noi University of Industrial', 'HAUI', 'HAUI', 1, 'Không có', 'Bộ công thương', '1956-11-12', '12/M544', '', NULL, '1', NULL, NULL, NULL, '0327927597', 'dhcnhn@haui.edu.vn', 'https://www.haui.edu.vn/vn', '123', 'Trường trực thuộc Bộ Công Thương', 'Công lập', '1956', '1960', 'abc', 'QĐ1', '12-11-1956', 'QĐ1', '12-11-1956', 'Cơ sở giáo dục', 'Chính quy', 'abc'),
+(90, 'Phòng Đào tạo', 'Trainning department', 'Đào tạo', 'DT_HAUI', 3, 'Không có', 'Trường Đại học Công nghiệp Hà Nội', '1957-11-12', '12/M545', '', NULL, '2', NULL, NULL, NULL, '0327927598', 'dhcnhn@haui.edu.vn', 'https://www.haui.edu.vn/vn', '123', 'Phòng trực thuộc trường ĐH Công Nghiệp', 'Công lập', '1956', '1960', 'abc', 'QĐ2', '12-11-1957', 'QĐ2', '12-11-1956', 'Cơ sở giáo dục', 'Chính quy', 'abc'),
+(91, 'Khoa Công Nghệ Thông Tin', 'Faculty of Information Technology', 'CNTT', 'IT_HAUI', 2, 'Không có', 'Trường Đại học Công nghiệp Hà Nội', '1958-11-12', '12/M546', '', NULL, '3', NULL, NULL, NULL, '0327927597', 'dhcnhn@haui.edu.vn', 'https://www.haui.edu.vn/vn', '123', 'Khoa trực thuộc trường Đại học Công Nghiệp', 'Công lập', '1956', '1960', 'abc', 'QĐ3', '12-11-1958', 'QĐ3', '12-11-1956', 'Cơ sở giáo dục', 'Chính quy', 'abc');
 
 -- --------------------------------------------------------
 
@@ -1524,6 +1671,20 @@ CREATE TABLE `excel_import_dtd_dtxxd` (
   `stt` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_dtd_dtxxd`
+--
+
+INSERT INTO `excel_import_dtd_dtxxd` (`id`, `noi_dung`, `dien_tich`, `so_huu`, `lien_ket`, `thue`, `parent`, `stt`) VALUES
+(41, 'Tổng diện tích đất cơ sở đào tạo quản lý sử dụng', 2423, '4', '42332', '234', '', '1'),
+(42, 'Trụ sở chính', 423, '23', '2344', '234', '1', 'a'),
+(43, 'Phân hiệu tại', 4, '3423', '4', '234', '1', 'b'),
+(44, 'Cơ sở 2 tại', 23432, '42', '2323432', '23', '1', 'c'),
+(45, 'Tổng diện tích sàn xây dựng phục vụ đào tạo, nghiên cứu khoa học', 42, '234', '4', '4', '', '2'),
+(46, 'Trụ sở chính', 4, '424', '32', '234', '2', 'a'),
+(47, 'Phân hiệu tại', 23, '234', '2334', '2', '2', 'b'),
+(48, 'Cơ sở 2 tại', 4, '2342', '2344', '34234', '2', 'c');
+
 -- --------------------------------------------------------
 
 --
@@ -1556,14 +1717,29 @@ INSERT INTO `excel_import_dtkhcn2` (`id`, `nam`, `doanh_thu`, `ty_le_doanh_thu`,
 
 CREATE TABLE `excel_import_giaithuong` (
   `id` int(10) NOT NULL,
-  `tgt` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tên giải thưởng',
-  `ckt` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Cấp khen thưởng',
+  `tengt` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tên giải thưởng',
+  `capkhent` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Cấp khen thưởng',
+  `soqd` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Số quyết định',
   `linhvuc` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `nam` int(10) NOT NULL,
-  `doituong` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `ndc` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Người được cấp',
-  `dvc` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Đơn vị cấp'
+  `ngdc` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `doituong` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tgkt` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `chucvu` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `donvict` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lopod` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `masv` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dvctkt` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `donvicap` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_giaithuong`
+--
+
+INSERT INTO `excel_import_giaithuong` (`id`, `tengt`, `capkhent`, `soqd`, `linhvuc`, `ngdc`, `doituong`, `tgkt`, `chucvu`, `donvict`, `lopod`, `masv`, `dvctkt`, `donvicap`) VALUES
+(5, 'Nobel', 'Quốc tế', 'QĐ 1', 'CNTT', 'Nam', 'Sinh viên', '06/2023', 'Không', '1', 'KQ', 'KQ123', '2', '2'),
+(6, 'Nobel', 'Quốc gia', 'QĐ 2', 'CNTT', 'Nam', 'Sinh viên', '06/2023', 'Không', '2', 'KQ', 'KQ124', '3', '2'),
+(7, 'Nobel', 'Bộ', 'QĐ 3', 'CNTT', 'Nam', 'Sinh viên', '06/2023', 'Không', '3', 'KQ', 'KQ125', '2', '2');
 
 -- --------------------------------------------------------
 
@@ -2003,6 +2179,32 @@ INSERT INTO `excel_import_hoclieu_tv_tthl` (`id`, `ten`, `so_luong`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `excel_import_hoithohn`
+--
+
+CREATE TABLE `excel_import_hoithohn` (
+  `id` int(11) NOT NULL,
+  `chude` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dvct` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `diadiem` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tgtc` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sodb` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ghichu` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_hoithohn`
+--
+
+INSERT INTO `excel_import_hoithohn` (`id`, `chude`, `dvct`, `diadiem`, `tgtc`, `sodb`, `ghichu`) VALUES
+(11, '123', '91', '123', '123', '123', '123'),
+(12, 'Chủ đề 02', '90', 'Hà nội', '2023', '3', 'không'),
+(13, 'Chủ đề 03', '90', 'Hà nội', '2023', '10', 'không'),
+(14, 'Chủ đề 04', '91', 'Hà nội', '2023', '22', 'không');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `excel_import_kdcl`
 --
 
@@ -2018,6 +2220,17 @@ CREATE TABLE `excel_import_kdcl` (
   `gcn_ngay_cap` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Giấy chứng nhận-Ngày cấp (Thẩm định và công nhận)',
   `gcn_gia_tri_den` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Giấy chứng nhận-Giá trị đến (Thẩm định và công nhận)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_kdcl`
+--
+
+INSERT INTO `excel_import_kdcl` (`id`, `doi_tuong`, `btcdg`, `nhtbcttdg1`, `ncnbctdg`, `ten_tcdg`, `thang_nam_dgn`, `kqdgchd`, `gcn_ngay_cap`, `gcn_gia_tri_den`) VALUES
+(1, 'Cơ sở giáo dục', 'VBHN số 06/VBHN-BGDĐT', 2013, 2014, 'VNU -CEA', '42278', '0.82', '23/3/', '23/3/'),
+(2, 'Cơ sở giáo dục', 'VBHN số 06/VBHN-BGDĐT', 2013, 2015, 'VNU -CEA', '42278', '0.82', '2016', '2021'),
+(3, 'Chương trình đào tạo….', 'AUN-QA', 2009, 2009, 'AUN-QA', '2009', 'Đạt', '40422', '08/01/'),
+(4, 'Chương trình đào tạo….', 'AUN-QA', 2009, 2009, 'AUN-QA', '2010', 'Đạt', '40423', '2014'),
+(5, 'Chương trình đào tạo….', 'TT số 04/2016/TT-BGDĐT', 0, 0, '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -2117,48 +2330,71 @@ CREATE TABLE `excel_import_nhansu` (
   `ten` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `shvc` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Số hiệu viên chức',
   `cccd` varchar(15) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số CCCD/ Hộ chiếu',
-  `dvct` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Đơn vị công tác (Tên Phòng/Khoa/TT)',
   `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `gender` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ngaysinh` date DEFAULT NULL,
   `quoctich` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tdcm` int(30) DEFAULT NULL COMMENT 'Tiến sĩ	8\r\nThạc sĩ	7\r\nĐại học	6\r\nCao đẳng 5\r\nTrung cấp 4\r\nSơ cấp III 3\r\nSơ cấp II 2\r\nSơ cấp I 1\r\n',
-  `tdnv` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Trình độ nghiệp vụ theo chuyên ngành',
-  `namtn` int(11) DEFAULT NULL COMMENT 'Năm tốt nghiệp',
-  `noitn` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Nơi tốt nghiệp',
-  `gvsp` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'GVSP',
-  `qlnn` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'QLNN',
-  `llct` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'LLCT',
-  `tinhoc` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ngoaingu` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `hocham` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Giáo sư	1\r\nPhó giáo sư 2\r\n',
-  `namphong` int(11) DEFAULT NULL COMMENT 'Năm được phong',
-  `cdnn` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Chức danh nghề nghiệp khi tuyển dụng',
-  `masocd` int(11) DEFAULT NULL COMMENT 'Mã số chức danh khi tuyển dụng',
-  `namtd` int(11) DEFAULT NULL COMMENT 'Năm tuyển dụng',
-  `cdnnht` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Chức danh nghề nghiệp hiện tại',
-  `masocdht` int(11) DEFAULT NULL COMMENT 'Mã số chức danh hiện tại',
-  `chuyenngach` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Có chuyển ngạch',
-  `namcn` int(11) DEFAULT NULL COMMENT 'Năm chuyển ngạch',
-  `dvsdvc` int(11) DEFAULT NULL COMMENT 'Đơn vị sử dụng viên chức',
-  `cdctht` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Chức danh (chức vụ) công tác hiện tại',
-  `tdbn` int(11) DEFAULT NULL COMMENT 'Thời điểm bổ nhiệm',
-  `qdbn` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'QĐ bổ nhiệm',
-  `cdkm` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Chức danh (chức vụ) kiêm nhiệm',
-  `tdgkm` int(11) DEFAULT NULL COMMENT 'Thời điểm  giao kiêm nhiệm',
-  `loaihd` int(50) DEFAULT NULL COMMENT '1	GV trong biên chế trực tiếp giảng dạy\r\n2	GV hợp đồng dài hạn trực tiếp giảng dạy\r\n3	GV kiêm nhiệm là cán bộ quản lý\r\n4	GV thỉnh giảng trong nước\r\n5	GV quốc tế\r\n',
-  `shdtd` varchar(12) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số hợp đồng tuyển dụng',
-  `ngaycdhd` int(11) DEFAULT NULL COMMENT 'Ngày chấm dứt hợp đồng',
-  `tggdht` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Tham gia giảng dạy/hỗ trợ/phục vụ ngành',
-  `nvdpc` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Nhiệm vụ được phân công',
-  `ltggd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Lớp tham gia giảng dạy',
-  `khbd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Các khóa học bồi dưỡng',
-  `xa` varchar(12) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Xã/Phường thường trú',
-  `huyen` varchar(12) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Quận/Huyện thường trú',
-  `tinh` varchar(12) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tỉnh/thành phố thường trú',
-  `trangthai` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Trạng thái'
+  `sosobh` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `xaphuongtc` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `quanhuytc` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tinhtptc` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cvct` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dvct` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `chdanh` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tddt` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cmdt` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `csdt` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `namtn` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ccspgv` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ttqlnn` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tdllct` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tinhoc` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ngoaingu` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cdnnktd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mscdktd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ntd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cdnnht` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mscdht` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ccn` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ncn` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dvsdvc` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cdctht` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tdbm` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `qdbm` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `htbn` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nqdbn` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cdnn` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cdgv` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cdkm` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tdgkm` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lhdlv` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `shdtd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nkhd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ncdhd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `soqdnh` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ngqdnh` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `htcd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tggd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nvdpc` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ltggd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ckhbd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ttlamv` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tncongt` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bacl` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `hesol` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pcthamn` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pcudn` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pccv` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_nhansu`
+--
+
+INSERT INTO `excel_import_nhansu` (`id`, `thoidiem`, `hodem`, `ten`, `shvc`, `cccd`, `phone`, `email`, `gender`, `ngaysinh`, `quoctich`, `sosobh`, `xaphuongtc`, `quanhuytc`, `tinhtptc`, `cvct`, `dvct`, `chdanh`, `tddt`, `cmdt`, `csdt`, `namtn`, `ccspgv`, `ttqlnn`, `tdllct`, `tinhoc`, `ngoaingu`, `cdnnktd`, `mscdktd`, `ntd`, `cdnnht`, `mscdht`, `ccn`, `ncn`, `dvsdvc`, `cdctht`, `tdbm`, `qdbm`, `htbn`, `nqdbn`, `cdnn`, `cdgv`, `cdkm`, `tdgkm`, `lhdlv`, `shdtd`, `nkhd`, `ncdhd`, `soqdnh`, `ngqdnh`, `htcd`, `tggd`, `nvdpc`, `ltggd`, `ckhbd`, `ttlamv`, `tncongt`, `bacl`, `hesol`, `pcthamn`, `pcudn`, `pccv`) VALUES
+(12, 2018, 'Nguyễn Văn', 'A', '19213', '13', '118222', 'abc@haui.edu.vn', 'Nam', '2002-11-11', 'Việt nam', 'abc', 'X', 'Y', 'Z', 'AA', 'CNTT', 'BB', 'Tiến sĩ', 'Chuyên ngành được đào tạo', '2023', 'Hà Nội', 'Có', 'Không', 'Không', 'd', 'đúng', 'Chuyên viên', '101333', '11/11/2003', 'Giảng viên', 'VH70001', 'Có', '2018', '2', 'Phó trưởng phòng', '2018', '2', 'Offline', '11/02/2020', 'ABC', 'XYZ', 'Giảng viên', '2018', 'Cơ hữu/toàn thời gian', '678', '11/11/2003', '11/11/2002', 'abc', '11/11/2003', 'CC', 'Ngành A', 'Tham gia giảng dạy', '1029101IT1010;1029101IT1012', 'Lớp tập huấn A', 'Đang công tác', '4 năm', 'D', '12', '12222', 'xyz', 'không'),
+(13, 2019, 'Nguyễn Văn', 'A', '19213', '14', '118222', 'abc@haui.edu.vn', 'Nam', '2003-11-11', 'Việt nam', 'abc', 'X', 'Y', 'Z', 'AA', 'CNTT', 'BB', 'Tiến sĩ', 'Chuyên ngành được đào tạo', '2023', 'Hà Nội', 'Có', 'Không', 'Không', 'd', 'đúng', 'Chuyên viên', '101333', '11/11/2004', 'Giảng viên', 'VH70001', 'Có', '2018', '3', 'Phó trưởng phòng', '2018', '3', 'Offline', '11/02/2021', 'ABC', 'XYZ', 'Giảng viên', '2019', 'Cơ hữu/toàn thời gian', '900', '11/11/2004', '11/11/2003', 'abc', '11/11/2004', 'CC', 'Ngành A', 'Tham gia giảng dạy', '1039101IT1010;1039101IT1013', 'Lớp tập huấn B', 'Đã chuyển công tác', '5 năm', 'F', '14', '232323', 'xyz', 'không');
 
 -- --------------------------------------------------------
 
@@ -2195,7 +2431,7 @@ CREATE TABLE `excel_import_sangche` (
   `cshdv` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Chủ sở hữu đơn vị',
   `linhvuc` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `scn` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Số công nhận',
-  `namcap` int(10) NOT NULL,
+  `namcap` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `noicap` varchar(40) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -2204,19 +2440,37 @@ CREATE TABLE `excel_import_sangche` (
 --
 
 INSERT INTO `excel_import_sangche` (`id`, `tpmsc`, `maso`, `loai`, `tacgia`, `cshcn`, `cshdv`, `linhvuc`, `scn`, `namcap`, `noicap`) VALUES
-(1, 'Nghiên cứu khả năng hòa tan và tái sinh fibroin tơ tằm bằng ', 'BB2001', 'Tạp chí Công Thương', 'Nguyễn Thu Phương', 'Nguyễn Thu Phương', 'TTĐBCL', 'KHCN', '5', 2022, 'Cục sở hữu trí tuệ'),
-(2, 'Trang phục của tộc người Việt Nam', 'BB2002', 'Thế giới di sản', 'Nguyễn Thu Phương', 'Nguyễn Thu Phương', 'TTĐBCL', 'KHCN', '6', 2022, 'Cục sở hữu trí tuệ'),
-(3, 'Thúc đẩy ứng dụng khoa học công nghệ trong lĩnh vực thủy sản', 'BB2003', 'Kỷ yếu hội thảo khoa học quốc gia', 'Nguyễn Thu Phương', 'Nguyễn Thu Phương', 'TTĐBCL', 'KHCN', '7', 2022, 'Cục sở hữu trí tuệ'),
-(4, 'Một số yêu cầu trong giáo dục lý tưởng cách mạng cho thanh n', 'BB2004', 'Dạy và học ngày nay', 'Nguyễn Thu Phương', 'Nguyễn Thu Phương', 'TTĐBCL', 'KHCN', '8', 2022, 'Cục sở hữu trí tuệ'),
-(5, 'Xây dựng mô hình lý thuyết các nhân tố ảnh hưởng đến đổi mới', 'BB2005', 'Tạp chí Kinh tế và Dự báo', 'Nguyễn Thu Phương', 'Nguyễn Thu Phương', 'TTĐBCL', 'KHCN', '9', 2022, 'Cục sở hữu trí tuệ'),
-(6, 'Phát triển khung lý thuyết về năng lực cạnh tranh của các do', 'BB2006', 'Tạp chí nghiên cứu Ấn Độ và Châu Á', 'Nguyễn Thu Phương', 'Nguyễn Thu Phương', 'TTĐBCL', 'KHCN', '10', 2022, 'Cục sở hữu trí tuệ'),
-(7, 'Vận dụng tư tưởng Hồ Chí Minh về quyền con người trong sự ng', 'BB2007', 'Tạp chí Dạy và học ngày nay', 'Nguyễn Thu Phương', 'Nguyễn Thu Phương', 'TTĐBCL', 'KHCN', '11', 2022, 'Cục sở hữu trí tuệ'),
-(8, 'Vai trò của việc học tập lý luận chủ nghĩa Mác- Lênin trong ', 'BB2008', 'Tạp chí Dạy và học ngày nay', 'Nguyễn Thu Phương', 'Nguyễn Thu Phương', 'TTĐBCL', 'KHCN', '12', 2022, 'Cục sở hữu trí tuệ'),
-(9, 'Nghiên cứu ảnh hưởng của tỉ số H/D và S/D đến lực chồn và mứ', 'BB2009', 'Tạp chí Cơ khí Việt Nam', 'Nguyễn Văn Trung', 'Nguyễn Văn Trung', 'TTĐBCL', 'KHCN', '13', 2022, 'Cục sở hữu trí tuệ'),
-(10, 'Tổng hợp vật liệu sắt nano hóa trị 0 bằng thiết bị vi lưu và', 'BB2010', 'Tạp chí xúc tác và hấp phụ Việt Nam', 'Nguyễn Văn Trung', 'Nguyễn Văn Trung', 'TTĐBCL', 'KHCN', '14', 2022, 'Cục sở hữu trí tuệ'),
-(11, 'Age and Gender Differences\n  in Entrepreneurship in Vietnam:', 'BB2011', 'Journal of the Social Sciences', 'Nguyễn Văn Trung', 'Nguyễn Văn Trung', 'TTĐBCL', 'KHCN', '15', 2022, 'Cục sở hữu trí tuệ'),
-(12, 'Vận dụng quan điểm toàn diện trong xây dựng chủ nghĩa xã hội', 'BB2012', 'Tạp chí Dạy và học ngày nay', 'Nguyễn Văn Trung', 'Nguyễn Văn Trung', 'TTĐBCL', 'KHCN', '16', 2022, 'Cục sở hữu trí tuệ'),
-(13, 'Giải pháp nâng cao chất lượng điện áp đối với các thiết bị đ', 'BB2013', 'Tập chí khoa học và công nghệ năng lượng Trường Đại học Điện', 'Nguyễn Văn Trung', 'Nguyễn Văn Trung', 'TTĐBCL', 'KHCN', '17', 2022, 'Cục sở hữu trí tuệ');
+(17, 'f23f', '23f23', '23f23f', '32f23f', '23f23f', '32ff', '23f23f', '23f23f', '32f23', '23f23f'),
+(18, 'Sáng chế 1', '113', 'Phát minh', 'Nam', 'Nam', '1', 'CNTT', 'QĐ1', '06/2022', 'Hà nội'),
+(19, 'Sáng chế 2', '114', 'Sáng chế', 'Long', 'Long', '2', 'CNTT', 'QĐ1', '06/2022', 'Hà nội'),
+(20, 'Sáng chế 3', '115', 'Giải pháp hữu ích', 'Thông', 'Thông', '3', 'CNTT', 'QĐ1', '06/2022', 'Hà nội');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `excel_import_sangkienkn`
+--
+
+CREATE TABLE `excel_import_sangkienkn` (
+  `id` int(11) NOT NULL,
+  `tensk` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `chunhiem` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `thanhvien` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dvct` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tgnt` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `diemdg` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tgpb` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ghichu` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_sangkienkn`
+--
+
+INSERT INTO `excel_import_sangkienkn` (`id`, `tensk`, `chunhiem`, `thanhvien`, `dvct`, `tgnt`, `diemdg`, `tgpb`, `ghichu`) VALUES
+(5, 'ABC', 'Chủ nhiệm 1', 'Hoàng, An', '89', '05/2023', '5', '44', 'Không'),
+(6, 'ABC', 'Chủ nhiệm 2', 'Hoàng, An', '90', '05/2024', '6', '5', 'Không'),
+(7, 'ABC', 'Chủ nhiệm 3', 'Hoàng, An', '91', '05/2025', '7', '4', 'Không');
 
 -- --------------------------------------------------------
 
@@ -2288,6 +2542,24 @@ CREATE TABLE `excel_import_tailieu_thuvien` (
   `tnndn_tltk` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Từ 5 năm đến nay (Năm xuất bản)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_tailieu_thuvien`
+--
+
+INSERT INTO `excel_import_tailieu_thuvien` (`id`, `ma_hoc_phan`, `ten_hoc_phan`, `khoi_nganh`, `syctdc_sck`, `sach_in_sck`, `sach_dt_sck`, `syctdc_sgt`, `sach_in_sgt`, `sach_dt_sgt`, `ttnn`, `tnndn`, `syctdchp_stk`, `sach_in_stk`, `sach_dt_stk`, `syctdc_shd`, `sach_in_shd`, `sach_dt_shd`, `sldtcbi`, `sldtcdt`, `ttnn_tltk`, `tnndn_tltk`) VALUES
+(18, 1, 'CNTT', 'CNTT', '3', '24', '10', '4', '6', '8', '20', '4', '9', '21', '32', '43', '10', '12', '45', '20', '8', '61'),
+(19, 2, 'CNTT', 'Kế Toán', '2', '25', '11', '5', '7', '9', '21', '3', '10', '22', '33', '44', '11', '13', '46', '21', '9', '60'),
+(20, 3, 'CNTT', 'Quản Trị', '4', '26', '12', '6', '8', '10', '22', '5', '11', '23', '34', '45', '12', '14', '47', '22', '10', '59'),
+(21, 4, 'CNTT', 'CNTT', '4', '27', '13', '7', '9', '11', '23', '6', '12', '24', '35', '46', '13', '15', '48', '23', '11', '58'),
+(22, 5, 'CNTT', 'Kế Toán', '4', '28', '14', '8', '10', '12', '24', '8', '13', '25', '36', '47', '14', '16', '49', '24', '12', '57'),
+(23, 6, 'CNTT', 'Quản Trị', '4', '29', '15', '9', '11', '13', '25', '10', '14', '26', '37', '48', '15', '17', '50', '25', '13', '56'),
+(24, 7, 'CNTT', 'CNTT', '4', '30', '16', '10', '12', '14', '26', '12', '15', '27', '38', '49', '16', '18', '51', '26', '14', '55'),
+(25, 8, 'CNTT', 'Kế Toán', '4', '31', '17', '11', '13', '15', '27', '14', '16', '28', '39', '50', '17', '19', '52', '27', '15', '54'),
+(26, 9, 'CNTT', 'Quản Trị', '4', '32', '18', '12', '14', '16', '28', '16', '17', '29', '40', '51', '18', '20', '53', '28', '16', '53'),
+(27, 10, 'CNTT', 'CNTT', '4', '33', '19', '13', '15', '17', '29', '18', '18', '30', '41', '52', '19', '21', '54', '29', '17', '52'),
+(28, 11, 'CNTT', 'Kế Toán', '4', '34', '20', '14', '16', '18', '30', '20', '19', '31', '42', '53', '20', '22', '55', '30', '18', '51'),
+(29, 12, 'CNTT', 'Quản Trị', '4', '35', '21', '15', '17', '19', '31', '22', '20', '32', '43', '54', '21', '23', '56', '31', '19', '50');
+
 -- --------------------------------------------------------
 
 --
@@ -2304,6 +2576,21 @@ CREATE TABLE `excel_import_tcnh` (
   `donvitinh` int(11) NOT NULL COMMENT '1: Triệu đồng / năm\r\n2: Tỷ đồng',
   `nam` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_tcnh`
+--
+
+INSERT INTO `excel_import_tcnh` (`id`, `parent_I`, `parent_II`, `ten_khoinganh`, `hocphi_1nam`, `hocphi_cakhoa`, `donvitinh`, `nam`) VALUES
+(38, 1, 1, '435345', 435, 345345, 1, 2023),
+(39, 1, 1, '235', 235, 5235, 1, 2023),
+(40, 1, 1, '23523', 235, 252, 1, 2023),
+(41, 1, 1, '5235235', 23523, 35235, 1, 2023),
+(42, 1, 1, '43634', 34634, 346346, 1, 2023),
+(43, 1, 2, '435435', 345, 345345, 1, 2023),
+(44, 1, 4, NULL, 2352, 235235, 1, 2023),
+(46, 1, 5, NULL, 235, 235, 1, 2023),
+(49, 3, 3, '235235', 235, 235, 1, 2023);
 
 -- --------------------------------------------------------
 
@@ -2388,7 +2675,19 @@ INSERT INTO `excel_import_tk_ktx` (`id`, `tieu_chi`, `nam`, `gia_tri`, `parent`)
 (15, '5. Tổng số chỗ ở KTX', NULL, NULL, NULL),
 (17, '6. Tình trạng CSVC KTX', NULL, NULL, NULL),
 (21, '7. Năm đưa vào sử dụng', NULL, NULL, NULL),
-(23, '8. Hình thức sở hữu', NULL, NULL, NULL);
+(23, '8. Hình thức sở hữu', NULL, NULL, NULL),
+(260, '1. Tổng diện tích KTX', '2019', '23432423', 1),
+(261, '2. Tổng diện tích phòng ở (m2)', '2019', '43543543', 3),
+(262, '4.1 Tổng', '2019', '43534', 10),
+(263, '4.2 Chương trình 1', '2019', '43534', 10),
+(264, '4.3 Chương trình 2', '2019', '43534', 10),
+(265, '5. Tổng số chỗ ở KTX', '2019', '32432', 15),
+(266, '6.1 Bán kiên cố', '2019', '4543', 17),
+(267, '6.2 Đang sửa chữa', '2019', '4543', 17),
+(268, '7. Năm đưa vào sử dụng', '2019', '43435345', 21),
+(269, '8.1 Mượn', '2019', '22353', 23),
+(270, '8.2 Sở hữu', '2019', '22353', 23),
+(271, '8.3 Cho thuê', '2019', '22353', 23);
 
 -- --------------------------------------------------------
 
@@ -2406,6 +2705,19 @@ CREATE TABLE `excel_import_tk_mt` (
   `dcht` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Dùng cho học tập',
   `ghi_chu` varchar(120) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `excel_import_tk_mt`
+--
+
+INSERT INTO `excel_import_tk_mt` (`id`, `don_vi`, `tong_so`, `so_may_moi`, `so_may_cu`, `dchtvp`, `dcht`, `ghi_chu`) VALUES
+(11, '86', '650', '650', '150', '300', '350', 'Không'),
+(12, '86', '650', '650', '150', '300', '350', 'Không'),
+(13, '85', '650', '650', '150', '300', '350', 'Không'),
+(14, '86', '650', '650', '150', '300', '350', 'Không'),
+(15, '86', '650', '650', '150', '300', '350', 'Không'),
+(16, '87', '650', '650', '150', '300', '350', 'Không'),
+(17, '85', '650', '650', '150', '300', '350', 'Không');
 
 -- --------------------------------------------------------
 
@@ -2451,89 +2763,96 @@ CREATE TABLE `excel_import_tk_tai_chinh` (
 --
 
 INSERT INTO `excel_import_tk_tai_chinh` (`id`, `parent_id`, `noi_dung`, `nam`, `doanhthu`) VALUES
-(208, NULL, '2.        Tổng thu học phí (chỉ tính hệ chính quy) trong 5 năm gần đây:', NULL, NULL),
-(214, NULL, '3.        Tổng chi cho hoạt động nghiên cứu khoa học, chuyển giao công nghệ và phục vụ cộng đồng:', NULL, NULL),
-(215, 214, NULL, 2019, 100000),
-(216, 214, NULL, 2020, 200000),
-(217, 214, NULL, 2021, 3000000),
-(218, 214, NULL, 2022, 400000),
-(219, 214, NULL, 2023, 500000),
-(220, NULL, '4.        Tổng thu từ hoạt động nghiên cứu khoa học, chuyển giao công nghệ và phục vụ cộng đồng', NULL, NULL),
-(221, 220, NULL, 2019, 100000),
-(222, 220, NULL, 2020, 200000),
-(223, 220, NULL, 2021, 3000000),
-(224, 220, NULL, 2022, 400000),
-(225, 220, NULL, 2023, 500000),
-(226, NULL, '5.        Tổng chi cho hoạt động đào tạo', NULL, NULL),
-(227, 226, NULL, 2019, 100000),
-(228, 226, NULL, 2020, 200000),
-(229, 226, NULL, 2021, 3000000),
-(230, 226, NULL, 2022, 400000),
-(231, 226, NULL, 2023, 500000),
-(232, NULL, '6.        Tổng chi cho phát triển đội ngũ', NULL, NULL),
-(233, 232, NULL, 2019, 100000),
-(234, 232, NULL, 2020, 200000),
-(235, 232, NULL, 2021, 3000000),
-(236, 232, NULL, 2022, 400000),
-(237, 232, NULL, 2023, 500000),
-(238, NULL, '7.        Tổng chi cho hoạt động kết nối doanh nghiệp, tư vấn và hỗ trợ việc làm', NULL, NULL),
-(239, 238, NULL, 2019, 100000),
-(240, 238, NULL, 2020, 200000),
-(241, 238, NULL, 2021, 3000000),
-(242, 238, NULL, 2022, 400000),
-(243, 238, NULL, 2023, 500000),
-(244, NULL, '8. Tổng chi hoạt động SXKD', NULL, NULL),
-(245, 244, NULL, 2019, 100000),
-(246, 244, NULL, 2020, 200000),
-(247, 244, NULL, 2021, 3000000),
-(248, 244, NULL, 2022, 400000),
-(249, 244, NULL, 2023, 500000),
-(250, NULL, '9. Tổng thu cho hoạt động SXKD', NULL, NULL),
-(251, 250, NULL, 2019, 100000),
-(252, 250, NULL, 2020, 200000),
-(253, 250, NULL, 2021, 3000000),
-(254, 250, NULL, 2022, 400000),
-(255, 250, NULL, 2023, 500000),
-(256, NULL, '10. Tổng cho các hoạt động khác', NULL, NULL),
-(257, 256, NULL, 2019, 100000),
-(258, 256, NULL, 2020, 200000),
-(259, 256, NULL, 2021, 3000000),
-(260, 256, NULL, 2022, 400000),
-(261, 256, NULL, 2023, 500000),
-(262, NULL, '11. Tổng thu các hoạt động khác', NULL, NULL),
-(263, 262, NULL, 2019, 100000),
-(264, 262, NULL, 2020, 200000),
-(265, 262, NULL, 2021, 3000000),
-(266, 262, NULL, 2022, 400000),
-(267, 262, NULL, 2023, 500000),
-(268, NULL, '12. Tổng kinh phí nộp ngân sách', NULL, NULL),
-(269, 268, NULL, 2019, 100000),
-(270, 268, NULL, 2020, 200000),
-(271, 268, NULL, 2021, 3000000),
-(272, 268, NULL, 2022, 400000),
-(273, 268, NULL, 2023, 500000),
-(274, NULL, '13. Tổng kinh phí trích lập quỹ', NULL, NULL),
-(275, 274, NULL, 2019, 100000),
-(276, 274, NULL, 2020, 200000),
-(277, 274, NULL, 2021, 3000000),
-(278, 274, NULL, 2022, 400000),
-(279, 274, NULL, 2023, 500000),
-(280, NULL, '14. Tổng kinh phí được cấp từ NSNN', NULL, NULL),
-(281, 280, NULL, 2019, 100000),
-(282, 280, NULL, 2020, 200000),
-(283, 280, NULL, 2021, 3000000),
-(284, 280, NULL, 2022, 400000),
-(285, 280, NULL, 2023, 500000),
-(286, NULL, '15. Tổng kinh phí chi từ NSNN', NULL, NULL),
-(287, 286, NULL, 2019, 100000),
-(288, 286, NULL, 2020, 200000),
-(289, 286, NULL, 2021, 3000000),
-(290, 286, NULL, 2022, 400000),
-(291, 286, NULL, 2023, 500000),
-(297, 208, NULL, 2020, 200000),
-(298, 208, NULL, 2222, 43543),
-(299, 208, NULL, 2323, 634),
-(300, 208, NULL, 2324, 346);
+(301, NULL, '1.        Tổng kinh phí từ các nguồn thu của trường trong 5 năm gần đây:', NULL, NULL),
+(302, 301, NULL, 2019, 100000),
+(303, 301, NULL, 2020, 200000),
+(304, 301, NULL, 2021, 3000000),
+(305, 301, NULL, 2022, 400000),
+(306, 301, NULL, 2023, 500000),
+(307, NULL, '2.        Tổng thu học phí (chỉ tính hệ chính quy) trong 5 năm gần đây:', NULL, NULL),
+(308, 307, NULL, 2019, 100000),
+(309, 307, NULL, 2020, 200000),
+(310, 307, NULL, 2021, 3000000),
+(311, 307, NULL, 2022, 400000),
+(312, 307, NULL, 2023, 500000),
+(313, NULL, '3.        Tổng chi cho hoạt động nghiên cứu khoa học, chuyển giao công nghệ và phục vụ cộng đồng:', NULL, NULL),
+(314, 313, NULL, 2019, 100000),
+(315, 313, NULL, 2020, 200000),
+(316, 313, NULL, 2021, 3000000),
+(317, 313, NULL, 2022, 400000),
+(318, 313, NULL, 2023, 500000),
+(319, NULL, '4.        Tổng thu từ hoạt động nghiên cứu khoa học, chuyển giao công nghệ và phục vụ cộng đồng', NULL, NULL),
+(320, 319, NULL, 2019, 100000),
+(321, 319, NULL, 2020, 200000),
+(322, 319, NULL, 2021, 3000000),
+(323, 319, NULL, 2022, 400000),
+(324, 319, NULL, 2023, 500000),
+(325, NULL, '5.        Tổng chi cho hoạt động đào tạo', NULL, NULL),
+(326, 325, NULL, 2019, 100000),
+(327, 325, NULL, 2020, 200000),
+(328, 325, NULL, 2021, 3000000),
+(329, 325, NULL, 2022, 400000),
+(330, 325, NULL, 2023, 500000),
+(331, NULL, '6.        Tổng chi cho phát triển đội ngũ', NULL, NULL),
+(332, 331, NULL, 2019, 100000),
+(333, 331, NULL, 2020, 200000),
+(334, 331, NULL, 2021, 3000000),
+(335, 331, NULL, 2022, 400000),
+(336, 331, NULL, 2023, 500000),
+(337, NULL, '7.        Tổng chi cho hoạt động kết nối doanh nghiệp, tư vấn và hỗ trợ việc làm', NULL, NULL),
+(338, 337, NULL, 2019, 100000),
+(339, 337, NULL, 2020, 200000),
+(340, 337, NULL, 2021, 3000000),
+(341, 337, NULL, 2022, 400000),
+(342, 337, NULL, 2023, 500000),
+(343, NULL, '8. Tổng chi hoạt động SXKD', NULL, NULL),
+(344, 343, NULL, 2019, 100000),
+(345, 343, NULL, 2020, 200000),
+(346, 343, NULL, 2021, 3000000),
+(347, 343, NULL, 2022, 400000),
+(348, 343, NULL, 2023, 500000),
+(349, NULL, '9. Tổng thu cho hoạt động SXKD', NULL, NULL),
+(350, 349, NULL, 2019, 100000),
+(351, 349, NULL, 2020, 200000),
+(352, 349, NULL, 2021, 3000000),
+(353, 349, NULL, 2022, 400000),
+(354, 349, NULL, 2023, 500000),
+(355, NULL, '10. Tổng cho các hoạt động khác', NULL, NULL),
+(356, 355, NULL, 2019, 100000),
+(357, 355, NULL, 2020, 200000),
+(358, 355, NULL, 2021, 3000000),
+(359, 355, NULL, 2022, 400000),
+(360, 355, NULL, 2023, 500000),
+(361, NULL, '11. Tổng thu các hoạt động khác', NULL, NULL),
+(362, 361, NULL, 2019, 100000),
+(363, 361, NULL, 2020, 200000),
+(364, 361, NULL, 2021, 3000000),
+(365, 361, NULL, 2022, 400000),
+(366, 361, NULL, 2023, 500000),
+(367, NULL, '12. Tổng kinh phí nộp ngân sách', NULL, NULL),
+(368, 367, NULL, 2019, 100000),
+(369, 367, NULL, 2020, 200000),
+(370, 367, NULL, 2021, 3000000),
+(371, 367, NULL, 2022, 400000),
+(372, 367, NULL, 2023, 500000),
+(373, NULL, '13. Tổng kinh phí trích lập quỹ', NULL, NULL),
+(374, 373, NULL, 2019, 100000),
+(375, 373, NULL, 2020, 200000),
+(376, 373, NULL, 2021, 3000000),
+(377, 373, NULL, 2022, 400000),
+(378, 373, NULL, 2023, 500000),
+(379, NULL, '14. Tổng kinh phí được cấp từ NSNN', NULL, NULL),
+(380, 379, NULL, 2019, 100000),
+(381, 379, NULL, 2020, 200000),
+(382, 379, NULL, 2021, 3000000),
+(383, 379, NULL, 2022, 400000),
+(384, 379, NULL, 2023, 500000),
+(385, NULL, '15. Tổng kinh phí chi từ NSNN', NULL, NULL),
+(386, 385, NULL, 2019, 100000),
+(387, 385, NULL, 2020, 200000),
+(388, 385, NULL, 2021, 3000000),
+(389, 385, NULL, 2022, 400000),
+(390, 385, NULL, 2023, 500000);
 
 -- --------------------------------------------------------
 
@@ -2699,6 +3018,17 @@ CREATE TABLE `export_import_dtkhcn` (
   `trangthai` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Trạng thái'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `export_import_dtkhcn`
+--
+
+INSERT INTO `export_import_dtkhcn` (`id`, `tenhd`, `mahd`, `sanphamcua`, `dvtn`, `namcg`, `stcg`, `trangthai`) VALUES
+(1, 'Hợp đồng 01 2', 'QĐ001 2', 'Sản phẩm 1 2', '90', 20202, '1000002', 'Xong2'),
+(2, 'Hợp đồng 02', 'QĐ002', 'Sản phẩm 2', '89', 2020, '100000', 'Xong'),
+(3, 'Hợp đồng 03', 'QĐ003', 'Sản phẩm 3', '90', 2020, '100000', 'Xong'),
+(4, 'Hợp đồng 04', 'QĐ004', 'Sản phẩm 4', '90', 2020, '100000', 'Xong'),
+(5, 'Hợp đồng 05', 'QĐ005', 'Sản phẩm 5', '91', 2022, '500000', 'Xong');
+
 -- --------------------------------------------------------
 
 --
@@ -2711,6 +3041,8 @@ CREATE TABLE `export_import_khcn` (
   `maso` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Mã số',
   `loai` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `capdetai` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Cấp đề tài',
+  `tgbd` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Thời gian bắt đầu (mm/yyyy)',
+  `tgnt` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Thời gian nghiệm thu (mm/yyyy)',
   `namdk` int(11) DEFAULT NULL COMMENT 'Năm đăng ký',
   `namnt` int(20) DEFAULT NULL COMMENT 'Năm nghiệm thu',
   `linhvuc` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2724,6 +3056,16 @@ CREATE TABLE `export_import_khcn` (
   `ketqua` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `trangthai` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `export_import_khcn`
+--
+
+INSERT INTO `export_import_khcn` (`id`, `tendetai`, `maso`, `loai`, `capdetai`, `tgbd`, `tgnt`, `namdk`, `namnt`, `linhvuc`, `nganhlq`, `dvct`, `cndt`, `thanhvien`, `nguoihd`, `dvcnph`, `kinhphi`, `ketqua`, `trangthai`) VALUES
+(5, 'fwwef', '3', 'fwef', 'ưefwef', '06/2022', '06/2022', 2002, 2002, 'cntt', 'cntt', 'Viện CNTT', 'Nam', 'Nhiều', 'Long', 'Trường', '2', 'Đạt', 'Hoàn thành'),
+(6, 'Hay', '1', 'Đề tài', 'Nhà nước', '06/2023', '06/2023', 2002, 2023, 'CNTT', 'CNTT', 'Viện CNTT', 'Nam', 'Nhiều', 'Long', 'Trường', '3', 'Đạt', 'Hoàn thành'),
+(7, 'Hay', '2', 'Đề án', 'Bộ', '06/2024', '06/2024', 2002, 2023, 'CNTT', 'CNTT', 'Viện CNTT', 'Nam', 'Nhiều', 'Long', 'Trường', '1', 'Đạt', 'Hoàn thành'),
+(8, 'Hay', '4', 'Dự án', 'Bộ', '06/2026', '06/2026', 2002, 2023, 'CNTT', 'CNTT', 'Viện CNTT', 'Nam', 'Nhiều', 'Long', 'Trường', '1', 'Đạt', 'Hoàn thành');
 
 -- --------------------------------------------------------
 
@@ -2854,13 +3196,6 @@ CREATE TABLE `hoatdongnhom_minhchung` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
-
---
--- Đang đổ dữ liệu cho bảng `hoatdongnhom_minhchung`
---
-
-INSERT INTO `hoatdongnhom_minhchung` (`id`, `hoatdongnhom_id`, `minhchung_id`, `nguoitao`, `csdt_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(45, 10463, 40, 1, 1, '2023-05-31 09:25:12', '2023-05-31 09:25:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -3571,6 +3906,24 @@ INSERT INTO `kehoach_tieuchuan_nhansu` (`id_kehoach`, `id_nhansuchuanbi`, `id_nh
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `lkh_phanquyen_excel`
+--
+
+CREATE TABLE `lkh_phanquyen_excel` (
+  `id` int(11) NOT NULL,
+  `donvi_id` int(11) NOT NULL,
+  `bang_stt` int(11) NOT NULL,
+  `nskt_id` int(11) NOT NULL,
+  `ngay_bd` date DEFAULT NULL,
+  `ngay_kt` date DEFAULT NULL,
+  `notes` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `update_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `loai_donvi`
 --
 
@@ -3713,15 +4066,12 @@ INSERT INTO `minhchung` (`id`, `tieuchi`, `nhom_mc_sl_id`, `minhchung_tt`, `tieu
 (29, NULL, 49, NULL, 'Biên bản họp HĐT về góp ý cho chiến lược năm 2018', 'Biên bản họp HĐT về góp ý cho chiến lược năm 2018', NULL, NULL, NULL, 'Trường Đại học Công nghiệp DM HN', NULL, 'Trung tâm ĐBCL', 'Bien ban hop thang 8.2018.pdf', 'minhchung/2023/05/25/jIgbF4KBpwH9nEXzhI9Yi0hcXC5hTcPKOBgKq2sr.pdf', NULL, 265664, 0, '2018-08-03', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-05-25 10:08:58', NULL),
 (30, NULL, 49, NULL, 'Biên bản họp HĐT về góp ý cho chiến lược năm 2019', 'Biên bản họp HĐT về góp ý cho chiến lược năm 2019', NULL, NULL, NULL, 'Trường Đại học Công nghiệp DM HN', NULL, 'Trung tâm ĐBCL', 'Bien ban hop thang 8.2019.pdf', 'minhchung/2023/05/25/F0lH4GfKV0kUblz5842rM7wTtrnJzt6VCK3tLBvO.pdf', NULL, 252198, 0, '2019-08-16', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-05-25 10:12:33', NULL),
 (31, NULL, 49, NULL, 'Biên bản họp HĐT về góp ý cho chiến lược năm 2020', 'Biên bản họp HĐT về góp ý cho chiến lược năm 2020', NULL, NULL, NULL, 'Trường Đại học Công nghiệp DM HN', NULL, 'Trung tâm ĐBCL', 'Bien ban hop thang 8.2020.pdf', 'minhchung/2023/05/25/OuJjiS3y6Kym5m6nnLFREbtVYw2EiPJiWkXyt1lR.pdf', NULL, 240542, 0, '2020-07-19', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-05-25 10:31:56', NULL),
-(32, NULL, NULL, NULL, 'Báo cáo đề tài \'Giải pháp phát triển văn hóa Trường ĐHCNDMHN đáp ứng yêu cầu Trường đại học tự chủ toàn diện giai đoạn 2018-2025\"', 'Báo cáo đề tài \'Giải pháp phát triển văn hóa Trường ĐHCNDMHN đáp ứng yêu cầu Trường đại học tự chủ toàn diện giai đoạn 2018-2025\"', NULL, NULL, NULL, 'Trường Đại học Công nghiệp DM HN', NULL, 'Trung tâm ĐBCL', 'De tai NCKH  Xay dung va phat trien van hoa nha truong chay muc luc.pdf', 'minhchung/2023/05/25/hFKKWqnSNrY0OelSBYdAn55ma43glBrf1mDu0YXJ.pdf', NULL, 2362129, 0, '2020-10-16', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-06-01 16:55:36', NULL),
 (33, NULL, 49, NULL, 'Quy trình xây dựng, rà soát CLPT năm 2016', 'Quy trình xây dựng, rà soát CLPT năm 2016', NULL, NULL, NULL, 'Trường Đại học Công nghiệp DM HN', NULL, 'Trung tâm ĐBCL', 'Quy trinh ra soat, xay dung Chien luoc phat trien (2016).pdf', 'minhchung/2023/05/25/jXtEQ0p1sS8UA2vzeGau4HWAkc8lJtL3Na1zymWL.pdf', '747/QĐ-ĐHCNDMHN', 308232, 0, '2016-06-03', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-05-25 10:22:05', NULL),
 (34, NULL, 49, NULL, 'Kế hoạch xây dựng CLPT ĐHCNDMHN giai đoạn 2016-2020', 'Kế hoạch xây dựng CLPT ĐHCNDMHN giai đoạn 2016-2020', NULL, NULL, NULL, 'Trường Đại học Công nghiệp DM HN', NULL, 'Trung tâm ĐBCL', 'Ke hoạch xay dung chien luoc phat trien truong giai doan 2016-2020.pdf', 'minhchung/2023/05/25/BzZiTWa67wcgzgbGUE5ysF0tA7y4ZwtWXzhqY2ab.pdf', '755/KH-ĐHCNDMHN', 2755517, 0, '2016-06-10', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-05-25 10:24:01', NULL),
 (35, NULL, 49, NULL, 'Chiến lược phát triển Trường ĐHCNDMHN giai đoạn 2017-2020', 'Chiến lược phát triển Trường ĐHCNDMHN giai đoạn 2017-2020', NULL, NULL, NULL, 'Trường Đại học Công nghiệp DM HN', NULL, 'Trung tâm ĐBCL', 'Chien luoc phat trien truong DNCNDMHN giai doan 2017-2020.pdf', 'minhchung/2023/05/25/jbPR3NNh55AXLTXybWVJqclbjOlBxcrU5vlZYwgh.pdf', '469/QĐ-ĐHCNDMHN', 1219000, 0, '2017-04-17', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-05-25 10:29:19', NULL),
 (36, NULL, 49, NULL, 'Quy trình xây dựng, rà soát CLPT Trường năm 2020', 'Quy trình xây dựng, rà soát CLPT Trường năm 2020', NULL, NULL, NULL, 'Trường Đại học Công nghiệp DM HN', NULL, 'Trung tâm ĐBCL', 'Quy trinh ra soat, xay dung Chien luoc phat trien (2020).pdf', 'minhchung/2023/05/25/tdqwRyNtehFT3CflHAOwzAfIV46IKCDQ5k1hTkzp.pdf', '880/QĐ-ĐHCNDMHN', 368190, 0, '2020-08-11', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-05-25 10:30:45', NULL),
 (37, NULL, 49, NULL, 'Kết luận cuộc hop HĐT góp ý cho chiến lược năm 2018', 'Kết luận cuộc hop HĐT góp ý cho chiến lược năm 2018', NULL, NULL, NULL, 'Trường Đại học Công nghiệp DM HN', NULL, 'Trung tâm ĐBCL', 'Ket luan phien hop thang 8.2018.pdf', 'minhchung/2023/05/25/QvOqql1ACid5IDWAPAC68hxihfi2KnoJRinMFU3u.pdf', '881/TB-ĐHCNDMHN', 274256, 0, '2018-08-15', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-05-25 10:40:43', NULL),
-(38, NULL, 49, NULL, 'Kết luận cuộc hop HĐT góp ý cho chiến lược năm 2019', 'Kết luận cuộc hop HĐT góp ý cho chiến lược năm 2019', NULL, NULL, NULL, 'Trường Đại học Công nghiệp DM HN', NULL, 'Trung tâm ĐBCL', 'Ket luan phien hop thang 8.2019.pdf', 'minhchung/2023/05/25/X1COAvDcMxRBPhuhBuqGHbR5sQz2YyZ9kVGVy8vo.pdf', '953/TB-ĐHCNDMHN', 230446, 0, '2019-08-19', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-05-25 10:47:19', NULL),
-(39, NULL, 49, NULL, 'Kết luận cuộc hop HĐT góp ý cho chiến lược năm 2020', 'Kết luận cuộc hop HĐT góp ý cho chiến lược năm 2020', NULL, NULL, NULL, 'Trường Đại học Công nghiệp DM HN', NULL, 'Trung tâm ĐBCL', 'Ket luan phien hop thang 8.2020.pdf', 'minhchung/2023/05/25/0Axd2rLYNXjjoj1QUGBq4iTgXXU4zxIQbIVkV7ec.pdf', '782/TB-ĐHCNDMHN', 226448, 0, '2020-07-20', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-05-25 10:47:45', NULL),
-(40, NULL, 51, NULL, 'Rà soát, cải tiến các quy trình Kiểm định chất lượng', 'Rà soát, cải tiến các quy trình Kiểm định chất lượng', NULL, NULL, NULL, 'Trường Đại học CN HN', 'http://hict.edu.vn/pic/general/files/2022/thang%2010/QD%20ban%20hanh%20Quy%20che%20chi%20tieu%20noi%20bo%20cua%20truong%20Dai%20hoc%20Cong%20nghiep%20Det%20May%20Ha%20Noi.pdf', 'Phòng 14A5', 'QD ban hanh Quy che chi tieu noi bo cua truong Dai hoc Cong nghiep Det May Ha Noi (2).pdf', 'minhchung/2023/05/31/8nMpU9r5XoEIheHnbBThrTXJKulqAipVg8dnnLAO.pdf', '100/QĐ', 12038797, 0, '2023-05-31', 1, 5094, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'dangcho', NULL, '2023-05-31 09:25:12', NULL);
+(38, NULL, 49, NULL, 'Kết luận cuộc hop HĐT góp ý cho chiến lược năm 2019', 'Kết luận cuộc hop HĐT góp ý cho chiến lược năm 2019', NULL, NULL, NULL, 'Trường Đại học Công nghiệp DM HN', NULL, 'Trung tâm ĐBCL', 'Ket luan phien hop thang 8.2019.pdf', 'minhchung/2023/05/25/X1COAvDcMxRBPhuhBuqGHbR5sQz2YyZ9kVGVy8vo.pdf', '953/TB-ĐHCNDMHN', 230446, 0, '2019-08-19', 1, 1, 'Y', 1, NULL, NULL, 'csdt', 0, 'active', 'xacnhan', NULL, '2023-05-25 10:47:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -4642,7 +4992,27 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (304, 1, 'khFEagbIcyJUylVpKvbWkqFM9BnZu7DP', '2023-07-09 22:14:18', '2023-07-09 22:14:18'),
 (305, 1, 'EIZ97xQRJUogiZYxJKU23gkp9i1U5S1Z', '2023-07-10 14:48:20', '2023-07-10 14:48:20'),
 (306, 1, '12YD584XKz68QfmkADJNPc3KIs2etyx0', '2023-07-10 09:14:42', '2023-07-10 09:14:42'),
-(307, 1, '8itACJ956YBewrxH0HocBbo3TOoT3Xk6', '2023-07-10 14:02:10', '2023-07-10 14:02:10');
+(307, 1, '8itACJ956YBewrxH0HocBbo3TOoT3Xk6', '2023-07-10 14:02:10', '2023-07-10 14:02:10'),
+(308, 1, 'nvBZiJyvOZNHwdgQIYwVYdYHKPGII7Sf', '2023-07-13 06:40:29', '2023-07-13 06:40:29'),
+(309, 1, 'oLRpO4eAxwXytSHPujnWmYkLjW903lab', '2023-07-14 07:33:40', '2023-07-14 07:33:40'),
+(310, 1, 'EV194fkLqbzkKdMnUCBtDxTrGF0tqvbU', '2023-07-15 04:35:48', '2023-07-15 04:35:48'),
+(311, 1, 'hOPPdz9055ulnxNejws29jIguw2o32Sr', '2023-07-15 04:35:48', '2023-07-15 04:35:48'),
+(312, 1, 'B5lTj8WbVqRCp5P957sXhHZLBHZkiJ1l', '2023-07-17 06:14:11', '2023-07-17 06:14:11'),
+(313, 1, 'YvN5kJnHMhgYmFZTMzqqAKpGcLAmJ6C9', '2023-07-18 02:25:23', '2023-07-18 02:25:23'),
+(314, 1, '3h5r8b8QZIGTtsS0Xe3rwF7QKjvib1mA', '2023-07-18 15:11:32', '2023-07-18 15:11:32'),
+(315, 1, 'nyV01kB17uucvC8THOP9qQRBu7YoXOaM', '2023-07-18 22:18:44', '2023-07-18 22:18:44'),
+(316, 1, 'Y0FnqmADvIVvu1ZC4TqpTTGq8CDwlATn', '2023-07-19 05:51:49', '2023-07-19 05:51:49'),
+(317, 1, 'HWyk6HrUmuUUkbACwKOVqr6eWI7NV6my', '2023-07-20 02:39:57', '2023-07-20 02:39:57'),
+(318, 1, 'TtPtEAXdsoYkYzzGckkiiOSZtGc7Bglg', '2023-07-21 07:26:42', '2023-07-21 07:26:42'),
+(319, 1, 'xCViIPkcrAYEjm04oHZh9SvpK24zJBRr', '2023-07-21 13:49:39', '2023-07-21 13:49:39'),
+(320, 1, 'miMjT0zSgwRQ8npz13HvGeRerDTUJoeD', '2023-07-23 02:15:31', '2023-07-23 02:15:31'),
+(321, 1, '6xb7TkpGebltvwulN4OouXKyY4jr8oD8', '2023-07-23 06:32:00', '2023-07-23 06:32:00'),
+(322, 1, 'RI1jetbsGnGN98xDsfVt76W5RhsMS1mO', '2023-07-24 07:20:39', '2023-07-24 07:20:39'),
+(323, 1, 'c7FU3rfvQ0Yhznzgg859pSVuItAf8SY3', '2023-07-24 15:24:48', '2023-07-24 15:24:48'),
+(324, 1, 'xVPGuss8Wh6M47NOriyygTDKbQOz2jEg', '2023-07-25 03:51:06', '2023-07-25 03:51:06'),
+(325, 1, 'iNbn0wGwFqHxU4SkPYqjp5ZGppCC3tcE', '2023-07-26 06:26:49', '2023-07-26 06:26:49'),
+(326, 1, 'ZvehTxkzANisDpt4a9ocO98mmjxcxlpY', '2023-07-26 15:58:57', '2023-07-26 15:58:57'),
+(327, 1, 'UlibEITU8KikLbJ6yCIw42T73ATsdXrU', '2023-07-27 02:51:35', '2023-07-27 02:51:35');
 
 -- --------------------------------------------------------
 
@@ -5413,7 +5783,9 @@ CREATE TABLE `tukhoa` (
 --
 
 INSERT INTO `tukhoa` (`tk_id`, `tk_name`) VALUES
+(23, 'abc'),
 (21, 'Quy chế'),
+(24, 'ưeưeg'),
 (22, 'Đề tài văn hóa');
 
 -- --------------------------------------------------------
@@ -5433,7 +5805,9 @@ CREATE TABLE `tukhoa_minhchung` (
 --
 
 INSERT INTO `tukhoa_minhchung` (`tkmc_tk_id`, `tkmc_mc_id`, `tkmc_nhom_mc_sl_id`) VALUES
-(21, 40, 51);
+(21, 40, 51),
+(23, 41, 52),
+(24, 42, 52);
 
 -- --------------------------------------------------------
 
@@ -5492,7 +5866,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ma_nhansu`, `name`, `email`, `password`, `permissions`, `last_login`, `first_name`, `last_name`, `nguoi_tao`, `created_at`, `updated_at`, `deleted_at`, `gender`, `dob`, `pic`, `country`, `user_state`, `city`, `address`, `phone`, `description`, `postal`, `provider`, `provider_id`, `donvi_id`, `csdt_id`, `code`, `ns`, `tdnvtcn`, `ntn`, `noitn`, `gvsp`, `qlnn`, `th`, `nn`, `hhdp`, `ndp`, `cdnnktd`, `mscnktd`, `ntd`, `qdbn`, `cdkn`) VALUES
-(1, '100002', 'Quan tri', 'admin@admin.com', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-07-10 14:02:10', NULL, NULL, 1, '2023-05-25 16:35:50', '2023-07-10 14:02:10', NULL, '1', '2023-03-28', 'uploads/users/DEF/1661420665-imageAvatar.png', NULL, NULL, NULL, NULL, '0123456678', NULL, NULL, NULL, NULL, 95, 1, 'DEF', '2023-03-28', 'Chuyên ngành đào tạo', 2002, 'Khoa CNTT - ĐH công', '2022', 'Nhà nước', '2022', '2022', 'không', 2022, 'Chuyên viên', '123ABC', 2020, 'QD', 'Giảng viên'),
+(1, '100002', 'Quan tri', 'admin@admin.com', '$2y$10$bUmbiNq0VnTcySwFAEXt8uE0bqKcxho.KfFmG0S4.qtOV/Avhf/DG', NULL, '2023-07-27 02:51:35', NULL, NULL, 1, '2023-05-25 16:35:50', '2023-07-27 02:51:35', NULL, '1', '2023-03-28', 'uploads/users/DEF/1661420665-imageAvatar.png', NULL, NULL, NULL, NULL, '0123456678', NULL, NULL, NULL, NULL, 95, 1, 'DEF', '2023-03-28', 'Chuyên ngành đào tạo', 2002, 'Khoa CNTT - ĐH công', '2022', 'Nhà nước', '2022', '2022', 'không', 2022, 'Chuyên viên', '123ABC', 2020, 'QD', 'Giảng viên'),
 (4925, 'admin', 'DIGITAL SCHOOL', 'admin', '$2y$10$1Zjfh8yxWjjouXrb/DTyFurbZvcLdDeP0MbK6o5bO0z0rCsAkkMUq', NULL, '2023-07-07 14:05:46', NULL, NULL, 1, '2023-05-25 16:35:50', '2023-07-07 14:05:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 95, 1, 'ABC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (4926, '010101', 'Lưu Văn Thiêm', 'thiemlv', '$2y$10$slreSUtP3CLOdBCe/rjuC.FxlV72zpKjkIch/WOIzKk/jLFA0HL5S', NULL, '2023-05-25 15:40:41', NULL, NULL, 1, '2023-05-25 16:35:50', '2023-05-25 16:35:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 78, 1, 'ABC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (4927, '010102', 'Nguyễn Đức Mai', 'maind', '$2y$10$VOMG4u5H29k79L9cqfIaReq8BNsbJ6xGMpeQ23Z9aqT71OBgEjAfy', NULL, NULL, NULL, NULL, 1, '2023-05-25 16:35:50', '2023-05-25 16:35:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 78, 1, 'ABC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -5900,6 +6274,12 @@ ALTER TABLE `chuyen_gia_dgn`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `coso_dulieu`
+--
+ALTER TABLE `coso_dulieu`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `countries`
 --
 ALTER TABLE `countries`
@@ -5964,6 +6344,12 @@ ALTER TABLE `excel_import_ck_cldt`
 -- Chỉ mục cho bảng `excel_import_csgd_ctgd`
 --
 ALTER TABLE `excel_import_csgd_ctgd`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `excel_import_data2`
+--
+ALTER TABLE `excel_import_data2`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -6064,6 +6450,12 @@ ALTER TABLE `excel_import_hoclieu_tv_tthl`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `excel_import_hoithohn`
+--
+ALTER TABLE `excel_import_hoithohn`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `excel_import_kdcl`
 --
 ALTER TABLE `excel_import_kdcl`
@@ -6091,6 +6483,12 @@ ALTER TABLE `excel_import_quymodt`
 -- Chỉ mục cho bảng `excel_import_sangche`
 --
 ALTER TABLE `excel_import_sangche`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `excel_import_sangkienkn`
+--
+ALTER TABLE `excel_import_sangkienkn`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -6345,6 +6743,12 @@ ALTER TABLE `kehoach_tieuchuan_nhansu`
   ADD KEY `idx_nskiemtra` (`id_nhansukiemtra`);
 
 --
+-- Chỉ mục cho bảng `lkh_phanquyen_excel`
+--
+ALTER TABLE `lkh_phanquyen_excel`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `loai_donvi`
 --
 ALTER TABLE `loai_donvi`
@@ -6556,7 +6960,7 @@ ALTER TABLE `activations`
 -- AUTO_INCREMENT cho bảng `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=348;
 
 --
 -- AUTO_INCREMENT cho bảng `bantin`
@@ -6637,6 +7041,12 @@ ALTER TABLE `chuyen_gia_dgn`
   MODIFY `id` int(66) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `coso_dulieu`
+--
+ALTER TABLE `coso_dulieu`
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
 -- AUTO_INCREMENT cho bảng `countries`
 --
 ALTER TABLE `countries`
@@ -6676,19 +7086,19 @@ ALTER TABLE `emails`
 -- AUTO_INCREMENT cho bảng `excel_import_baibao_baocao`
 --
 ALTER TABLE `excel_import_baibao_baocao`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_biensoansach`
 --
 ALTER TABLE `excel_import_biensoansach`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_cccldt`
 --
 ALTER TABLE `excel_import_cccldt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_ck_cldt`
@@ -6703,22 +7113,28 @@ ALTER TABLE `excel_import_csgd_ctgd`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT cho bảng `excel_import_data2`
+--
+ALTER TABLE `excel_import_data2`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
+--
 -- AUTO_INCREMENT cho bảng `excel_import_dientich_sv`
 --
 ALTER TABLE `excel_import_dientich_sv`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_dientich_xaydung`
 --
 ALTER TABLE `excel_import_dientich_xaydung`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_dlsinhvien`
 --
 ALTER TABLE `excel_import_dlsinhvien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_doan_khoaluan`
@@ -6730,7 +7146,7 @@ ALTER TABLE `excel_import_doan_khoaluan`
 -- AUTO_INCREMENT cho bảng `excel_import_donvi`
 --
 ALTER TABLE `excel_import_donvi`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_ds_gvch`
@@ -6742,7 +7158,7 @@ ALTER TABLE `excel_import_ds_gvch`
 -- AUTO_INCREMENT cho bảng `excel_import_dtd_dtxxd`
 --
 ALTER TABLE `excel_import_dtd_dtxxd`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_dtkhcn2`
@@ -6754,7 +7170,7 @@ ALTER TABLE `excel_import_dtkhcn2`
 -- AUTO_INCREMENT cho bảng `excel_import_giaithuong`
 --
 ALTER TABLE `excel_import_giaithuong`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_giaotrinh`
@@ -6766,7 +7182,7 @@ ALTER TABLE `excel_import_giaotrinh`
 -- AUTO_INCREMENT cho bảng `excel_import_gvch`
 --
 ALTER TABLE `excel_import_gvch`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_gvchkn`
@@ -6799,10 +7215,16 @@ ALTER TABLE `excel_import_hoclieu_tv_tthl`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT cho bảng `excel_import_hoithohn`
+--
+ALTER TABLE `excel_import_hoithohn`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT cho bảng `excel_import_kdcl`
 --
 ALTER TABLE `excel_import_kdcl`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_monhoc`
@@ -6814,19 +7236,25 @@ ALTER TABLE `excel_import_monhoc`
 -- AUTO_INCREMENT cho bảng `excel_import_nhansu`
 --
 ALTER TABLE `excel_import_nhansu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_quymodt`
 --
 ALTER TABLE `excel_import_quymodt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_sangche`
 --
 ALTER TABLE `excel_import_sangche`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT cho bảng `excel_import_sangkienkn`
+--
+ALTER TABLE `excel_import_sangkienkn`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_svtn_cvl`
@@ -6844,13 +7272,13 @@ ALTER TABLE `excel_import_taichinh`
 -- AUTO_INCREMENT cho bảng `excel_import_tailieu_thuvien`
 --
 ALTER TABLE `excel_import_tailieu_thuvien`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_tcnh`
 --
 ALTER TABLE `excel_import_tcnh`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_thu_gon_lv`
@@ -6868,13 +7296,13 @@ ALTER TABLE `excel_import_tinh_trang_tn`
 -- AUTO_INCREMENT cho bảng `excel_import_tk_ktx`
 --
 ALTER TABLE `excel_import_tk_ktx`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_tk_mt`
 --
 ALTER TABLE `excel_import_tk_mt`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_tk_phong_tb`
@@ -6886,7 +7314,7 @@ ALTER TABLE `excel_import_tk_phong_tb`
 -- AUTO_INCREMENT cho bảng `excel_import_tk_tai_chinh`
 --
 ALTER TABLE `excel_import_tk_tai_chinh`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=391;
 
 --
 -- AUTO_INCREMENT cho bảng `excel_import_tt_dao_tao`
@@ -6922,13 +7350,13 @@ ALTER TABLE `export_import_ctdt`
 -- AUTO_INCREMENT cho bảng `export_import_dtkhcn`
 --
 ALTER TABLE `export_import_dtkhcn`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `export_import_khcn`
 --
 ALTER TABLE `export_import_khcn`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `failed_jobs`
@@ -7027,6 +7455,12 @@ ALTER TABLE `kehoach_tieuchuan`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
+-- AUTO_INCREMENT cho bảng `lkh_phanquyen_excel`
+--
+ALTER TABLE `lkh_phanquyen_excel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT cho bảng `loai_donvi`
 --
 ALTER TABLE `loai_donvi`
@@ -7048,7 +7482,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `minhchung`
 --
 ALTER TABLE `minhchung`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT cho bảng `minhchung_gop`
@@ -7084,7 +7518,7 @@ ALTER TABLE `nhom_mc_sl`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
 
 --
 -- AUTO_INCREMENT cho bảng `reminders`
@@ -7168,7 +7602,7 @@ ALTER TABLE `trinhdo_hoccvi`
 -- AUTO_INCREMENT cho bảng `tukhoa`
 --
 ALTER TABLE `tukhoa`
-  MODIFY `tk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `tk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
