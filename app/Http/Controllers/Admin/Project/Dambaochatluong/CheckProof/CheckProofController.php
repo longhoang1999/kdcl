@@ -38,8 +38,10 @@ class CheckProofController extends DefinedController
     }
 
     public function getData(Request $req){
-        $hdns = DB::table("hoatdongnhom")->where("parent", 0)
-        ->orderBy('created_at', 'desc');
+        $hdns = DB::table("hoatdongnhom")
+                    ->where("parent", 0)
+                    ->where('deleted_at',null)
+                    ->orderBy('created_at', 'desc');
         // foreach($hdns as $hdn){
         //     $hdn_dv = DB::table("hoatdongnhom_donvi")->where("hoatdongnhom_id", $hdn->id)
         //                 ->get();

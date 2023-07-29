@@ -331,6 +331,18 @@
 			    <p>
 			        <small>@lang('project/Externalreview/title.gvtgla')
 			    </p>
+
+			    <div>
+		    		<input hidden type="file" class="inputFile" name="p31_1">
+			    	<button href="" class="btn btn-benchmark mr-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Nhập Excel">
+		            	<i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
+		        	</button>
+
+		        	<div class="import_ex">
+		        		{!! isset($data['p31_1']) ? $data['p31_1'] : '' !!}
+		       	 	</div>
+			    </div>
+
 			    <p><em>@lang('project/Externalreview/title.khitinhsl')</em></p>
 			    <p>Tổng số giảng viên cơ hữu : 
 			    	<input type="number" class="edit_input" value="{{$dulieu->p31_tongvcohuu}}" data_key="p31_tongvcohuu" min="0">
