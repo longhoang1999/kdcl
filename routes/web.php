@@ -523,7 +523,7 @@ Route::group(
                             function () {
                                 // Lập kế hoạch
                                 Route::get('index', 'PlanningController@index')
-                                    ->middleware(['super_check:admin,operator'])
+                                    ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::get('delete-ccsl', 'PlanningController@deleteCcsl')->name('deleteCcsl');
                                 Route::post('create-ccsl', 'PlanningController@createCcsl')->name('createCcsl');
@@ -1031,7 +1031,9 @@ Route::group(
                         Route::group(
                             ['prefix' => 'bien-soan-sach', 'as' => 'bssach.', 'namespace' => 'Bssach'],
                             function(){
-                                Route::get('index','BssachController@index')->name('index');
+                                Route::get('index','BssachController@index')
+                                ->middleware(['super_check:admin,operator,ttchuyentrach'])
+                                ->name('index');
                                 Route::post('import-unit', 'BssachController@importUnit')->name('importUnit');
                                 Route::post('import-data-unit', 'BssachController@importDataUnit')->name('importDataUnit');
                                 Route::get('data-unit', 'BssachController@dataUnit')->name('dataUnit');
@@ -1125,7 +1127,9 @@ Route::group(
                         Route::group(
                             ['prefix' => 'tuyen-sinh', 'as' => 'tuyensinh.', 'namespace' => 'Tuyensinh'],
                             function(){
-                                Route::get('index','TuyensinhController@index')->name('index');
+                                Route::get('index','TuyensinhController@index')
+                                    ->middleware(['super_check:admin,operator,ttchuyentrach'])
+                                    ->name('index');
                                 Route::post('import-unit', 'TuyensinhController@importUnit')->name('importUnit');
                                 Route::post('import-data-unit', 'TuyensinhController@importDataUnit')->name('importDataUnit');
                                 Route::get('data-unit', 'TuyensinhController@dataUnit')->name('dataUnit');
@@ -1636,7 +1640,7 @@ Route::group(
 
                 // Route for function Import dữ liệu thô thay thế
                 Route::group(
-                    ['prefix' => 'import-excel-2', 'as' => 'importdata2.', 'namespace' => 'Importdata2', 'middleware' => ['super_check:admin,operator']],
+                    ['prefix' => 'import-excel-2', 'as' => 'importdata2.', 'namespace' => 'Importdata2'],
                     function(){
                         // Import thông tin cơ bản
                         Route::group(
@@ -1662,7 +1666,9 @@ Route::group(
                         Route::group(
                             ['prefix' => 'du-lieu-sinh-vien', 'as' => 'dlsinhvien.', 'namespace' => 'Dlsinhvien'],
                             function(){
-                                Route::get('index','DlsinhvienController@index')->name('index');
+                                Route::get('index','DlsinhvienController@index')
+                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    ->name('index');
                                 Route::post('addfilenew', 'DlsinhvienController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'DlsinhvienController@showFileData')->name('showFileData');
                             }
@@ -1755,7 +1761,9 @@ Route::group(
                         Route::group(
                             ['prefix' => 'tuyen-sinh', 'as' => 'tuyensinh.', 'namespace' => 'Tuyensinh'],
                             function(){
-                                Route::get('index','TuyensinhController@index')->name('index');
+                                Route::get('index','TuyensinhController@index')
+                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    ->name('index');
                                 Route::post('addfilenew', 'TuyensinhController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'TuyensinhController@showFileData')->name('showFileData');
                             }
@@ -2088,7 +2096,9 @@ Route::group(
                         Route::group(
                             ['prefix' => 'lap-ke-hoach-excel', 'as' => 'lkhex.', 'namespace' => 'LapkehoachExcel'],
                             function(){
-                                Route::get('index','LapkehoachExcelController@index')->name('index');
+                                Route::get('index','LapkehoachExcelController@index')
+                                ->middleware(['super_check:admin,operator'])
+                                ->name('index');
                                 Route::get('data','LapkehoachExcelController@data')->name('data');
                                 Route::post('create-kehoach','LapkehoachExcelController@createKH')->name('createKH');
 

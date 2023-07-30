@@ -639,7 +639,7 @@
 
                                 <div class="menu-item">
                                     <a class="menu-link 
-                                    {!! (Request::is('admin/tu-danh-gia/completionreport/index')
+                                    {!! (Request::is('admin/tu-danh-gia/database/index')
                                     ? 'active' : '' ) !!}
                                      " href="{{ $linkMenuSevenParent[6] }}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                         <span class="menu-icon">

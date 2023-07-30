@@ -26,9 +26,35 @@ use App\Exports\exceltactionExport;
 class UpdateAciController extends DefinedController
 {
     public function index(Request $req){
-        $linhvuc = DB::table('nhom_mc_sl')->select('id', 'mo_ta')->get();
+        if(Sentinel::inRole('admin') || Sentinel::inRole('operator')){
+            $linh_vuc = DB::table("nhom_mc_sl")->select("id", "mo_ta")->get();
+        }else if(Sentinel::inRole('truongdonvi')){
+            $kehoach = DB::table('kehoach_cc_solieu')
+                        ->select('nhom_mc_sl_id')
+                        ->where('dv_thuchien',Sentinel::getUser()->donvi_id)
+                        ->get();
+            $arr = [];
+            foreach($kehoach as $val){
+                array_push($arr,$val->nhom_mc_sl_id);
+            }
+            $linh_vuc = DB::table("nhom_mc_sl")
+                        ->select("id", "mo_ta")
+                        ->whereIn('id',$arr)
+                        ->get();
+
+        }
+
+        // if(Sentinel::inRole('admin') || Sentinel::inRole('operator')){
+        //     $linh_vuc = DB::table("nhom_mc_sl")->select("id", "mo_ta")->get();
+        // }else if(Sentinel::inRole('truongdonvi')){
+            
+        //     $linh_vuc = DB::table("nhom_mc_sl")
+        //                     ->select("id", "mo_ta")
+        //                     ->where("donvi_id",Sentinel::getUser()->donvi_id)
+        //                     ->get();
+        // }
         return view('admin.project.QualiAssurance.updateaci')->with([
-            "linhvuc" =>  $linhvuc
+            "linhvuc" =>  $linh_vuc
         ]);
         
     }
