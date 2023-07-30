@@ -529,7 +529,7 @@ class CategoryController extends DefinedController
                     function ($user) {
                         $checkUser = Sentinel::findById($user->id);
                         if($checkUser->inRole('admin') || $checkUser->inRole('operator'))
-                            $actions = "";
+                            $actions = '<button data-toggle="modal" data-target="#modalUpdate" class="btn btn-block mt-2" data-id="'.$user->id.'"data-bs-placement="top" title="'.Lang::get('project/Standard/title.capnhat').'">'. '<i class="bi bi-pencil-square" style="font-size: 25px;color: #009ef7;"></i>' .'</button>';
                         else{
                             $actions = '<button data-toggle="modal" data-target="#modalUpdate" class="btn btn-block mt-2" data-id="'.$user->id.'"data-bs-placement="top" title="'.Lang::get('project/Standard/title.capnhat').'">'. '<i class="bi bi-pencil-square" style="font-size: 25px;color: #009ef7;"></i>' .'</button>'; 
                             $actions = $actions.'<button class="btn btn-block" data-toggle="modal" data-target="#modalDelete" data-id="'.$user->id.'">'. '<i class="bi bi-trash" style="font-size: 25px;color: red;"></i>' .'</button>';

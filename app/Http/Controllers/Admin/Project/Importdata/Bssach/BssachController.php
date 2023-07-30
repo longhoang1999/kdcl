@@ -34,13 +34,32 @@ class BssachController extends DefinedController{
 		$donvi = DB::table("donvi")->select("id", "ten_donvi", "deleted_at","loai_dv_id")
                 ->where("deleted_at", null)
                 ->get();
-        $dvex = DB::table("excel_import_donvi")->select("ten_donvi_TV", "ma_donvi", "id")->get();
-		
+        $dvex = DB::table("excel_import_donvi")
+                    ->select("ten_donvi_TV", "ma_donvi", "id")
+                    ->get();
+        if(Sentinel::inRole('ttchuyentrach')){
+            $phanquen = DB::table('lkh_phanquyen_excel')
+                            ->where('bang_stt',5)
+                            ->first();
+            if($phanquen->donvi_id == Sentinel::getUser()->donvi_id){
+                    return view('admin.project.Importdata.compilation_book')->with([
+                        'loai_dv'           => $loai_dv,
+                        'donvi'             => $donvi,
+                        'dvex'              => $dvex
+                    ]);
+            }else{
+                return redirect()->back();
+            }
+
+        }
+
         return view('admin.project.Importdata.compilation_book')->with([
-           	'loai_dv'           => $loai_dv,
-           	'donvi'             => $donvi,
+            'loai_dv'           => $loai_dv,
+            'donvi'             => $donvi,
             'dvex'              => $dvex
         ]);
+		
+        
 	}
 
 	//Import excel unit

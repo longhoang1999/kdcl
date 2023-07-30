@@ -37,6 +37,22 @@ class Chuongtrinhdaotao extends DefinedController{
                 ->get();
         $getFile = DB::table('excel_import_data2')->where('type_excel', '3')->select("id", "year")->get();
 		
+         if(Sentinel::inRole('truongdonvi')){
+            $phanquen = DB::table('lkh_phanquyen_excel')
+                            ->where('bang_stt',3)
+                            ->first();
+            if($phanquen->donvi_id == Sentinel::getUser()->donvi_id){
+                     return view('admin.project.Importdata2.ctdt')->with([
+                        'loai_dv'           => $loai_dv,
+                        'donvi'             => $donvi,
+                        'getFile'           => $getFile
+                    ]);
+            }else{
+                return redirect()->back();
+            }
+
+        }
+
         return view('admin.project.Importdata2.ctdt')->with([
            	'loai_dv'           => $loai_dv,
            	'donvi'             => $donvi,

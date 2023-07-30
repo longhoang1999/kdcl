@@ -5,9 +5,19 @@
 @stop
 
 @section('header_styles')
-<link rel="stylesheet" href="{{ asset('css/project/QualiAssurance/qualiAssurance.css') }}">
-<style type="text/css">
 
+<style type="text/css">
+    .table{
+        border: 1px solid;
+    }
+
+    .table tr,td{
+        border: 1px solid;
+    }
+    .table th,td{
+        padding: 5px !important;
+        text-align: center;
+    }
 </style>
 @stop
 
