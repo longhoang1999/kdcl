@@ -289,8 +289,8 @@ class CheckProofController extends DefinedController
             }
             // Thông báo ....
         }
-        //return back()->with('success',  
-          //          Lang::get( $this->langBase . '.mcycbtc'));
+        return back()->with('success',  
+                   Lang::get( $this->langBase . '.mcycbtc'));
     }
 
     public function openAgain($id) {

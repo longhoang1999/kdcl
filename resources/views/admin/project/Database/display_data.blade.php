@@ -897,6 +897,7 @@
     })
    @if($check != "sua")
         $('.edit_input').prop('disabled', true);
+        $('.radiobox').prop('disabled', true);
     @endif
 
 

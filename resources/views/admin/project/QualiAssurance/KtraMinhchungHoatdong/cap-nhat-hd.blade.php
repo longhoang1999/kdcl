@@ -71,7 +71,7 @@
                     <input type="text" class="form-control " placeholder="@lang( $baseLang . '.tenhd')" disabled value="{{ $hoatDongNhom->noi_dung }}">
                 </div>
             </div>
-            @if(!Sentinel::inRole('ns_thuchien'))
+            @if(!Sentinel::inRole('ns_thuchien') || Sentinel::inRole('admin') || Sentinel::inRole('operator'))
                 @if($hoatDongNhom->cong_bo =='N' )
                     <div class="row mt-3">
                         <div class="col-md-8">

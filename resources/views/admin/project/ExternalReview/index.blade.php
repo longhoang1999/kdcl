@@ -1,7 +1,7 @@
 @extends('admin/layouts/default')
 {{-- Page title --}}
 @section('title')
-    @lang('project/Selfassessment/title.dsbctdg')
+     @lang('project/Externalreview/title.danhgn')
 @parent
 @stop
 
@@ -12,7 +12,7 @@
 @stop
 
 @section('title_page')
-    @lang('project/Selfassessment/title.dsbctdg')
+    @lang('project/Externalreview/title.danhgn')
 @stop
 @section('content')
 <section class="content-body">

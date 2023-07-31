@@ -6,6 +6,16 @@
         margin-top: 60px;
         padding-right: 0px !important;
     }
+
+    table{
+        border: 1px solid lightgrey !important;
+    }
+    table tr{
+        border: 1px solid lightgrey !important;
+    }
+    table tr th,td{
+        border: 1px solid lightgrey !important;
+    }
 </style>
 <div class="row show_mcg">
     <div class="col-md-8">

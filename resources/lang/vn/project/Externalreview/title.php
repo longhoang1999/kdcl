@@ -325,6 +325,7 @@
 		'khacphuctt'		=> 'Khắc phục tồn tại',
 		'mucdg'		        => '4. Mức đánh giá:',
 		'tieuchuantc'		=> 'Tiêu chuẩn/Tiêu chí',
+		'danhgn'			=> 'Đánh giá ngoài',
 
 	);
 

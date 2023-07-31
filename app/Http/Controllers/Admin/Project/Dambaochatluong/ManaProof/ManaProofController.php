@@ -105,9 +105,9 @@ class ManaProofController extends DefinedController
                 ->where('minhchung.deleted_at',NULL)
                 ->orderBy('minhchung.updated_at','desc');
         
-        if(Sentinel::inRole('truongdonvi')){
-            $res = $res->where('donvi.id',Sentinel::getUser()->donvi_id);
-        }
+        // if(Sentinel::inRole('truongdonvi')){
+        //     $res = $res->where('donvi.id',Sentinel::getUser()->donvi_id);
+        // }
 
         if(isset($req->tieude) && $req->tieude != ''){
             $res = $res->where(function ($q) use ($req){

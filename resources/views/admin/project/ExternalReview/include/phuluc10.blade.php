@@ -1,3 +1,14 @@
+<style type="text/css">
+    table{
+        border: 1px solid lightgrey !important;
+    }
+    table tr{
+        border: 1px solid lightgrey !important;
+    }
+    table tr th,td{
+        border: 1px solid lightgrey !important;
+    }
+</style>
 <div class="m-t-md">
     <div  class="form-horizontal">
         <!-- <div class="form-group">

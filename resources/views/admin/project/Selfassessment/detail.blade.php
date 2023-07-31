@@ -156,22 +156,24 @@
                                 @endif
                                     
                                 <div class="col-sm-12">
+
                                     @foreach($keHoachBaoCaoDetail->keHoachTieuChuanList as $keHoachTieuChuan)
-                                        @continue(!$keHoachTieuChuan->baoCaoTieuChuan)
+
                                         <strong>@lang('project/Selfassessment/title.tieuchuan') {{isset($keHoachTieuChuan->tieuChuan->stt)?$keHoachTieuChuan->tieuChuan->stt : ''  }}
                                             : {{isset($keHoachTieuChuan->tieuChuan->mo_ta)?$keHoachTieuChuan->tieuChuan->mo_ta : ''  }}</strong>
-                                        @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
 
+                                        @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
+                                             
                                             @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'csgd')
 
                                                 @include("admin.project.Selfassessment.hoanthien.tieuchi-csdt")
                                             @else
-                                            
-                                                <p>{!! $keHoachTieuChuan->baoCaoTieuChuan->modau !!}</p>
+                                               
+                                                <p>{!! isset($keHoachTieuChuan->baoCaoTieuChuan->modau) ? $keHoachTieuChuan->baoCaoTieuChuan->modau : "" !!}</p>
                                                @include("admin.project.Selfassessment.hoanthien.tieuchi-ctdt")
                                                 <div class="m-b-md m-l-md">
                                                     <b>@lang('project/Selfassessment/title.kltc') {{ $keHoachTieuChuan->tieuChuan->stt }}: </b>
-                                                    {!! $keHoachTieuChuan->baoCaoTieuChuan->ketluan !!}
+                                                    {!! isset($keHoachTieuChuan->baoCaoTieuChuan->ketluan) ? $keHoachTieuChuan->baoCaoTieuChuan->ketluan : "" !!}
                                                 </div>
                                             @endif
                                         @endif

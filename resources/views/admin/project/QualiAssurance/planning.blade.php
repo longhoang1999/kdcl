@@ -81,22 +81,24 @@
                     @endfor
                 </select>
             </div>
-            <div class="col-md-1">
-                <button class="btn btn-benchmark mr-2" type="button" id="turnOnmodalCopy" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.copykhtnc')">
-                    <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
-                </button>
-            </div>
-            <div class="col-md-1">
-                <button type="button" class="btn" data-toggle="modal" data-target="#modalLapKeHoach" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.lkhm')">
-                    <i class="bi bi-file-earmark-plus-fill"  style="font-size: 35px;color: #009ef7;"></i> 
-                </button>
-            </div>
-            
-            <div class="col-md-1">
-                <a class="btn btn-benchmark mr-2" href="{{route('admin.dambaochatluong.planning.exportplaning')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.xuat_excel')">
-                    <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
-                </a>
-            </div>
+            @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                <div class="col-md-1">
+                    <button class="btn btn-benchmark mr-2" type="button" id="turnOnmodalCopy" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.copykhtnc')">
+                        <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
+                    </button>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn" data-toggle="modal" data-target="#modalLapKeHoach" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.lkhm')">
+                        <i class="bi bi-file-earmark-plus-fill"  style="font-size: 35px;color: #009ef7;"></i> 
+                    </button>
+                </div>
+                
+                <div class="col-md-1">
+                    <a class="btn btn-benchmark mr-2" href="{{route('admin.dambaochatluong.planning.exportplaning')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.xuat_excel')">
+                        <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
+                    </a>
+                </div>
+            @endif
         </div>
        
     </div>
@@ -172,7 +174,9 @@
                             <th >@lang('project/QualiAssurance/title.dvpt')</th>
                             <th >@lang('project/QualiAssurance/title.nskt')</th>
                             <th >@lang('project/QualiAssurance/title.notes')</th>
-                            <th >@lang('project/QualiAssurance/title.hdong')</th>
+                            @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                                <th >@lang('project/QualiAssurance/title.hdong')</th>
+                            @endif
                          </tr>
                         </thead>
                         <tbody>  
@@ -786,7 +790,9 @@
                 { data: 'dvThucHien', name: 'dvThucHien' },
                 { data: 'nsKiemTra', name: 'nsKiemTra' },
                 { data: 'notes', name: 'notes' },
-                { data: 'actions', name: 'actions' ,className: 'action'},
+                @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                    { data: 'actions', name: 'actions' ,className: 'action'},
+                @endif
             ],            
         });
 
