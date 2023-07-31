@@ -2091,7 +2091,6 @@ Route::group(
                                 Route::post('showFileData', 'CongkhaidngvchController@showFileData')->name('showFileData');
                             }
                         );
-
                         // Phân quyền import
                         Route::group(
                             ['prefix' => 'lap-ke-hoach-excel', 'as' => 'lkhex.', 'namespace' => 'LapkehoachExcel'],
