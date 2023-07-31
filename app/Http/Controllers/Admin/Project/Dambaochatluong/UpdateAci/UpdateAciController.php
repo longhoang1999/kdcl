@@ -254,9 +254,17 @@ class UpdateAciController extends DefinedController
     }
     
     public function deleteAction(Request $req){
-        DB::table("hoatdongnhom")->where("id", $req->id_delete)->update([
-                'deleted_at'      => Carbon::now()->toDateTimeString()
-        ]);
+        DB::table("hoatdongnhom")->where("id", $req->id_delete)->delete();
+
+        $child =  DB::table("hoatdongnhom")->where("parent", $req->id_delete);
+        
+
+        DB::table("kehoach_hanhdong")->whereIn("hoatdongnhom_id", $child->pluck("id"))
+            ->delete();
+
+        $child->delete();
+        
+
         return back()->with('success', 
                     Lang::get('project/Standard/message.success.delete'));
     }

@@ -10,8 +10,8 @@
 <link rel="stylesheet" href="{{ asset('css/project/QualiAssurance/qualiassurance.css') }}">
 <style type="text/css">
 .searchtext {
-    padding: 13px 10px !important; 
-}    
+    padding: 13px 10px !important;
+}
 
 </style>
 @stop
@@ -29,7 +29,7 @@
     <div class="form-standard">
         <h4>@lang('project/QualiAssurance/title.tkiem')</h4>
             <div class="container-fuild pl-5 ">
-                <div class="row mt-3 ">                                        
+                <div class="row mt-3 ">
                     <div class="col-md-3">
                         <select class="form-control " id="add_tc">
                         </select>
@@ -43,10 +43,10 @@
                         <button class="btn btn-benchmark" onclick="search();return false;" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.timkiem')">
                             <i class="bi bi-search" style="font-size: 35px;color: #009ef7;"></i>
                         </button>
-                    </div>                    
+                    </div>
                 </div>
 
-                <div class="row mt-3 div_search" id="div_tk_1">                    
+                <div class="row mt-3 div_search" id="div_tk_1">
                     <div class="col-md-2">
                         <select class="form-control " id="nam_search">
                             <option value=""></option>
@@ -67,15 +67,15 @@
                         <select class="form-control " id="hoatdong_search">
                             <option value=""></option>
                         </select>
-                    </div>  
+                    </div>
                     <div class="col-md-2">
                         <button class="btn" onclick="close_tc(1);return false;" >
                             &nbsp;<i class="bi bi-trash" style="font-size: 35px;color: red;" aria-hidden="true"></i>&nbsp;
                         </button>
-                    </div>                                                      
+                    </div>
                 </div>
 
-                <div class="row mt-3 div_search" id="div_tk_2">                    
+                <div class="row mt-3 div_search" id="div_tk_2">
                     <label class="col-md-2 control-label">
                         @lang('project/QualiAssurance/title.tdmc')
                     </label>
@@ -89,7 +89,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-3 div_search" id="div_tk_3">                    
+                <div class="row mt-3 div_search" id="div_tk_3">
                     <label class="col-md-2 control-label">
                         @lang('project/QualiAssurance/title.tyeu')
                     </label>
@@ -103,7 +103,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-3 div_search" id="div_tk_4">                    
+                <div class="row mt-3 div_search" id="div_tk_4">
                     <label class="col-md-2 control-label">
                         @lang('project/QualiAssurance/title.sohieu')
                     </label>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-3 div_search" id="div_tk_5">                    
+                <div class="row mt-3 div_search" id="div_tk_5">
                     <label class="col-md-2 control-label">
                         @lang('project/QualiAssurance/title.diachi')
                     </label>
@@ -131,7 +131,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-3 div_search" id="div_tk_6">                    
+                <div class="row mt-3 div_search" id="div_tk_6">
                     <label class="col-md-2 control-label">
                         @lang('project/QualiAssurance/title.tukhoa')
                     </label>
@@ -157,14 +157,16 @@
                 <div class="col-md-4 mb-5">
                     <input type="text" name="tieude_search" id="tieude_search" class="form-control" style="height: 100%;" placeholder="@lang('project/QualiAssurance/title.locmctt')">
                 </div>
-               
-                <div class="col-md-1" style="text-align: right;">                
+
+                @if(!Sentinel::inRole('truongdonvi') && !Sentinel::inRole('khac'))
+                <div class="col-md-1" style="text-align: right;">
                     <a href="{{ route('admin.dambaochatluong.manaproof.newProof') }}" class="btn btn-benchmark" style="width: 100%;" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.tmoi')">
                         <i class="bi bi-plus-square" style="font-size: 35px;color: #50cd89;"></i>
                     </a>
                 </div>
-          
-                <div class="col-md-1">                
+                @endif
+
+                <div class="col-md-1">
                     <a class="btn btn-benchmark" style="width: 100%;" href="{{route('admin.dambaochatluong.manaproof.exportProof')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.xuat_excel')">
                         <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
                     </a>
@@ -184,9 +186,9 @@
                 <th >@lang('project/QualiAssurance/title.hanhd')</th>
              </tr>
             </thead>
-            <tbody>  
-            </tbody>                
-        </table> 
+            <tbody>
+            </tbody>
+        </table>
     </div>
     @endif
 
@@ -212,7 +214,7 @@
     </div>
   </div>
 <!-- /Kết thúc page trang -->
-    
+
     <!-- Kết thúc trang -->
     </section>
 
@@ -227,9 +229,9 @@
     var id_del = '';
     var cur_search = [];
     var list_search = ["@lang('project/QualiAssurance/title.nam')/@lang('project/QualiAssurance/title.lvuc')/@lang('project/QualiAssurance/title.hoatdong')",
-"@lang('project/QualiAssurance/title.tdmc')",   
-"@lang('project/QualiAssurance/title.tyeu')", 
-"@lang('project/QualiAssurance/title.sohieu')", 
+"@lang('project/QualiAssurance/title.tdmc')",
+"@lang('project/QualiAssurance/title.tyeu')",
+"@lang('project/QualiAssurance/title.sohieu')",
 "@lang('project/QualiAssurance/title.diachi')",
 "@lang('project/QualiAssurance/title.tukhoa')",];
 
@@ -237,7 +239,7 @@
         var choose = $('#add_tc').val();
         var idx = (choose - 1);
         if(!cur_search.includes(idx)){
-            cur_search.push(idx);            
+            cur_search.push(idx);
             fill_list_search();
             $('#div_tk_' + choose).show();
         }
@@ -252,9 +254,9 @@
                 cur_search[i] == idx;
                 cur_search.splice(i,1);
                 break;
-            }            
-            fill_list_search();            
-        }   
+            }
+            fill_list_search();
+        }
     }
 
     function fill_list_search(){
@@ -284,9 +286,9 @@
                 },
                 error: function(err) {
 
-                },            
+                },
                 success: function(data) {
-                console.log(data)                
+                console.log(data)
                     if(data == 1){
                         alert("@lang('project/QualiAssurance/message.success.delete')");
                         table.ajax.reload();
@@ -334,12 +336,12 @@
             diachi:diachi,
             tukhoa:tukhoa,
             _token : "{{ csrf_token()}}",
-        };       
+        };
     }
 
     function search(){
         var tieude = $('#tieude_search').val();
-        table.ajax.url("{!! route('admin.dambaochatluong.manaproof.viewProof') !!}?tieude=" + tieude).load();        
+        table.ajax.url("{!! route('admin.dambaochatluong.manaproof.viewProof') !!}?tieude=" + tieude).load();
     }
 
     function loadhoatdong(linhvuc){
@@ -348,26 +350,26 @@
             type: 'GET',
             error: function(err) {
 
-            },            
-            success: function(data) {                
+            },
+            success: function(data) {
                 var el = $('#hoatdong_search');
                 el.empty();
                 el.append($("<option></option>").attr("value", '').text("@lang('project/QualiAssurance/title.lchd')"));
                 if(data != ''){
                     for (var i = 0; i < data.length; i++) {
-                        el.append($("<option></option>").attr("value", data[i][0]).text(data[i][1]));                                                
+                        el.append($("<option></option>").attr("value", data[i][0]).text(data[i][1]));
                     }
                 }
             }
         });
     }
-    
+
     $(function(){
         table = $('#table').DataTable({
             responsive: true,
             processing: true,
             serverSide: true,
-            searching: false,            
+            searching: false,
             ajax: {
                 url: "{!! route('admin.dambaochatluong.manaproof.viewProof') !!}",
                 type: 'POST',
@@ -376,7 +378,7 @@
                     return $.extend(d,getdatasearch());
                 },
             },
-            order: [],  
+            order: [],
             columns: [
                 { data: 'tieu_de', name: 'tieu_de' },
                 { data: 'sohieu', name: 'sohieu' },
@@ -386,10 +388,10 @@
                 { data: 'cong_khai_text', name: 'cong_khai_text'},
                 { data: 'tinhTrang', name: 'tinhTrang' },
                 { data: 'actions', orderable: false, searchable: false ,className: 'action'},
-            ],           
+            ],
         });
 
-        $('#tieude_search').keyup(function(){            
+        $('#tieude_search').keyup(function(){
             search();
         });
 
@@ -405,12 +407,12 @@
             placeholder: "@lang('project/QualiAssurance/title.lclv')",
             allowClear: false
         })
-        
+
         $("#hoatdong_search").select2({
             placeholder: "@lang('project/QualiAssurance/title.lchd')",
             allowClear: false
         })
-        
+
         $("#nam_search").select2({
             placeholder: "@lang('project/QualiAssurance/title.nam')",
             allowClear: false
@@ -419,7 +421,7 @@
         $('.div_search').hide();
         fill_list_search();
 
-    });  
+    });
 </script>
 
 @stop

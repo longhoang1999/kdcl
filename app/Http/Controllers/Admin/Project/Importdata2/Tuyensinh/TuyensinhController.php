@@ -38,6 +38,7 @@ class TuyensinhController extends DefinedController{
         $getFile = DB::table('excel_import_data2')->where('type_excel', '1')->select("id", "year")->get();
 		
         if(Sentinel::inRole('truongdonvi')){
+            echo 'df';die;
             $phanquen = DB::table('lkh_phanquyen_excel')
                             ->where('bang_stt',1)
                             ->first();

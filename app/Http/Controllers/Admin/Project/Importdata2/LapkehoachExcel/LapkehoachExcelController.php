@@ -141,7 +141,12 @@ class LapkehoachExcelController extends DefinedController{
                 'donvi',
                 function ($user) {
                     $donvi = DB::table('donvi')->where("id", $user->donvi_id)->first();
-                    return $donvi->ten_donvi;
+                    if($donvi){
+                        return $donvi->ten_donvi;
+                    }else{
+                        return "Không có dữ liệu";
+                    }
+                    
                 }
             )   
             ->addColumn(

@@ -1064,4 +1064,11 @@ class DetailedplanningController extends DefinedController
                     ]);
           return 1;
     }
+
+    public function uploadimg(Request $req){
+          $file = $req->file;
+
+          return array($file);
+
+    }
 }

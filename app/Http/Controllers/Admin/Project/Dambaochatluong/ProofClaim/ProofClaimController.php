@@ -40,17 +40,20 @@ class ProofClaimController extends DefinedController
 
     public function getListKhhd(Request $req) {
         $khhds = DB::table("kehoach_hanhdong")->orderBy('kehoach_hanhdong.tieu_de', 'asc')
-            ->leftjoin('hoatdongnhom', 'hoatdongnhom.id', '=', 'kehoach_hanhdong.hoatdongnhom_id')
-            ->select(
-                'hoatdongnhom.id as idhdn',
-                'hoatdongnhom.noi_dung', 
-                'kehoach_hanhdong.ngay_batdau', 
-                'kehoach_hanhdong.ngay_hoanthanh', 
-                'kehoach_hanhdong.donvi_id', 
-                'hoatdongnhom.kehoach_id', 
-                'kehoach_hanhdong.ghi_chu',
-                'hoatdongnhom.cong_bo'
-            );
+                    ->leftjoin('hoatdongnhom', 'hoatdongnhom.id', '=', 'kehoach_hanhdong.hoatdongnhom_id')
+                    ->where("kehoach_hanhdong.deleted_at",null)
+                    ->groupBy('kehoach_hanhdong.hoatdongnhom_id')
+                    ->select(
+                        'hoatdongnhom.id as idhdn',
+                        'hoatdongnhom.id as hoatdongnhom_id',
+                        'hoatdongnhom.noi_dung',
+                        'kehoach_hanhdong.ngay_batdau',
+                        'kehoach_hanhdong.ngay_hoanthanh',
+                        'kehoach_hanhdong.donvi_id',
+                        'hoatdongnhom.kehoach_id',
+                        'kehoach_hanhdong.ghi_chu',
+                        'hoatdongnhom.cong_bo'
+                    );
         if($req->nam_search != ""){
             $khhds = $khhds->where('kehoach_hanhdong.year', $req->nam_search);
         }
@@ -63,8 +66,8 @@ class ProofClaimController extends DefinedController
         if($req->tthai_search){
             $khhds = $khhds->where('hoatdongnhom.cong_bo', $req->tthai_search);
         }
-    
-        return DataTables::of($khhds) 
+
+        return DataTables::of($khhds)
             // ->addColumn('actions',function($khhd){
             //     $actions = '<a href="" class="btn btn-primary mr-2 btn-block">
             //         '. Lang::get( $this->langBase . '.ctiet') .'
@@ -78,9 +81,19 @@ class ProofClaimController extends DefinedController
                 return date("d-m-Y", strtotime($khhd->ngay_hoanthanh));
             })
             ->addColumn('donViTh',function($khhd){
-                $donvi = DB::table("donvi")->where("id", $khhd->donvi_id)
+                $span = '';
+                $all = DB::table("kehoach_hanhdong")->where("hoatdongnhom_id", $khhd->hoatdongnhom_id)->get();
+                foreach($all as $val){
+                    $donvi = DB::table("donvi")->where("id", $val->donvi_id)
                         ->select('ten_donvi')->first();
-                return $donvi->ten_donvi;
+                    if($donvi){
+                        $span .= "<span class='badge bg-primary'>" . $donvi->ten_donvi . "</span>" ;
+                    }else{
+                        $span .= "";
+                    }
+                }
+
+                return  $span;
             })
             // ->addColumn('ngKiemtra',function($khhd){
             //     $khccsl = DB::table("kehoach_cc_solieu")->where("id", $khhd->kehoach_id)
@@ -96,20 +109,20 @@ class ProofClaimController extends DefinedController
                     return '<span class="badge badge-success">'. Lang::get( $this->langBase . '.dxn') .'</span>';
                 else if($khhd->cong_bo == 'P')
                     return '<span class="badge badge-danger">'. Lang::get( $this->langBase . '.kxn') .'</span>';
-                else 
+                else
                     return '<span class="badge badge-warning">'. Lang::get( $this->langBase . '.cxn') .'</span>';
             })
             ->addColumn('noiDung',function($khhd){
-                return '<a href="'. 
-                    route('admin.dambaochatluong.checkproof.editData', $khhd->idhdn)     
+                return '<a href="'.
+                    route('admin.dambaochatluong.checkproof.editData', $khhd->idhdn)
                 .'" class="text-primary">'. $khhd->noi_dung .'</a>';
             })
-            ->rawColumns(['noiDung', 'trangthai'])           
+            ->rawColumns(['noiDung', 'trangthai', 'donViTh'])
             ->make(true);
     }
 
     public function exportlistKhhd(){
         return Excel::download(new ListKhhdExport(), 'listKhhd.xlsx');
     }
-    
+
 }

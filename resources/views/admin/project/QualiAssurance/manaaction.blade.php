@@ -205,7 +205,7 @@
                     </div>
                     <div class="form-group">
                         <h5>@lang('project/QualiAssurance/title.noidung')</h5>
-                        <textarea class="form-control min-h500" placeholder="@lang('project/QualiAssurance/title.noidung')" name="noidung"></textarea>
+                        <textarea class="form-control min-h500" placeholder="@lang('project/QualiAssurance/title.noidung')" name="noidung" required></textarea>
                     </div>
 
                 </div>
