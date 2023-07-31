@@ -32,11 +32,11 @@ class ManaProofController extends DefinedController
         return view('admin.project.QualiAssurance.manaproof')->with([
             "linhvuc" =>  $linhvuc,
             "donvi" =>  $donvi,
-            
+
         ]);
     }
 
-    public function getHD(Request $req){            
+    public function getHD(Request $req){
         $res = DB::table('hoatdongnhom')
             ->whereNull('deleted_at');
 
@@ -64,13 +64,13 @@ class ManaProofController extends DefinedController
 
     public function getQL(Request $req){
         $res = DB::table('users')->select('id','name')->whereNull('deleted_at');
-        
+
         $from = (intval($req->page) - 1) * 10;
         $search = $req->search;
         if($search != ''){
             $res = $res->where('name','like',"%".$search."%");
         }
-        
+
         $count = $res->count();
 
         $res = $res->skip($from)->take(10)->get();
@@ -82,7 +82,7 @@ class ManaProofController extends DefinedController
     }
 
     public function getTukhoa(Request $req){
-        $res = DB::table('tukhoa');                
+        $res = DB::table('tukhoa');
         if(isset($req->linhvuc) && $req->linhvuc != ''){
             $res = $res->leftJoin('tukhoa_minhchung','tukhoa.tk_id','=','tukhoa_minhchung.tkmc_tk_id')->where('tkmc_nhom_mc_sl_id',$req->linhvuc);
         }
@@ -96,7 +96,7 @@ class ManaProofController extends DefinedController
         }
         return json_encode($arr);
     }
-    
+
     public function viewProof(Request $req){
         $res = DB::table('minhchung')
                 ->leftJoin('users','users.id','=','minhchung.nguoi_quan_ly')
@@ -104,7 +104,11 @@ class ManaProofController extends DefinedController
                 ->select('minhchung.id as mc_id','tieu_de','ngay_ban_hanh','noi_banhanh','cong_khai','count_size','ten_donvi', 'trich_yeu', 'minhchung.duong_dan', 'minhchung.url', 'minhchung.tinh_trang','minhchung.sohieu')
                 ->where('minhchung.deleted_at',NULL)
                 ->orderBy('minhchung.updated_at','desc');
-        
+
+        if(Sentinel::inRole('truongdonvi')){
+            $res = $res->where("donvi.id", Sentinel::getUser()->donvi_id);
+        }
+
         // if(Sentinel::inRole('truongdonvi')){
         //     $res = $res->where('donvi.id',Sentinel::getUser()->donvi_id);
         // }
@@ -114,21 +118,21 @@ class ManaProofController extends DefinedController
                 $q->orWhere('minhchung.tieu_de','like',"%$req->tieude%")
                     ->orWhere('minhchung.trich_yeu','like',"%$req->tieude%")
                     ->orWhere('minhchung.ten_file','like',"%$req->tieude%");
-            }); 
+            });
         }
 
         if(isset($req->nam) && $req->nam != ''){
-            $res = $res->whereYear('minhchung.ngay_ban_hanh',$req->nam);  
-            //echo $req->nam . "<br/>";   
+            $res = $res->whereYear('minhchung.ngay_ban_hanh',$req->nam);
+            //echo $req->nam . "<br/>";
         }
 
         if(isset($req->linhvuc) && $req->linhvuc != ''){
-            $res = $res->where('nhom_mc_sl_id',$req->linhvuc);  
-            //echo $req->linhvuc . "<br/>";    
+            $res = $res->where('nhom_mc_sl_id',$req->linhvuc);
+            //echo $req->linhvuc . "<br/>";
         }
 
         if(isset($req->hoatdong) && $req->hoatdong != ''){
-            $res = $res->where('hoatdongnhom_id',$req->hoatdong);   
+            $res = $res->where('hoatdongnhom_id',$req->hoatdong);
             //echo $req->hoatdong . "<br/>";
         }
 
@@ -152,16 +156,16 @@ class ManaProofController extends DefinedController
             $res = $res->leftjoin('tukhoa_minhchung','tukhoa_minhchung.tkmc_mc_id','=','minhchung.id')->leftjoin('tukhoa','tukhoa_minhchung.tkmc_tk_id','=','tukhoa.tk_id')->where('tk_name','like',"%" . mb_strtolower($req->tukhoa,'UTF-8') . "%");
         }
 
-        return DataTables::of($res) 
-            ->addColumn('actions',function($user){                    
+        return DataTables::of($res)
+            ->addColumn('actions',function($user){
                     $actions = '';
-                    
+
                     $actions .= ' <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="bi bi-eye-fill" style="font-size: 25px;color: #50cd89;"></i>
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        
+
                       ';
 
                     if(isset($user->url) && $user->url != ''){
@@ -181,9 +185,9 @@ class ManaProofController extends DefinedController
                     }
                     $actions .= "</div> </div>";
 
-                    if(!Sentinel::inRole('khac')){                    
-                        $actions = $actions.'<a href="' . route('admin.dambaochatluong.manaproof.editProof',$user->mc_id) .'" 
-                        class="btn" data-bs-placement="top" title="'.Lang::get('project/QualiAssurance/title.chinhsua').'">'. '<i class="bi bi-pencil-square" style="font-size: 25px;color: #009ef7;"></i>' .'</a>';                    
+                    if(!Sentinel::inRole('khac')){
+                        $actions = $actions.'<a href="' . route('admin.dambaochatluong.manaproof.editProof',$user->mc_id) .'"
+                        class="btn" data-bs-placement="top" title="'.Lang::get('project/QualiAssurance/title.chinhsua').'">'. '<i class="bi bi-pencil-square" style="font-size: 25px;color: #009ef7;"></i>' .'</a>';
                         $actions = $actions. '<button type="button" class="btn " onclick="deleteconfirm(' . $user->mc_id . ');">
                             '. '<i class="bi bi-trash" style="font-size: 25px;color: red;"></i>' .'
                         </button>';
@@ -193,7 +197,7 @@ class ManaProofController extends DefinedController
             ->addColumn('ngayBan_hanh',function($user){
                 if($user->ngay_ban_hanh != '' && $user->ngay_ban_hanh != '0000-00-00')
                     return date("d/m/Y", strtotime($user->ngay_ban_hanh));
-                else 
+                else
                     return '';
             })
             ->addColumn('cong_khai_text',function ($user){
@@ -212,17 +216,17 @@ class ManaProofController extends DefinedController
                     return '<span class="badge badge-danger">' . Lang::get('project/QualiAssurance/title.khongxacnhan') . '</span>';
                 }
             })
-            
+
             ->addColumn('checkBoxSelect',function($user){
-                return '<button class="btn btn-info btn-block btn-select-item" 
+                return '<button class="btn btn-info btn-block btn-select-item"
                         data-id="'. $user->mc_id .'"
                         data-content = "'. $user->tieu_de .'"
                         data-trichyeu = "'. $user->trich_yeu .'"
-                         >'.  
-                         Lang::get('project/Selfassessment/title.chon') 
+                         >'.
+                         Lang::get('project/Selfassessment/title.chon')
                  .'</button>';
             })
-        ->rawColumns(['cong_khai_text','actions', 'checkBoxSelect', 'tinhTrang'])            
+        ->rawColumns(['cong_khai_text','actions', 'checkBoxSelect', 'tinhTrang'])
         ->make(true);
     }
 
@@ -239,7 +243,7 @@ class ManaProofController extends DefinedController
 
 
         $viewMC = false;
-        
+
         if (Sentinel::inRole('operator')) {
             $viewMC = true;
         }
@@ -276,7 +280,7 @@ class ManaProofController extends DefinedController
         }
         return $this->downloadfile($minhChungData->duong_dan,$minhChungData->ten_file);
     }
-    
+
     public function newProof(Request $req){
         $nguoi_quan_ly = DB::table("users")
             ->leftjoin("donvi", "users.donvi_id", "=", "donvi.id")
@@ -292,11 +296,11 @@ class ManaProofController extends DefinedController
         $lv = null;
         if(isset($req->idhdn) && $req->idhdn != null){
             $idhdn = $req->idhdn;
-            $hdn = DB::table('hoatdongnhom')->select("id", "noi_dung", "nhom_mc_sl_id", 
+            $hdn = DB::table('hoatdongnhom')->select("id", "noi_dung", "nhom_mc_sl_id",
                 "ngay_batdau", "ngay_hoanthanh", "cong_bo", "parent")
                         ->where("id", $idhdn)->first();
             if ($hdn->cong_bo == 'Y') {
-                return back()->with('error', 
+                return back()->with('error',
                         Lang::get('project/QualiAssurance/title.kcdmccb'));
             }
             if ($hdn->parent != 0) {
@@ -338,10 +342,10 @@ class ManaProofController extends DefinedController
         $nql = DB::table('users')->select('name')->where('id',$minhchung->nguoi_quan_ly)->first();
         if($nql){
             $minhchung->nguoi_quan_ly_text = $nql->name;
-        } 
+        }
         $str = explode('.', $minhchung->ten_file);
         $minhchung->extfile = $str[sizeof($str) - 1];
-        if($minhchung->duong_dan != '' && $minhchung->extfile != 'PDF' && $minhchung->extfile != 'pdf'){            
+        if($minhchung->duong_dan != '' && $minhchung->extfile != 'PDF' && $minhchung->extfile != 'pdf'){
             $linkfile = $this->getlinkfile($minhchung->duong_dan);
             //$linkfile = str_replace('/','\\',$linkfile);
             if(file_exists($linkfile)){
@@ -365,8 +369,8 @@ class ManaProofController extends DefinedController
             if($value->parent == ''){
                 $minhchung->hoatdongnhom_id = $value->id;
             }
-            break;            
-        }         
+            break;
+        }
         $minhchung->hoatdongnhom = $hdn;
 
         //get tu khoa
@@ -410,10 +414,10 @@ class ManaProofController extends DefinedController
         if($file = $req->file('file')){
             // if (!$file->isValid()) {
             //     return Redirect::back()->withInput()->with('error',Lang::get('project/QualiAssurance/message.error.uploadfile'));
-            // } 
+            // }
 
             $filename = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();               
+            $extension = $file->getClientOriginalExtension();
             $size = $file->getClientSize();
 
             $checkmcexisted = DB::table('minhchung')
@@ -422,22 +426,22 @@ class ManaProofController extends DefinedController
             if($checkmcexisted){
                 return Redirect::back()->withInput()->with('error',Lang::get('project/QualiAssurance/message.error.fileexisted'));
             }
-            $duong_dan = $this->upload($file, 'minhchung');            
+            $duong_dan = $this->upload($file, 'minhchung');
             if($duong_dan == false){
                 return Redirect::back()->withInput()->with('error',Lang::get('project/QualiAssurance/message.error.uploadfile'));
-            }   
+            }
             $data['duong_dan'] = $duong_dan;
-            $data['count_size'] = $size;         
+            $data['count_size'] = $size;
             $data['ten_file'] = $filename;
         }
-        
-        
+
+
         if($mc_id == 0 && $req->duong_dan == '' && $duong_dan == ''){
             return Redirect::back()->withInput()->with('error',Lang::get('project/QualiAssurance/message.error.emptymc'));
         }
-        $user = Sentinel::getUser();        
-                
-        if($mc_id == 0){            
+        $user = Sentinel::getUser();
+
+        if($mc_id == 0){
             $data['nguoi_tao'] = $user->id;
             $data['csdt_id'] = $user->csdt_id;
             $mc_id = DB::table('minhchung')->insertGetId($data);
@@ -445,7 +449,7 @@ class ManaProofController extends DefinedController
             $res = DB::table('minhchung')->where('id',$mc_id)->update($data);
         }
 
-        // xử lý hoat dong nhom        
+        // xử lý hoat dong nhom
         $mcyc = $req->mcyc_id;
         $listhoatdong = array();
         if($mcyc != null && $mcyc != '' && sizeof($mcyc) > 0){
@@ -508,7 +512,7 @@ class ManaProofController extends DefinedController
             // return Redirect::back()->with('success',Lang::get('project/QualiAssurance/message.success.store'));
             return redirect()->route('admin.dambaochatluong.manaproof.index')->with('success',Lang::get('project/QualiAssurance/message.success.update'));
         }
-    } 
+    }
 
     public function deleteMC(Request $req){
         $candelete = false;
@@ -523,7 +527,7 @@ class ManaProofController extends DefinedController
                 if($mc->nguoi_tao == $userid || $mc->nguoi_quan_ly == $userid){
                     $candelete = true;
                 }
-            }    
+            }
         }
 
         if($candelete){
@@ -535,14 +539,14 @@ class ManaProofController extends DefinedController
                 $re = DB::table('minhchung')->where('id',$req->id);
                 if($re->count() > 0){
                     $hdn_mc = DB::table('hoatdongnhom_minhchung')->where('minhchung_id',$req->id)
-                    ->delete();                     
+                    ->delete();
                     $this->deletefile($link);
                 }
                 $re->delete();
 
                 // ->update(['deleted_at' => date('Y-m-d H:i:s')]);
-                return 1;  
-            } 
+                return 1;
+            }
         }
         return 0;
     }
@@ -555,7 +559,7 @@ class ManaProofController extends DefinedController
         $checkmcexisted = DB::table('minhchung')
                         ->where('count_size',$size)
                         ->where('ten_file',$filename)->first();
-        
+
         if($checkmcexisted){
             return route('admin.dambaochatluong.manaproof.editProof',$checkmcexisted->id);
         }else{
@@ -585,7 +589,7 @@ class ManaProofController extends DefinedController
                         'tinh_trang'    => 'dangcho'
                     ]);
         }
-        
+
 
         return redirect()->route('admin.dambaochatluong.manaproof.index')->with('success',Lang::get('project/QualiAssurance/message.success.update'));
     }

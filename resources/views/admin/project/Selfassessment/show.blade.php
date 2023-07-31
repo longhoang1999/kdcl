@@ -1477,7 +1477,41 @@
                 ed.on('init', function(args) {
                     
                 });
+            },
+
+            images_upload_handler: function (blobInfo, success, failure) {
+                var xhr, formData;
+
+                xhr = new XMLHttpRequest();
+                xhr.withCredentials = false;
+                xhr.open('POST', "{!! route('admin.tudanhgia.detailedplanning.uploadimg') !!}");
+
+                xhr.onload = function() {
+                  var json;
+
+                  if (xhr.status < 200 || xhr.status >= 300) {
+                    failure('HTTP Error: ' + xhr.status);
+                    return;
+                  }
+
+                  json = JSON.parse(xhr.responseText);
+
+                  console.log(json);
+
+                  if (!json || typeof json.location != 'string') {
+                    failure('Invalid JSON: ' + xhr.responseText);
+                    return;
+                  }
+
+                  success(json.location);
+                };
+
+                formData = new FormData();
+                formData.append('file', blobInfo.blob(), fileName(blobInfo));
+
+                xhr.send(formData);
             }
+
         });
 
         tinymce.init({
@@ -1542,6 +1576,39 @@
                         }); 
                     }
                 });
+            },
+
+            images_upload_handler: function (blobInfo, success, failure) {
+                var xhr, formData;
+
+                xhr = new XMLHttpRequest();
+                xhr.withCredentials = false;
+                xhr.open('POST', "{!! route('admin.tudanhgia.detailedplanning.uploadimg') !!}");
+
+                xhr.onload = function() {
+                  var json;
+
+                  if (xhr.status < 200 || xhr.status >= 300) {
+                    failure('HTTP Error: ' + xhr.status);
+                    return;
+                  }
+
+                  json = JSON.parse(xhr.responseText);
+
+                  console.log(json);
+
+                  if (!json || typeof json.location != 'string') {
+                    failure('Invalid JSON: ' + xhr.responseText);
+                    return;
+                  }
+
+                  success(json.location);
+                };
+
+                formData = new FormData();
+                formData.append('file', blobInfo.blob(), fileName(blobInfo));
+
+                xhr.send(formData);
             }
         });
 
@@ -1575,8 +1642,66 @@
                     
                 });
                 
+            },
+
+            images_upload_handler: function (blobInfo, success, failure) {
+                var xhr, formData;
+
+                xhr = new XMLHttpRequest();
+                xhr.withCredentials = false;
+                xhr.open('POST', "{!! route('admin.tudanhgia.detailedplanning.uploadimg') !!}");
+
+                xhr.onload = function() {
+                  var json;
+
+                  if (xhr.status < 200 || xhr.status >= 300) {
+                    failure('HTTP Error: ' + xhr.status);
+                    return;
+                  }
+
+                  json = JSON.parse(xhr.responseText);
+
+                  console.log(json);
+
+                  if (!json || typeof json.location != 'string') {
+                    failure('Invalid JSON: ' + xhr.responseText);
+                    return;
+                  }
+
+                  success(json.location);
+                };
+
+                formData = new FormData();
+                formData.append('file', blobInfo.blob(), fileName(blobInfo));
+
+                xhr.send(formData);
             }
         });
+
+        // tinymce.activeEditor.uploadImages(function(success) {
+        //   // $.post('ajax/post.php', tinymce.activeEditor.getContent()).done(function() {
+        //   //   console.log("Uploaded images and posted content as an ajax request.");
+        //   // });
+        //     console.log(tinymce.activeEditor.getContent());
+        //     $.ajax({
+        //         url: "{!! route('admin.tudanhgia.detailedplanning.uploadimg') !!}",
+        //         type: 'POST',
+        //         data: {
+        //             'file': tinymce.activeEditor.getContent(),
+        //             _token: '{{ csrf_token() }}'
+        //         },
+        //         error: function(err) {
+
+        //         },
+
+        //         success: function(data) {
+        //             console.log(data);               
+        //         },
+        //     });
+
+        // });
+
+
 
         $('#tab-nx').on('click', ()=>{
             $('#tab-nx').css('background','white');
