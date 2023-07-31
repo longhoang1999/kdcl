@@ -35,7 +35,27 @@ class DientichSanController extends DefinedController{
                 ->where("deleted_at", null)
                 ->get();
         $getFile = DB::table('excel_import_data2')->where('type_excel', '20')->select("id", "year")->get();
-		
+		if(Sentinel::inRole('truongdonvi')){
+    
+            $phanquen = DB::table('lkh_phanquyen_excel')
+                            ->where('bang_stt',20)
+                            ->first();
+            if($phanquen){
+                if($phanquen->donvi_id == Sentinel::getUser()->donvi_id){
+                    return view('admin.project.Importdata2.dtsxd')->with([
+                        'loai_dv'           => $loai_dv,
+                        'donvi'             => $donvi,
+                        'getFile'           => $getFile
+                    ]);
+                }else{
+                    return redirect()->back()->withErrors("");
+                }
+            }else{
+                return redirect()->back()->withErrors(""); 
+            }
+            
+
+        }
         return view('admin.project.Importdata2.dtsxd')->with([
             'loai_dv'           => $loai_dv,
             'donvi'             => $donvi,
