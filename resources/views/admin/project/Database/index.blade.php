@@ -5,20 +5,12 @@
 @stop
 
 @section('header_styles')
+<link rel="stylesheet" href="{{ asset('css/project/Selfassessment/selfassessment.css') }}">
+<link href="{{ asset('vendors/flatpickr/css/flatpickr.min.css') }}" rel="stylesheet"
+      type="text/css"/>
+<link href="{{ asset('css/pages/adv_date_pickers.css') }}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('css/pages/calendar_custom.css') }}" rel="stylesheet" type="text/css" />
 
-<style type="text/css">
-    .table{
-        border: 1px solid;
-    }
-
-    .table tr,td{
-        border: 1px solid;
-    }
-    .table th,td{
-        padding: 5px !important;
-        text-align: center;
-    }
-</style>
 @stop
 
 @section('title_page')
@@ -29,8 +21,8 @@
 @section('content')
     <section class="content indexpage pr-3 pl-3">
         <!-- Bắt đầu trang -->
-        
-        <table class="table table-striped table-bordered" id="table_danhgiangoai" width="100%">
+     <div class="content-body">
+        <table class="table table-striped table-bordered " id="table" width="100%">
             <thead>
                 <tr>
                     <th >@lang('project/Externalreview/title.tdv')</th>
@@ -42,7 +34,9 @@
             </thead>
             <tbody>  
             </tbody>                
-        </table>
+        </table>    
+    </div>   
+        
 <!-- page trang ở đây -->
 
     
@@ -58,7 +52,7 @@
 
 <script type="text/javascript">
    $(function(){
-        table = $('#table_danhgiangoai').DataTable({
+        table = $('#table').DataTable({
             lengthMenu: [[7, 10, 20, -1], [7, 10, 20, "All"]],
             responsive: true,
             processing: true,

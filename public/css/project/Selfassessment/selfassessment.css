@@ -659,9 +659,15 @@ tbody td table{
     transition: .5s;
 }
 #content_text{
+    word-wrap: break-word;
     padding: 0 16px;
     padding-bottom: 17px;
     background-color: #ffffff;
+    
+}
+#content_text img{
+    max-width: 100%;
+    height: auto;
 }
 #content_text .text_contents{
     text-indent: 28.1pt;
@@ -743,17 +749,27 @@ tbody td table{
     font-weight: bold !important;
 }
 
-
-
+.border-bottom img{
+    max-width: 100%;
+    height: auto;
+}
+.minhChungAllow{
+    word-wrap: break-word;
+}
 
 #content_text2:hover{
     box-shadow: -1px 2px 15px 4px lightgrey;
     transition: .5s;
 }
 #content_text2{
+    word-wrap: break-word;
     padding: 0 16px;
     padding-bottom: 17px;
     background-color: #ffffff;
+}
+#content_text2 img{
+    max-width: 100%;
+    height: auto;
 }
 #content_text2 .text_contents{
     text-indent: 28.1pt;
