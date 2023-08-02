@@ -78,6 +78,7 @@
         .btn i{
             font-size: 30px !important;
         }
+
     </style>
 @stop
 
@@ -87,7 +88,7 @@
 
 @section('content')
 <section class="content indexpage pr-3 pl-3">
-        <!-- Bắt đầu trang -->   
+        <!-- Bắt đầu trang -->
     <div class="show_css">
         <h2>
             @foreach($KHBaoCao as $value)
@@ -130,7 +131,7 @@
             @endif
     </div>
 
-    @php $arrss = array();@endphp 
+    @php $arrss = array();@endphp
     <div class="arrow_content">
         <div class="arrow_content_text">
            @if($keHoachBaoCaoDetail->loai_tieuchuan != 'csgd')
@@ -138,9 +139,9 @@
                     <div class="group_back">
                         <div class="arrow_content_text_css">
                             <h5>@lang('project/Selfassessment/title.modau')</h5>
-                            
+
                             <button id="show_content" onclick="showhidetieuchi()"><i class="fa fa-chevron-up" id="show_arrow"></i></button>
-                           
+
                         </div>
                         <div id="content_text" >
                             <div class="text_contents p-5" id="show_textcontent">
@@ -154,7 +155,7 @@
                                     @endforeach
                                     <span class="update_modau_bc">{!!$baoCaoTieuChuan->modau!!}</span>
                                 @else
-                                    <div class="add_text_md"> 
+                                    <div class="add_text_md">
                                         <i class="text-muted">@lang('project/Selfassessment/title.bvddtmd')</i>
                                     </div>
                                 @endif
@@ -168,7 +169,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="card my-3">
-                                            
+
                                                 <div class="bootstrap-admin-card-content">
                                                     <textarea class="tinymce_full tieuchuan_save" name="modau">
                                                         @if($baoCaoTieuChuan)
@@ -238,30 +239,30 @@
                                     <button class="btn ladda-button btn-xs congBoTieuChi congBoTieuChi_{{isset($kehoachtieuchi->id) ? $kehoachtieuchi->id : '' }} data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.cbtc')"
                                                 data-style="expand-right"
                                                 d-id="{{isset($kehoachtieuchi->baocao_tieuchi->id) ? $kehoachtieuchi->baocao_tieuchi->id : ''}}"
-                                                d-tieuchi_id="{{isset($kehoachtieuchi->id) ? $kehoachtieuchi->id : ''}}" 
-                                                d-menhde = "{{isset($kehoachtieuchi->menhde_khmd->id) ? $kehoachtieuchi->menhde_khmd->id : ''}}" 
-                                                d-kehmd = "{{isset($kehoachtieuchi->menhde_khmd->id_khmd) ? $kehoachtieuchi->menhde_khmd->id_khmd : ''}}" 
+                                                d-tieuchi_id="{{isset($kehoachtieuchi->id) ? $kehoachtieuchi->id : ''}}"
+                                                d-menhde = "{{isset($kehoachtieuchi->menhde_khmd->id) ? $kehoachtieuchi->menhde_khmd->id : ''}}"
+                                                d-kehmd = "{{isset($kehoachtieuchi->menhde_khmd->id_khmd) ? $kehoachtieuchi->menhde_khmd->id_khmd : ''}}"
                                                 >
                                                 <i class="bi bi-bookmark-check-fill" style="font-size: 35px;color: #009ef7;"></i>
                                     </button>
                                 @elseif($kehoachtieuchi->baocao_tieuchi->trang_thai=="congbo")
                                     <div class="label label-success" style="position: absolute;left: 14px;
                                     bottom: 2px;">@lang('project/Selfassessment/title.dacongbo')</div>
-                                     
+
                                     <button class="btn ladda-button btn-xs moLaiTieuChi congBoTieuChi_{{$kehoachtieuchi->id}} data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.molaitieuchi')"
                                             data-style="expand-right"
                                             d-id="{{$kehoachtieuchi->baocao_tieuchi->id}}"
                                             d-tieuchi_id="{{$kehoachtieuchi->id}}">
                                             <i class="fas fa-redo" style="font-size: 25px;color: #50cd89;"></i>
                                     </button>
-                                    
+
                                 @endif
                             @else
                                 <button class="btn ladda-button btn-xs congBoTieuChi congBoTieuChi_{{$kehoachtieuchi->id}} data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.cbtc')"
                                         data-style="expand-right"
                                         d-id="0"
-                                        d-tieuchi_id="{{$kehoachtieuchi->id}}" 
-                                        d-menhde = "{{$kehoachtieuchi->menhde_khmd->id}}" 
+                                        d-tieuchi_id="{{$kehoachtieuchi->id}}"
+                                        d-menhde = "{{$kehoachtieuchi->menhde_khmd->id}}"
                                         d-kehmd = "{{$kehoachtieuchi->menhde_khmd->id_khmd}}"
                                         >
                                         <i class="bi bi-bookmark-check-fill" style="font-size: 35px;color: #009ef7;"></i>
@@ -271,21 +272,21 @@
                     </div>
 
                     <div class="ibox_cotent css_width" id="show_block_content_{!!$kehoachtieuchi->id!!}" style="display: none;">
-                         
-                      @if(isset($kehoachtieuchi->bc_menhde))     
+
+                      @if(isset($kehoachtieuchi->bc_menhde))
                         @if(count($kehoachtieuchi->bc_menhde) > 0)
                             @foreach($kehoachtieuchi->bc_menhde as $menhde)
                                 @if(in_array($menhde->id, $arrss))
-                                    @php 
+                                    @php
                                         continue;
                                     @endphp
                                 @else
                                     @php
                                         array_push($arrss, $menhde->id);
                                     @endphp
-                                   
+
                                 @endif
-                              
+
                                <div class="ibox-title border-bottom">
                                     <div class="ibox-tools2">
                                         <h5>{{$menhde->mo_ta}}</h5>
@@ -295,21 +296,21 @@
                                                         data-style="expand-right"
                                                         d-id="{{$menhde->id}}"
                                                         d-menh_id="{{$menhde->menhde_id}}">
-                                                        <i class="bi bi-check-square-fill" style="font-size: 25px;color: #009ef7;"></i> 
+                                                        <i class="bi bi-check-square-fill" style="font-size: 25px;color: #009ef7;"></i>
                                                 </button>
                                             @elseif($menhde->trang_thai=='congbo')
                                                 <div class="label label-success">@lang('project/Selfassessment/title.dahoanthanh')</div>
-                                               
+
                                                 <button class="btn ladda-button btn-xs moLaiMenhDe congBoMenhDe_css data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.molai')"
                                                         data-style="expand-right"
                                                         d-id="{{$menhde->id}}">
                                                         <i class="fas fa-redo" style="font-size: 25px;color: #50cd89;"></i>
                                                 </button>
-                                                
+
                                             @endif
                                         @else
                                             <button class="btn btn-xs congBoMenhDeFake congBoMenhDe_css data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.hoanthanh')">
-                                                <i class="bi bi-check-square-fill" style="font-size: 25px;color: #009ef7;"></i> 
+                                                <i class="bi bi-check-square-fill" style="font-size: 25px;color: #009ef7;"></i>
                                             </button>
                                         @endif
                                     </div>
@@ -324,8 +325,8 @@
                                             if(!empty($kehoachtieuchi->baocao_tieuchi->trang_thai)){
                                                 $editable = ($kehoachtieuchi->baocao_tieuchi->trang_thai=='dangsua' || $kehoachtieuchi->baocao_tieuchi->trang_thai=='nhanxet')?"click2edit hover-shadows":"";
                                             }
-                                            
-                                            
+
+
                                         }else{
                                             $editable="click2edit hover-shadows";
                                         }
@@ -334,7 +335,7 @@
                                             $trangthai=!empty($kehoachtieuchi->baocao_tieuchi->trang_thai)?$kehoachtieuchi->baocao_tieuchi->trang_thai:'';
                                         }
                                     @endphp
-                                    <div class="ibox-content minhChungAllow shadows" d-tieuChi="{{ $menhde->tieuchi_id }}">                                    
+                                    <div class="ibox-content minhChungAllow shadows" d-tieuChi="{{ $menhde->tieuchi_id }}">
                                         <div class="texts_{!! $menhde->id !!} showtieuchi_{{$kehoachtieuchi->id}} p-4" onclick="showbaocaomenhde({!! $menhde->id !!},{!! $trangthai=="dangsua" ? 1 : 0 !!})">
                                             @if($menhde)
 
@@ -360,11 +361,11 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="card my-3">
-                                                
+
                                                             <div class="bootstrap-admin-card-content">
-                                                                <textarea class="tinymce_full_md menhde_mt_{{$menhde->id}} menhde_mt_tc_{{$menhde->tieuchi_id}}" style="width: 100%;" id="menhde_mota_dm_{{ $tieuChuan->id}}_{{ $menhde->tieuchi_id}}_{{$menhde->id}}" tieu_chi_id = "$menhde->tieuchi_id" name="mota_md">                     
+                                                                <textarea class="tinymce_full_md menhde_mt_{{$menhde->id}} menhde_mt_tc_{{$menhde->tieuchi_id}}" style="width: 100%;" id="menhde_mota_dm_{{ $tieuChuan->id}}_{{ $menhde->tieuchi_id}}_{{$menhde->id}}" tieu_chi_id = "$menhde->tieuchi_id" name="mota_md">
                                                                     @if($menhde)
-                                                                        <div class="menhde_minhchung_id_{{$menhde->id}}  menhde_minhchung_text_{{$kehoachtieuchi->id}}}}border-bottom"> 
+                                                                        <div class="menhde_minhchung_id_{{$menhde->id}}  menhde_minhchung_text_{{$kehoachtieuchi->id}}}}border-bottom">
                                                                             {!! $menhde->mota !!}
                                                                         </div>
                                                                     @endif
@@ -389,7 +390,7 @@
                                 </div>
                                     @if($menhde->id)
                                         @include("admin.project.Selfassessment.comment",['kieu'=>'menhde_mota','id'=>$menhde->id,'id_kehoach_bc'=>$id_khbc])
-                                    @endif 
+                                    @endif
                                 <div class="hr-line-dashed"></div>
 
                                 <h3>@lang('project/Selfassessment/title.diemmanh')</h3>
@@ -417,7 +418,7 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card my-3">
-                                                        
+
                                                         <div class="bootstrap-admin-card-content">
                                                             <textarea class="tinymce_diemmanh menhde_mota_diemm_{{$menhde->id}}" style="width: 100%;" name="mota_dm">
                                                                 @if($menhde)
@@ -467,11 +468,11 @@
                                             @if($tieuChuan->trang_thai!='congbo')
                                                 <th colspan="2">@lang('project/Selfassessment/title.tacvu')</th>
                                             @endif
-                                            
+
                                         </tr>
                                         </thead>
                                         <tbody class="keHoach_diemmanh" id="keHoach_diemmanh_{{ $menhde->menhde_id }}">
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -506,7 +507,7 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card my-3">
-                                                        
+
                                                         <div class="bootstrap-admin-card-content">
                                                             <textarea class="tinymce_full menhde_tt_{{$menhde->id}}" style="width: 100%;" name="mota_tt">
                                                                 @if($menhde)
@@ -580,7 +581,7 @@
                                                 }else{
                                                     $editClass = "danhGia";
                                                 }
-                                                
+
                                             @endphp
 
                                             <button type="button" data-id="{{ $menhde->id }}" value="{{ $i }}"
@@ -591,9 +592,9 @@
                                     </div>
                                 </div>
                             @endforeach
-                        @endif 
+                        @endif
                     @endif
-              
+
                 </div>
                 </div>
             @endforeach
@@ -602,9 +603,9 @@
                     <div class="group_back">
                         <div class="arrow_content_text_css">
                             <h5>@lang('project/Selfassessment/title.ketluan')</h5>
-                            
+
                             <button id="show_content2" onclick="showhidetieuchi3()"><i class="fa fa-chevron-up" id="show_arrow2"></i></button>
-                            
+
                         </div>
 
                         <div id="content_text2" >
@@ -632,7 +633,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="card my-3">
-                                                
+
                                                 <div class="bootstrap-admin-card-content">
                                                     <textarea class="tinymce_full tieu_chuan2_kl" name="ketluan" >
                                                         @if($baoCaoTieuChuan)
@@ -728,7 +729,7 @@
             </button>
           </div>
           <div class="modal-body add_item">
-         
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang('project/Selfassessment/title.dong')</button>
@@ -743,7 +744,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                
+
                 <h3 class="modal-title" id="kh_kehoach_title">@lang('project/Selfassessment/title.themkehoach')</h3>
             </div>
             <form class="ajaxForm2 doneCloseModal form-horizontal" id="keHoachForm" modal-id="keHoachModal"
@@ -826,7 +827,7 @@
                            </i> @lang('project/Selfassessment/title.them')
                         </button>
                     </div>
-                </form>        
+                </form>
         </div>
       </div>
     </div>
@@ -844,7 +845,7 @@
             <h5 class="modal-title" id="exampleModalLabels">@lang('project/Selfassessment/title.danhgia')</h5>
           </div>
           <div class="modal-body danhgiatc text-center">
-            
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary show_dg" data-bs-dismiss="modal"><i class="fa-solid fa-i"></i>@lang('project/Selfassessment/title.ok')</button>
@@ -882,7 +883,7 @@
             </div>
         </div>
     </div>
-</div>    
+</div>
 
 
     <!-- Modal minh chứng gộp -->
@@ -898,11 +899,11 @@
             </div>
 
             <div class="minhchung_stt">
-                
+
             </div>
 
-            <div class="bg-light p-3" style="border: 1px solid lightgrey;">   
-                <div class="row">  
+            <div class="bg-light p-3" style="border: 1px solid lightgrey;">
+                <div class="row">
                     <div class="col-md-9  align-items-center">
                         @if(isset($tieuChuan->id))
                             <select id="" class="selectmc_mota form-control option_mc{{$tieuChuan->id}} h-auto w-100"></select>
@@ -915,10 +916,10 @@
                 </div>
                 <div class="change_all_minhchung">
                     <div class="minhchung_tieude">
-                    
+
                     </div>
                     <div class="minhchung_trichyeu">
-            
+
                     </div>
                     <div class="Minhchung_nbh">
 
@@ -928,9 +929,9 @@
                     <button class="border-0 btn btn-primary" onclick="setminhchung({{$tieuChuan->id}})">@lang('project/Selfassessment/title.cvbc')</button>
                 @endif
             </div>
-            
 
-            
+
+
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
@@ -955,7 +956,7 @@
                 <span class="content_mc_trichyeu"></span>
             </div>
             <div class="chitiet_modal_mc">
-                
+
             </div>
         </div>
     </div>
@@ -1018,7 +1019,7 @@
     <script src="{{asset('vendors/ckeditor/js/ckeditor.js')}}" type="text/javascript"></script>
     <script src="{{asset('vendors/tinymce/js/tinymce.min.js')}}" type="text/javascript"></script>
     <!-- <script src="{{ asset('js/pages/editor.js') }}" type="text/javascript"></script> -->
-   
+
     <script src="{{ asset('vendors/pickadate/js/picker.js') }}" type="text/javascript"></script>
     <script src="{{ asset('vendors/pickadate/js/picker.date.js') }}" type="text/javascript"></script>
     <script src="{{ asset('vendors/pickadate/js/picker.time.js') }}" type="text/javascript"></script>
@@ -1067,7 +1068,7 @@
             }else{
                 $(`#show_block_content_${a}`).show();
             }
-            
+
 
 
         }
@@ -1088,7 +1089,7 @@
                 $(`#shows_${a}`).show();
                 $(`.texts_${a}`).hide();
 
-                
+
             }
         }
 
@@ -1096,13 +1097,13 @@
             $(`#shows_${a}`).hide();
             $(`.texts_${a}`).show();
         }
-        
+
         function showbaocaomenhde2(a,b){
             if(b == 1){
                 $(`#shows2_${a}`).show();
                 $(`.texts2_${a}`).hide();
-            }                
-                
+            }
+
         }
 
         function hied_md2(a){
@@ -1113,8 +1114,8 @@
             if(b == 1){
                 $(`#shows3_${a}`).show();
                 $(`.texts3_${a}`).hide();
-            }                
-            
+            }
+
         }
         function hied_md3(a){
             $(`#shows3_${a}`).hide();
@@ -1127,8 +1128,8 @@
             cur_editor = ed;
             var st = cur_editor_id.split('_');
             var n = st.length;
-            
-            if(n > 4){                
+
+            if(n > 4){
                 var tieuchuan_id = st[n - 3];
                 var tieuchi_id = st[n - 2];
                 var menhde_id = st[n - 1];
@@ -1138,14 +1139,14 @@
                     type: 'GET',
                     error: function(err) {
 
-                    },            
+                    },
                     success: function(data) {
                         push_minhchung.empty();
                         data.forEach(function(e){
                             e.minhChungList.forEach(function(e_child){
                                 push_minhchung.append(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
                             });
-                           
+
                         });
 
                          $('.show_minhchunggop').on('click','.show_all_mc',function(){
@@ -1156,9 +1157,9 @@
                             data.forEach(function(e){
                                 e.minhchung.forEach(function(e_child){
                                     push_minhchung.append(`<option value="${e_child.id}" trichyeu="${e_child.trich_yeu}">${e_child.tieu_de}</option>`);
-                           
+
                                 });
-                               
+
                             });
 
                             if(!check){
@@ -1173,16 +1174,16 @@
                                                                 </span>
                                                             `);
                                 $('.minhchung_trichyeu').empty();
-                                $('.minhchung_trichyeu').append(`   
+                                $('.minhchung_trichyeu').append(`
                                                                 <p style="font-weight: bold;margin: 0;margin-top:6px">@lang('project/Selfassessment/title.trichyeu')</p>
                                                                 <span>
                                                                 ${$(".selectmc_mota option:selected").attr('trichyeu')}
                                                                 </span>
                                                               `);
                                 }
-                                
+
                                 check = true;
-                           
+
                          })
 
                        $('.minhchung_tieude').empty();
@@ -1196,12 +1197,12 @@
                                                         ${result}
                                                             </span>
                                                     `);
-                       
-                       $('.minhchung_trichyeu').append(`   
+
+                       $('.minhchung_trichyeu').append(`
                                                         <p style="font-weight: bold;margin: 0;margin-top:6px">@lang('project/Selfassessment/title.trichyeu')</p>
                                                         <span id="mc-trichyeu">
-                                                            ${$(".selectmc_mota option:selected").attr('trichyeu')} 
-                                                          
+                                                            ${$(".selectmc_mota option:selected").attr('trichyeu')}
+
                                                         </span>
                                                       `);
                         $test = $(`.option_mc${tieuchuan_id}`).on('change', function(){
@@ -1214,23 +1215,23 @@
                                                             </span>
                                                         `);
                             $('.minhchung_trichyeu').empty();
-                            $('.minhchung_trichyeu').append(`   
+                            $('.minhchung_trichyeu').append(`
                                                             <p style="font-weight: bold;margin: 0;margin-top:6px">@lang('project/Selfassessment/title.trichyeu')</p>
                                                             <span>
-                                                                
+
 
                                                             ${$(".selectmc_mota  option:selected").attr('trichyeu')})
                                                             </span>
                                                           `);
                         });
                     },
-                });            
+                });
                 $('.show_minhchunggop').modal('toggle');
             }
         }
 
         cur_editor2 = $('.show_minhchunggop .option_mc').val();
-      
+
         function clickMC(id,mcg){
             var num;
             console.log(mcg)
@@ -1238,11 +1239,11 @@
             $.ajax({
                 url: "{!! route('admin.tudanhgia.detailedplanning.modalminhchung') !!}",
                 type: 'POST',
-                
+
                 data :{
                     id_minhchunggop : id,
                     mcg : mcg,
-                },   
+                },
                 error: function(err) {
 
                 },
@@ -1254,7 +1255,7 @@
                    data[0].forEach(function(e){
                         $('.content_mc_tieude').html(e.tieu_de);
                         $('.content_mc_trichyeu').html(e.trich_yeu);
-                        var link  = "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}";      
+                        var link  = "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}";
                         if(data[1] == '1'){
                             link = link.replace('view-mcgop/0','view-mcgop/'+ e.id);
                             $('.chitiet_modal_mc').html(
@@ -1268,8 +1269,8 @@
 
                             let UI = ``;
                             if(e.duong_dan != '' && e.duong_dan != null){
-                                
-                                UI += 
+
+                                UI +=
                                 `<strong style ="padding-right: 17px;">Xem chi tiết</strong>
                                 <a href="${e.linkview}" target = "_blank" title="xem file" >
                                     <i class="fas fa-download" style="color : red"></i>
@@ -1277,7 +1278,7 @@
                                 `;
                             }
                             if(e.url != '' &&  e.url != null){
-                                UI += 
+                                UI +=
                                     `
                                      <a href="${e.url}" target = "_blank" title = "xem đường dẫn" >
                                         <i class="fas fa-eye" style="color : #00bbf8;padding-left: 11px;"></i>
@@ -1287,7 +1288,7 @@
                             }
                             $('.chitiet_modal_mc').html(UI);
                         }
-                        
+
                    });
                 },
             });
@@ -1296,16 +1297,16 @@
             $('.modal_minhchung').modal('show');
 
         }
-      
-            
-  
+
+
+
         function setminhchung(tieuchuan_id){
 
             let arr_mc = {!! json_encode($arr_mc) !!};
-            
+
             let inseart =  `${$('select.option_mc' + tieuchuan_id + ' option').filter(":selected").text()}`;
             let id_mcg =  `${$('select.option_mc' + tieuchuan_id + ' option').filter(":selected").val()}`;
-         
+
             if(cur_editor != null){
                 if(check){
                     id_mcg = parseInt(id_mcg);
@@ -1313,21 +1314,21 @@
                          cur_editor.execCommand('mceInsertContent', false, text);
                 }else{
                     let text = '&nbsp;<a id="addminhchunggop_' + id_mcg + '" href="#" class="danMinhChung mcGop addminhchunggop_' + id_mcg + ' danMinhChungs" d-type="mcGop" d-id="' + id_mcg + '">' + '[' + inseart + ']'+ ' </a>';
-                     cur_editor.execCommand('mceInsertContent', false, text);  
+                     cur_editor.execCommand('mceInsertContent', false, text);
                 }
-                     
-                             
-            } 
 
-            check = false;           
-            $('.show_minhchunggop').modal('hide');                 
+
+            }
+
+            check = false;
+            $('.show_minhchunggop').modal('hide');
         }
 
         $('.click2cancel').on('click', ()=>{
             $('#show-text').hide();
             $('.text_contents').show();
         });
-            
+
         $('.mocChuanTieuChi').on('click', function(){
             $('#exampleModalLabel').empty();
             $('#exampleModalLabel').prepend("@lang('project/Selfassessment/title.mocchuan')");
@@ -1340,7 +1341,7 @@
                 type: 'GET',
                 error: function(err) {
 
-                },            
+                },
                 success: function(data) {
                       if(data == 1){
                         item = "@lang('project/Selfassessment/title.ccmcctcn')";
@@ -1355,7 +1356,7 @@
                 },
             });
         });
-        
+
         $('.block_content').on('click','.minhChungTTTieuChi', function(){
             $('#exampleModalLabel').empty();
             $('#exampleModalLabel').prepend("@lang('project/Selfassessment/title.mctt')");
@@ -1370,14 +1371,14 @@
                     id : id_tieuchi,
                      _token : '{{ csrf_token() }}',
                 },
-               
+
                 error: function(err) {
 
                 },
 
                 success: function(data) {
-                   
-                    
+
+
                     if(data == 1){
                         item = "@lang('project/Selfassessment/title.mtctcncdxl')";
                     }else{
@@ -1387,7 +1388,7 @@
                             }
                         })
                     }
-                    
+
                      add.empty();
                      add.append(item);
                      $('#benchmark').modal('show');
@@ -1395,7 +1396,7 @@
             })
         });
 
-        
+
         $('.block_content_title').on('click','.huongDanTieuChi', function(){
             let id_tieuchi = $(this).attr('d-id');
             let huongdan = '';
@@ -1412,9 +1413,9 @@
                         // huongdan += e.mo_ta;
                         $('#huongDanDetail').append(e.mo_ta);
                         $('#huongDanDetail').append("<p><hr></p>");
-                        
+
                     })
-                   
+
                 },
             })
         });
@@ -1434,7 +1435,7 @@
         // $('.input-group.date').click(function(){
         //     $('.datelocal').flatpickr('show'); //support hide,show and destroy command
         // });
-        
+
         $('.addKeHoach').on('click', function () {
             $('#menhde_id').val($(this).attr('data-id'));
             $('#kh_kehoach_type').val($(this).attr('data-type'));
@@ -1475,44 +1476,57 @@
             allow_unsafe_link_target: true,
             setup: function (ed) {
                 ed.on('init', function(args) {
-                    
+
                 });
             },
-
             images_upload_handler: function (blobInfo, success, failure) {
                 var xhr, formData;
 
                 xhr = new XMLHttpRequest();
                 xhr.withCredentials = false;
                 xhr.open('POST', "{!! route('admin.tudanhgia.detailedplanning.uploadimg') !!}");
-
+                var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                xhr.setRequestHeader('X-CSRF-TOKEN', token);
                 xhr.onload = function() {
-                  var json;
+                    var json;
 
-                  if (xhr.status < 200 || xhr.status >= 300) {
-                    failure('HTTP Error: ' + xhr.status);
-                    return;
-                  }
+                    if (xhr.status < 200 || xhr.status >= 300) {
+                        failure('HTTP Error: ' + xhr.status);
+                        return;
+                    }
 
-                  json = JSON.parse(xhr.responseText);
+                    json = JSON.parse(xhr.responseText);
 
-                  console.log(json);
 
-                  if (!json || typeof json.location != 'string') {
-                    failure('Invalid JSON: ' + xhr.responseText);
-                    return;
-                  }
 
-                  success(json.location);
+                    if (!json || typeof json.location != 'string') {
+                        failure('Invalid JSON: ' + xhr.responseText);
+                        return;
+                    }
+
+                    success(json.location); // Gọi hàm success với đường dẫn ảnh trả về từ server
+                    // // Chèn ảnh vào trình soạn thảo
+                    // var img = document.createElement('img');
+                    // img.src = json.location;
+                    // img.alt = blobInfo.filename();
+                    // tinymce.activeEditor.insertContent(img.outerHTML);
+                };
+
+                xhr.onerror = function() {
+                    failure('Image upload failed due to a network error.');
                 };
 
                 formData = new FormData();
-                formData.append('file', blobInfo.blob(), fileName(blobInfo));
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
 
                 xhr.send(formData);
-            }
+            },
+
+
 
         });
+
+
 
         tinymce.init({
             selector: '.tinymce_full_md',
@@ -1542,7 +1556,7 @@
             setup: function (ed) {
 
                 ed.on('init', function(args) {
-                    
+
                 });
 
                 ed.on("click", function(e) {
@@ -1560,11 +1574,11 @@
                     // console.log(mcg)
                     if(id != undefined && id != '' && id.includes('addminhchunggop_')){
                         var idmcg = id.split('_')[1];
-                     
-                        clickMC(idmcg,mcg);    
+
+                        clickMC(idmcg,mcg);
                     }
                 });
-                
+
                 ed.addButton('minhchung', {
                     icon: 'anchor',
                     text: "@lang('project/Selfassessment/title.minhchung')",
@@ -1573,7 +1587,7 @@
                         openselectmc(ed);
                         $('.selectmc_mota').select2({
                             dropdownParent: $(".show_minhchunggop"),
-                        }); 
+                        });
                     }
                 });
             },
@@ -1584,32 +1598,42 @@
                 xhr = new XMLHttpRequest();
                 xhr.withCredentials = false;
                 xhr.open('POST', "{!! route('admin.tudanhgia.detailedplanning.uploadimg') !!}");
-
+                var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                xhr.setRequestHeader('X-CSRF-TOKEN', token);
                 xhr.onload = function() {
-                  var json;
+                    var json;
 
-                  if (xhr.status < 200 || xhr.status >= 300) {
-                    failure('HTTP Error: ' + xhr.status);
-                    return;
-                  }
+                    if (xhr.status < 200 || xhr.status >= 300) {
+                        failure('HTTP Error: ' + xhr.status);
+                        return;
+                    }
 
-                  json = JSON.parse(xhr.responseText);
+                    json = JSON.parse(xhr.responseText);
 
-                  console.log(json);
 
-                  if (!json || typeof json.location != 'string') {
-                    failure('Invalid JSON: ' + xhr.responseText);
-                    return;
-                  }
 
-                  success(json.location);
+                    if (!json || typeof json.location != 'string') {
+                        failure('Invalid JSON: ' + xhr.responseText);
+                        return;
+                    }
+
+                    success(json.location); // Gọi hàm success với đường dẫn ảnh trả về từ server
+                    // // Chèn ảnh vào trình soạn thảo
+                    // var img = document.createElement('img');
+                    // img.src = json.location;
+                    // img.alt = blobInfo.filename();
+                    // tinymce.activeEditor.insertContent(img.outerHTML);
+                };
+
+                xhr.onerror = function() {
+                    failure('Image upload failed due to a network error.');
                 };
 
                 formData = new FormData();
-                formData.append('file', blobInfo.blob(), fileName(blobInfo));
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
 
                 xhr.send(formData);
-            }
+            },
         });
 
         tinymce.init({
@@ -1639,9 +1663,9 @@
             allow_unsafe_link_target: true,
             setup: function (ed) {
                 ed.on('init', function(args) {
-                    
+
                 });
-                
+
             },
 
             images_upload_handler: function (blobInfo, success, failure) {
@@ -1650,57 +1674,43 @@
                 xhr = new XMLHttpRequest();
                 xhr.withCredentials = false;
                 xhr.open('POST', "{!! route('admin.tudanhgia.detailedplanning.uploadimg') !!}");
-
+                var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                xhr.setRequestHeader('X-CSRF-TOKEN', token);
                 xhr.onload = function() {
-                  var json;
+                    var json;
 
-                  if (xhr.status < 200 || xhr.status >= 300) {
-                    failure('HTTP Error: ' + xhr.status);
-                    return;
-                  }
+                    if (xhr.status < 200 || xhr.status >= 300) {
+                        failure('HTTP Error: ' + xhr.status);
+                        return;
+                    }
 
-                  json = JSON.parse(xhr.responseText);
+                    json = JSON.parse(xhr.responseText);
 
-                  console.log(json);
 
-                  if (!json || typeof json.location != 'string') {
-                    failure('Invalid JSON: ' + xhr.responseText);
-                    return;
-                  }
 
-                  success(json.location);
+                    if (!json || typeof json.location != 'string') {
+                        failure('Invalid JSON: ' + xhr.responseText);
+                        return;
+                    }
+
+                    success(json.location); // Gọi hàm success với đường dẫn ảnh trả về từ server
+                    // // Chèn ảnh vào trình soạn thảo
+                    // var img = document.createElement('img');
+                    // img.src = json.location;
+                    // img.alt = blobInfo.filename();
+                    // tinymce.activeEditor.insertContent(img.outerHTML);
+                };
+
+                xhr.onerror = function() {
+                    failure('Image upload failed due to a network error.');
                 };
 
                 formData = new FormData();
-                formData.append('file', blobInfo.blob(), fileName(blobInfo));
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
 
                 xhr.send(formData);
-            }
+            },
         });
-
-        // tinymce.activeEditor.uploadImages(function(success) {
-        //   // $.post('ajax/post.php', tinymce.activeEditor.getContent()).done(function() {
-        //   //   console.log("Uploaded images and posted content as an ajax request.");
-        //   // });
-        //     console.log(tinymce.activeEditor.getContent());
-        //     $.ajax({
-        //         url: "{!! route('admin.tudanhgia.detailedplanning.uploadimg') !!}",
-        //         type: 'POST',
-        //         data: {
-        //             'file': tinymce.activeEditor.getContent(),
-        //             _token: '{{ csrf_token() }}'
-        //         },
-        //         error: function(err) {
-
-        //         },
-
-        //         success: function(data) {
-        //             console.log(data);               
-        //         },
-        //     });
-
-        // });
-
 
 
         $('#tab-nx').on('click', ()=>{
@@ -1714,7 +1724,7 @@
             $('#tab-hd').css('background','white');
             $('.panel-body').css('background','white');
             $('#tab-nx').css('background','#ebebeb');
-            
+
         })
 
 
@@ -1746,7 +1756,7 @@
                     $('#exampleModalLabels').append('Tiêu chí');
                     $('.danhgiatc').empty();
                     $('.danhgiatc').append('<p>' + data + '</p>')
-                   
+
                 },
             })
 
@@ -1777,7 +1787,7 @@
                     $('#exampleModalLabels').append(`@lang('project/Selfassessment/title.tieuchi')`);
                     $('.danhgiatc').empty();
                     $('.danhgiatc').append('<p>' + data + '</p>')
-                   
+
                 },
             })
 
@@ -1786,7 +1796,7 @@
             $('#show-text').hide();
             $('.text_contents').show();
         }
-        
+
 
         function hide_tc(){
             $('#show-text').hide();
@@ -1814,13 +1824,13 @@
                     modau : modau,
                     id_kh_tc : {{$keHoachTieuChuan->id}},
                     _token: '{{ csrf_token() }}'
-                },    
+                },
                 error: function(err) {
 
                 },
 
                 success: function(data) {
-                  
+
                     if(data){
                         $('.add_text_md').html(data);
                     }
@@ -1846,7 +1856,7 @@
                         id_tc : tieu_chuan,
                         ketluan : ketluan,
                         _token: '{{ csrf_token() }}'
-                    },    
+                    },
                     error: function(err) {
 
                     },
@@ -1878,7 +1888,7 @@
                         id_menhde : id_menhde,
                         mota_md : mota_md,
                         _token: '{{ csrf_token() }}'
-                    },    
+                    },
                     error: function(err) {
 
                     },
@@ -1907,7 +1917,7 @@
                         id_menhde : id_menhde,
                         mota_dm : mota_dm,
                         _token: '{{ csrf_token() }}'
-                    },    
+                    },
                     error: function(err) {
 
                     },
@@ -1934,7 +1944,7 @@
                         id_menhde : id_menhde,
                         mota_tt : mota_tt,
                         _token: '{{ csrf_token() }}'
-                    },    
+                    },
                     error: function(err) {
 
                     },
@@ -1961,7 +1971,7 @@
             let ngay_hoanthanh = $('.menhde_nht').val();
             let kieu_kehoach = $('.menhde_kkh').val();
 
-            
+
             let tieu_des = $('.menhde_tieude');
             let noi_dungs = $('.menhde_noidung');
             let de_xuat_mois = $('.menhde_dxm');
@@ -1985,7 +1995,7 @@
                     ngay_hoanthanh : ngay_hoanthanh,
                     kieu_kehoach : kieu_kehoach,
                     _token: '{{ csrf_token() }}'
-                },    
+                },
                 error: function(err) {
                     alert(`@lang('project/Selfassessment/title.bcddtt')`);
                 },
@@ -2000,13 +2010,13 @@
                         ngay_batdaus.val('');
                         ngay_hoanthanhs.val('');
 
-                        $('#keHoachModal').modal('hide'); 
+                        $('#keHoachModal').modal('hide');
                         alert("@lang('project/Selfassessment/title.capnhatthanhcong')");
                         tontai_diemmanh();
                     }else{
                         alert(`@lang('project/Selfassessment/title.nbdktnhnht')`);
                     }
-                },                    
+                },
             });
         }
 
@@ -2032,7 +2042,7 @@
                         menh_id : menh_id,
                         id_khbc : {{$id_khbc}},
                        _token: '{{ csrf_token() }}',
-                    },    
+                    },
                     error: function(err) {
 
                     },
@@ -2058,7 +2068,7 @@
                     data:{
                         bacaomd_id : bacaomd_id,
                        _token: '{{ csrf_token() }}',
-                    },    
+                    },
                     error: function(err) {
 
                     },
@@ -2085,7 +2095,7 @@
             $('.danhgiatc').empty();
             $('.danhgiatc').append(`<p>@lang('project/Selfassessment/title.mdcdvbc')</p> <span>@lang('project/Selfassessment/title.vlvbckht'), @lang('project/Selfassessment/title.warning')!! </span>`);
         });
-        
+
 
         $('.danhGia').on('click', function(){
             let muc = $(this).val();
@@ -2099,7 +2109,7 @@
                         muc : muc,
                         id_khbc : {{$id_khbc}},
                        _token: '{{ csrf_token() }}',
-                    },    
+                    },
                     error: function(err) {
 
                     },
@@ -2137,14 +2147,14 @@
                 data:{
                     id_khbc : {{$id_khbc}},
                     _token: '{{ csrf_token() }}',
-                },    
+                },
                 error: function(err) {
                     alert(`@lang('project/Selfassessment/title.bcddtt')`);
                 },
 
-                success: function(data) {          
-                    $('.keHoach_tontai').empty();          
-                    $('.keHoach_diemmanh').empty();          
+                success: function(data) {
+                    $('.keHoach_tontai').empty();
+                    $('.keHoach_diemmanh').empty();
                     data.forEach(function(keHoach){
                         if(keHoach.kehoachbaocao.writeFollow == 1){
                             $('#keHoach_' + keHoach.kieu_kehoach + '_' + keHoach.menhde_id).append(
@@ -2183,12 +2193,12 @@
                                 "</tr>"
                             );
                         }
-                        
 
-                        
+
+
                     })
-                    
-                },                    
+
+                },
             });
         }
 
@@ -2205,17 +2215,17 @@
                         id_menhde : id_menhde,
                         id_kh_hd : id_kh_hd,
                         _token: '{{ csrf_token() }}',
-                    },    
+                    },
                     error: function(err) {
-                       
+
                     },
 
                     success: function(data) {
                         tontai_diemmanh();
-                    },                    
+                    },
                 });
             })
-           
+
         }
 
 
@@ -2228,14 +2238,14 @@
                     id_khbc : {{$id_khbc}},
                     id_kh_hd : id_kh_hd,
                     _token: '{{ csrf_token() }}',
-                },    
+                },
                 error: function(err) {
                     alert(`@lang('project/Selfassessment/title.bcddtt')`);
                 },
 
                 success: function(data) {
                     data.forEach(function(keHoach){
-                        $('.import_khhd').html(` 
+                        $('.import_khhd').html(`
                                 <div class="mt-2 d-flex">
                                     <strong style="width:81px">@lang('project/Selfassessment/title.tieude')</strong>
                                     <span class="pl-5">${keHoach.tieu_de}</span>
@@ -2257,14 +2267,14 @@
                                     <strong style="width:81px">@lang('project/Selfassessment/title.nhansu')</strong>
                                     <span class="pl-5">${keHoach.nhanSuThucHien.ten_donvi}</span>
                                     <span class="pl-5">${keHoach.nhanSuKiemTra.ten_donvi}</span>
-                                </div>           
+                                </div>
 
                         `)
                     });
 
                     $('.modal_chitiet_kehoachhd').modal('show');
-                    
-                },                    
+
+                },
             });
         })
 
@@ -2277,14 +2287,14 @@
                     id_khbc : {{$id_khbc}},
                     id_kh_hd : id_kh_hd,
                     _token: '{{ csrf_token() }}',
-                },    
+                },
                 error: function(err) {
                     alert(`@lang('project/Selfassessment/title.bcddtt')`);
                 },
 
                 success: function(data) {
                     data.forEach(function(keHoach){
-                        $('.import_khhd').html(` 
+                        $('.import_khhd').html(`
                                 <div class="mt-2 d-flex">
                                     <strong style="width:81px">@lang('project/Selfassessment/title.tieude')</strong>
                                     <span class="pl-5">${keHoach.tieu_de}</span>
@@ -2306,14 +2316,14 @@
                                     <strong style="width:81px">@lang('project/Selfassessment/title.nhansu')</strong>
                                     <span class="pl-5">${keHoach.nhanSuThucHien.ten_donvi}</span>
                                     <span class="pl-5">${keHoach.nhanSuKiemTra.ten_donvi}</span>
-                                </div>           
+                                </div>
 
                         `)
                     });
 
                     $('.modal_chitiet_kehoachhd').modal('show');
-                    
-                },                    
+
+                },
             });
         })
         $(function(){
@@ -2324,7 +2334,7 @@
             });
             $('.option_mc').select2();
             $('.danMinhChung').click(function(e){
-           
+
                 e.preventDefault();
             });
         });

@@ -17,7 +17,7 @@
     }
     .select2{
         width: 100% !important;
-        border: 1px solid  #e4e6ef; 
+        border: 1px solid  #e4e6ef;
         padding-top: 4px;
     }
     .select2 span{
@@ -55,7 +55,7 @@
                     <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
                 </button>
             @endif
-            
+
             <a class="btn btn-benchmark mr-2 mt-3 ml-4 pl-3 pr-3" href="{{ route('admin.tudanhgia.report.dsbctdg') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xuat_excel')">
                 <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
             </a>
@@ -72,9 +72,9 @@
                 <th >@lang('project/Selfassessment/title.hanhdong')</th>
              </tr>
             </thead>
-            <tbody>  
-            </tbody>                
-        </table> 
+            <tbody>
+            </tbody>
+        </table>
     </div>
 </section>
 
@@ -139,7 +139,7 @@
                                 @lang('project/Selfassessment/title.ncsl')
                             </label>
                             <br>
-                            <input name="thoi_diem_bao_cao" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_chot" type="text" placeholder="@lang('project/Selfassessment/title.ncsl')" required> 
+                            <input name="thoi_diem_bao_cao" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_chot" type="text" placeholder="@lang('project/Selfassessment/title.ncsl')" required>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -148,14 +148,14 @@
                                 @lang('project/Selfassessment/title.khcb')
                             </label>
                             <br>
-                            <input name="ngay_batdau_chuanbi" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_cbi_start" type="text" placeholder="@lang('project/Selfassessment/title.tungay')" required>  
+                            <input name="ngay_batdau_chuanbi" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_cbi_start" type="text" placeholder="@lang('project/Selfassessment/title.tungay')" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label></label>
                             <br>
-                            <input name="ngay_hoanthanh_chuanbi" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_cbi_end" type="text" placeholder="@lang('project/Selfassessment/title.denngay')" required>  
+                            <input name="ngay_hoanthanh_chuanbi" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_cbi_end" type="text" placeholder="@lang('project/Selfassessment/title.denngay')" required>
                         </div>
                     </div>
 
@@ -165,21 +165,21 @@
                                 @lang('project/Selfassessment/title.khvbc')
                             </label>
                             <br>
-                            <input name="ngay_batdau" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_vietbc_start" type="text" placeholder="@lang('project/Selfassessment/title.tungay')" required>    
+                            <input name="ngay_batdau" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_vietbc_start" type="text" placeholder="@lang('project/Selfassessment/title.tungay')" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label></label>
                             <br>
-                            <input name="ngay_hoanthanh" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_vietbc_end" type="text" placeholder="@lang('project/Selfassessment/title.denngay')" required>   
+                            <input name="ngay_hoanthanh" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_vietbc_end" type="text" placeholder="@lang('project/Selfassessment/title.denngay')" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="centers">
                             @lang('project/Selfassessment/title.ttct')
                         </label>
-                        <select name="ns_phutrach" id="centers" class="searchs ttct" multiple="multiple">
+                        <select name="ns_phutrach" id="centers" class="searchs ttct">
                             <option value="" hidden></option>
                             @foreach($user as $value)
                                 <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
@@ -195,7 +195,7 @@
                         <select class="multiple-nscb js-states form-control" multiple="multiple" name="ns_chuanbi[]" id="multiple-nscb">
                             @foreach($user as $value)
                                 <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
-                            @endforeach  
+                            @endforeach
                         </select>
                     </div>
 
@@ -206,7 +206,7 @@
                         <select class="multiple-nsth js-states form-control" multiple="multiple" name="ns_thuchien[]">
                             @foreach($user as $value)
                                 <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
-                            @endforeach  
+                            @endforeach
                         </select>
                     </div>
 
@@ -217,7 +217,7 @@
                         <select class="multiple-nskt js-states form-control" multiple="multiple" name="ns_kiemtra[]">
                             @foreach($user as $value)
                                 <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
-                            @endforeach  
+                            @endforeach
                         </select>
                     </div>
 
@@ -231,10 +231,10 @@
                             </option>
                             <option value="1">
                                 @lang('project/Selfassessment/title.chỉbao')
-                            </option>  
+                            </option>
                             <option value="2">
                                 @lang('project/Selfassessment/title.mocchuan')
-                            </option>  
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -343,7 +343,7 @@
                                 @lang('project/Selfassessment/title.ncsl')
                             </label>
                             <br>
-                            <input name="thoi_diem_bao_cao" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_chot-id" type="text" placeholder="@lang('project/Selfassessment/title.ncsl')" required> 
+                            <input name="thoi_diem_bao_cao" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_chot-id" type="text" placeholder="@lang('project/Selfassessment/title.ncsl')" required>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -352,14 +352,14 @@
                                 @lang('project/Selfassessment/title.khcb')
                             </label>
                             <br>
-                            <input name="ngay_batdau_chuanbi" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_cbi_start-id" type="text" placeholder="@lang('project/Selfassessment/title.tungay')" required>  
+                            <input name="ngay_batdau_chuanbi" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_cbi_start-id" type="text" placeholder="@lang('project/Selfassessment/title.tungay')" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label></label>
                             <br>
-                            <input name="ngay_hoanthanh_chuanbi" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_cbi_end-id" type="text" placeholder="@lang('project/Selfassessment/title.denngay')" required>  
+                            <input name="ngay_hoanthanh_chuanbi" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_cbi_end-id" type="text" placeholder="@lang('project/Selfassessment/title.denngay')" required>
                         </div>
                     </div>
 
@@ -369,14 +369,14 @@
                                 @lang('project/Selfassessment/title.khvbc')
                             </label>
                             <br>
-                            <input name="ngay_batdau" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_vietbc_start-id" type="text" placeholder="@lang('project/Selfassessment/title.tungay')" required>    
+                            <input name="ngay_batdau" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_vietbc_start-id" type="text" placeholder="@lang('project/Selfassessment/title.tungay')" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label></label>
                             <br>
-                            <input name="ngay_hoanthanh" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_vietbc_end-id" type="text" placeholder="@lang('project/Selfassessment/title.denngay')" required>   
+                            <input name="ngay_hoanthanh" class="chot-date form-control flatpickr flatpickr-input searchs" id="ngay_vietbc_end-id" type="text" placeholder="@lang('project/Selfassessment/title.denngay')" required>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -399,7 +399,7 @@
                         <select class="multiple-nscb js-states form-control" multiple="multiple" name="ns_chuanbi[]" id="multiple-nscb-id">
                             @foreach($user as $value)
                                 <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
-                            @endforeach  
+                            @endforeach
                         </select>
                     </div>
 
@@ -410,7 +410,7 @@
                         <select class="multiple-nsth js-states form-control" multiple="multiple" name="ns_thuchien[]" id="multiple-nsth-id">
                             @foreach($user as $value)
                                 <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
-                            @endforeach  
+                            @endforeach
                         </select>
                     </div>
 
@@ -421,7 +421,7 @@
                         <select class="multiple-nskt js-states form-control" multiple="multiple" name="ns_kiemtra[]" id="multiple-nskt-id">
                             @foreach($user as $value)
                                 <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
-                            @endforeach  
+                            @endforeach
                         </select>
                     </div>
 
@@ -435,10 +435,10 @@
                             </option>
                             <option value="1">
                                 @lang('project/Selfassessment/title.chỉbao')
-                            </option>  
+                            </option>
                             <option value="2">
                                 @lang('project/Selfassessment/title.mocchuan')
-                            </option>  
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -508,10 +508,10 @@
     })
 
     $(".btn-lkhNew").click(function() {
-        if($("#ngay_cbi_end").val() == "" || $("#ngay_cbi_start").val() == "" 
+        if($("#ngay_cbi_end").val() == "" || $("#ngay_cbi_start").val() == ""
             || $("#ngay_vietbc_end").val() == "" ||  $("#ngay_vietbc_start").val() == "")
             alert("@lang('project/QualiAssurance/title.vldddtt')")
-        else 
+        else
             $("#form-lkhNew").submit();
     })
     // end check date
@@ -531,12 +531,12 @@
                 { data: 'ngHt', name: 'ngHt' },
                 { data: 'ngPhutrach', name: 'ngPhutrach' },
                 { data: 'action', name: 'action', className:'action' },
-            ],            
+            ],
         });
-    });  
+    });
 
 
-    
+
     $(".btc-select").select2({
         placeholder: "@lang('project/Selfassessment/title.lcbtc')",
         allowClear: true
@@ -551,6 +551,7 @@
         placeholder: "@lang('project/Selfassessment/title.ttct')",
         allowClear: true
     });
+
     $(".multiple-nscb").select2({
         placeholder: "@lang('project/Selfassessment/title.nscb')"
     });
@@ -605,23 +606,23 @@
 
                 }
             })
-        
+
     })
 
 
     $('#modalDelete').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
-        var recipient = button.data('id') 
+        var recipient = button.data('id')
 
         let route = "{{ route('admin.tudanhgia.report.deletePlan') }}" + "?id_planning=" + recipient;
         var modal = $(this)
         modal.find('#btn-delete-manafield').attr('href' , route)
     })
 
-    
+
     $('#modalUpdateBC').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
-        var recipient = button.data('id') 
+        var recipient = button.data('id')
         console.log(recipient)
 
         let route = "{{ route('admin.tudanhgia.report.getDataCurrent') }}" + "?id_planning=" + recipient;
@@ -650,7 +651,7 @@
                     idNscb.push(item.id_nhansuchuanbi);
                 })
                 $("#multiple-nscb-id").val(idNscb).trigger('change')
-                
+
 
                 let idNsth = [];
                 data[2].forEach(item => {
@@ -667,10 +668,10 @@
     })
 
     $(".btn-lkhNew-up").click(function() {
-        if($("#ngay_cbi_end-id").val() == "" || $("#ngay_cbi_start-id").val() == "" 
+        if($("#ngay_cbi_end-id").val() == "" || $("#ngay_cbi_start-id").val() == ""
             || $("#ngay_vietbc_end-id").val() == "" ||  $("#ngay_vietbc_start-id").val() == "")
             alert("@lang('project/QualiAssurance/title.vldddtt')")
-        else 
+        else
             $("#form-lkhNew-up").submit();
     })
 

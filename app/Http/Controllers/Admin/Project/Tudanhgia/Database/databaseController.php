@@ -25,34 +25,49 @@ use App\Models\Country;
 
 class databaseController extends DefinedController
 {
-     
+
      public function index(){
 
           return view('admin.project.Database.index');
      }
 
      public function data(){
-          $keHoachBaoCaoList = DB::table('kehoach_baocao')
+
+               if(Sentinel::inRole('operator') || Sentinel::inRole('admin')){
+
+                $keHoachBaoCaoList = DB::table('kehoach_baocao')
                                              ->select('kehoach_baocao.id as id_khbc','kehoach_baocao.*','users.*')
                                              ->leftjoin('users','users.id','=','kehoach_baocao.ns_phutrach')
                                              ->where('kehoach_baocao.deleted_at',null)
                                              ->get();
-               if(!Sentinel::inRole('operator') && !Sentinel::inRole('admin')){
-                    foreach($keHoachBaoCaoList as $key => $value){
-                         $find = DB::table("role_user_dgn")
-                                   ->where("user_id", Sentinel::getUser()->id)
-                                   ->where("baocao_tdg_id", $value->id_khbc);
-                         if($find->count() == 0){
-                              $keHoachBaoCaoList->forget($key);
-                         }
-                    }
+
+               }else{
+                    $keHoachBaoCaoList = DB::table('kehoach_baocao')
+                                            ->select('kehoach_baocao.id as id_khbc', 'kehoach_baocao.*', 'users.*')
+                                            ->leftJoin('users', 'users.id', '=', 'kehoach_baocao.ns_phutrach')
+                                            ->where('kehoach_baocao.deleted_at', null)
+                                            ->where(function ($query) {
+                                                $user_id = Sentinel::getUser()->id;
+                                                $query->where('kehoach_baocao.ns_phutrach', '=', $user_id)
+                                                    ->orWhereExists(function ($subquery) use ($user_id) {
+                                                        $subquery->from('kehoach_baocao_nhansu')
+                                                            ->whereRaw('kehoach_baocao.id = kehoach_baocao_nhansu.id_kehoach')
+                                                            ->where(function ($subsubquery) use ($user_id) {
+                                                                $subsubquery->where('kehoach_baocao_nhansu.id_nhansuthuchien', '=', $user_id)
+                                                                            ->orWhere('kehoach_baocao_nhansu.id_nhansukiemtra', '=', $user_id);
+                                                            });
+                                                    });
+                                            })
+                                            ->get();
+
+
                }
 
                return DataTables::of($keHoachBaoCaoList)
                               ->addColumn(
                                    'ten_donvi',
                                    function($keHoachBaoCaoList){
-                                        
+
                                         $ten_dv = DB::table('donvi')->where('id',$keHoachBaoCaoList->donvi_id)->first();
                                         if($ten_dv){
                                              return $ten_dv->ten_donvi;
@@ -75,7 +90,7 @@ class databaseController extends DefinedController
                                    'nam_vietbao',
                                    function($keHoachBaoCaoList){
                                         if($keHoachBaoCaoList->ngay_batdau){
-                                             return date("Y", strtotime($keHoachBaoCaoList->ngay_batdau)); 
+                                             return date("Y", strtotime($keHoachBaoCaoList->ngay_batdau));
                                         }else{
                                              return '';
                                         }
@@ -85,7 +100,7 @@ class databaseController extends DefinedController
                                    'thoidiem_bc',
                                    function($keHoachBaoCaoList){
                                         if($keHoachBaoCaoList->thoi_diem_bao_cao){
-                                             return date("d/m/Y", strtotime($keHoachBaoCaoList->thoi_diem_bao_cao)); 
+                                             return date("d/m/Y", strtotime($keHoachBaoCaoList->thoi_diem_bao_cao));
                                         }else{
                                              return '';
                                         }
@@ -103,13 +118,13 @@ class databaseController extends DefinedController
                                         $actions = '<a href="'.route("admin.tudanhgia.database.data_school_csgd",$keHoachBaoCaoList->id_khbc).'" class="btn" data-bs-placement="top" title="'.Lang::get('project/ExternalReview/title.xct').'"> '.'<i class="fas fa-edit" style="font-size: 25px;color: #50cd89;"></i>'
                                                    .'</a>';
                                    }
-                              
+
                                   return $actions;
                           })
                          ->rawColumns(['actions'])
                          ->make(true);
      }
-     
+
 
      public function data_school(Request $req){
           $sua = "sua";
@@ -121,7 +136,7 @@ class databaseController extends DefinedController
           $dulieu = json_decode($data->dulieu);
           list($keHoachBaoCaoList2,$keHoachBaoCaoDetail2) = $this->baseIndex($id);
           list($noiDungThem) = $this->getDataPhuLuc($keHoachBaoCaoDetail2);
-          
+
           $list = $this->showFileData($id);
           return view('admin.project.Database.display_data')
                     ->with([
@@ -184,8 +199,8 @@ class databaseController extends DefinedController
                                                                  ->select('donvi.*','donvi.ma_donvi as id_donvi')
                                                                  ->leftjoin('donvi','donvi.id','=','users.donvi_id')
                                                                  ->where('users.id',$keHoachBaoCaoDetail2->ns_phutrach)->first();
-     
-                              
+
+
                     $keHoachBaoCaoDetail2->ctdt = DB::table('ctdt')
                                                                  ->where('id',$keHoachBaoCaoDetail2->ctdt_id)->first();
                     $keHoachBaoCaoDetail2->keHoachChung = DB::table('kehoach_chung')
@@ -205,7 +220,7 @@ class databaseController extends DefinedController
                                                                            ->where('id_kh_tieuchuan',$keHoachTieuChuan->id)
                                                                            ->where('id_tieuchuan',$keHoachTieuChuan->tieuchuan_id)
                                                                            ->first();
-                         
+
                          if($tieuChuan){
                               $keHoachTieuChuan->moTaWithStt = "TC $tieuChuan->stt: $tieuChuan->mo_ta";
                               $keHoachTieuChuan->keHoachTieuChiList = $keHoachTieuChiList = DB::table('kehoach_tieuchi')->where('id_kh_tieuchuan',$keHoachTieuChuan->id)->get();
@@ -217,7 +232,7 @@ class databaseController extends DefinedController
                                                                                           ->get();
                                         $keHoachTieuChi->tieuChi = $tieuChi;
                                         foreach($menhde as $value){
-                                             
+
                                              $value->khmenhde = DB::table('kehoach_menhde')
                                                                       ->where('id_kh_tieuchi',$keHoachTieuChi->id)
                                                                       ->where('id_menhde',$value->id)
@@ -228,7 +243,7 @@ class databaseController extends DefinedController
                                                                       ->where('id_kh_menhde',$value->khmenhde->id)
                                                                       ->where('id_menhde',$value->khmenhde->id_menhde)
                                                                       ->first();
-                                             
+
                                              $value->baoCaoMenhDe = $baoCaoMenhDe;
 
                                              $baoCaoMenhDe->keHoachHanhDongList = DB::table('kehoach_hd')
@@ -245,13 +260,13 @@ class databaseController extends DefinedController
                                                                                 ->where('id',$val->ns_kiemtra)
                                                                                 ->first();
                                              }
-                                                  
-                                             
-                                             
+
+
+
                                              $danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
                                         }
-                                        
-                                        
+
+
 
                                         $baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
                                         $danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
@@ -262,7 +277,7 @@ class databaseController extends DefinedController
                                                                                           ->get();
                                         $keHoachTieuChi->tieuChi = $tieuChi;
                                         foreach($menhde as $value){
-                                             
+
                                              $value->khmenhde = DB::table('kehoach_menhde')
                                                                       ->where('id_kh_tieuchi',$keHoachTieuChi->id)
                                                                       ->where('mocchuan_id',$value->id)
@@ -273,7 +288,7 @@ class databaseController extends DefinedController
                                                                       ->where('id_kh_menhde',$value->khmenhde->id)
                                                                       ->where('mocchuan_id',$value->khmenhde->mocchuan_id)
                                                                       ->first();
-                                             
+
                                              $value->baoCaoMenhDe = $baoCaoMenhDe;
 
                                              $baoCaoMenhDe->keHoachHanhDongList = DB::table('kehoach_hd')
@@ -290,43 +305,43 @@ class databaseController extends DefinedController
                                                                                 ->where('id',$val->ns_kiemtra)
                                                                                 ->first();
                                              }
-                                                  
-                                             
-                                             
+
+
+
                                              $danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
                                         }
-                                        
-                                        
+
+
 
                                         $baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
                                         $danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
                                         $keHoachTieuChi->baoCaoTieuChi = $baoCaoTieuChi;
                                    }
-                                   
+
 
                                    if($tieuChi){
                                         $keHoachTieuChi->moTaWithStt = "$tieuChuan->stt.$tieuChi->stt: $tieuChi->mo_ta";
                                    }
-                                   
+
                               }
                          }
-                         
-                         
+
+
                     }
                   }
           }
-               
+
         return array($keHoachBaoCaoList2,$keHoachBaoCaoDetail2);
      }
 
 
           public function getDataPhuLuc($keHoachBaoCaoDetail2){
-               
+
                $noiDungThem = DB::table('baocao_noidungthem')
                                         ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
                                         ->first();
 
-               $noidung = json_decode($noiDungThem->noidung);                                           
+               $noidung = json_decode($noiDungThem->noidung);
                return array($noidung);
           }
 
@@ -344,7 +359,7 @@ class databaseController extends DefinedController
 
 
                $data = DB::table('coso_dulieu')
-                         ->where('id_khbc',$req->ikhbc); 
+                         ->where('id_khbc',$req->ikhbc);
                $datas = json_decode($data->first()->dulieu);
 
                $datas->{$req->key} = $req->val;
@@ -371,7 +386,7 @@ class databaseController extends DefinedController
 
 
                $data = DB::table('coso_dulieu')
-                         ->where('id_khbc',$req->ikhbc); 
+                         ->where('id_khbc',$req->ikhbc);
                $datas = json_decode($data->first()->dulieu);
 
                $datas->{$req->key} = $req->val;
@@ -390,7 +405,7 @@ class databaseController extends DefinedController
                                         ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
                                         ->first();
 
-               $noidung = json_decode($noiDungThem->noidung);                                           
+               $noidung = json_decode($noiDungThem->noidung);
                return array($noidung);
 
           }
@@ -400,7 +415,7 @@ class databaseController extends DefinedController
          //     $dataJson = json_decode($getFile->first()->Url_ex);
          //     $tableList = [];
 
-         //     foreach($dataJson as $key => $value){ 
+         //     foreach($dataJson as $key => $value){
          //       if($value != '0'){
          //          $address = public_path($value);
 
@@ -427,7 +442,7 @@ class databaseController extends DefinedController
          //              if( $td != ""){
          //                  $UI .= '<tr>
          //                              '.$td.'
-         //                          </tr>  
+         //                          </tr>
          //                  ';
          //              }
          //          }
@@ -493,9 +508,9 @@ class databaseController extends DefinedController
                      if($image != null){
                          $randomText = substr(str_shuffle($permitted_chars), 0, 20);
                          $picName = $randomText.time().'.'.$image->getClientOriginalExtension();
-                         
+
                          File::delete(public_path($dataJson->{$key}));
-                         
+
 
                          $image->move(public_path('excel_cosodl'), $picName);
 
@@ -509,26 +524,26 @@ class databaseController extends DefinedController
                ]);
 
                     return redirect()->route('admin.tudanhgia.database.data_school',['id' => $req->id])->with('success','Thành công');
-               
+
           }
 
           public function save_file_csgd(Request $req){
                $dataMau = DB::table("coso_dulieu")->where("id_khbc", $req->id);
-               
+
                $dataJson = json_decode($dataMau->first()->Url_ex);
 
                $permitted_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
               // dd($dataJson);
                foreach($dataJson as $key => $value){
                     $image = $req->file([$key]);
-                   
+
                      if($image != null){
 
                          $randomText = substr(str_shuffle($permitted_chars), 0, 20);
                          $picName = $randomText.time().'.'.$image->getClientOriginalExtension();
-                         
+
                          File::delete(public_path($dataJson->{$key}));
-                         
+
 
                          $image->move(public_path('excel_cosodl'), $picName);
 
@@ -537,7 +552,7 @@ class databaseController extends DefinedController
                }
 
                $dataJson = json_encode($dataJson);
-              
+
                $dataMau->update([
                     'Url_ex'  => $dataJson
                ]);
@@ -549,7 +564,7 @@ class databaseController extends DefinedController
                $data = DB::table('baocao_noidungthem')
                                         ->where('id_kehoach_bc',$req->id);
 
-            
+
                $datas = json_decode($data->first()->noidung);
 
                $datas->{$req->key} = $req->val;
