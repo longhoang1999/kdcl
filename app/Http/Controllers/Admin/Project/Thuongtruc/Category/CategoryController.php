@@ -589,7 +589,11 @@ class CategoryController extends DefinedController
         ];
         DB::table("users")->where("id", $req->id_user)->update($data);
 
-        
+        $donvi = DB::table("donvi")->where("id", $req->updonvi);
+        $donvi->update([
+            'canbo_dbcl'  => null
+        ]);
+
         if($req->upchucvu == '1'){
             $this->detachRole($req->id_user);
             $us = Sentinel::findById($req->id_user);
@@ -600,6 +604,10 @@ class CategoryController extends DefinedController
             $us = Sentinel::findById($req->id_user);
             $role_ = Sentinel::findRoleByName('canboDBCL');
             $role_->users()->attach($us);
+            // 
+            $donvi->update([
+                'canbo_dbcl'  => $req->id_user
+            ]);
         }else if($req->upchucvu == '3'){
             $this->detachRole($req->id_user);
             $us = Sentinel::findById($req->id_user);
@@ -615,10 +623,10 @@ class CategoryController extends DefinedController
     }
     public function detachRole($id_user){
         $us = Sentinel::findById($id_user);
-        if(DB::table("role_users")->where("user_id", $id_user)->where("role_id", 8)->count() != 0){
-            $role_1 = Sentinel::findRoleByName('truongdonvi');
-            $role_1->users()->detach($us);
-        }
+        // if(DB::table("role_users")->where("user_id", $id_user)->where("role_id", 8)->count() != 0){
+        //     $role_1 = Sentinel::findRoleByName('truongdonvi');
+        //     $role_1->users()->detach($us);
+        // }
         if(DB::table("role_users")->where("user_id", $id_user)->where("role_id", 4)->count() != 0){
             $role_2 = Sentinel::findRoleByName('canboDBCL');
             $role_2->users()->detach($us);

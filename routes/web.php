@@ -5,6 +5,21 @@ use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
+// Reset trưởng đơn vị
+Route::get("update-trdv", function() {
+   $donvi = DB::table("donvi")->select("truong_dv")->get();
+   foreach($donvi as $value){
+        $find = DB::table("role_users")->where("role_id", 8)->where("user_id", $value->truong_dv);
+        if($find->count() == 0 && $value->truong_dv != null){
+            $user = Sentinel::findById($value->truong_dv);
+            $role = Sentinel::findRoleByName('truongdonvi');
+            $role->users()->attach($user);
+        }
+        
+   }
+    
+});
+
 // Thường trực cho Ban Giám Hiệu và nhân sự TT đảm bảo chất lượng
 Route::get("update-per", function() {
     $users = DB::table("users")->select("id")->where("donvi_id", "95")->get();
@@ -953,192 +968,192 @@ Route::group(
                     ['prefix' => 'import-du-lieu-excel', 'as' => 'importdata.', 'namespace' => 'Importdata', 'middleware' => ['super_check:admin,operator']],
                     function(){
                         // Import thông tin cơ bản
-                        Route::group(
-                            ['prefix' => 'thong-tin-co-ban', 'as' => 'thongtincoban.', 'namespace' => 'Thongtincoban'],
-                            function(){
-                                Route::get('index','BasicInforController@index')->name('index');
-                                Route::post('import-unit', 'BasicInforController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'BasicInforController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'BasicInforController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'BasicInforController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'BasicInforController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'thong-tin-co-ban', 'as' => 'thongtincoban.', 'namespace' => 'Thongtincoban'],
+                        //     function(){
+                        //         Route::get('index','BasicInforController@index')->name('index');
+                        //         Route::post('import-unit', 'BasicInforController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'BasicInforController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'BasicInforController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'BasicInforController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'BasicInforController@updateUnit')->name('updateUnit');
 
-                                //Export thông tin cơ bản
-                                Route::get('export-basiclnfor', 'BasicInforController@exportBasiclnfor')->name('exportBasiclnfor');
-                            }
-                        );
+                        //         //Export thông tin cơ bản
+                        //         Route::get('export-basiclnfor', 'BasicInforController@exportBasiclnfor')->name('exportBasiclnfor');
+                        //     }
+                        // );
 
                         // Import thông tin nhân sự
-                        Route::group(
-                            ['prefix' => 'nhan-su', 'as' => 'nhansu.', 'namespace' => 'Nhansu'],
-                            function(){
-                                Route::get('index','NhansuController@index')->name('index');
-                                Route::post('import-unit', 'NhansuController@importUnit')->name('importUnit');
-                                Route::get('data-unit', 'NhansuController@dataUnit')->name('dataUnit');
-                                Route::post('import-data-unit', 'NhansuController@importDataUnit')->name('importDataUnit');
-                                Route::get('delete-unit', 'NhansuController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'NhansuController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'nhan-su', 'as' => 'nhansu.', 'namespace' => 'Nhansu'],
+                        //     function(){
+                        //         Route::get('index','NhansuController@index')->name('index');
+                        //         Route::post('import-unit', 'NhansuController@importUnit')->name('importUnit');
+                        //         Route::get('data-unit', 'NhansuController@dataUnit')->name('dataUnit');
+                        //         Route::post('import-data-unit', 'NhansuController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('delete-unit', 'NhansuController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'NhansuController@updateUnit')->name('updateUnit');
                                 
-                                //Export nhân sự
-                                Route::get('export-unit', 'NhansuController@exportUnit')->name('exportUnit');
-                            }
-                        );
+                        //         //Export nhân sự
+                        //         Route::get('export-unit', 'NhansuController@exportUnit')->name('exportUnit');
+                        //     }
+                        // );
 
                         // Import dữ liệu sinh viên
-                        Route::group(
-                            ['prefix' => 'du-lieu-sinh-vien', 'as' => 'dlsinhvien.', 'namespace' => 'Dlsinhvien'],
-                            function(){
-                                Route::get('index','DlsinhvienController@index')->name('index');
-                                Route::post('import-unit', 'DlsinhvienController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 
-                                    'DlsinhvienController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'DlsinhvienController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'DlsinhvienController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'DlsinhvienController@updateUnit')->name('updateUnit');
-                                //Export sinh viên
-                                Route::get('export-unit', 'DlsinhvienController@exportUnit')->name('exportUnit');
+                        // Route::group(
+                        //     ['prefix' => 'du-lieu-sinh-vien', 'as' => 'dlsinhvien.', 'namespace' => 'Dlsinhvien'],
+                        //     function(){
+                        //         Route::get('index','DlsinhvienController@index')->name('index');
+                        //         Route::post('import-unit', 'DlsinhvienController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 
+                        //             'DlsinhvienController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'DlsinhvienController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'DlsinhvienController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'DlsinhvienController@updateUnit')->name('updateUnit');
+                        //         //Export sinh viên
+                        //         Route::get('export-unit', 'DlsinhvienController@exportUnit')->name('exportUnit');
                                 
-                            }
-                        );
+                        //     }
+                        // );
                         // Import KHCN
-                        Route::group(
-                            ['prefix' => 'khcn', 'as' => 'khcn.', 'namespace' => 'Khcn'],
-                            function(){
-                                Route::get('index','KhcnController@index')->name('index');
-                                Route::post('import-unit', 'KhcnController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'KhcnController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'KhcnController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'KhcnController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'KhcnController@updateUnit')->name('updateUnit');
-                                //Export KHCN
-                                Route::get('export-unit', 'KhcnController@exportUnit')->name('exportUnit');
-                            }
-                        );
+                        // Route::group(
+                        //     ['prefix' => 'khcn', 'as' => 'khcn.', 'namespace' => 'Khcn'],
+                        //     function(){
+                        //         Route::get('index','KhcnController@index')->name('index');
+                        //         Route::post('import-unit', 'KhcnController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'KhcnController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'KhcnController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'KhcnController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'KhcnController@updateUnit')->name('updateUnit');
+                        //         //Export KHCN
+                        //         Route::get('export-unit', 'KhcnController@exportUnit')->name('exportUnit');
+                        //     }
+                        // );
                         // Import Doanh thu KHCN
-                        Route::group(
-                            ['prefix' => 'doanh-thu-khcn', 'as' => 'dtkhcn.', 'namespace' => 'Dtkhcn'],
-                            function(){
-                                Route::get('index','DtkhcnController@index')->name('index');
-                                Route::post('import-unit', 'DtkhcnController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'DtkhcnController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'DtkhcnController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'DtkhcnController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'DtkhcnController@updateUnit')->name('updateUnit');
-                                //Export Doanh thu KHCN
-                                Route::get('export-unit', 'DtkhcnController@exportUnit')->name('exportUnit');
-                            }
-                        );
+                        // Route::group(
+                        //     ['prefix' => 'doanh-thu-khcn', 'as' => 'dtkhcn.', 'namespace' => 'Dtkhcn'],
+                        //     function(){
+                        //         Route::get('index','DtkhcnController@index')->name('index');
+                        //         Route::post('import-unit', 'DtkhcnController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'DtkhcnController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'DtkhcnController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'DtkhcnController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'DtkhcnController@updateUnit')->name('updateUnit');
+                        //         //Export Doanh thu KHCN
+                        //         Route::get('export-unit', 'DtkhcnController@exportUnit')->name('exportUnit');
+                        //     }
+                        // );
                         // Import biên soạn sách
-                        Route::group(
-                            ['prefix' => 'bien-soan-sach', 'as' => 'bssach.', 'namespace' => 'Bssach'],
-                            function(){
-                                Route::get('index','BssachController@index')
-                                ->middleware(['super_check:admin,operator,ttchuyentrach'])
-                                ->name('index');
-                                Route::post('import-unit', 'BssachController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'BssachController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'BssachController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'BssachController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'BssachController@updateUnit')->name('updateUnit');
-                                //Export biên soạn sách
-                                Route::get('export-unit', 'BssachController@exportUnit')->name('exportUnit');
-                            }
-                        );
+                        // Route::group(
+                        //     ['prefix' => 'bien-soan-sach', 'as' => 'bssach.', 'namespace' => 'Bssach'],
+                        //     function(){
+                        //         Route::get('index','BssachController@index')
+                        //         ->middleware(['super_check:admin,operator,ttchuyentrach'])
+                        //         ->name('index');
+                        //         Route::post('import-unit', 'BssachController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'BssachController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'BssachController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'BssachController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'BssachController@updateUnit')->name('updateUnit');
+                        //         //Export biên soạn sách
+                        //         Route::get('export-unit', 'BssachController@exportUnit')->name('exportUnit');
+                        //     }
+                        // );
                         // Import bài báo-báo cáo
-                        Route::group(
-                            ['prefix' => 'bai-bao-bao-cao', 'as' => 'baibaobc.', 'namespace' => 'Baibaobc'],
-                            function(){
-                                Route::get('index','BaibaobcController@index')->name('index');
-                                Route::post('import-unit', 'BaibaobcController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'BaibaobcController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'BaibaobcController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'BaibaobcController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'BaibaobcController@updateUnit')->name('updateUnit');
-                                //Export bài báo-báo cáo
-                                Route::get('export-unit', 'BaibaobcController@exportUnit')->name('exportUnit');
-                            }
-                        );
+                        // Route::group(
+                        //     ['prefix' => 'bai-bao-bao-cao', 'as' => 'baibaobc.', 'namespace' => 'Baibaobc'],
+                        //     function(){
+                        //         Route::get('index','BaibaobcController@index')->name('index');
+                        //         Route::post('import-unit', 'BaibaobcController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'BaibaobcController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'BaibaobcController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'BaibaobcController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'BaibaobcController@updateUnit')->name('updateUnit');
+                        //         //Export bài báo-báo cáo
+                        //         Route::get('export-unit', 'BaibaobcController@exportUnit')->name('exportUnit');
+                        //     }
+                        // );
                         // Import sáng chế
-                        Route::group(
-                            ['prefix' => 'sang-che', 'as' => 'sangche.', 'namespace' => 'Sangche'],
-                            function(){
-                                Route::get('index','SangcheController@index')->name('index');
-                                Route::post('import-unit', 'SangcheController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'SangcheController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'SangcheController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'SangcheController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'SangcheController@updateUnit')->name('updateUnit');
-                                //Export sáng chế
-                                Route::get('export-unit', 'SangcheController@exportUnit')->name('exportUnit');
-                            }
-                        );
+                        // Route::group(
+                        //     ['prefix' => 'sang-che', 'as' => 'sangche.', 'namespace' => 'Sangche'],
+                        //     function(){
+                        //         Route::get('index','SangcheController@index')->name('index');
+                        //         Route::post('import-unit', 'SangcheController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'SangcheController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'SangcheController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'SangcheController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'SangcheController@updateUnit')->name('updateUnit');
+                        //         //Export sáng chế
+                        //         Route::get('export-unit', 'SangcheController@exportUnit')->name('exportUnit');
+                        //     }
+                        // );
                         // Import giải thưởng
-                        Route::group(
-                            ['prefix' => 'giai-thuong', 'as' => 'giaithuong.', 'namespace' => 'Giaithuong'],
-                            function(){
-                                Route::get('index','GiaithuongController@index')->name('index');
-                                Route::post('import-unit', 'GiaithuongController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'GiaithuongController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'GiaithuongController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'GiaithuongController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'GiaithuongController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'giai-thuong', 'as' => 'giaithuong.', 'namespace' => 'Giaithuong'],
+                        //     function(){
+                        //         Route::get('index','GiaithuongController@index')->name('index');
+                        //         Route::post('import-unit', 'GiaithuongController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'GiaithuongController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'GiaithuongController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'GiaithuongController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'GiaithuongController@updateUnit')->name('updateUnit');
 
-                                //Export giải thưởng
-                                Route::get('export-unit', 'GiaithuongController@exportUnit')->name('exportUnit');
-                            }
-                        );
+                        //         //Export giải thưởng
+                        //         Route::get('export-unit', 'GiaithuongController@exportUnit')->name('exportUnit');
+                        //     }
+                        // );
                         // Import sáng kiến kinh nghiệm
-                        Route::group(
-                            ['prefix' => 'sang-kien-kinh-nghiem', 'as' => 'sangkienkinhnghiem.', 'namespace' => 'Sangkienkinhnghiem'],
-                            function(){
-                                Route::get('index','Sangkienkinhnghiem@index')->name('index');
+                        // Route::group(
+                        //     ['prefix' => 'sang-kien-kinh-nghiem', 'as' => 'sangkienkinhnghiem.', 'namespace' => 'Sangkienkinhnghiem'],
+                        //     function(){
+                        //         Route::get('index','Sangkienkinhnghiem@index')->name('index');
 
 
-                                Route::post('import-unit', 'Sangkienkinhnghiem@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'Sangkienkinhnghiem@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'Sangkienkinhnghiem@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'Sangkienkinhnghiem@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'Sangkienkinhnghiem@updateUnit')->name('updateUnit');
+                        //         Route::post('import-unit', 'Sangkienkinhnghiem@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'Sangkienkinhnghiem@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'Sangkienkinhnghiem@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'Sangkienkinhnghiem@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'Sangkienkinhnghiem@updateUnit')->name('updateUnit');
 
-                                // //Export sáng kiến kinh nghiệm
-                                Route::get('export-unit', 'Sangkienkinhnghiem@exportUnit')->name('exportUnit');
-                            }
-                        );
+                        //         // //Export sáng kiến kinh nghiệm
+                        //         Route::get('export-unit', 'Sangkienkinhnghiem@exportUnit')->name('exportUnit');
+                        //     }
+                        // );
 
                         // Import hội thảo hội nghị
-                        Route::group(
-                            ['prefix' => 'hoi-thao-hoi-nghi', 'as' => 'hoithaohoinghi.', 'namespace' => 'Hoithaohoinghi'],
-                            function(){
-                                Route::get('index','Hoithaohoinghi@index')->name('index');
+                        // Route::group(
+                        //     ['prefix' => 'hoi-thao-hoi-nghi', 'as' => 'hoithaohoinghi.', 'namespace' => 'Hoithaohoinghi'],
+                        //     function(){
+                        //         Route::get('index','Hoithaohoinghi@index')->name('index');
 
 
-                                Route::post('import-unit', 'Hoithaohoinghi@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'Hoithaohoinghi@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'Hoithaohoinghi@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'Hoithaohoinghi@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'Hoithaohoinghi@updateUnit')->name('updateUnit');
+                        //         Route::post('import-unit', 'Hoithaohoinghi@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'Hoithaohoinghi@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'Hoithaohoinghi@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'Hoithaohoinghi@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'Hoithaohoinghi@updateUnit')->name('updateUnit');
 
-                                // //Export hội thảo hội nghị
-                                Route::get('export-unit', 'Hoithaohoinghi@exportUnit')->name('exportUnit');
-                            }
-                        );
+                        //         // //Export hội thảo hội nghị
+                        //         Route::get('export-unit', 'Hoithaohoinghi@exportUnit')->name('exportUnit');
+                        //     }
+                        // );
 
 
                         // Import tuyển sinh
                         Route::group(
                             ['prefix' => 'tuyen-sinh', 'as' => 'tuyensinh.', 'namespace' => 'Tuyensinh'],
                             function(){
-                                Route::get('index','TuyensinhController@index')
-                                    ->middleware(['super_check:admin,operator,ttchuyentrach'])
-                                    ->name('index');
-                                Route::post('import-unit', 'TuyensinhController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'TuyensinhController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'TuyensinhController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'TuyensinhController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'TuyensinhController@updateUnit')->name('updateUnit');
+                                // Route::get('index','TuyensinhController@index')
+                                //     ->middleware(['super_check:admin,operator,truongdonvi'])
+                                //     ->name('index');
+                                // Route::post('import-unit', 'TuyensinhController@importUnit')->name('importUnit');
+                                // Route::post('import-data-unit', 'TuyensinhController@importDataUnit')->name('importDataUnit');
+                                // Route::get('data-unit', 'TuyensinhController@dataUnit')->name('dataUnit');
+                                // Route::get('delete-unit', 'TuyensinhController@deleteUnit')->name('deleteUnit');
+                                // Route::post('update-unit', 'TuyensinhController@updateUnit')->name('updateUnit');
 
-                                //Export tuyển sinh
-                                Route::get('export-admissions', 'TuyensinhController@exportAdmissions')->name('exportAdmissions');
+                                // //Export tuyển sinh
+                                // Route::get('export-admissions', 'TuyensinhController@exportAdmissions')->name('exportAdmissions');
 
 
                                 Route::get('delete-table-data', 'TuyensinhController@deleteDataTable')->name('deleteDataTable');
@@ -1146,490 +1161,490 @@ Route::group(
                         );
 
                         // Import chương trình đào tạo
-                        Route::group(
-                            ['prefix' => 'chuong-trinh-dao-tao', 'as' => 'ctdt.', 'namespace' => 'Chuongtrinhdaotao'],
-                            function(){
-                                Route::get('index','Chuongtrinhdaotao@index')->name('index');
-                                Route::post('import-unit', 'Chuongtrinhdaotao@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'Chuongtrinhdaotao@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'Chuongtrinhdaotao@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'Chuongtrinhdaotao@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'Chuongtrinhdaotao@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'chuong-trinh-dao-tao', 'as' => 'ctdt.', 'namespace' => 'Chuongtrinhdaotao'],
+                        //     function(){
+                        //         Route::get('index','Chuongtrinhdaotao@index')->name('index');
+                        //         Route::post('import-unit', 'Chuongtrinhdaotao@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'Chuongtrinhdaotao@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'Chuongtrinhdaotao@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'Chuongtrinhdaotao@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'Chuongtrinhdaotao@updateUnit')->name('updateUnit');
 
-                                //Export chương trình đào tạo
-                                Route::get('export-ctdt', 'Chuongtrinhdaotao@exportCtdt')->name('exportCtdt');
+                        //         //Export chương trình đào tạo
+                        //         Route::get('export-ctdt', 'Chuongtrinhdaotao@exportCtdt')->name('exportCtdt');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import thống kê tài chính
-                        Route::group(
-                            ['prefix' => 'thong-ke-tai-chinh', 'as' => 'tktc.', 'namespace' => 'Thongketaichinh'],
-                            function(){
-                                Route::get('index','ThongketaichinhController@index')->name('index');
-                                Route::post('import-unit', 'ThongketaichinhController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'ThongketaichinhController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'ThongketaichinhController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'ThongketaichinhController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'ThongketaichinhController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'thong-ke-tai-chinh', 'as' => 'tktc.', 'namespace' => 'Thongketaichinh'],
+                        //     function(){
+                        //         Route::get('index','ThongketaichinhController@index')->name('index');
+                        //         Route::post('import-unit', 'ThongketaichinhController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'ThongketaichinhController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'ThongketaichinhController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'ThongketaichinhController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'ThongketaichinhController@updateUnit')->name('updateUnit');
 
-                                //Export thống kê tài chính
-                                Route::get('export-tktc', 'ThongketaichinhController@exportTktc')->name('exportTktc');
+                        //         //Export thống kê tài chính
+                        //         Route::get('export-tktc', 'ThongketaichinhController@exportTktc')->name('exportTktc');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import thống kê ký túc xá
-                        Route::group(
-                            ['prefix' => 'thong-ke-ky-tuc-xa', 'as' => 'tkktx.', 'namespace' => 'Thongkekytucxa'],
-                            function(){
-                                Route::get('index','ThongkekytucxaController@index')->name('index');
-                                Route::post('import-unit', 'ThongkekytucxaController@importUnit')->name('importUnit');
-                                // Route::post('import-data-unit', 'ThongkekytucxaController@importDataUnit')->name('importDataUnit');
-                                // Route::get('data-unit', 'ThongkekytucxaController@dataUnit')->name('dataUnit');
-                                Route::post('delete-unit', 'ThongkekytucxaController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'ThongkekytucxaController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'thong-ke-ky-tuc-xa', 'as' => 'tkktx.', 'namespace' => 'Thongkekytucxa'],
+                        //     function(){
+                        //         Route::get('index','ThongkekytucxaController@index')->name('index');
+                        //         Route::post('import-unit', 'ThongkekytucxaController@importUnit')->name('importUnit');
+                        //         // Route::post('import-data-unit', 'ThongkekytucxaController@importDataUnit')->name('importDataUnit');
+                        //         // Route::get('data-unit', 'ThongkekytucxaController@dataUnit')->name('dataUnit');
+                        //         Route::post('delete-unit', 'ThongkekytucxaController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'ThongkekytucxaController@updateUnit')->name('updateUnit');
 
-                                //Export thống kê ký túc xá
-                                Route::get('export-tkktx', 'ThongkekytucxaController@exportTkktx')->name('exportTkktx');
-                                Route::get('delete-all', 'ThongkekytucxaController@deleteAll')->name('deleteAll');
+                        //         //Export thống kê ký túc xá
+                        //         Route::get('export-tkktx', 'ThongkekytucxaController@exportTkktx')->name('exportTkktx');
+                        //         Route::get('delete-all', 'ThongkekytucxaController@deleteAll')->name('deleteAll');
                                 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import thống kê máy tính
-                        Route::group(
-                            ['prefix' => 'thong-ke-may-tinh', 'as' => 'tkmt.', 'namespace' => 'Thongkemaytinh'],
-                            function(){
-                                Route::get('index','ThongkemaytinhController@index')->name('index');
-                                Route::post('import-unit', 'ThongkemaytinhController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'ThongkemaytinhController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'ThongkemaytinhController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'ThongkemaytinhController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'ThongkemaytinhController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'thong-ke-may-tinh', 'as' => 'tkmt.', 'namespace' => 'Thongkemaytinh'],
+                        //     function(){
+                        //         Route::get('index','ThongkemaytinhController@index')->name('index');
+                        //         Route::post('import-unit', 'ThongkemaytinhController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'ThongkemaytinhController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'ThongkemaytinhController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'ThongkemaytinhController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'ThongkemaytinhController@updateUnit')->name('updateUnit');
 
-                                //Export thống kê máy tính
-                                Route::get('export-tkmt', 'ThongkemaytinhController@exportTkmt')->name('exportTkmt');
+                        //         //Export thống kê máy tính
+                        //         Route::get('export-tkmt', 'ThongkemaytinhController@exportTkmt')->name('exportTkmt');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import doanh thu KHCN2
-                        Route::group(
-                            ['prefix' => 'doanh-thu-khcn2', 'as' => 'dtkhcn2.', 'namespace' => 'Dtkhcn2'],
-                            function(){
-                                Route::get('index','Dtkhcn2Controller@index')->name('index');
-                                Route::post('import-unit', 'Dtkhcn2Controller@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'Dtkhcn2Controller@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'Dtkhcn2Controller@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'Dtkhcn2Controller@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'Dtkhcn2Controller@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'doanh-thu-khcn2', 'as' => 'dtkhcn2.', 'namespace' => 'Dtkhcn2'],
+                        //     function(){
+                        //         Route::get('index','Dtkhcn2Controller@index')->name('index');
+                        //         Route::post('import-unit', 'Dtkhcn2Controller@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'Dtkhcn2Controller@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'Dtkhcn2Controller@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'Dtkhcn2Controller@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'Dtkhcn2Controller@updateUnit')->name('updateUnit');
 
-                                //Export danh thu KHCN2
-                                Route::get('export-dtkhcn2', 'Dtkhcn2Controller@exportDtkhcn2')->name('exportDtkhcn2');
+                        //         //Export danh thu KHCN2
+                        //         Route::get('export-dtkhcn2', 'Dtkhcn2Controller@exportDtkhcn2')->name('exportDtkhcn2');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import kết quả kiểm định chất lượng
-                        Route::group(
-                            ['prefix' => 'kiem-dinh-chat-luong', 'as' => 'kdcl.', 'namespace' => 'Kdcl'],
-                            function(){
-                                Route::get('index','KdclController@index')->name('index');
-                                Route::post('import-unit', 'KdclController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'KdclController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'KdclController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'KdclController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'KdclController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'kiem-dinh-chat-luong', 'as' => 'kdcl.', 'namespace' => 'Kdcl'],
+                        //     function(){
+                        //         Route::get('index','KdclController@index')->name('index');
+                        //         Route::post('import-unit', 'KdclController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'KdclController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'KdclController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'KdclController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'KdclController@updateUnit')->name('updateUnit');
 
-                                //Export Kiểm định chất lượng
-                                Route::get('export-kdcl', 'KdclController@exportKdcl')->name('exportKdcl');
+                        //         //Export Kiểm định chất lượng
+                        //         Route::get('export-kdcl', 'KdclController@exportKdcl')->name('exportKdcl');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import tài liệu thư viện
-                        Route::group(
-                            ['prefix' => 'tai-lieu-thu-vien', 'as' => 'tltv.', 'namespace' => 'Tlthuvien'],
-                            function(){
-                                Route::get('index','TltvController@index')->name('index');
-                                Route::post('import-unit', 'TltvController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'TltvController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'TltvController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'TltvController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'TltvController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'tai-lieu-thu-vien', 'as' => 'tltv.', 'namespace' => 'Tlthuvien'],
+                        //     function(){
+                        //         Route::get('index','TltvController@index')->name('index');
+                        //         Route::post('import-unit', 'TltvController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'TltvController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'TltvController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'TltvController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'TltvController@updateUnit')->name('updateUnit');
 
-                                //Export tài liệu thư viện
-                                Route::get('export-tltv', 'TltvController@exportTltv')->name('exportTltv');
+                        //         //Export tài liệu thư viện
+                        //         Route::get('export-tltv', 'TltvController@exportTltv')->name('exportTltv');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import thống kê phòng, trang thiết bị
-                        Route::group(
-                            ['prefix' => 'thong-ke-phong-trang-thiet-bi', 'as' => 'tkpttb.', 'namespace' => 'Tkphongtrangthietbi'],
-                            function(){
-                                Route::get('index','TkpttbController@index')->name('index');
-                                Route::post('import-unit', 'TkpttbController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'TkpttbController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'TkpttbController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'TkpttbController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'TkpttbController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'thong-ke-phong-trang-thiet-bi', 'as' => 'tkpttb.', 'namespace' => 'Tkphongtrangthietbi'],
+                        //     function(){
+                        //         Route::get('index','TkpttbController@index')->name('index');
+                        //         Route::post('import-unit', 'TkpttbController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'TkpttbController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'TkpttbController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'TkpttbController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'TkpttbController@updateUnit')->name('updateUnit');
 
-                                //Export thống kê phòng, trang thiết bị
-                                Route::get('export-tkpttb', 'TkpttbController@exportTkpttb')->name('exportTkpttb');
+                        //         //Export thống kê phòng, trang thiết bị
+                        //         Route::get('export-tkpttb', 'TkpttbController@exportTkpttb')->name('exportTkpttb');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import thu gọn lĩnh vực
-                        Route::group(
-                            ['prefix' => 'thu-gon-linh-vuc', 'as' => 'tglv.', 'namespace' => 'Thugonlinhvuc'],
-                            function(){
-                                Route::get('index','ThugonlvController@index')->name('index');
-                                Route::post('import-unit', 'ThugonlvController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'ThugonlvController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'ThugonlvController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'ThugonlvController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'ThugonlvController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'thu-gon-linh-vuc', 'as' => 'tglv.', 'namespace' => 'Thugonlinhvuc'],
+                        //     function(){
+                        //         Route::get('index','ThugonlvController@index')->name('index');
+                        //         Route::post('import-unit', 'ThugonlvController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'ThugonlvController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'ThugonlvController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'ThugonlvController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'ThugonlvController@updateUnit')->name('updateUnit');
 
-                                //Export thu gọn lĩnh vực
-                                Route::get('export-tglv', 'ThugonlvController@exportTglv')->name('exportTglv');
+                        //         //Export thu gọn lĩnh vực
+                        //         Route::get('export-tglv', 'ThugonlvController@exportTglv')->name('exportTglv');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import diện tích sàn xây dựng
-                        Route::group(
-                            ['prefix' => 'dien-tich-san-xay-dung', 'as' => 'dtsxd.', 'namespace' => 'Dientichsanxdung'],
-                            function(){
-                                Route::get('index','DientichSanController@index')->name('index');
-                                Route::post('import-unit', 'DientichSanController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'DientichSanController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'DientichSanController@dataUnit')->name('dataUnit');
-                                // Route::get('delete-unit', 'ThugonlvController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'DientichSanController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'dien-tich-san-xay-dung', 'as' => 'dtsxd.', 'namespace' => 'Dientichsanxdung'],
+                        //     function(){
+                        //         Route::get('index','DientichSanController@index')->name('index');
+                        //         Route::post('import-unit', 'DientichSanController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'DientichSanController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'DientichSanController@dataUnit')->name('dataUnit');
+                        //         // Route::get('delete-unit', 'ThugonlvController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'DientichSanController@updateUnit')->name('updateUnit');
 
-                                //Export diện tích sàn xây dựng
-                                Route::get('export-tglv', 'DientichSanController@exportDtSan')->name('exportDtSan');
-                            }
-                        );
+                        //         //Export diện tích sàn xây dựng
+                        //         Route::get('export-tglv', 'DientichSanController@exportDtSan')->name('exportDtSan');
+                        //     }
+                        // );
 
                         // Import khảo sát tình trạng tốt nghiệp sinh viên
-                        Route::group(
-                            ['prefix' => 'tinh-trang-tot-nghiep', 'as' => 'tttn.', 'namespace' => 'TinhTrangTotNghiep'],
-                            function(){
-                                Route::get('index','TtTotNghiepController@index')->name('index');
+                        // Route::group(
+                        //     ['prefix' => 'tinh-trang-tot-nghiep', 'as' => 'tttn.', 'namespace' => 'TinhTrangTotNghiep'],
+                        //     function(){
+                        //         Route::get('index','TtTotNghiepController@index')->name('index');
 
-                                Route::post('import-unit', 'TtTotNghiepController@importUnit')->name('importUnit');
-                                // Route::post('import-data-unit', 'DientichSanController@importDataUnit')->name('importDataUnit');
-                                // Route::get('data-unit', 'DientichSanController@dataUnit')->name('dataUnit');
-                                Route::post('delete-unit', 'TtTotNghiepController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'TtTotNghiepController@updateUnit')->name('updateUnit');
+                        //         Route::post('import-unit', 'TtTotNghiepController@importUnit')->name('importUnit');
+                        //         // Route::post('import-data-unit', 'DientichSanController@importDataUnit')->name('importDataUnit');
+                        //         // Route::get('data-unit', 'DientichSanController@dataUnit')->name('dataUnit');
+                        //         Route::post('delete-unit', 'TtTotNghiepController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'TtTotNghiepController@updateUnit')->name('updateUnit');
 
-                                //Export khảo sát tình trạng tốt nghiệp sinh viên
-                                Route::get('export-tglv', 'TtTotNghiepController@exportTttnsv')->name('exportTttnsv');
-                            }
-                        );
+                        //         //Export khảo sát tình trạng tốt nghiệp sinh viên
+                        //         Route::get('export-tglv', 'TtTotNghiepController@exportTttnsv')->name('exportTttnsv');
+                        //     }
+                        // );
 
 
                         // Import thông tin đồ án, khóa luận, luận văn, luận án tốt nghiệp
-                        Route::group(
-                            ['prefix' => 'thong-tin-do-an-khoa-luan', 'as' => 'ttdakl.', 'namespace' => 'Thongtindakl'],
-                            function(){
-                                Route::get('index','ThongtindaklController@index')->name('index');
-                                Route::post('import-unit', 'ThongtindaklController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'ThongtindaklController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'ThongtindaklController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'ThongtindaklController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'ThongtindaklController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'thong-tin-do-an-khoa-luan', 'as' => 'ttdakl.', 'namespace' => 'Thongtindakl'],
+                        //     function(){
+                        //         Route::get('index','ThongtindaklController@index')->name('index');
+                        //         Route::post('import-unit', 'ThongtindaklController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'ThongtindaklController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'ThongtindaklController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'ThongtindaklController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'ThongtindaklController@updateUnit')->name('updateUnit');
 
-                                //Export thông tin đồ án, khóa luận, luận văn, luận án tốt nghiệp
-                                Route::get('export-ttdakl', 'ThongtindaklController@exportTtdakl')->name('exportTtdakl');
+                        //         //Export thông tin đồ án, khóa luận, luận văn, luận án tốt nghiệp
+                        //         Route::get('export-ttdakl', 'ThongtindaklController@exportTtdakl')->name('exportTtdakl');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import công khai hội nghị, hội thảo khoa học do csgd tổ chức
-                        Route::group(
-                            ['prefix' => 'cong-khai-hoi-nghi', 'as' => 'ckhnhtkh.', 'namespace' => 'Congkhaihnhtkh'],
-                            function(){
-                                Route::get('index','CongkhaihnhtkhController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaihnhtkhController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaihnhtkhController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaihnhtkhController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaihnhtkhController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaihnhtkhController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'cong-khai-hoi-nghi', 'as' => 'ckhnhtkh.', 'namespace' => 'Congkhaihnhtkh'],
+                        //     function(){
+                        //         Route::get('index','CongkhaihnhtkhController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaihnhtkhController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaihnhtkhController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaihnhtkhController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaihnhtkhController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaihnhtkhController@updateUnit')->name('updateUnit');
 
-                                //Export công khai hội nghị, hội thảo khoa học do csgd tổ chức
-                                Route::get('export-ckhnhtkh', 'CongkhaihnhtkhController@exportCkhnhtkh')->name('exportCkhnhtkh');
+                        //         //Export công khai hội nghị, hội thảo khoa học do csgd tổ chức
+                        //         Route::get('export-ckhnhtkh', 'CongkhaihnhtkhController@exportCkhnhtkh')->name('exportCkhnhtkh');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                          // Import công khai giáo trình, tài liệu tham khảo do cơ sở giáo dục tổ chức biên soạn 
-                         Route::group(
-                            ['prefix' => 'cong-khai-tai-lieu', 'as' => 'ckgttl.', 'namespace' => 'Congkhaigttl'],
-                            function(){
-                                Route::get('index','CongkhaigttlController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaigttlController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaigttlController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaigttlController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaigttlController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaigttlController@updateUnit')->name('updateUnit');
+                        //  Route::group(
+                        //     ['prefix' => 'cong-khai-tai-lieu', 'as' => 'ckgttl.', 'namespace' => 'Congkhaigttl'],
+                        //     function(){
+                        //         Route::get('index','CongkhaigttlController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaigttlController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaigttlController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaigttlController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaigttlController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaigttlController@updateUnit')->name('updateUnit');
 
-                                //Export  giáo trình, tài liệu tham khảo do cơ sở giáo dục tổ chức biên soạn 
-                                Route::get('export-ckgttl', 'CongkhaigttlController@exportCkgttl')->name('exportCkgttl');
+                        //         //Export  giáo trình, tài liệu tham khảo do cơ sở giáo dục tổ chức biên soạn 
+                        //         Route::get('export-ckgttl', 'CongkhaigttlController@exportCkgttl')->name('exportCkgttl');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                          // Import công khai các môn học của từng khóa học, chuyên ngành 
-                         Route::group(
-                            ['prefix' => 'cong-khai-mon-hoc', 'as' => 'ckmh.', 'namespace' => 'Congkhaimh'],
-                            function(){
-                                Route::get('index','CongkhaimhController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaimhController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaimhController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaimhController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaimhController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaimhController@updateUnit')->name('updateUnit');
+                        //  Route::group(
+                        //     ['prefix' => 'cong-khai-mon-hoc', 'as' => 'ckmh.', 'namespace' => 'Congkhaimh'],
+                        //     function(){
+                        //         Route::get('index','CongkhaimhController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaimhController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaimhController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaimhController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaimhController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaimhController@updateUnit')->name('updateUnit');
 
-                                //Export công khai các môn học của từng khóa học, chuyên ngành
-                                Route::get('export-ckmh', 'CongkhaimhController@exportCkmh')->name('exportCkmh');
+                        //         //Export công khai các môn học của từng khóa học, chuyên ngành
+                        //         Route::get('export-ckmh', 'CongkhaimhController@exportCkmh')->name('exportCkmh');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import công khai thông tin về quy mô đào tạo hiện tại   
-                        Route::group(
-                            ['prefix' => 'cong-khai-quy-mo-dao-tao', 'as' => 'ckqmdt.', 'namespace' => 'Congkhaiqmdt'],
-                            function(){
-                                Route::get('index','CongkhaiqmdtController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaiqmdtController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaiqmdtController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaiqmdtController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaiqmdtController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaiqmdtController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'cong-khai-quy-mo-dao-tao', 'as' => 'ckqmdt.', 'namespace' => 'Congkhaiqmdt'],
+                        //     function(){
+                        //         Route::get('index','CongkhaiqmdtController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaiqmdtController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaiqmdtController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaiqmdtController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaiqmdtController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaiqmdtController@updateUnit')->name('updateUnit');
 
-                                //Export công khai thông tin về quy mô đào tạo hiện tại
-                                Route::get('export-ckqmdt', 'CongkhaiqmdtController@exportCkqmdt')->name('exportCkqmdt');
+                        //         //Export công khai thông tin về quy mô đào tạo hiện tại
+                        //         Route::get('export-ckqmdt', 'CongkhaiqmdtController@exportCkqmdt')->name('exportCkqmdt');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                          // Import công khai thông tin về các phòng thí nghiệm, phòng thực hành, xưởng thực tập, nhà tập đa năng, hội trường, phòng học, thư viện, trung tâm học liệu
-                         Route::group(
-                            ['prefix' => 'cong-khai-cac-phong', 'as' => 'ckcp.', 'namespace' => 'Congkhaicp'],
-                            function(){
-                                Route::get('index','CongkhaicpController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaicpController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaicpController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaicpController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaicpController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaicpController@updateUnit')->name('updateUnit');
+                        //  Route::group(
+                        //     ['prefix' => 'cong-khai-cac-phong', 'as' => 'ckcp.', 'namespace' => 'Congkhaicp'],
+                        //     function(){
+                        //         Route::get('index','CongkhaicpController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaicpController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaicpController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaicpController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaicpController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaicpController@updateUnit')->name('updateUnit');
 
-                                //Export công khai thông tin về các phòng thí nghiệm, phòng thực hành, xưởng thực tập, nhà tập đa năng, hội trường, phòng học, thư viện, trung tâm học liệu
-                                Route::get('export-ckcp', 'CongkhaicpController@exportCkcp')->name('exportCkcp');
+                        //         //Export công khai thông tin về các phòng thí nghiệm, phòng thực hành, xưởng thực tập, nhà tập đa năng, hội trường, phòng học, thư viện, trung tâm học liệu
+                        //         Route::get('export-ckcp', 'CongkhaicpController@exportCkcp')->name('exportCkcp');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                          // Import công khai thông tin về sinh viên tốt nghiệp và tỷ lệ sinh viên có việc làm
-                         Route::group(
-                            ['prefix' => 'cong-khai-sinh-vien-tot-nghiep', 'as' => 'cksvtn.', 'namespace' => 'Congkhaisvtn'],
-                            function(){
-                                Route::get('index','CongkhaisvtnController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaisvtnController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaisvtnController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaisvtnController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaisvtnController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaisvtnController@updateUnit')->name('updateUnit');
+                        //  Route::group(
+                        //     ['prefix' => 'cong-khai-sinh-vien-tot-nghiep', 'as' => 'cksvtn.', 'namespace' => 'Congkhaisvtn'],
+                        //     function(){
+                        //         Route::get('index','CongkhaisvtnController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaisvtnController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaisvtnController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaisvtnController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaisvtnController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaisvtnController@updateUnit')->name('updateUnit');
 
-                                //Export công khai thông tin về sinh viên tốt nghiệp và tỷ lệ sinh viên có việc làm
-                                Route::get('export-cksvtn', 'CongkhaisvtnController@exportCksvtn')->name('exportCksvtn');
+                        //         //Export công khai thông tin về sinh viên tốt nghiệp và tỷ lệ sinh viên có việc làm
+                        //         Route::get('export-cksvtn', 'CongkhaisvtnController@exportCksvtn')->name('exportCksvtn');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import công khai thông tin kiểm định cơ sở giáo dục và chương trình giáo dục
-                        Route::group(
-                            ['prefix' => 'cong-khai-co-so-giao-duc', 'as' => 'ckcsgd.', 'namespace' => 'Congkhaicsgd'],
-                            function(){
-                                Route::get('index','CongkhaicsgdController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaicsgdController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaicsgdController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaicsgdController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaicsgdController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaicsgdController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'cong-khai-co-so-giao-duc', 'as' => 'ckcsgd.', 'namespace' => 'Congkhaicsgd'],
+                        //     function(){
+                        //         Route::get('index','CongkhaicsgdController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaicsgdController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaicsgdController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaicsgdController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaicsgdController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaicsgdController@updateUnit')->name('updateUnit');
 
-                                //Export công khai thông tin kiểm định cơ sở giáo dục và chương trình giáo dục
-                                Route::get('export-ckcsgd', 'CongkhaicsgdController@exportCkcsgd')->name('exportCkcsgd');
+                        //         //Export công khai thông tin kiểm định cơ sở giáo dục và chương trình giáo dục
+                        //         Route::get('export-ckcsgd', 'CongkhaicsgdController@exportCkcsgd')->name('exportCkcsgd');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         
 
                         // Import công khai tỷ lệ sinh viên/giảng viên quy đổi 
-                        Route::group(
-                            ['prefix' => 'cong-khai-sinh-vien-giang-vien', 'as' => 'cksvgv.', 'namespace' => 'Congkhaisvgv'],
-                            function(){
-                                Route::get('index','CongkhaisvgvController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaisvgvController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaisvgvController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaisvgvController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaisvgvController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaisvgvController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'cong-khai-sinh-vien-giang-vien', 'as' => 'cksvgv.', 'namespace' => 'Congkhaisvgv'],
+                        //     function(){
+                        //         Route::get('index','CongkhaisvgvController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaisvgvController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaisvgvController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaisvgvController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaisvgvController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaisvgvController@updateUnit')->name('updateUnit');
 
-                                //Export công khai tỷ lệ sinh viên/giảng viên quy đổi 
-                                Route::get('export-cksvgv', 'CongkhaisvgvController@exportCksvgv')->name('exportCksvgv');
+                        //         //Export công khai tỷ lệ sinh viên/giảng viên quy đổi 
+                        //         Route::get('export-cksvgv', 'CongkhaisvgvController@exportCksvgv')->name('exportCksvgv');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import diện tích đất/sinh viên; diện tích sàn/sinh viên  
-                        Route::group(
-                            ['prefix' => 'dien-tich-dat-sinh-vien', 'as' => 'ckdtdsv.', 'namespace' => 'Congkhaidtdsv'],
-                            function(){
-                                Route::get('index','CongkhaidtdsvController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaidtdsvController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaidtdsvController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaidtdsvController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaidtdsvController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaidtdsvController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'dien-tich-dat-sinh-vien', 'as' => 'ckdtdsv.', 'namespace' => 'Congkhaidtdsv'],
+                        //     function(){
+                        //         Route::get('index','CongkhaidtdsvController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaidtdsvController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaidtdsvController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaidtdsvController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaidtdsvController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaidtdsvController@updateUnit')->name('updateUnit');
 
-                                //Export công khai tỷ lệ sinh viên/giảng viên quy đổi 
-                                Route::get('export-ckdtdsv', 'CongkhaidtdsvController@exportCkdtdsv')->name('exportCkdtdsv');
+                        //         //Export công khai tỷ lệ sinh viên/giảng viên quy đổi 
+                        //         Route::get('export-ckdtdsv', 'CongkhaidtdsvController@exportCkdtdsv')->name('exportCkdtdsv');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import công khai thông tin đào tạo theo đơn đặt hàng của nhà nước, địa phương và doanh nghiệp  
-                        Route::group(
-                            ['prefix' => 'thong-tin-dao-tao', 'as' => 'ckttdt.', 'namespace' => 'Congkhaittdt'],
-                            function(){
-                                Route::get('index','CongkhaittdtController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaittdtController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaittdtController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaittdtController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaittdtController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaittdtController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'thong-tin-dao-tao', 'as' => 'ckttdt.', 'namespace' => 'Congkhaittdt'],
+                        //     function(){
+                        //         Route::get('index','CongkhaittdtController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaittdtController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaittdtController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaittdtController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaittdtController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaittdtController@updateUnit')->name('updateUnit');
 
-                                //Export công khai thông tin đào tạo theo đơn đặt hàng của nhà nước, địa phương và doanh nghiệp
-                                Route::get('export-ckttdt', 'CongkhaittdtController@exportCkttdt')->name('exportCkttdt');
+                        //         //Export công khai thông tin đào tạo theo đơn đặt hàng của nhà nước, địa phương và doanh nghiệp
+                        //         Route::get('export-ckttdt', 'CongkhaittdtController@exportCkttdt')->name('exportCkttdt');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import công khai thông tin về diện tích đất, tổng diện tích sàn xây dựng
-                        Route::group(
-                            ['prefix' => 'thong-tin-dien-tich-dat', 'as' => 'ckttdtd.', 'namespace' => 'Congkhaittdtd'],
-                            function(){
-                                Route::get('index','CongkhaittdtdController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaittdtdController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaittdtdController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaittdtdController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaittdtdController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaittdtdController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'thong-tin-dien-tich-dat', 'as' => 'ckttdtd.', 'namespace' => 'Congkhaittdtd'],
+                        //     function(){
+                        //         Route::get('index','CongkhaittdtdController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaittdtdController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaittdtdController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaittdtdController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaittdtdController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaittdtdController@updateUnit')->name('updateUnit');
 
-                                //Export công khai thông tin về diện tích đất, tổng diện tích sàn xây dựng
-                                Route::get('export-ckttdtd', 'CongkhaittdtdController@exportCkttdtd')->name('exportCkttdtd');
+                        //         //Export công khai thông tin về diện tích đất, tổng diện tích sàn xây dựng
+                        //         Route::get('export-ckttdtd', 'CongkhaittdtdController@exportCkttdtd')->name('exportCkttdtd');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import công khai thông tin về học liệu (sách, tạp chí, e-book, cơ sở dữ liệu điện tử) của thư viện và trung tâm học liệu 
-                        Route::group(
-                            ['prefix' => 'cong-khai-tt-ve-hoc-lieu', 'as' => 'ckttvhl.', 'namespace' => 'Congkhaittvhl'],
-                            function(){
-                                Route::get('index','CongkhaittvhlController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaittvhlController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaittvhlController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaittvhlController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaittvhlController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaittvhlController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'cong-khai-tt-ve-hoc-lieu', 'as' => 'ckttvhl.', 'namespace' => 'Congkhaittvhl'],
+                        //     function(){
+                        //         Route::get('index','CongkhaittvhlController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaittvhlController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaittvhlController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaittvhlController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaittvhlController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaittvhlController@updateUnit')->name('updateUnit');
 
-                                //Export công khai thông tin về học liệu (sách, tạp chí, e-book, cơ sở dữ liệu điện tử) của thư viện và trung tâm học liệu 
-                                Route::get('export-cksvgv', 'CongkhaittvhlController@exportCksvgv')->name('exportCksvgv');
+                        //         //Export công khai thông tin về học liệu (sách, tạp chí, e-book, cơ sở dữ liệu điện tử) của thư viện và trung tâm học liệu 
+                        //         Route::get('export-cksvgv', 'CongkhaittvhlController@exportCksvgv')->name('exportCksvgv');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import công khai thông tin về các hoạt động nghiên cứu khoa học, chuyển giao công nghệ, sản xuất thử và tư vấn  
-                        Route::group(
-                            ['prefix' => 'cong-khai-nghien-cuu-khoa-hoc', 'as' => 'cknckh.', 'namespace' => 'Congkhainckh'],
-                            function(){
-                                Route::get('index','CongkhainckhController@index')->name('index');
-                                Route::post('import-unit', 'CongkhainckhController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhainckhController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhainckhController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhainckhController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhainckhController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'cong-khai-nghien-cuu-khoa-hoc', 'as' => 'cknckh.', 'namespace' => 'Congkhainckh'],
+                        //     function(){
+                        //         Route::get('index','CongkhainckhController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhainckhController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhainckhController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhainckhController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhainckhController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhainckhController@updateUnit')->name('updateUnit');
 
-                                //Export công khai thông tin về các hoạt động nghiên cứu khoa học, chuyển giao công nghệ, sản xuất thử và tư vấn  
-                                Route::get('export-cknckh', 'CongkhainckhController@exportCknckh')->name('exportCknckh');
+                        //         //Export công khai thông tin về các hoạt động nghiên cứu khoa học, chuyển giao công nghệ, sản xuất thử và tư vấn  
+                        //         Route::get('export-cknckh', 'CongkhainckhController@exportCknckh')->name('exportCknckh');
 
-                            }
-                        );
+                        //     }
+                        // );
 
 
                         // Import công khai cam kết chất lượng đào tạo của Trường Đại học Công nghiệp Dệt May Hà Nội năm học 
-                        Route::group(
-                            ['prefix' => 'cong-khai-cam-ket-chat-luong', 'as' => 'ckcldt.', 'namespace' => 'Congkhaickcl'],
-                            function(){
-                                Route::get('index','CongkhaickclController@index')->name('index');
-                                Route::post('update-ckcldt', 'CongkhaickclController@updateCkcldt')->name('updateCkcldt');
-                                Route::get('get-ckcldt', 'CongkhaickclController@getCkcldt')->name('getCkcldt');
+                        // Route::group(
+                        //     ['prefix' => 'cong-khai-cam-ket-chat-luong', 'as' => 'ckcldt.', 'namespace' => 'Congkhaickcl'],
+                        //     function(){
+                        //         Route::get('index','CongkhaickclController@index')->name('index');
+                        //         Route::post('update-ckcldt', 'CongkhaickclController@updateCkcldt')->name('updateCkcldt');
+                        //         Route::get('get-ckcldt', 'CongkhaickclController@getCkcldt')->name('getCkcldt');
 
-                                //Export công khai cam kết chất lượng đào tạo của Trường Đại học Công nghiệp Dệt May Hà Nội năm học
-                                Route::get('export-ckcldt', 'CongkhaickclController@exportCkcldt')->name('exportCkcldt');
-                            }
-                        );
+                        //         //Export công khai cam kết chất lượng đào tạo của Trường Đại học Công nghiệp Dệt May Hà Nội năm học
+                        //         Route::get('export-ckcldt', 'CongkhaickclController@exportCkcldt')->name('exportCkcldt');
+                        //     }
+                        // );
 
                         // Import công khai tài chính năm học
-                        Route::group(
-                            ['prefix' => 'tai-chinh-nam-hoc', 'as' => 'cktcnh.', 'namespace' => 'Congkhaitcnh'],
-                            function(){
-                                Route::get('index','CongkhaitcnhController@index')->name('index');
-                                Route::post('updatedata','CongkhaitcnhController@updatedata')->name('updatedata');
-                                Route::post('loaddata','CongkhaitcnhController@loaddata')->name('loaddata');
+                        // Route::group(
+                        //     ['prefix' => 'tai-chinh-nam-hoc', 'as' => 'cktcnh.', 'namespace' => 'Congkhaitcnh'],
+                        //     function(){
+                        //         Route::get('index','CongkhaitcnhController@index')->name('index');
+                        //         Route::post('updatedata','CongkhaitcnhController@updatedata')->name('updatedata');
+                        //         Route::post('loaddata','CongkhaitcnhController@loaddata')->name('loaddata');
 
-                                Route::get('exportCktcnh','CongkhaitcnhController@exportCktcnh')->name('exportCktcnh');
+                        //         Route::get('exportCktcnh','CongkhaitcnhController@exportCktcnh')->name('exportCktcnh');
 
-                            }
-                        );
+                        //     }
+                        // );
                         
                         // Import công khai thông tin danh sách chi tiết đội ngũ giảng viên theo khối ngành
-                        Route::group(
-                            ['prefix' => 'cong-khai-doi-ngu-gv', 'as' => 'ckdngv.', 'namespace' => 'Congkhaidngv'],
-                            function(){
-                                Route::get('index','CongkhaidngvController@index')->name('index');
-                                Route::post('import-unit', 'CongkhaidngvController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 'CongkhaidngvController@importDataUnit')->name('importDataUnit');
-                                Route::get('data-unit', 'CongkhaidngvController@dataUnit')->name('dataUnit');
-                                Route::get('delete-unit', 'CongkhaidngvController@deleteUnit')->name('deleteUnit');
-                                Route::post('update-unit', 'CongkhaidngvController@updateUnit')->name('updateUnit');
+                        // Route::group(
+                        //     ['prefix' => 'cong-khai-doi-ngu-gv', 'as' => 'ckdngv.', 'namespace' => 'Congkhaidngv'],
+                        //     function(){
+                        //         Route::get('index','CongkhaidngvController@index')->name('index');
+                        //         Route::post('import-unit', 'CongkhaidngvController@importUnit')->name('importUnit');
+                        //         Route::post('import-data-unit', 'CongkhaidngvController@importDataUnit')->name('importDataUnit');
+                        //         Route::get('data-unit', 'CongkhaidngvController@dataUnit')->name('dataUnit');
+                        //         Route::get('delete-unit', 'CongkhaidngvController@deleteUnit')->name('deleteUnit');
+                        //         Route::post('update-unit', 'CongkhaidngvController@updateUnit')->name('updateUnit');
                                 
-                                //Export công khai thông tin danh sách chi tiết đội ngũ giảng viên theo khối ngành
-                                Route::get('export-cknckh', 'CongkhaidngvController@exportCkdtdsv')->name('exportCkdtdsv');
+                        //         //Export công khai thông tin danh sách chi tiết đội ngũ giảng viên theo khối ngành
+                        //         Route::get('export-cknckh', 'CongkhaidngvController@exportCkdtdsv')->name('exportCkdtdsv');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                         // Import Công khai thông tin về đội ngũ giảng viên cơ hữu
-                        Route::group(
-                            ['prefix' => 'cong-khai-dn-gv-co-huu', 'as' => 'ckdngvch.', 'namespace' => 'Congkhaidngvch'],
-                            function(){
-                                Route::get('index','CongkhaidngvchController@index')->name('index');
-                                Route::post('create-unit','CongkhaidngvchController@createUnit')->name('createUnit');
-                                Route::get('delete-unit', 'CongkhaidngvchController@deleteUnit')->name('deleteUnit');
-                                Route::get('get-info-unit', 'CongkhaidngvchController@getInfoUnit')->name('getInfoUnit');
+                        // Route::group(
+                        //     ['prefix' => 'cong-khai-dn-gv-co-huu', 'as' => 'ckdngvch.', 'namespace' => 'Congkhaidngvch'],
+                        //     function(){
+                        //         Route::get('index','CongkhaidngvchController@index')->name('index');
+                        //         Route::post('create-unit','CongkhaidngvchController@createUnit')->name('createUnit');
+                        //         Route::get('delete-unit', 'CongkhaidngvchController@deleteUnit')->name('deleteUnit');
+                        //         Route::get('get-info-unit', 'CongkhaidngvchController@getInfoUnit')->name('getInfoUnit');
                                 
-                                Route::post('update-unit', 'CongkhaidngvchController@updateUnit')->name('updateUnit');
+                        //         Route::post('update-unit', 'CongkhaidngvchController@updateUnit')->name('updateUnit');
 
-                            }
-                        );
+                        //     }
+                        // );
 
                     }
                 );
@@ -1783,7 +1798,7 @@ Route::group(
                             ['prefix' => 'tuyen-sinh', 'as' => 'tuyensinh.', 'namespace' => 'Tuyensinh'],
                             function(){
                                 Route::get('index','TuyensinhController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    //->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'TuyensinhController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'TuyensinhController@showFileData')->name('showFileData');
@@ -2169,8 +2184,8 @@ Route::group(
                             ['prefix' => 'lap-ke-hoach-excel', 'as' => 'lkhex.', 'namespace' => 'LapkehoachExcel'],
                             function(){
                                 Route::get('index','LapkehoachExcelController@index')
-                                ->middleware(['super_check:admin,operator'])
-                                ->name('index');
+                                    ->middleware(['super_check:admin,operator'])
+                                    ->name('index');
                                 Route::get('data','LapkehoachExcelController@data')->name('data');
                                 Route::post('create-kehoach','LapkehoachExcelController@createKH')->name('createKH');
 

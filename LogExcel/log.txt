@@ -1,9 +1,9 @@
 ﻿1. Tuyển sinh
 2. Dữ liệu sinh viên
 3. Chương trình đào tạo
-4. Khoa học công nghệ
 => Đào tạo
 
+4. Khoa học công nghệ
 5. Biên soạn sách
 6. Bài báo
 7. Phát minh sáng chế
