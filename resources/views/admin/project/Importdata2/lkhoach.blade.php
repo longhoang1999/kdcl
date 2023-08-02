@@ -11,6 +11,9 @@
 <link href="{{ asset('vendors/bootstrap3-wysihtml5-bower/css/bootstrap3-wysihtml5.min.css') }}"  rel="stylesheet" media="screen"/>
 <link href="{{ asset('css/pages/editor.css') }}" rel="stylesheet" type="text/css"/>
 <style>
+    .select2-container .select2-selection--single{
+        height: unset;
+    }
     .container-fuild{
         box-shadow: unset;
     }
@@ -77,7 +80,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modalUpdateBC" tabindex="-1" aria-labelledby="modalUpdateBCLabel" aria-hidden="true">
+<div class="modal fade" id="modalUpdateBC" aria-labelledby="modalUpdateBCLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -177,7 +180,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="modelShow" tabindex="-1" aria-labelledby="modelShowLabel" aria-hidden="true">
+<div class="modal fade" id="modelShow"  aria-labelledby="modelShowLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -209,7 +212,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
             @lang('project/ImportdataExcel/title.dong')
         </button>
       </div>
@@ -239,7 +242,7 @@
   </div>
 
 <!-- Modal -->
-<div class="modal fade" id="modalCreateBC" tabindex="-1" role="dialog" aria-labelledby="modalCreateBCLabel" aria-hidden="true">
+<div class="modal fade" id="modalCreateBC"  role="dialog" aria-labelledby="modalCreateBCLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -296,7 +299,7 @@
                         <label for="multiple-nskt">
                             @lang('project/Selfassessment/title.nskt')
                         </label>
-                        <select class="multiple-nskt js-states form-control" name="ns_kiemtra" required>
+                        <select class="multiple-nskt js-states form-control" name="ns_kiemtra" id="ns_kiemtra" required>
                             @foreach($user as $value)
                                 <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
                             @endforeach  
@@ -405,6 +408,15 @@
         'Công khai đội ngũ giảng viên theo khối ngành',
     ]
 
+    $("#ns_kiemtra").select2({
+        allowClear: false,
+        placeholder: "@lang('project/Selfassessment/title.nskt')",
+    });
+    $("#upnskt").select2({
+        allowClear: false,
+        placeholder: "@lang('project/Selfassessment/title.nskt')",
+    });
+
     $(function(){
         table = $('#table').DataTable({
             lengthMenu: [[7, 10, 20, -1], [7, 10, 20, "All"]],
@@ -435,13 +447,13 @@
         let b = $(this).val();
         if(b == 1){
             let ui = '';
-            for(let i = 1; i<= 4; i++){
+            for(let i = 1; i<= 3; i++){
                 ui += `<option value="${i}">${$dataChild[i - 1]}</option>`;
             }
             $("#select-bang").append(ui);
         }else if(b == 2){
             let ui = '';
-            for(let i = 5; i<= 10; i++){
+            for(let i = 4; i<= 10; i++){
                 ui += `<option value="${i}">${$dataChild[i - 1]}</option>`;
             }
             $("#select-bang").append(ui);
