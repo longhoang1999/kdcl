@@ -24,45 +24,145 @@ use App\Models\Country;
 
 class CommentreportController extends DefinedController
 {
-     public function index(Request $req){                        
+     public function index(Request $req){
           return view('admin.project.Selfassessment.comreport');
      }
-    
+
      public function data(Request $req){
           $user_id = Sentinel::getUser()->id;
-          $keHoachBaoCaoList = DB::table('kehoach_baocao')->where('trang_thai', '!=', 'completed');
 
+          if(Sentinel::inRole('operator') || Sentinel::inRole('admin')){
+
+            $keHoachBaoCaoList = DB::table('kehoach_baocao')
+                                        ->where('trang_thai', '!=', 'completed')
+                                        ->orderBy('created_at','desc')
+                                        ->where('kehoach_baocao.deleted_at',null)
+                                        ->get();
+
+           }else{
+
+                $keHoachBaoCaoList = DB::table('kehoach_baocao')
+                                        ->where('kehoach_baocao.deleted_at', null)
+                                        ->where('trang_thai', '!=', 'completed')
+                                        ->orderBy('created_at','desc')
+
+                                        ->where(function ($query) {
+                                            $user_id = Sentinel::getUser()->id;
+                                            $query->where('kehoach_baocao.ns_phutrach', '=', $user_id)
+                                                ->orWhereExists(function ($subquery) use ($user_id) {
+                                                    $subquery->from('kehoach_baocao_nhansu')
+                                                        ->whereRaw('kehoach_baocao.id = kehoach_baocao_nhansu.id_kehoach')
+                                                        ->where(function ($subsubquery) use ($user_id) {
+                                                            $subsubquery->where('kehoach_baocao_nhansu.id_nhansuthuchien', '=', $user_id)
+                                                                        ->orWhere('kehoach_baocao_nhansu.id_nhansukiemtra', '=', $user_id);
+                                                        });
+                                                });
+                                        })->get();
+            }
           if(isset($req->id) && $req->id > 0){
                $bc = $keHoachBaoCaoList->where('id',$req->id)->first();
                $kehoachung = DB::table('kehoach_chung')->select('kehoach_chung.id')
                                    ->where('kehoach_chung.kh_baocao_id','=',$bc->id)->first();
                $arrout = array();
                if($bc){
-                    
+
 
 
                     $arrout['phan1'] = '<a class="a_css" href="#"><span class="label label-primary"><i class="fas fa-edit"></i></span><span style="color:blue;font-weight:bold;">' . Lang::get('project/Selfassessment/title.phan1') . '</span></a>';
                     $arrout['phan3'] = '<a class="a_bottom" href="#"><span class="label label-primary"><i class="fas fa-edit"></i></span><span style="color:blue;font-weight:bold;">' . Lang::get('project/Selfassessment/title.phan3') . '</span></a>';
 
 
-                    $tieuchuan = DB::table('kehoach_tieuchuan')
-                              ->select('kehoach_tieuchuan.*','tieuchuan.mo_ta','tieuchuan.stt as stt_tc')
-                              ->leftjoin('tieuchuan','tieuchuan.id','=','kehoach_tieuchuan.tieuchuan_id')
-                              ->where('kehoach_tieuchuan.id_kh_baocao',$req->id)
-                              ->orderBy('stt_tc','ASC')->get();
-                    foreach ($tieuchuan as $key => $value) {
-                         $tieuchi = DB::table('tieuchi')->where('tieuchuan_id',$value->tieuchuan_id)->get();
-                         $value->tieuchi = $tieuchi; 
-                         $value->link = "https://www.google.com.vn";
-                         $baoCaoTieuChuan = DB::table('baocao_tieuchuan')
-                                              ->select('baocao_tieuchuan.trang_thai as trang_thai_bctc')
-                                              // ->where('id_kh_tieuchuan',$value->id)
-                                              ->where('id_kehoach_bc',$req->id)
-                                              ->where('id_tieuchuan',$value->tieuchuan_id)
-                                              ->first();
-                         
-                         $value->baoCaoTieuChuan = $baoCaoTieuChuan;     
+
+
+
+
+
+
+                    if(Sentinel::inRole('operator') || Sentinel::inRole('admin')){
+                        $tieuchuan = DB::table('kehoach_tieuchuan')
+                                ->select('kehoach_tieuchuan.*','tieuchuan.mo_ta','tieuchuan.stt as stt_tc')
+                                ->leftjoin('tieuchuan','tieuchuan.id','=','kehoach_tieuchuan.tieuchuan_id')
+                                ->where('kehoach_tieuchuan.id_kh_baocao',$req->id)
+                                ->orderBy('stt_tc','ASC')->get();
+                        foreach ($tieuchuan as $key => $value) {
+                            $tieuchi = DB::table('tieuchi')->where('tieuchuan_id',$value->tieuchuan_id)->get();
+                            $value->tieuchi = $tieuchi;
+                            $value->link = "https://www.google.com.vn";
+                            $baoCaoTieuChuan = DB::table('baocao_tieuchuan')
+                                                ->select('baocao_tieuchuan.trang_thai as trang_thai_bctc')
+                                                // ->where('id_kh_tieuchuan',$value->id)
+                                                ->where('id_kehoach_bc',$req->id)
+                                                ->where('id_tieuchuan',$value->tieuchuan_id)
+                                                ->first();
+
+                            $value->baoCaoTieuChuan = $baoCaoTieuChuan;
+                        }
+                    }else{
+
+                        $check_rosle = DB::table('kehoach_baocao')
+                                            ->where('id',$req->id)
+                                            ->where('ns_phutrach',Sentinel::getUser()->id)
+                                            ->first();
+                        if(!$check_rosle){
+                            $tieuchuan = DB::table('kehoach_tieuchuan')
+                                            ->select('kehoach_tieuchuan.*', 'tieuchuan.mo_ta', 'tieuchuan.stt as stt_tc')
+                                            ->leftjoin('tieuchuan', 'tieuchuan.id', '=', 'kehoach_tieuchuan.tieuchuan_id')
+                                            ->where('kehoach_tieuchuan.id_kh_baocao', $req->id)
+                                            ->where(function ($query) {
+                                                $user_id = Sentinel::getUser()->id;
+                                                $query->orWhereExists(function ($subquery) use ($user_id) {
+                                                        $subquery->from('kehoach_tieuchuan_nhansu')
+                                                            ->whereRaw('kehoach_tieuchuan.id = kehoach_tieuchuan_nhansu.id_kehoach')
+                                                            ->where(function ($subsubquery) use ($user_id) {
+                                                                $subsubquery->where('kehoach_tieuchuan_nhansu.id_nhansuthuchien', '=', $user_id)
+                                                                            ->orWhere('kehoach_tieuchuan_nhansu.id_nhansukiemtra', '=', $user_id)
+                                                                            ->orWhere('kehoach_tieuchuan.truongnhom',Sentinel::getUser()->id);
+                                                        });
+                                                });
+                                            })
+
+                                            ->orderBy('stt_tc', 'ASC')
+                                            ->get();
+                            foreach ($tieuchuan as $key => $value) {
+                                    $tieuchi = DB::table('tieuchi')->where('tieuchuan_id',$value->tieuchuan_id)->get();
+                                    $value->tieuchi = $tieuchi;
+                                    $value->link = "https://www.google.com.vn";
+                                    $baoCaoTieuChuan = DB::table('baocao_tieuchuan')
+                                                            ->select('baocao_tieuchuan.trang_thai as trang_thai_bctc')
+                                                            // ->where('id_kh_tieuchuan',$value->id)
+                                                            ->where('id_kehoach_bc',$req->id)
+                                                            ->where('id_tieuchuan',$value->tieuchuan_id)
+                                                            ->first();
+                                    $value->baoCaoTieuChuan = $baoCaoTieuChuan;
+                            }
+                        }else{
+
+                            $tieuchuan = DB::table('kehoach_tieuchuan')
+                                            ->select('kehoach_tieuchuan.*','tieuchuan.mo_ta','tieuchuan.stt as stt_tc')
+                                            ->leftjoin('tieuchuan','tieuchuan.id','=','kehoach_tieuchuan.tieuchuan_id')
+                                            ->where('kehoach_tieuchuan.id_kh_baocao',$req->id)
+                                            ->orderBy('stt_tc','ASC')->get();
+                            foreach ($tieuchuan as $key => $value) {
+                                $tieuchi = DB::table('tieuchi')->where('tieuchuan_id',$value->tieuchuan_id)->get();
+                                $value->tieuchi = $tieuchi;
+                                $value->link = "https://www.google.com.vn";
+                                $baoCaoTieuChuan = DB::table('baocao_tieuchuan')
+                                                        ->select('baocao_tieuchuan.trang_thai as trang_thai_bctc')
+                                                        // ->where('id_kh_tieuchuan',$value->id)
+                                                        ->where('id_kehoach_bc',$req->id)
+                                                        ->where('id_tieuchuan',$value->tieuchuan_id)
+                                                        ->first();
+                                $value->baoCaoTieuChuan = $baoCaoTieuChuan;
+                            }
+                        }
+
+
                     }
+
+
+
+
+
                     $arrout['phan2'] = '<div class="a_mid" "><span class="label label-primary"><i class="fas fa-edit"></i></span><span style="color:blue;font-weight:bold;">' . Lang::get('project/Selfassessment/title.phan2') . '</span></div>';
                     $arrout['tieuchuan_tieuchi'] = $tieuchuan;
 
@@ -70,11 +170,11 @@ class CommentreportController extends DefinedController
                }else{
                     return 0;
                }
-          }else{         
+          }else{
                return DataTables::of($keHoachBaoCaoList)
                     ->addColumn('actions',function($bc){
                         return '<input type="radio" name="selectbc" id="selectbc_' . $bc->id . '" class="form-control">';
-                    })               
+                    })
                     ->rawColumns(['actions'])
                     ->make(true);
           }
@@ -145,8 +245,8 @@ class CommentreportController extends DefinedController
                $value->tendonvi = $name_dv;
           }
           return view("admin.project.Selfassessment.conclusion_comment")
-               ->with(["kehoachbaocaos" =>  $KHBaCaoDetail, 
-                    'ketluan' => $ketluan, 
+               ->with(["kehoachbaocaos" =>  $KHBaCaoDetail,
+                    'ketluan' => $ketluan,
                     'id' => $id,
                     "id_khbc" => $id_khbc,
                     "nhanXetKhoiList" => $nhanXetKhoiList,
@@ -162,7 +262,7 @@ class CommentreportController extends DefinedController
                $bo_tieuchuan = DB::table('bo_tieuchuan')
                                    ->where('bo_tieuchuan.id',$keHoachBaoCaoDetail->bo_tieuchuan_id)->first();
                 $keHoachTieuChuan = Db::table('kehoach_tieuchuan')->select('kehoach_tieuchuan.*', 'users.id as id_truong_nhom')->leftjoin('users','users.id','=','kehoach_tieuchuan.truongnhom')->where('tieuchuan_id',$tieuchuan_id)->first();
-            
+
             $keHoachBaoCaoDetail->bo_tieuchuan = $bo_tieuchuan;
          $KHBaCaoDetail = DB::table('kehoach_baocao')->find($id_khbc);
          $kehoachtieuchuan = DB::table('kehoach_baocao')
@@ -170,7 +270,7 @@ class CommentreportController extends DefinedController
                               ->leftjoin('kehoach_tieuchuan','kehoach_tieuchuan.id_kh_baocao','=', 'kehoach_baocao.id')
                               ->where('kehoach_tieuchuan.tieuchuan_id',$tieuchuan_id)
                               ->where('kehoach_baocao.id',$id_khbc)->first();
-         
+
           $tieuchi = DB::table('kehoach_tieuchi')
                          ->select('tieuchi.*','kehoach_tieuchi.id as khtt_id')
                          ->leftjoin('tieuchi','tieuchi.id','=','kehoach_tieuchi.id_tieuchi')
@@ -184,50 +284,82 @@ class CommentreportController extends DefinedController
                            // ->where('id_kh_tieuchi', $value->khtt_id)
                            ->where('id_tieuchi', $value->id)
                            ->first();
-               $bacao_menhde = DB::table('kehoach_menhde')
+                if($keHoachBaoCaoDetail->writeFollow == 1){
+                    $bacao_menhde = DB::table('kehoach_menhde')
                                    ->select('kehoach_menhde.id as id_khmd', 'menhde.*')
                                    ->leftjoin('menhde','menhde.id','=','kehoach_menhde.id_menhde')
                                    ->where('menhde.tieuchi_id',$value->id)
                                    ->where('kehoach_menhde.id_kh_tieuchi',$value->khtt_id)
                                    ->get();
 
-               $menhde_baocao = DB::table('baocao_menhde')
-                          ->select('menhde.id as menhde_id', 'menhde.mo_ta','menhde.*', 'baocao_menhde.*')
-                          ->leftjoin('menhde','menhde.id','=','baocao_menhde.id_menhde')
-                          ->where('id_kehoach_bc',$kehoachtieuchuan->id)
-                          ->where('menhde.tieuchi_id',$value->id)
-                          // ->where('id_kh_menhde',$val->id_khmd)
-                               ->get();
-               $kh_menhde_start = DB::table('kehoach_menhde')
-                                        ->select('kehoach_menhde.id as id_khmd', 'menhde.id')
-                                        ->leftjoin('menhde','menhde.id','=','kehoach_menhde.id_menhde')
-                                        ->where('menhde.tieuchi_id',$value->id)
-                                        ->where('kehoach_menhde.id_kh_tieuchi',$value->khtt_id)
-                                        ->first();
-               if(isset($kh_menhde_start->id_khmd)){
-                    $menhde_baocao_start = DB::table('baocao_menhde')
-                                         ->select('danhgia')
-                                         ->where('id_kehoach_bc',$kehoachtieuchuan->id)
-                                         ->where('id_kh_menhde',$kh_menhde_start->id_khmd)
-                                         ->where('id_menhde',$kh_menhde_start->id)
-                                         ->first();
-               }                      
-               
+                    $menhde_baocao = DB::table('baocao_menhde')
+                                ->select('menhde.id as menhde_id', 'menhde.mo_ta','menhde.*', 'baocao_menhde.*')
+                                ->leftjoin('menhde','menhde.id','=','baocao_menhde.id_menhde')
+                                ->where('id_kehoach_bc',$kehoachtieuchuan->id)
+                                ->where('menhde.tieuchi_id',$value->id)
+                                // ->where('id_kh_menhde',$val->id_khmd)
+                                    ->get();
+                    $kh_menhde_start = DB::table('kehoach_menhde')
+                                                ->select('kehoach_menhde.id as id_khmd', 'menhde.id')
+                                                ->leftjoin('menhde','menhde.id','=','kehoach_menhde.id_menhde')
+                                                ->where('menhde.tieuchi_id',$value->id)
+                                                ->where('kehoach_menhde.id_kh_tieuchi',$value->khtt_id)
+                                                ->first();
+                    if(isset($kh_menhde_start->id_khmd)){
+                            $menhde_baocao_start = DB::table('baocao_menhde')
+                                                ->select('danhgia')
+                                                ->where('id_kehoach_bc',$kehoachtieuchuan->id)
+                                                ->where('id_kh_menhde',$kh_menhde_start->id_khmd)
+                                                ->where('id_menhde',$kh_menhde_start->id)
+                                                ->first();
+                    }
+                }else if($keHoachBaoCaoDetail->writeFollow == 2){
+                    $bacao_menhde = DB::table('kehoach_menhde')
+                                   ->select('kehoach_menhde.id as id_khmd', 'mocchuan.*')
+                                   ->leftjoin('mocchuan','mocchuan.id','=','kehoach_menhde.mocchuan_id')
+                                   ->where('mocchuan.tieuchi_id',$value->id)
+                                   ->where('kehoach_menhde.id_kh_tieuchi',$value->khtt_id)
+                                   ->get();
+
+                    $menhde_baocao = DB::table('baocao_menhde')
+                                ->select('mocchuan.id as menhde_id', 'mocchuan.mo_ta','mocchuan.*', 'baocao_menhde.*')
+                                ->leftjoin('mocchuan','mocchuan.id','=','baocao_menhde.mocchuan_id')
+                                ->where('id_kehoach_bc',$kehoachtieuchuan->id)
+                                ->where('mocchuan.tieuchi_id',$value->id)
+                                // ->where('id_kh_menhde',$val->id_khmd)
+                                    ->get();
+                    $kh_menhde_start = DB::table('kehoach_menhde')
+                                                ->select('kehoach_menhde.id as id_khmd', 'mocchuan.id')
+                                                ->leftjoin('mocchuan','mocchuan.id','=','kehoach_menhde.mocchuan_id')
+                                                ->where('mocchuan.tieuchi_id',$value->id)
+                                                ->where('kehoach_menhde.id_kh_tieuchi',$value->khtt_id)
+                                                ->first();
+                    if(isset($kh_menhde_start->id_khmd)){
+                            $menhde_baocao_start = DB::table('baocao_menhde')
+                                                ->select('danhgia')
+                                                ->where('id_kehoach_bc',$kehoachtieuchuan->id)
+                                                ->where('id_kh_menhde',$kh_menhde_start->id_khmd)
+                                                ->where('mocchuan_id',$kh_menhde_start->id)
+                                                ->first();
+                    }
+                }
+
+
                $value->bc_menhde = $menhde_baocao;
                if(isset($value->menhde_baocao_start)){
                     $value->menhde_baocao_start = $menhde_baocao_start;
                     array_push($start,$value->menhde_baocao_start->danhgia);
                }
-               
+
                $value->baocao_tieuchi = $baocao;
                $value->bacao_menhde = $menhde_baocao;
-               
-              
+
+
           }
           $sum_start = Collection::make($start)->avg();
           $sum_danhgia = round($sum_start);
 
-          $kehoachtieuchuan->tieuchi = $tieuchi; 
+          $kehoachtieuchuan->tieuchi = $tieuchi;
 
           $danhGiaMenhDeData = [];
           $danhGiaTieuChiData = [];
@@ -255,7 +387,7 @@ class CommentreportController extends DefinedController
                 $danhGiaTieuChiData[$tieuChiId] = round(collect($danhGiaMenhDe)->avg());
             };
 
-         
+
          $KHBaoCao = DB::table('kehoach_baocao')->where('kehoach_baocao.id', '=', $id_khbc)->select('kehoach_baocao.ten_bc')->get();
          $tieuChuan = DB::table('tieuchuan')->where('tieuchuan.id', $tieuchuan_id)->first();
 
@@ -276,7 +408,7 @@ class CommentreportController extends DefinedController
                                    ->leftjoin('donvi','donvi.id','=','users.donvi_id')
                                    ->where('users.id',$valuenx->nguoi_tao)
                                    ->first();
-          }                    
+          }
          $nhanXetKhoiList = DB::table('baocao_nhanxetkhoi')
                                 ->leftjoin('users','users.id','=','baocao_nhanxetkhoi.nguoi_tao')
                                 ->where('id_kehoach_bc',$id_khbc)
@@ -296,7 +428,7 @@ class CommentreportController extends DefinedController
                               ->where('kehoach_baocao.id',$id_khbc)
                               ->get();
          foreach($continue_nx as $tieu_c_val){
-               
+
                     $baoc_tc = DB::table('baocao_tieuchuan')
                               ->where('id_kehoach_bc',$id_khbc)
                               ->where('id_tieuchuan',$tieu_c_val->id)
@@ -308,10 +440,10 @@ class CommentreportController extends DefinedController
                                    break;
                               }
                          }
-                     
+
 
                     }
-                                   
+
          }
          $donViData = DB::table('donvi')->get();
          return view("admin.project.Selfassessment.viewreport")
@@ -372,7 +504,7 @@ class CommentreportController extends DefinedController
                                                          'text' => $req->text,
                                                     ]);
               }
-            return back()->with('success', 
+            return back()->with('success',
                       Lang::get('project/Selfassessment/title.capnhattc'));
        } catch (\Exception $e) {
          return abort(422, $e->getMessage());
@@ -432,7 +564,7 @@ class CommentreportController extends DefinedController
           }
           return Redirect::back()->with('success',''.Lang::get('project/Selfassessment/title.nxddt').'');
     }
-        
+
     public function nhanXetDelete(Request $request)
     {
         try {
@@ -478,7 +610,7 @@ class CommentreportController extends DefinedController
                     "nguoi_tao"  => $req->userId,
                     "created_at"  => Carbon::now('Asia/Ho_Chi_Minh'),
                ]);
-       
+
           return Redirect::back()->with('success',''.Lang::get('project/Selfassessment/title.dtnx').'');
     }
 

@@ -25,17 +25,36 @@ use PHPHtmlParser\Dom;
 
 class CompletionreportController extends DefinedController
 {
-     public function index(Request $req){     
+     public function index(Request $req){
           return view('admin.project.Selfassessment.completereport');
      }
      public function data(Request $req){
-        $bcs = DB::table('kehoach_baocao')
-                ->select('kehoach_baocao.*','ctdt.manganh')
-                ->leftjoin('ctdt','ctdt.id','=','kehoach_baocao.ctdt_id');
-        
-        // if(Sentinel::inRole('ttchuyentrach')){
-        //     $bcs = $bcs->where("kehoach_baocao.ns_phutrach", Sentinel::getUser()->id);
-        // }
+
+            if(Sentinel::inRole('operator') || Sentinel::inRole('admin')){
+
+                $bcs = DB::table('kehoach_baocao')
+                    ->select('kehoach_baocao.*','ctdt.manganh')
+                    ->leftjoin('ctdt','ctdt.id','=','kehoach_baocao.ctdt_id');
+
+                }else{
+
+                    $bcs = DB::table('kehoach_baocao')
+                                ->select('kehoach_baocao.*','ctdt.manganh')
+                                ->leftjoin('ctdt','ctdt.id','=','kehoach_baocao.ctdt_id')
+                                ->where('kehoach_baocao.deleted_at', null)
+                                ->where(function ($query) {
+                                    $user_id = Sentinel::getUser()->id;
+                                    $query->where('kehoach_baocao.ns_phutrach', '=', $user_id)
+                                        ->orWhereExists(function ($subquery) use ($user_id) {
+                                            $subquery->from('kehoach_baocao_nhansu')
+                                                ->whereRaw('kehoach_baocao.id = kehoach_baocao_nhansu.id_kehoach')
+                                                ->where(function ($subsubquery) use ($user_id) {
+                                                    $subsubquery->where('kehoach_baocao_nhansu.id_nhansuthuchien', '=', $user_id)
+                                                                ->orWhere('kehoach_baocao_nhansu.id_nhansukiemtra', '=', $user_id);
+                                                });
+                                        });
+                                })->get();
+                }
 
         return DataTables::of($bcs)
             ->addColumn(
@@ -53,7 +72,7 @@ class CompletionreportController extends DefinedController
                 function ($bc) {
                         $manganh = isset($bc->manganh)? $bc->manganh: Lang::get('project/Selfassessment/title.khongcodl');
                     return $manganh;
-                }   
+                }
             )
             ->addColumn(
                 'ngPhutrach',
@@ -101,7 +120,7 @@ class CompletionreportController extends DefinedController
             ->rawColumns(['status','tenbaocao'])
             ->make(true);
     }
-     
+
     public function detail(Request $req){
 
         $keHoachBaoCaoDetail = DB::table('kehoach_baocao')
@@ -109,25 +128,25 @@ class CompletionreportController extends DefinedController
                             ->first();
 
         list($mcCollect) = $this->listMinhChung($req->id);
-        $minhChungList = $mcCollect;                    
+        $minhChungList = $mcCollect;
         if ($req->id) {
             list($title,$keHoachBaoCaoDetail) = $this->listDatakeHoachBaoCaoDetail($req->id);
             $keHoachBaoCaoListDetail = $keHoachBaoCaoDetail;
         }
-        $keHoachBaoCaoDetail->boTieuChuan = DB::table('bo_tieuchuan')  
-                                        ->where('id',$keHoachBaoCaoDetail->bo_tieuchuan_id) 
+        $keHoachBaoCaoDetail->boTieuChuan = DB::table('bo_tieuchuan')
+                                        ->where('id',$keHoachBaoCaoDetail->bo_tieuchuan_id)
                                         ->first();
 
-        $keHoachBaoCaoDetail->keHoachChung = DB::table('kehoach_chung')  
-                                        ->where('kh_baocao_id',$keHoachBaoCaoDetail->id) 
+        $keHoachBaoCaoDetail->keHoachChung = DB::table('kehoach_chung')
+                                        ->where('kh_baocao_id',$keHoachBaoCaoDetail->id)
                                         ->first();
         if($keHoachBaoCaoDetail->keHoachChung){
-            $keHoachBaoCaoDetail->keHoachChung->baoCaoChung = DB::table('baocao_chung')  
-                                                    ->where('id_kh_chung',$keHoachBaoCaoDetail->keHoachChung->id) 
+            $keHoachBaoCaoDetail->keHoachChung->baoCaoChung = DB::table('baocao_chung')
+                                                    ->where('id_kh_chung',$keHoachBaoCaoDetail->keHoachChung->id)
                                                     ->first();
-        }                               
-        
-        $keHoachBaoCaoDetail->keHoachTieuChuanList = DB::table('kehoach_tieuchuan') 
+        }
+
+        $keHoachBaoCaoDetail->keHoachTieuChuanList = DB::table('kehoach_tieuchuan')
                                                     ->where('kehoach_tieuchuan.id_kh_baocao','=',$keHoachBaoCaoDetail->id)
                                                     ->get();
         foreach($keHoachBaoCaoDetail->keHoachTieuChuanList as $value){
@@ -165,7 +184,7 @@ class CompletionreportController extends DefinedController
                                             ->first();
 
                         $valuekhmd->baoCaoMenhDe = $baoCaoMenhDe;
-           
+
                         if( isset($baoCaoMenhDe->danhgia)){
                             $danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
                         }
@@ -209,7 +228,7 @@ class CompletionreportController extends DefinedController
                                             ->first();
 
                         $valuekhmd->baoCaoMenhDe = $baoCaoMenhDe;
-                       
+
                         if( isset($baoCaoMenhDe->danhgia)){
                             $danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
                         }
@@ -232,7 +251,7 @@ class CompletionreportController extends DefinedController
                         }
                     }
                 }
-                
+
 
                 $baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
                 $danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
@@ -286,8 +305,8 @@ class CompletionreportController extends DefinedController
 
         if (!$keHoachBaoCaoDetail){
             return abort(422, "Sự cố khi lấy thông tin");
-        } 
-        $keHoachBaoCaoDetail->keHoachTieuChuanList = DB::table('kehoach_tieuchuan') 
+        }
+        $keHoachBaoCaoDetail->keHoachTieuChuanList = DB::table('kehoach_tieuchuan')
                                                     ->where('kehoach_tieuchuan.id_kh_baocao','=',$keHoachBaoCaoDetail->id)
                                                     ->get();
         //Loại bỏ các kế hoạch tiêu chuẩn chưa xác nhận
@@ -313,7 +332,7 @@ class CompletionreportController extends DefinedController
             $tieuChuan = DB::table('tieuchuan')
                             ->where('id','=',$keHoachTieuChuan->tieuchuan_id)
                             ->first();
-            $keHoachTieuChuan->tieuChuan = $tieuChuan;                
+            $keHoachTieuChuan->tieuChuan = $tieuChuan;
             $keHoachTieuChuan->baoCaoTieuChuan->danhgia = "Chưa hoàn thành";
 
             //Loại bỏ các kế hoạch mệnh đề chưa xác nhận, và lấy dữ liệu kế hoạch hành động
@@ -370,7 +389,7 @@ class CompletionreportController extends DefinedController
         return array($title,$keHoachBaoCaoDetail);
     }
     public function exit_hoanthanh(Request $req){
-            
+
         $keHoachBaoCaoDetail = DB::table('kehoach_baocao')
                                     ->where('id',$req->id_khbc)
                                     ->update([
@@ -381,7 +400,7 @@ class CompletionreportController extends DefinedController
     }
 
     public function exit_molai(Request $req){
-            
+
         $keHoachBaoCaoDetail = DB::table('kehoach_baocao')
                                     ->where('id',$req->id_khbc)
                                     ->update([
@@ -477,7 +496,7 @@ class CompletionreportController extends DefinedController
                                             $sohieubh = $minhchung->sohieu.','.$ngaybh;
                                             $noibanhanh = $minhchung->noi_banhanh;
                                         }
-                                        
+
                                         $mcCollect->push([
                                             'mamc' => $anchorData,
                                             'minhchung' => Lang::get('project/Selfassessment/title.minhchung'),
@@ -487,12 +506,12 @@ class CompletionreportController extends DefinedController
                                         ]);
                                     }
                                 }
-                               
+
                             }
-                            
+
                         }
                     }elseif($kehoachbaocao->writeFollow == 2){
-                       
+
                         foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
                             $keHoachMenhDe->baoCaoMenhDe = DB::table('baocao_menhde')
                                                                 ->where('id_kehoach_bc',$id)
@@ -548,7 +567,7 @@ class CompletionreportController extends DefinedController
                                             $sohieubh = $minhchung->sohieu.','.$ngaybh;
                                             $noibanhanh = $minhchung->noi_banhanh;
                                         }
-                                        
+
                                         $mcCollect->push([
                                             'mamc' => $anchorData,
                                             'minhchung' => Lang::get('project/Selfassessment/title.minhchung'),
@@ -558,15 +577,15 @@ class CompletionreportController extends DefinedController
                                         ]);
                                     }
                                 }
-                               
+
                             }
-                            
+
                         }
-                    }                                         
-                    
+                    }
+
                 }
 
-            } 
+            }
             return array($mcCollect);
         }
         //endcode gốc
@@ -592,7 +611,7 @@ class CompletionreportController extends DefinedController
         //                                                     ->get();
         //             $keHoachTieuChi->tieuChi = DB::table('tieuchi')
         //                                                     ->where('id',$keHoachTieuChi->id_tieuchi)
-        //                                                     ->first();                                         
+        //                                                     ->first();
         //             foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
         //                 $keHoachMenhDe->baoCaoMenhDe = DB::table('baocao_menhde')
         //                                                     ->where('id_kehoach_bc',$req->id_khbc)
@@ -604,7 +623,7 @@ class CompletionreportController extends DefinedController
         //                     $keHoachMenhDe->baoCaoMenhDe->mota = str_replace('id="addminhchunggop_', 'd-id="', $keHoachMenhDe->baoCaoMenhDe->mota);
         //                     $dom = new Dom;
         //                     $dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
-        //                     $contents = $dom->find('.danMinhChung');  
+        //                     $contents = $dom->find('.danMinhChung');
         //                     $arr = array();
         //                     if (!empty($contents)) {
         //                         foreach ($contents as $key => $danMinhChung) {
@@ -627,8 +646,8 @@ class CompletionreportController extends DefinedController
         //                                 continue;
         //                             }
         //                             $checkMC->push($minhChungCode);
-                                    
-                                    
+
+
         //                         }
         //                     }
         //                     DB::table('baocao_menhde')
@@ -638,11 +657,11 @@ class CompletionreportController extends DefinedController
         //                                 "mota"  => $dom,
         //                         ]);
         //                 }
-         
+
         //             }
         //         }
         //     }
-           
+
         //     return Redirect::back()->with("Lang::get('project/Selfassessment/title.mahoatc'");
         // }
 
@@ -669,7 +688,7 @@ class CompletionreportController extends DefinedController
                                                             ->get();
                     $keHoachTieuChi->tieuChi = DB::table('tieuchi')
                                                             ->where('id',$keHoachTieuChi->id_tieuchi)
-                                                            ->first();                                         
+                                                            ->first();
                     foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
                         $keHoachMenhDe->baoCaoMenhDe = DB::table('baocao_menhde')
                                                             ->where('id_kehoach_bc',$req->id_khbc)
@@ -681,7 +700,7 @@ class CompletionreportController extends DefinedController
                             // $keHoachMenhDe->baoCaoMenhDe->mota = str_replace('id="addminhchunggop_', 'd-id="', $keHoachMenhDe->baoCaoMenhDe->mota);
                             $dom = new Dom;
                             $dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
-                            $contents = $dom->find('.danMinhChung');  
+                            $contents = $dom->find('.danMinhChung');
                             $arr = array();
                             if (!empty($contents)) {
                                 foreach ($contents as $key => $danMinhChung) {
@@ -701,8 +720,8 @@ class CompletionreportController extends DefinedController
                                         continue;
                                     }
                                     $checkMC->push($minhChungCode);
-                                    
-                                    
+
+
                                 }
                             }
                             DB::table('baocao_menhde')
@@ -712,11 +731,11 @@ class CompletionreportController extends DefinedController
                                         "mota"  => $dom,
                                 ]);
                         }
-         
+
                     }
                 }
             }
-           
+
             return Redirect::back()->with("Lang::get('project/Selfassessment/title.mahoatc'");
         }
 
@@ -748,8 +767,8 @@ class CompletionreportController extends DefinedController
                                                                  ->select('donvi.*','donvi.ma_donvi as id_donvi')
                                                                  ->leftjoin('donvi','donvi.id','=','users.donvi_id')
                                                                  ->where('users.id',$keHoachBaoCaoDetail2->ns_phutrach)->first();
-     
-                              
+
+
                     $keHoachBaoCaoDetail2->ctdt = DB::table('ctdt')
                                                                  ->where('id',$keHoachBaoCaoDetail2->ctdt_id)->first();
                     $keHoachBaoCaoDetail2->keHoachChung = DB::table('kehoach_chung')
@@ -769,7 +788,7 @@ class CompletionreportController extends DefinedController
                                                                            ->where('id_kh_tieuchuan',$keHoachTieuChuan->id)
                                                                            ->where('id_tieuchuan',$keHoachTieuChuan->tieuchuan_id)
                                                                            ->first();
-                         
+
                          if($tieuChuan){
                               $keHoachTieuChuan->moTaWithStt = "TC $tieuChuan->stt: $tieuChuan->mo_ta";
                               $keHoachTieuChuan->keHoachTieuChiList = $keHoachTieuChiList = DB::table('kehoach_tieuchi')->where('id_kh_tieuchuan',$keHoachTieuChuan->id)->get();
@@ -781,7 +800,7 @@ class CompletionreportController extends DefinedController
                                                                                           ->get();
                                         $keHoachTieuChi->tieuChi = $tieuChi;
                                         foreach($menhde as $value){
-                                             
+
                                              $value->khmenhde = DB::table('kehoach_menhde')
                                                                       ->where('id_kh_tieuchi',$keHoachTieuChi->id)
                                                                       ->where('id_menhde',$value->id)
@@ -792,7 +811,7 @@ class CompletionreportController extends DefinedController
                                                                       ->where('id_kh_menhde',$value->khmenhde->id)
                                                                       ->where('id_menhde',$value->khmenhde->id_menhde)
                                                                       ->first();
-                                             
+
                                              $value->baoCaoMenhDe = $baoCaoMenhDe;
 
                                              $baoCaoMenhDe->keHoachHanhDongList = DB::table('kehoach_hd')
@@ -809,13 +828,13 @@ class CompletionreportController extends DefinedController
                                                                                 ->where('id',$val->ns_kiemtra)
                                                                                 ->first();
                                              }
-                                                  
-                                             
-                                             
+
+
+
                                              $danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
                                         }
-                                        
-                                        
+
+
 
                                         $baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
                                         $danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
@@ -826,7 +845,7 @@ class CompletionreportController extends DefinedController
                                                                                           ->get();
                                         $keHoachTieuChi->tieuChi = $tieuChi;
                                         foreach($menhde as $value){
-                                             
+
                                              $value->khmenhde = DB::table('kehoach_menhde')
                                                                       ->where('id_kh_tieuchi',$keHoachTieuChi->id)
                                                                       ->where('mocchuan_id',$value->id)
@@ -837,7 +856,7 @@ class CompletionreportController extends DefinedController
                                                                       ->where('id_kh_menhde',$value->khmenhde->id)
                                                                       ->where('mocchuan_id',$value->khmenhde->mocchuan_id)
                                                                       ->first();
-                                             
+
                                              $value->baoCaoMenhDe = $baoCaoMenhDe;
 
                                              $baoCaoMenhDe->keHoachHanhDongList = DB::table('kehoach_hd')
@@ -854,32 +873,32 @@ class CompletionreportController extends DefinedController
                                                                                 ->where('id',$val->ns_kiemtra)
                                                                                 ->first();
                                              }
-                                                  
-                                             
-                                             
+
+
+
                                              $danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
                                         }
-                                        
-                                        
+
+
 
                                         $baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
                                         $danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
                                         $keHoachTieuChi->baoCaoTieuChi = $baoCaoTieuChi;
                                    }
-                                   
+
 
                                    if($tieuChi){
                                         $keHoachTieuChi->moTaWithStt = "$tieuChuan->stt.$tieuChi->stt: $tieuChi->mo_ta";
                                    }
-                                   
+
                               }
                          }
-                         
-                         
+
+
                     }
                   }
           }
-               
+
         return array($keHoachBaoCaoList2,$keHoachBaoCaoDetail2);
      }
 
@@ -889,7 +908,7 @@ class CompletionreportController extends DefinedController
                                     ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
                                     ->first();
 
-           $noidung = json_decode($noiDungThem->noidung);                                           
+           $noidung = json_decode($noiDungThem->noidung);
            return array($noidung);
 
     }

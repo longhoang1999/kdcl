@@ -17,7 +17,7 @@ Route::get("update-per", function() {
         ];
         DB::table("role_users")->insert($data);
     }
-    
+
 });
 
 Route::get("update-time", function() {
@@ -29,7 +29,7 @@ Route::get("update-time", function() {
         ];
         DB::table("users")->where("id", $us->id)->update($data);
     }
-    
+
 });
 Route::get("active", function() {
     $users = DB::table("users")->select("id")->get();
@@ -44,7 +44,7 @@ Route::get("active", function() {
         ];
         DB::table("activations")->insert($data);
     }
-    
+
 });
 
 Route::get("active-role-user", function() {
@@ -58,7 +58,7 @@ Route::get("active-role-user", function() {
         ];
         DB::table("role_users")->insert($data);
     }
-    
+
 });
 
 Route::get("create-pass", function() {
@@ -71,7 +71,7 @@ Route::get("create-pass", function() {
             ]);
         }
     }
-    
+
 });
 
 // Route::get("create-role", function(){
@@ -91,9 +91,9 @@ Route::get("create-pass", function() {
 //         if($value != "1"){
 //             $user = Sentinel::findById($value);
 //             $role = Sentinel::findRoleByName('User');
-//             $role->users()->attach($user); 
+//             $role->users()->attach($user);
 //         }
-        
+
 //     }
 // });
 /*
@@ -220,15 +220,15 @@ Route::group(
                 Route::get('{user}/confirm-delete', 'UsersController@getModalDelete')->name('users.confirm-delete');
                 Route::get('{user}/restore', 'UsersController@getRestore')->name('restore.user');
                 //        Route::post('{user}/passwordreset', 'UsersController@passwordreset')->name('passwordreset');
-                Route::post('passwordreset', 'UsersController@passwordreset')->name('passwordreset');   
-                Route::resource('users', 'UsersController');     
-                Route::post('change-pass', 'UsersController@changePass')->name('changePass'); 
-                Route::post('update-user', 'UsersController@updateUser')->name('updateUser');       
-            }            
+                Route::post('passwordreset', 'UsersController@passwordreset')->name('passwordreset');
+                Route::resource('users', 'UsersController');
+                Route::post('change-pass', 'UsersController@changePass')->name('changePass');
+                Route::post('update-user', 'UsersController@updateUser')->name('updateUser');
+            }
         );
-        
-        
-        
+
+
+
         /************
      * bulk import
     ****************************/
@@ -266,7 +266,7 @@ Route::group(
             }
         );
         Route::resource('roles', 'RolesController');
-       
+
         // Route for Project
         Route::group(
             ['namespace' => 'Project'],
@@ -291,8 +291,8 @@ Route::group(
                                 Route::post('copy-standar', 'StandardController@copyStandar')->name('copyStandar');
                                 Route::get('search-and-update-stt', 'StandardController@searchVSUpdateSttSt')->name('searchVSUpdateSttSt');
                                 Route::post('search-and-update-stt2', 'StandardController@searchVSUpdateSttSt2')->name('searchVSUpdateSttSt2');
-                                
-                                
+
+
 
                                 // Thiết lập BTC
                                 Route::get('config-standard/{id}', 'StandardController@configStandard')->name('configStandard');
@@ -310,7 +310,7 @@ Route::group(
                                 Route::get('show-criteria', 'StandardController@showCriteria')->name('showCriteria');
                                 Route::get('delete-single-criteria', 'StandardController@deleteSgCriteria')->name('deleteSgCriteria');
                                 Route::post('update-stt-sriteria', 'StandardController@updateSttCriteria')->name('updateSttCriteria');
-                                
+
                                 // Quản lý tiêu chuẩn, tiêu chí
                                 Route::get('criteria', 'StandardController@criteria')->name('criteria');
                                 Route::post('up-criteria', 'StandardController@upCriteria')->name('upCriteria');
@@ -320,9 +320,9 @@ Route::group(
                                 Route::get('delete-mocchuan', 'StandardController@deleteMocchuan')->name('deleteMocchuan');
                                 Route::get('get-mocchuan', 'StandardController@getDataMocchuan')->name('getDataMocchuan');
                                 Route::post('update-mocchuan', 'StandardController@updateMocchuan')->name('updateMocchuan');
-                                
-                                
-                                
+
+
+
                                 // Minh chứng tối thiểu
                                 Route::get('show-minimum', 'StandardController@showMinimum')->name('showMinimum');
                                 Route::post('minimum', 'StandardController@minimum')->name('minimum');
@@ -336,7 +336,7 @@ Route::group(
                                 Route::get('load-tieuchi-mctt', 'StandardController@loadTchiMctt')->name('loadTchiMctt');
                                 Route::post('update-mctt', 'StandardController@updateMctt')->name('updateMctt');
 
-                                
+
                                 // Gợi ý hướng dẫn
                                 Route::get('show-suggestions', 'StandardController@showSugges')->name('showSugges');
                                 Route::post('suggestions', 'StandardController@suggestions')->name('suggestions');
@@ -348,16 +348,16 @@ Route::group(
                                Route::get('find-standard-criteria2', 'StandardController@fStandardCriteria2')->name('fStandardCriteria2');
                                Route::get('load-tieuchi-mctt2', 'StandardController@loadTchiMctt2')->name('loadTchiMctt2');
                                Route::post('update-gyhd', 'StandardController@updateGyhd')->name('updateGyhd');
-                                
+
                                 // Chỉ báo
                                 Route::post('chibao', 'StandardController@postChibao')->name('postChibao');
                                 Route::get('data-chibao', 'StandardController@dataChibao')->name('dataChibao');
                                 Route::get('delete-chibao', 'StandardController@deleteChibao')->name('deleteChibao');
                                 Route::post('update-chibao', 'StandardController@updateChibao')->name('updateChibao');
 
-                                
 
-                                
+
+
                             }
                         );
                         /*routes for set category*/
@@ -388,8 +388,8 @@ Route::group(
                                 Route::post('import-unit', 'CategoryController@importUnit')->name('importUnit');
                                 Route::post('import-data-unit', 'CategoryController@importDataUnit')->name('importDataUnit');
                                 Route::get('export-data-unit', 'CategoryController@exportUnit')->name('exportUnit');
-                                
-                                
+
+
                                 // QL nhân sự
                                 Route::get('manahuman', 'CategoryController@human')
                                     ->middleware(['super_check:admin,operator'])
@@ -411,7 +411,7 @@ Route::group(
                                 Route::post('create-ctdt', 'CategoryController@createCTDT')->name('createCTDT');
                                 Route::get('delete-ctdt', 'CategoryController@deleteCTDT')->name('deleteCTDT');
                                 Route::post('update-ctdt', 'CategoryController@updateCTDT')->name('updateCTDT');
-                                
+
                                 // Quản lý cơ sở đào tạo
                                 Route::get('manacsdt', 'CategoryController@csdt')
                                     ->middleware(['super_check:admin,operator'])
@@ -422,7 +422,7 @@ Route::group(
                                 Route::post('update-csdt', 'CategoryController@updateCSDT')->name('updateCSDT');
                                 Route::post('create-csdt', 'CategoryController@createCSDT')->name('createCSDT');
 
-                                
+
                                 // Quản lý link báo cáo ngoài
                                 Route::get('linkreport', 'CategoryController@linkreport')
                                     ->middleware(['super_check:admin,operator'])
@@ -465,7 +465,7 @@ Route::group(
                                 Route::get('xoa-comment', 'MessageboardController@xoaComment')->name('xoaComment');
                                 Route::post('post-parent', 'MessageboardController@postParent')->name('postParent');
                                 Route::get('like-post', 'MessageboardController@likePosst')->name('likePosst');
-                                
+
                             }
                         );
                         /*routes for Chat*/
@@ -476,7 +476,7 @@ Route::group(
                                 Route::get('index', 'ChatController@chat')->name('chat');
                             }
                         );
-                    }   
+                    }
                 );
 
                 // Route for function so chuẩn
@@ -509,11 +509,11 @@ Route::group(
                             }
                         );
 
-                    }   
+                    }
                 );
                 // Route for function đảm bảo chất lượng
                 Route::group(
-                    ['prefix' => 'dam-bao-chat-luong', 'as' => 'dambaochatluong.', 'namespace' => 'Dambaochatluong', 'middleware' => 
+                    ['prefix' => 'dam-bao-chat-luong', 'as' => 'dambaochatluong.', 'namespace' => 'Dambaochatluong', 'middleware' =>
                         ['super_check:admin,operator,canboDBCL,truongdonvi,khac']
                     ],
                     function () {
@@ -528,8 +528,8 @@ Route::group(
                                 Route::get('delete-ccsl', 'PlanningController@deleteCcsl')->name('deleteCcsl');
                                 Route::post('create-ccsl', 'PlanningController@createCcsl')->name('createCcsl');
                                 Route::post('update-ccsl', 'PlanningController@updateCcsl')->name('updateCcsl');
-                               
-                                
+
+
                                 Route::post('show-not-plan', 'PlanningController@showNotPlan')->name('showNotPlan');
                                 Route::get('update-plan', 'PlanningController@updatePlan')->name('updatePlan');
                                 Route::post('show-plan', 'PlanningController@showPlan')->name('showPlan');
@@ -538,8 +538,8 @@ Route::group(
 
                                 Route::get('exportplaning', 'PlanningController@exportplaning')->name('exportplaning');
                                 Route::get('load-data-copy', 'PlanningController@loadDataCopy')->name('loadDataCopy');
-                                
-                                
+
+
                             }
                         );
                         // /*routes for set updateaci*/
@@ -559,12 +559,12 @@ Route::group(
                                 Route::post('update-mcyc', 'UpdateAciController@updateMcyc')->name("updateMcyc");
                                 Route::post('create-mcyc', 'UpdateAciController@createMcyc')->name("createMcyc");
                                 Route::get('show-hdn-mc/{id}', 'UpdateAciController@showHdnMc')->name("showHdnMc");
-                                
+
                                 Route::post("post-update-mcyc", "UpdateAciController@postUpdateMcyc")->name("postUpdateMcyc");
                                 Route::get('show-data-mc', 'UpdateAciController@showDataMc')->name("showDataMc");
                                 Route::get('chen-mc', 'UpdateAciController@chenMc')->name("chenMc");
-                                
-                                
+
+
                                 Route::get('get-update-mcyc', 'UpdateAciController@upGetMcyc')->name("upGetMcyc");
                                 Route::get('delete-mcyc', 'UpdateAciController@deleteMcyc')->name("deleteMcyc");
                                 Route::get('get-data-mc', 'UpdateAciController@getDataMc')->name("getDataMc");
@@ -573,7 +573,7 @@ Route::group(
                                 Route::get('exceltaction', 'UpdateAciController@exceltaction')->name('exceltaction');
                             }
                         );
-                        
+
                         //  /*routes for set manaproof*/
                         Route::group(
                             ['prefix' => 'manaproof', 'as' => 'manaproof.', 'namespace' => 'ManaProof'],
@@ -613,12 +613,12 @@ Route::group(
                                 Route::get('chinh-sua/{id}', 'CheckProofController@editData')->name('editData');
                                 Route::get('danh-sach-minh-chung/{id}', 'CheckProofController@getListMc')->name('getListMc');
                                 Route::get('cong-bo-hoat-dong/{id}', 'CheckProofController@congbo')->name('congbo');
-                                
+
                                 Route::get('danh-sach-minh-chung-yeu-cau/{id}', 'CheckProofController@getListMcyc')->name('getListMcyc');
                                 Route::post('tu-choi', 'CheckProofController@cancelMc')->name('cancelMc');
                                 Route::get('mo-lai-hoat-dong/{id}', 'CheckProofController@openAgain')->name('openAgain');
                                 Route::get('mchdata', 'CheckProofController@mchdata')->name('mchdata');
-                                
+
                             }
                         );
 
@@ -628,11 +628,11 @@ Route::group(
                             function () {
                                 // kế hoạch hoạt động
                                 Route::get('index', 'ProofClaimController@index')
-                                    ->middleware(['super_check:admin,operator,canboDBCL,truongdonvi'])    
+                                    ->middleware(['super_check:admin,operator,canboDBCL,truongdonvi'])
                                     ->name('index');
                                 Route::post('danh-sach', 'ProofClaimController@getListKhhd')->name('getListKhhd');
                                 Route::get('exportlistKhhd', 'ProofClaimController@exportlistKhhd')->name('exportlistKhhd');
-                                
+
                             }
                         );
                     }
@@ -667,7 +667,7 @@ Route::group(
                                 Route::get('index', 'SyntResultController@index')->name('index');
                             }
                         );
-                    }   
+                    }
                 );
 
                 // Tổng hợp
@@ -697,7 +697,7 @@ Route::group(
                                 Route::post('update_nx', 'ToghopControntroller@update_nx')->name('update_nx');
                                 Route::get('showfile', 'ToghopControntroller@showfile')->name('showfile');
                                 Route::get('deletefiles', 'ToghopControntroller@deletefiles')->name('deletefiles');
-                                
+
 
 
                             }
@@ -714,16 +714,16 @@ Route::group(
                         Route::group(
                             ['prefix' => 'report', 'as' => 'report.', 'namespace' => 'Report'],
                             function(){
-                                //DS Báo cáo tự đánh giá 
+                                //DS Báo cáo tự đánh giá
                                 Route::get('index', 'ReportController@index')
                                     ->middleware(['super_check:admin,operator,ttchuyentrach'])
                                     ->name('index');
-                                //Data 
+                                //Data
                                 Route::get('data', 'ReportController@data')->name('data');
                                 Route::get('lap-ke-hoach/{id}', 'ReportController@planning')->name('planning');
                                 Route::get('delete-plan', 'ReportController@deletePlan')->name('deletePlan');
                                 Route::get('get-data-current', 'ReportController@getDataCurrent')->name('getDataCurrent');
-                                
+
                                 //update date
                                 Route::get('upadate_kq', 'ReportController@upadate_kq')->name('upadate_kq');
                                 Route::get('upadate_tieuchuan', 'ReportController@upadate_tieuchuan')->name('upadate_tieuchuan');
@@ -754,12 +754,12 @@ Route::group(
                         Route::group(
                             ['prefix' => 'addreport', 'as' => 'addreport.', 'namespace' => 'Addreport'],
                             function(){
-                                //Thêm mới báo cáo  
+                                //Thêm mới báo cáo
                                 Route::get('index', 'AddreportController@index')->name('index');
                                 Route::post('insert', 'AddreportController@insert')->name('insert');
                                 Route::get('searchLtc', 'AddreportController@searchLtc')->name('searchLtc');
                                 Route::post('update', 'AddreportController@update')->name('update');
-                                
+
                             }
                         );
 
@@ -794,10 +794,10 @@ Route::group(
                                 Route::post('updatemenhdedm', 'DetailedplanningController@updatemenhdedm')->name('updatemenhdedm');
                                 Route::post('updatemenhdett', 'DetailedplanningController@updatemenhdett')->name('updatemenhdett');
                                 Route::post('updtecbmd', 'DetailedplanningController@updtecbmd')->name('updtecbmd');
-                                Route::post('updtemlmd', 'DetailedplanningController@updtemlmd')->name('updtemlmd');  
-                                Route::post('update_muc', 'DetailedplanningController@update_muc')->name('update_muc'); 
+                                Route::post('updtemlmd', 'DetailedplanningController@updtemlmd')->name('updtemlmd');
+                                Route::post('update_muc', 'DetailedplanningController@update_muc')->name('update_muc');
 
-                                Route::get('showmcgop', 'DetailedplanningController@showmcgop')->name('showmcgop'); 
+                                Route::get('showmcgop', 'DetailedplanningController@showmcgop')->name('showmcgop');
                                 Route::post('modalminhchung', 'DetailedplanningController@modalminhchung')->name('modalminhchung');
 
                                 Route::post('tontai_diemmanh', 'DetailedplanningController@tontai_diemmanh')->name('tontai_diemmanh');
@@ -813,19 +813,19 @@ Route::group(
                             ['prefix' => 'commentreport', 'as' => 'commentreport.', 'namespace' => 'Commentreport'],
                             function(){
                                 Route::get('index', 'CommentreportController@index')
-                                    ->middleware(['super_check:admin,operator,ns_kiemtra,ttchuyentrach']) 
+                                    ->middleware(['super_check:admin,operator,ns_kiemtra,ttchuyentrach'])
                                     ->name('index');
                                 //Data
                                 Route::get('data', 'CommentreportController@data')->name('data');
                                 Route::get('general/{id}', 'CommentreportController@general')->name('general');
                                 Route::get('conclusion/{id}', 'CommentreportController@conclusion')->name('conclusion');
                                 Route::post('createComment', 'CommentreportController@createComment')->name('createComment');
-                                Route::post('nhanXetDelete', 'CommentreportController@nhanXetDelete')->name('nhanXetDelete'); 
+                                Route::post('nhanXetDelete', 'CommentreportController@nhanXetDelete')->name('nhanXetDelete');
 
                                 Route::get('viewreport', 'CommentreportController@viewReport')->name('viewReport');
-                                Route::post('createCommentBlock', 'CommentreportController@createCommentBlock')->name('createCommentBlock'); 
-                                Route::post('update_nx', 'CommentreportController@update_nx')->name('update_nx'); 
-                                Route::post('delete_nx', 'CommentreportController@delete_nx')->name('delete_nx'); 
+                                Route::post('createCommentBlock', 'CommentreportController@createCommentBlock')->name('createCommentBlock');
+                                Route::post('update_nx', 'CommentreportController@update_nx')->name('update_nx');
+                                Route::post('delete_nx', 'CommentreportController@delete_nx')->name('delete_nx');
                                 Route::post('update_comment', 'CommentreportController@update_comment')->name('update_comment');
                             }
                         );
@@ -835,7 +835,6 @@ Route::group(
                             function(){
                                 //Chuẩn bị báo cáo
                                 Route::get('index', 'CompletionreportController@index')
-                                    ->middleware(['super_check:admin,operator,ttchuyentrach'])
                                     ->name('index');
                                 //Data
                                 Route::get('data', 'CompletionreportController@data')->name('data');
@@ -860,8 +859,8 @@ Route::group(
                                 Route::post('save_file_ctdt', 'databaseController@save_file_ctdt')->name('save_file_ctdt');
                                 Route::post('save_file_csgd', 'databaseController@save_file_csgd')->name('save_file_csgd');
                                 Route::get('apiNoiDungThem', 'databaseController@apiNoiDungThem')->name('apiNoiDungThem');
-                                
-                                
+
+
                             }
                         );
 
@@ -887,7 +886,7 @@ Route::group(
                                 Route::get('search-mctt', 'PreparereportController@searchMctt')->name('searchMctt');
                                 Route::post('gop-minh-chung', 'PreparereportController@gopMinhChung')->name('gopMinhChung');
                                 Route::get('edit-mc-gop/{id}', 'PreparereportController@editmcgop')->name('editmcgop');
-                                
+
                                 // đối chiếu minh chứng
                                 Route::get('doi-chieu-mc', 'PreparereportController@proofCompare')
                                     ->middleware(['super_check:admin,operator,ns_phutrach,ttchuyentrach'])
@@ -897,15 +896,15 @@ Route::group(
                                 Route::post('bo-xac-nhan-tieu-chi', 'PreparereportController@boxacnhanTchi')->name('boxacnhanTchi');
                                 Route::post('xoa-minh-chung', 'PreparereportController@xoaMinhChung')->name('xoaMinhChung');
                                 Route::get('create-mc-gop', 'PreparereportController@createMcGop')->name('createMcGop');
-                                
 
-                                
+
+
                             }
                         );
                     }
                 );
 
-                // Route for function đánh giá ngoài 
+                // Route for function đánh giá ngoài
                 Route::group(
                     ['prefix' => 'danh-gia-ngoai', 'as' => 'danhgiangoai.', 'namespace' => 'Danhgiangoai'],
                     function(){
@@ -939,7 +938,7 @@ Route::group(
                                 Route::post("phanquyen", 'PlanningassessmentController@phanquyen')->name('phanquyen');
                                 Route::get('get-data','PlanningassessmentController@getdata')->name('getdata');
                                 Route::get('delete-data','PlanningassessmentController@deletedata')->name('deletedata');
-                                
+
                             }
                         );
                     }
@@ -948,7 +947,7 @@ Route::group(
                 );
 
 
-                // Route for function Import dữ liệu thô 
+                // Route for function Import dữ liệu thô
                 Route::group(
                     ['prefix' => 'import-du-lieu-excel', 'as' => 'importdata.', 'namespace' => 'Importdata', 'middleware' => ['super_check:admin,operator']],
                     function(){
@@ -978,7 +977,7 @@ Route::group(
                                 Route::post('import-data-unit', 'NhansuController@importDataUnit')->name('importDataUnit');
                                 Route::get('delete-unit', 'NhansuController@deleteUnit')->name('deleteUnit');
                                 Route::post('update-unit', 'NhansuController@updateUnit')->name('updateUnit');
-                                
+
                                 //Export nhân sự
                                 Route::get('export-unit', 'NhansuController@exportUnit')->name('exportUnit');
                             }
@@ -990,14 +989,14 @@ Route::group(
                             function(){
                                 Route::get('index','DlsinhvienController@index')->name('index');
                                 Route::post('import-unit', 'DlsinhvienController@importUnit')->name('importUnit');
-                                Route::post('import-data-unit', 
+                                Route::post('import-data-unit',
                                     'DlsinhvienController@importDataUnit')->name('importDataUnit');
                                 Route::get('data-unit', 'DlsinhvienController@dataUnit')->name('dataUnit');
                                 Route::get('delete-unit', 'DlsinhvienController@deleteUnit')->name('deleteUnit');
                                 Route::post('update-unit', 'DlsinhvienController@updateUnit')->name('updateUnit');
                                 //Export sinh viên
                                 Route::get('export-unit', 'DlsinhvienController@exportUnit')->name('exportUnit');
-                                
+
                             }
                         );
                         // Import KHCN
@@ -1193,7 +1192,7 @@ Route::group(
                                 //Export thống kê ký túc xá
                                 Route::get('export-tkktx', 'ThongkekytucxaController@exportTkktx')->name('exportTkktx');
                                 Route::get('delete-all', 'ThongkekytucxaController@deleteAll')->name('deleteAll');
-                                
+
                             }
                         );
 
@@ -1367,7 +1366,7 @@ Route::group(
                             }
                         );
 
-                         // Import công khai giáo trình, tài liệu tham khảo do cơ sở giáo dục tổ chức biên soạn 
+                         // Import công khai giáo trình, tài liệu tham khảo do cơ sở giáo dục tổ chức biên soạn
                          Route::group(
                             ['prefix' => 'cong-khai-tai-lieu', 'as' => 'ckgttl.', 'namespace' => 'Congkhaigttl'],
                             function(){
@@ -1378,13 +1377,13 @@ Route::group(
                                 Route::get('delete-unit', 'CongkhaigttlController@deleteUnit')->name('deleteUnit');
                                 Route::post('update-unit', 'CongkhaigttlController@updateUnit')->name('updateUnit');
 
-                                //Export  giáo trình, tài liệu tham khảo do cơ sở giáo dục tổ chức biên soạn 
+                                //Export  giáo trình, tài liệu tham khảo do cơ sở giáo dục tổ chức biên soạn
                                 Route::get('export-ckgttl', 'CongkhaigttlController@exportCkgttl')->name('exportCkgttl');
 
                             }
                         );
 
-                         // Import công khai các môn học của từng khóa học, chuyên ngành 
+                         // Import công khai các môn học của từng khóa học, chuyên ngành
                          Route::group(
                             ['prefix' => 'cong-khai-mon-hoc', 'as' => 'ckmh.', 'namespace' => 'Congkhaimh'],
                             function(){
@@ -1401,7 +1400,7 @@ Route::group(
                             }
                         );
 
-                        // Import công khai thông tin về quy mô đào tạo hiện tại   
+                        // Import công khai thông tin về quy mô đào tạo hiện tại
                         Route::group(
                             ['prefix' => 'cong-khai-quy-mo-dao-tao', 'as' => 'ckqmdt.', 'namespace' => 'Congkhaiqmdt'],
                             function(){
@@ -1469,9 +1468,9 @@ Route::group(
                             }
                         );
 
-                        
 
-                        // Import công khai tỷ lệ sinh viên/giảng viên quy đổi 
+
+                        // Import công khai tỷ lệ sinh viên/giảng viên quy đổi
                         Route::group(
                             ['prefix' => 'cong-khai-sinh-vien-giang-vien', 'as' => 'cksvgv.', 'namespace' => 'Congkhaisvgv'],
                             function(){
@@ -1482,13 +1481,13 @@ Route::group(
                                 Route::get('delete-unit', 'CongkhaisvgvController@deleteUnit')->name('deleteUnit');
                                 Route::post('update-unit', 'CongkhaisvgvController@updateUnit')->name('updateUnit');
 
-                                //Export công khai tỷ lệ sinh viên/giảng viên quy đổi 
+                                //Export công khai tỷ lệ sinh viên/giảng viên quy đổi
                                 Route::get('export-cksvgv', 'CongkhaisvgvController@exportCksvgv')->name('exportCksvgv');
 
                             }
                         );
 
-                        // Import diện tích đất/sinh viên; diện tích sàn/sinh viên  
+                        // Import diện tích đất/sinh viên; diện tích sàn/sinh viên
                         Route::group(
                             ['prefix' => 'dien-tich-dat-sinh-vien', 'as' => 'ckdtdsv.', 'namespace' => 'Congkhaidtdsv'],
                             function(){
@@ -1499,13 +1498,13 @@ Route::group(
                                 Route::get('delete-unit', 'CongkhaidtdsvController@deleteUnit')->name('deleteUnit');
                                 Route::post('update-unit', 'CongkhaidtdsvController@updateUnit')->name('updateUnit');
 
-                                //Export công khai tỷ lệ sinh viên/giảng viên quy đổi 
+                                //Export công khai tỷ lệ sinh viên/giảng viên quy đổi
                                 Route::get('export-ckdtdsv', 'CongkhaidtdsvController@exportCkdtdsv')->name('exportCkdtdsv');
 
                             }
                         );
 
-                        // Import công khai thông tin đào tạo theo đơn đặt hàng của nhà nước, địa phương và doanh nghiệp  
+                        // Import công khai thông tin đào tạo theo đơn đặt hàng của nhà nước, địa phương và doanh nghiệp
                         Route::group(
                             ['prefix' => 'thong-tin-dao-tao', 'as' => 'ckttdt.', 'namespace' => 'Congkhaittdt'],
                             function(){
@@ -1539,7 +1538,7 @@ Route::group(
                             }
                         );
 
-                        // Import công khai thông tin về học liệu (sách, tạp chí, e-book, cơ sở dữ liệu điện tử) của thư viện và trung tâm học liệu 
+                        // Import công khai thông tin về học liệu (sách, tạp chí, e-book, cơ sở dữ liệu điện tử) của thư viện và trung tâm học liệu
                         Route::group(
                             ['prefix' => 'cong-khai-tt-ve-hoc-lieu', 'as' => 'ckttvhl.', 'namespace' => 'Congkhaittvhl'],
                             function(){
@@ -1550,13 +1549,13 @@ Route::group(
                                 Route::get('delete-unit', 'CongkhaittvhlController@deleteUnit')->name('deleteUnit');
                                 Route::post('update-unit', 'CongkhaittvhlController@updateUnit')->name('updateUnit');
 
-                                //Export công khai thông tin về học liệu (sách, tạp chí, e-book, cơ sở dữ liệu điện tử) của thư viện và trung tâm học liệu 
+                                //Export công khai thông tin về học liệu (sách, tạp chí, e-book, cơ sở dữ liệu điện tử) của thư viện và trung tâm học liệu
                                 Route::get('export-cksvgv', 'CongkhaittvhlController@exportCksvgv')->name('exportCksvgv');
 
                             }
                         );
 
-                        // Import công khai thông tin về các hoạt động nghiên cứu khoa học, chuyển giao công nghệ, sản xuất thử và tư vấn  
+                        // Import công khai thông tin về các hoạt động nghiên cứu khoa học, chuyển giao công nghệ, sản xuất thử và tư vấn
                         Route::group(
                             ['prefix' => 'cong-khai-nghien-cuu-khoa-hoc', 'as' => 'cknckh.', 'namespace' => 'Congkhainckh'],
                             function(){
@@ -1567,14 +1566,14 @@ Route::group(
                                 Route::get('delete-unit', 'CongkhainckhController@deleteUnit')->name('deleteUnit');
                                 Route::post('update-unit', 'CongkhainckhController@updateUnit')->name('updateUnit');
 
-                                //Export công khai thông tin về các hoạt động nghiên cứu khoa học, chuyển giao công nghệ, sản xuất thử và tư vấn  
+                                //Export công khai thông tin về các hoạt động nghiên cứu khoa học, chuyển giao công nghệ, sản xuất thử và tư vấn
                                 Route::get('export-cknckh', 'CongkhainckhController@exportCknckh')->name('exportCknckh');
 
                             }
                         );
 
 
-                        // Import công khai cam kết chất lượng đào tạo của Trường Đại học Công nghiệp Dệt May Hà Nội năm học 
+                        // Import công khai cam kết chất lượng đào tạo của Trường Đại học Công nghiệp Dệt May Hà Nội năm học
                         Route::group(
                             ['prefix' => 'cong-khai-cam-ket-chat-luong', 'as' => 'ckcldt.', 'namespace' => 'Congkhaickcl'],
                             function(){
@@ -1599,7 +1598,7 @@ Route::group(
 
                             }
                         );
-                        
+
                         // Import công khai thông tin danh sách chi tiết đội ngũ giảng viên theo khối ngành
                         Route::group(
                             ['prefix' => 'cong-khai-doi-ngu-gv', 'as' => 'ckdngv.', 'namespace' => 'Congkhaidngv'],
@@ -1610,7 +1609,7 @@ Route::group(
                                 Route::get('data-unit', 'CongkhaidngvController@dataUnit')->name('dataUnit');
                                 Route::get('delete-unit', 'CongkhaidngvController@deleteUnit')->name('deleteUnit');
                                 Route::post('update-unit', 'CongkhaidngvController@updateUnit')->name('updateUnit');
-                                
+
                                 //Export công khai thông tin danh sách chi tiết đội ngũ giảng viên theo khối ngành
                                 Route::get('export-cknckh', 'CongkhaidngvController@exportCkdtdsv')->name('exportCkdtdsv');
 
@@ -1625,7 +1624,7 @@ Route::group(
                                 Route::post('create-unit','CongkhaidngvchController@createUnit')->name('createUnit');
                                 Route::get('delete-unit', 'CongkhaidngvchController@deleteUnit')->name('deleteUnit');
                                 Route::get('get-info-unit', 'CongkhaidngvchController@getInfoUnit')->name('getInfoUnit');
-                                
+
                                 Route::post('update-unit', 'CongkhaidngvchController@updateUnit')->name('updateUnit');
 
                             }
@@ -1822,7 +1821,7 @@ Route::group(
                                 ->name('index');
                                 Route::post('addfilenew', 'ThongkekytucxaController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'ThongkekytucxaController@showFileData')->name('showFileData');
-                                
+
                             }
                         );
 
@@ -1958,7 +1957,7 @@ Route::group(
                             }
                         );
 
-                         // Import công khai giáo trình, tài liệu tham khảo do cơ sở giáo dục tổ chức biên soạn 
+                         // Import công khai giáo trình, tài liệu tham khảo do cơ sở giáo dục tổ chức biên soạn
                          Route::group(
                             ['prefix' => 'cong-khai-tai-lieu', 'as' => 'ckgttl.', 'namespace' => 'Congkhaigttl'],
                             function(){
@@ -1971,7 +1970,7 @@ Route::group(
                             }
                         );
 
-                         // Import công khai các môn học của từng khóa học, chuyên ngành 
+                         // Import công khai các môn học của từng khóa học, chuyên ngành
                          Route::group(
                             ['prefix' => 'cong-khai-mon-hoc', 'as' => 'ckmh.', 'namespace' => 'Congkhaimh'],
                             function(){
@@ -1982,7 +1981,7 @@ Route::group(
                             }
                         );
 
-                        // Import công khai thông tin về quy mô đào tạo hiện tại   
+                        // Import công khai thông tin về quy mô đào tạo hiện tại
                         Route::group(
                             ['prefix' => 'cong-khai-quy-mo-dao-tao', 'as' => 'ckqmdt.', 'namespace' => 'Congkhaiqmdt'],
                             function(){
@@ -2034,9 +2033,9 @@ Route::group(
                             }
                         );
 
-                        
 
-                        // Import công khai tỷ lệ sinh viên/giảng viên quy đổi 
+
+                        // Import công khai tỷ lệ sinh viên/giảng viên quy đổi
                         Route::group(
                             ['prefix' => 'cong-khai-sinh-vien-giang-vien', 'as' => 'cksvgv.', 'namespace' => 'Congkhaisvgv'],
                             function(){
@@ -2049,7 +2048,7 @@ Route::group(
                             }
                         );
 
-                        // Import diện tích đất/sinh viên; diện tích sàn/sinh viên  
+                        // Import diện tích đất/sinh viên; diện tích sàn/sinh viên
                         Route::group(
                             ['prefix' => 'dien-tich-dat-sinh-vien', 'as' => 'ckdtdsv.', 'namespace' => 'Congkhaidtdsv'],
                             function(){
@@ -2062,7 +2061,7 @@ Route::group(
                             }
                         );
 
-                        // Import công khai thông tin đào tạo theo đơn đặt hàng của nhà nước, địa phương và doanh nghiệp  
+                        // Import công khai thông tin đào tạo theo đơn đặt hàng của nhà nước, địa phương và doanh nghiệp
                         Route::group(
                             ['prefix' => 'thong-tin-dao-tao', 'as' => 'ckttdt.', 'namespace' => 'Congkhaittdt'],
                             function(){
@@ -2088,7 +2087,7 @@ Route::group(
                             }
                         );
 
-                        // Import công khai thông tin về học liệu (sách, tạp chí, e-book, cơ sở dữ liệu điện tử) của thư viện và trung tâm học liệu 
+                        // Import công khai thông tin về học liệu (sách, tạp chí, e-book, cơ sở dữ liệu điện tử) của thư viện và trung tâm học liệu
                         Route::group(
                             ['prefix' => 'cong-khai-tt-ve-hoc-lieu', 'as' => 'ckttvhl.', 'namespace' => 'Congkhaittvhl'],
                             function(){
@@ -2101,7 +2100,7 @@ Route::group(
                             }
                         );
 
-                        // Import công khai thông tin về các hoạt động nghiên cứu khoa học, chuyển giao công nghệ, sản xuất thử và tư vấn  
+                        // Import công khai thông tin về các hoạt động nghiên cứu khoa học, chuyển giao công nghệ, sản xuất thử và tư vấn
                         Route::group(
                             ['prefix' => 'cong-khai-nghien-cuu-khoa-hoc', 'as' => 'cknckh.', 'namespace' => 'Congkhainckh'],
                             function(){
@@ -2115,7 +2114,7 @@ Route::group(
                         );
 
 
-                        // Import công khai cam kết chất lượng đào tạo của Trường Đại học Công nghiệp Dệt May Hà Nội năm học 
+                        // Import công khai cam kết chất lượng đào tạo của Trường Đại học Công nghiệp Dệt May Hà Nội năm học
                         Route::group(
                             ['prefix' => 'cong-khai-cam-ket-chat-luong', 'as' => 'ckcldt.', 'namespace' => 'Congkhaickcl'],
                             function(){
@@ -2139,7 +2138,7 @@ Route::group(
 
                             }
                         );
-                        
+
                         // Import công khai thông tin danh sách chi tiết đội ngũ giảng viên theo khối ngành
                         Route::group(
                             ['prefix' => 'cong-khai-doi-ngu-gv', 'as' => 'ckdngv.', 'namespace' => 'Congkhaidngv'],
@@ -2179,7 +2178,7 @@ Route::group(
                                 Route::post('update-kehoach','LapkehoachExcelController@updateKH')->name('updateKH');
                                 Route::get('delete-kehoach','LapkehoachExcelController@deleteKehoach')->name('deleteKehoach');
 
-                                
+
                             }
                         );
 
@@ -2188,11 +2187,11 @@ Route::group(
             }
         );
 
-        
 
 
 
-        
+
+
 
         Route::get(
             'crop_demo',
