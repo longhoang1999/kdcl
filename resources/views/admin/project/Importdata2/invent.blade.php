@@ -78,6 +78,7 @@
     	</div>
         <div id="excel_data2" class="mt-5"></div>
         
+        @if(!isset($kiemtra))
         <div class="card mt-4">
     		<div class="card-body">
     			<div class="row">
@@ -104,7 +105,7 @@
     		</div>
     	</div>
         <div id="excel_data" class="mt-5"></div>
-
+        @endif
 
     </div>
 </section>
@@ -129,6 +130,7 @@
 
 <script src="{{ asset('js/xlsx.full.min.js') }}"></script>
 <script>
+    @if(!isset($kiemtra))
     const excel_file = document.getElementById('excel_file');
     excel_file.addEventListener('change', (event) => {
         if(!['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'].includes(event.target.files[0].type))
@@ -171,7 +173,7 @@
             // excel_file.value = '';
         }
     });
-
+    @endif
 
 
     $("#selectYear").on("change", function() {
