@@ -42,12 +42,12 @@
                             <th>@lang('project/Selfassessment/title.loaitieuchuan')</th>
                             <th>@lang('project/Selfassessment/title.nam')</th>
                         </thead>
-                        <tbody class="tbodys">                        
-                        </tbody>                
-                    </table> 
+                        <tbody class="tbodys">
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="col-md-7">       
+            <div class="col-md-7">
                 <div id="div_showbc" style="margin-left: 20px; padding-bottom: 22px;"></div>
             </div>
         </div>
@@ -93,7 +93,7 @@
         }
     }
 
-    function selectBC(dat){    
+    function selectBC(dat){
         var textout = '<br/><h4 id="div_showbcs" style="text-align: center;width: 100%;">' + dat.ten_bc + '</h4><br/>';
         var id_khbc = dat.id;
         var name_bc = dat.ten_bc;
@@ -103,8 +103,8 @@
             type: 'GET',
             error: function(err) {
 
-            },            
-            
+            },
+
             success: function(data) {
                 // console.log(data)
                 var texto = '<li class="dd-item">' + data.solieutonghop + '</li>';
@@ -115,9 +115,9 @@
                     texto += '<div class="alert alert-warning">' + "@lang('project/Selfassessment/message.alert.kocobctc')" + '</div>';
                 }else{
                     let temp = 0;
-                  
+
                         texto += data.phan1 ;
-                    
+
                     texto += data.phan2 ;
                     var name_trangthai = '';
                     var testm = '';
@@ -128,60 +128,60 @@
                             var css_color;
                             if(value.baoCaoTieuChuan != undefined){
                                 if(value.baoCaoTieuChuan.trang_thai_bctc == 'nhanxet'){
-                                 
+
                                     name_trangthai = '<i class="fas fa-pen"></i>' + "@lang('project/Selfassessment/title.suabaocao')";
                                     css_color = 'css_color_organe';
 
                                     testm = `<a href="{{ route('admin.tudanhgia.detailedplanning.show')}}?id=${value.id_kh_baocao}&tieuchuan_id=${value.tieuchuan_id} " class="${css_trangthai } ${css_color}">`+name_trangthai+ '</a>';
-                                    
+
                                 }else if(value.baoCaoTieuChuan.trang_thai_bctc == 'dangsua'){
-                                  
+
                                     name_trangthai = '<i class="fas fa-pen"></i>' + "@lang('project/Selfassessment/title.suabaocao')";
                                     css_color = 'css_color_organe';
 
                                     testm =`<a href="{{ route('admin.tudanhgia.detailedplanning.show')}}?id=${value.id_kh_baocao}&tieuchuan_id=${value.tieuchuan_id} " class="${css_trangthai } ${css_color}">`+name_trangthai+ '</a>';
-                                   
+
                                 }
                                 else{
                                     name_trangthai = '<i class="fas fa-eye"></i>' + "@lang('project/Selfassessment/title.xembaocao')";
                                     css_color = 'css_color_blue';
 
                                     testm =`<a href="{{ route('admin.tudanhgia.detailedplanning.show')}}?id=${value.id_kh_baocao}&tieuchuan_id=${value.tieuchuan_id} " class="${css_trangthai } ${css_color}">`+name_trangthai+ '</a>';
-                                } 
+                                }
                             }else{
-                            
+
                                 name_trangthai = '<i class="fas fa-pen"></i>' + "@lang('project/Selfassessment/title.vietbc')"
                                 css_color = 'css_color_organe';
 
                                 testm =`<a href="{{ route('admin.tudanhgia.detailedplanning.show')}}?id=${value.id_kh_baocao}&tieuchuan_id=${value.tieuchuan_id} " class="${css_trangthai } ${css_color}">`+name_trangthai+ '</a>';
-                           
+
                             }
-                                  
+
                             // console.log(value.id_kh_baocao);
-                            texto += '<p class="css_p">'+ '<button class="btn btn-default button_css" id="btn_tieuchuan_'+value.id+'" onclick="showhidetieuchi('+value.id+');return false;"> + </button>' +'<span class="label label-warning span_css"><i class="fas fa-file" style="font-size: 25px;color: #e56f3e;"></i></span>' + 
-                            "<span> @lang('project/Selfassessment/title.tc')" +  
+                            texto += '<p class="css_p">'+ '<button class="btn btn-default button_css" id="btn_tieuchuan_'+value.id+'" onclick="showhidetieuchi('+value.id+');return false;"> + </button>' +'<span class="label label-warning span_css"><i class="fas fa-file" style="font-size: 25px;color: #e56f3e;"></i></span>' +
+                            "<span> @lang('project/Selfassessment/title.tc')" +
                             value.stt_tc + ": &nbsp; </span>" + '<a href="" style="width: 50%;",>' + value.mo_ta + '</a>' + testm +'</br>'+'</p>';
 
                             texto += '<div id="div_tieuchi_' + value.id +'" style="display:none">';
                             let dem = value.stt_tc;
                             let dem2 = 1;
                             for(var i = 0; i<value.tieuchi.length;i++){
-                                texto += '<p class="tieuchi_css">'+'<span><i class="far fa-calendar-check"></i></span>'+ '<b>'+`&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;${dem} `+'.'+`${dem2++}`+'&nbsp;'+value.tieuchi[i].mo_ta+'</b>'+'</p>';    
+                                texto += '<p class="tieuchi_css">'+'<span><i class="far fa-calendar-check"></i></span>'+ '<b>'+`&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;${dem} `+'.'+`${dem2++}`+'&nbsp;'+value.tieuchi[i].mo_ta+'</b>'+'</p>';
                             }
                             texto += '</div>';
-                        }           
+                        }
 
                     })
-                 
+
                     texto += data.phan3;
-                 
+
                 }
                 $("#div_showbc").empty();
-                $('#div_showbc').html(textout);    
+                $('#div_showbc').html(textout);
                 $('#div_showbc').append(texto + '<br/>');
                 // $('.css_p').append(texto2);
                 // console.log(data);
-                $('#div_showbc').css({'background' : 'white','box-shadow' : '0 0 12px #ababab'});                
+                $('#div_showbc').css({'background' : 'white','box-shadow' : '0 0 12px #ababab'});
             }
         });
     }
@@ -191,26 +191,24 @@
         table = $('#table').DataTable({
             responsive: true,
             processing: true,
-            serverSide: true, 
+            serverSide: true,
             searching:false,
             ajax: "{!! route('admin.tudanhgia.detailedplanning.data') !!}",
-            order: [],  
+            order: [],
             columns: [
                 { data: 'actions', orderable: false, searchable: false },
                 { data: 'ten_bc', name: 'ten_bc' },
                 { data: 'loai_tieuchuan', name: 'loai_tieuchuan' },
                 { data: 'nam', name: 'nam' },
-            ],           
+            ],
         });
 
-        $('#table tbody').on('click', 'tr', function () {            
-            var data = table.row( this ).data();    
-            //console.log(data)    
+        $('#table tbody').on('click', 'tr', function () {
+            var data = table.row( this ).data();
             if(data != undefined){
                 $('#selectbc_' + data.id).prop('checked', true);
                 selectBC(data);
-                // console.log(data)
-            }   
+            }
         });
     });
 

@@ -38,19 +38,19 @@
     td{
         text-align: center;
     }
-    
+
     .table-borderless{
         border: 1px solid;
      }
     .table-borderless tr,td{
         border: 1px solid;
-     } 
+     }
 </style>
 @stop
 
 @section('title_page')
     @lang('project/Selfassessment/title.hoantbc')
-    
+
 @stop
 
 @section('content')
@@ -68,24 +68,25 @@
             <div class="row show_mcg">
                 <div class="col-lg-11 col-lg-offset-1">
                     <div class="ibox" id="htmlContent">
-                        @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+
                         <div class="pull-right m-b-lg">
                             <button class="btn btn-primary" onclick="exportHTML();return false;">
                                 <i class="fa fa-file-alt"></i> @lang('project/Selfassessment/title.taifile')
                             </button>
-    
-                            @if (Sentinel::inRole('admin') || Sentinel::inRole('operator') || $keHoachBaoCaoDetail->ns_phutrach == Sentinel::getUser()->id)
+
+
                             <button class="btn btn-info" onclick="exportminhchung()">
                                 <i class="fa fa-file-alt"></i> @lang('project/Selfassessment/title.xuatminhc')
                             </button>
                             <form action="{{route('admin.tudanhgia.completionreport.encode')}}" method="POST">
                                 <input type="text" hidden name="id_khbc" value="{{$id_khbc}}">
                                 @csrf
-                                <button class="btn btn-warning" id="traSoatMinhChung" type="submit">
-                                    <i class="fa fa-atlas"></i> @lang('project/Selfassessment/title.mahoamc')
-                                </button>
+                                @if (Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                                    <button class="btn btn-warning" id="traSoatMinhChung" type="submit">
+                                        <i class="fa fa-atlas"></i> @lang('project/Selfassessment/title.mahoamc')
+                                    </button>
+                                @endif
                             </form>
-                            @endif
                             @if($keHoachBaoCaoDetail->trang_thai == 'completed')
                                 <a class="btn btn-danger" id="moLaiKeHoach" d-id="{{$keHoachBaoCaoDetail->id}}">
                                     <i class="fa fa-retweet"></i> @lang('project/Selfassessment/title.molai')
@@ -94,8 +95,8 @@
                                 <a class="btn btn-success" id="xacNhanHoanThanh" d-id="{{$keHoachBaoCaoDetail->id}}">
                                     <i class="fa fa-clipboard-check"></i> @lang('project/Selfassessment/title.hoanthanh')
                                 </a>
-                            @endif
-    
+
+
                         </div>
                         @endif
                         <div id="div_main_content">
@@ -105,23 +106,23 @@
                                         {{ $tencsgd }}
                                     </h2>
                                 </div>
-    
+
                                 <div class="col-sm-4 col-sm-offset-4 text-center m-auto">
                                     <hr>
                                 </div>
-    
+
                                 <div class="col-sm-12 h3">
                                     {{ $keHoachBaoCaoDetail->ten_bc }} <br/>
                                     <h4>@lang('project/Selfassessment/title.theotcdg')</h4>
                                 </div>
-    
+
                                 <div class="col-sm-12 m-t-lg">
                                     <p>
                                         @lang('project/Selfassessment/title.tinhtp')
                                     </p>
                                 </div>
                             </div>
-                    
+
                             <div class="row  m-t-lg">
                                 @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
                                     @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
@@ -134,14 +135,14 @@
                                         </div>
                                     @endif
                                 @endif
-    
+
                                 <div class="col-sm-12">
                                     @if(isset($keHoachBaoCaoDetail->keHoachChung->baoCaoChung))
                                         {!! $keHoachBaoCaoDetail->keHoachChung->baoCaoChung->text !!}
                                     @endif
                                 </div>
                             </div>
-                   
+
                             <div class="row m-t-lg">
                                 @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
                                     @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
@@ -154,7 +155,7 @@
                                         </div>
                                     @endif
                                 @endif
-                                    
+
                                 <div class="col-sm-12">
 
                                     @foreach($keHoachBaoCaoDetail->keHoachTieuChuanList as $keHoachTieuChuan)
@@ -163,12 +164,12 @@
                                             : {{isset($keHoachTieuChuan->tieuChuan->mo_ta)?$keHoachTieuChuan->tieuChuan->mo_ta : ''  }}</strong>
 
                                         @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
-                                             
+
                                             @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'csgd')
 
                                                 @include("admin.project.Selfassessment.hoanthien.tieuchi-csdt")
                                             @else
-                                               
+
                                                 <p>{!! isset($keHoachTieuChuan->baoCaoTieuChuan->modau) ? $keHoachTieuChuan->baoCaoTieuChuan->modau : "" !!}</p>
                                                @include("admin.project.Selfassessment.hoanthien.tieuchi-ctdt")
                                                 <div class="m-b-md m-l-md">
@@ -177,8 +178,8 @@
                                                 </div>
                                             @endif
                                         @endif
-    
-                                        
+
+
                                     @endforeach
                                 </div>
 
@@ -189,14 +190,14 @@
                                         <div class="col-sm-12 m-t-lg">
                                             <div class="h4 text-center">@lang('project/Selfassessment/title.phan3lama')</div>
                                         </div>
-        
+
                                         <div class="col-sm-12">
                                             @if(isset($keHoachBaoCaoDetail->keHoachChung->baoCaoChung))
                                                 {!! $keHoachBaoCaoDetail->keHoachChung->baoCaoChung->ketluan !!}
                                             @endif
                                         </div>
                                     </div>
-        
+
                                     <div class="row m-t-md">
                                         <div class="col-sm-12">
                                             <table class="table table-striped table-bordered" id="table">
@@ -220,7 +221,7 @@
                                     @include("admin.project.Selfassessment.hoanthien.phuluc7")
                                 @endif
                             @endif
-    
+
                             <div class="row m-t-lg">
                                 <div class="col-sm-12">
                                     <div class="h4 font-bold mb-sm">
@@ -252,9 +253,9 @@
                   </div>
                   <div class="modal-body">
                     <div class="add_conten">
-                        
+
                     </div>
-                    
+
                   </div>
                   <div class="modal-footer">
                     <a href="{{route('admin.tudanhgia.completionreport.index')}}" class="btn btn-primary submit_ht">@lang('project/Selfassessment/title.xacnhan')</a>
@@ -266,7 +267,7 @@
         </div>
 <!-- page trang ở đây -->
 
-    
+
 <!-- /Kết thúc page trang -->
 
     <!-- Kết thúc trang -->
@@ -285,13 +286,13 @@
 
        var footer = "</body></html>";
        var data = document.getElementById("div_main_content").innerHTML;
-       
+
        var sourceHTML = header;
 
         // sourceHTML += "{{'<head><meta charset="utf-8"><title>' . $title . '</title></head><body>' }}";
         sourceHTML += data;
         // sourceHTML += footer;
-       
+
        var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
        var fileDownload = document.createElement("a");
        document.body.appendChild(fileDownload);
@@ -308,13 +309,13 @@
 
        var footer = "</body></html>";
        var data = document.getElementById("phuluc10").innerHTML;
-       
+
        var sourceHTML = header;
 
         // sourceHTML += "{{'<head><meta charset="utf-8"><title>' . $title . '</title></head><body>' }}";
         sourceHTML += data;
         // sourceHTML += footer;
-       
+
        var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
        var fileDownload = document.createElement("a");
        document.body.appendChild(fileDownload);
@@ -327,7 +328,7 @@
 
             let id = $(this).attr('id').split('_')[1];
             window.location= "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id;
-    }); 
+    });
 
     $('.show_mcg').on('click','.mc',function(){
             let id = $(this).attr('id').split('_')[1];
@@ -345,7 +346,7 @@
                 data:{
                     id_khbc : id_khbc,
                     _token: '{{ csrf_token() }}',
-                },    
+                },
                 error: function(err) {
                 },
 
@@ -354,7 +355,7 @@
                 },
             })
         })
-        
+
     })
 
     $('#moLaiKeHoach').on('click',function(){
@@ -368,21 +369,21 @@
                 data:{
                     id_khbc : id_khbc,
                     _token: '{{ csrf_token() }}',
-                },    
+                },
                 error: function(err) {
 
                 },
 
                 success: function(data) {
-                 
+
                 },
             })
         })
-           
+
     })
 
     $(document).ready(function() {
-        
+
         $("a[d-id]").each(function() {
           var dId = $(this).attr("d-id");
           $('.addminhchunggop_' + dId).attr("id", "addminhchunggop_" + dId);
@@ -402,7 +403,7 @@
                 key : key,
                 ikhbc : {{$idkhbc}},
                 _token: '{{ csrf_token() }}'
-            },    
+            },
             error: function(err) {
 
             },
@@ -428,11 +429,11 @@
     @if($check != "sua")
         $('.edit_input').prop('disabled', true);
         $('.radiobox').prop('disabled', true);
-    @else 
+    @else
         $("#save_contenty").on('change','.radiobox',function(){
         let key = $(this).attr('data_key');
         let val = $(this).val();
-        
+
         $.ajax({
                 url: "{{route('admin.tudanhgia.database.apiNoiDungThem')}}",
                 type: "GET",
@@ -440,7 +441,7 @@
                     id : {{$idkhbc}},
                     key : key,
                     val : val,
-                },    
+                },
                 error: function(err) {
                 },
 

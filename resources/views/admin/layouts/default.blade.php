@@ -7,7 +7,7 @@
                 | @lang('default.kdcl')
             @show
         </title>
-        
+
         <meta class="csrf-token" name="csrf-token" content="{{ csrf_token() }}">
 
         <meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
@@ -20,7 +20,7 @@
         <meta property="og:url" content="https://keenthemes.com/metronic" />
         <meta property="og:site_name" content="Keenthemes | Metronic" />
         <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-        
+
         <link rel="shortcut icon" href="{{ asset('assets/media/logos/logo_uni2.png') }}" />
         <!--begin::Fonts-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -65,7 +65,7 @@
             }
             .aside-logo a img{
                 width: 50%;
-                
+
             }
             .modal-body span.badge{
                 color: black;
@@ -76,7 +76,7 @@
             }
             td.action{
                 display: flex !important;
-            
+
             }
             tbody tr td:last-child  button.btn-block{
                 display: inline !important;
@@ -143,7 +143,7 @@
                     @endif
                     <!--end::Aside menu-->
                     <!--begin::Footer-->
-                    
+
                     <!--end::Footer-->
                 </div>
                 <!--end::Aside-->
@@ -171,7 +171,7 @@
                             <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
                                 <!--begin::Navbar-->
                                 <div class="d-flex align-items-stretch" id="kt_header_nav">
-                                    
+
                                 </div>
                                 <!--end::Navbar-->
                                 <!--begin::Topbar-->
@@ -181,20 +181,20 @@
                                         <!--begin::Search-->
                                         <div class="d-flex align-items-stretch">
                                             <!--begin::Search-->
-                                            
+
                                             <!--end::Search-->
                                         </div>
                                         <!--end::Search-->
                                         <!--begin::Activities-->
-                                    
+
                                         <!--end::Activities-->
                                         <!--begin::Quick links-->
-                                    
+
                                         <!--end::Quick links-->
                                         <!--begin::Chat-->
                                         <div class="d-flex align-items-stretch">
                                             <!--begin::Menu wrapper-->
-                                        
+
                                             <!--end::Menu wrapper-->
                                         </div>
                                         <!--end::Chat-->
@@ -477,7 +477,7 @@
                                                         <!--end::Items-->
                                                         <!--begin::View more-->
                                                         <div class="py-3 text-center border-top">
-                                                            
+
                                                         </div>
                                                         <!--end::View more-->
                                                     </div>
@@ -502,7 +502,7 @@
                                                 @else
                                                     <img alt="Logo" src="{{ asset('images/authors/no_avatar.jpg') }}" />
                                                 @endif
-                                                
+
                                             </div>
                                             <!--begin::Menu-->
                                             <div class="sub-drop-icon menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px">
@@ -542,7 +542,7 @@
                                                     <a href="{{ URL::route('admin.users.show',Sentinel::getUser()->id) }}" class="menu-link px-5">@lang('default.tttk')</a>
                                                 </div>
                                                 <!--end::Menu item-->
-                                                
+
                                                 <!--begin::Menu item-->
                                                 <!-- <div class="menu-item px-5">
                                                     <a href="{{ route('admin.users.edit', Sentinel::getUser()->id) }}" class="menu-link px-5">
@@ -555,7 +555,7 @@
                                                 <div class="separator my-2"></div>
                                                 <!--end::Menu separator-->
 
-                                                
+
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-5">
                                                     <a href="{{ URL::to('admin/logout') }}" class="menu-link px-5">@lang('default.logout')</a>
@@ -611,7 +611,7 @@
                     </div>
 
 
-                    
+
 
 
 
@@ -1024,7 +1024,7 @@
                                     </div>
                                     <!--end::Timeline heading-->
                                     <!--begin::Timeline details-->
-                                    
+
                                     <!--end::Timeline details-->
                                 </div>
                                 <!--end::Timeline content-->
@@ -1588,7 +1588,7 @@
         </div>
         <!--end::Chat drawer-->
         <!--begin::Exolore drawer toggle-->
-        
+
         <!--end::Exolore drawer toggle-->
         <!--begin::Exolore drawer-->
         <div id="kt_explore" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="explore" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'350px', 'lg': '475px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_explore_toggle" data-kt-drawer-close="#kt_explore_close">
@@ -3799,16 +3799,16 @@
         <!--begin::Page Custom Javascript(used by this page)-->
         <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
         <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
-        
 
 
-        
+
+
 
         <!--end::Page Custom Javascript-->
         <!--end::Javascript-->
 
 
-        
+
         <!-- hệ thống cũ -->
         <script type="text/javascript" src="{{ asset('css/select2-4.1.0-rc.0/dist/js/select2.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendors/datatables/js/jquery.dataTables.js') }}" ></script>
@@ -3816,7 +3816,7 @@
 
 
         <!-- bootstrap -->
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> 
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -3827,11 +3827,15 @@
         <script type="text/javascript" src="{{ asset('assets/js/custom.js') }}"></script>
         <script>
             $('#modalDeleteAll__').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) 
-                var recipient = button.data('nametable') 
+                var button = $(event.relatedTarget)
+                var recipient = button.data('nametable')
                 var modal = $(this)
                 modal.find('#deleteAllTable__').attr('href', "{{ route('admin.importdata.tuyensinh.deleteDataTable') }}?nametable=" + recipient)
             })
+
+            $(document).ready(function() {
+                $('input').attr('min', '0');
+            });
         </script>
 
         @yield('footer_scripts')

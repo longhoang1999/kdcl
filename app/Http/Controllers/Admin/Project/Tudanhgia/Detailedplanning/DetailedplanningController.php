@@ -25,16 +25,45 @@ use App\Models\Country;
 
 class DetailedplanningController extends DefinedController
 {
-    
-     public function index(Request $req){                        
+
+     public function index(Request $req){
           return view('admin.project.Selfassessment.planning');
      }
-    
+
      public function data(Request $req){
           $user_id = Sentinel::getUser()->id;
-          $keHoachBaoCaoList = DB::table('kehoach_baocao')
-          ->where('trang_thai', '!=', 'completed')
-          ->orderBy('created_at','desc')->get();; 
+
+          if(Sentinel::inRole('operator') || Sentinel::inRole('admin')){
+
+            $keHoachBaoCaoList = DB::table('kehoach_baocao')
+                                        ->where('trang_thai', '!=', 'completed')
+                                        ->orderBy('created_at','desc')
+                                        ->where('kehoach_baocao.deleted_at',null)
+                                        ->get();
+
+           }else{
+
+                $keHoachBaoCaoList = DB::table('kehoach_baocao')
+                                        ->where('kehoach_baocao.deleted_at', null)
+                                        ->where('trang_thai', '!=', 'completed')
+                                        ->orderBy('created_at','desc')
+
+                                        ->where(function ($query) {
+                                            $user_id = Sentinel::getUser()->id;
+                                            $query->where('kehoach_baocao.ns_phutrach', '=', $user_id)
+                                                ->orWhereExists(function ($subquery) use ($user_id) {
+                                                    $subquery->from('kehoach_baocao_nhansu')
+                                                        ->whereRaw('kehoach_baocao.id = kehoach_baocao_nhansu.id_kehoach')
+                                                        ->where(function ($subsubquery) use ($user_id) {
+                                                            $subsubquery->where('kehoach_baocao_nhansu.id_nhansuthuchien', '=', $user_id)
+                                                                        ->orWhere('kehoach_baocao_nhansu.id_nhansukiemtra', '=', $user_id);
+                                                        });
+                                                });
+                                        })
+                                        ->get();
+
+
+           }
           if(isset($req->id) && $req->id > 0){
                $bc = $keHoachBaoCaoList->where('id',$req->id)->first();
                $kehoachung = DB::table('kehoach_chung')->select('kehoach_chung.id')
@@ -47,23 +76,86 @@ class DetailedplanningController extends DefinedController
                     $arrout['phan3'] = '<a class="a_bottom" href="'.route('admin.tudanhgia.detailedplanning.conclusion',[$req->id,$kehoachung->id]).'"><span class="label label-primary"><i class="fas fa-edit"></i></span><span style="color:blue;font-weight:bold;">' . Lang::get('project/Selfassessment/title.phan3') . '</span></a>';
                     $arrout['kehoachchung'] = $kehoachung;
 
-                    $tieuchuan = DB::table('kehoach_tieuchuan')
-                              ->select('kehoach_tieuchuan.*','tieuchuan.mo_ta','tieuchuan.stt as stt_tc')
-                              ->leftjoin('tieuchuan','tieuchuan.id','=','kehoach_tieuchuan.tieuchuan_id')
-                              ->where('kehoach_tieuchuan.id_kh_baocao',$req->id)
-                              ->orderBy('stt_tc','ASC')->get();
-                    foreach ($tieuchuan as $key => $value) {
-                         $tieuchi = DB::table('tieuchi')->where('tieuchuan_id',$value->tieuchuan_id)->get();
-                         $value->tieuchi = $tieuchi; 
-                         $value->link = "https://www.google.com.vn";    
-                         $baoCaoTieuChuan = DB::table('baocao_tieuchuan')
-                                              ->select('baocao_tieuchuan.trang_thai as trang_thai_bctc')
-                                              // ->where('id_kh_tieuchuan',$value->id)
-                                              ->where('id_kehoach_bc',$req->id)
-                                              ->where('id_tieuchuan',$value->tieuchuan_id)
-                                              ->first();
-                         $value->baoCaoTieuChuan = $baoCaoTieuChuan;                     
+                    if(Sentinel::inRole('operator') || Sentinel::inRole('admin')){
+                        $tieuchuan = DB::table('kehoach_tieuchuan')
+                                        ->select('kehoach_tieuchuan.*','tieuchuan.mo_ta','tieuchuan.stt as stt_tc')
+                                        ->leftjoin('tieuchuan','tieuchuan.id','=','kehoach_tieuchuan.tieuchuan_id')
+                                        ->where('kehoach_tieuchuan.id_kh_baocao',$req->id)
+                                        ->orderBy('stt_tc','ASC')->get();
+                        foreach ($tieuchuan as $key => $value) {
+                            $tieuchi = DB::table('tieuchi')->where('tieuchuan_id',$value->tieuchuan_id)->get();
+                            $value->tieuchi = $tieuchi;
+                            $value->link = "https://www.google.com.vn";
+                            $baoCaoTieuChuan = DB::table('baocao_tieuchuan')
+                                                    ->select('baocao_tieuchuan.trang_thai as trang_thai_bctc')
+                                                    // ->where('id_kh_tieuchuan',$value->id)
+                                                    ->where('id_kehoach_bc',$req->id)
+                                                    ->where('id_tieuchuan',$value->tieuchuan_id)
+                                                    ->first();
+                            $value->baoCaoTieuChuan = $baoCaoTieuChuan;
+                        }
+                    }else{
+
+                        $check_rosle = DB::table('kehoach_baocao')
+                                            ->where('id',$req->id)
+                                            ->where('ns_phutrach',Sentinel::getUser()->id)
+                                            ->first();
+                        if(!$check_rosle){
+                            $tieuchuan = DB::table('kehoach_tieuchuan')
+                                            ->select('kehoach_tieuchuan.*', 'tieuchuan.mo_ta', 'tieuchuan.stt as stt_tc')
+                                            ->leftjoin('tieuchuan', 'tieuchuan.id', '=', 'kehoach_tieuchuan.tieuchuan_id')
+                                            ->where('kehoach_tieuchuan.id_kh_baocao', $req->id)
+                                            ->where(function ($query) {
+                                                $user_id = Sentinel::getUser()->id;
+                                                $query->orWhereExists(function ($subquery) use ($user_id) {
+                                                        $subquery->from('kehoach_tieuchuan_nhansu')
+                                                            ->whereRaw('kehoach_tieuchuan.id = kehoach_tieuchuan_nhansu.id_kehoach')
+                                                            ->where(function ($subsubquery) use ($user_id) {
+                                                                $subsubquery->where('kehoach_tieuchuan_nhansu.id_nhansuthuchien', '=', $user_id)
+                                                                            ->orWhere('kehoach_tieuchuan_nhansu.id_nhansukiemtra', '=', $user_id)
+                                                                            ->orWhere('kehoach_tieuchuan.truongnhom',Sentinel::getUser()->id);
+                                                        });
+                                                });
+                                            })
+
+                                            ->orderBy('stt_tc', 'ASC')
+                                            ->get();
+                            foreach ($tieuchuan as $key => $value) {
+                                    $tieuchi = DB::table('tieuchi')->where('tieuchuan_id',$value->tieuchuan_id)->get();
+                                    $value->tieuchi = $tieuchi;
+                                    $value->link = "https://www.google.com.vn";
+                                    $baoCaoTieuChuan = DB::table('baocao_tieuchuan')
+                                                            ->select('baocao_tieuchuan.trang_thai as trang_thai_bctc')
+                                                            // ->where('id_kh_tieuchuan',$value->id)
+                                                            ->where('id_kehoach_bc',$req->id)
+                                                            ->where('id_tieuchuan',$value->tieuchuan_id)
+                                                            ->first();
+                                    $value->baoCaoTieuChuan = $baoCaoTieuChuan;
+                            }
+                        }else{
+
+                            $tieuchuan = DB::table('kehoach_tieuchuan')
+                                            ->select('kehoach_tieuchuan.*','tieuchuan.mo_ta','tieuchuan.stt as stt_tc')
+                                            ->leftjoin('tieuchuan','tieuchuan.id','=','kehoach_tieuchuan.tieuchuan_id')
+                                            ->where('kehoach_tieuchuan.id_kh_baocao',$req->id)
+                                            ->orderBy('stt_tc','ASC')->get();
+                            foreach ($tieuchuan as $key => $value) {
+                                $tieuchi = DB::table('tieuchi')->where('tieuchuan_id',$value->tieuchuan_id)->get();
+                                $value->tieuchi = $tieuchi;
+                                $value->link = "https://www.google.com.vn";
+                                $baoCaoTieuChuan = DB::table('baocao_tieuchuan')
+                                                        ->select('baocao_tieuchuan.trang_thai as trang_thai_bctc')
+                                                        // ->where('id_kh_tieuchuan',$value->id)
+                                                        ->where('id_kehoach_bc',$req->id)
+                                                        ->where('id_tieuchuan',$value->tieuchuan_id)
+                                                        ->first();
+                                $value->baoCaoTieuChuan = $baoCaoTieuChuan;
+                            }
+                        }
+
+
                     }
+
 
 
                     $arrout['phan2'] = '<a class="a_mid" href="https://www.google.com.vn"><span class="label label-primary"><i class="fas fa-edit"></i></span><span style="color:blue;font-weight:bold;">' . Lang::get('project/Selfassessment/title.phan2') . '</span></a>';
@@ -72,11 +164,11 @@ class DetailedplanningController extends DefinedController
                }else{
                     return 0;
                }
-          }else{         
+          }else{
                return DataTables::of($keHoachBaoCaoList)
                     ->addColumn('actions',function($bc){
                         return '<input type="radio" name="selectbc" id="selectbc_' . $bc->id . '" class="form-control">';
-                    })               
+                    })
                     ->rawColumns(['actions'])
                     ->make(true);
           }
@@ -101,10 +193,10 @@ class DetailedplanningController extends DefinedController
                               ->first();
           $text = isset($KHBaCaochung->text) ? $KHBaCaochung->text : '';
           return view("admin.project.Selfassessment.general")->with(["kehoachbaocaos" =>  $KHBaCaoDetail,
-                                                                      'text' => $text, 
+                                                                      'text' => $text,
                                                                       'id' => $id,
                                                                       'KHBaCaochung' => $kehoachbaocaochung,
-                                                                      'id_kehoacchung' => $id_kehoacchung,       
+                                                                      'id_kehoacchung' => $id_kehoacchung,
                                                                  ]);
     }
 
@@ -125,7 +217,7 @@ class DetailedplanningController extends DefinedController
          $chuancongbo = true;
          // Phần này cần sửa lại
          $start = [];
-         try{     
+         try{
             if(Sentinel::inRole('admin') || Sentinel::inRole('operator')) {
 
                 $keHoachBaoCaoDetail = DB::table('kehoach_baocao')
@@ -148,9 +240,9 @@ class DetailedplanningController extends DefinedController
                 //                    ->where('bo_tieuchuan.id',$keHoachBaoCaoDetail->bo_tieuchuan_id)->first();
                 $keHoachTieuChuan = Db::table('kehoach_tieuchuan')->select('kehoach_tieuchuan.*', 'users.id as id_truong_nhom')->leftjoin('users','users.id','=','kehoach_tieuchuan.truongnhom')->where('tieuchuan_id',$tieuchuan_id)->first();
             }
-            
+
             // $keHoachBaoCaoDetail->bo_tieuchuan = $bo_tieuchuan;
-     
+
 
          }catch (\Exception $e) {
             return abort(422, $e->getMessage());
@@ -162,7 +254,7 @@ class DetailedplanningController extends DefinedController
                               ->leftjoin('kehoach_tieuchuan','kehoach_tieuchuan.id_kh_baocao','=', 'kehoach_baocao.id')
                               ->where('kehoach_tieuchuan.tieuchuan_id',$tieuchuan_id)
                               ->where('kehoach_baocao.id',$id_khbc)->first();
-         
+
           $tieuchi = DB::table('kehoach_tieuchi')
                          ->select('tieuchi.*','kehoach_tieuchi.id as khtt_id')
                          ->leftjoin('tieuchi','tieuchi.id','=','kehoach_tieuchi.id_tieuchi')
@@ -209,7 +301,7 @@ class DetailedplanningController extends DefinedController
                                    ->where('menhde.tieuchi_id',$value->id)
                                    ->where('kehoach_menhde.id_kh_tieuchi',$value->khtt_id)
                                    ->first();
-                   
+
                     if($bacao_menhde){
                          $menhde_baocao = DB::table('baocao_menhde')
                                ->select('menhde.id as menhde_id', 'menhde.mo_ta','menhde.*', 'baocao_menhde.*')
@@ -218,8 +310,8 @@ class DetailedplanningController extends DefinedController
                                ->where('menhde.tieuchi_id',$value->id)
                                // ->where('baocao_menhde.id_kh_menhde',$bacao_menhde->id_khmd)
                               ->get();
-                    }          
-               
+                    }
+
                     $kh_menhde_start = DB::table('kehoach_menhde')
                                              ->select('kehoach_menhde.id as id_khmd','menhde.id')
                                              ->leftjoin('menhde','menhde.id','=','kehoach_menhde.id_menhde')
@@ -235,16 +327,16 @@ class DetailedplanningController extends DefinedController
                                ->where('id_menhde',$kh_menhde_start->id)
                                ->first();
                     }
-                    
+
                }else if($KHBaCaoDetail->writeFollow == 2){
-                    
+
                     $bacao_menhde = DB::table('kehoach_menhde')
                                    ->select('kehoach_menhde.id as id_khmd', 'mocchuan.*')
                                    ->leftjoin('mocchuan','mocchuan.id','=','kehoach_menhde.mocchuan_id')
                                    ->where('mocchuan.tieuchi_id',$value->id)
                                    ->where('kehoach_menhde.id_kh_tieuchi',$value->khtt_id)
                                    ->first();
-                    
+
 
                     if($bacao_menhde){
                          $menhde_baocao = DB::table('baocao_menhde')
@@ -254,11 +346,11 @@ class DetailedplanningController extends DefinedController
                                ->where('mocchuan.tieuchi_id',$value->id)
                                // ->where('id_kh_menhde',$bacao_menhde->id_khmd)
                               ->get();
-                            
 
-            
+
+
                     }
-                                   
+
                     $kh_menhde_start = DB::table('kehoach_menhde')
                                              ->select('kehoach_menhde.id as id_khmd', 'mocchuan.id')
                                              ->leftjoin('mocchuan','mocchuan.id','=','kehoach_menhde.mocchuan_id')
@@ -272,11 +364,11 @@ class DetailedplanningController extends DefinedController
                                               ->where('id_kh_menhde',$kh_menhde_start->id_khmd)
                                               ->where('mocchuan_id',$kh_menhde_start->id)
                                               ->first();
-                    }                        
-                    
+                    }
+
                }
 
-               
+
                if(isset($menhde_baocao)){
                     $value->bc_menhde = $menhde_baocao;
                     $value->bacao_menhde = $menhde_baocao;
@@ -284,19 +376,19 @@ class DetailedplanningController extends DefinedController
                if(isset($menhde_baocao_start)){
                     $value->menhde_baocao_start = $menhde_baocao_start;
                }
-               
+
                $value->baocao_tieuchi = $baocao;
-               
+
                $value->menhde_khmd = $bacao_menhde;
                if(!empty($value->menhde_baocao_start->danhgia)){
-                   array_push($start,$value->menhde_baocao_start->danhgia); 
+                   array_push($start,$value->menhde_baocao_start->danhgia);
                }
-                              
+
 
           }
           $sum_start = Collection::make($start)->avg();
           $sum_danhgia = round($sum_start);
-          $kehoachtieuchuan->tieuchi = $tieuchi; 
+          $kehoachtieuchuan->tieuchi = $tieuchi;
           foreach($kehoachtieuchuan->tieuchi as $value){
                $keHoachMenhDeList = DB::table('kehoach_menhde')
                                         ->select('menhde.id as id_md', 'kehoach_menhde.*','kehoach_tieuchi.id_tieuchi')
@@ -369,7 +461,7 @@ class DetailedplanningController extends DefinedController
           foreach($minhchung_gmc as $val_mc){
                array_push($arr_mc,$val_mc->minhchung_id);
           }
-         
+
          $donViData = DB::table('donvi')->get();
          return view("admin.project.Selfassessment.show")
                 ->with(["KHBaoCao" =>  $KHBaoCao,
@@ -390,7 +482,7 @@ class DetailedplanningController extends DefinedController
     }
 
     public function showmochuan(Request $req){
-          
+
           try {
               $mo_chuan = DB::table('mocchuan')->where('tieuchi_id',$req->id)->get();
 
@@ -408,7 +500,7 @@ class DetailedplanningController extends DefinedController
     }
 
     public function showmctt(Request $req){
-          
+
           try {
 
               $minhchunggop_minhchungtt = DB::table('minhchunggop_minhchungtt')
@@ -416,7 +508,7 @@ class DetailedplanningController extends DefinedController
               ->leftjoin('minhchung_gop','minhchung_gop.id','=','minhchunggop_minhchungtt.minhchunggop_id')
               ->where('minhchung_gop.id_tieuchi',$req->id)
               ->get();
-            
+
 
               $listtieude = array();
 
@@ -450,7 +542,7 @@ class DetailedplanningController extends DefinedController
 
           $goi_y_hd_id = DB::table('role_gyhd_tchi')
                          ->where('tieuchi_id',$req->id)
-                         ->pluck('gyhd_id');     
+                         ->pluck('gyhd_id');
           $huongDanData = DB::table('huongdan')
                               ->select('mo_ta')
                               ->whereIn('id',$goi_y_hd_id)
@@ -545,7 +637,7 @@ class DetailedplanningController extends DefinedController
                                    ->where('baocao_chung.id_kehoach_bc',$KHBaCaoDetail->id)
                                    ->where('baocao_chung.id_kh_chung',$keHoachChung->id)->first();
 
-              
+
                if (!$baoCaoChung) {
 
                     $s = DB::table('baocao_chung')
@@ -558,21 +650,21 @@ class DetailedplanningController extends DefinedController
                } else{
 
                     $baoCaoChung->text = $req->text;
-                     
+
                     $save = DB::table('baocao_chung')
                               ->where('baocao_chung.id_kehoach_bc',$KHBaCaoDetail->id)
                               ->where('baocao_chung.id_kh_chung',$keHoachChung->id)
                               ->update([
                                         'text' => $req->text,
                                       ]);
-                     
+
                }
-               return back()->with('success', 
+               return back()->with('success',
                          Lang::get('project/Selfassessment/title.capnhattc'));
           } catch (\Exception $e) {
             return abort(422, $e->getMessage());
           }
-          
+
     }
 
 
@@ -611,7 +703,7 @@ class DetailedplanningController extends DefinedController
           $baoCaoTieuChuan = DB::table('baocao_tieuchuan')
                               ->where('baocao_tieuchuan.id_kehoach_bc',$req->id_khbc)
                               ->where('baocao_tieuchuan.id_tieuchuan',$req->id_tc)->first();
-          
+
 
            if (!$baoCaoTieuChuan) {
               $saves = DB::table('baocao_tieuchuan')
@@ -621,7 +713,7 @@ class DetailedplanningController extends DefinedController
                                    'ketluan' => $req->ketluan,
 
                               ]);
-                              
+
                return $req->ketluan;
             }
 
@@ -632,7 +724,7 @@ class DetailedplanningController extends DefinedController
                                    'ketluan' => $req->ketluan,
 
                               ]);
-                              
+
           return $req->ketluan;
     }
 
@@ -640,7 +732,7 @@ class DetailedplanningController extends DefinedController
           $kehoachbaocao = DB::table("kehoach_baocao")
                               ->where('id',$req->id_khbc)
                               ->first();
-          
+
           if($kehoachbaocao->writeFollow == 1){
                $baoCaoMenhDe = DB::table('baocao_menhde')
                               ->where('id_kehoach_bc',$req->id_khbc)
@@ -663,7 +755,7 @@ class DetailedplanningController extends DefinedController
                                    'mota' => $req->mota_md,
                               ]);
           }
-          
+
 
      return $req->mota_md;
     }
@@ -694,7 +786,7 @@ class DetailedplanningController extends DefinedController
                                         'trang_thai'    => 'todo',
                                         'nguoi_tao'     => Sentinel::getUser()->id,
                                         'csdt_id'       => Sentinel::getUser()->csdt_id,
-                                     ]);     
+                                     ]);
                }elseif($kehoachbaocao->writeFollow == 2){
                     $baoCaoKeHoach = DB::table('kehoach_hd')->insert([
                                         'kehoach_bc_id' => $req->id_khbc,
@@ -710,15 +802,15 @@ class DetailedplanningController extends DefinedController
                                         'trang_thai'    => 'todo',
                                         'nguoi_tao'     => Sentinel::getUser()->id,
                                         'csdt_id'       => Sentinel::getUser()->csdt_id,
-                                     ]);  
+                                     ]);
                }
-               
+
 
                return 1;
           }catch (\Exception $e) {
             return abort(422, $e->getMessage());
           }
-          
+
     }
 
     public function conclusion(Request $req){
@@ -777,7 +869,7 @@ class DetailedplanningController extends DefinedController
                                                             'ketluan' => $req->text,
                                                        ]);
                  }
-               return back()->with('success', 
+               return back()->with('success',
                          Lang::get('project/Selfassessment/title.capnhattc'));
           } catch (\Exception $e) {
             return abort(422, $e->getMessage());
@@ -793,7 +885,7 @@ class DetailedplanningController extends DefinedController
                $baoCaoMenhDe = DB::table('baocao_menhde')
                               ->where('id_kehoach_bc',$req->id_khbc)
                               ->where('id_menhde',$req->id_menhde)->first();
-                              
+
                $save = DB::table('baocao_menhde')
                          ->where('id_kehoach_bc',$req->id_khbc)
                          ->where('id_menhde',$req->id_menhde)->update([
@@ -803,14 +895,14 @@ class DetailedplanningController extends DefinedController
                $baoCaoMenhDe = DB::table('baocao_menhde')
                               ->where('id_kehoach_bc',$req->id_khbc)
                               ->where('mocchuan_id',$req->id_menhde)->first();
-                              
+
                $save = DB::table('baocao_menhde')
                               ->where('id_kehoach_bc',$req->id_khbc)
                               ->where('mocchuan_id',$req->id_menhde)->update([
                                    'diemmanh' => $req->mota_dm,
                               ]);
-          }                  
-          
+          }
+
 
           return $req->mota_dm;
     }
@@ -838,15 +930,15 @@ class DetailedplanningController extends DefinedController
                                    ->where('id_kehoach_bc',$req->id_khbc)
                                    ->where('mocchuan_id',$req->id_menhde)->update([
                                         'tontai' => $req->mota_tt,
-                                   ]); 
-               }                 
-          
+                                   ]);
+               }
+
 
           return $req->mota_tt;
     }
 
     public function moLaiTieuChi(Request $req){
-           
+
           if(Sentinel::inRole('admin') || Sentinel::inRole('operator')){
 
                $updateTieuChi = DB::table('baocao_tieuchi')
@@ -858,7 +950,7 @@ class DetailedplanningController extends DefinedController
                      $id_kh_tieuchuan =  DB::table('kehoach_tieuchuan')
                                              ->where('id_kh_baocao',$req->id_khbc)
                                              ->where('tieuchuan_id',$req->id_tieuchuan)->first();
-               // //  Lấy id_kh_tieuchi  
+               // //  Lấy id_kh_tieuchi
 
                     if($id_kh_tieuchuan){
                          $id_kh_tieuchi  = DB::table('kehoach_tieuchi')
@@ -877,18 +969,18 @@ class DetailedplanningController extends DefinedController
                                              'trang_thai' => 'dangsua',
                                         ]);
                }
-                
+
                $response = 'Mở lại tiêu chí thành công . Bấm OK để reload lại trang';
 
           }else{
                $response = 'Bạn không có quyền mở lại tiêu chí này';
 
-               
+
           }
-                
+
           return $response;
-          
-          
+
+
     }
 
     public function updtecbmd(Request $req){
@@ -913,7 +1005,7 @@ class DetailedplanningController extends DefinedController
     }
 
     public function updtemlmd(Request $req){
-          
+
           try {
             if (Sentinel::inRole('admin') || Sentinel::inRole('operator')) {
                 $menhDe = DB::table('baocao_menhde')
@@ -926,7 +1018,7 @@ class DetailedplanningController extends DefinedController
                 $response = 'Bạn không có quyền mở lại tiêu mệnh đề này . Bấm OK để reload lại trang';
 
             }
-           
+
         } catch (\Throwable $th) {
             $response = [
                 'message' => $th->getMessage(),
@@ -991,7 +1083,7 @@ class DetailedplanningController extends DefinedController
                               ->first();
                $minhchunggop->linkview = route('admin.dambaochatluong.manaproof.showProof',$minhchunggop->id);
           }
-          
+
           return [array($minhchunggop), $check];
     }
 
@@ -1065,10 +1157,32 @@ class DetailedplanningController extends DefinedController
           return 1;
     }
 
-    public function uploadimg(Request $req){
-          $file = $req->file;
+    public function uploadimg(Request $req) {
+        $currentTime = date('YmdHis');
 
-          return array($file);
+        // Kiểm tra xem có file được tải lên không
+        if ($req->hasFile('file') && $req->file('file')->isValid()) {
+            $file = $req->file('file');
+            $permitted_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            // Tạo thư mục 'img_baocao' trong thư mục public nếu nó chưa tồn tại
+            $folderPath = public_path('img_baocao');
+            if (!file_exists($folderPath)) {
+                mkdir($folderPath, 0777, true);
+            }
+            $randomText = substr(str_shuffle($permitted_chars), 0, 20);
+            $picName = $currentTime . $randomText.time().'.'.$file->getClientOriginalExtension();
+            // Lưu trữ tệp tin vào thư mục 'img_baocao' trong thư mục public
+            $filePath = $file->move($folderPath, $picName);
 
+            // Trả về đường dẫn tới ảnh đã upload để hiển thị cho người dùng trong trình soạn thảo
+            return response()->json(['location' => asset('img_baocao/' . $picName)]);
+        }
+
+        // Trả về thông báo lỗi nếu không tìm thấy tệp tin hoặc xảy ra lỗi khi upload
+        return response()->json(['error' => 'Error uploading file.'], 400);
     }
+
+
 }
+
+

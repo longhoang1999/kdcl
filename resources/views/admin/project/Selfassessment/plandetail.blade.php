@@ -38,7 +38,7 @@
     align-items: center;
 }
 
-.tieuchi{    
+.tieuchi{
     padding: 9px 0px 8px 0px;
     border-radius: 40px !important;
     position: relative;
@@ -108,7 +108,7 @@
 .select2-container .select2-selection--single{
     display: flex !important;
 }
-        
+
 tbody tr td:last-child {
     display: revert !important;
 }
@@ -137,10 +137,10 @@ tbody tr td:last-child {
         </h3>
         <div class="part-one" style="display: inline-block;">
             <span class="label label-primary">
-                <i class="fas fa-edit"></i>      
+                <i class="fas fa-edit"></i>
             </span>
-            <span >@lang('project/Selfassessment/title.p1')</span>    
-            <button style="float: right;margin-right: 20px;" class="btn btn-warning button_css button_lkh" id="btn_part_one" onclick="showhidepartone();return false;"><i class="fa fa-plus"></i></button>            
+            <span >@lang('project/Selfassessment/title.p1')</span>
+            <button style="float: right;margin-right: 20px;" class="btn btn-warning button_css button_lkh" id="btn_part_one" onclick="showhidepartone();return false;"><i class="fa fa-plus"></i></button>
             <div id="div_lkh_part_one" style="display:none">
                 <br/>
                 <table style="width: 100%;">
@@ -153,9 +153,9 @@ tbody tr td:last-child {
                         </td>
                         <td width="10%">
                             <input name="gioihan_end" class="start-date ml-3 form-control flatpickr flatpickr-input ngayht_bc" id="gioihan_end" type="text" value="{{ $keHoachBaoCao->ngay_hoanthanh }}" disabled/>
-                        </td>                    
+                        </td>
                         <td width="10%" align="right">
-                            <label class="control-label">@lang('project/Selfassessment/title.nbd'):&nbsp;</label> 
+                            <label class="control-label">@lang('project/Selfassessment/title.nbd'):&nbsp;</label>
                         </td>
                         <td width="10%">
                             <input name="ngay_bat_dau" class="start-date form-control flatpickr flatpickr-input ngaybd_chung" id="ngay_bat_dau" type="text" value="{{ isset($keHoachChung->ngay_batdau)?$keHoachChung->ngay_batdau:''}}">
@@ -174,30 +174,30 @@ tbody tr td:last-child {
                     </tr>
                 </table>
                 <br/>
-            </div>        
+            </div>
         </div>
         <hr>
         <div class="check_time">
             <button class="part-two border-0">
                 <span class="label label-primary">
-                    <i class="fas fa-edit"></i>      
+                    <i class="fas fa-edit"></i>
                 </span>
                 <span>@lang('project/Selfassessment/title.p2')</span>
             </button>
             <div >
                 @foreach($listTc as $kh_tieuchuan)
-                    
+
                     <div class="part-two-content">
                         <div class="tieuchuan ml-3">
-                           
+
                             <button class="btn btn-success button_css" id="btn_tieuchuan{{$kh_tieuchuan->id}}" onclick="showhidetieuchi({{$kh_tieuchuan->id}});return false;"><i class="fa fa-plus"></i></button>
-                       
+
                             <span class="label label-warning span_css">
-                                <i class="fas fa-file"></i>    
-                            </span>  
+                                <i class="fas fa-file"></i>
+                            </span>
                             <span>
                                 @lang('project/Selfassessment/title.tc'){{$kh_tieuchuan->stt }}:
-                                <a>{{ $kh_tieuchuan->mo_ta }} </a> 
+                                <a>{{ $kh_tieuchuan->mo_ta }} </a>
                             </span>&nbsp;
                             <span class="daVietBaoCao_{{$kh_tieuchuan->id}} pl-2" d-id=""
                                   d-url="">
@@ -217,9 +217,9 @@ tbody tr td:last-child {
                                     </td>
                                     <td width="10%">
                                         <input name="gioihan_end" class="start-date ml-3 form-control flatpickr flatpickr-input ngayht_bc" id="tieuchuan_date_gh_kt_{{$kh_tieuchuan->id}}" type="text" value="{{ $keHoachBaoCao->ngay_hoanthanh_chuanbi }}" readonly />
-                                    </td>                    
+                                    </td>
                                     <td width="10%" align="right">
-                                        <label class="control-label">@lang('project/Selfassessment/title.khcb'):&nbsp;</label> 
+                                        <label class="control-label">@lang('project/Selfassessment/title.khcb'):&nbsp;</label>
                                     </td>
                                     <td width="10%">
                                         <input name="ngay_bat_dau" class="start-date form-control flatpickr flatpickr-input kh_time" id="ngay_chuanbi_{{$kh_tieuchuan->id}}" type="text" >
@@ -237,9 +237,9 @@ tbody tr td:last-child {
                                     </td>
                                     <td width="10%">
                                         <input name="gioihan_end" class="start-date ml-3 form-control flatpickr flatpickr-input ngayht_bc" id="tieuchuan_ghbc_kt_{{$kh_tieuchuan->id}}" type="text" value="{{ $keHoachBaoCao->ngay_hoanthanh }}" disabled/>
-                                    </td>                    
+                                    </td>
                                     <td width="10%" align="right">
-                                        <label class="control-label">@lang('project/Selfassessment/title.khvbc'):&nbsp;</label> 
+                                        <label class="control-label">@lang('project/Selfassessment/title.khvbc'):&nbsp;</label>
                                     </td>
                                     <td width="10%">
                                         <input name="ngay_bat_dau" class="start-date form-control flatpickr flatpickr-input kh_time" id="ngay_batdau_vbc_{{$kh_tieuchuan->id}}" type="text" >
@@ -300,7 +300,7 @@ tbody tr td:last-child {
                                 <label class="control-label">@lang('project/Selfassessment/title.truongnhom')</label>
                                 <div class="col-sm-8">
                                     <select name="truongnhom" class="form-control select2_tn" id="truong_nhom_tieuchuan_{{$kh_tieuchuan->id}}">
-                                        
+
                                     </select>
                                 </div>
                             </div>
@@ -308,10 +308,10 @@ tbody tr td:last-child {
                                 <strong>@lang('project/Selfassessment/title.capnhatctc')</strong>
                                 <input type="checkbox" id = "checkbox_all_{{$kh_tieuchuan->id}}" onclick="checkbox_tieuchuan({{$kh_tieuchuan->id}})" style="width: 1.3rem;height: 1.3rem;">
                             </div> -->
-                            
+
                             <br>
                             <div class="d-flex justify-content-center">
-                                
+
                                 <button type="button" class="btn" onclick="update_tieuchuan({{$kh_tieuchuan->id}})" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.capnhat')">
                                     <i class="bi bi-save" style="font-size: 35px;color: #50cd89;"></i>
                                 </button>
@@ -320,11 +320,11 @@ tbody tr td:last-child {
                                 </button>
                             </div>
                             <br/>
-                        </div> 
+                        </div>
                     </div>
                     <div id="div_tieuchi{{$kh_tieuchuan->id}}" style="display:none">
                         @foreach($kh_tieuchuan->tieuchi as $tchi)
-                            
+
                             <input type="text" hidden id="tieuchi_id_{{$kh_tieuchuan->id}}" value="{{$tchi->id}}">
                             <div class="part-two-tieuchi part-two-tieuchi_{{$tchi->id}} part-two-tieuchi2_{{$kh_tieuchuan->id}}">
                                 <div class="d-flex align-items-center">
@@ -332,21 +332,21 @@ tbody tr td:last-child {
                                         @if($khbc->writeFollow == 1 || $khbc->writeFollow == 2)
                                             <button class="btn btn-success button_css" id="div_tieuchi-1{{$tchi->id}}" onclick="showhidemenhde({{$tchi->id}});updatebosung({{$id_kehoach_bc}},{{$kh_tieuchuan->id}},{{$tchi->id}});"><i class="fa fa-plus"></i></button>
                                         @endif
-                                        
+
                                         <span style="color:red;">
                                             <i class="far fa-calendar-check" style="color:red;"></i>
                                         </span>
 
                                         <span style="padding-right: 106px;">
                                             @lang('project/Selfassessment/title.tieuchi') {{$kh_tieuchuan->stt }}.{{ $tchi->stt }}:
-                                            <a href="#">{{ $tchi->mo_ta }}</a> 
+                                            <a href="#">{{ $tchi->mo_ta }}</a>
 
                                             <span class="daVietBaoCao_tieuchi_{{$tchi->id}}" d-id="" d-url="">
                                                 <i class="fas fa-spinner fa-spin"></i>
                                             </span>
                                         </span>
 
-                                       
+
                                     </div>
                                     <button style="" class="btn btn-warning button_css button_lkh bt_tieuchi btn_part_tieuchi2{{$kh_tieuchuan->id}}" id="btn_part_tieuchi{{$tchi->id}}" onclick="showhidepartieuchi({{$tchi->id}},{{$kh_tieuchuan->id}})"><i class="fa fa-plus"></i></button>
                                 </div>
@@ -363,9 +363,9 @@ tbody tr td:last-child {
                                             </td>
                                             <td width="10%">
                                                 <input name="gioihan_end" class="start-date ml-3 form-control flatpickr flatpickr-input ngayht_bc tchi_hoanthanh_chuanbi_{{$kh_tieuchuan->id}}" type="text" disabled/>
-                                            </td>                    
+                                            </td>
                                             <td width="10%" align="right">
-                                                <label class="control-label">@lang('project/Selfassessment/title.khcb'):&nbsp;</label> 
+                                                <label class="control-label">@lang('project/Selfassessment/title.khcb'):&nbsp;</label>
                                             </td>
                                             <td width="10%">
                                                 <input name="ngay_bat_dau" class="start-date form-control flatpickr flatpickr-input kh_time" id="ngay_chuanbi_tchi{{$tchi->id}}" type="text">
@@ -383,9 +383,9 @@ tbody tr td:last-child {
                                             </td>
                                             <td width="10%">
                                                 <input name="gioihan_end" class="start-date ml-3 form-control flatpickr flatpickr-input ngayht_bc tchi_hoanthanh_bc_{{$kh_tieuchuan->id}}" id="" type="text" disabled/>
-                                            </td>                    
+                                            </td>
                                             <td width="10%" align="right">
-                                                <label class="control-label">@lang('project/Selfassessment/title.khvbc'):&nbsp;</label> 
+                                                <label class="control-label">@lang('project/Selfassessment/title.khvbc'):&nbsp;</label>
                                             </td>
                                             <td width="10%">
                                                 <input name="ngay_bat_dau" class="start-date form-control flatpickr flatpickr-input kh_time" id="ngay_batdau_vbc_tchi{{$tchi->id}}" type="text" >
@@ -429,7 +429,7 @@ tbody tr td:last-child {
                                             <div class="">
                                                 <div class="form-control-static d-flex align-items-center">
                                                     <button class="btn btn-xs pd-css" data-toggle="modal" type="button"
-                                                            data-target="#nhanSuKiemTraModal_tchi_{{$tchi->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xemdanhsach')"> 
+                                                            data-target="#nhanSuKiemTraModal_tchi_{{$tchi->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.xemdanhsach')">
                                                             <i class="bi bi-person-lines-fill" style="font-size: 35px;color: #5014d0;"></i>
                                                     </button>
                                                     <p id="nhanSuKiemTraForm_tchi_{{$tchi->id}}" style="margin: 0;"></p>
@@ -442,7 +442,7 @@ tbody tr td:last-child {
                                         <label class="control-label">@lang('project/Selfassessment/title.truongnhom')</label>
                                         <div class="col-sm-8">
                                             <select name="truongnhom" id="truong_nhom_tieuchi_{{$tchi->id}}" class="form-control select2 ">
-                                               
+
                                             </select>
                                         </div>
                                     </div>
@@ -452,7 +452,7 @@ tbody tr td:last-child {
                                     </div> -->
                                     <br>
                                     <div class="d-flex justify-content-center">
-                                        <button type="button" class="btn" onclick="update_tieuchi({{$tchi->id}},{{$kh_tieuchuan->id}})" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.capnhat')"> 
+                                        <button type="button" class="btn" onclick="update_tieuchi({{$tchi->id}},{{$kh_tieuchuan->id}})" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/Selfassessment/title.capnhat')">
                                             <i class="bi bi-save" style="font-size: 35px;color: #50cd89;"></i>
                                         </button>
                                         <button type="button" id="tieuchi_all_{{$tchi->id}}" class="btn btn-warning ml-4" onclick="update_tieuchi_all({{$tchi->id}},{{$kh_tieuchuan->id}})" style="display: none;">
@@ -460,7 +460,7 @@ tbody tr td:last-child {
                                         </button>
                                     </div>
                                     <br/>
-                                </div> 
+                                </div>
                             </div>
                             <div id="div_menhde{{$tchi->id}}" style="display:none">
                                 @if($khbc->writeFollow == 1)
@@ -492,9 +492,9 @@ tbody tr td:last-child {
                                                             </td>
                                                             <td width="10%">
                                                                 <input name="gioihan_end" class="start-date ml-3 form-control flatpickr flatpickr-input ngayht_md_gh_{{$tchi->id}}" id="gioihan_end_menhde" type="text" disabled/>
-                                                            </td>                    
+                                                            </td>
                                                             <td width="10%" align="right">
-                                                                <label class="control-label">@lang('project/Selfassessment/title.nbd'):&nbsp;</label> 
+                                                                <label class="control-label">@lang('project/Selfassessment/title.nbd'):&nbsp;</label>
                                                             </td>
                                                             <td width="10%">
                                                                 <input name="ngay_bat_dau" class="start-date form-control flatpickr flatpickr-input ngaybd_menhde_{{$md->id}}" id="ngay_bat_dau" type="text">
@@ -510,7 +510,7 @@ tbody tr td:last-child {
                                                     </table>
                                                     <br>
                                                     <div class="d-flex justify-content-around">
-                                                        
+
                                                         <div class="form-group d-flex">
                                                             <strong class="control-label">@lang('project/Selfassessment/title.nsth')</strong>
                                                             <div class="">
@@ -565,7 +565,7 @@ tbody tr td:last-child {
                                                                 <div class="col-lg-5">
                                                                     <div class="list-group exchangeList_mende_th_{{$md->id}}" data-target="#nhanSuThucHienAll_menhde_{{$md->id}}"
                                                                          id="nhanSuThucHienList_menhde_{{$md->id}}" d-form="#nhanSuThucHienForm_menhde_{{$md->id}}" d-name="ns_thuchien">
-                                                                     
+
                                                                     </div>
                                                                 </div>
 
@@ -575,7 +575,7 @@ tbody tr td:last-child {
                                                                 <div class="col-lg-5">
                                                                     <div class="list-group exchangeList_mende_th_{{$md->id}}" data-target="#nhanSuThucHienList_menhde_{{$md->id}}"
                                                                          id="nhanSuThucHienAll_menhde_{{$md->id}}">
-                                              
+
 
                                                                     </div>
                                                                 </div>
@@ -603,11 +603,11 @@ tbody tr td:last-child {
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row">
-                                                        
+
                                                             <div class="col-lg-5">
                                                                 <div class="list-group exchangeList_mende_kt_{{$md->id}}" data-target="#nhanSuKiemTraAll_menhde_{{$md->id}}"
                                                                      id="nhanSuKiemTraList_menhde_{{$md->id}}" d-form="#nhanSuKiemTraForm_menhde_{{$md->id}}" d-name="ns_kiemtra">
-                                                              
+
                                                                 </div>
                                                             </div>
 
@@ -617,9 +617,9 @@ tbody tr td:last-child {
                                                             <div class="col-lg-5">
                                                                 <div class="list-group exchangeList_mende_kt_{{$md->id}}" data-target="#nhanSuKiemTraList_menhde_{{$md->id}}"
                                                                      id="nhanSuKiemTraAll_menhde_{{$md->id}}">
-                                    
 
-                                                                    
+
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -662,9 +662,9 @@ tbody tr td:last-child {
                                                             </td>
                                                             <td width="10%">
                                                                 <input name="gioihan_end" class="start-date ml-3 form-control flatpickr flatpickr-input ngayht_md_gh_{{$tchi->id}}" id="gioihan_end_menhde" type="text" disabled/>
-                                                            </td>                    
+                                                            </td>
                                                             <td width="10%" align="right">
-                                                                <label class="control-label">@lang('project/Selfassessment/title.nbd'):&nbsp;</label> 
+                                                                <label class="control-label">@lang('project/Selfassessment/title.nbd'):&nbsp;</label>
                                                             </td>
                                                             <td width="10%">
                                                                 <input name="ngay_bat_dau" class="start-date form-control flatpickr flatpickr-input ngaybd_menhde_{{$md->id}}" id="ngay_bat_dau" type="text">
@@ -680,7 +680,7 @@ tbody tr td:last-child {
                                                     </table>
                                                     <br>
                                                     <div class="d-flex justify-content-around">
-                                                        
+
                                                         <div class="form-group d-flex">
                                                             <strong class="control-label">@lang('project/Selfassessment/title.nsth')</strong>
                                                             <div class="">
@@ -735,7 +735,7 @@ tbody tr td:last-child {
                                                                 <div class="col-lg-5">
                                                                     <div class="list-group exchangeList_mende_th_{{$md->id}}" data-target="#nhanSuThucHienAll_menhde_{{$md->id}}"
                                                                          id="nhanSuThucHienList_menhde_{{$md->id}}" d-form="#nhanSuThucHienForm_menhde_{{$md->id}}" d-name="ns_thuchien">
-                                                                     
+
                                                                     </div>
                                                                 </div>
 
@@ -745,7 +745,7 @@ tbody tr td:last-child {
                                                                 <div class="col-lg-5">
                                                                     <div class="list-group exchangeList_mende_th_{{$md->id}}" data-target="#nhanSuThucHienList_menhde_{{$md->id}}"
                                                                          id="nhanSuThucHienAll_menhde_{{$md->id}}">
-                                              
+
 
                                                                     </div>
                                                                 </div>
@@ -773,11 +773,11 @@ tbody tr td:last-child {
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row">
-                                                        
+
                                                             <div class="col-lg-5">
                                                                 <div class="list-group exchangeList_mende_kt_{{$md->id}}" data-target="#nhanSuKiemTraAll_menhde_{{$md->id}}"
                                                                      id="nhanSuKiemTraList_menhde_{{$md->id}}" d-form="#nhanSuKiemTraForm_menhde_{{$md->id}}" d-name="ns_kiemtra">
-                                                              
+
                                                                 </div>
                                                             </div>
 
@@ -787,9 +787,9 @@ tbody tr td:last-child {
                                                             <div class="col-lg-5">
                                                                 <div class="list-group exchangeList_mende_kt_{{$md->id}}" data-target="#nhanSuKiemTraList_menhde_{{$md->id}}"
                                                                      id="nhanSuKiemTraAll_menhde_{{$md->id}}">
-                                    
 
-                                                                    
+
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -818,7 +818,7 @@ tbody tr td:last-child {
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
-                                        
+
                                                 <div class="col-lg-5">
                                                     <div class="list-group exchangeList_tchi_cb{{$tchi->id}}" data-target="#nhanSuChuanBiAll_tchi_{{$tchi->id}}"
                                                          id="nhanSuChuanBiList_tchi_{{$tchi->id}}" d-form="#nhanSuChuanBiForm_tchi_{{$tchi->id}}" d-name="ns_chuanbi">
@@ -832,7 +832,7 @@ tbody tr td:last-child {
                                                 <div class="col-lg-5">
                                                     <div class="list-group exchangeList_tchi_cb{{$tchi->id}}" data-target="#nhanSuChuanBiList_tchi_{{$tchi->id}}"
                                                          id="nhanSuChuanBiAll_tchi_{{$tchi->id}}">
-                                                       
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -874,7 +874,7 @@ tbody tr td:last-child {
                                                     <div class="list-group exchangeList_tchi_th{{$tchi->id}}" data-target="#nhanSuThucHienList_tchi_{{$tchi->id}}"
                                                          id="nhanSuThucHienAll_tchi_{{$tchi->id}}">
 
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -915,7 +915,7 @@ tbody tr td:last-child {
                                                 <div class="col-lg-5">
                                                     <div class="list-group exchangeList_tchi_kt{{$tchi->id}}" data-target="#nhanSuKiemTraList_tchi_{{$tchi->id}}"
                                                          id="nhanSuKiemTraAll_tchi_{{$tchi->id}}">
-                                                
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -929,7 +929,7 @@ tbody tr td:last-child {
                             </div>
                         @endforeach
                     </div>
-                
+
 
                 <!-- modal nhân sự chuẩn bị -->
                 <div class="modal inmodal fade" id="nhanSuChuanBiModal_{{$kh_tieuchuan->id}}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -948,7 +948,7 @@ tbody tr td:last-child {
                                     <div class="col-lg-5">
                                         <div class="list-group exchangeList_cb_tieuchuan exchangeList_cb_{{$kh_tieuchuan->id}}" data-target="#nhanSuChuanBiAll_{{$kh_tieuchuan->id}}"
                                              id="nhanSuChuanBiList_{{$kh_tieuchuan->id}}" d-form="#nhanSuChuanBiForm_{{$kh_tieuchuan->id}}" d-name="ns_chuanbi">
-                                            
+
                                         </div>
                                     </div>
 
@@ -958,8 +958,8 @@ tbody tr td:last-child {
                                     <div class="col-lg-5">
                                         <div class="list-group exchangeList_cb_tieuchuan exchangeList_cb_{{$kh_tieuchuan->id}}" data-target="#nhanSuChuanBiList_{{$kh_tieuchuan->id}}"
                                              id="nhanSuChuanBiAll_{{$kh_tieuchuan->id}}">
-                                                                                    
-                                         
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -988,7 +988,7 @@ tbody tr td:last-child {
                                     <div class="col-lg-5">
                                         <div class="list-group exchangeList_th_{{$kh_tieuchuan->id}}" data-target="#nhanSuThucHienAll_{{$kh_tieuchuan->id}}"
                                              id="nhanSuThucHienList_{{$kh_tieuchuan->id}}" d-form="#nhanSuThucHienForm_{{$kh_tieuchuan->id}}" d-name="ns_thuchien">
-                                            
+
                                         </div>
                                     </div>
 
@@ -999,7 +999,7 @@ tbody tr td:last-child {
 
                                         <div class="list-group exchangeList_th_{{$kh_tieuchuan->id}}" data-target="#nhanSuThucHienList_{{$kh_tieuchuan->id}}"
                                              id="nhanSuThucHienAll_{{$kh_tieuchuan->id}}">
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -1039,7 +1039,7 @@ tbody tr td:last-child {
                                     <div class="col-lg-5">
                                         <div class="list-group exchangeList_kt_{{$kh_tieuchuan->id}}" data-target="#nhanSuKiemTraList_{{$kh_tieuchuan->id}}"
                                              id="nhanSuKiemTraAll_{{$kh_tieuchuan->id}}">
-                                       
+
                                         </div>
                                     </div>
                                 </div>
@@ -1058,7 +1058,7 @@ tbody tr td:last-child {
         <div >
             <div class="part-three" data-toggle="modal" data-target="">
                 <span class="label label-primary">
-                    <i class="fas fa-edit"></i>      
+                    <i class="fas fa-edit"></i>
                 </span>
                 <span>@lang('project/Selfassessment/title.p3')</span>
         </div>
@@ -1081,18 +1081,18 @@ tbody tr td:last-child {
         @csrf
           <div class="modal-body">
                 <p>
-                    @lang('project/Selfassessment/title.kehoach'): 
+                    @lang('project/Selfassessment/title.kehoach'):
                     {{ $khbc->ten_bc }}
                 </p>
                 <p class="block-flex">
-                    @lang('project/Selfassessment/title.ghtg'): 
+                    @lang('project/Selfassessment/title.ghtg'):
                     <span class="block-flex">
                         <input name="gioihan_start" class="start-date form-control flatpickr flatpickr-input" id="gioihan_start" type="text" value="{{ $keHoachBaoCao->ngay_batdau }}">
                         <input name="gioihan_end" class="start-date ml-3 form-control flatpickr flatpickr-input" id="gioihan_end" type="text" value="{{ $keHoachBaoCao->ngay_hoanthanh }}">
                     </span>
                 </p>
                 <p class="block-flex">
-                    @lang('project/Selfassessment/title.nbd'): 
+                    @lang('project/Selfassessment/title.nbd'):
                     <input name="ngay_bat_dau" class="start-date form-control flatpickr flatpickr-input" id="ngay_bat_dau" type="text">
                     <input name="ngay_ket_thuc" class="start-date ml-3 form-control flatpickr flatpickr-input" id="ngay_ket_thuc" type="text">
                 </p>
@@ -1135,7 +1135,7 @@ tbody tr td:last-child {
     var khbc_id = {{$khbc->id}};
     var listkhtchuan = {};
     var listkhtchi = {};
-    
+
     function showhidetieuchi(id){
         if($('#btn_tieuchuan' + id).html() == '<i class="fa fa-minus"></i>'){
             $('#div_tieuchi' + id).hide();
@@ -1144,7 +1144,7 @@ tbody tr td:last-child {
             $('#div_tieuchi' + id).show();
             $('#btn_tieuchuan' + id).html('<i class="fa fa-minus"></i>');
         }
-        
+
     }
     function showhidemenhde(id){
         if($('#div_tieuchi-1' + id).html() == '<i class="fa fa-minus"></i>'){
@@ -1163,7 +1163,7 @@ tbody tr td:last-child {
 
             $('#div_lkh_part_one').show();
             $('#btn_part_one').html('<i class="fa fa-minus"></i>');
-        }        
+        }
     }
 
     function load_menhde(data, tieuchi_id){
@@ -1175,17 +1175,17 @@ tbody tr td:last-child {
 
     function load_tieuchuan(data, tieuchuan_id){
         listkhtchuan[tieuchuan_id] = data.id;
-        $('#ngay_chuanbi_' + tieuchuan_id).val(data.ngay_batdau_chuanbi);                        
-        $('#ngay_hoanthanh_' + tieuchuan_id).val(data.ngay_hoanthanh_chuanbi);                        
-        $('#ngay_batdau_vbc_' + tieuchuan_id).val(data.ngay_batdau);                        
+        $('#ngay_chuanbi_' + tieuchuan_id).val(data.ngay_batdau_chuanbi);
+        $('#ngay_hoanthanh_' + tieuchuan_id).val(data.ngay_hoanthanh_chuanbi);
+        $('#ngay_batdau_vbc_' + tieuchuan_id).val(data.ngay_batdau);
         $('#ngay_hoanthanh_vbc_' + tieuchuan_id).val(data.ngay_hoanthanh);
         $('.tchi_batdau_chuanbi_' + tieuchuan_id).val(data.ngay_batdau_chuanbi);
-        $('.tchi_hoanthanh_chuanbi_' + tieuchuan_id).val(data.ngay_hoanthanh_chuanbi);                 
-        $('.tchi_batdau_bc_' + tieuchuan_id).val(data.ngay_batdau);                        
+        $('.tchi_hoanthanh_chuanbi_' + tieuchuan_id).val(data.ngay_hoanthanh_chuanbi);
+        $('.tchi_batdau_bc_' + tieuchuan_id).val(data.ngay_batdau);
         $('.tchi_hoanthanh_bc_' + tieuchuan_id).val(data.ngay_hoanthanh);
 
         let truong_nhom = $('#truong_nhom_tieuchuan_'+tieuchuan_id);
-        
+
         let nhanSuChuanBiAll = $('#nhanSuChuanBiAll_'+tieuchuan_id);
         let nhanSuChuanBiList = $('#nhanSuChuanBiList_'+tieuchuan_id);
         let nhanSuThucHienAll = $('#nhanSuThucHienAll_'+tieuchuan_id);
@@ -1202,19 +1202,19 @@ tbody tr td:last-child {
         nhanSuChuanBiAll.append(`
                                     <li class="list-group-item active font-bold">
                                         @lang('project/Selfassessment/title.danhsachnhansu')
-                                    </li> 
+                                    </li>
                                 `
                                 );
         nhanSuChuanBiList.append(`
                                     <li class="list-group-item active font-bold">
                                         @lang('project/Selfassessment/title.nscb')
-                                    </li> 
+                                    </li>
                                 `
                                 );
         nhanSuThucHienAll.append(`
                                     <li class="list-group-item active font-bold">
                                         @lang('project/Selfassessment/title.danhsachnhansu')
-                                    </li> 
+                                    </li>
                                 `
                                 );
         nhanSuThucHienList.append(`
@@ -1226,7 +1226,7 @@ tbody tr td:last-child {
         nhanSuKiemTraAll.append(`
                                     <li class="list-group-item active font-bold">
                                         @lang('project/Selfassessment/title.danhsachnhansu')
-                                    </li> 
+                                    </li>
                                 `
                                 );
         nhanSuKiemTraList.append(`
@@ -1251,7 +1251,7 @@ tbody tr td:last-child {
                 e.id_nhansuchuanbi.forEach(function(e_child){
                     id_nhansu_cb.push(e_child.id);
                 });
-                
+
             });
         }
 
@@ -1264,7 +1264,7 @@ tbody tr td:last-child {
                                         <option value=""></option>
                                         <option value="${e_child.id}" ${(data.truongnhom==e_child.id)?"selected":""}>
                                             ${e_child.name} (${e_child.ten_donvi})
-                                        </option> 
+                                        </option>
                                       `);
                 }
                 if(id_nhansu_th.includes(e_child.id)){
@@ -1275,7 +1275,7 @@ tbody tr td:last-child {
                             <div class="small">${e_child.ten_donvi }</div>
                         </a>
                      `
-                    ); 
+                    );
                 }else{
                     nhanSuThucHienAll.append(`
                         <a href="javascript:;" d-id="${e_child.id}"
@@ -1284,67 +1284,67 @@ tbody tr td:last-child {
                             <div class="small">${e_child.ten_donvi }</div>
                         </a>
                      `
-                    ); 
+                    );
                 }
             });
-            
+
             e.nhanSuKiemTraList.forEach(function(e_child,index){
                 if(!truongNhomList.includes(e_child.id)){
                     truongNhomList.push(e_child.id);
-                
+
                     truong_nhom.append(`<option value="${e_child.id}" ${(data.truongnhom==e_child.id)?"selected":""}>
                                             ${e_child.name} (${e_child.ten_donvi})
-                                        </option> 
+                                        </option>
                                       `);
                 }
                 if(id_nhansu_kt.includes(e_child.id)){
-                    nhanSuKiemTraAll.append(`  
+                    nhanSuKiemTraAll.append(`
                         <a href="javascript:;" d-id="${e_child.id}"
                            class="list-group-item exchanged nhanSuChuanBiItem click_tieuchuan">
                             ${e_child.name}
                             <div class="small">${e_child.ten_donvi }</div>
-                        </a> 
+                        </a>
                     `
                     )
                 }else{
-                    nhanSuKiemTraAll.append(`  
+                    nhanSuKiemTraAll.append(`
                         <a href="javascript:;" d-id="${e_child.id}"
                            class="list-group-item nhanSuChuanBiItem click_tieuchuan">
                             ${e_child.name}
                             <div class="small">${e_child.ten_donvi }</div>
-                        </a> 
+                        </a>
                     `
                     )
                 }
-                
+
             });
 
             e.nhanSuChuanBiList.forEach(function(e_child,index){
                 if(id_nhansu_cb.includes(e_child.id)){
-                    nhanSuChuanBiAll.append(`  
+                    nhanSuChuanBiAll.append(`
                         <a href="javascript:;" d-id="${e_child.id}"
                            class="list-group-item exchanged nhanSuChuanBiItem click_tieuchuan">
                             ${e_child.name}
                             <div class="small">${e_child.ten_donvi }</div>
-                        </a> 
+                        </a>
                     `
                     )
                 }else{
-                    nhanSuChuanBiAll.append(`  
+                    nhanSuChuanBiAll.append(`
                         <a href="javascript:;" d-id="${e_child.id}"
                            class="list-group-item nhanSuChuanBiItem click_tieuchuan">
                             ${e_child.name}
                             <div class="small">${e_child.ten_donvi }</div>
-                        </a> 
+                        </a>
                     `
                     )
                 }
             });
         });
-        
+
         // Nhân sự chuẩn bị
         $('.exchangeList_cb_' + tieuchuan_id + ' a').unbind('click');
-        $('.exchangeList_cb_' + tieuchuan_id + ' a').click(function () {                
+        $('.exchangeList_cb_' + tieuchuan_id + ' a').click(function () {
             var target = $(this).parent().attr('data-target');
             var targetForm = $(target).attr('d-form');
             var targetName = $(target).attr('d-name');
@@ -1372,17 +1372,17 @@ tbody tr td:last-child {
                     i++;
                     list_nhansuchuanbi_tieuchuan[tieuchuan_id].push($(this).attr('d-id'));
                 });
-                $(sourceForm).append(i + ' nhân sự');                    
+                $(sourceForm).append(i + ' nhân sự');
             }
-        });           
+        });
 
         $('.exchangeList_cb_' + tieuchuan_id + ' a.exchanged').each(function () {
-            $(this).trigger('click');            
-        }); 
+            $(this).trigger('click');
+        });
 
-        //Nhân sự thực hiện   
+        //Nhân sự thực hiện
         $('.exchangeList_th_' + tieuchuan_id + ' a').unbind('click');
-        $('.exchangeList_th_' + tieuchuan_id + ' a').click(function () {                
+        $('.exchangeList_th_' + tieuchuan_id + ' a').click(function () {
             var target = $(this).parent().attr('data-target');
             var targetForm = $(target).attr('d-form');
             var targetName = $(target).attr('d-name');
@@ -1410,17 +1410,17 @@ tbody tr td:last-child {
                     i++;
                     list_nhansuthuchien_tieuchuan[tieuchuan_id].push($(this).attr('d-id'));
                 });
-                $(sourceForm).append(i + ' nhân sự');                    
+                $(sourceForm).append(i + ' nhân sự');
             }
-        });           
+        });
 
         $('.exchangeList_th_' + tieuchuan_id + ' a.exchanged').each(function () {
-            $(this).trigger('click');            
-        });    
+            $(this).trigger('click');
+        });
 
-        //Nhân sự kiểm tra   
+        //Nhân sự kiểm tra
         $('.exchangeList_kt_' + tieuchuan_id + ' a').unbind('click');
-        $('.exchangeList_kt_' + tieuchuan_id + ' a').click(function () {                
+        $('.exchangeList_kt_' + tieuchuan_id + ' a').click(function () {
             var target = $(this).parent().attr('data-target');
             var targetForm = $(target).attr('d-form');
             var targetName = $(target).attr('d-name');
@@ -1448,16 +1448,16 @@ tbody tr td:last-child {
                     i++;
                     list_nhansukiemtra_tieuchuan[tieuchuan_id].push($(this).attr('d-id'));
                 });
-                $(sourceForm).append(i + ' nhân sự');                    
+                $(sourceForm).append(i + ' nhân sự');
             }
-        });           
+        });
 
         $('.exchangeList_kt_' + tieuchuan_id + ' a.exchanged').each(function () {
-            $(this).trigger('click');            
-        });   
+            $(this).trigger('click');
+        });
 
     }
-    
+
     function showhidepartwo(tieuchuan_id){
 
         if($('#div_lkh_part_two'+tieuchuan_id).is(':visible')){
@@ -1473,28 +1473,28 @@ tbody tr td:last-child {
                 data:{
                     khbc_id : {{$id_kehoach_bc}},
                     tieuchuan_id : tieuchuan_id,
-                },    
+                },
                 error: function(err) {
-           
+
                 },
 
                 success: function(data) {
                     if(data == 0){
                         alert(`@lang('project/Selfassessment/title.danhsachnhansu')`);
-                    }else{ 
+                    }else{
                         if(data != undefined){
 
                             load_tieuchuan(data, tieuchuan_id);
-                        }                       
+                        }
                     }
-                    
+
                     $('#div_lkh_part_two'+tieuchuan_id).show();
                     $('#btn_part_two_'+tieuchuan_id).html('<i class="fa fa-minus"></i>');
                 },
             });
             let tieuchuan_date_gh_bd = $('#tieuchuan_date_gh_bd_' + tieuchuan_id).val();
             let tieuchuan_date_gh_kt = $('#tieuchuan_date_gh_kt_' + tieuchuan_id).val();
-            let tieuchuan_ghbc_bd = $('#tieuchuan_ghbc_bd_' + tieuchuan_id).val();            
+            let tieuchuan_ghbc_bd = $('#tieuchuan_ghbc_bd_' + tieuchuan_id).val();
             let tieuchuan_ghbc_kt = $('#tieuchuan_ghbc_kt_' + tieuchuan_id).val();
 
 
@@ -1527,7 +1527,7 @@ tbody tr td:last-child {
 
     }
 
-    
+
     function showhidepartieuchi(tieuchi_id,tieuchuan_id){
         let truong_nhom_tieuchi = $('#truong_nhom_tieuchi_'+tieuchi_id);
         let nhanSuChuanBiAll_tchi = $('#nhanSuChuanBiAll_tchi_'+tieuchi_id);
@@ -1538,21 +1538,21 @@ tbody tr td:last-child {
         let nhanSuKiemTraList_tchi = $('#nhanSuKiemTraList_tchi_'+tieuchi_id);
         var truongnhom_tieuchi = [];
 
-        
+
         if($('#div_lkh_part_tieuchi'+tieuchi_id).is(':visible')){
             $('#div_lkh_part_tieuchi'+tieuchi_id).hide();
             $('#btn_part_tieuchi'+tieuchi_id).html('<i class="fa fa-plus"></i>');
             $('.part-two-tieuchi_'+tieuchi_id).css('border-radius','82px');
-        }else{            
+        }else{
             $.ajax({
                 url: "{{route('admin.tudanhgia.report.datadetail')}}",
                 type: "POST",
                 _token: '{{ csrf_token() }}',
                 data:{
-                    khbc_id : khbc_id,                    
+                    khbc_id : khbc_id,
                     tieuchuan_id : tieuchuan_id,
                     tieuchi_id: tieuchi_id,
-                },    
+                },
                 error: function(err) {
 
                 },
@@ -1568,26 +1568,26 @@ tbody tr td:last-child {
                     nhanSuChuanBiAll_tchi.append(`
                                                 <li class="list-group-item active font-bold">
                                                     @lang('project/Selfassessment/title.danhsachnhansu')
-                                                </li> 
+                                                </li>
                                             `
                                             );
-                    
+
                     nhanSuThucHienAll_tchi.append(`
                                                 <li class="list-group-item active font-bold">
                                                     @lang('project/Selfassessment/title.danhsachnhansu')
-                                                </li> 
+                                                </li>
                                             `
                                             );
                     nhanSuKiemTraAll_tchi.append(`
                                                 <li class="list-group-item active font-bold">
                                                     @lang('project/Selfassessment/title.danhsachnhansu')
-                                                </li> 
+                                                </li>
                                             `
                                             );
                     nhanSuChuanBiList_tchi.append(`
                                                 <li class="list-group-item active font-bold">
                                                     @lang('project/Selfassessment/title.nscb')
-                                                </li> 
+                                                </li>
                                             `
                                             );
                     nhanSuThucHienList_tchi.append(`
@@ -1596,7 +1596,7 @@ tbody tr td:last-child {
                                                 </li>
                                             `
                                             );
-                    
+
                     nhanSuKiemTraList_tchi.append(`
                                                 <li class="list-group-item active font-bold">
                                                     @lang('project/Selfassessment/title.nsth')
@@ -1609,7 +1609,7 @@ tbody tr td:last-child {
                         // console.log(data);
                         load_tieuchuan(data.kh_tieuchuan, tieuchuan_id);
                         listkhtchi[tieuchi_id] = data.id;
-                       
+
                         let tchi_batdau_chuanbi = $('.tchi_batdau_chuanbi_' + tieuchuan_id).val();
                         let tchi_hoanthanh_chuanbi = $('.tchi_hoanthanh_chuanbi_' + tieuchuan_id).val();
                         let tchi_batdau_bc = $('.tchi_batdau_bc_' + tieuchuan_id).val();
@@ -1641,8 +1641,8 @@ tbody tr td:last-child {
                         $('#ngay_hoanthanh_tchi' + tieuchi_id).val(data.ngay_hoanthanh_chuanbi);
                         $('#ngay_batdau_vbc_tchi' + tieuchi_id).val(data.ngay_batdau);
                         $('#ngay_hoanthanh_vbc_tchi' + tieuchi_id).val(data.ngay_hoanthanh);
-                        
-                        
+
+
 
                         truong_nhom_tieuchi.empty();
                         let id_nsth_tieuchi = [];
@@ -1667,7 +1667,7 @@ tbody tr td:last-child {
                                                                     <option value=""></option>
                                                                     <option value="${e_child.id}" ${(data.truongnhom==e_child.id)?"selected":""}>
                                                                         ${e_child.name} (${e_child.ten_donvi})
-                                                                    </option> 
+                                                                    </option>
                                                                 `);
                                     }
                                     if(id_nsth_tieuchi.includes(e_child.id)){
@@ -1687,7 +1687,7 @@ tbody tr td:last-child {
                                                                 </a>
                                                              `)
                                     }
-                                    
+
                                 });
                                 e.nhanSuKiemTraList.forEach(function(e_child){
                                     if(!truongnhom_tieuchi.includes(e_child.id)){
@@ -1696,9 +1696,9 @@ tbody tr td:last-child {
                                                                     <option value=""></option>
                                                                     <option value="${e_child.id}" ${(data.truongnhom==e_child.id)?"selected":""}>
                                                                         ${e_child.name} (${e_child.ten_donvi})
-                                                                    </option> 
+                                                                    </option>
                                                                 `);
-                                        
+
                                     }
 
                                     if(id_nsth_kiemtra.includes(e_child.id)){
@@ -1718,7 +1718,7 @@ tbody tr td:last-child {
                                                                     </a>
                                                                 `)
                                     }
-                                    
+
                                 });
                                 e.nhanSuChuanBiList.forEach(function(e_child){
 
@@ -1739,7 +1739,7 @@ tbody tr td:last-child {
                                                                     </a>
                                                                 `)
                                     }
-                                    
+
                                 });
                         });
                     }
@@ -1786,7 +1786,7 @@ tbody tr td:last-child {
 
                     $('.exchangeList_tchi_cb'+tieuchi_id+' a.exchanged').each(function () {
                         $(this).trigger('click');
-                    });    
+                    });
 
                     // Nhân sự thực hiện
 
@@ -1881,16 +1881,16 @@ tbody tr td:last-child {
                         $(this).trigger('click');
                     });
                     // Nhân sự kiểm tra
-        
+
                 },
             });
 
             $('#div_lkh_part_tieuchi'+tieuchi_id).show();
             $('#btn_part_tieuchi'+tieuchi_id).html('<i class="fa fa-minus"></i>');
-            $('.part-two-tieuchi_'+tieuchi_id).css('border-radius','25px');    
+            $('.part-two-tieuchi_'+tieuchi_id).css('border-radius','25px');
         }
 
-        
+
     }
 
     function showhideparmenhde(menhde_id,tieuchi_id,tieuchuan_id){
@@ -1914,7 +1914,7 @@ tbody tr td:last-child {
                     khbc_id : khbc_id,
                     _token: '{{ csrf_token() }}',
 
-                },    
+                },
                 error: function(err) {
 
                 },
@@ -1928,14 +1928,14 @@ tbody tr td:last-child {
                     nhanSuThucHienAll_menhde.append(`
                                     <li class="list-group-item active font-bold">
                                         @lang('project/Selfassessment/title.danhsachnhansu')
-                                    </li> 
+                                    </li>
                                 `
                                 );
-        
+
                     nhanSuKiemTraAll_menhde.append(`
                                                 <li class="list-group-item active font-bold">
                                                     @lang('project/Selfassessment/title.danhsachnhansu')
-                                                </li> 
+                                                </li>
                                             `
                                             );
 
@@ -1945,14 +1945,14 @@ tbody tr td:last-child {
                                                 </li>
                                             `
                                             );
-                    
+
                     nhanSuKiemTraList_menhde.append(`
                                                 <li class="list-group-item active font-bold">
                                                     @lang('project/Selfassessment/title.nsth')
                                                 </li>
                                             `
                                             );
-                    
+
                     if(data == 0){
                         alert(`@lang('project/Selfassessment/title.kcdlkhmenhde')`);
                     }else{
@@ -1994,11 +1994,11 @@ tbody tr td:last-child {
                                                                 </a>`
                                                                 );
                                 }
-                                
+
                             }
                             for (var k = 0; k < e.nhanSuKiemTraList.length; k++) {
                                 var h = e.nhanSuKiemTraList[k];
-                                
+
                                 if(id_nsth_kiemtra.includes(h.id)){
                                     nhanSuKiemTraAll_menhde.append(`<a href="javascript:;" d-id="${h.id}"
                                                                    class="list-group-item exchanged nhanSuChuanBiItem click_tieuchuan">
@@ -2014,10 +2014,10 @@ tbody tr td:last-child {
                                                                 </a>`
                                                                 );
                                 }
-                                
+
                             }
                         }
-                        
+
                     }
                     // Mệnh đề thực hiện
                     $('.exchangeList_mende_th_' + menhde_id + ' a').unbind('click');
@@ -2112,7 +2112,7 @@ tbody tr td:last-child {
                 }
 
             });
-            
+
             setTimeout(function(){
                 let ngaybd_md_gh = $('.ngaybd_md_gh_' + tieuchi_id).val();
                 let ngayht_md_gh = $('.ngayht_md_gh_' + tieuchi_id).val();
@@ -2128,7 +2128,7 @@ tbody tr td:last-child {
                     maxDate: ngayht_md_gh,
                 });
             },2000);
-            
+
             $('#div_lkh_part_menhde'+menhde_id).show();
             $('#btn_part_menhde_'+menhde_id).html('<i class="fa fa-minus"></i>');
             $('.part-two-menhde_'+menhde_id).css('border-radius','25px');
@@ -2137,7 +2137,7 @@ tbody tr td:last-child {
         }
 
     }
-    
+
     function update_khaiquat(){
         let id_khbc = {{ $keHoachBaoCao->id }};
         let ngay_batdau_chung = $('.ngaybd_chung').val();
@@ -2150,7 +2150,7 @@ tbody tr td:last-child {
                     id_khbc : id_khbc,
                     ngay_batdau_chung : ngay_batdau_chung,
                     ngay_hoanthanh_chung : ngay_hoanthanh_chung,
-                },    
+                },
                 error: function(err) {
 
                 },
@@ -2163,8 +2163,8 @@ tbody tr td:last-child {
                     }else{
                         alert(`@lang('project/Selfassessment/title.capnhatkhl')`);
                     }
-                    
-                    
+
+
                 },
         });
     }
@@ -2194,7 +2194,7 @@ tbody tr td:last-child {
                     nhansuchuanbi : arr_cb,
                     nhansuthuchien : arr_th,
                     nhansukiemtra : arr_kt,
-                },    
+                },
                 error: function(err) {
 
                 },
@@ -2229,7 +2229,7 @@ tbody tr td:last-child {
             }else{
                 $("#tieuchuan_all_"+a).css('display','none');
             }
-        
+
     }
     function checkbox_tieuchi(a,b){
        let check =  $("#checkbox_tieuchi_"+a);
@@ -2238,7 +2238,7 @@ tbody tr td:last-child {
             }else{
                 $("#tieuchi_all_"+a).css('display','none');
             }
-        
+
     }
 
     function update_all_tieuchuan(tieuchuan_id){
@@ -2264,7 +2264,7 @@ tbody tr td:last-child {
                     truong_nhom : truong_nhom,
                     option : option,
                     id_tieuchi : id_tieuchi,
-                },    
+                },
                 error: function(err) {
 
                 },
@@ -2285,7 +2285,7 @@ tbody tr td:last-child {
                     }else{
                         alert(`@lang('project/Selfassessment/title.capnhatkhl')`);
                     }
-                    
+
                 },
         })
     }
@@ -2314,7 +2314,7 @@ tbody tr td:last-child {
             if (check == -1) {
                 $(this).addClass('hidden');
             } else {
-                
+
             }
         });
     });
@@ -2331,11 +2331,11 @@ tbody tr td:last-child {
                     var tieuchuan = data[0];
                     var tieuchi = data[1];
                     var menhde = data[2];
-                    
+
                     for(var i = 0;i < tieuchuan.length;i++){
 
                         if(tieuchuan[i][1] == 1){
-                           
+
                             $('.daVietBaoCao_' + tieuchuan[i][0]).html('<i class="fas fa-star text-danger" data-toggle="tooltip"\n' +
                                 'title="Đã được lên kết hoạch"></i>');
                         }else{
@@ -2413,13 +2413,13 @@ tbody tr td:last-child {
                     nhansuthuchien : arr_th_tieuchi,
                     nhansukiemtra : arr_kt_tieuchi,
                     id_khbc : id_khbc,
-                },    
+                },
                 error: function(err) {
 
                 },
 
                 success: function(data) {
-                    if(data ==1){                        
+                    if(data ==1){
                         $('#div_lkh_part_tieuchi'+tieuchi_id).hide();
                         $('#btn_part_tieuchi'+tieuchi_id).html('<i class="fa fa-plus"></i>');
 
@@ -2431,7 +2431,7 @@ tbody tr td:last-child {
                     }else{
                         alert(`@lang('project/Selfassessment/title.capnhatkhl')`);
                     }
-                    
+
                 },
         });
     }
@@ -2457,15 +2457,15 @@ tbody tr td:last-child {
                     id_kh_tieuchuan : id_kh_tieuchuan,
                     truong_nhom : truong_nhom,
                     option : option,
-                },    
+                },
                 error: function(err) {
 
                 },
 
                 success: function(data) {
-                    
+
                     if(data == 1){
-                        
+
                         alert(`@lang('project/Selfassessment/title.capnhatthanhcong')`);
                         $('#div_lkh_part_tieuchi'+tieuchi_id).hide();
                         $('#btn_part_tieuchi'+tieuchi_id).html('<i class="fa fa-plus"></i>');
@@ -2476,15 +2476,15 @@ tbody tr td:last-child {
                     }else{
                         alert(`@lang('project/Selfassessment/title.capnhatkhl')`);
                     }
-                   
+
                 },
         });
-    }   
+    }
 
     function update_menhde(menhde_id,tieuchi_id){
         let id_kh_tieuchi = listkhtchuan[tieuchi_id];
         let ngay_batdau = $('.ngaybd_menhde_'+menhde_id).val();
-        let ngay_hoanthanh = $('.ngayht_menhde_'+menhde_id).val(); 
+        let ngay_hoanthanh = $('.ngayht_menhde_'+menhde_id).val();
         let id_khbc = {{ $keHoachBaoCao->id }};
         let arr_th_menhde = list_nhansuthuchien_menhde[menhde_id] != undefined ? list_nhansuthuchien_menhde[menhde_id].join(',') : [];
         let arr_kt_menhde = list_nhansukiemtra_menhde[menhde_id] != undefined ? list_nhansukiemtra_menhde[menhde_id].join(',') : [];
@@ -2501,7 +2501,7 @@ tbody tr td:last-child {
                     nhansuthuchien : arr_th_menhde,
                     nhansukiemtra : arr_kt_menhde,
                     id_khbc : id_khbc,
-                },    
+                },
                 error: function(err) {
                 },
 
@@ -2514,11 +2514,11 @@ tbody tr td:last-child {
                     }else{
                         alert(`@lang('project/Selfassessment/title.capnhatkhl')`);
                     }
-                    
+
                 },
         })
     }
-    
+
     function updatebosung(id_khbc,id_tieuchuan,id_tieuchi){
         $.ajax({
                 url: "{{route('admin.tudanhgia.report.updatebosung')}}",
@@ -2527,15 +2527,15 @@ tbody tr td:last-child {
                     id_khbc : id_khbc,
                     id_tieuchuan : id_tieuchuan,
                     id_tieuchi : id_tieuchi,
-    
-                },    
+
+                },
                 error: function(err) {
                 },
 
                 success: function(data) {
                     check_start();
                     console.log(data)
-                    
+
                 },
         })
     }

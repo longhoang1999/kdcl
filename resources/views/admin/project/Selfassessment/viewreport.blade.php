@@ -27,7 +27,7 @@
     justify-content: space-between;
     padding: 0 30px;
     height: 4rem;
-    
+
 
 }
 h4{
@@ -61,14 +61,14 @@ td{
 @stop
 
 @section('title_page')
-    
+
 @stop
 
 @section('content')
 <section class="content-body">
     <div class="show_minhc">
 
-    
+
         <div id="contextMenu" class="btn btn-primary btn-sm" style="position: absolute;z-index:9999999;display:none;">
             <i class="fas fa-comment-alt"></i> @lang('project/Selfassessment/title.vietnhanxet')
         </div>
@@ -97,7 +97,7 @@ td{
         <div class="target">
             <div class="text-right">
                 <div>
-                    <button class="btn btn-success btn-lg" id="guiNhanXet" data-toggle="modal" data-target="#guinhanxet" > 
+                    <button class="btn btn-success btn-lg" id="guiNhanXet" data-toggle="modal" data-target="#guinhanxet" >
                         <i class="fas fa-share-square"></i> @lang('project/Selfassessment/title.guinhanxet')
                     </button>
                     @if($Forward)
@@ -105,7 +105,7 @@ td{
                             <i class="fas fa-chevron-right"></i> @lang('project/Selfassessment/title.nhanxettctt')
                         </a>
                     @endif
-                    
+
                 </div>
             </div>
             <h3>
@@ -120,12 +120,12 @@ td{
                     </small>
                 @endif
             </h2>
-            
+
         </div>
 
         <div class="arrow_content">
             <div class="arrow_content_t clickToComment">
-        
+
             @if($keHoachBaoCaoDetail->loai_tieuchuan != 'csdt')
                         <div class="group_back">
                             <div class="arrow_content_text_css">
@@ -215,12 +215,12 @@ td{
                                             @endif
                                         </div>
 
-                                    
+
                                     </div>
-                                </div>  
+                                </div>
                                     @if($menhde->id)
                                         @include("admin.project.Selfassessment.viewcomment",['kieu'=>'menhde_mota','id'=>$menhde->id,'id_kehoach_bc'=>$id_khbc])
-                                    @endif 
+                                    @endif
                                 <div class="hr-line-dashed"></div>
 
                                 <h3>@lang('project/Selfassessment/title.diemmanh')</h3>
@@ -235,7 +235,7 @@ td{
                                             @endphp
                                         @endforeach
                                         {!! $menhde->diemmanh !!}
-                                    </div>               
+                                    </div>
                                 </div>
 
                                 <h3>
@@ -257,11 +257,11 @@ td{
                                             @if($tieuChuan->trang_thai!='congbo')
                                                 <th colspan="2">@lang('project/Selfassessment/title.tacvu')</th>
                                             @endif
-                                            
+
                                         </tr>
                                         </thead>
                                         <tbody class="keHoach_diemmanh" id="keHoach_diemmanh_{{ $menhde->id }}">
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -283,7 +283,7 @@ td{
                                             @endforeach
                                             {!! $menhde->tontai !!}
                                     </div>
-                        
+
                                 </div>
 
                                 <h3>
@@ -312,7 +312,7 @@ td{
                                     @include("admin.project.Selfassessment.viewcomment",['kieu'=>'menhde_tontai','id'=>$menhde->id,'id_kehoach_bc'=>$id_khbc])
                                 @endif
                             @endforeach
-                        @endif 
+                        @endif
                     </div>
                     </div>
                 @endforeach
@@ -457,7 +457,7 @@ td{
     <script src="{{asset('vendors/ckeditor/js/ckeditor.js')}}" type="text/javascript"></script>
     <script src="{{asset('vendors/tinymce/js/tinymce.min.js')}}" type="text/javascript"></script>
     <!-- <script src="{{ asset('js/pages/editor.js') }}" type="text/javascript"></script> -->
-   
+
     <script src="{{ asset('vendors/pickadate/js/picker.js') }}" type="text/javascript"></script>
     <script src="{{ asset('vendors/pickadate/js/picker.date.js') }}" type="text/javascript"></script>
     <script src="{{ asset('vendors/pickadate/js/picker.time.js') }}" type="text/javascript"></script>
@@ -547,11 +547,11 @@ td{
                 ],
                 setup: function (ed) {
                     ed.on('init', function(args) {
-                        
+
                     });
                 }
             });
-        
+
             $('#contextMenu').on('click', function () {
             var selectedText = x.Selector.getSelected();
             $('#contextMenu').hide();
@@ -601,7 +601,7 @@ td{
             });
         });
 
-            
+
     $('.arrow_content').on('click','.commentDetail',function(){
         let noidung = $(this).attr('d-data');
         let id_nx = $(this).attr('d-id');
@@ -616,7 +616,7 @@ td{
             window.location= "{!! route('admin.tudanhgia.preparereport.editmcgop',0)!!}"+id;
         })
 
-      
+
     });
     </script>
 
