@@ -3832,6 +3832,10 @@
                 var modal = $(this)
                 modal.find('#deleteAllTable__').attr('href', "{{ route('admin.importdata.tuyensinh.deleteDataTable') }}?nametable=" + recipient)
             })
+
+            $(document).ready(function() {
+                $('input').attr('min', '1');
+            });
         </script>
 
         @yield('footer_scripts')
