@@ -847,14 +847,14 @@ class ExternalReviewController extends DefinedController{
 		                                <ul class="dropdown-menu">';
 		                    if($dt->url){
 		                        $text .= '<li>
-                                            <a target="_blank" href="' . $dt->url. '"><i class="fas fa-link"></i>'.Lang::get('project/ExternalReview/title.url').'</a>
+                                            <a target="_blank" href="' . $dt->url. '"><i class="fas fa-link"></i>'.Lang::get('project/Externalreview/title.url').'</a>
                                         </li>';
 		                    }
 
                             if($dt->duong_dan){
                             	$text .= '<li>
-		                                       <a target="_blank" href="">
-		                                            <i class="fas fa-file-alt"></i> ' .Lang::get('project/ExternalReview/title.xemfile').'
+		                                       <a target="_blank" href="' . route('admin.dambaochatluong.manaproof.showProof',$dt->id) .'">
+		                                            <i class="fas fa-file-alt"></i> ' .Lang::get('project/Externalreview/title.xemfile').'
 		                                       </a>
 		                                   </li>';
                             }

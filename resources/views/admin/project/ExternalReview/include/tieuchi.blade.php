@@ -18,7 +18,7 @@
     }
 </style>
 <div class="row show_mcg">
-    <div class="col-md-8">
+    <div class="col-md-8" style="padding-right: 23px">
         <div class="ibox tieuchuantieuchi">
             <div class="ibox-content ">
                 <div class="">
