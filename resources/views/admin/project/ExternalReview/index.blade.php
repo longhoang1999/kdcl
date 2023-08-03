@@ -35,22 +35,22 @@
             </h2>
             <ol class="d-flex">
                 <li class="pr-2 pl-2"><a href="">@lang('project/Externalreview/title.trangchu')</a></li>
-                
+
                     @if($KHBaCaoDetail)
-                        
+
                         <li class="pr-2 pl-2">/
                             {{$KHBaCaoDetail->ten_bc}}
                         </li>
-                        
+
                         <li class="pr-2 "> / {{$title}}</li>
                     @endif
-                
-                
+
+
             </ol>
              {{--  @include("admin.project.ExternalReview.include.tieuchuan_tieuchi") --}}
             @if($page == 'tieuchuan')
                 @if(!$khtc)<!-- Nếu không có  id tiêu chí -->
-                   
+
                     @include ('admin.project.ExternalReview.include.tieuchuan_tieuchi')
                 @else
                     @include ('admin.project.ExternalReview.include.tieuchi')
@@ -77,7 +77,7 @@
                                     @include ('kdcl::danhgiangoai.tonghop.include.phuluc3')
                                 --}}
                                  @endif
-                                
+
                             </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                         <div class="col-lg-12">
                             <div class="boxphuluc10">
                                 <div class="pageHomeView">
-                                    @include("admin.project.ExternalReview.include.phuluc10")  
+                                    @include("admin.project.ExternalReview.include.phuluc10")
                                 </div>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                         <div class="ibox">
                             <div class=" {{((!$id)?'pageHomeView':'ibox-content') }} ">
                                 <div  class="form-horizontal ajaxForm">
-                                
+
                                   @if(!$id)
                                         <table class="table table-striped table-bordered" id="table_danhgiangoai" width="100%">
                                             <thead>
@@ -112,8 +112,8 @@
                                                     <th >@lang('project/Externalreview/title.chitiet')</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>  
-                                            </tbody>                
+                                            <tbody>
+                                            </tbody>
                                         </table>
 
                                         <style>
@@ -125,12 +125,12 @@
                                                 background-color: white;
                                             }
                                         </style>
-                                    
+
                                  @endif
                                     <div class="form-group">
                                         <div class="col-sm-12"> </div>
                                         <div class="col-sm-12 css-img">
-                                            @php 
+                                            @php
                                                 if($page == 'chung' || $page=='baocao'){
                                                     echo ( ($keHoachChung)?$keHoachChung->text:"");
                                                 }
@@ -147,13 +147,13 @@
                     </div>
                 </div>
             @endif
-        </div> 
-       
+        </div>
+
         <div class="css_scoll">@include("admin.project.ExternalReview.include.sidebar") </div>
     </div>
-    
 
-    
+
+
 
 </section>
 @stop
@@ -166,7 +166,7 @@
 @section('footer_scripts')
 
 <script>
-    
+
     function show_tudanhgia(){
         $add_row = $('.arrow_active');
          if($(`#tudanhgia_bctdg`).is(':visible')){
@@ -218,7 +218,7 @@
     $(".wrapper").addClass('hide_menu');
     $(".skin-josh").addClass("left-hidden");
     $(".skin-josh").removeClass("mini");
-    
+
     $(function(){
         table = $('#table_danhgiangoai').DataTable({
             lengthMenu: [[7, 10, 20, -1], [7, 10, 20, "All"]],
@@ -232,7 +232,7 @@
                 { data: 'nam_vietbao', name: 'nam_vietbao' },
                 { data: 'thoidiem_bc', name: 'thoidiem_bc' },
                 { data: 'actions', name: 'actions' },
-            ],            
+            ],
         });
     });
 
@@ -251,21 +251,34 @@
 
          $('.MC_Tc_Tchi').on('click','tr a.mt-4',function(){
             let id_mc = $(this).attr('d-id');
-            
+
             window.location.href = "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id_mc;
             // window.location.href = "{!! route('admin.dambaochatluong.manaproof.showProof',0)!!}"+id_mc;
          })
-         
+
          $('body').on('click','.mcGop',function(){
 
             let id = $(this).attr('id').split('_')[1];
             window.location= "{!! route('admin.tudanhgia.preparereport.viewmcgop',0)!!}"+id;
-        }); 
+        });
 
         $('body').on('click','.mc',function(){
             let id = $(this).attr('id').split('_')[1];
             window.location= "{!! route('admin.dambaochatluong.manaproof.showProof',0) !!}"+id;
         });
     })
+
+    // $(document).ready(function () {
+    //         // Lấy URL hiện tại
+    //         var currentURL = window.location.href;
+
+    //         // Xử lý phần side-menu để bôi đỏ item li nếu URL trùng khớp
+    //         $("#side-menu li").each(function () {
+    //             var anchor = $(this).find("a").attr("href");
+    //             if (currentURL.includes(anchor)) {
+    //                 $(this).css('background','red');
+    //             }
+    //         });
+    //     });
 </script>
 @stop

@@ -15,7 +15,7 @@
 @stop
 @section('content')
 <section class="content-body">
-    
+
     <table class="table table-striped table-bordered" id="table">
         <thead>
             <tr>
@@ -40,7 +40,7 @@
 @section('footer_scripts')
 
 <script>
-  
+
          $( function () {
             table = $('#table').DataTable({
                 responsive: true,
@@ -51,7 +51,7 @@
                     type: 'GET',
                 },
 
-                columns: [ 
+                columns: [
                     {data:'ten_ngan'},
                     {data:'sohieu'},
                     {data:'ngay_ban_hanh'},
@@ -61,7 +61,7 @@
                     {data:'status'},
                     {data:'quanly'},
                     // {data:'status'},
-                   
+
 
                 ]
 
