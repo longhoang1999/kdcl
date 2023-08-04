@@ -29,9 +29,9 @@
     #excel_data, #excel_data2{
         padding: 5px;
     }
-    .table{
+    /* .table{
         width: 2000px !important;
-    }
+    } */
     #excel_data, #excel_data2{
         overflow-x:auto;
     }

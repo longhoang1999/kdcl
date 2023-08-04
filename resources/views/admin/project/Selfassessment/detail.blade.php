@@ -45,6 +45,13 @@
     .table-borderless tr,td{
         border: 1px solid;
      }
+    p,strong,br,hr,b,small,i,u,em,mark,del,ins,sub,sup{
+        word-wrap: break-word;
+    }
+    img{
+        max-width: 100%;
+        height: auto;
+    }
 </style>
 @stop
 

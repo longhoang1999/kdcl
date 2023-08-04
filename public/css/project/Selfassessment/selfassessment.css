@@ -666,11 +666,11 @@ tbody td table{
     
 }
 #content_text img{
-    max-width: 100%;
+    max-width: 97%;
     height: auto;
 }
 #content_text .text_contents{
-    text-indent: 28.1pt;
+    text-indent: 11.1pt;
 }
 #content_text .text_contents p{
     line-height: 31px !important;
@@ -736,6 +736,10 @@ tbody td table{
     margin: 1rem 0;
     padding: 0 10px;
 }
+.ibox-content img{
+    max-width: 97%;
+    height: auto;
+}
 .shadows{
     padding: 13px !important;
 
@@ -750,7 +754,7 @@ tbody td table{
 }
 
 .border-bottom img{
-    max-width: 100%;
+    max-width: 97%;
     height: auto;
 }
 .minhChungAllow{
@@ -768,7 +772,7 @@ tbody td table{
     background-color: #ffffff;
 }
 #content_text2 img{
-    max-width: 100%;
+    max-width: 97%;
     height: auto;
 }
 #content_text2 .text_contents{

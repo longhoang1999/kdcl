@@ -27,6 +27,13 @@
         tr a.mt-4:hover{
             cursor: pointer;
         }
+        p,strong,br,hr,b,small,i,u,em,mark,del,ins,sub,sup{
+        word-wrap: break-word;
+        }
+        img{
+            max-width: 100%;
+            height: auto;
+        }
     </style>
     <div class="body-flex">
       <div class="content-body-css">
