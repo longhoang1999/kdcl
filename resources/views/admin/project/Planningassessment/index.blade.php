@@ -54,6 +54,7 @@
 
 
     </style>
+		@if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
 		<div class="container mt-5 block_css">
 				<div class="row form-group css-t d-flex align-items-center">
 					<label for="" class="col-4 control-label">@lang('project/Externalreview/title.tenbaocao')</label>
@@ -102,6 +103,7 @@
 
 		</div>
 		
+		@endif
 	<!-- modal nhân sự thực hiện -->
                 <div class="modal inmodal fade" id="nhanSuThucHienModal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog">
@@ -168,7 +170,9 @@
 				<th>Tổ trưởng chuyên trách</th>
 				<th>Nhân sự thực hiên</th>
 				<th>Thời gian</th>
-				<th>Hành động</th>
+				@if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+					<th>Hành động</th>
+				@endif
 			</tr>
 		</thead>
 		<tbody> 
@@ -362,7 +366,9 @@
 				{ data: 'totruong', name: 'totruong' },
 				{ data: 'nvth', name: 'nvth' },
 				{ data: 'time', name: 'time' },
-                { data: 'actions', name: 'actions' },
+				@if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                	{ data: 'actions', name: 'actions' },
+				@endif
             ],           
         });
 

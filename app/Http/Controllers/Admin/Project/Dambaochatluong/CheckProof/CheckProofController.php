@@ -298,6 +298,7 @@ class CheckProofController extends DefinedController
             ->update([
                 'cong_bo' => 'N'
             ]);
+        DB::table("kehoach_hanhdong")->where("hoatdongnhom_id", $id)->delete();
         return back()->with('success',  
                     Lang::get( $this->langBase . '.mcycdcml'));
     }

@@ -158,13 +158,13 @@
                     <input type="text" name="tieude_search" id="tieude_search" class="form-control" style="height: 100%;" placeholder="@lang('project/QualiAssurance/title.locmctt')">
                 </div>
 
-                @if(!Sentinel::inRole('truongdonvi') && !Sentinel::inRole('khac'))
+               
                 <div class="col-md-1" style="text-align: right;">
                     <a href="{{ route('admin.dambaochatluong.manaproof.newProof') }}" class="btn btn-benchmark" style="width: 100%;" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.tmoi')">
                         <i class="bi bi-plus-square" style="font-size: 35px;color: #50cd89;"></i>
                     </a>
                 </div>
-                @endif
+               
 
                 <div class="col-md-1">
                     <a class="btn btn-benchmark" style="width: 100%;" href="{{route('admin.dambaochatluong.manaproof.exportProof')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.xuat_excel')">

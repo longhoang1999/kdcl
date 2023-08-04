@@ -63,25 +63,25 @@
                 @lang('project/QualiAssurance/title.khdbcln' )
             </h2>
         </div>
-       
-        <div class="row">
-            <div class="col-md-4">
-                <select id="namlkh" class="form-control">
-                    <option value="" hidden>-- @lang('project/QualiAssurance/title.cnlkh')</option>
-                    @for($i = intVal(date('Y')) + 1 ;$i >= 2017; $i--)
-                        <option >{{$i}}</option>
-                    @endfor
-                </select>
-            </div>
-            <div class="col-md-4">
-                <select id="namcopykh" class="form-control">
-                    <option value="" hidden>-- @lang('project/QualiAssurance/title.cncopykh')</option>
-                    @for($i = intVal(date('Y'));$i >= 2017; $i--)
-                        <option >{{$i}}</option>
-                    @endfor
-                </select>
-            </div>
-            @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+        @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+            <div class="row">
+                <div class="col-md-4">
+                    <select id="namlkh" class="form-control">
+                        <option value="" hidden>-- @lang('project/QualiAssurance/title.cnlkh')</option>
+                        @for($i = intVal(date('Y')) + 1 ;$i >= 2017; $i--)
+                            <option >{{$i}}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <select id="namcopykh" class="form-control">
+                        <option value="" hidden>-- @lang('project/QualiAssurance/title.cncopykh')</option>
+                        @for($i = intVal(date('Y'));$i >= 2017; $i--)
+                            <option >{{$i}}</option>
+                        @endfor
+                    </select>
+                </div>
+            
                 <div class="col-md-1">
                     <button class="btn btn-benchmark mr-2" type="button" id="turnOnmodalCopy" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.copykhtnc')">
                         <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
@@ -98,8 +98,8 @@
                         <i class="bi bi-file-earmark-excel " style="font-size: 35px;color: #50cd89;"></i>
                     </a>
                 </div>
-            @endif
-        </div>
+            </div>
+        @endif
        
     </div>
    
@@ -189,7 +189,9 @@
                          <tr>
                             <th >@lang('project/QualiAssurance/title.lvuc')</th>
                             <th >@lang('project/QualiAssurance/title.trangthai')</th>
+                            @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
                             <th >@lang('project/QualiAssurance/title.hdong')</th>
+                            @endif
                          </tr>
                         </thead>
                         <tbody>  
@@ -930,7 +932,9 @@
             columns: [
                 { data: 'mo_ta', name: 'mo_ta' , className: 'width_30'  },
                 { data: 'note', name: 'note' , className: 'width_50' },
+                @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
                 { data: 'actions', name: 'actions', className: 'width_20' ,className: 'action' },
+                @endif
             ],            
         });
 

@@ -538,7 +538,7 @@ Route::group(
                             function () {
                                 // Lập kế hoạch
                                 Route::get('index', 'PlanningController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi,canboDBCL'])
                                     ->name('index');
                                 Route::get('delete-ccsl', 'PlanningController@deleteCcsl')->name('deleteCcsl');
                                 Route::post('create-ccsl', 'PlanningController@createCcsl')->name('createCcsl');
@@ -722,7 +722,7 @@ Route::group(
                 // Route for function tự đánh giá
                 Route::group(
                     ['prefix' => 'tu-danh-gia', 'as' => 'tudanhgia.', 'namespace' => 'Tudanhgia', 'middleware' => [
-                        'super_check:admin,operator,ns_thuchien,ns_phutrach,ns_kiemtra,ttchuyentrach'
+                        'super_check:admin,operator,ns_thuchien,ns_phutrach,ns_kiemtra,ttchuyentrach,truongdonvi,canboDBCL'
                     ]],
                     function () {
                         // Danh sách báo cáo tự đánh giá
@@ -731,7 +731,7 @@ Route::group(
                             function(){
                                 //DS Báo cáo tự đánh giá
                                 Route::get('index', 'ReportController@index')
-                                    ->middleware(['super_check:admin,operator,ttchuyentrach'])
+                                    //->middleware(['super_check:admin,operator,ttchuyentrach'])
                                     ->name('index');
                                 //Data
                                 Route::get('data', 'ReportController@data')->name('data');
@@ -948,7 +948,7 @@ Route::group(
                             function(){
                                 // Đánh giá ngoài
                                 Route::get('/','PlanningassessmentController@index')
-                                ->middleware(['super_check:admin,operator'])
+                                // ->middleware(['super_check:admin,operator'])
                                 ->name('index');
                                 Route::post("phanquyen", 'PlanningassessmentController@phanquyen')->name('phanquyen');
                                 Route::get('get-data','PlanningassessmentController@getdata')->name('getdata');
@@ -2183,7 +2183,7 @@ Route::group(
                             ['prefix' => 'lap-ke-hoach-excel', 'as' => 'lkhex.', 'namespace' => 'LapkehoachExcel'],
                             function(){
                                 Route::get('index','LapkehoachExcelController@index')
-                                    ->middleware(['super_check:admin,operator'])
+                                    //->middleware(['super_check:admin,operator'])
                                     ->name('index');
                                 Route::get('data','LapkehoachExcelController@data')->name('data');
                                 Route::post('create-kehoach','LapkehoachExcelController@createKH')->name('createKH');

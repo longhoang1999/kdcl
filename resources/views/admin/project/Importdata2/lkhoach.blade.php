@@ -55,12 +55,14 @@
 @section('content')
 <section class="content indexpage pr-3 pl-3">
     <section class="content-body">
+        @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
         <div class="item-group-button right-block mb-2">
             <button class="btn btn-benchmark mr-2 mt-3 ml-4 pl-3 pr-3" type="button"
                 data-toggle="modal" data-target="#modalCreateBC" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/ImportdataExcel/title.phancong')">
                 <i class="bi bi-plus-square" style="font-size: 35px;color: red;"></i>
             </button>
         </div>
+        @endif
         <table class="table table-striped table-bordered" id="table" width="100%">
             <thead>
              <tr>
@@ -69,7 +71,9 @@
                 <th >@lang('project/ImportdataExcel/title.donvi')</th>
                 <th >@lang('project/ImportdataExcel/title.nskt')</th>
                 <th >@lang('project/ImportdataExcel/title.kehoach')</th>
-                <th >@lang('project/ImportdataExcel/title.hanhdong')</th>
+                @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                    <th>@lang('project/ImportdataExcel/title.hanhdong')</th>
+                @endif
              </tr>
             </thead>
             <tbody>  
@@ -430,7 +434,9 @@
                 { data: 'donvi', name: 'donvi' },
                 { data: 'nhansukt', name: 'nhansukt' },
                 { data: 'time', name: 'time' },
+                @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
                 { data: 'action', name: 'action', className:'action' },
+                @endif
             ],            
         });
     });  

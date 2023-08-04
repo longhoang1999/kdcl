@@ -61,7 +61,6 @@ class UpdateAciController extends DefinedController
 
 
     public function viewAction(Request $req){
-
         $hdns = DB::table('hoatdongnhom AS hdn')
                 ->where('hdn.parent', 0)
                 ->where("hdn.deleted_at", null)
@@ -69,6 +68,19 @@ class UpdateAciController extends DefinedController
                 ->select("hdn.id AS id_hdn", "hdn.year", "hdn.nhom_mc_sl_id", "mcsl.mo_ta",
                  "hdn.noi_dung", "hdn.parent", 'mcsl.id')
                 ->orderBy('hdn.year', 'desc');
+        
+        if(!Sentinel::inRole('operator') && Sentinel::inRole('truongdonvi')){
+            $kehoach = DB::table('kehoach_cc_solieu')
+                        ->select('nhom_mc_sl_id')
+                        ->where('dv_thuchien',Sentinel::getUser()->donvi_id)
+                        ->get();
+            $arr = [];
+            foreach($kehoach as $val){
+                array_push($arr,$val->nhom_mc_sl_id);
+            }
+            $hdns->whereIn("hdn.nhom_mc_sl_id",$arr);
+        }
+        
         if($req->content != "" && $req->year == "" && $req->mcsl == ""){
             $hdns = $hdns->where('hdn.noi_dung', 'like', '%'. $req->content .'%');
         }
@@ -100,11 +112,13 @@ class UpdateAciController extends DefinedController
             })
             ->addColumn('actions',function ($hdn){
                     $actions = '<a href="'. route('admin.dambaochatluong.updateaci.manaAction', ['id' => $hdn->id_hdn]) .'" class="btn mt-2 btn-block" data-bs-placement="top" title="'.Lang::get('project/QualiAssurance/title.qlhd').'">'. '<i class="bi bi-gear-fill" style="font-size: 25px;color: #009ef7;"></i>' .'</a>';
-                    if( Sentinel::inRole('ns_kiemtra') !== false){
+
+                    if( Sentinel::inRole('truongdonvi') || Sentinel::inRole('admin') || Sentinel::inRole('operator')){
                         $actions = $actions . '<button type="button" class="btn btn-block" data-toggle="modal" data-target="#modalDelete" data-id="'. $hdn->id_hdn .'">
                             '. '<i class="bi bi-trash" style="font-size: 25px;color: red;"></i>' .'
                         </button>';
                     }
+                    
                     // $actions = $actions . '<button type="button" class="btn btn-block" data-toggle="modal" data-target="#modalDelete" data-id="'. $hdn->id_hdn .'">
                     //         '. '<i class="bi bi-trash" style="font-size: 25px;color: red;"></i>' .'
                     //     </button>';

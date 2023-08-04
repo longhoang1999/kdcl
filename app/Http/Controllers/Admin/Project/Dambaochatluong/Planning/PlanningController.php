@@ -136,7 +136,7 @@ class PlanningController extends DefinedController
                     ->where("ccsl.deleted_at"  ,null);
 
         if($req->year != "" && $req->mcsl == "" && $req->donvi == ""){
-            $plannings = $plannings->whereYear('ccsl.year', $req->year);
+            $plannings = $plannings->whereYear('ccsl.ngay_batdau', $req->year);
         };
         if($req->year == "" && $req->mcsl != "" && $req->donvi == ""){
             $plannings = $plannings->where("nhom_mc_sl_id", $req->mcsl);
@@ -145,11 +145,11 @@ class PlanningController extends DefinedController
             $plannings = $plannings->where("dv_thuchien", $req->donvi);
         };
         if($req->year != "" && $req->mcsl != "" && $req->donvi == ""){
-            $plannings = $plannings->whereYear('ccsl.year', $req->year)
+            $plannings = $plannings->whereYear('ccsl.ngay_batdau', $req->year)
                         ->where("nhom_mc_sl_id", $req->mcsl);
         };
         if($req->year != "" && $req->mcsl == "" && $req->donvi != ""){
-            $plannings = $plannings->whereYear('ccsl.year', $req->year)
+            $plannings = $plannings->whereYear('ccsl.ngay_batdau', $req->year)
                         ->where("dv_thuchien", $req->donvi);
         };
         if($req->year == "" && $req->mcsl != "" && $req->donvi != ""){
@@ -157,7 +157,7 @@ class PlanningController extends DefinedController
                         ->where("dv_thuchien", $req->donvi);
         };
         if($req->year != "" && $req->mcsl != "" && $req->donvi != ""){
-            $plannings = $plannings->whereYear('ccsl.year', $req->year)
+            $plannings = $plannings->whereYear('ccsl.ngay_batdau', $req->year)
                         ->where("nhom_mc_sl_id", $req->mcsl)
                         ->where("dv_thuchien", $req->donvi);
         };
@@ -209,8 +209,11 @@ class PlanningController extends DefinedController
                 
         return DataTables::of($notPlans) 
             ->addColumn('actions',function($notPlan){
+                $actions = "";
+                if(Sentinel::inRole('admin') || Sentinel::inRole('operator')){
                     $actions = '<button type="button" class="btn btn-block control" data-toggle="modal" data-target="#modalLkh" data-bs-placement="top" title="'.Lang::get('project/QualiAssurance/title.lkh').'">'. '<i class="bi bi-pencil-square" style="font-size: 25px;color: #009ef7;"></i>' .'</button>';
-                    return $actions;
+                }
+                return $actions;
             })
             ->addColumn('note',function($notPlan){
                     return '<span class="badge badge-light font-italic">'. Lang::get('project/QualiAssurance/title.clkh') .'</span>';

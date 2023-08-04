@@ -120,15 +120,16 @@ class ReportController extends DefinedController
                                    '</a>';
                     }
 
-                    $actions .= '<a href="#" class="btn" data-bs-placement="top" title="'.Lang::get('project/Selfassessment/title.chsua').'"  data-id='.$user->id.' data-toggle="modal" data-target="#modalUpdateBC">'.
-                                    '<i data-bs-placement="top" title="'.Lang::get('project/Selfassessment/title.chsua').'" class="bi bi-pencil-square" style="font-size: 25px;color: #ce186a;"></i>'
-                                        .
-                                '</a>';
-                    $actions .= '<a href="#" class="btn" data-bs-placement="top" title="'.Lang::get('project/       Selfassessment/title.xoa').'" data-id='.$user->id.' data-toggle="modal" data-target="#modalDelete">'.
-                                    '<i data-bs-placement="top" title="'.Lang::get('project/Selfassessment/title.xoa').'" class="bi bi-trash" style="font-size: 25px;color: #d9214e;"></i>'
-                                        .
-                                '</a>';
-                    
+                    if(Sentinel::inRole('admin') || Sentinel::inRole('operator')){
+                        $actions .= '<a href="#" class="btn" data-bs-placement="top" title="'.Lang::get('project/Selfassessment/title.chsua').'"  data-id='.$user->id.' data-toggle="modal" data-target="#modalUpdateBC">'.
+                                        '<i data-bs-placement="top" title="'.Lang::get('project/Selfassessment/title.chsua').'" class="bi bi-pencil-square" style="font-size: 25px;color: #ce186a;"></i>'
+                                            .
+                                    '</a>';
+                        $actions .= '<a href="#" class="btn" data-bs-placement="top" title="'.Lang::get('project/       Selfassessment/title.xoa').'" data-id='.$user->id.' data-toggle="modal" data-target="#modalDelete">'.
+                                        '<i data-bs-placement="top" title="'.Lang::get('project/Selfassessment/title.xoa').'" class="bi bi-trash" style="font-size: 25px;color: #d9214e;"></i>'
+                                            .
+                                    '</a>';
+                    }
                     return $actions;
                 }
             )

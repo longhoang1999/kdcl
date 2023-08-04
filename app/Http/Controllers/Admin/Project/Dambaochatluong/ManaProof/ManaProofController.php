@@ -283,8 +283,13 @@ class ManaProofController extends DefinedController
 
     public function newProof(Request $req){
         $nguoi_quan_ly = DB::table("users")
-            ->leftjoin("donvi", "users.donvi_id", "=", "donvi.id")
-            ->select("users.id","users.name", "donvi.ten_donvi")->get();
+            ->leftjoin("donvi", "users.donvi_id", "=", "donvi.id");
+        if(Sentinel::inRole('truongdonvi')){
+            $nguoi_quan_ly = $nguoi_quan_ly->where("donvi.id", Sentinel::getUser()->donvi_id);
+        }
+        $nguoi_quan_ly = $nguoi_quan_ly->select("users.id","users.name", "donvi.ten_donvi")->get();
+
+        
         $linhvuc = DB::table('nhom_mc_sl')->select('id', 'mo_ta');
         $linhvuc = $this->dataExceptDelete($linhvuc)->get();
         $hoatdong = DB::table('hoatdongnhom')->select('id', 'noi_dung');
