@@ -81,7 +81,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modalCreateBC" tabindex="-1" role="dialog" aria-labelledby="modalCreateBCLabel" aria-hidden="true">
+<div class="modal fade" id="modalCreateBC" role="dialog" aria-labelledby="modalCreateBCLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -251,7 +251,7 @@
 </div>
 
 
-<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+<div class="modal fade" id="modalDelete" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -284,7 +284,7 @@
 </div>
 
 
-<div class="modal fade" id="modalUpdateBC" tabindex="-1" role="dialog" aria-labelledby="modalUpdateBCLabel" aria-hidden="true">
+<div class="modal fade" id="modalUpdateBC" role="dialog" aria-labelledby="modalUpdateBCLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
