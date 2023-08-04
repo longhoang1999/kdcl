@@ -28,7 +28,7 @@ class ExternalReviewController extends DefinedController{
 
 			$keHoachBaoCaoList2 = DB::table('kehoach_baocao')->get();
 
-			
+
     		if($id){
 
     			$keHoachBaoCaoDetail2 = DB::table('kehoach_baocao')
@@ -48,8 +48,8 @@ class ExternalReviewController extends DefinedController{
 		        										->select('donvi.*','donvi.ma_donvi as id_donvi')
 		        										->leftjoin('donvi','donvi.id','=','users.donvi_id')
 		        										->where('users.id',$keHoachBaoCaoDetail2->ns_phutrach)->first();
-	
-						
+
+
 		        	$keHoachBaoCaoDetail2->ctdt = DB::table('ctdt')
 		        										->where('id',$keHoachBaoCaoDetail2->ctdt_id)->first();
 		        	$keHoachBaoCaoDetail2->keHoachChung = DB::table('kehoach_chung')
@@ -60,8 +60,8 @@ class ExternalReviewController extends DefinedController{
 					        											->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
 					        											->where('id_kh_chung',$keHoachBaoCaoDetail2->keHoachChung->id)
 					        											->first();
-		        	}										
-		        	
+		        	}
+
 
 		        	foreach($keHoachTieuChuanList as $keHoachTieuChuan){
 		        		$tieuChuan = DB::table('tieuchuan')->where('id',$keHoachTieuChuan->tieuchuan_id)->first();
@@ -71,7 +71,7 @@ class ExternalReviewController extends DefinedController{
 		        												->where('id_kh_tieuchuan',$keHoachTieuChuan->id)
 		        												->where('id_tieuchuan',$keHoachTieuChuan->tieuchuan_id)
 		        												->first();
-		        		
+
 		        		if($tieuChuan){
 		        			$keHoachTieuChuan->moTaWithStt = "TC $tieuChuan->stt: $tieuChuan->mo_ta";
 			            	$keHoachTieuChuan->keHoachTieuChiList =	$keHoachTieuChiList = DB::table('kehoach_tieuchi')->where('id_kh_tieuchuan',$keHoachTieuChuan->id)->get();
@@ -87,7 +87,7 @@ class ExternalReviewController extends DefinedController{
 				            		$keHoachTieuChi->tieuChi = $tieuChi;
 
 				            		foreach($menhde as $value){
-				            			
+
 				            			$value->khmenhde = DB::table('kehoach_menhde')
             												->where('id_kh_tieuchi',$keHoachTieuChi->id)
             												->where('id_menhde',$value->id)
@@ -98,7 +98,7 @@ class ExternalReviewController extends DefinedController{
 				            								->where('id_kh_menhde',$value->khmenhde->id)
 				            								->where('id_menhde',$value->khmenhde->id_menhde)
 				            								->first();
-				            			
+
 				            			$value->baoCaoMenhDe = $baoCaoMenhDe;
 
 				            			$baoCaoMenhDe->keHoachHanhDongList = DB::table('kehoach_hd')
@@ -115,13 +115,13 @@ class ExternalReviewController extends DefinedController{
 					            									->where('id',$val->ns_kiemtra)
 					            									->first();
 				            			}
-				            				
-				            			
-				            			
+
+
+
 				            			$danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
 				            		}
-				            		
-				            		
+
+
 
 				                	$baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
 				                	$danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
@@ -133,7 +133,7 @@ class ExternalReviewController extends DefinedController{
 											            					->get();
 				            		$keHoachTieuChi->tieuChi = $tieuChi;
 				            		foreach($menhde as $value){
-				            			
+
 				            			$value->khmenhde = DB::table('kehoach_menhde')
             												->where('id_kh_tieuchi',$keHoachTieuChi->id)
             												->where('mocchuan_id',$value->id)
@@ -144,7 +144,7 @@ class ExternalReviewController extends DefinedController{
 				            								->where('id_kh_menhde',$value->khmenhde->id)
 				            								->where('mocchuan_id',$value->khmenhde->mocchuan_id)
 				            								->first();
-				            			
+
 				            			$value->baoCaoMenhDe = $baoCaoMenhDe;
 
 				            			$baoCaoMenhDe->keHoachHanhDongList = DB::table('kehoach_hd')
@@ -152,7 +152,7 @@ class ExternalReviewController extends DefinedController{
 				            													->where('kehoach_bc_id',$id)
 				            													->whereNull('deleted_at')
 				            													->get();
-				            		
+
 
 				            			foreach($baoCaoMenhDe->keHoachHanhDongList as $val){
 				            				$val->donViThucHien = DB::table('donvi')
@@ -162,38 +162,38 @@ class ExternalReviewController extends DefinedController{
 					            									->where('id',$val->ns_kiemtra)
 					            									->first();
 				            			}
-				            				
-				            			
-				            			
+
+
+
 				            			$danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
 				            		}
-				            		
-				            		
+
+
 
 				                	$baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
 				                	$danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
 				                	$keHoachTieuChi->baoCaoTieuChi = $baoCaoTieuChi;
 			            		}
-			            		
+
 
 			            		if($tieuChi){
 			            			$keHoachTieuChi->moTaWithStt = "$tieuChuan->stt.$tieuChi->stt: $tieuChi->mo_ta";
 			            		}
-			            		
+
 			            	}
 		        		}
-		            	
-		            	
+
+
 		        	}
 		        }
     		}
-	        	
+
 	        return array($keHoachBaoCaoList2,$keHoachBaoCaoDetail2);
 		}
 
 
 
-		
+
 
 		public function listDatakeHoachBaoCaoDetail($id){
 			$check_mccb = DB::table('kehoach_baocao')
@@ -253,7 +253,7 @@ class ExternalReviewController extends DefinedController{
 						        						->where('id',$valuekhd->ns_thuchien)
 						        						->first();
 						        	$valuekhd->donViThucHien = $donViThucHien;
-						        	
+
 						        	$donViKiemTra = DB::table('donvi')
 						        						->where('id',$valuekhd->ns_kiemtra)
 						        						->first();
@@ -330,7 +330,7 @@ class ExternalReviewController extends DefinedController{
 						        						->where('id',$valuekhd->ns_thuchien)
 						        						->first();
 						        	$valuekhd->donViThucHien = $donViThucHien;
-						        	
+
 						        	$donViKiemTra = DB::table('donvi')
 						        						->where('id',$valuekhd->ns_kiemtra)
 						        						->first();
@@ -356,8 +356,8 @@ class ExternalReviewController extends DefinedController{
 					return array($keHoachBaoCaoDetail);
 				}
 			}
-			
-			
+
+
 
 		}
 
@@ -372,7 +372,7 @@ class ExternalReviewController extends DefinedController{
 				$value->ten_donvi = $ten_dv;
 
 			}
-		
+
 			$page = $req->page;
 			$kh = null;
 			$keHoachChungs = null;
@@ -401,7 +401,7 @@ class ExternalReviewController extends DefinedController{
 			$dulieu = '';
           	$list = "";
           	$sua = "xem";
-			
+
 
 			list($keHoachBaoCaoList2,$keHoachBaoCaoDetail2) = $this->baseIndex($id);
 
@@ -430,8 +430,8 @@ class ExternalReviewController extends DefinedController{
 					$KHBaCaoDetails = $KHBaCaoDetail;
 					$nhanXetKhoiLists = $nhanXetKhoiList;
 	        	}
-				
-				
+
+
 			}elseif($page == 'tieuchuan'){
 				list($mcCollect) = $this->listMinhChung($keHoachBaoCaoDetail2);
 	            $minhChungList = $mcCollect;
@@ -456,10 +456,10 @@ class ExternalReviewController extends DefinedController{
 			          	  $dulieu = json_decode($data->dulieu);
 				          list($keHoachBaoCaoList2,$keHoachBaoCaoDetail2) = $this->baseIndex2($id);
 				          list($noiDungThem) = $this->getDataPhuLucCSDT($keHoachBaoCaoDetail2);
-				          
+
 				          $list = $this->showFileData($id);
 	            		}else{
-	            			
+
 				            $data = DB::table('coso_dulieu')
 				                    ->where('id_khbc',$req->id)
 				                    ->first();
@@ -473,7 +473,7 @@ class ExternalReviewController extends DefinedController{
 	            }
 
 			}
-	
+
 			return view('admin.project.ExternalReview.index')
 						->with([
 								'keHoachBaoCaoList' => $keHoachBaoCaoList,
@@ -512,7 +512,7 @@ class ExternalReviewController extends DefinedController{
 								"dulieu"  => $dulieu,
                                 'data'    => $list,
                                 'check'   => $sua,
-							
+
 						]);
 		}
 
@@ -559,7 +559,7 @@ class ExternalReviewController extends DefinedController{
 							'nam_vietbao',
 							function($keHoachBaoCaoList){
 								if($keHoachBaoCaoList->ngay_batdau){
-									return date("Y", strtotime($keHoachBaoCaoList->ngay_batdau)); 
+									return date("Y", strtotime($keHoachBaoCaoList->ngay_batdau));
 								}else{
 									return '';
 								}
@@ -569,7 +569,7 @@ class ExternalReviewController extends DefinedController{
 							'thoidiem_bc',
 							function($keHoachBaoCaoList){
 								if($keHoachBaoCaoList->thoi_diem_bao_cao){
-									return date("d/m/Y", strtotime($keHoachBaoCaoList->thoi_diem_bao_cao)); 
+									return date("d/m/Y", strtotime($keHoachBaoCaoList->thoi_diem_bao_cao));
 								}else{
 									return '';
 								}
@@ -616,7 +616,7 @@ class ExternalReviewController extends DefinedController{
 											->leftjoin('bo_tieuchuan','bo_tieuchuan.id','=','kehoach_baocao.bo_tieuchuan_id')
 											->where('kehoach_baocao.id',$id)->first();
 			}
-			
+
 			if($id){
 				$keHoachTieuChuan = DB::table('kehoach_baocao')
 										->select('kehoach_tieuchuan.*')
@@ -626,7 +626,7 @@ class ExternalReviewController extends DefinedController{
 					$tieuchuan = DB::table('tieuchuan')
 									->where('tieuchuan.id',$value->tieuchuan_id)
 									->first();
-			
+
 					$tieuchi = DB::table('kehoach_tieuchi')
 									->select('tieuchi.*','kehoach_tieuchi.id_tieuchi','kehoach_tieuchi.id as id_khtc')
 									->leftjoin('tieuchi','tieuchi.id','=','kehoach_tieuchi.id_tieuchi')
@@ -635,7 +635,7 @@ class ExternalReviewController extends DefinedController{
 						$value->tieuchuan = $tieuchuan;
 					}else{
 						$value->tieuchuan = 1;
-					}				
+					}
 
 					$value->tieuchi = $tieuchi;
 					$danhGiaTieuChi = [];
@@ -676,7 +676,7 @@ class ExternalReviewController extends DefinedController{
 														->where('id',$val_dvth->ns_kiemtra)
 														->first();
 									$val_dvth->donViKiemTra = $donViKiemTra;
-									
+
 
 
 									// if($donViThucHien){
@@ -692,18 +692,18 @@ class ExternalReviewController extends DefinedController{
 									// var_dump($donViThucHien);
 
 								}
-							}					
-							
-												
-							
-							
+							}
+
+
+
+
 
 						}
 
 						$baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
 						// $danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
 						$val->baoCaoTieuChi = $baoCaoTieuChi;
-					}	
+					}
 				}
 			}
 			return array($KehoachBaocaoDetaliscoll,$keHoachTieuChuan);
@@ -715,18 +715,18 @@ class ExternalReviewController extends DefinedController{
                                         ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
                                         ->first();
 
-            $noidung = json_decode($noiDungThem->noidung);                                           
+            $noidung = json_decode($noiDungThem->noidung);
             return array($noidung);
 
 	     }
 
 		public function getDataPhuLuc($keHoachBaoCaoDetail2){
-               
+
                $noiDungThem = DB::table('baocao_noidungthem')
                                         ->where('id_kehoach_bc',$keHoachBaoCaoDetail2->id)
                                         ->first();
 
-               $noidung = json_decode($noiDungThem->noidung);                                           
+               $noidung = json_decode($noiDungThem->noidung);
                return array($noidung);
           }
 		public function baoCaoKhac(Request $req){
@@ -737,7 +737,7 @@ class ExternalReviewController extends DefinedController{
 				$url = DB::table('baocao_url')
 	                ->where('is_active', '=', 1)->first()->url;
 			}
-	        
+
 
 	        return view('admin.project.ExternalReview.baocaokhac')->with([
 	            'title' => "Số liệu tổng hợp",
@@ -753,7 +753,7 @@ class ExternalReviewController extends DefinedController{
 	        ]);
 			return $req->id;
 		}
-		
+
 		public function thuvienminhchung(Request $req){
 
 			return view('admin.project.ExternalReview.thuvienminhchung')
@@ -771,7 +771,7 @@ class ExternalReviewController extends DefinedController{
 					->first();
 
 	        $getIdDonvikhoa = DB::table('users')->where('donvi_id',$getIdDonvi->id)->pluck('id')->toArray();
-	       
+
 	        $querydonvichung =DB::select('select users.id from users,donvi where users.donvi_id = donvi.id and donvi.ten_donvi not like "Khoa%"');
         	$getIdDonvichung = [];
 
@@ -795,7 +795,7 @@ class ExternalReviewController extends DefinedController{
 						}else{
 							return 'Không có dữ liệu';
 						}
-						
+
 					})
 
 					->addColumn('tendonvi',function($dt){
@@ -808,7 +808,7 @@ class ExternalReviewController extends DefinedController{
 						}else{
 							return ''.Lang::get('project/ExternalReview/title.khongcodulieu').'';
 						}
-						
+
 					})
 
 					->addColumn('trang_t',function($dt){
@@ -817,7 +817,7 @@ class ExternalReviewController extends DefinedController{
 						}else{
 							return '<span class="badge badge-secondary">'.Lang::get('project/Externalreview/title.khongck').'</span>';
 						}
-						
+
 					})
 
 					->addColumn('status',function($dt){
@@ -836,7 +836,7 @@ class ExternalReviewController extends DefinedController{
                                         <i class="far fa-circle"></i>
                                     </button>';
 						}
-						
+
 					})
 
 					->addColumn('quanly',function($dt){
@@ -861,14 +861,14 @@ class ExternalReviewController extends DefinedController{
                             $text .= '</ul>
                         				</div>';
 
-                        	return $text;         
-                            
+                        	return $text;
+
 						}
-						
+
 					})
 					->rawColumns(['trang_t','status','quanly'])
 					->make(true);
-		
+
 
 
 		}
@@ -928,7 +928,7 @@ class ExternalReviewController extends DefinedController{
 		                                                    ->get();
 		            $keHoachTieuChi->tieuChi = DB::table('tieuchi')
 		                                                    ->where('id',$keHoachTieuChi->id_tieuchi)
-		                                                    ->first();                                         
+		                                                    ->first();
 		            foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
 		                $keHoachMenhDe->baoCaoMenhDe = DB::table('baocao_menhde')
 		                                                    ->where('id_kehoach_bc',$kehoachbao->id)
@@ -939,7 +939,7 @@ class ExternalReviewController extends DefinedController{
 
 		                $dom = new Dom;
 		                $dom->loadStr($keHoachMenhDe->baoCaoMenhDe->mota);
-		                $contents = $dom->find('.danMinhChung');  
+		                $contents = $dom->find('.danMinhChung');
 		                $arr = array();
 		                foreach ($contents as $key => $danMinhChung) {
 		                	if(!in_array($danMinhChung->{'d-id'}, $minhChungid)){
@@ -985,12 +985,12 @@ class ExternalReviewController extends DefinedController{
 
                             }
 		                    // $html = $minhChungCode;
-		                    
+
 		                }
 		            }
 		        }
 		    }
-		 
+
     	 }
 
     	 public function listMinhChung($keHoachBaoCaoDetail,$idTieuChuan = null,$idTieuChi = null,$statusMC = true){
@@ -1018,7 +1018,7 @@ class ExternalReviewController extends DefinedController{
 		                                                    ->get();
 		            $keHoachTieuChi->tieuChi = DB::table('tieuchi')
 		                                                    ->where('id',$keHoachTieuChi->id_tieuchi)
-		                                                    ->first();                                         
+		                                                    ->first();
 		            if($kehoachbaocao->writeFollow == 1){
                         foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
                             $keHoachMenhDe->baoCaoMenhDe = DB::table('baocao_menhde')
@@ -1075,7 +1075,7 @@ class ExternalReviewController extends DefinedController{
                                             $sohieubh = $minhchung->sohieu.','.$ngaybh;
                                             $noibanhanh = $minhchung->noi_banhanh;
                                         }
-                                        
+
                                         $mcCollect->push([
                                             'mamc' => $anchorData,
                                             'minhchung' => Lang::get('project/Selfassessment/title.minhchung'),
@@ -1085,12 +1085,12 @@ class ExternalReviewController extends DefinedController{
                                         ]);
                                     }
                                 }
-                               
+
                             }
-                            
+
                         }
                     }elseif($kehoachbaocao->writeFollow == 2){
-                       
+
                         foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
                             $keHoachMenhDe->baoCaoMenhDe = DB::table('baocao_menhde')
                                                                 ->where('id_kehoach_bc',$keHoachBaoCaoDetail->id)
@@ -1146,7 +1146,7 @@ class ExternalReviewController extends DefinedController{
                                             $sohieubh = $minhchung->sohieu.','.$ngaybh;
                                             $noibanhanh = $minhchung->noi_banhanh;
                                         }
-                                        
+
                                         $mcCollect->push([
                                             'mamc' => $anchorData,
                                             'minhchung' => Lang::get('project/Selfassessment/title.minhchung'),
@@ -1156,14 +1156,14 @@ class ExternalReviewController extends DefinedController{
                                         ]);
                                     }
                                 }
-                               
+
                             }
-                            
+
                         }
-                    } 
+                    }
 		        }
 		    }
-		
+
 		    return array($mcCollect);
 		}
 
@@ -1236,8 +1236,8 @@ class ExternalReviewController extends DefinedController{
                                                                  ->select('donvi.*','donvi.ma_donvi as id_donvi')
                                                                  ->leftjoin('donvi','donvi.id','=','users.donvi_id')
                                                                  ->where('users.id',$keHoachBaoCaoDetail2->ns_phutrach)->first();
-     
-                              
+
+
                     $keHoachBaoCaoDetail2->ctdt = DB::table('ctdt')
                                                                  ->where('id',$keHoachBaoCaoDetail2->ctdt_id)->first();
                     $keHoachBaoCaoDetail2->keHoachChung = DB::table('kehoach_chung')
@@ -1257,7 +1257,7 @@ class ExternalReviewController extends DefinedController{
                                                                            ->where('id_kh_tieuchuan',$keHoachTieuChuan->id)
                                                                            ->where('id_tieuchuan',$keHoachTieuChuan->tieuchuan_id)
                                                                            ->first();
-                         
+
                          if($tieuChuan){
                               $keHoachTieuChuan->moTaWithStt = "TC $tieuChuan->stt: $tieuChuan->mo_ta";
                               $keHoachTieuChuan->keHoachTieuChiList = $keHoachTieuChiList = DB::table('kehoach_tieuchi')->where('id_kh_tieuchuan',$keHoachTieuChuan->id)->get();
@@ -1269,7 +1269,7 @@ class ExternalReviewController extends DefinedController{
                                                                                           ->get();
                                         $keHoachTieuChi->tieuChi = $tieuChi;
                                         foreach($menhde as $value){
-                                             
+
                                              $value->khmenhde = DB::table('kehoach_menhde')
                                                                       ->where('id_kh_tieuchi',$keHoachTieuChi->id)
                                                                       ->where('id_menhde',$value->id)
@@ -1280,7 +1280,7 @@ class ExternalReviewController extends DefinedController{
                                                                       ->where('id_kh_menhde',$value->khmenhde->id)
                                                                       ->where('id_menhde',$value->khmenhde->id_menhde)
                                                                       ->first();
-                                             
+
                                              $value->baoCaoMenhDe = $baoCaoMenhDe;
 
                                              $baoCaoMenhDe->keHoachHanhDongList = DB::table('kehoach_hd')
@@ -1297,13 +1297,13 @@ class ExternalReviewController extends DefinedController{
                                                                                 ->where('id',$val->ns_kiemtra)
                                                                                 ->first();
                                              }
-                                                  
-                                             
-                                             
+
+
+
                                              $danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
                                         }
-                                        
-                                        
+
+
 
                                         $baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
                                         $danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
@@ -1314,7 +1314,7 @@ class ExternalReviewController extends DefinedController{
                                                                                           ->get();
                                         $keHoachTieuChi->tieuChi = $tieuChi;
                                         foreach($menhde as $value){
-                                             
+
                                              $value->khmenhde = DB::table('kehoach_menhde')
                                                                       ->where('id_kh_tieuchi',$keHoachTieuChi->id)
                                                                       ->where('mocchuan_id',$value->id)
@@ -1325,7 +1325,7 @@ class ExternalReviewController extends DefinedController{
                                                                       ->where('id_kh_menhde',$value->khmenhde->id)
                                                                       ->where('mocchuan_id',$value->khmenhde->mocchuan_id)
                                                                       ->first();
-                                             
+
                                              $value->baoCaoMenhDe = $baoCaoMenhDe;
 
                                              $baoCaoMenhDe->keHoachHanhDongList = DB::table('kehoach_hd')
@@ -1333,7 +1333,7 @@ class ExternalReviewController extends DefinedController{
                                                                                                ->where('kehoach_bc_id',$id)
                                                                                                ->whereNull('deleted_at')
                                                                                                ->get();
-                                      
+
 
                                              foreach($baoCaoMenhDe->keHoachHanhDongList as $val){
                                                   $val->donViThucHien = DB::table('donvi')
@@ -1343,32 +1343,32 @@ class ExternalReviewController extends DefinedController{
                                                                                 ->where('id',$val->ns_kiemtra)
                                                                                 ->first();
                                              }
-                                                  
-                                             
-                                             
+
+
+
                                              $danhGiaMenhDe[] = $baoCaoMenhDe->danhgia;
                                         }
-                                        
-                                        
+
+
 
                                         $baoCaoTieuChi = collect(['danhgia' => round(collect($danhGiaMenhDe)->avg())]);
                                         $danhGiaTieuChi[] = round(collect($danhGiaMenhDe)->avg());
                                         $keHoachTieuChi->baoCaoTieuChi = $baoCaoTieuChi;
                                    }
-                                   
+
 
                                    if($tieuChi){
                                         $keHoachTieuChi->moTaWithStt = "$tieuChuan->stt.$tieuChi->stt: $tieuChi->mo_ta";
                                    }
-                                   
+
                               }
                          }
-                         
-                         
+
+
                     }
                   }
           }
-               
+
              return array($keHoachBaoCaoList2,$keHoachBaoCaoDetail2);
           }
 }

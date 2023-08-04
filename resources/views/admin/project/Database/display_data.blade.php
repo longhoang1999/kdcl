@@ -13,7 +13,7 @@
 
 @section('title_page')
     <h2>Cơ sở dữ liệu</h2>
-    
+
 @stop
 
 @section('content')
@@ -58,9 +58,9 @@
                 }
                 .table-borderless tr,td{
                     border: 1px solid;
-                } 
+                }
             </style>
-        
+
         @else
              <style>
                 .import_ex table{
@@ -106,9 +106,14 @@
                     display: none;
                 }
             </style>
-        
-        
+
+
         @endif
+        <style>
+            li.none_css{
+                display: none !important;
+            }
+        </style>
       	<div class="m-t-md">
 
 		    <div class="h5 text-center">
@@ -184,7 +189,7 @@
 		                if($keHoachBaoCaoDetail2->phutrach->gioi_thieu != null){
 		                   echo($keHoachBaoCaoDetail2->phutrach->gioi_thieu);
 		                }
-		                
+
 		            }
 		        @endphp
 
@@ -195,11 +200,11 @@
 		                if($keHoachBaoCaoDetail2->phutrach->co_cau_tochuc != null){
 		                    echo($keHoachBaoCaoDetail2->phutrach->co_cau_tochuc);
 		                }
-		                
+
 		            }
 		        @endphp
 		        </strong></i>
-		        
+
 		    </p>
 
 		    <form action="{{route('admin.tudanhgia.database.save_file_ctdt')}}" method="POST" enctype="multipart/form-data">
@@ -221,7 +226,7 @@
 		        		{!! isset($data['p26']) ? $data['p26'] : '' !!}
 		       	 	</div>
 			    </div>
-			  	
+
 			  	<p><i><strong>@lang('project/Externalreview/title.27')</strong></i></p>
 			  	<div>
 			  		<span>Số lượng chuyên ngành đào tạo Cao đẳng :</span>
@@ -239,7 +244,7 @@
 			  		<span>Số lượng chuyên ngành đào tạo Tiến sĩ :</span>
 			  		<input type="number" class="edit_input" value="{{$dulieu->p27_tiensi}}" data_key="p27_tiensi" min="0">
 			  	</div>
-			  	
+
 			  	<p>@lang('project/Externalreview/title.slcndtk')</p>
 			  	<p>
 			        <em>
@@ -248,7 +253,7 @@
 			    </p>
 			    <p><i><strong>@lang('project/Externalreview/title.28')</strong></i></p>
 			    <div class="row m-t-lg">
-		       
+
 
 		        <!-- đây là thẻ form -->
 		        <div id="save_contenty">
@@ -302,7 +307,7 @@
 		                </tr>
 		            </table>
 		        </div>
-		    
+
 			    <p><i><strong>@lang('project/Externalreview/title.29')<b>
 			    	<input type="number" class="edit_input" value="{{$dulieu->p29_tongnganhdt}}" data_key="p29_tongnganhdt" min="0">
 			    </b></strong></i></p>
@@ -319,8 +324,8 @@
 		        		{!! isset($data['p30']) ? $data['p30'] : '' !!}
 		       	 	</div>
 			    </div>
-			   
-		        
+
+
 
 		        <p><em>@lang('project/Externalreview/title.donvithuchien')</em></p>
 			    <p><i><strong>@lang('project/Externalreview/title.31')</strong></i></p>
@@ -344,13 +349,13 @@
 			    </div>
 
 			    <p><em>@lang('project/Externalreview/title.khitinhsl')</em></p>
-			    <p>Tổng số giảng viên cơ hữu : 
+			    <p>Tổng số giảng viên cơ hữu :
 			    	<input type="number" class="edit_input" value="{{$dulieu->p31_tongvcohuu}}" data_key="p31_tongvcohuu" min="0">
 			    </p>
 			    <p>@lang('project/Externalreview/title.tile')
-			       <input type="number" class="edit_input" value="{{$dulieu->p31_tylegvch}}" data_key="p31_tylegvch" min="0"> 
+			       <input type="number" class="edit_input" value="{{$dulieu->p31_tylegvch}}" data_key="p31_tylegvch" min="0">
 			     </p>
-			    
+
 			    <br/>
 			    <p><i><strong>@lang('project/Externalreview/title.32')</strong></i></p>
 			  	<p>
@@ -383,7 +388,7 @@
 		        <p>@lang('project/Externalreview/title.33cham1')
 		        	<input type="number" class="edit_input" value="{{$dulieu->p33_1_tuoitb}}" data_key="p33_1_tuoitb" min="0">
 		        </p>
-		        <p>@lang('project/Externalreview/title.33cham2') 
+		        <p>@lang('project/Externalreview/title.33cham2')
 		        	<input type="number" class="edit_input" value="{{$dulieu->p33_2_tdts}}" data_key="p33_2_tdts" min="0">
 		        </p>
 		        <p>@lang('project/Externalreview/title.33cham3')
@@ -458,7 +463,7 @@
 
 		        	<div class="import_ex">
 		        		{!! isset($data['p38']) ? $data['p38'] : '' !!}
-		        		
+
 		       	 	</div>
 			    </div>
 
@@ -472,7 +477,7 @@
 
 		        	<div class="import_ex">
 		        		{!! isset($data['p39']) ? $data['p39'] : '' !!}
-		        		
+
 		       	 	</div>
 			    </div>
 		        <p>(Tính cả những người học đã đủ điều kiện tốt nghiệp theo quy định nhưng đang chờ cấp bằng)</p>
@@ -485,7 +490,7 @@
 
 		        	<div class="import_ex">
 		        		{!! isset($data['p40']) ? $data['p40'] : '' !!}
-		        		
+
 		       	 	</div>
 			    </div>
 		        <p>Ghi chú:</p>
@@ -512,7 +517,7 @@
 		        </div>
 		        <div>
 		        	<span>
-		        	      Tỷ số đề tài nghiên cứu khoa học và chuyển giao khoa học công nghệ (quy đổi) trên cán bộ cơ hữu của đơn vị thực hiện CTĐT: 
+		        	      Tỷ số đề tài nghiên cứu khoa học và chuyển giao khoa học công nghệ (quy đổi) trên cán bộ cơ hữu của đơn vị thực hiện CTĐT:
 		            </span>
 		            <input type="number" class="edit_input" value="{{$dulieu->p42_tysodtqd}}" data_key="p42_tysodtqd" min="0">
 		        </div>
@@ -525,7 +530,7 @@
 
 		        	<div class="import_ex">
 		        		{!! isset($data['p42']) ? $data['p42'] : '' !!}
-		        		
+
 		       	 	</div>
 			    </div>
 
@@ -550,7 +555,7 @@
 
 		        	<div class="import_ex">
 		        		{!! isset($data['p44']) ? $data['p44'] : '' !!}
-		        		
+
 		       	 	</div>
 			    </div>
 		        <p>**Hệ số quy đổi: Dựa trên nguyên tắc tính điểm công trình của Hội đồng chức danh giáo sư Nhà nước (có điều chỉnh).</p>
@@ -571,7 +576,7 @@
 
 		        	<div class="import_ex">
 		        		{!! isset($data['p45']) ? $data['p45'] : '' !!}
-		        		
+
 		       	 	</div>
 			    </div>
 		        <p><i><strong>47. Số lượng bài của các cán bộ cơ hữu của đơn vị thực hiện CTĐT được đăng tạp chí trong 5 năm gần đây:</strong></i></p>
@@ -604,7 +609,7 @@
 
 	        	<div class="import_ex">
 		        	{!! isset($data['p47']) ? $data['p47'] : '' !!}
-	        		
+
 	       	 	</div>
 		    </div>
 		    <p><i><strong>49. Số lượng báo cáo khoa học do cán bộ cơ hữu của đơn vị thực hiện CTĐT báo cáo tại các hội nghị, hội thảo, được đăng toàn văn trong tuyển tập công trình hay kỷ yếu trong 5 năm gần đây:</strong></i></p>
@@ -616,7 +621,7 @@
 
 	        	<div class="import_ex">
 		        	{!! isset($data['p48']) ? $data['p48'] : '' !!}
-	        		
+
 	       	 	</div>
 		    </div>
 		    <p>(Khi tính Hội thảo trong nước sẽ không bao gồm các Hội thảo của cơ sở giáo dục vì đã được tính 1 lần)</p>
@@ -639,7 +644,7 @@
 
 	        	<div class="import_ex">
 		        	{!! isset($data['p49']) ? $data['p49'] : '' !!}
-	        		
+
 	       	 	</div>
 		    </div>
 	        <p>(Khi tính Hội thảo trong nước sẽ không bao gồm các Hội thảo của trường)</p>
@@ -652,7 +657,7 @@
 
 	        	<div class="import_ex">
 		        	{!! isset($data['p50']) ? $data['p50'] : '' !!}
-	        		
+
 	       	 	</div>
 		    </div>
 
@@ -666,7 +671,7 @@
 
 	        	<div class="import_ex">
 		        	{!! isset($data['p51']) ? $data['p51'] : '' !!}
-	        		
+
 	       	 	</div>
 		    </div>
 	        <p>* Bao gồm đề tài cấp Bộ hoặc tương đương, đề tài nhánh cấp Nhà nước</p>
@@ -680,7 +685,7 @@
 
 	        	<div class="import_ex">
 		        	{!! isset($data['p52']) ? $data['p52'] : '' !!}
-	        		
+
 	       	 	</div>
 		    </div>
 
@@ -847,7 +852,7 @@
 
 <!-- page trang ở đây -->
 
-    
+
 <!-- /Kết thúc page trang -->
 
     <!-- Kết thúc trang -->
@@ -872,7 +877,7 @@
                 key : key,
                 ikhbc : {{$idkhbc}},
                 _token: '{{ csrf_token() }}'
-            },    
+            },
             error: function(err) {
 
             },
@@ -891,7 +896,7 @@
 		                text: 'Bạn đã cập nhật thất bại.',
 		            });
             	}
-                
+
             },
         })
     })
@@ -904,7 +909,7 @@
     $("#save_contenty").on('change','.radiobox',function(){
     	let key = $(this).attr('data_key');
     	let val = $(this).val();
-    	
+
     	$.ajax({
                 url: "{{route('admin.tudanhgia.database.apiNoiDungThem')}}",
                 type: "GET",
@@ -912,7 +917,7 @@
                     id : {{$idkhbc}},
                     key : key,
                     val : val,
-                },    
+                },
                 error: function(err) {
                 },
 
@@ -934,6 +939,7 @@
                 },
         })
     })
+    $("body").attr("data-kt-aside-minimize", "on");
 </script>
 
 <script type="text/javascript" src="{{ asset('js/baocaoctdt.js') }}"></script>

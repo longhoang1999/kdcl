@@ -33,7 +33,7 @@
                 }
 
             </style>
-        
+
         @else
              <style>
                 .import_ex table{
@@ -83,11 +83,16 @@
                 }
                 .table-borderless tr,td{
                     border: 1px solid;
-                } 
+                }
             </style>
-        
-        
+
+
         @endif
+        <style>
+            li.none_css{
+                display: none !important;
+            }
+        </style>
       <div class="m-t-md">
             <div class="h5 text-center">
                 @lang('project/Externalreview/title.csdlkdcl')
@@ -130,7 +135,7 @@
         <p><i><strong>@lang('project/Externalreview/title.11')</strong></i></p>
 
         <div class="row m-t-lg">
-           
+
             <!-- form cần sửa -->
             <div id="save_contenty">
                 <table class="table-borderless table table-condensed">
@@ -186,15 +191,15 @@
             <input type="text" hidden value="{{$idkhbc}}" name="id">
             <p><i><strong>@lang('project/Externalreview/title.12')</strong></i></p>
             <p><em>@lang('project/Externalreview/title.cpb')</em>
-            </p> 
+            </p>
             <div class="parent_ex">
                 <input hidden type="file" class="inputFile" name="g12">
                 <button href="" class="btn btn-benchmark mr-2" type="button" data-toggle="modal" data-target="#modal_unit" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-original-title="Nhập Excel" fdprocessedid="riirhd">
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                     {!! isset($data['g12']) ? $data['g12'] : '' !!}   
-                </div> 
+                     {!! isset($data['g12']) ? $data['g12'] : '' !!}
+                </div>
             </div>
             <p><i><strong>@lang('project/Externalreview/title.13')</strong></i></p>
             <div class="parent_ex">
@@ -203,8 +208,8 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g13']) ? $data['g13'] : '' !!} 
-                </div> 
+                    {!! isset($data['g13']) ? $data['g13'] : '' !!}
+                </div>
             </div>
             <p><i><strong>
                 14. Danh sách đơn vị trực thuộc (bao gồm các trung tâm nghiên cứu, chi nhánh/cơ sở của các đơn vị)
@@ -215,9 +220,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g14']) ? $data['g14'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g14']) ? $data['g14'] : '' !!}
+
+                </div>
             </div>
             <p><strong>
                 II. Cán bộ, giảng viên, nhân viên
@@ -236,9 +241,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g15']) ? $data['g15'] : '' !!} 
+                    {!! isset($data['g15']) ? $data['g15'] : '' !!}
 
-                </div> 
+                </div>
             </div>
 
             <p><i><strong>
@@ -251,9 +256,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g16']) ? $data['g16'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g16']) ? $data['g16'] : '' !!}
+
+                </div>
             </div>
             <p><i><strong>
                 17. Thống kê số lượng cán bộ, giảng viên và nhân viên (gọi chung là cán bộ) của CSGD theo giới tính:
@@ -265,9 +270,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g17']) ? $data['g17'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g17']) ? $data['g17'] : '' !!}
+
+                </div>
             </div>
 
             <p><i><strong>
@@ -280,11 +285,11 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g18_1']) ? $data['g18_1'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g18_1']) ? $data['g18_1'] : '' !!}
+
+                </div>
             </div>
-            
+
             <p>(Khi tính số lượng các TSKH, TS thì không bao gồm những giảng viên vừa có học vị vừa có chức danh khoa học vì đã tính ở 2 dòng trên)</p>
             <div class="parent_ex">
                 <input hidden type="file" class="inputFile" name="g18_2">
@@ -292,9 +297,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g18_2']) ? $data['g18_2'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g18_2']) ? $data['g18_2'] : '' !!}
+
+                </div>
             </div>
             <p><i><strong>
                 19. Thống kê, phân loại giảng viên cơ hữu theo độ tuổi (số người):
@@ -306,9 +311,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g19_1']) ? $data['g19_1'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g19_1']) ? $data['g19_1'] : '' !!}
+
+                </div>
             </div>
             <b>Tổng hợp</b>
             <div class="parent_ex">
@@ -317,11 +322,11 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g19_2']) ? $data['g19_2'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g19_2']) ? $data['g19_2'] : '' !!}
+
+                </div>
             </div>
-            
+
             <p><i><strong>
                 20. Thống kê, phân loại giảng viên cơ hữu theo mức độ thường xuyên sử dụng ngoại ngữ và tin học cho công tác giảng dạy và nghiên cứu:
             </strong></i></p>
@@ -332,9 +337,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g20']) ? $data['g20'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g20']) ? $data['g20'] : '' !!}
+
+                </div>
             </div>
 
             <p><strong>III. Người học</strong></p>
@@ -349,9 +354,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g21']) ? $data['g21'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g21']) ? $data['g21'] : '' !!}
+
+                </div>
             </div>
             <div>
                 <span>Số lượng người học hệ chính quy đang học tập tại CSGD: </span>
@@ -369,9 +374,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g22']) ? $data['g22'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g22']) ? $data['g22'] : '' !!}
+
+                </div>
             </div>
 
             <p><i>
@@ -386,9 +391,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g23']) ? $data['g23'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g23']) ? $data['g23'] : '' !!}
+
+                </div>
             </div>
 
             <p><i>
@@ -403,9 +408,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g24']) ? $data['g24'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g24']) ? $data['g24'] : '' !!}
+
+                </div>
             </div>
 
             <p><i>
@@ -420,9 +425,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g25']) ? $data['g25'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g25']) ? $data['g25'] : '' !!}
+
+                </div>
             </div>
             <p><i>
                 <strong>
@@ -436,9 +441,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g26']) ? $data['g26'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g26']) ? $data['g26'] : '' !!}
+
+                </div>
             </div>
             <p><i>
                 <strong>
@@ -452,9 +457,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g27']) ? $data['g27'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g27']) ? $data['g27'] : '' !!}
+
+                </div>
             </div>
             <p><strong>
                 IV. Nghiên cứu khoa học và chuyển giao công nghệ
@@ -472,9 +477,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g28']) ? $data['g28'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g28']) ? $data['g28'] : '' !!}
+
+                </div>
             </div>
             <p>* Bao gồm đề tài cấp Bộ hoặc tương đương, đề tài nhánh cấp Nhà nước.</p>
             <div>
@@ -491,9 +496,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g29']) ? $data['g29'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g29']) ? $data['g29'] : '' !!}
+
+                </div>
             </div>
             <p><i><strong>
                 30. Số lượng cán bộ cơ hữu của CSGD tham gia thực hiện đề tài khoa học trong 5 năm gần đây:
@@ -504,9 +509,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g30']) ? $data['g30'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g30']) ? $data['g30'] : '' !!}
+
+                </div>
             </div>
             <p>* Bao gồm đề tài cấp Bộ hoặc tương đương, đề tài nhánh cấp Nhà nước</p>
             <p><i><strong>
@@ -518,9 +523,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g31']) ? $data['g31'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g31']) ? $data['g31'] : '' !!}
+
+                </div>
             </div>
             <p>* Bao gồm đề tài cấp Bộ hoặc tương đương, đề tài nhánh cấp Nhà nước</p>
             <div>
@@ -536,9 +541,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g32']) ? $data['g32'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g32']) ? $data['g32'] : '' !!}
+
+                </div>
             </div>
 
             <p><i><strong>
@@ -550,9 +555,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g33']) ? $data['g33'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g33']) ? $data['g33'] : '' !!}
+
+                </div>
             </div>
 
             <div>
@@ -569,9 +574,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g34']) ? $data['g34'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g34']) ? $data['g34'] : '' !!}
+
+                </div>
             </div>
             <p><i><strong>
                 35. Số lượng báo cáo khoa học do cán bộ cơ hữu của CSGD báo cáo tại các hội nghị, hội thảo, được đăng toàn văn trong tuyển tập công trình hay kỷ yếu trong 5 năm gần đây:
@@ -582,9 +587,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g35']) ? $data['g35'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g35']) ? $data['g35'] : '' !!}
+
+                </div>
             </div>
             <p>(Khi tính Hội thảo trong nước sẽ không bao gồm các Hội thảo của cơ sở giáo dục vì đã được tính 1 lần)</p>
             <div>
@@ -601,9 +606,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g36']) ? $data['g36'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g36']) ? $data['g36'] : '' !!}
+
+                </div>
             </div>
 
             <p>(Khi tính Hội thảo trong nước sẽ không bao gồm các Hội thảo của trường)</p>
@@ -616,9 +621,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g37']) ? $data['g37'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g37']) ? $data['g37'] : '' !!}
+
+                </div>
             </div>
             <p><i><strong>38. Nghiên cứu khoa học của sinh viên</strong></i></p>
             <p><i><strong>
@@ -630,9 +635,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g38_1']) ? $data['g38_1'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g38_1']) ? $data['g38_1'] : '' !!}
+
+                </div>
             </div>
             <p>*Bao gồm đề tài cấp Bộ hoặc tương đương, đề tài nhánh cấp nhà nước</p>
             <p><i><strong>
@@ -645,9 +650,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g38_2']) ? $data['g38_2'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g38_2']) ? $data['g38_2'] : '' !!}
+
+                </div>
             </div>
             <p><strong>V. Cơ sở vật chất, thư viện, tài chính</strong></p>
             <p><i><strong>
@@ -659,9 +664,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g39']) ? $data['g39'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g39']) ? $data['g39'] : '' !!}
+
+                </div>
             </div>
             <p><i><strong>
                 40. Tổng số đầu sách trong thư viện của nhà trường (bao gồm giáo trình, học liệu, tài liệu, sách tham khảo… sách, tạp chí, kể cả e-book, cơ sở dữ liệu điện tử)
@@ -672,9 +677,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g40']) ? $data['g40'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g40']) ? $data['g40'] : '' !!}
+
+                </div>
             </div>
 
             <p><i><strong>
@@ -686,9 +691,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['g41']) ? $data['g41'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['g41']) ? $data['g41'] : '' !!}
+
+                </div>
             </div>
             <p><i>
                 <strong>
@@ -703,13 +708,13 @@
                 </div>
                 @php $key1++; @endphp
             @endfor
-            
+
             <p><i>
                 <strong>
                     43. Tổng thu học phí (chỉ tính hệ chính quy) trong 5 năm gần đây (triệu đồng):
                 </strong>
             </i></p>
-            
+
             @for($i=$fiveYearAgo+1;$i<$fiveYearAgo+6;$i++)
                 <div>
                     <span>- Năm {{$i}}: </span>
@@ -722,7 +727,7 @@
                     44. Tổng chi cho hoạt động nghiên cứu khoa học, chuyển giao công nghệ và phục vụ cộng đồng (triệu đồng):
                 </strong>
             </i></p>
-            
+
             @for($i=$fiveYearAgo+1;$i<$fiveYearAgo+6;$i++)
                 <div>
                     <span>- Năm {{$i}}: </span>
@@ -735,7 +740,7 @@
                    45. Tổng thu từ hoạt động nghiên cứu khoa học, chuyển giao công nghệ và phục vụ cộng đồng (triệu đồng):
                 </strong>
             </i></p>
-            
+
             @for($i=$fiveYearAgo+1;$i<$fiveYearAgo+6;$i++)
                 <div>
                     <span>- Năm {{$i}}: </span>
@@ -748,7 +753,7 @@
                     46. Tổng chi cho hoạt động đào tạo (triệu đồng):
                 </strong>
             </i></p>
-            
+
             @for($i=$fiveYearAgo+1;$i<$fiveYearAgo+6;$i++)
                 <div>
                     <span>- Năm {{$i}}: </span>
@@ -761,7 +766,7 @@
                     47. Tổng chi cho phát triển đội ngũ (triệu đồng):
                 </strong>
             </i></p>
-            
+
             @for($i=$fiveYearAgo+1;$i<$fiveYearAgo+6;$i++)
                 <div>
                     <span>- Năm {{$i}}: </span>
@@ -774,7 +779,7 @@
                     48. Tổng chi cho hoạt động kết nối doanh nghiệp, tư vấn và hỗ trợ việc làm (triệu đồng):
                 </strong>
             </i></p>
-            
+
             @for($i=$fiveYearAgo+1;$i<$fiveYearAgo+6;$i++)
                 <div>
                     <span>- Năm {{$i}}: </span>
@@ -792,9 +797,9 @@
                     <i class="bi bi-file-earmark-arrow-up" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
                 <div class="import_ex">
-                    {!! isset($data['gvi']) ? $data['gvi'] : '' !!} 
-                    
-                </div> 
+                    {!! isset($data['gvi']) ? $data['gvi'] : '' !!}
+
+                </div>
             </div>
             <p><strong>
                 VII. Tóm tắt một số chỉ số quan trọng
@@ -919,11 +924,11 @@
             </strong></i></p>
             <div>
                 <span>Cấp cơ sở giáo dục: Đạt. </span>
-                
+
             </div>
             <div>
                 <span>Cấp chương trình đào tạo: 12 CTĐT đạt </span>
-              
+
             </div>
 
             <div class="text-center mt-3">
@@ -935,9 +940,9 @@
 <script src="{{ asset('js/xlsx.full.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/baocaoctdt.js') }}"></script>
 <script type="text/javascript">
-    
-    
-    
+
+
+
 </script>
 
 
