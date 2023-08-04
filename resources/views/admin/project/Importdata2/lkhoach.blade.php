@@ -167,7 +167,7 @@
                                     @lang('project/ImportdataExcel/title.gcndkh')
                                 </label>
                                 <br>
-                                <textarea class="form-control" name="note" id="upnotes" placeholder="@lang('project/ImportdataExcel/title.gcndkh')"></textarea>
+                                <textarea class="form-control" name="note" id="upnotes" placeholder="@lang('project/ImportdataExcel/title.gcndkh')" required></textarea>
                             </div>
                         </div>
                     </div>
