@@ -101,6 +101,7 @@ class NhansuController extends DefinedController{
                     ->first();
         $address = public_path($getFile->url);
         $a = Excel::toArray([],$address);
+
         $table = "";
         $UI = "";
         foreach($a[0] as $key => $value) {
@@ -109,12 +110,16 @@ class NhansuController extends DefinedController{
                 foreach($value as $val){
                     if(trim($val) != ""){
                         $td .=   '<th>'.  trim($val)   .'</th>';
+                    }else{
+                        $td .=   '<th> </th>';
                     }
                 }
             }else{
                 foreach($value as $val){
                     if(trim($val) != ""){
                         $td .=   '<td>'.  trim($val) .'</td>';
+                    }else{
+                        $td .=   '<td> </td>';
                     }
                 }
             }

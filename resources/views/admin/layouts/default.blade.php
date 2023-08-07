@@ -92,16 +92,58 @@
                 font-size: 15.5px !important;
             }
             #kt_header{
-                background-color: deepskyblue;
+                background-color: #fafafa;
             }
             #kt_aside_logo{
-                background-color: deepskyblue;
+                background-color: white;
+                padding: 60px 0 20px 0;
+                height: auto !important;
             }
             #css_table::-webkit-scrollbar {
                 height: 1em
             }
             #css_table::-webkit-scrollbar-thumb {
                 background: #c9c8c7;
+            }
+            #kt_aside{
+                box-shadow: 0 0 12px #b9b9b9;
+                /* width: 300px; */
+            }
+            /* .aside-menu{
+                width: 300px !important;
+            }
+            #kt_wrapper{
+                padding-left: 300px;
+            } */
+            .drop-icon img{
+                border-radius: 50%;
+                width: 40px !important;
+                height: 40px !important;
+            }
+            #kt_toolbar{
+                height: 200px;
+                background-color: #64c5b1;   
+            }
+            #kt_toolbar h1{
+                color: white !important;
+                font-size: 26px !important;
+                text-transform: uppercase;
+            }
+            #kt_post{
+                z-index: 100;
+                margin: 0 40px;
+                background: white;
+                margin-top: 50px;
+                border-radius: 8px;
+            }
+            #kt_toolbar{
+                display: flex;
+                padding-top: 30px;
+                padding-left:40px;
+                align-items: unset;
+            }
+            #kt_post .content{
+                min-height: 1000px
             }
         </style>
     </head>
@@ -590,15 +632,9 @@
 
                     <div class="d-flex flex-column flex-column-fluid" id="kt_content">
                         <div class="toolbar" id="kt_toolbar">
-                            <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
-                                <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-                                    <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
-                                        @yield('title_page')
-                                    </h1>
-                                </div>
-                                <div class="d-flex align-items-center py-1">
-                                </div>
-                            </div>
+                                <h1 class="d-flex  text-dark fw-bolder fs-3 my-1">
+                                    @yield('title_page')
+                                </h1>
                         </div>
                         <div class="post d-flex flex-column-fluid" id="kt_post">
 

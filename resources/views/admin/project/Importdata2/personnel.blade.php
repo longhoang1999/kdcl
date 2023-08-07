@@ -152,17 +152,19 @@
                 for(var row = 0; row < sheet_data.length; row++)
                 {
                     table_output += '<tr>';
-                    for(var cell = 0; cell < sheet_data[row].length; cell++)
+                    for(var cell = 0; cell < sheet_data[0].length; cell++)
                     {
                         if(row == 0)
                         {
-                            table_output += '<th>'+sheet_data[row][cell]+'</th>';
+                            let ui = sheet_data[row][cell] == undefined ? " " : sheet_data[row][cell]
+                            table_output += '<th>'+  ui  +'</th>';
                         }
                         else
                         {
-                            table_output += '<td>'+sheet_data[row][cell]+'</td>';
+                            let ui = sheet_data[row][cell] ==  undefined ? " " : sheet_data[row][cell]
+                            table_output += '<td>'+  ui  +'</td>';
                         }
-                    }
+                    } 
                     table_output += '</tr>';
                 }
                 table_output += '</table>';
