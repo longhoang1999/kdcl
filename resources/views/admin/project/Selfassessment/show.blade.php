@@ -1487,6 +1487,7 @@
                 xhr.open('POST', "{!! route('admin.tudanhgia.detailedplanning.uploadimg') !!}");
                 var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                 xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                // Không nên sử dụng JSON.stringify ở đây
                 xhr.onload = function() {
                     var json;
 
@@ -1497,20 +1498,17 @@
 
                     json = JSON.parse(xhr.responseText);
 
-
-
                     if (!json || typeof json.location != 'string') {
                         failure('Invalid JSON: ' + xhr.responseText);
                         return;
                     }
 
-                    success(json.location); // Gọi hàm success với đường dẫn ảnh trả về từ server
-                    // // Chèn ảnh vào trình soạn thảo
-                    // var img = document.createElement('img');
-                    // img.src = json.location;
-                    // img.alt = blobInfo.filename();
-                    // tinymce.activeEditor.insertContent(img.outerHTML);
+                    console.log(json.location)
+
+                    // Sử dụng json.location mà không thay đổi gì thêm
+                    success(json.location); 
                 };
+
 
                 xhr.onerror = function() {
                     failure('Image upload failed due to a network error.');

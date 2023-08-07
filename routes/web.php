@@ -857,6 +857,8 @@ Route::group(
                                 Route::post('exit_hoanthanh', 'CompletionreportController@exit_hoanthanh')->name('exit_hoanthanh');
                                 Route::post('exit_molai', 'CompletionreportController@exit_molai')->name('exit_molai');
                                 Route::post('encode', 'CompletionreportController@encode')->name('encode');
+                                Route::get('export_exht/{id}', 'CompletionreportController@export_exht')->name('export_exht');
+
                             }
                         );
 

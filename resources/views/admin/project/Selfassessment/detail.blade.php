@@ -77,9 +77,9 @@
                     <div class="ibox" id="htmlContent">
 
                         <div class="pull-right m-b-lg">
-                            <button class="btn btn-primary" onclick="exportHTML();return false;">
+                             <a href="{{ route('admin.tudanhgia.completionreport.export_exht', ['id' => $id_khbc]) }}" title="" class="btn btn-danger">
                                 <i class="fa fa-file-alt"></i> @lang('project/Selfassessment/title.taifile')
-                            </button>
+                            </a>
 
 
                             <button class="btn btn-info" onclick="exportminhchung()">
@@ -151,6 +151,7 @@
                             </div>
 
                             <div class="row m-t-lg">
+
                                 @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
                                     @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
                                         <div class="col-sm-12 m-t-lg">
@@ -176,7 +177,6 @@
 
                                                 @include("admin.project.Selfassessment.hoanthien.tieuchi-csdt")
                                             @else
-
                                                 <p>{!! isset($keHoachTieuChuan->baoCaoTieuChuan->modau) ? $keHoachTieuChuan->baoCaoTieuChuan->modau : "" !!}</p>
                                                @include("admin.project.Selfassessment.hoanthien.tieuchi-ctdt")
                                                 <div class="m-b-md m-l-md">
@@ -191,6 +191,7 @@
                                 </div>
 
                             </div>
+
                             @if(isset($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan))
                                 @if($keHoachBaoCaoDetail->boTieuChuan->loai_tieuchuan == 'ctdt')
                                     <div class="row m-t-lg">
