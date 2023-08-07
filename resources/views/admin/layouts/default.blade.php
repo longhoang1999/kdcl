@@ -107,14 +107,19 @@
             }
             #kt_aside{
                 box-shadow: 0 0 12px #b9b9b9;
-                /* width: 300px; */
             }
-            /* .aside-menu{
-                width: 300px !important;
+            #kt_content{
+                position: relative;
+            }
+            #kt_toolbar{
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
             }
             #kt_wrapper{
-                padding-left: 300px;
-            } */
+                padding-top: 65px;
+            }
             .drop-icon img{
                 border-radius: 50%;
                 width: 40px !important;
@@ -130,10 +135,10 @@
                 text-transform: uppercase;
             }
             #kt_post{
-                z-index: 100;
+                
                 margin: 0 40px;
                 background: white;
-                margin-top: 50px;
+                margin-top: 85px;
                 border-radius: 8px;
             }
             #kt_toolbar{
@@ -145,6 +150,7 @@
             #kt_post .content{
                 min-height: 1000px
             }
+          
         </style>
     </head>
     <!--end::Head-->
