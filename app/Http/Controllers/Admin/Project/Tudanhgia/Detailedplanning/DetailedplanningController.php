@@ -411,7 +411,7 @@ class DetailedplanningController extends DefinedController
                 ['id_tieuchuan', '=', $tieuchuan_id],
                 // ['id_kh_tieuchuan', '=', $kehoachtieuchuan->khtc_id],
           ])->orderBy('created_at', 'desc')->first();
-
+          
           if($isTieuChuanCongBo && !$baoCaoTieuChuan){
             $baoCaoTieuChuan = DB::table('baocao_tieuchuan')->insert([
                                    'id_kehoach_bc'     => $id_khbc,
@@ -1181,6 +1181,38 @@ class DetailedplanningController extends DefinedController
         // Trả về thông báo lỗi nếu không tìm thấy tệp tin hoặc xảy ra lỗi khi upload
         return response()->json(['error' => 'Error uploading file.'], 400);
     }
+
+
+    // public function uploadimg(Request $req) {
+    //     $currentTime = date('YmdHis');
+
+    //     // Kiểm tra xem có file được tải lên không
+    //     if ($req->hasFile('file') && $req->file('file')->isValid()) {
+    //         $file = $req->file('file');
+    //         $permitted_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    //         // Tạo thư mục 'img_baocao' trong thư mục public nếu nó chưa tồn tại
+    //         $folderPath = public_path('img_baocao');
+    //         if (!file_exists($folderPath)) {
+    //             mkdir($folderPath, 0777, true);
+    //         }
+    //         $randomText = substr(str_shuffle($permitted_chars), 0, 20);
+    //         $picName = $currentTime . $randomText . time() . '.' . $file->getClientOriginalExtension();
+    //         // Lưu trữ tệp tin vào thư mục 'img_baocao' trong thư mục public
+    //         $filePath = $file->move($folderPath, $picName);
+
+    //         // Trả về đường dẫn tới ảnh đã upload dưới dạng URL https
+    //         $imageUrl = secure_asset('img_baocao/' . $picName);
+
+    //         $imageUrl = str_replace('\\/', '/', $imageUrl);
+
+    //         return response()->json(['location' => $imageUrl]);
+    //     }
+
+    //     // Trả về thông báo lỗi nếu không tìm thấy tệp tin hoặc xảy ra lỗi khi upload
+    //     return response()->json(['error' => 'Error uploading file.'], 400);
+    // }
+
+
 
 
 }
