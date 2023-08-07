@@ -196,11 +196,14 @@ class ExternalReviewController extends DefinedController{
 
 
 		public function listDatakeHoachBaoCaoDetail($id){
+
 			$check_mccb = DB::table('kehoach_baocao')
 					->where('id',$id)
 					->first();
 			if(isset($check_mccb->writeFollow)){
+
 				if($check_mccb->writeFollow == 1){
+
 					$keHoachBaoCaoDetail = DB::table('kehoach_baocao')
 											->select('kehoach_baocao.id as khbc_id','kehoach_baocao.ten_bc','kehoach_tieuchuan.*')
 											->leftjoin('kehoach_tieuchuan','kehoach_tieuchuan.id_kh_baocao','=','kehoach_baocao.id')
@@ -213,9 +216,9 @@ class ExternalReviewController extends DefinedController{
 														->where('baocao_tieuchuan.id_kehoach_bc',$keHoachTieuChuan->khbc_id)
 														->where('tieuchuan.id',$keHoachTieuChuan->tieuchuan_id)
 														->first();
-						if (!$keHoachTieuChuans) {
-		                	continue;
-		            	}
+						// if (!$keHoachTieuChuans) {
+		                // 	continue;
+		            	// }
 
 						$keHoachTieuChuan->danhgia = 'Chưa hoàn thành';
 						//Loại bỏ các kế hoạch mệnh đề chưa xác nhận, và lấy dữ liệu kế hoạch hành động
@@ -276,23 +279,27 @@ class ExternalReviewController extends DefinedController{
 			            }
 						$keHoachTieuChuan->danhgia = round(collect($danhGiaTieuChi)->avg(), 1);
 					}
+
 					return array($keHoachBaoCaoDetail);
 				}else if($check_mccb->writeFollow == 2){
+
 					$keHoachBaoCaoDetail = DB::table('kehoach_baocao')
 											->select('kehoach_baocao.id as khbc_id','kehoach_baocao.ten_bc','kehoach_tieuchuan.*')
 											->leftjoin('kehoach_tieuchuan','kehoach_tieuchuan.id_kh_baocao','=','kehoach_baocao.id')
 											->where('kehoach_baocao.id',$id)->get();
 
 					foreach($keHoachBaoCaoDetail as $keHoachTieuChuan){
+
 						$keHoachTieuChuan->keHoachTieuChuans = $keHoachTieuChuans = DB::table('baocao_tieuchuan')
 														->leftjoin('tieuchuan','tieuchuan.id','baocao_tieuchuan.id_tieuchuan')
 														->where('baocao_tieuchuan.id_kh_tieuchuan',$keHoachTieuChuan->id)
 														->where('baocao_tieuchuan.id_kehoach_bc',$keHoachTieuChuan->khbc_id)
 														->where('tieuchuan.id',$keHoachTieuChuan->tieuchuan_id)
 														->first();
-						if (!$keHoachTieuChuans) {
-		                	continue;
-		            	}
+						// if (!$keHoachTieuChuans) {
+		                // 	continue;
+		            	// }
+		            	// var_dump($keHoachTieuChuan);die;
 
 						$keHoachTieuChuan->danhgia = 'Chưa hoàn thành';
 						//Loại bỏ các kế hoạch mệnh đề chưa xác nhận, và lấy dữ liệu kế hoạch hành động

@@ -310,7 +310,6 @@
                                         @if($key=='diem_manh')
                                             <!--1. Tóm tắt các điểm mạnh:  -->
                                             <p><?= $i; ?>. 
-
                                                 @if(isset($keHoachTieuChuan->keHoachTieuChiList))
                                                     @foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi)
                                                         @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
