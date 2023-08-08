@@ -62,7 +62,7 @@
                                     @endphp
 
                                     <tr class="text-center">
-                                        <th>@lang('project/Externalreview/title.tieuchuan'){{ isset($keHoachTieuChuan->keHoachTieuChuans->stt)?$keHoachTieuChuan->keHoachTieuChuans->stt:''  }}</th>
+                                        <th>@lang('project/Externalreview/title.tieuchuan') {{ isset($keHoachTieuChuan->keHoachTieuChuans->stt)?$keHoachTieuChuan->keHoachTieuChuans->stt:''  }}</th>
                                         @if(isset($keHoachTieuChuan->danhgia))
                                             @for($i=1;$i<=7;$i++)
                                                 @if($i==$keHoachTieuChuan->danhgia)
@@ -91,7 +91,7 @@
                                         @foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi)
                                             <tr>
                                                 <td>
-                                                @lang('project/Externalreview/title.tieuchi') {{ $keHoachTieuChuan->keHoachTieuChuans->stt }}
+                                                @lang('project/Externalreview/title.tieuchi') {{ isset($keHoachTieuChuan->keHoachTieuChuans->stt) ? $keHoachTieuChuan->keHoachTieuChuans->stt : ''}}
                                                     .{{ isset($keHoachTieuChi->tieuChi->stt)?$keHoachTieuChi->tieuChi->stt:'' }}
                                                 </td>
 
@@ -194,7 +194,7 @@
                                         @foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi)
                                             <tr>
                                                 <td>
-                                                @lang('project/Externalreview/title.tieuchi'){{ $keHoachTieuChuan->keHoachTieuChuans->stt }}
+                                                @lang('project/Externalreview/title.tieuchi') {{ $keHoachTieuChuan->keHoachTieuChuans->stt }}
                                                     .{{ isset($keHoachTieuChi->tieuChi->stt)?$keHoachTieuChi->tieuChi->stt:'' }}
                                                 </td>
 

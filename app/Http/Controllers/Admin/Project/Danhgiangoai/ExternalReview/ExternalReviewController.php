@@ -68,7 +68,7 @@ class ExternalReviewController extends DefinedController{
 		        		$keHoachTieuChuan->tieuChuan = $tieuChuan;
 		        		$keHoachTieuChuan->baoCaoTieuChuan = DB::table('baocao_tieuchuan')
 		        												->where('id_kehoach_bc',$id)
-		        												->where('id_kh_tieuchuan',$keHoachTieuChuan->id)
+		        												// ->where('id_kh_tieuchuan',$keHoachTieuChuan->id)
 		        												->where('id_tieuchuan',$keHoachTieuChuan->tieuchuan_id)
 		        												->first();
 
@@ -210,15 +210,13 @@ class ExternalReviewController extends DefinedController{
 											->where('kehoach_baocao.id',$id)->get();
 
 					foreach($keHoachBaoCaoDetail as $keHoachTieuChuan){
-						$keHoachTieuChuan->keHoachTieuChuans = $keHoachTieuChuans = DB::table('baocao_tieuchuan')
+						$keHoachTieuChuan->keHoachTieuChuans = DB::table('baocao_tieuchuan')
 														->leftjoin('tieuchuan','tieuchuan.id','baocao_tieuchuan.id_tieuchuan')
-														->where('baocao_tieuchuan.id_kh_tieuchuan',$keHoachTieuChuan->id)
+														// ->where('baocao_tieuchuan.id_kh_tieuchuan',$keHoachTieuChuan->id)
 														->where('baocao_tieuchuan.id_kehoach_bc',$keHoachTieuChuan->khbc_id)
 														->where('tieuchuan.id',$keHoachTieuChuan->tieuchuan_id)
 														->first();
-						// if (!$keHoachTieuChuans) {
-		                // 	continue;
-		            	// }
+						
 
 						$keHoachTieuChuan->danhgia = 'Chưa hoàn thành';
 						//Loại bỏ các kế hoạch mệnh đề chưa xác nhận, và lấy dữ liệu kế hoạch hành động
@@ -231,6 +229,7 @@ class ExternalReviewController extends DefinedController{
 			            $keHoachTieuChuan->keHoachTieuChiList = $keHoachTieuChiList = DB::table('kehoach_tieuchi')
 							            						->where('kehoach_tieuchi.id_kh_tieuchuan',$keHoachTieuChuan->id)
 							            						->get();
+
 
 			            foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi){
 			            	$danhGiaMenhDe = [];
@@ -290,12 +289,13 @@ class ExternalReviewController extends DefinedController{
 
 					foreach($keHoachBaoCaoDetail as $keHoachTieuChuan){
 
-						$keHoachTieuChuan->keHoachTieuChuans = $keHoachTieuChuans = DB::table('baocao_tieuchuan')
+						$keHoachTieuChuan->keHoachTieuChuans = DB::table('baocao_tieuchuan')
 														->leftjoin('tieuchuan','tieuchuan.id','baocao_tieuchuan.id_tieuchuan')
-														->where('baocao_tieuchuan.id_kh_tieuchuan',$keHoachTieuChuan->id)
+														// ->where('baocao_tieuchuan.id_kh_tieuchuan',$keHoachTieuChuan->id)
 														->where('baocao_tieuchuan.id_kehoach_bc',$keHoachTieuChuan->khbc_id)
 														->where('tieuchuan.id',$keHoachTieuChuan->tieuchuan_id)
 														->first();
+						// dd($keHoachTieuChuan->keHoachTieuChuans);
 						// if (!$keHoachTieuChuans) {
 		                // 	continue;
 		            	// }
@@ -313,25 +313,30 @@ class ExternalReviewController extends DefinedController{
 							            						->where('kehoach_tieuchi.id_kh_tieuchuan',$keHoachTieuChuan->id)
 							            						->get();
 
+
 			            foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi){
+
 			            	$danhGiaMenhDe = [];
 		                	$minhChungStt = 1;
 		                	$tieuChi = DB::table('tieuchi')
 		                				->where('id',$keHoachTieuChi->id_tieuchi)
 		                				->first();
 		                	$keHoachTieuChi->tieuChi = $tieuChi;
-		                	$keHoachTieuChi->keHoachMenhDeList = $keHoachMenhDeList = DB::table('kehoach_menhde')
+		                	$keHoachTieuChi->keHoachMenhDeList = DB::table('kehoach_menhde')
 		                												->where('id_kh_tieuchi',$keHoachTieuChi->id)->get();
+		                	
 		                	foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe){
 		                		$keHoachMenhDe->baocao_menhde = DB::table('baocao_menhde')
 						                							->where('baocao_menhde.id_kh_menhde',$keHoachMenhDe->id)
 						                							->where('baocao_menhde.id_kehoach_bc',$id)
 						                							->where('baocao_menhde.mocchuan_id',$keHoachMenhDe->mocchuan_id)
 						                							->first();
+
 						        $keHoachMenhDe->baocao_menhde->keHoachHanhDongList = DB::table('kehoach_hd')
 						        														->where('kehoach_bc_id',$id)
-						        														->where('menhde_id',$keHoachMenhDe->baocao_menhde->mocchuan_id)
+						        														->where('mocchuan_id',$keHoachMenhDe->baocao_menhde->mocchuan_id)
 						        														->get();
+						       
 						        foreach($keHoachMenhDe->baocao_menhde->keHoachHanhDongList as $valuekhd){
 						        	$donViThucHien = DB::table('donvi')
 						        						->where('id',$valuekhd->ns_thuchien)
@@ -441,6 +446,7 @@ class ExternalReviewController extends DefinedController{
 
 			}elseif($page == 'tieuchuan'){
 				list($mcCollect) = $this->listMinhChung($keHoachBaoCaoDetail2);
+
 	            $minhChungList = $mcCollect;
 				$khtc = $req->idkhtc;
 				$kh = $req->idkh;
@@ -830,12 +836,12 @@ class ExternalReviewController extends DefinedController{
 					->addColumn('status',function($dt){
 						if($dt->trang_thai == 'active'){
 							return '<button class="btn btn-success btn-xs" data-toggle="tooltip"
-                                                title="'.Lang::get('project/ExternalReview/title.cofile').'">
+                                                title="'.Lang::get('project/Externalreview/title.cofile').'">
                                             <i class="fas fa-check-circle"></i>
                                     </button>';
 						}else if($dt->trang_thai == 'inactive'){
 							return '<button class="btn btn-danger btn-xs" data-toggle="tooltip"
-                                            title="'.Lang::get('project/ExternalReview/title.khongcofile').'">
+                                            title="'.Lang::get('project/Externalreview/title.khongcofile').'">
                                         <i class="fas fa-ban"></i>
                                     </button>';
 						}else{
@@ -1018,6 +1024,11 @@ class ExternalReviewController extends DefinedController{
 		        $keHoachTieuChuan->tieuChuan = DB::table('tieuchuan')
 		                                                    ->where('id',$keHoachTieuChuan->tieuchuan_id)
 		                                                    ->first();
+		        $keHoachTieuChuan->baoCaoTieuChuan = DB::table('baocao_tieuchuan')
+		        											->where('id_kehoach_bc',$keHoachBaoCaoDetail->id)
+		        											->where('id_tieuchuan',$keHoachTieuChuan->tieuchuan_id)
+		        											->first();
+		        // echo($keHoachTieuChuan->baoCaoTieuChuan->modau);die;
 		        foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi){
 		        	$minhChungStt = 1;
 		            $keHoachTieuChi->keHoachMenhDeList = DB::table('kehoach_menhde')

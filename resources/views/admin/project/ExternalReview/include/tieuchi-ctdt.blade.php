@@ -10,19 +10,34 @@
             <strong>1. Mô tả: </strong>
             @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
                 @continue(!$keHoachMenhDe->baoCaoMenhDe)
-                <p>{!! $keHoachMenhDe->baoCaoMenhDe->mota !!}</p>
+                @php
+                    if (isset($keHoachMenhDe->baoCaoMenhDe->mota)) {
+                        $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $keHoachMenhDe->baoCaoMenhDe->mota);
+                        echo $absoluteImagePath;
+                    }
+                @endphp
             @endforeach
             <br/>
             <strong>2. Điểm mạnh: </strong>
             @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
                 @continue(!$keHoachMenhDe->baoCaoMenhDe)
-                <p>{!! $keHoachMenhDe->baoCaoMenhDe->diemmanh !!}</p>
+                @php
+                    if (isset($keHoachMenhDe->baoCaoMenhDe->diemmanh)) {
+                        $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $keHoachMenhDe->baoCaoMenhDe->diemmanh);
+                        echo $absoluteImagePath;
+                    }
+                @endphp
             @endforeach
             <br/>
             <strong>3. Điểm tồn tại: </strong>
             @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
                 @continue(!$keHoachMenhDe->baoCaoMenhDe)
-                <p>{!! $keHoachMenhDe->baoCaoMenhDe->tontai !!}</p>
+                @php
+                    if (isset($keHoachMenhDe->baoCaoMenhDe->tontai)) {
+                        $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $keHoachMenhDe->baoCaoMenhDe->tontai);
+                        echo $absoluteImagePath;
+                    }
+                @endphp
             @endforeach
             <br/>
             <strong>4. Kế hoạch hành động: </strong>

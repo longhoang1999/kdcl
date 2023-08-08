@@ -225,7 +225,7 @@
                         <label for="write-follow">
                             @lang('project/Selfassessment/title.vbctheo')
                         </label>
-                        <select name="writeFollow" id="write-follow" class="js-states form-control" >
+                        <select name="writeFollow" id="write-follow" class="js-states form-control" required>
                             <option value="" hidden>
                                 @lang('project/Selfassessment/title.vbctheo')
                             </option>
@@ -430,7 +430,7 @@
                             @lang('project/Selfassessment/title.vbctheo')
                         </label>
                         <select name="writeFollow" id="write-follow-id" class="js-states form-control" >
-                            <option value="" hidden>
+                            <option value="1" hidden>
                                 @lang('project/Selfassessment/title.vbctheo')
                             </option>
                             <option value="1">
@@ -696,5 +696,6 @@
         dateFormat: 'd-m-Y',
         minDate: "today",
     });
+
 </script>
 @stop

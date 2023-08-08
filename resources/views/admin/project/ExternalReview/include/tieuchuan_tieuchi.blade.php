@@ -23,17 +23,30 @@
                                 @include("admin.project.ExternalReview.include.tieuchi-csdt")
                             @else
                                 @if(isset($keHoachTieuChuan->baoCaoTieuChuan->modau))
-                                    <p>{!! str_replace('&nbsp;',' ',$keHoachTieuChuan->baoCaoTieuChuan->modau) !!}</p>
+
+                                    @php
+                                        $modifiedMota = str_replace('id="addminhchunggop_', 'd-id="', $keHoachTieuChuan->baoCaoTieuChuan->modau);
+                                        $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $modifiedMota);
+                                        echo '<p>' . $absoluteImagePath . '</p>';
+                                    @endphp
+
                                 @endif
+
                                 @include("admin.project.ExternalReview.include.tieuchi-ctdt")
 
                                 <div class="m-b-md m-l-md">
                                     <b>Kết luận tiêu chuẩn {{ $keHoachTieuChuan->tieuChuan->stt }}: </b>
                                     @if(isset($keHoachTieuChuan->baoCaoTieuChuan->ketluan))
-                                        {!! str_replace('&nbsp;',' ',$keHoachTieuChuan->baoCaoTieuChuan->ketluan) !!}
+
+                                        @php
+                                            $modifiedMota = str_replace('id="addminhchunggop_', 'd-id="', $keHoachTieuChuan->baoCaoTieuChuan->ketluan);
+                                            $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $modifiedMota);
+                                            echo '<p>' . $absoluteImagePath . '</p>';
+                                        @endphp
                                     @endif
                                 </div>
                             @endif
+
 
                         @endif
                     @endforeach
