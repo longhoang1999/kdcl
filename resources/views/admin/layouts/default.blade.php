@@ -120,6 +120,7 @@
             #kt_wrapper{
                 padding-top: 65px;
             }
+            
             .drop-icon img{
                 border-radius: 50%;
                 width: 40px !important;
