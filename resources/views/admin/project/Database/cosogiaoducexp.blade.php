@@ -511,7 +511,9 @@
             <p>* Bao gồm đề tài cấp Bộ hoặc tương đương, đề tài nhánh cấp Nhà nước</p>
             <div>
                 <span>Tỷ số sách đã được xuất bản trên cán bộ cơ hữu: </span>
-                <input type="number" class="edit_input" value="{{$dulieu->g31_tyssddxb}}" data_key="g31_tyssddxb" min="0">
+                <span class="edit_input">
+                    {{$dulieu->g31_tyssddxb}}
+                </span>
             </div>
             <p><i><strong>
                 32. Số lượng cán bộ cơ hữu của CSGD tham gia viết sách trong 5 năm gần đây:
@@ -695,7 +697,7 @@
                 <div>
                     <span>- Năm {{$i}}: </span>
                     <span class="edit_input">
-                        {{$dulieu->{'g43_'.$key2}}}
+                        {{$dulieu->{'g43_'.$key2} }}
                     </span>
                 </div>
                 @php $key2++; @endphp
@@ -710,7 +712,7 @@
                 <div>
                     <span>- Năm {{$i}}: </span>
                     <span class="edit_input">
-                        {{$dulieu->{'g44_'.$key3}}}
+                        {{$dulieu->{'g44_'.$key3} }}
                     </span>
                 </div>
                 @php $key3++; @endphp
@@ -755,7 +757,7 @@
                 <div>
                     <span>- Năm {{$i}}: </span>
                     <span class="edit_input">
-                        {{$dulieu->{'g47_'.$key6}}}
+                        {{$dulieu->{'g47_'.$key6} }}
                     </span>
                 </div>
                 @php $key6++; @endphp

@@ -149,6 +149,7 @@ class CompletionreportController extends DefinedController
         $keHoachBaoCaoDetail->keHoachTieuChuanList = DB::table('kehoach_tieuchuan')
                                                     ->where('kehoach_tieuchuan.id_kh_baocao','=',$keHoachBaoCaoDetail->id)
                                                     ->get();
+       
         foreach($keHoachBaoCaoDetail->keHoachTieuChuanList as $value){
             $baoCaoTieuChuan = DB::table('baocao_tieuchuan')
                                     ->where('baocao_tieuchuan.id_kehoach_bc',$req->id)

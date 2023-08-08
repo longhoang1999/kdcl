@@ -28,11 +28,14 @@
             cursor: pointer;
         }
         p,strong,br,hr,b,small,i,u,em,mark,del,ins,sub,sup{
-        word-wrap: break-word;
+            word-wrap: break-word;
         }
         img{
             max-width: 100%;
             height: auto;
+        }
+        tr,th,td{
+            border: 1px solid black;
         }
     </style>
     <div class="body-flex">

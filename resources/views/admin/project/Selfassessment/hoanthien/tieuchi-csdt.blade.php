@@ -8,7 +8,13 @@
         <div class="m-l-md">
             @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
                 @continue(!$keHoachMenhDe->baoCaoMenhDe)
-                <p>{!! str_replace('id="addminhchunggop_', 'd-id="', $keHoachMenhDe->baoCaoMenhDe->mota) !!}</p>
+                @if (isset($keHoachMenhDe->baoCaoMenhDe->mota))
+                    @php
+                        $modifiedMota = str_replace('id="addminhchunggop_', 'd-id="', $keHoachMenhDe->baoCaoMenhDe->mota);
+                        $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $modifiedMota);
+                        echo '<p>' . $absoluteImagePath . '</p>';
+                    @endphp
+                @endif
             @endforeach
             <br/>
 
@@ -23,7 +29,14 @@
     @foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi)
             @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
                 @continue(!$keHoachMenhDe->baoCaoMenhDe)
-                <p>{!! $keHoachMenhDe->baoCaoMenhDe->diemmanh !!}</p>
+                <p>
+                    @php
+                        if (isset($keHoachMenhDe->baoCaoMenhDe->diemmanh)) {
+                            $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $keHoachMenhDe->baoCaoMenhDe->diemmanh);
+                            echo $absoluteImagePath;
+                        }
+                    @endphp
+                </p>
             @endforeach
     @endforeach
     <br/>
@@ -31,7 +44,12 @@
     @foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi)
         @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
             @continue(!$keHoachMenhDe->baoCaoMenhDe)
-            <p>{!! $keHoachMenhDe->baoCaoMenhDe->tontai !!}</p>
+            @php
+                if (isset($keHoachMenhDe->baoCaoMenhDe->tontai)) {
+                    $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $keHoachMenhDe->baoCaoMenhDe->tontai);
+                    echo $absoluteImagePath;
+                }
+            @endphp
         @endforeach
     @endforeach
     <br/>

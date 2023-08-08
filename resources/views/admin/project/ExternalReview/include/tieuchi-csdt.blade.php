@@ -7,7 +7,14 @@
         </strong>
         <div class="m-l-md">
             @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
-                <p>{!! $keHoachMenhDe->baoCaoMenhDe->mota !!}</p>
+                <p>
+                    @php
+                        if (isset($keHoachMenhDe->baoCaoMenhDe->mota)) {
+                            $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $keHoachMenhDe->baoCaoMenhDe->mota);
+                            echo $absoluteImagePath;
+                        }
+                    @endphp
+                </p>
             @endforeach
             <br/>
 
@@ -21,7 +28,14 @@
     @foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi)
             @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
                 @continue(!$keHoachMenhDe->baoCaoMenhDe)
-                <p>{!! $keHoachMenhDe->baoCaoMenhDe->diemmanh !!}</p>
+                <p>
+                    @php
+                        if (isset($keHoachMenhDe->baoCaoMenhDe->diemmanh)) {
+                            $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $keHoachMenhDe->baoCaoMenhDe->diemmanh);
+                            echo $absoluteImagePath;
+                        }
+                    @endphp
+                </p>
             @endforeach
     @endforeach
     <br/>
@@ -29,7 +43,14 @@
     @foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi)
         @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
             @continue(!$keHoachMenhDe->baoCaoMenhDe)
-            <p>{!! $keHoachMenhDe->baoCaoMenhDe->tontai !!}</p>
+            <p>
+                @php
+                    if (isset($keHoachMenhDe->baoCaoMenhDe->tontai)) {
+                        $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $keHoachMenhDe->baoCaoMenhDe->tontai);
+                        echo $absoluteImagePath;
+                    }
+                @endphp
+            </p>
         @endforeach
     @endforeach
     <br/>

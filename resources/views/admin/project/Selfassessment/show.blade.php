@@ -317,7 +317,7 @@
                                 </div>
 
                                 <div class="ibox-content border-bottom">
-                                    <h3>@lang('project/Selfassessment/title.mota')</h3>
+                                    <h3 style="width: 100%;">@lang('project/Selfassessment/title.mota')</h3>
 
                                     @php
 
@@ -1234,8 +1234,6 @@
 
         function clickMC(id,mcg){
             var num;
-            console.log(mcg)
-            console.log(id)
             $.ajax({
                 url: "{!! route('admin.tudanhgia.detailedplanning.modalminhchung') !!}",
                 type: 'POST',
@@ -1503,7 +1501,12 @@
                         return;
                     }
 
-                    console.log(json.location)
+                    // console.log(json.location)
+                    // // Chèn ảnh vào trình soạn thảo
+                    // var img = document.createElement('img');
+                    // img.src = json.location;
+                    // img.alt = blobInfo.filename();
+                    // tinymce.activeEditor.insertContent(img.outerHTML);
 
                     // Sử dụng json.location mà không thay đổi gì thêm
                     success(json.location); 

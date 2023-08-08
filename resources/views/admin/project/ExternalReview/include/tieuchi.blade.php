@@ -39,19 +39,47 @@
                                     <strong>@lang('project/Externalreview/title.1mota') </strong></p>
                                     @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
                                         @continue(!$keHoachMenhDe->baoCaoMenhDe)
-                                        <p>{!! str_replace('&nbsp;',' ',$keHoachMenhDe->baoCaoMenhDe->mota) !!}</p>
+
+                                        @if(isset($keHoachMenhDe->baoCaoMenhDe->mota))
+
+                                            @php
+                                                $modifiedMota = str_replace('id="addminhchunggop_', 'd-id="', $keHoachMenhDe->baoCaoMenhDe->mota);
+                                                $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $modifiedMota);
+                                                echo '<p>' . $absoluteImagePath . '</p>';
+                                            @endphp
+
+                                        @endif
                                     @endforeach
                                     <br/>
                                     <strong>@lang('project/Externalreview/title.2diemmanh') </strong></p>
                                     @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
                                         @continue(!$keHoachMenhDe->baoCaoMenhDe)
-                                        <p>{!! strip_tags(str_replace('&nbsp;',' ',$keHoachMenhDe->baoCaoMenhDe->diemmanh)) !!}</p>
+                                        {{-- <p>{!! strip_tags(str_replace('&nbsp;',' ',$keHoachMenhDe->baoCaoMenhDe->diemmanh)) !!}</p> --}}
+
+                                        @if(isset($keHoachMenhDe->baoCaoMenhDe->diemmanh))
+
+                                            @php
+                                                $modifiedMota = str_replace('id="addminhchunggop_', 'd-id="', $keHoachMenhDe->baoCaoMenhDe->diemmanh);
+                                                $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $modifiedMota);
+                                                echo '<p>' . $absoluteImagePath . '</p>';
+                                            @endphp
+
+                                        @endif
                                     @endforeach
                                     <br/>
                                     <strong>@lang('project/Externalreview/title.3diemtontai') </strong></p>
                                     @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
                                         @continue(!$keHoachMenhDe->baoCaoMenhDe)
-                                        <p>{!! strip_tags(str_replace('&nbsp;',' ',$keHoachMenhDe->baoCaoMenhDe->tontai)) !!}</p>
+                                       {{-- <p>{!! strip_tags(str_replace('&nbsp;',' ',$keHoachMenhDe->baoCaoMenhDe->tontai)) !!}</p> --}}
+                                        @if(isset($keHoachMenhDe->baoCaoMenhDe->tontai))
+
+                                            @php
+                                                $modifiedMota = str_replace('id="addminhchunggop_', 'd-id="', $keHoachMenhDe->baoCaoMenhDe->tontai);
+                                                $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $modifiedMota);
+                                                echo '<p>' . $absoluteImagePath . '</p>';
+                                            @endphp
+
+                                        @endif
                                     @endforeach
                                     <br/>
                                     <strong>@lang('project/Externalreview/title.4kehoachhd') </strong></p>

@@ -177,11 +177,24 @@
 
                                                 @include("admin.project.Selfassessment.hoanthien.tieuchi-csdt")
                                             @else
-                                                <p>{!! isset($keHoachTieuChuan->baoCaoTieuChuan->modau) ? $keHoachTieuChuan->baoCaoTieuChuan->modau : "" !!}</p>
+                                            <p>
+                                                @php
+                                                    if (isset($keHoachTieuChuan->baoCaoTieuChuan->modau)) {
+                                                        $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $keHoachTieuChuan->baoCaoTieuChuan->modau);
+                                                        echo $absoluteImagePath;
+                                                    }
+                                                @endphp
+                                            </p> 
+                                                
                                                @include("admin.project.Selfassessment.hoanthien.tieuchi-ctdt")
                                                 <div class="m-b-md m-l-md">
                                                     <b>@lang('project/Selfassessment/title.kltc') {{ $keHoachTieuChuan->tieuChuan->stt }}: </b>
-                                                    {!! isset($keHoachTieuChuan->baoCaoTieuChuan->ketluan) ? $keHoachTieuChuan->baoCaoTieuChuan->ketluan : "" !!}
+                                                    @php
+                                                        if (isset($keHoachTieuChuan->baoCaoTieuChuan->ketluan)) {
+                                                            $absoluteImagePath = preg_replace('/src="..\/..\/..\/img_baocao/', 'src="' . asset('img_baocao'), $keHoachTieuChuan->baoCaoTieuChuan->ketluan);
+                                                            echo $absoluteImagePath;
+                                                        }
+                                                    @endphp
                                                 </div>
                                             @endif
                                         @endif
