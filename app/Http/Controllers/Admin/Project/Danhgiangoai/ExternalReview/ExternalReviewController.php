@@ -836,12 +836,12 @@ class ExternalReviewController extends DefinedController{
 					->addColumn('status',function($dt){
 						if($dt->trang_thai == 'active'){
 							return '<button class="btn btn-success btn-xs" data-toggle="tooltip"
-                                                title="'.Lang::get('project/ExternalReview/title.cofile').'">
+                                                title="'.Lang::get('project/Externalreview/title.cofile').'">
                                             <i class="fas fa-check-circle"></i>
                                     </button>';
 						}else if($dt->trang_thai == 'inactive'){
 							return '<button class="btn btn-danger btn-xs" data-toggle="tooltip"
-                                            title="'.Lang::get('project/ExternalReview/title.khongcofile').'">
+                                            title="'.Lang::get('project/Externalreview/title.khongcofile').'">
                                         <i class="fas fa-ban"></i>
                                     </button>';
 						}else{
