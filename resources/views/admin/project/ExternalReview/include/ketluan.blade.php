@@ -46,7 +46,6 @@
                                 </thead>
 
                                 <tbody class="text-center">
-
                                 @foreach($keHoachBaoCaoListDetail as $keHoachTieuChuan)
                                     @continue(!$keHoachTieuChuan->id)
                                     @php
