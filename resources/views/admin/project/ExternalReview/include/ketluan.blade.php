@@ -303,18 +303,29 @@
                                     </tbody>
                                 </table>
                             @else
+                                @php $dm = 0; $tt = 0;@endphp
                                 @foreach($keHoachBaoCaoListDetail as $keHoachTieuChuan)
-                                    <?php $i++; ?> 
                                     @continue(!$keHoachTieuChuan->id)
                                     <div class="m-l-md">
                                         @if($key=='diem_manh')
                                             <!--1. Tóm tắt các điểm mạnh:  -->
-                                            <p><?= $i; ?>. 
+                                            <p class="m-0">
                                                 @if(isset($keHoachTieuChuan->keHoachTieuChiList))
                                                     @foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi)
+
                                                         @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
+                                                            <span>
+                                                                    @if($keHoachMenhDe->baocao_menhde->diemmanh != "")
+                                                                        {{ ++$dm }} .
+                                                                    @endif
+
+                                                            </span>
                                                             @continue(!$keHoachMenhDe->baocao_menhde)
                                                             {!! strip_tags(str_replace('&nbsp;',' ',$keHoachMenhDe->baocao_menhde->diemmanh)) !!}
+                                                            @if($keHoachMenhDe->baocao_menhde->diemmanh != "")
+                                                                <br/>
+                                                            @endif
+                                                            
                                                         @endforeach
                                                     @endforeach
                                                 @endif
@@ -322,12 +333,21 @@
                                             </p>
                                         @elseif($key=='tontai')
                                             <!-- 2. Tóm tắt các tồn tại:  -->
-                                            <p><?= $i; ?>.
+                                            <p class="m-0">
                                                 @if(isset($keHoachTieuChuan->keHoachTieuChiList))
                                                     @foreach($keHoachTieuChuan->keHoachTieuChiList as $keHoachTieuChi)
                                                         @foreach($keHoachTieuChi->keHoachMenhDeList as $keHoachMenhDe)
+                                                            <span>
+                                                                @if($keHoachMenhDe->baocao_menhde->tontai != "")
+                                                                    {{ ++$dm }} .
+                                                                @endif
+
+                                                            </span>
                                                             @continue(!$keHoachMenhDe->baocao_menhde)
                                                             {!! strip_tags(str_replace('&nbsp;',' ',$keHoachMenhDe->baocao_menhde->tontai)) !!}
+                                                            @if($keHoachMenhDe->baocao_menhde->tontai != "")
+                                                                <br/>
+                                                            @endif
                                                         @endforeach
                                                     @endforeach
                                                 @endif 

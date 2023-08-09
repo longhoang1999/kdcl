@@ -104,7 +104,7 @@
                                 @lang('project/Selfassessment/title.botc')
                             </label>
                             <br>
-                            <select class="btc-select" name="bo_tieuchuan" id="btc-select">
+                            <select class="btc-select" name="bo_tieuchuan" id="btc-select" required>
                                 <option value=""></option>
                                 @foreach($btc as $value)
                                     <option value="{{ $value->id }}">{{ $value->tieu_de }}</option>
@@ -193,6 +193,7 @@
                             @lang('project/Selfassessment/title.nscb')
                         </label>
                         <select class="multiple-nscb js-states form-control" multiple="multiple" name="ns_chuanbi[]" id="multiple-nscb">
+                            <option value="" hidden></option>
                             @foreach($user as $value)
                                 <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
                             @endforeach
@@ -203,7 +204,8 @@
                         <label for="multiple-nsth">
                             @lang('project/Selfassessment/title.nsth')
                         </label>
-                        <select class="multiple-nsth js-states form-control" multiple="multiple" name="ns_thuchien[]">
+                        <select class="multiple-nsth js-states form-control" multiple="multiple" name="ns_thuchien[]" id="nsth_c">
+                            <option value="" hidden></option>
                             @foreach($user as $value)
                                 <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
                             @endforeach
@@ -214,7 +216,8 @@
                         <label for="multiple-nskt">
                             @lang('project/Selfassessment/title.nskt')
                         </label>
-                        <select class="multiple-nskt js-states form-control" multiple="multiple" name="ns_kiemtra[]">
+                        <select class="multiple-nskt js-states form-control" multiple="multiple" name="ns_kiemtra[]" id="nskt_c">
+                            <option value="" hidden></option>
                             @foreach($user as $value)
                                 <option value="{{ $value->id }}">{{$value->name  }} - ({{ $value->ten_donvi }})</option>
                             @endforeach
@@ -226,7 +229,7 @@
                             @lang('project/Selfassessment/title.vbctheo')
                         </label>
                         <select name="writeFollow" id="write-follow" class="js-states form-control" required>
-                            <option value="" hidden>
+                            <option value="1" hidden>
                                 @lang('project/Selfassessment/title.vbctheo')
                             </option>
                             <option value="1">
@@ -509,7 +512,7 @@
 
     $(".btn-lkhNew").click(function() {
         if($("#ngay_cbi_end").val() == "" || $("#ngay_cbi_start").val() == ""
-            || $("#ngay_vietbc_end").val() == "" ||  $("#ngay_vietbc_start").val() == "")
+            || $("#ngay_vietbc_end").val() == "" ||  $("#ngay_vietbc_start").val() == "" || $("#multiple-nscb").val() == "" ||  $("#centers").val() == "" ||  $("#ten_baocao").val() == "" ||  $("#nskt_c").val() == "" ||  $("#nsth_c").val() == "" ||  $("#btc-select").val() == "")
             alert("@lang('project/QualiAssurance/title.vldddtt')")
         else
             $("#form-lkhNew").submit();
