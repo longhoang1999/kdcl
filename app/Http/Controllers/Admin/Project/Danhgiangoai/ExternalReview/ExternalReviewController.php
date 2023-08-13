@@ -213,7 +213,7 @@ class ExternalReviewController extends DefinedController{
 						$keHoachTieuChuan->keHoachTieuChuans = DB::table('baocao_tieuchuan')
 														->leftjoin('tieuchuan','tieuchuan.id','baocao_tieuchuan.id_tieuchuan')
 														// ->where('baocao_tieuchuan.id_kh_tieuchuan',$keHoachTieuChuan->id)
-														->where('baocao_tieuchuan.id_kehoach_bc',$keHoachTieuChuan->khbc_id)
+														// ->where('baocao_tieuchuan.id_kehoach_bc',$keHoachTieuChuan->khbc_id)
 														->where('tieuchuan.id',$keHoachTieuChuan->tieuchuan_id)
 														->first();
 						
@@ -286,16 +286,19 @@ class ExternalReviewController extends DefinedController{
 											->select('kehoach_baocao.id as khbc_id','kehoach_baocao.ten_bc','kehoach_tieuchuan.*')
 											->leftjoin('kehoach_tieuchuan','kehoach_tieuchuan.id_kh_baocao','=','kehoach_baocao.id')
 											->where('kehoach_baocao.id',$id)->get();
+					// dd($keHoachBaoCaoDetail);
 
 					foreach($keHoachBaoCaoDetail as $keHoachTieuChuan){
 
 						$keHoachTieuChuan->keHoachTieuChuans = DB::table('baocao_tieuchuan')
 														->leftjoin('tieuchuan','tieuchuan.id','baocao_tieuchuan.id_tieuchuan')
 														// ->where('baocao_tieuchuan.id_kh_tieuchuan',$keHoachTieuChuan->id)
-														->where('baocao_tieuchuan.id_kehoach_bc',$keHoachTieuChuan->khbc_id)
+														// ->where('baocao_tieuchuan.id_kehoach_bc',$keHoachTieuChuan->khbc_id)
 														->where('tieuchuan.id',$keHoachTieuChuan->tieuchuan_id)
 														->first();
-						// dd($keHoachTieuChuan->keHoachTieuChuans);
+						
+						// dd($gf);
+						// echo($keHoachTieuChuan->keHoachTieuChuans->tieuchuan_id);die;
 						// if (!$keHoachTieuChuans) {
 		                // 	continue;
 		            	// }
