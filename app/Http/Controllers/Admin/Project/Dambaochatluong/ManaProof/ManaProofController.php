@@ -291,7 +291,13 @@ class ManaProofController extends DefinedController
 
         
         $linhvuc = DB::table('nhom_mc_sl')->select('id', 'mo_ta');
+        if(Sentinel::inRole('truongdonvi')){
+            $kh = DB::table("kehoach_cc_solieu")->where("dv_thuchien", Sentinel::getUser()->donvi_id)
+                ->pluck("nhom_mc_sl_id");
+            $linhvuc = $linhvuc->whereIn("id", $kh) ;
+        }
         $linhvuc = $this->dataExceptDelete($linhvuc)->get();
+
         $hoatdong = DB::table('hoatdongnhom')->select('id', 'noi_dung');
         $hoatdong = $this->dataExceptDelete($hoatdong)->get();
         $idhdn = null;

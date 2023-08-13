@@ -134,6 +134,7 @@ class PlanningController extends DefinedController
                     ->select("ccsl.id AS id_ccsl", "ccsl.nhom_mc_sl_id", "ccsl.ngay_batdau", 
                         "ccsl.ngay_hoanthanh", "ccsl.dv_thuchien", "ccsl.dv_kiemtra", "mcsl.mo_ta","mcsl.id AS id_mcsl", "ccsl.notes")
                     ->where("ccsl.deleted_at"  ,null);
+        
 
         if($req->year != "" && $req->mcsl == "" && $req->donvi == ""){
             $plannings = $plannings->whereYear('ccsl.ngay_batdau', $req->year);

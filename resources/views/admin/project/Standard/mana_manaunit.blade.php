@@ -547,8 +547,14 @@
 
 
     // CKEDITOR.replace( 'forMotaNamTL' );
-    CKEDITOR.replace( 'forGT' );
-    CKEDITOR.replace( 'forCCTC' );
+    CKEDITOR.replace( 'forGT', {
+        height: 300,
+        filebrowserImageUploadUrl : '{!! route('admin.thuongtruc.manacategory.uploadPhoto').'?_token='.csrf_token() !!}'
+    } );
+    CKEDITOR.replace( 'forCCTC', {
+        height: 300,
+        filebrowserImageUploadUrl : '{!! route('admin.thuongtruc.manacategory.uploadPhoto').'?_token='.csrf_token() !!}'
+    } );
 
     $('#modalUpdate').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) 

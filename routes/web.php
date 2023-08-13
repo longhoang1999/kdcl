@@ -396,6 +396,9 @@ Route::group(
                                 Route::get('manaunit', 'CategoryController@unit')
                                     ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('unit');
+
+                                Route::post('uploadPhoto', 'CategoryController@uploadPhoto')->name('uploadPhoto');
+                                
                                 Route::get('data-unit', 'CategoryController@dataUnit')->name('dataUnit');
                                 Route::get('delete-unit', 'CategoryController@deleteUnit')->name('deleteUnit');
                                 Route::post('update-unit', 'CategoryController@updateUnit')->name('updateUnit');
@@ -1664,7 +1667,7 @@ Route::group(
                             ['prefix' => 'thong-tin-co-ban', 'as' => 'thongtincoban.', 'namespace' => 'Thongtincoban'],
                             function(){
                                 Route::get('index','BasicInforController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                //->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'BasicInforController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'BasicInforController@showFileData')->name('showFileData');
@@ -1676,7 +1679,7 @@ Route::group(
                             ['prefix' => 'nhan-su', 'as' => 'nhansu.', 'namespace' => 'Nhansu'],
                             function(){
                                 Route::get('index','NhansuController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                // ->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'NhansuController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'NhansuController@showFileData')->name('showFileData');
@@ -1688,7 +1691,7 @@ Route::group(
                             ['prefix' => 'du-lieu-sinh-vien', 'as' => 'dlsinhvien.', 'namespace' => 'Dlsinhvien'],
                             function(){
                                 Route::get('index','DlsinhvienController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'DlsinhvienController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'DlsinhvienController@showFileData')->name('showFileData');
@@ -1701,7 +1704,7 @@ Route::group(
                             ['prefix' => 'khcn', 'as' => 'khcn.', 'namespace' => 'Khcn'],
                             function(){
                                 Route::get('index','KhcnController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                //->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'KhcnController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'KhcnController@showFileData')->name('showFileData');
@@ -1712,7 +1715,7 @@ Route::group(
                             ['prefix' => 'doanh-thu-khcn', 'as' => 'dtkhcn.', 'namespace' => 'Dtkhcn'],
                             function(){
                                 Route::get('index','DtkhcnController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                // ->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'DtkhcnController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'DtkhcnController@showFileData')->name('showFileData');
@@ -1724,7 +1727,7 @@ Route::group(
                             ['prefix' => 'bien-soan-sach', 'as' => 'bssach.', 'namespace' => 'Bssach'],
                             function(){
                                 Route::get('index','BssachController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                //->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'BssachController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'BssachController@showFileData')->name('showFileData');
@@ -1735,7 +1738,7 @@ Route::group(
                             ['prefix' => 'bai-bao-bao-cao', 'as' => 'baibaobc.', 'namespace' => 'Baibaobc'],
                             function(){
                                 Route::get('index','BaibaobcController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                //->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'BaibaobcController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'BaibaobcController@showFileData')->name('showFileData');
@@ -1748,7 +1751,7 @@ Route::group(
                             ['prefix' => 'sang-che', 'as' => 'sangche.', 'namespace' => 'Sangche'],
                             function(){
                                 Route::get('index','SangcheController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                //->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'SangcheController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'SangcheController@showFileData')->name('showFileData');
@@ -1761,7 +1764,7 @@ Route::group(
                             ['prefix' => 'giai-thuong', 'as' => 'giaithuong.', 'namespace' => 'Giaithuong'],
                             function(){
                                 Route::get('index','GiaithuongController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                //->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'GiaithuongController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'GiaithuongController@showFileData')->name('showFileData');
@@ -1774,7 +1777,7 @@ Route::group(
                             ['prefix' => 'sang-kien-kinh-nghiem', 'as' => 'sangkienkinhnghiem.', 'namespace' => 'Sangkienkinhnghiem'],
                             function(){
                                 Route::get('index','Sangkienkinhnghiem@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                //->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'Sangkienkinhnghiem@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'Sangkienkinhnghiem@showFileData')->name('showFileData');
@@ -1786,7 +1789,7 @@ Route::group(
                             ['prefix' => 'hoi-thao-hoi-nghi', 'as' => 'hoithaohoinghi.', 'namespace' => 'Hoithaohoinghi'],
                             function(){
                                 Route::get('index','Hoithaohoinghi@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                //->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'Hoithaohoinghi@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'Hoithaohoinghi@showFileData')->name('showFileData');
@@ -1821,7 +1824,7 @@ Route::group(
                             ['prefix' => 'thong-ke-tai-chinh', 'as' => 'tktc.', 'namespace' => 'Thongketaichinh'],
                             function(){
                                 Route::get('index','ThongketaichinhController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                // ->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'ThongketaichinhController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'ThongketaichinhController@showFileData')->name('showFileData');
@@ -1834,7 +1837,7 @@ Route::group(
                             ['prefix' => 'thong-ke-ky-tuc-xa', 'as' => 'tkktx.', 'namespace' => 'Thongkekytucxa'],
                             function(){
                                 Route::get('index','ThongkekytucxaController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                // ->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'ThongkekytucxaController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'ThongkekytucxaController@showFileData')->name('showFileData');
@@ -1847,7 +1850,7 @@ Route::group(
                             ['prefix' => 'thong-ke-may-tinh', 'as' => 'tkmt.', 'namespace' => 'Thongkemaytinh'],
                             function(){
                                 Route::get('index','ThongkemaytinhController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                // ->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'ThongkemaytinhController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'ThongkemaytinhController@showFileData')->name('showFileData');
@@ -1860,7 +1863,7 @@ Route::group(
                             ['prefix' => 'doanh-thu-khcn2', 'as' => 'dtkhcn2.', 'namespace' => 'Dtkhcn2'],
                             function(){
                                 Route::get('index','Dtkhcn2Controller@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                //->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'Dtkhcn2Controller@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'Dtkhcn2Controller@showFileData')->name('showFileData');
@@ -1873,7 +1876,7 @@ Route::group(
                             ['prefix' => 'kiem-dinh-chat-luong', 'as' => 'kdcl.', 'namespace' => 'Kdcl'],
                             function(){
                                 Route::get('index','KdclController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                //  ->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'KdclController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'KdclController@showFileData')->name('showFileData');
@@ -1885,7 +1888,7 @@ Route::group(
                             ['prefix' => 'tai-lieu-thu-vien', 'as' => 'tltv.', 'namespace' => 'Tlthuvien'],
                             function(){
                                 Route::get('index','TltvController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                // ->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'TltvController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'TltvController@showFileData')->name('showFileData');
@@ -1898,7 +1901,7 @@ Route::group(
                             ['prefix' => 'thong-ke-phong-trang-thiet-bi', 'as' => 'tkpttb.', 'namespace' => 'Tkphongtrangthietbi'],
                             function(){
                                 Route::get('index','TkpttbController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                // ->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'TkpttbController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'TkpttbController@showFileData')->name('showFileData');
@@ -1928,7 +1931,7 @@ Route::group(
                             ['prefix' => 'dien-tich-san-xay-dung', 'as' => 'dtsxd.', 'namespace' => 'Dientichsanxdung'],
                             function(){
                                 Route::get('index','DientichSanController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                // ->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'DientichSanController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'DientichSanController@showFileData')->name('showFileData');
@@ -1940,7 +1943,7 @@ Route::group(
                             ['prefix' => 'tinh-trang-tot-nghiep', 'as' => 'tttn.', 'namespace' => 'TinhTrangTotNghiep'],
                             function(){
                                 Route::get('index','TtTotNghiepController@index')
-                                ->middleware(['super_check:admin,operator,truongdonvi'])
+                                // ->middleware(['super_check:admin,operator,truongdonvi'])
                                 ->name('index');
                                 Route::post('addfilenew', 'TtTotNghiepController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'TtTotNghiepController@showFileData')->name('showFileData');
@@ -1953,7 +1956,7 @@ Route::group(
                             ['prefix' => 'thong-tin-do-an-khoa-luan', 'as' => 'ttdakl.', 'namespace' => 'Thongtindakl'],
                             function(){
                                 Route::get('index','ThongtindaklController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    //->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'ThongtindaklController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'ThongtindaklController@showFileData')->name('showFileData');
@@ -1966,7 +1969,7 @@ Route::group(
                             ['prefix' => 'cong-khai-hoi-nghi', 'as' => 'ckhnhtkh.', 'namespace' => 'Congkhaihnhtkh'],
                             function(){
                                 Route::get('index','CongkhaihnhtkhController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaihnhtkhController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaihnhtkhController@showFileData')->name('showFileData');
@@ -1979,7 +1982,7 @@ Route::group(
                             ['prefix' => 'cong-khai-tai-lieu', 'as' => 'ckgttl.', 'namespace' => 'Congkhaigttl'],
                             function(){
                                 Route::get('index','CongkhaigttlController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaigttlController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaigttlController@showFileData')->name('showFileData');
@@ -1991,7 +1994,9 @@ Route::group(
                          Route::group(
                             ['prefix' => 'cong-khai-mon-hoc', 'as' => 'ckmh.', 'namespace' => 'Congkhaimh'],
                             function(){
-                                Route::get('index','CongkhaimhController@index')->middleware(['super_check:admin,operator,truongdonvi'])->name('index');
+                                Route::get('index','CongkhaimhController@index')
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    ->name('index');
                                 Route::post('addfilenew', 'CongkhaimhController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaimhController@showFileData')->name('showFileData');
 
@@ -2003,7 +2008,7 @@ Route::group(
                             ['prefix' => 'cong-khai-quy-mo-dao-tao', 'as' => 'ckqmdt.', 'namespace' => 'Congkhaiqmdt'],
                             function(){
                                 Route::get('index','CongkhaiqmdtController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaiqmdtController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaiqmdtController@showFileData')->name('showFileData');
@@ -2016,7 +2021,7 @@ Route::group(
                             ['prefix' => 'cong-khai-cac-phong', 'as' => 'ckcp.', 'namespace' => 'Congkhaicp'],
                             function(){
                                 Route::get('index','CongkhaicpController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaicpController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaicpController@showFileData')->name('showFileData');
@@ -2029,7 +2034,7 @@ Route::group(
                             ['prefix' => 'cong-khai-sinh-vien-tot-nghiep', 'as' => 'cksvtn.', 'namespace' => 'Congkhaisvtn'],
                             function(){
                                 Route::get('index','CongkhaisvtnController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaisvtnController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaisvtnController@showFileData')->name('showFileData');
@@ -2042,7 +2047,7 @@ Route::group(
                             ['prefix' => 'cong-khai-co-so-giao-duc', 'as' => 'ckcsgd.', 'namespace' => 'Congkhaicsgd'],
                             function(){
                                 Route::get('index','CongkhaicsgdController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaicsgdController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaicsgdController@showFileData')->name('showFileData');
@@ -2057,7 +2062,7 @@ Route::group(
                             ['prefix' => 'cong-khai-sinh-vien-giang-vien', 'as' => 'cksvgv.', 'namespace' => 'Congkhaisvgv'],
                             function(){
                                 Route::get('index','CongkhaisvgvController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaisvgvController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaisvgvController@showFileData')->name('showFileData');
@@ -2070,7 +2075,7 @@ Route::group(
                             ['prefix' => 'dien-tich-dat-sinh-vien', 'as' => 'ckdtdsv.', 'namespace' => 'Congkhaidtdsv'],
                             function(){
                                 Route::get('index','CongkhaidtdsvController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaidtdsvController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaidtdsvController@showFileData')->name('showFileData');
@@ -2083,7 +2088,7 @@ Route::group(
                             ['prefix' => 'thong-tin-dao-tao', 'as' => 'ckttdt.', 'namespace' => 'Congkhaittdt'],
                             function(){
                                 Route::get('index','CongkhaittdtController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaittdtController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaittdtController@showFileData')->name('showFileData');
@@ -2096,7 +2101,7 @@ Route::group(
                             ['prefix' => 'thong-tin-dien-tich-dat', 'as' => 'ckttdtd.', 'namespace' => 'Congkhaittdtd'],
                             function(){
                                 Route::get('index','CongkhaittdtdController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaittdtdController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaittdtdController@showFileData')->name('showFileData');
@@ -2109,7 +2114,7 @@ Route::group(
                             ['prefix' => 'cong-khai-tt-ve-hoc-lieu', 'as' => 'ckttvhl.', 'namespace' => 'Congkhaittvhl'],
                             function(){
                                 Route::get('index','CongkhaittvhlController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaittvhlController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaittvhlController@showFileData')->name('showFileData');
@@ -2122,7 +2127,7 @@ Route::group(
                             ['prefix' => 'cong-khai-nghien-cuu-khoa-hoc', 'as' => 'cknckh.', 'namespace' => 'Congkhainckh'],
                             function(){
                                 Route::get('index','CongkhainckhController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhainckhController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhainckhController@showFileData')->name('showFileData');
@@ -2136,7 +2141,7 @@ Route::group(
                             ['prefix' => 'cong-khai-cam-ket-chat-luong', 'as' => 'ckcldt.', 'namespace' => 'Congkhaickcl'],
                             function(){
                                 Route::get('index','CongkhaickclController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaickclController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaickclController@showFileData')->name('showFileData');
@@ -2148,7 +2153,7 @@ Route::group(
                             ['prefix' => 'tai-chinh-nam-hoc', 'as' => 'cktcnh.', 'namespace' => 'Congkhaitcnh'],
                             function(){
                                 Route::get('index','CongkhaitcnhController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaitcnhController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaitcnhController@showFileData')->name('showFileData');
@@ -2161,7 +2166,7 @@ Route::group(
                             ['prefix' => 'cong-khai-doi-ngu-gv', 'as' => 'ckdngv.', 'namespace' => 'Congkhaidngv'],
                             function(){
                                 Route::get('index','CongkhaidngvController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaidngvController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaidngvController@showFileData')->name('showFileData');
@@ -2174,7 +2179,7 @@ Route::group(
                             ['prefix' => 'cong-khai-dn-gv-co-huu', 'as' => 'ckdngvch.', 'namespace' => 'Congkhaidngvch'],
                             function(){
                                 Route::get('index','CongkhaidngvchController@index')
-                                    ->middleware(['super_check:admin,operator,truongdonvi'])
+                                    // ->middleware(['super_check:admin,operator,truongdonvi'])
                                     ->name('index');
                                 Route::post('addfilenew', 'CongkhaidngvchController@addfilenew')->name('addfilenew');
                                 Route::post('showFileData', 'CongkhaidngvchController@showFileData')->name('showFileData');

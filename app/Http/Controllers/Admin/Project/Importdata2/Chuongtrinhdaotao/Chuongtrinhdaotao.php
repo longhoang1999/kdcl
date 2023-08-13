@@ -53,7 +53,7 @@ class Chuongtrinhdaotao extends DefinedController{
                             'getFile'           => $getFile
                         ]);
                     }else{
-                        return redirect()->back()->with("error", "Hết thời gian lên kế hoạch");
+                        //return redirect()->back()->with("error", "Hết thời gian lên kế hoạch");
                     }
                 }
             }
@@ -70,22 +70,22 @@ class Chuongtrinhdaotao extends DefinedController{
                             'getFile'           => $getFile
                         ]);
                     }else{
-                        return redirect()->back()->with("error", "Hết thời gian lên kế hoạch");
+                        //return redirect()->back()->with("error", "Hết thời gian lên kế hoạch");
                     }
                 }
             }
         }
         
-        if($phanquen){
-            if(Sentinel::getUser()->id == $phanquen->nskt_id){
-                return view('admin.project.Importdata2.ctdt')->with([
-                    'loai_dv'           => $loai_dv,
-                    'donvi'             => $donvi,
-                    'getFile'           => $getFile,
-                    'kiemtra'           => 'nskt'
-                ]);
-            }
-        }
+        // if($phanquen){
+        //     if(Sentinel::getUser()->id == $phanquen->nskt_id){
+        //         return view('admin.project.Importdata2.ctdt')->with([
+        //             'loai_dv'           => $loai_dv,
+        //             'donvi'             => $donvi,
+        //             'getFile'           => $getFile,
+        //             'kiemtra'           => 'nskt'
+        //         ]);
+        //     }
+        // }
 
 
         if(Sentinel::inRole('admin') || Sentinel::inRole('operator')){
@@ -96,7 +96,13 @@ class Chuongtrinhdaotao extends DefinedController{
             ]);
         }
 
-        return redirect()->back()->with("error", "Bạn không có quyền lập kế hoạch cho bảng này");
+        return view('admin.project.Importdata2.ctdt')->with([
+            'loai_dv'           => $loai_dv,
+            'donvi'             => $donvi,
+            'getFile'           => $getFile,
+            'kiemtra'           => 'nskt'
+        ]);
+        //return redirect()->back()->with("error", "Bạn không có quyền lập kế hoạch cho bảng này");
 
        
 	}
