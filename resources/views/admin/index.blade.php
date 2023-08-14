@@ -130,7 +130,7 @@
                                     </div>
                                 </div>
                                 <div class="block-flex">
-                                    <a href="">Xem chi tiết</a>
+                                    <a href="{{ route('admin.thuongtruc.manacategory.human') }}">Xem chi tiết</a>
                                 </div>
                             </div>
                             <div class="info-item">
@@ -142,7 +142,7 @@
                                     </div>
                                 </div>
                                 <div class="block-flex">
-                                    <a href="">Xem chi tiết</a>
+                                    <a href="{{ route('admin.tudanhgia.report.index') }}">Xem chi tiết</a>
                                 </div>
                             </div>
                             <div class="info-item">
@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
                                 <div class="block-flex">
-                                    <a href="">Xem chi tiết</a>
+                                    <a href="{{ route('admin.dambaochatluong.manaproof.index') }}">Xem chi tiết</a>
                                 </div>
                             </div>
                             <div class="info-item">
@@ -166,7 +166,7 @@
                                     </div>
                                 </div>
                                 <div class="block-flex">
-                                    <a href="">Xem chi tiết</a>
+                                    <a href="{{ route('admin.importdata2.lkhex.index') }}">Xem chi tiết</a>
                                 </div>
                             </div>
                         </div>
@@ -189,13 +189,13 @@
                             </div>
                             <div class="mt-5  text-center">
                                 <div class="fw-bolder">
-                                    <a href="" class="link-name">
+                                    <a href="{{ URL::route('admin.users.show',Sentinel::getUser()->id) }}" class="link-name">
                                         {{ Sentinel::getUser()->name }}
                                     </a>
                                 </div>
                             </div>
                             <div class=" mb-5 text-center">
-                                <a href="#" class="link-email fw-bold text-muted text-hover-primary fs-7">
+                                <a href="{{ URL::route('admin.users.show',Sentinel::getUser()->id) }}" class="link-email fw-bold text-muted text-hover-primary fs-7">
                                     {{ Sentinel::getUser()->email }}
                                 </a>
                             </div>
@@ -230,7 +230,7 @@
         </div>
 
 
-        <div class="container-fuild mt-50">
+        <!-- <div class="container-fuild mt-50">
             <div class="row">
 
                 <div class="right col-md-4">
@@ -251,7 +251,7 @@
                 </div>
                
             </div>
-        </div>
+        </div> -->
     </section>
 @stop
 
