@@ -122,7 +122,7 @@
                                 <div class="bg bg-blue">
                                     <i class="bi bi-window fs-3"></i>
                                     <div class="block-text">
-                                        <h1>26</h1>
+                                        <h1 class="">26</h1>
                                         <p>Comment</p>
                                     </div>
                                 </div>
