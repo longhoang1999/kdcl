@@ -481,6 +481,72 @@ class CategoryController extends DefinedController
         }
     }
 
+    public function dashboard(Request $req) {
+        $users = DB::table("users");
+        $users = $this->dataExceptDelete(
+            $users->select('id', 'ma_nhansu', 'email', 'pic', 'gender',
+                    'name', 'donvi_id', 'created_at', 'nguoi_tao', 'deleted_at')
+        );
+
+        $users = $users->orderBy('created_at', 'desc');
+        return DataTables::of($users)               
+            ->addColumn(
+                'tenDV',
+                function ($user) {
+                    $tenDV = DB::table("donvi")->where("id", $user->donvi_id)
+                            ->select("ten_donvi")->first();
+                    if($tenDV)
+                        return $tenDV->ten_donvi;
+                    else return " ";
+                }
+            )
+            ->addColumn(
+                'avatar',
+                function ($user) {
+                    $avatar = "";
+                    if($user->pic){
+                        $avatar .= "<img class='table-img' alt='Logo' src='" . asset(Sentinel::getUser()->pic) ."' />";
+                    }else if($user->gender === "male"){
+                        $avatar .= "<img class='table-img' alt='Logo' src='" . asset('images/authors/avatar3.png') ."' />";
+                    }else if($user->gender === "female"){
+                        $avatar .= "<img class='table-img' alt='Logo' src='" . asset('images/authors/avatar5.png') ."' />";
+                    }else{
+                        $avatar .= "<img class='table-img' alt='Logo' src='" . asset('images/authors/no_avatar.jpg') ."' />";
+                    }
+
+                    $avatar .= "<div class='block-chucvu'>";
+                    $role = DB::table("role_users")->where("user_id", $user->id)->select("role_id")->get();
+                    foreach($role as $value){
+                        if($value->role_id == "1"){
+                            $avatar .= '<span class="chucvu">Admin</span>';
+                        }
+                        if($value->role_id == "3"){
+                            $avatar .= '<span class="chucvu">Thường trực</span>';
+                        }
+                        if($value->role_id == "8"){
+                            $avatar .= '<span class="chucvu">Trưởng đơn vị</span>';
+                        }
+                        //break;
+                        
+                    }
+                    $avatar .= "</div>";
+                    return $avatar;
+                }
+            )
+            ->addColumn(
+                'actions',
+                function ($user) {
+                    $actions = "";
+                    if(Sentinel::inRole('admin') || Sentinel::inRole('operator')){
+                        $actions .= "<a href='abc.php?iduser=". $user->id ."'>Truy cập</a>";
+                    }
+                    return $actions;
+                }
+            )
+            ->rawColumns(['actions', 'avatar', 'tenChucvu'])
+            ->make(true);
+    }
+
     public function dataHuman(Request $req) {
         $users = DB::table("users");
         if(isset($req->id_user) && $req->id_user != ""){

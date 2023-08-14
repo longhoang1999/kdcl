@@ -219,8 +219,10 @@
                             <!--begin::Wrapper-->
                             <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
                                 <!--begin::Navbar-->
-                                <div class="d-flex align-items-stretch" id="kt_header_nav">
-
+                                <div class="d-flex align-items-center" id="kt_header_nav">
+                                    <div class="row">
+                                        <h1 class="col-md-12 real-time"></h1>
+                                    </div>
                                 </div>
                                 <!--end::Navbar-->
                                 <!--begin::Topbar-->
@@ -3875,6 +3877,51 @@
                 var modal = $(this)
                 modal.find('#deleteAllTable__').attr('href', "{{ route('admin.importdata.tuyensinh.deleteDataTable') }}?nametable=" + recipient)
             })
+        </script>
+
+        
+        <script type="text/javascript">
+            // real time
+            var h1 = document.querySelector(".real-time");
+            let month;
+            let day;
+            let year;
+            let hour;
+            let minute;
+            let second;
+
+            function convertTime(number) {
+                if(number >= 0 && number <= 9){
+                    number = `0${number}`;
+                }
+                return number;
+            }
+            function loadRealTime() {
+                let dateObj = new Date();
+                month = dateObj.getMonth() + 1;
+                day = dateObj.getDate();
+                year = dateObj.getFullYear();
+                hour = convertTime(dateObj.getHours());
+                minute = convertTime(dateObj.getMinutes());
+                second = convertTime(dateObj.getSeconds());
+
+                let newdate = `${day}/${month}/${year}  ${hour}:${minute}:${second}`;
+                h1.innerText = newdate;
+            }
+            loadRealTime();
+
+            setInterval(() => {
+                let dateObj = new Date();
+                month = dateObj.getMonth() + 1;
+                day = dateObj.getDate();
+                year = dateObj.getFullYear();
+                hour = convertTime(dateObj.getHours());
+                minute = convertTime(dateObj.getMinutes());
+                second = convertTime(dateObj.getSeconds());
+
+                let newdate = `${day}/${month}/${year}  ${hour}:${minute}:${second}`;
+                h1.innerText = newdate;
+            }, 1000)
         </script>
 
         @yield('footer_scripts')

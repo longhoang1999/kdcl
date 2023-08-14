@@ -89,6 +89,8 @@ Route::get("create-pass", function() {
 
 });
 
+
+
 // Route::get("create-role", function(){
 //     $role = Sentinel::getRoleRepository()->createModel()->create([
 //         'name' => 'ns_kiemtra',
@@ -379,6 +381,11 @@ Route::group(
                         Route::group(
                             ['prefix' => 'manacategory', 'as' => 'manacategory.', 'namespace' => 'Category'],
                             function () {
+                                // dashboard
+                                Route::get('dashboard', 'CategoryController@dashboard')->name('dashboard');
+
+
+
                                 // Quản lý danh mục
                                 Route::get('index', 'CategoryController@index')->name('index');
                                 // Lĩnh vực
