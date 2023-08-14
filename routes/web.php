@@ -383,7 +383,8 @@ Route::group(
                             function () {
                                 // dashboard
                                 Route::get('dashboard', 'CategoryController@dashboard')->name('dashboard');
-
+                                Route::get('getDataCommon', 'CategoryController@getDataCommon')->name('getDataCommon');
+                                Route::get('redicect', 'CategoryController@redicect')->name('redicect');
 
 
                                 // Quản lý danh mục

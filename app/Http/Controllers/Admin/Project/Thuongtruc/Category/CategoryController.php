@@ -481,71 +481,7 @@ class CategoryController extends DefinedController
         }
     }
 
-    public function dashboard(Request $req) {
-        $users = DB::table("users");
-        $users = $this->dataExceptDelete(
-            $users->select('id', 'ma_nhansu', 'email', 'pic', 'gender',
-                    'name', 'donvi_id', 'created_at', 'nguoi_tao', 'deleted_at')
-        );
-
-        $users = $users->orderBy('created_at', 'desc');
-        return DataTables::of($users)               
-            ->addColumn(
-                'tenDV',
-                function ($user) {
-                    $tenDV = DB::table("donvi")->where("id", $user->donvi_id)
-                            ->select("ten_donvi")->first();
-                    if($tenDV)
-                        return $tenDV->ten_donvi;
-                    else return " ";
-                }
-            )
-            ->addColumn(
-                'avatar',
-                function ($user) {
-                    $avatar = "";
-                    if($user->pic){
-                        $avatar .= "<img class='table-img' alt='Logo' src='" . asset(Sentinel::getUser()->pic) ."' />";
-                    }else if($user->gender === "male"){
-                        $avatar .= "<img class='table-img' alt='Logo' src='" . asset('images/authors/avatar3.png') ."' />";
-                    }else if($user->gender === "female"){
-                        $avatar .= "<img class='table-img' alt='Logo' src='" . asset('images/authors/avatar5.png') ."' />";
-                    }else{
-                        $avatar .= "<img class='table-img' alt='Logo' src='" . asset('images/authors/no_avatar.jpg') ."' />";
-                    }
-
-                    $avatar .= "<div class='block-chucvu'>";
-                    $role = DB::table("role_users")->where("user_id", $user->id)->select("role_id")->get();
-                    foreach($role as $value){
-                        if($value->role_id == "1"){
-                            $avatar .= '<span class="chucvu">Admin</span>';
-                        }
-                        if($value->role_id == "3"){
-                            $avatar .= '<span class="chucvu">Thường trực</span>';
-                        }
-                        if($value->role_id == "8"){
-                            $avatar .= '<span class="chucvu">Trưởng đơn vị</span>';
-                        }
-                        //break;
-                        
-                    }
-                    $avatar .= "</div>";
-                    return $avatar;
-                }
-            )
-            ->addColumn(
-                'actions',
-                function ($user) {
-                    $actions = "";
-                    if(Sentinel::inRole('admin') || Sentinel::inRole('operator')){
-                        $actions .= "<a href='abc.php?iduser=". $user->id ."'>Truy cập</a>";
-                    }
-                    return $actions;
-                }
-            )
-            ->rawColumns(['actions', 'avatar', 'tenChucvu'])
-            ->make(true);
-    }
+    
 
     public function dataHuman(Request $req) {
         $users = DB::table("users");
@@ -1137,5 +1073,112 @@ class CategoryController extends DefinedController
         ]);
         return back()->with('success', 
                     Lang::get('project/Standard/title.updatePassSuccess'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /// Trang chủ
+    public function dashboard(Request $req) {
+        $users = DB::table("users");
+        $users = $this->dataExceptDelete(
+            $users->select('id', 'ma_nhansu', 'email', 'pic', 'gender',
+                    'name', 'donvi_id', 'created_at', 'nguoi_tao', 'deleted_at')
+        );
+
+        $users = $users->orderBy('created_at', 'desc');
+        return DataTables::of($users)               
+            ->addColumn(
+                'tenDV',
+                function ($user) {
+                    $tenDV = DB::table("donvi")->where("id", $user->donvi_id)
+                            ->select("ten_donvi")->first();
+                    if($tenDV)
+                        return $tenDV->ten_donvi;
+                    else return " ";
+                }
+            )
+            ->addColumn(
+                'avatar',
+                function ($user) {
+                    $avatar = "";
+                    if($user->pic != "" && $user->pic !=  null){
+                        $avatar .= "<img class='table-img' alt='Logo' src='" . asset($user->pic) ."' />";
+                    }else if($user->gender == "male"){
+                        $avatar .= "<img class='table-img' alt='Logo' src='" . asset('images/authors/avatar3.png') ."' />";
+                    }else if($user->gender == "female"){
+                        $avatar .= "<img class='table-img' alt='Logo' src='" . asset('images/authors/avatar5.png') ."' />";
+                    }else{
+                        $avatar .= "<img class='table-img' alt='Logo' src='" . asset('images/authors/no_avatar.jpg') ."' />";
+                    }
+
+                    $avatar .= "<div class='block-chucvu'>";
+                    $role = DB::table("role_users")->where("user_id", $user->id)->select("role_id")->get();
+                    foreach($role as $value){
+                        if($value->role_id == "1"){
+                            $avatar .= '<span class="chucvu">Admin</span>';
+                        }
+                        if($value->role_id == "3"){
+                            $avatar .= '<span class="chucvu">Thường trực</span>';
+                        }
+                        if($value->role_id == "8"){
+                            $avatar .= '<span class="chucvu">Trưởng đơn vị</span>';
+                        }
+                        //break;
+                        
+                    }
+                    $avatar .= "</div>";
+                    return $avatar;
+                }
+            )
+            ->addColumn(
+                'actions',
+                function ($user) {
+                    $actions = "";
+                    if(Sentinel::inRole('admin') || Sentinel::inRole('operator')){
+                        if($user->id != Sentinel::getUser()->id){
+                            $actions .= "<a href='". route('admin.thuongtruc.manacategory.redicect') . "?id=" . $user->id ."'>Truy cập</a>";
+                        }
+                    }
+                    return $actions;
+                }
+            )
+            ->rawColumns(['actions', 'avatar', 'tenChucvu'])
+            ->make(true);
+    }
+
+
+
+    public function getDataCommon(){
+        $countNS = DB::table("users")->where("deleted_at", null)->count();
+        $countBC = DB::table("kehoach_baocao")->where("deleted_at", null)->count();
+        $countMC = DB::table("minhchung")->where("deleted_at", null)->count();
+        $countBB = DB::table("excel_import_data2")->count();
+        return json_encode([
+            'countNS'   => $countNS,
+            'countBC'   => $countBC,
+            'countMC'   => $countMC,
+            'countBB'   => $countBB
+        ]);
+    }
+
+
+    public function redicect(Request $req){
+        Sentinel::logout();
+        $user = Sentinel::findById($req->id);
+
+        Sentinel::login($user);
+        return redirect()->route('admin.dashboard');
+        
     }
 }

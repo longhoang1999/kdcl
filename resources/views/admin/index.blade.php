@@ -59,7 +59,7 @@
         .bg i{
             font-size: 80px !important;
             color: white;
-            width: 60%;
+            width: 58%;
         }
         .block-text{
             text-align: right;
@@ -122,8 +122,8 @@
                                 <div class="bg bg-blue">
                                     <i class="bi bi-window fs-3"></i>
                                     <div class="block-text">
-                                        <h1>26</h1>
-                                        <p>Comment</p>
+                                        <h1 class="numContent"></h1>
+                                        <p>Nhân sự</p>
                                     </div>
                                 </div>
                                 <div class="block-flex">
@@ -134,8 +134,8 @@
                                 <div class="bg bg-green">
                                     <i class="bi bi-layers fs-3"></i>
                                     <div class="block-text">
-                                        <h1>26</h1>
-                                        <p>Comment</p>
+                                        <h1 class="numContent"></h1>
+                                        <p>Báo cáo TĐG</p>
                                     </div>
                                 </div>
                                 <div class="block-flex">
@@ -146,8 +146,8 @@
                                 <div class="bg bg-orange">
                                     <i class="bi bi-grid fs-3"></i>
                                     <div class="block-text">
-                                        <h1>26</h1>
-                                        <p>Comment</p>
+                                        <h1 class="numContent"></h1>
+                                        <p>Minh chứng</p>
                                     </div>
                                 </div>
                                 <div class="block-flex">
@@ -158,8 +158,8 @@
                                 <div class="bg bg-red">
                                     <i class="fas fa-edit"></i>
                                     <div class="block-text">
-                                        <h1>26</h1>
-                                        <p>Comment</p>
+                                        <h1 class="numContent"></h1>
+                                        <p>Bảng biểu</p>
                                     </div>
                                 </div>
                                 <div class="block-flex">
@@ -212,7 +212,9 @@
                                 <th>Tên nhân sự</th>
                                 <th>Email</th>
                                 <th>Đơn vị</th>
-                                <th>Hành động</th>
+                                @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                                    <th>Hành động</th>
+                                @endif
                             </thead>
                             <tbody>
 
@@ -240,10 +242,60 @@
                     { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },
                     { data: 'tenDV', name: 'tenDV' },
-                    { data: 'actions', name: 'actions' ,className: 'action'},
+                    @if(Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                        { data: 'actions', name: 'actions' },
+                    @endif
                 ],            
             });
         });
+
+
+    let routeApi = "{{ route('admin.thuongtruc.manacategory.getDataCommon') }}";
+    fetch(routeApi, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            var numContent = document.querySelectorAll(".numContent")
+            
+
+            let i1 = 0, i2 = 0, i3 = 0, i4 = 0
+            let animation1 = setInterval(() => {
+                numContent[0].textContent = i1
+                i1++
+                if(numContent[0].textContent == data.countNS){
+                    clearInterval(animation1)
+                }
+            }, 50);
+
+            let animation2 = setInterval(() => {
+                numContent[1].textContent = i2
+                i2++
+                if(numContent[1].textContent == data.countBC){
+                    clearInterval(animation2)
+                }
+            }, 50);
+
+            let animation3 = setInterval(() => {
+                numContent[2].textContent = i3
+                i3++
+                if(numContent[2].textContent == data.countMC){
+                    clearInterval(animation3)
+                }
+            }, 50);
+
+            let animation4 = setInterval(() => {
+                numContent[3].textContent = i4
+                i4++
+                if(numContent[3].textContent == data.countBB){
+                    clearInterval(animation4)
+                }
+            }, 50);
+        })
     </script>
 
 <!--//jquery-ui-->
