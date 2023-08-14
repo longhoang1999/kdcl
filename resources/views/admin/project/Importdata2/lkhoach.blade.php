@@ -385,7 +385,7 @@
         'Doanh thu khoa học công nghệ',
         'Doanh thu khoa học công nghệ 2',
         'Thống kê tài chính',
-        'Khảo sát tình trạng tốt nghiệm sinh viên',
+        'Khảo sát tình trạng tốt nghiệp sinh viên',
         'Diện tính KTX',
         'Thống kê phòng học, thiết bị',
         'Thông kê máy tính',
@@ -409,7 +409,7 @@
         'Công khai cam kết chất lượng đào tạo',
         'Công khai tài chính năm học',
         'Công khai đội ngũ giảng viên theo khối ngành',
-        'Công khai đội ngũ giảng viên theo khối ngành',
+        'Công khai đội ngũ giảng viên cơ hữu',
     ]
 
     $("#ns_kiemtra").select2({
