@@ -105,7 +105,7 @@
                 <th >@lang('project/QualiAssurance/title.dvth')</th>
                 <th >@lang('project/QualiAssurance/title.tgth')</th>
                 <th >@lang('project/QualiAssurance/title.trangthai')</th>
-                @if(!Sentinel::inRole('ns_kiemtra') || Sentinel::inRole('admin') || Sentinel::inRole('operator'))
+                @if(!Sentinel::inRole('ns_kiemtra') || Sentinel::inRole('admin') || Sentinel::inRole('operator') || Sentinel::inRole('truongdonvi') || Sentinel::inRole('canboDBCL'))
                     <th >@lang('project/QualiAssurance/title.hanhd')</th>
                  @endif 
              </tr>
@@ -276,7 +276,7 @@
                 { data: 'tenDv' },
                 { data: 'thoi_gian', },
                 { data: 'trang_thai' },
-                @if(!Sentinel::inRole('ns_kiemtra') || Sentinel::inRole('admin') || Sentinel::inRole('operator')) 
+                @if(!Sentinel::inRole('ns_kiemtra') || Sentinel::inRole('admin') || Sentinel::inRole('operator') || Sentinel::inRole('truongdonvi') || Sentinel::inRole('canboDBCL')) 
                 { data: 'actions' ,className: 'action' },
                 @endif 
             ],

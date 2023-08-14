@@ -26,6 +26,7 @@ use App\Exports\exceltactionExport;
 class UpdateAciController extends DefinedController
 {
     public function index(Request $req){
+        $linh_vuc = "";
         if(Sentinel::inRole('admin') || Sentinel::inRole('operator')){
             $linh_vuc = DB::table("nhom_mc_sl")->select("id", "mo_ta")->get();
         }else if(Sentinel::inRole('truongdonvi')){
@@ -53,9 +54,15 @@ class UpdateAciController extends DefinedController
         //                     ->where("donvi_id",Sentinel::getUser()->donvi_id)
         //                     ->get();
         // }
-        return view('admin.project.QualiAssurance.updateaci')->with([
-            "linhvuc" =>  $linh_vuc
-        ]);
+        if($linh_vuc != ""){
+            return view('admin.project.QualiAssurance.updateaci')->with([
+                "linhvuc" =>  $linh_vuc
+            ]);   
+        }else{
+            return back()->with('error', 
+                    'Bạn không có quyền thực hiện chức năng này');
+        }
+        
         
     }
 
