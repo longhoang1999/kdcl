@@ -284,6 +284,11 @@ Route::group(
         );
         Route::resource('roles', 'RolesController');
 
+        // dashboard
+        Route::get('dashboard', 'Project\Thuongtruc\Category\CategoryController@dashboard')->name('dashboardTable');
+        Route::get('getDataCommon', 'Project\Thuongtruc\Category\CategoryController@getDataCommon')->name('getDataCommon');
+        Route::get('redicect', 'Project\Thuongtruc\Category\CategoryController@redicect')->name('redicect');
+
         // Route for Project
         Route::group(
             ['namespace' => 'Project'],
@@ -381,10 +386,7 @@ Route::group(
                         Route::group(
                             ['prefix' => 'manacategory', 'as' => 'manacategory.', 'namespace' => 'Category'],
                             function () {
-                                // dashboard
-                                Route::get('dashboard', 'CategoryController@dashboard')->name('dashboard');
-                                Route::get('getDataCommon', 'CategoryController@getDataCommon')->name('getDataCommon');
-                                Route::get('redicect', 'CategoryController@redicect')->name('redicect');
+                                
 
 
                                 // Quản lý danh mục

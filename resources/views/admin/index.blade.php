@@ -237,7 +237,7 @@
                 processing: true,
                 serverSide: true,
                 lengthMenu: [[5, 10, 20, -1],[5, 10, 20, "All"]],
-                ajax: "{!! route('admin.thuongtruc.manacategory.dashboard') !!}",
+                ajax: "{!! route('admin.dashboardTable') !!}",
                 columns: [
                     { data: 'avatar', name: 'avatar' , className:'avatar' },
                     { data: 'name', name: 'name' },
@@ -251,7 +251,7 @@
         });
 
 
-    let routeApi = "{{ route('admin.thuongtruc.manacategory.getDataCommon') }}";
+    let routeApi = "{{ route('admin.getDataCommon') }}";
     fetch(routeApi, {
         headers: {
             'Content-Type': 'application/json',

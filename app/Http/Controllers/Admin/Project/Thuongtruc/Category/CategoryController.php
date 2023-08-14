@@ -1150,7 +1150,7 @@ class CategoryController extends DefinedController
                     $actions = "";
                     if(Sentinel::inRole('admin') || Sentinel::inRole('operator')){
                         if($user->id != Sentinel::getUser()->id){
-                            $actions .= "<a href='". route('admin.thuongtruc.manacategory.redicect') . "?id=" . $user->id ."'>Truy cập</a>";
+                            $actions .= "<a href='". route('admin.redicect') . "?id=" . $user->id ."'>Truy cập</a>";
                         }
                     }
                     return $actions;
