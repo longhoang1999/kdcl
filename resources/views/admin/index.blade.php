@@ -103,6 +103,9 @@
         .block-chucvu{
             margin-left: 20px;
         }
+        .mt-50{
+            margin-top: 50px;
+        }
     </style>
 @stop
 
@@ -223,6 +226,30 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+
+
+        <div class="container-fuild mt-50">
+            <div class="row">
+
+                <div class="right col-md-4">
+                    <div class="info-user">
+                        <h1>Thống kê nổi bật</h1>
+                        <div class="content-user text-center">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="left col-md-8">
+                    <div class="common-info">
+                        <h1 class="mb-5">Lịch làm việc chung</h1>
+                        <div class="common-info-content">
+
+                        </div>
+                    </div>
+                </div>
+               
             </div>
         </div>
     </section>
