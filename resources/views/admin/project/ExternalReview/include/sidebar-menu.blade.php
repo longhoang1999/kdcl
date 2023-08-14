@@ -8,6 +8,9 @@
         #side-menu a{
             color: #888c9f !important;
         }
+        .active {
+            background: red;
+        }
     </style>
 @if($id)
     @if(isset($keHoachBaoCaokehoachchung->id))

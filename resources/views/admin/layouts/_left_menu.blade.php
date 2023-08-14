@@ -713,7 +713,9 @@
                                 </div>
                                 <!-- Đảm bảo chất lượng -->
                                 <div class="menu-item">
-                                    <a class="menu-link" href="{{route('admin.tonghop.dbcl.index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                    <a class="menu-link 
+                                         {!! (Request::is('admin/tonghop/tong-hop/index')
+                                    ? 'active' : '' ) !!} " href="{{route('admin.tonghop.dbcl.index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                         <span class="menu-icon">
                                             {!! $icon_array[array_rand($icon_array, 1) ] !!}
                                         </span>
@@ -722,7 +724,9 @@
                                 </div>
                                 <!-- Báo cáo tiến độ -->
                                 <div class="menu-item">
-                                    <a class="menu-link" href="{{route('admin.tonghop.dbcl.baocaotiendo')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                    <a class="menu-link 
+                                       {!! (Request::is('admin/tonghop/tong-hop/baocaotiendo')
+                                    ? 'active' : '' ) !!}" href="{{route('admin.tonghop.dbcl.baocaotiendo')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                         <span class="menu-icon">
                                             {!! $icon_array[array_rand($icon_array, 1) ] !!}
                                         </span>
@@ -731,7 +735,8 @@
                                 </div>
                                 <!-- DS báo cáo TĐG -->
                                 <div class="menu-item">
-                                    <a class="menu-link" href="{{route('admin.tudanhgia.completionreport.index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                                    <a class="menu-link {!! (Request::is('admin/tu-danh-gia/completionreport/index')
+                                    ? 'active' : '' ) !!}" href="{{route('admin.tudanhgia.completionreport.index')}}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                                         <span class="menu-icon">
                                             {!! $icon_array[array_rand($icon_array, 1) ] !!}
                                         </span>
@@ -752,7 +757,7 @@
                                                 <!-- Đánh giá nội bộ -->
                                                 <div class="menu-item">
                                                     <a class="menu-link 
-                                                    {!! (Request::is('admin/import-du-lieu-excel/tuyen-sinh/index')
+                                                    {!! (Request::is('admin/tonghop/tong-hop/baocaonhanxet')
                                                     ? 'active' : '' ) !!}
                                                      " href="{{ route('admin.tonghop.dbcl.baocaonhanxet') }}">
                                                         <span class="menu-bullet">
@@ -765,7 +770,7 @@
                                                 <!-- Đánh giá ngoài -->
                                                 <div class="menu-item">
                                                     <a class="menu-link 
-                                                    {!! (Request::is('admin/import-du-lieu-excel/du-lieu-sinh-vien/index')
+                                                    {!! (Request::is('admin/tonghop/tong-hop/baocaodgn')
                                                     ? 'active' : '' ) !!}
                                                      " href="{{ route('admin.tonghop.dbcl.baocaodgn') }}">
                                                         <span class="menu-bullet">
