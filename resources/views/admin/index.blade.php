@@ -206,6 +206,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="block-table">
+                        <h1 class="mb-4">Thông tin nhân sự</h1>
                         <table class="table table-striped table-bordered" id="table">
                             <thead>
                                 <th>Avatar</th>

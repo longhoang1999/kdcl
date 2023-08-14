@@ -1134,6 +1134,9 @@ class CategoryController extends DefinedController
                         if($value->role_id == "8"){
                             $avatar .= '<span class="chucvu">Trưởng đơn vị</span>';
                         }
+                        if($value->role_id == "4"){
+                            $avatar .= '<span class="chucvu">Cán bộ DBCL</span>';
+                        }
                         //break;
                         
                     }
