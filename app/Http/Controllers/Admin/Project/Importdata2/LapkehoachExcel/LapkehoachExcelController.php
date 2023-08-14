@@ -55,7 +55,7 @@ class LapkehoachExcelController extends DefinedController{
             '13' => 'Doanh thu khoa học công nghệ',
             '14' => 'Doanh thu khoa học công nghệ 2',
             '15' => 'Thống kê tài chính',
-            '16' => 'Khảo sát tình trạng tốt nghiệm sinh viên',
+            '16' => 'Khảo sát tình trạng tốt nghiệp sinh viên',
             '17' => 'Diện tính KTX',
             '18' => 'Thống kê phòng học, thiết bị',
             '19' => 'Thông kê máy tính',
@@ -79,7 +79,7 @@ class LapkehoachExcelController extends DefinedController{
             '37' => 'Công khai cam kết chất lượng đào tạo',
             '38' => 'Công khai tài chính năm học',
             '39' => 'Công khai đội ngũ giảng viên theo khối ngành',
-            '40' => 'Công khai đội ngũ giảng viên theo khối ngành',
+            '40' => 'Công khai đội ngũ giảng viên cơ hữu',
         ];
         return $excel_log;
     }
