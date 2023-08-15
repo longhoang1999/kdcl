@@ -181,9 +181,9 @@
 
             
             <div class="item-group-button mb-2">
-                <button class="btn btn-benchmark mt-5 ml-4 pl-3 pr-3" type="button">
+                <a class="btn btn-benchmark mt-5 ml-4 pl-3 pr-3" href="{{route('admin.dambaochatluong.manaproof.index')}}">
                     <i class="bi bi-x-circle" style="font-size: 35px;color: red;"></i>
-                </button>
+                </a>
                 <button type="submit" onclick="doSubmit();" class="btn btn-benchmark mt-5 ml-4 pl-3 pr-3" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="@lang('project/QualiAssurance/title.luu')">
                     <i class="bi bi-save" style="font-size: 35px;color: #50cd89;"></i>
                 </button>
