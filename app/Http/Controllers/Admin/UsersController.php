@@ -559,6 +559,19 @@ class UsersController extends JoshController
     }
     public function updateUser(Request $req){
         $user = Sentinel::getUser();
+        if($req->file('image')){
+            if($user->pic != null){
+                File::delete(public_path($user->pic));
+            }
+            $file_temp = $req->file('image');
+            $extension = $file_temp->getClientOriginalExtension() ?: 'png';
+            $picName   = time().'-imageAvatar'.'.'.$extension;
+            $file_temp->move(public_path('uploads/users/'.$user->code), $picName);
+            $routePic = 'uploads/users/'.$user->code.'/'.$picName;
+        }else{
+            $routePic = $user->pic;
+        }
+
         $data = [
             'ma_nhansu' => $req->ma_nhansu,
             'name' => $req->ten_nhansu,
@@ -579,8 +592,10 @@ class UsersController extends JoshController
             'mscnktd' => $req->mscnktd,
             'ntd' => $req->ntd,
             'qdbn' => $req->qdbn,
-            'cdkn' => $req->cdkn
+            'cdkn' => $req->cdkn,
+            'pic'           =>  $routePic
         ];
+        
         $user->update($data);
         return back()->with('success', Lang::get('project/Common/title.updateUser'));
     }

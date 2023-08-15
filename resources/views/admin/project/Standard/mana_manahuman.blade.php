@@ -251,11 +251,11 @@
                                         <span class="input-group-btn">
                                             <!-- image-preview-clear button -->
                                             <button type="button" class="btn btn-secondary image-preview-clear" style="display:none; border-radius:0 !important; border: 1px solid rgba(0, 0, 0, 0.16);">
-                                                <span class="fa  fa-times"></span> Clear
+                                                <ion-icon name="close-outline"></ion-icon> Clear
                                             </button>
                                             <!-- image-preview-input -->
                                             <div class="btn btn-secondary image_radius image-preview-input" style="margin-left:-3px;">
-                                                <span class="fa fa-folder-open"></span>
+                                                <ion-icon name="document-outline"></ion-icon>
                                                 <span class="image-preview-input-title">Browse</span>
                                                 <input type="file" accept="image/png, image/jpeg, image/gif" name="image"/> <!-- rename it -->
                                             </div>

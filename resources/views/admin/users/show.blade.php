@@ -216,9 +216,9 @@
                                                         <tr>
                                                             <td></td>
                                                             <td>
-                                                                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUpdate">
+                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUpdate">
                                                                     @lang('project/Common/title.chinhsua')
-                                                                </button> -->
+                                                                </button>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -284,23 +284,205 @@
 
 
     <!-- Modal -->
-<div class="modal fade" id="modalUpdate" aria-labelledby="modalUpdateLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalUpdateLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="modalUpdateLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalUpdateLabel">@lang('project/Common/title.chinhsua')</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{{ route('admin.updateUser') }}" method="post" enctype="multipart/form-data">
+                @csrf
+              <div class="modal-body">
+                    <table class="table table-bordered table-striped" id="users">
+                        <tr>
+                            <td>Avatar</td>
+                            <td>
+                                @if($user->pic != null && $user->pic != "")
+                                    <img width="150" src="{{ asset($user->pic) }}" alt="img" />
+                                @elseif($user->gender === "male")
+                                    <img  width="150" src="{{ asset('images/authors/avatar3.png') }}" alt="..."/>
+                                @elseif($user->gender === "female")
+                                    <img width="150" src="{{ asset('images/authors/avatar5.png') }}" alt="..."/>
+                                @else
+                                    <img width="150" src="{{ asset('images/authors/no_avatar.jpg') }}" alt="..."/>
+                                @endif
+                                <br>
+                                <input class="mt-5" type="file" name="image" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.ma_nhansu')</td>
+                            <td>
+                                <input class="form-control" type="text" name="ma_nhansu" value="{{ $user->ma_nhansu }}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.name')</td>
+                            <td>
+                                <input class="form-control" type="text" name="ten_nhansu" value="{{ $user->name }}">
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.email')</td>
+                            <td>
+                                <input type="email" name="email_ns" class="form-control" value="{{ $user->email }}" disabled>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @lang('project/Common/title.gender')
+                            </td>
+                            <td>
+                                <select class="form-control" name="gender_ns">
+                                    <option value="1"   
+                                        @if($user->gender == 1)
+                                            selected
+                                        @endif
+                                     >
+                                        @lang('project/Common/title.male')
+                                    </option>
+                                    <option value="2"   
+                                        @if($user->gender == 2)
+                                            selected
+                                        @endif
+                                     >
+                                        @lang('project/Common/title.female')
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.dob')</td>
+                            <td>
+                                <input type="date" value="{{ $user->ns }}" class="form-control" name="ns_ns">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.phone')</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ $user->phone }}" name="phone_ns">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.donvi')</td>
+                            <td>
+                                @php
+                                    $dv = DB::table('donvi')->select('id', 'ten_donvi')->where('id', $user->donvi_id)->first();
+                                    $dvAll = DB::table('donvi')->get();
+                                @endphp
+                                @if($dv)
+                                    <select class='form-control' name="dv_ns">
+                                        <option value="">--Không thuộc đơn vị nào</option>
+                                        @foreach($dvAll as $dvs)
+                                            <option  
+                                                @if($dv->id == $dvs->id)
+                                                    selected
+                                                @endif
+                                            value="{{ $dvs->id }}">{{ $dvs->ten_donvi }}</option>
+                                        @endforeach
+                                    </select>
+                                @else
+                                    <select  class='form-control' name="dv_ns">
+                                        <option value="">--Không thuộc đơn vị nào</option>
+                                        @foreach($dvAll as $dvs)
+                                            <option value="{{ $dvs->id }}">{{ $dvs->ten_donvi }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.tdnvtcn')</td>
+                            <td>
+                                <input class="form-control" type="text" name="tdnvtcn" value="{{ $user->tdnvtcn }}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.ntn')</td>
+                            <td>
+                                <input type="text" name="ntn" class="form-control" value="{{ $user->ntn }}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.noitn')</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ $user->noitn }}" name="noitn">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.gvsp')</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ $user->gvsp }}" name="gvsp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.th')</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ $user->th }}" name="th_ns">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.nn')</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ $user->nn }}" name="nn_ns">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.hhdp')</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ $user->hhdp }}" name="hhdp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.ndp')</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ $user->ndp }}" name="ndp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.cdnnktd')</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ $user->cdnnktd }}" name="cdnnktd">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.mscnktd')</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ $user->mscnktd }}" name="mscnktd">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.ntd')</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ $user->ntd }}" name="ntd">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.qdbn')</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ $user->qdbn }}" name="qdbn">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@lang('project/Common/title.cdkn')</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ $user->cdkn }}" name="cdkn">
+                            </td>
+                        </tr>
+                    </table>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">@lang('project/Common/title.luu')</button>
+              </div>
+          </form>
+        </div>
     </div>
-  </div>
-</div>
+    </div>
 
     
 @stop
