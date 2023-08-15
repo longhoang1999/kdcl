@@ -302,14 +302,14 @@ class PreparereportController extends DefinedController
         if(empty($mcgop->id_kehoach_baocao)){
             return "<h1 style = 'color:red; text-align : center'>Không tìm thấy minh chứng vui lòng thêm minh chứng</h1>";
         }
-
         // báo cáo, tiêu chuẩn, tiêu chí
         $baocao = DB::table("kehoach_baocao")->where("id", $mcgop->id_kehoach_baocao)
                     ->first();
         $tieuchuan = DB::table("tieuchuan")->where("id", $mcgop->id_tieuchuan)->first();
         $tieuchi = DB::table("tieuchi")->where("id", $mcgop->id_tieuchi)->first();
         // load list
-        $listTC =  DB::table("kehoach_tieuchuan")
+        if($baocao){
+            $listTC =  DB::table("kehoach_tieuchuan")
                     ->leftjoin('tieuchuan', 'tieuchuan.id', 
                         '=', 'kehoach_tieuchuan.tieuchuan_id')
                     ->where("kehoach_tieuchuan.id_kh_baocao", $baocao->id)
@@ -319,6 +319,10 @@ class PreparereportController extends DefinedController
                             'tieuchuan.stt', 'tieuchuan.mo_ta'
                     )
                     ->get();
+            }else{
+                $listTC = Collect();
+            }
+        
 
         $listTChi = DB::table("tieuchi")
                     ->leftjoin('tieuchuan', 'tieuchuan.id', '=', 'tieuchi.tieuchuan_id')
@@ -536,7 +540,8 @@ class PreparereportController extends DefinedController
         $tieuchuan = DB::table("tieuchuan")->where("id", $mcgop->id_tieuchuan)->first();
         $tieuchi = DB::table("tieuchi")->where("id", $mcgop->id_tieuchi)->first();
         // load list
-        $listTC =  DB::table("kehoach_tieuchuan")
+        if($baocao){
+            $listTC =  DB::table("kehoach_tieuchuan")
                     ->leftjoin('tieuchuan', 'tieuchuan.id', 
                         '=', 'kehoach_tieuchuan.tieuchuan_id')
                     ->where("kehoach_tieuchuan.id_kh_baocao", $baocao->id)
@@ -546,6 +551,10 @@ class PreparereportController extends DefinedController
                             'tieuchuan.stt', 'tieuchuan.mo_ta'
                     )
                     ->get();
+            }else{
+                $listTC = Collect();
+            }
+        
 
         $listTChi = DB::table("tieuchi")
                     ->leftjoin('tieuchuan', 'tieuchuan.id', '=', 'tieuchi.tieuchuan_id')
