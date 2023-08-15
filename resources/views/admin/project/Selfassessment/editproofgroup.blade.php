@@ -78,11 +78,14 @@
                     <select name="report_id" id="select-report" class="form-control">
                         <option value="" hidden></option>
                         @foreach($kehoach_baocao as $khbc)
-                            <option  
-                                @if($khbc->id == $baocao->id)
-                                    selected
+                            <option 
+                                @if($baocao) 
+                                    @if($khbc->id == $baocao->id)
+                                        selected
+                                    @endif
                                 @endif
-                             value="{{ $khbc->id }}">{{ $khbc->ten_bc }}</option>
+                                value="{{ $khbc->id }}">{{ $khbc->ten_bc }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -90,13 +93,15 @@
                     <label for="standard">@lang('project/Selfassessment/title.tctchi')</label>
                     <select name="standard_id" id="standard" class="ml-2 mr-2 form-control">
                         <option value="" hidden></option>
-                        @foreach($listTC as $tc)
-                            <option  
-                                @if($tc->tieuchuan_id == $tieuchuan->id)
-                                    selected
-                                @endif
-                             value="{{ $tc->tieuchuan_id }}">TC {{ $tc->stt }}: {{ $tc->mo_ta }}</option>
-                        @endforeach
+                        @if($listTC)
+                            @foreach($listTC as $tc)
+                                <option  
+                                    @if($tc->tieuchuan_id == $tieuchuan->id)
+                                        selected
+                                    @endif
+                                 value="{{ $tc->tieuchuan_id }}">TC {{ $tc->stt }}: {{ $tc->mo_ta }}</option>
+                            @endforeach
+                        @endif
                     </select>
                     <select name="criteria_id" id="criteria" class="ml-2 mr-2 form-control">
                         <option value="" hidden></option>

@@ -95,8 +95,10 @@
                     
                     <p class="">
                         @foreach($kehoach_baocao as $khbc)
-                            @if($khbc->id == $baocao->id)
-                                {{ $khbc->ten_bc }}
+                            @if($baocao)
+                                @if($khbc->id == $baocao->id)
+                                    {{ $khbc->ten_bc }}
+                                @endif
                             @endif
                         @endforeach
                     </p>
@@ -106,11 +108,14 @@
                         @lang('project/Selfassessment/title.tctchi'): 
                     </label>
                     <p class="">
-                        @foreach($listTC as $tc)
-                            @if($tc->tieuchuan_id == $tieuchuan->id)
-                            @lang('project/Selfassessment/title.tc') {{ $tc->stt }}: {{ $tc->mo_ta }}
-                            @endif
-                        @endforeach
+                        @if($listTC)
+                            @foreach($listTC as $tc)
+                                @if($tc->tieuchuan_id == $tieuchuan->id)
+                                @lang('project/Selfassessment/title.tc') {{ $tc->stt }}: {{ $tc->mo_ta }}
+                                @endif
+                            @endforeach
+                        @endif
+                        
                     </p>
 
                     <p class="">
