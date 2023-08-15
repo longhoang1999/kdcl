@@ -298,10 +298,10 @@ class PreparereportController extends DefinedController
         foreach ($minhchungtt as $key => $value) {
             array_push($listminhchungtoithieu,$value->id);
         }
-
-        if(empty($mcgop->id_kehoach_baocao)){
-            return "<h1 style = 'color:red; text-align : center'>Không tìm thấy minh chứng vui lòng thêm minh chứng</h1>";
-        }
+        
+        // if(empty($mcgop->id_kehoach_baocao)){
+        //     return "<h1 style = 'color:red; text-align : center'>Không tìm thấy minh chứng vui lòng thêm minh chứng</h1>";
+        // }
         // báo cáo, tiêu chuẩn, tiêu chí
         $baocao = DB::table("kehoach_baocao")->where("id", $mcgop->id_kehoach_baocao)
                     ->first();
@@ -528,13 +528,11 @@ class PreparereportController extends DefinedController
             array_push($listminhchungtoithieu,$value->id);
         }
 
-        // var_dump($listminhchungtoithieu);
-        // die;
-
+    
         // báo cáo, tiêu chuẩn, tiêu chí
-        if(empty($mcgop->id_kehoach_baocao)){
-            return view('admin.project.Selfassessment.michchungpdf');
-        }
+        // if(empty($mcgop->id_kehoach_baocao)){
+        //     return view('admin.project.Selfassessment.michchungpdf');
+        // }
         $baocao = DB::table("kehoach_baocao")->where("id", $mcgop->id_kehoach_baocao)
                     ->first();
         $tieuchuan = DB::table("tieuchuan")->where("id", $mcgop->id_tieuchuan)->first();

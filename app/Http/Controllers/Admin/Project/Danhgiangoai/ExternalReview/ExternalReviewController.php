@@ -368,10 +368,10 @@ class ExternalReviewController extends DefinedController{
 			            }
 						$keHoachTieuChuan->danhgia = round(collect($danhGiaTieuChi)->avg(), 1);
 					}
+					
 					return array($keHoachBaoCaoDetail);
 				}
 			}
-
 
 
 		}
